@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Dipen Shah      
+ 
+
+Description  Schema definations for data transfer between Omiga to Direct Gateway for Esurv Polling Messages
+
+============================================================================================== -->
+<schema targetNamespace="http://pollingvaluationmessages.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:datatype="http://datatypes.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:questtype="http://questtypes.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:pollingvaluationmessages="http://pollingvaluationmessages.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="..//GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="..//CommonTypes.xsd"/>
+	<import namespace="http://questtypes.externalInterface.services.dg.ingdirect.com/0.0.1" schemaLocation="QuestDefinition.xsd"/>
+	<import namespace="http://datatypes.externalInterface.services.dg.ingdirect.com/0.0.1" schemaLocation="DataType.xsd"/>
+	<annotation>
+		<documentation>
+                    	Schema definitions for data transfer between Omega to DGW for eSurv polling and vice versa.
+                    	This schema defines two message types ,
+			                    	1. ValuationPollingRequestType 
+			                    	2. ValuationPollingResponseStatusType
+			                    		a. StatusDetails
+			                    		b. MortgageValuationDetails
+			                    		c. ExternalAppraisalDetails
+       		 	for request and response respectively.
+       		  </documentation>
+		<documentation>
+       		  	Document version = 0.1
+	       	</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+				1. Changed the type for the 	CavityWallTiefailure
+				 and SeriousRot to QSTYNB from QSTYN, corrospondingly made the changes in the 
+				 QuestDefinition.xsd file.
+				2. Also added an extra element called DateofReport for EA reports.				
+       	  </documentation>
+		<documentation>
+       		  	Document version = 0.2
+	       	</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+				1. removed DateofReport from the External Appraisal Reports.
+				2. Added one more element namely 'NoMessageDetails' in the response.
+       	  </documentation>
+		<documentation>
+       		  	Document version = 0.3       		  
+       		   	1.  Change incude to import for DataTypes.xsd and QuestDefinition.xsd due to technical problems on Omiga side.
+	       	</documentation>
+		<documentation>
+				Added minoccurs=0 against the sequence number in Response
+       	  </documentation>
+     	  <documentation>
+				change the maxlength of the message element in the statusdetails to 55 from 40
+       	  </documentation>
+	</annotation>
+	<complexType name="ValuationPollingRequestType">
+		<annotation>
+			<documentation>
+                    	Valuation Polling Message Collection Request Declaration
+      		  </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="ValuationPollingRequestDetails" type="pollingvaluationmessages:ValuationPollingRequestDetailsType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ValuationPollingResponseType">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<choice>
+					<element name="NoMessageDetails" type="pollingvaluationmessages:NoMessageDetailsType"/>
+					<element name="StatusDetails" type="pollingvaluationmessages:StatusDetailsType"/>
+					<element name="MortgageValuationDetails" type="pollingvaluationmessages:MortgageValuationDetailsType"/>
+					<element name="ExternalAppraisalDetails" type="pollingvaluationmessages:ExternalAppraisalDetailsType"/>
+				</choice>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ValuationPollingRequestDetailsType">
+		<annotation>
+			<documentation>
+                    	Valuation Polling Request Elements Declaration
+      		  </documentation>
+		</annotation>
+		<sequence>
+			<element name="SequenceNumber">
+				<simpleType>
+					<restriction base="long"/>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="NoMessageDetailsType">
+		<annotation>
+			<documentation>
+                    	Polling Response Status No messages
+      		  </documentation>
+		</annotation>
+		<sequence minOccurs="0">
+			<element name="QuestStatus">
+				<complexType>
+					<sequence>
+						<element name="MessageType">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="40"/>
+									<enumeration value="Survey Instruction"/>
+									<enumeration value="Survey Status"/>
+									<enumeration value="Valuation Report"/>
+									<enumeration value="External Report"/>
+									<enumeration value="Nothing Available"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="MessageTimeStamp" type="common:TimeStampType"/>
+						<element name="MessageOriginatorReference" minOccurs="0">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="80"/>
+								</restriction>
+							</simpleType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="StatusDetailsType">
+		<annotation>
+			<documentation>
+                    	Polling Response Status Elements Declaration
+      		  </documentation>
+		</annotation>
+		<sequence minOccurs="0">
+			<element name="QuestStatus">
+				<complexType>
+					<sequence>
+						<element name="MessageType">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="40"/>
+									<enumeration value="Survey Instruction"/>
+									<enumeration value="Survey Status"/>
+									<enumeration value="Valuation Report"/>
+									<enumeration value="External Report"/>
+									<enumeration value="Nothing Available"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="MessageTimeStamp" type="common:TimeStampType"/>
+						<element name="MessageOriginatorReference" minOccurs="0">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="80"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="StatusData">
+							<complexType>
+								<sequence>
+									<element name="ApplicationReference">
+										<simpleType>
+											<restriction base="string">
+												<minLength value="1"/>
+												<maxLength value="10"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="UpdateDate" type="common:SimpleDateType"/>
+									<element name="Timestamp" type="common:TimeStampType"/>
+									<element name="status">
+										<simpleType>
+											<restriction base="string">
+												<maxLength value="1"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="message">
+										<simpleType>
+											<restriction base="string">
+												<maxLength value="55"/>
+											</restriction>
+										</simpleType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="MortgageValuationDetailsType">
+		<annotation>
+			<documentation>
+                    	Valuation Polling Response Mortgage Valuation Elements Declaration
+      		  </documentation>
+		</annotation>
+		<sequence minOccurs="0">
+			<element name="MortgageValuation">
+				<complexType>
+					<all>
+						<element name="MessageType">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="40"/>
+									<enumeration value="Survey Instruction"/>
+									<enumeration value="Survey Status"/>
+									<enumeration value="Valuation Report"/>
+									<enumeration value="External Report"/>
+									<enumeration value="Nothing Available"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="MessageTimeStamp" type="common:TimeStampType"/>
+						<element name="MessageOriginatorReference" minOccurs="0">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="80"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="LenderReference" type="datatype:str10"/>
+						<element name="TypeOfInstruction" type="questtype:qstInstructionType"/>
+						<element name="ApplicantDetails">
+							<complexType>
+								<sequence>
+									<element name="Applicant1" type="questtype:qstName"/>
+									<element name="Applicant2" type="questtype:qstName"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="PropertyDetails">
+							<complexType>
+								<all>
+									<element name="Address" type="common:StructuredAddressDetailsType"/>
+									<element name="InstructionAddressCorrect" type="questtype:qstYN"/>
+									<element name="NewPropertyIndicator" type="questtype:qstYN"/>
+									<element name="PlotNumber" type="questtype:qstPlotNumber"/>
+									<element name="Tenure" type="questtype:qstTenure"/>
+									<element name="Leasehold">
+										<simpleType>
+											<restriction base="int"/>
+										</simpleType>
+									</element>
+									<element name="PropertyType" type="questtype:qstPropertyType"/>
+									<element name="ExLocalAuthority" type="questtype:qstYN"/>
+									<element name="ApproxYearPropertyBuilt" type="questtype:qstPropertyBuilt"/>
+									<element name="BuildingIndemnityType" type="questtype:qstIndemnityType"/>
+									<element name="GrossExternalFloorArea">
+										<simpleType>
+											<restriction base="long">
+												<totalDigits value="5"/>
+											</restriction>
+										</simpleType>
+									</element>
+								</all>
+							</complexType>
+						</element>
+						<element name="Accommodation">
+							<complexType>
+								<all>
+									<element name="LivingRooms">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="BedRooms">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="Kitchens">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="BathRooms">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="Garages">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="ParkingSpaces">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+								</all>
+							</complexType>
+						</element>
+						<element name="Construction">
+							<complexType>
+								<all>
+									<element name="TraditionalConstructionIndicator" type="questtype:qstYN"/>
+									<element name="TraditionalConstructionType" type="datatype:str40b"/>
+									<element name="SingleSkinConstructionIndicator" type="questtype:qstYN"/>
+									<element name="SingleSkin2storyIndicator" type="questtype:qstYN"/>
+								</all>
+							</complexType>
+						</element>
+						<element name="GeneralObservations" type="datatype:str900b"/>
+						<element name="PotentialRisk">
+							<complexType>
+								<all>
+									<element name="StructuralMovement" type="questtype:qstYN"/>
+									<element name="StructuralMovementSignificant" type="questtype:qstYN"/>
+									<element name="SeriousRot" type="questtype:qstYNB"/>
+									<element name="AsbestosPoorCondition" type="questtype:qstYN"/>
+									<element name="CavityWallTiefailure" type="questtype:qstYNB"/>
+									<element name="LargePanelSystem" type="questtype:qstYN"/>
+									<element name="HistoricBuildingRepairRequired" type="questtype:qstYN"/>
+									<element name="ReTypeIndicator" type="questtype:qstYN"/>
+									<element name="ReTypeOriginalLender" type="datatype:str40b"/>
+									<element name="EssentialMatters" type="datatype:str600b"/>
+								</all>
+							</complexType>
+						</element>
+						<element name="LegalIssues">
+							<complexType>
+								<all>
+									<element name="Extensions" type="questtype:qstYN"/>
+									<element name="NonResidential" type="questtype:qstYN"/>
+									<element name="Roads" type="questtype:qstYN"/>
+									<element name="Tenanted" type="questtype:qstYN"/>
+									<element name="PotentialHighAlumnia" type="questtype:qstYN"/>
+									<element name="DevelopmentProposal" type="questtype:qstYN"/>
+									<element name="MiningArea" type="questtype:qstYN"/>
+									<element name="Comments" type="datatype:str300b"/>
+								</all>
+							</complexType>
+						</element>
+						<element name="Recommendation">
+							<complexType>
+								<all>
+									<element name="Saleability" type="questtype:qstCondition"/>
+									<element name="OverallCondition" type="questtype:qstCondition"/>
+									<element name="PresentConditionValuation">
+										<simpleType>
+											<restriction base="long">
+												<totalDigits value="8"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="BuildingInsuranceReInStatement">
+										<simpleType>
+											<restriction base="long">
+												<totalDigits value="8"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="ValuerName" type="datatype:str30b"/>
+									<element name="DateofInspection" type="common:SimpleDateType"/>
+									<element name="DateofReport" type="common:SimpleDateType"/>
+									<element name="Signature" type="datatype:str15b"/>
+								</all>
+							</complexType>
+						</element>
+					</all>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ExternalAppraisalDetailsType">
+		<annotation>
+			<documentation>
+                    	Polling External Appraisal Elements Declaration
+      		  </documentation>
+		</annotation>
+		<sequence minOccurs="0">
+			<element name="ExternalAppraisal">
+				<complexType>
+					<all>
+						<element name="MessageType">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="40"/>
+									<enumeration value="Survey Instruction"/>
+									<enumeration value="Survey Status"/>
+									<enumeration value="Valuation Report"/>
+									<enumeration value="External Report"/>
+									<enumeration value="Nothing Available"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="MessageTimeStamp" type="common:TimeStampType"/>
+						<element name="MessageOriginatorReference" minOccurs="0">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="80"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="LenderReference" type="datatype:str10"/>
+						<element name="TypeOfInstruction" type="questtype:qstInstructionType"/>
+						<element name="ApplicantDetails">
+							<complexType>
+								<sequence>
+									<element name="Applicant1" type="questtype:qstName"/>
+									<element name="Applicant2" type="questtype:qstName"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="PropertyDetails">
+							<complexType>
+								<all>
+									<element name="Address" type="common:StructuredAddressDetailsType"/>
+									<element name="InstructionAddressCorrect" type="questtype:qstYN"/>
+									<element name="NewPropertyIndicator" type="questtype:qstYN"/>
+									<element name="PlotNumber" type="questtype:qstPlotNumber"/>
+									<element name="PropertyType" type="questtype:qstPropertyType"/>
+									<element name="ExLocalAuthority" type="questtype:qstYN"/>
+									<element name="ApproxYearPropertyBuilt" type="questtype:qstPropertyBuilt"/>
+								</all>
+							</complexType>
+						</element>
+						<element name="AssumedAccommodation">
+							<complexType>
+								<all>
+									<element name="LivingRooms">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="BedRooms">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="Kitchens">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="BathRooms">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="Garages">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="ParkingSpaces">
+										<simpleType>
+											<restriction base="questtype:qstAccommodation">
+												<totalDigits value="2"/>
+											</restriction>
+										</simpleType>
+									</element>
+								</all>
+							</complexType>
+						</element>
+						<element name="AssumedConstruction">
+							<complexType>
+								<all>
+									<element name="TraditionalConstructionIndicator" type="questtype:qstYN"/>
+									<element name="TraditionalConstructionType" type="datatype:str40b"/>
+								</all>
+							</complexType>
+						</element>
+						<element name="GeneralObservations" type="datatype:str900b"/>
+						<element name="PotentialRisk">
+							<complexType>
+								<all>
+									<element name="EssentialMatters" type="datatype:str600b"/>
+								</all>
+							</complexType>
+						</element>
+						<element name="Recommendation">
+							<complexType>
+								<all>
+									<element name="Saleability" type="questtype:qstCondition"/>
+									<element name="ExternalAppearance" type="questtype:qstCondition"/>
+									<element name="PresentConditionValuation">
+										<simpleType>
+											<restriction base="long">
+												<totalDigits value="8"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="ValuerName" type="datatype:str30b"/>
+									<element name="DateofInspection" type="common:SimpleDateType"/>
+									<element name="Signature" type="datatype:str15b"/>
+								</all>
+							</complexType>
+						</element>
+					</all>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<annotation>
+		<documentation>
+                    	Polling Root Elements
+      		  </documentation>
+	</annotation>
+	<element name="ValuationPollingRequest" type="pollingvaluationmessages:ValuationPollingRequestType"/>
+	<element name="ValuationPollingResponse" type="pollingvaluationmessages:ValuationPollingResponseType"/>
+	<element name="ValuationPollingRequestDetails" type="pollingvaluationmessages:ValuationPollingRequestDetailsType"/>
+	<element name="StatusDetails" type="pollingvaluationmessages:StatusDetailsType"/>
+	<element name="MortgageValuationlDetails" type="pollingvaluationmessages:MortgageValuationDetailsType"/>
+	<element name="ExternalAppraisalDetails" type="pollingvaluationmessages:ExternalAppraisalDetailsType"/>
+</schema>

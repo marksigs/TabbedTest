@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: GetAffordability - CreateKFI  Response
+
+History:
+
+Version 		Author   	Date       			Description
+01.01      		RMH	 		29/06/2005 		Created
+01.02           	TLiu          20/07/2005      	Changed mars to IDUK in path, named a complexType, added MESSAGE & ERROR.
+01.03           	TLiu          22/07/2005      	Imported msgCommonTypes.
+01.04			TLiu			22/07/2005		Changed omiga to Omiga in name space.
+01.05			TLiu			29/07/2005		Fixed Name Spaces and named complex types.
+01.06			TLiu			10/08/2005		Named an unnamed complexType.
+01.07			TLiu			11/08/2005		Renamed some complex Types to make names different in Request and Response.
+01.08			IK				15/09/2005		maxOccurs unbounded on LOANCOMPONENT,   LOANCOMPONENTPAYMENTSCHEDULE, 
+															LOANCOMPONENTREDEMPTIONFEE,  LOANCOMPONENTBALANCESCHEDULE
+															(as per InterfaceChangeRegister.xls item 9)
+01.09      		RFairlie    12/10/2005 		InterfaceChangeRegister.xls items 15 & 16:
+                                                            Added KFIPRINTEDINDICATOR
+                                                            Add PaymentType and InterestRate to LOANCOMPONENTPAYMENTSCHEDULE
+01.10			RHart		17/10/2005		String
+01.11			GHun		04/11/2005		Fixed spelling of ACCRUEDINTEREST. Made TOTALMONTHLYREPAYMENT, KFIPRINTINDICATOR, 
+															TOTALQUOTATIONCOST, LOANCOMPONENTREDEMPTIONFEE and LOANCOMPONENTBALANCESCHEDULE optional
+01.12			GHun		09/11/2005		Changed ACCRUEDINTEREST type from int to float
+01.13			GHun		16/11/2005		Added ONEOFFCOSTType
+01.14			GHun		27/01/2006		Added UNDERWRITERSDECISION attribute to APPLICATION
+01.15			GHun		01/02/2006		Changed AdHocInd to ADHOCIND
+01.16			SAB		19/09/2006		EP2_1 - Updated the namesspaces
+01.17           PSC			06/11/2006      EP2_41 Optionally return document content
+01.18			PSC			09/11/2006		EP2_41 Add CONTENTTYPE to DOCUMENTCONTENTType
+01.19			PSC			14/12/2006		EP2_507 Add MONTHLYCOSTLESSDRAWDOWN to LOANCOMPONENT and MORTGAGESUBQUOTE
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.CreateKFI.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.CreateKFI.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="APPLICATION" type="APPLICATIONResponseType" minOccurs="0"/>
+			<xs:element name="CUSTOMER" type="CUSTOMERRespnseType" minOccurs="0"/>
+			<xs:element name="DOCUMENTLOCATION" type="DOCUMENTLOCATIONType" minOccurs="0"/>
+			<xs:element name="DOCUMENTCONTENT" type="DOCUMENTCONTENTType" minOccurs="0"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONResponseType">
+		<xs:sequence>
+			<xs:element name="APPLICATIONFACTFIND" type="APPLICATIONFACTFINDResponseType"/>
+			<xs:element name="APPLICATIONFEETYPE" type="APPLICATIONFEETYPEType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Description of the Fees on the application as designated by the product selection</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ONEOFFCOST" type="ONEOFFCOSTType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="UNDERWRITERSDECISION" type="xs:short"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFACTFINDResponseType">
+		<xs:sequence>
+			<xs:element name="QUOTATION" type="QUOTATIONResponseType"/>
+		</xs:sequence>
+		<xs:attribute name="TOTALMONTHLYREPAYMENT" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The monthly repayment on the current loan.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="QUOTATIONResponseType">
+		<xs:sequence>
+			<xs:element name="MORTGAGESUBQUOTE" type="MORTGAGESUBQUOTEResponseType"/>
+		</xs:sequence>
+		<xs:attribute name="TOTALQUOTATIONCOST" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The total monthly cost of the quotation. This includes the mortgage sub-quote, life cover sub-quote and, if present, the buildings and contents and payment protection sub-quotes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="KFIPRINTEDINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Shows whether the KFI for the quotation has been printed</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGESUBQUOTEResponseType">
+		<xs:sequence>
+			<xs:element name="LOANCOMPONENTLIST" type="LOANCOMPONENTLISTResponseType"/>
+		</xs:sequence>
+		<xs:attribute name="TOTALGROSSMONTHLYCOST" type="xs:float" use="required">
+			<xs:annotation>
+				<xs:documentation>The sum of all GrossMonthlyCosts from all LoanComponents on the mortgage sub-quote.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MONTHLYCOSTLESSDRAWDOWN" type="xs:float" use="optional">
+			<xs:annotation>
+				<xs:documentation>The sum of all MonthlyCosts from all LoanComponents taking any drwdown into consideration.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOTALACCRUEDINTEREST" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>The total value of accrued interest as calculated by mortcalc from the call in payment processing. This based on the amount of disbursement. This value will be generated as part of the composite rate call to mortcalc</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AMOUNTPERUNITBORROWED" type="xs:float" use="required"/>
+		<xs:attribute name="APR" type="xs:float" use="required">
+			<xs:annotation>
+				<xs:documentation>APR for the SubQuote</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOTALAMOUNTPAYABLE" type="xs:float" use="required">
+			<xs:annotation>
+				<xs:documentation>Repayment amount if the Loan were repaid at the end of it's term</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOTALMORTGAGEPAYMENTS" type="xs:float" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTLISTResponseType">
+		<xs:sequence>
+			<xs:element name="LOANCOMPONENT" type="LOANCOMPONENTResponseType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTResponseType">
+		<xs:sequence>
+			<xs:element name="LOANCOMPONENTPAYMENTSCHEDULE" type="LOANCOMPONENTPAYMENTSCHEDULEType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Schedule of payments for each loan component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LOANCOMPONENTREDEMPTIONFEE" type="LOANCOMPONENTREDEMPTIONFEEType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>ERC's against the component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LOANCOMPONENTBALANCESCHEDULE" type="LOANCOMPONENTBALANCESCHEDULEType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Break down of the balance with repayment type using the payment schedule, term and total amount repayable</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="LOANCOMPONENTSEQUENCENUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The sequence number of the loan component within the mortgage sub-quote.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOTALLOANCOMPONENTAMOUNT" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The amount of the loan for this component including any one-off costs that may have been added to the loan. Note that one-off costs can only be added to the first non-ported component in a multi-component arrangement</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="GROSSMONTHLYCOST" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The calculated monthly cost of the loan component in the first interest rate period </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NETMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="MONTHLYCOSTLESSDRAWDOWN" type="xs:float" use="optional"/>
+		<xs:attribute name="INTERESTONLYELEMENT" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>For loan components with repayment method "part and part", this is the proportion of the loan amount that is to be repaid on an interest-only basis.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CAPITALANDINTERESTELEMENT" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>For loan components with repayment method "part and part", this is the proportion of the loan amount that is to be repaid on a capital and  interest basis</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NETCAPANDINTELEMENT" type="xs:int"/>
+		<xs:attribute name="NETINTONLYELEMENT" type="xs:int"/>
+		<xs:attribute name="PORTEDLOAN" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Whether or not the loan component has been ported from an existing portable mortgage account. The details for ported components are collected in agreement in principle and cannot be amended in any way in cost modelling. The monthly cost of ported components is not calculated as the actual (existing) cost is collected as part of the agreement in principle data.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PURPOSEOFLOAN" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The identifier of the purpose of loan of the component. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REPAYMENTMETHOD" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The mortgage repayment method chosen for the loan component.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TERMINMONTHS" type="xs:int"/>
+		<xs:attribute name="TERMINYEARS" type="xs:int"/>
+		<xs:attribute name="APR" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The calculated annual percentage rate for the loan component. APR is not calculated for ported components.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FINALPAYMENT" type="xs:float"/>
+		<xs:attribute name="FINALRATE" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The interest rate of the final interest rate period for the loan component</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FINALRATEMONTHLYCOST" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The calculated monthly cost of the loan component projected at the final rate</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RESOLVEDRATE" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The net interest rate following a manual adjustment.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AMOUNTPERUNITBORROWED" type="xs:float"/>
+		<xs:attribute name="ACCRUEDINTEREST" type="xs:float"/>
+		<xs:attribute name="TOTALAMOUNTPAYABLE" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>This is the total amount payable (cost of  credit) payable by the customer for this loan component</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MORTGAGEPRODUCTCODE" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTPAYMENTSCHEDULEType">
+		<xs:attribute name="LOANCOMPONENTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="LOANCOMPONENTPAYMENTSCHEDULEID" type="xs:int"/>
+		<xs:attribute name="INTERESTRATETYPESEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="STARTDATE" type="msgdt:msgDateTime"/>
+		<xs:attribute name="MONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="INTONLYMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="CAPINTMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="MINMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="MAXMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="INCREASEDMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="INCREASEDMONTHLYCOSTDIFFERENCE" type="xs:float"/>
+		<xs:attribute name="PAYMENTTYPE" type="xs:string"/>
+		<xs:attribute name="INTERESTRATE" type="xs:float"/>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTREDEMPTIONFEEType">
+		<xs:attribute name="LOANCOMPONENTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="MORTGAGESUBQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="REDEMPTIONFEESTEPNUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The step number of the redemption fee set</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REDEMPTIONFEEPERIOD" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The number of months the redemption fee applies for the step</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REDEMPTIONFEEPERIODENDDATE" type="msgdt:msgDateTime">
+			<xs:annotation>
+				<xs:documentation>The end date the redemption fee applies for the step</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REDEMPTIONFEEAMOUNT" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>The calculated redemption fee amount</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTBALANCESCHEDULEType">
+		<xs:attribute name="LOANCOMPONENTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="LOANCOMPONENTBALANCESCHEDULEID" type="xs:int"/>
+		<xs:attribute name="SCHEDULETYPE" type="xs:int"/>
+		<xs:attribute name="STARTDATE" type="msgdt:msgDateTime"/>
+		<xs:attribute name="BALANCE" type="xs:float"/>
+		<xs:attribute name="INTONLYBALANCE" type="xs:float"/>
+		<xs:attribute name="CAPINTBALANCE" type="xs:float"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFEETYPEType">
+		<xs:attribute name="FEETYPE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The type of the Fee</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FEETYPESEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="AMOUNT" type="xs:int"/>
+		<xs:attribute name="REBATEORADDITION" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The amount of the rebate ( negative ) or the increased fee ( positive )</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DESCRIPTION" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Description of the fee type</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ADHOCIND" type="xs:short"/>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERRespnseType">
+		<xs:sequence>
+			<xs:element name="CUSTOMERVERSION" type="CUSTOMERVERSIONType"/>
+		</xs:sequence>
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="OTHERSYSTEMCUSTOMERNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>CIF Number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERVERSIONType">
+		<xs:attribute name="FIRSTFORENAME" type="xs:string"/>
+		<xs:attribute name="OTHERFORENAMES" type="xs:string"/>
+		<xs:attribute name="SECONDFORENAME" type="xs:string"/>
+		<xs:attribute name="SURNAME" type="xs:string"/>
+		<xs:attribute name="TITLE" type="xs:int"/>
+		<xs:attribute name="TITLEOTHER" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="DOCUMENTLOCATIONType">
+		<xs:attribute name="DOCUMENTID" type="msgdt:msgGuid"/>
+	</xs:complexType>
+	<xs:complexType name="ONEOFFCOSTType">
+		<xs:attribute name="AMOUNT" type="xs:int" use="required"/>
+		<xs:attribute name="REFUNDAMOUNT" type="xs:int" use="optional"/>
+		<xs:attribute name="DESCRIPTION" type="xs:string" use="optional"/>
+		<xs:attribute name="MORTGAGEONEOFFCOSTTYPE" type="xs:int" use="required"/>
+		<xs:attribute name="ONEOFFCOSTSEQUENCENUMBER" type="xs:int" use="optional"/>
+		<xs:attribute name="ADHOCIND" type="xs:short" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="DOCUMENTCONTENTType">
+		<xs:attribute name="CONTENT" type="xs:base64Binary"/>
+		<xs:attribute name="CONTENTTYPE" type="xs:string"/>
+	</xs:complexType>
+</xs:schema>

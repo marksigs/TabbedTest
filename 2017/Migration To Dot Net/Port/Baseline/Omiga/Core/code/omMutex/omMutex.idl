@@ -1,0 +1,41 @@
+// omMutex.idl : IDL source for omMutex.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (omMutex.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(4CB1C7C7-85C8-4893-AAA5-0AB068DF4DEE),
+		dual,
+		helpstring("IomMutex1 Interface"),
+		pointer_default(unique)
+	]
+	interface IomMutex1 : IDispatch
+	{
+		[id(1), helpstring("method AcquireMutex")] HRESULT AcquireMutexWithTimeout([in] BSTR bstrMutexName, [in] VARIANT_BOOL bHighPrioirty, [in] LONG dwMilliseconds);
+		[id(2), helpstring("method AcquireMutex")] HRESULT AcquireMutex([in] BSTR bstrMutexName, [in] VARIANT_BOOL bHighPrioirty);
+		[id(3), helpstring("method ReleaseMutex")] HRESULT ReleaseMutex();
+	};
+
+[
+	uuid(B76FE60D-787D-4720-AADC-31202F934D72),
+	version(1.0),
+	helpstring("omMutex 1.0 Type Library")
+]
+library OMMUTEXLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(06480444-8A7F-48C1-9C52-64A78F7D6CB1),
+		helpstring("omMutex1 Class")
+	]
+	coclass omMutex1
+	{
+		[default] interface IomMutex1;
+	};
+};

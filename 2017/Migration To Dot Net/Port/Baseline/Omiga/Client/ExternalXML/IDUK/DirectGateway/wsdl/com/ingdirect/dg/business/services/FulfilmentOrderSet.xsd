@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Rohit Saproo     
+ 
+
+Description  Schema definations for data transfer between Direct Gateway and Fulfilment house for publishing.
+ 
+============================================================================================== -->
+<schema targetNamespace="http://fulfilmentorder.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns:fulfilmentOrder="http://fulfilmentorder.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation> Document Version = 0.1 </documentation>
+	</annotation>
+	<!-- start of type definitions -->
+	<complexType name="FulfilmentOrderSetType" abstract="false">	
+		<sequence>
+			<element name="NoOfOrders" type="string" nillable="false">
+				<annotation>
+					<documentation>Describes the total no. of orders for packs in the order set</documentation>
+				</annotation>
+			</element>
+			<element name="PackOrder" type="fulfilmentOrder:PackOrderDetailsType" nillable="true" maxOccurs="unbounded">
+				<annotation>
+					<documentation>PackOrder is an element which contains the actual data for processing by the fulfilment house.</documentation>
+				</annotation>
+			</element>
+
+		</sequence>
+	</complexType>
+	<complexType name="PackOrderDetailsType" abstract="false">
+		<sequence>
+			<element name="OrderId" type="string" nillable="false">
+				<annotation>
+					<documentation>Unique identification for the order for the pack.</documentation>
+				</annotation>
+			</element>
+			<element name="PersonDetails" type="fulfilmentOrder:FulfilmentPersonDetailsType" nillable="false">
+				<annotation>
+					<documentation>Person Details like first name, last name etc.</documentation>
+				</annotation>
+			</element>
+			<element name="PackId" type="string" nillable="false">
+				<annotation>
+					<documentation>Unique identification for the pack.</documentation>
+				</annotation>
+			</element>
+			<element name="PackTypeId" type="string" nillable="false">
+				<annotation>
+					<documentation>Defines the pack type e.g welcome pack, completion letter pack etc.</documentation>
+				</annotation>
+			</element>
+			<element name="MainApplicantIndicator" type="string" nillable="true">
+				<annotation>
+					<documentation>Specifies whether the customer is the main applicant in a  joint application.</documentation>
+				</annotation>
+			</element>
+			<element name="PropertyLocation" type="string" nillable="true">
+				<annotation>
+					<documentation>Used to specify scottish properties.</documentation>
+				</annotation>
+			</element>
+			<element name="ProductType" type="string" nillable="false">
+				<annotation>
+					<documentation>Defines product e.g Mortgages, Savings etc.</documentation>
+				</annotation>
+			</element>
+			<element name="MobileNo" type="string" nillable="1" minOccurs="0">
+				<annotation>
+					<documentation>Contact no. of the customer. This no. is used to send SMS  Fulfilment packs.</documentation>
+				</annotation>
+			</element>
+			<element name="Documents" type="fulfilmentOrder:FulfilmentDocumentListType" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Defines a list of documents for printing for the pack.</documentation>
+				</annotation>
+			</element>
+			<element name="StructuredData" type="fulfilmentOrder:StructuredDataListType" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Non-Pdf data that needs to be used for document generation by the fulfilment house. The DataItem gives the data fields/values.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FulfilmentDocumentListType" abstract="false">
+		<sequence>
+			<element name="PrimaryDocument" type="string">
+				<annotation>
+					<documentation>References the file name of the primary document/Cover letter.</documentation>
+				</annotation>
+			</element>
+			<element name="DocumentName" type="string" maxOccurs="unbounded">
+				<annotation>
+					<documentation>References the file name of the document to print, from within the batch.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FulfilmentPersonDetailsType" abstract="false">
+		<annotation>
+			<documentation>Added the new PersonDetailsTypes currently used in fulfilment				 	since most of the elements in ClientDetailsType are mandatory
+				 </documentation>
+		</annotation>
+		<sequence>
+			<element name="PersonId" type="string" nillable="false">
+				<annotation>
+					<documentation>Customer's CIF </documentation>
+				</annotation>
+			</element>
+			<element name="FirstName" type="string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>First Name of Person</documentation>
+				</annotation>
+			</element>
+			<element name="MiddleName" type="string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Middle Name of Person</documentation>
+				</annotation>
+			</element>
+			<element name="LastName" type="string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Last Name of Person</documentation>
+				</annotation>
+			</element>
+			<element name="Salutation" type="string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Salutation for the person</documentation>
+				</annotation>
+			</element>
+			<element name="SpecialNeed" type="fulfilmentOrder:SpecialNeedType" minOccurs="0">
+				<annotation>
+					<documentation>Indicates if the person has special need like Braille, Large Print, Audio</documentation>
+				</annotation>
+			</element>
+			<element name="PersonAddressDetails" type="fulfilmentOrder:FulfilmentAddressDetailsType" nillable="false">
+				<annotation>
+					<documentation>Customers Address details like House no, Street etc.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FulfilmentAddressDetailsType" abstract="false">
+		<annotation>
+			<documentation>Structured address is used for all address capture. For the prospect/customer, structured addresses include Legal, Mailing and Previous addresses. For the mortgage application, structured addresses include the Property Address and Solicitor Address.</documentation>
+		</annotation>
+		<sequence>
+			<element name="FlatNameOrNumber" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Flat name or flat number of address</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="40"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="HouseOrBuildingName" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>House or building name of address</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="HouseOrBuildingNumber" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>House number of address</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="6"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Street" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Street name of address</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="40"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="District" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>District name of address</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="40"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="TownOrCity" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Town or City name of address</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="40"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="County" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>County name of address</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="40"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="PostCode" type="fulfilmentOrder:PostCodeType" minOccurs="0">
+				<annotation>
+					<documentation>Post code of address. See PostCodeType for formats</documentation>
+				</annotation>
+			</element>
+			<element name="CountryCode" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Indicates the country for the address</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<simpleType name="PostCodeType">
+		<annotation>
+			<documentation>PostCode can be in format [RG11 7XR] or [rg11 7xr]</documentation>
+		</annotation>
+		<restriction base="string">
+			<maxLength value="8"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SpecialNeedType">
+		<annotation>
+			<documentation>Refers to the Special Needs fulfilment indicator. 0 = No special needs; 1 = Large Print; 2 = Audio fulfilment; 3 = Braille fulfilment</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="0"/>
+			<enumeration value="L"/>
+			<enumeration value="A"/>
+			<enumeration value="B"/>
+		</restriction>
+	</simpleType>
+	<complexType name="StructuredDataListType" abstract="false">
+		<annotation>
+			<documentation>Structured Data as got from Profile</documentation>
+		</annotation>
+		<sequence>
+			<element name="DataRecord" nillable="true" maxOccurs="unbounded">
+				<complexType>
+					<complexContent>
+						<extension base="fulfilmentOrder:RecordType">
+							<attribute name="RecordType" type="string" use="required"/>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="RecordType" abstract="false">
+		<annotation>
+			<documentation>Actual Record from profile</documentation>
+		</annotation>
+		<sequence>
+			<element name="DataItem" type="fulfilmentOrder:DataItemType" nillable="true" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="DataItemType" abstract="false">
+		<annotation>
+			<documentation>Actual Data fields in record received from profile</documentation>
+		</annotation>
+		<attribute name="KeyName" type="string" use="required"/>
+		<attribute name="KeyValue" type="string" use="required"/>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="OrderSet" type="fulfilmentOrder:FulfilmentOrderSetType">
+		<annotation>
+			<documentation>This is the order that will form part of order fille sent to Fulfilment house for printing.</documentation>
+		</annotation>
+	</element>
+</schema>

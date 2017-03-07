@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+
+Archive               $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/OmigaAiPData.xsd $
+Workfile:             $Workfile: OmigaAiPData.xsd $
+Current Version   $Revision: 13 $
+Last Modified      $Modtime: 7/04/07 15:44 $
+Modified By        $Author: Mheys $
+
+Copyright				Copyright © 2006 Vertex Financial Services
+Description			Ingestion (Stop&Save) at AiP  
+
+History:
+
+Author		Date				    Description
+IK				14/03/2006		EP2 epsom specific changes
+IK				20/03/2006		EP2 (MAR1437) Added CARDTYPE to LOANSLIABILITIES
+IK				19/09/2006		remove Epsom identifier
+YK			04/10/2006		Address Targeting, CONTRACTDETAILSType,,NEWPROPERTYDEPOSITType and UNEARNEDINCOMEType node added
+IK				26/10/2006		EP2_25 - additional dip data
+IK				26/10/2006		EP2_10 - address targeting response
+IK				20/11/2006		EP2_106 - drop ACCOUNTRELATIONSHIP
+IK				26/10/2006		EP2_106 - add CUSTOMERROLETYPE, CUSTOMERORDER to address targetting response
+IK				23/11/2006		EP2_170 - add APPLICATIONINTRODUCER, add ADDITIONALDIPDATA (memopad) drop PACKAGER
+IK				25/11/2006		EP2_202 - product cascade response - PRODUCTCASCADING removed, required attributes defined
+IK				05/12/2006		EP2_287 - shopping list output, additional data items
+IK				07/12/2006		EP2_342 - CUSTOMERROLETYPE, CUSTOMERORDER optional in address targetting response
+IK				08/12/2006		EP2_379 - LEVELOFADVICE mandatory
+IK				11/12/2006		EP2_398 - MORTGAGEPRODUCTCODE, STARTDATE not mandatory
+IK				13/12/2006		EP2_478	add type  to EXPERIANREF & ADDRESSTARGETING 
+MCh 		13/12/2006		EP2_239 - INCOMESUMMARYType added 
+MCh 		13/12/2006		EP2_241 - DATESTARTEDORESTABLISHED type changed to msgDate
+MCh 		13/12/2006		EP2_302 - NUMBEROFDEPENDANTS added to APPLICATIONType
+IK				09/01/2007		EP2_702 - create ACCOUNTRELATIONSHIP records
+IK				19/01/2007		EP2_918 - ORIGINALLTV data type change, incorporate OmigaBase reference
+IK				29/01/2007		EP2_1081 - add NEWPROPERTY
+IK				20/01/2007		EP2_609 CONTRACTDETAILS, NEWPROPERTYDEPOSIT , UNEARNEDINCOME added to REQUEST
+IK				20/01/2007		EP2_1711 (EMPLOYMENT) NETPROFIT added to REQUEST
+================================================================================-->
+<xs:schema xmlns="http://OmigaAiPData.Omiga.vertex.co.uk" xmlns:ob="http://OmigaBase.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://OmigaAiPData.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--  EP2_918 -->
+	<xs:import namespace="http://OmigaBase.Omiga.vertex.co.uk" schemaLocation="OmigaBase.xsd"/>
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+
+	<!-- EP2_10 AddressTargettingResponse_APPLICATIONType -->
+	<xs:complexType name="ATR_APPLICATIONType">
+		<xs:sequence>
+			<xs:element name="APPLICATIONFACTFIND">
+				<xs:complexType>
+					<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+	</xs:complexType>
+
+	<!-- EP2_702 -->
+	<xs:complexType name="ACCOUNTRELATIONSHIPType">
+		<xs:attribute name="CUSTOMERORDER" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATION_base">
+				<xs:sequence>
+					<xs:element name="APPLICATIONFACTFIND">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="APPLICATIONFACTFINDType"/>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="APPLICATIONFEETYPE" type="APPLICATIONFEETYPEType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFACTFINDType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONFACTFIND_base">
+				<xs:sequence>
+					<xs:element name="APPLICATIONINTRODUCER" type="APPLICATIONINTRODUCERType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="APPLICATIONLEGALREP" type="APPLICATIONLEGALREPType" minOccurs="0"/>
+					<xs:element name="QUOTATION" type="QUOTATIONType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="FINANCIALSUMMARY" type="FINANCIALSUMMARYType" minOccurs="0"/>
+					<!-- EP2_1081 -->
+					<xs:element name="NEWPROPERTY" type="NEWPROPERTYType" minOccurs="0"/>
+					<!-- EP2_609 -->
+					<xs:element name="NEWPROPERTYDEPOSIT" type="NEWPROPERTYDEPOSITType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="CUSTOMERROLE" type="CUSTOMERROLEType" maxOccurs="3"/>
+					<!-- EP2_702 -->
+					<xs:element name="ACCOUNT" type="ACCOUNTType" minOccurs="0" maxOccurs="unbounded"/>
+					<!-- EP2_170 -->
+					<xs:element name="ADDITIONALDIPDATA" minOccurs="0">
+						<xs:complexType>
+							<xs:attribute name="MEMOENTRY" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMER_base">
+				<xs:sequence>
+					<xs:element name="CUSTOMERVERSION" type="CUSTOMERVERSIONType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERVERSIONType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERVERSION_base">
+				<xs:sequence>
+					<xs:element name="CUSTOMERTELEPHONENUMBER" type="CUSTOMERTELEPHONENUMBERType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="CUSTOMERADDRESS" type="CUSTOMERADDRESSType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="ALIAS" type="ALIASType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="EMPLOYMENT" type="EMPLOYMENTType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="BANKCREDITCARD" type="BANKCREDITCARDType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="INCOMESUMMARY" type="INCOMESUMMARYType" minOccurs="0"/>
+					<!-- EP2_609 -->
+					<xs:element name="UNEARNEDINCOME" type="UNEARNEDINCOMEType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERTELEPHONENUMBERType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERTELEPHONENUMBER_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERROLEType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERROLE_base">
+				<xs:sequence>
+					<xs:element name="CUSTOMER" type="CUSTOMERType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERADDRESSType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERADDRESS_base">
+				<xs:sequence>
+					<xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ALIASType">
+		<xs:complexContent>
+			<xs:extension base="ob:ALIAS_base">
+				<xs:sequence>
+					<xs:element name="PERSON" type="msgdt:PERSONType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EMPLOYMENTType">
+		<xs:complexContent>
+			<xs:extension base="ob:EMPLOYMENT_base">
+				<xs:sequence>
+					<xs:element name="EARNEDINCOME" type="EARNEDINCOMEType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="EMPLOYEDDETAILS" type="EMPLOYEDDETAILSType" minOccurs="0"/>
+					<!-- EP2_609 -->
+					<xs:element name="CONTRACTDETAILS" type="CONTRACTDETAILSType" minOccurs="0"/>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0" maxOccurs="unbounded"/>
+					<!-- EP2_1711 -->
+					<xs:element name="NETPROFIT" type="NETPROFITType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EARNEDINCOMEType">
+		<xs:complexContent>
+			<xs:extension base="ob:EARNEDINCOME_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EMPLOYEDDETAILSType">
+		<xs:complexContent>
+			<xs:extension base="ob:EMPLOYEDDETAILS_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BANKCREDITCARDType">
+		<xs:complexContent>
+			<xs:extension base="ob:BANKCREDITCARD_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONLEGALREPType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONLEGALREP_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LOANSLIABILITIESType">
+		<xs:complexContent>
+			<xs:extension base="ob:LOANSLIABILITIES_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFEETYPEType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONFEETYPE_base">
+				<xs:sequence>
+					<xs:element name="FEEPAYMENT" type="FEEPAYMENTType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FEEPAYMENTType">
+		<xs:complexContent>
+			<xs:extension base="ob:FEEPAYMENT_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QUOTATIONType">
+		<xs:complexContent>
+			<xs:extension base="ob:QUOTATION_base">
+				<xs:sequence>
+					<xs:element name="MORTGAGESUBQUOTE" type="MORTGAGESUBQUOTEType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGESUBQUOTEType">
+		<xs:complexContent>
+			<xs:extension base="ob:MORTGAGESUBQUOTE_base">
+				<xs:sequence>
+					<xs:element name="LOANCOMPONENT" type="LOANCOMPONENTType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="MORTGAGEONEOFFCOST" type="MORTGAGEONEOFFCOSTType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTType">
+		<xs:complexContent>
+			<xs:extension base="ob:LOANCOMPONENT_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGEONEOFFCOSTType">
+		<xs:complexContent>
+			<xs:extension base="ob:MORTGAGEONEOFFCOST_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FINANCIALSUMMARYType">
+		<xs:complexContent>
+			<xs:extension base="ob:FINANCIALSUMMARY_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ACCOUNTType">
+		<xs:complexContent>
+			<xs:extension base="ob:ACCOUNT_base">
+				<xs:sequence>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType"/>
+					<xs:element name="MORTGAGEACCOUNT" type="MORTGAGEACCOUNTType" minOccurs="0"/>
+					<xs:element name="LOANSLIABILITIES" type="LOANSLIABILITIESType" minOccurs="0"/>
+					<!-- EP2_702 -->
+					<xs:element name="ACCOUNTRELATIONSHIP" type="ACCOUNTRELATIONSHIPType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="INCOMESUMMARYType">
+		<xs:attribute name="UKTAXPAYERINDICATOR" type="xs:short"/>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGEACCOUNTType">
+		<xs:complexContent>
+			<xs:extension base="ob:MORTGAGEACCOUNT_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PAYMENTRECORDType">
+		<xs:complexContent>
+			<xs:extension base="ob:PAYMENTRECORD_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CONTRACTDETAILSType">
+		<xs:complexContent>
+			<xs:extension base="ob:CONTRACTDETAILS_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYDEPOSITType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWPROPERTYDEPOSIT_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UNEARNEDINCOMEType">
+		<xs:complexContent>
+			<xs:extension base="ob:UNEARNEDINCOME_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONINTRODUCERType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONINTRODUCER_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_1081 -->
+	<xs:complexType name="NEWPROPERTYType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWPROPERTY_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_1711 -->
+	<xs:complexType name="NETPROFITType">
+		<xs:complexContent>
+			<xs:extension base="ob:NETPROFIT_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- address targeting data -->
+	<xs:complexType name="TARGETINGDATAType">
+		<xs:sequence>
+			<xs:element name="ADDRESSTARGETING" type="xs:string"/>
+			<xs:element name="ADDRESSMAP" type="ADDRESSMAPType"/>
+			<xs:element name="CCN1LIST" type="CCN1LISTType"/>
+			<xs:element name="TARGETDISPLAY" type="TARGETDISPLAYType" maxOccurs="unbounded"/>
+			<xs:element name="DECLAREADDRESSLIST" type="DECLAREADDRESSLISTType"/>
+			<xs:element name="ADDRESSTARGET" type="ADDRESSTARGETType" maxOccurs="unbounded"/>
+			<xs:element name="EXP" type="EXPType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ADDRESSMAPType">
+		<xs:sequence>
+			<xs:element name="ADDRESS" type="ADDRESSType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ADDRESSType">
+		<xs:attribute name="BLOCKSEQNUMBER" type="xs:string"/>
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:short"/>
+		<xs:attribute name="TARGETADDRESSTYPE" type="xs:string"/>
+		<xs:attribute name="DATEMOVEDIN" type="xs:string"/>
+		<xs:attribute name="DATEMOVEDOUT" type="xs:string"/>
+		<xs:attribute name="NATUREOFOCCUPANCY" type="xs:string"/>
+		<xs:attribute name="CUSTOMERROLETYPE" type="xs:int"/>
+		<xs:attribute name="CUSTOMERORDER" type="xs:int"/>
+		<!-- EP2_106 -->
+	</xs:complexType>
+	<xs:complexType name="CCN1Type">
+		<xs:attribute name="BLOCKSEQNUMBER" type="xs:string"/>
+		<xs:attribute name="NAME" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="CCN1LISTType">
+		<xs:sequence>
+			<xs:element name="CCN1" type="CCN1Type" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TARGETDISPLAYType">
+		<xs:attribute name="ADDRESSINDICATOR" type="xs:string"/>
+		<xs:attribute name="SEQNUMBER" type="xs:string"/>
+		<xs:attribute name="ADDRESSTYPE" type="xs:string"/>
+		<xs:attribute name="ADDRESSRESOLVED" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="DECLAREADDRESSLISTType">
+		<xs:sequence>
+			<xs:element name="DECLAREADDRESS" type="DECLAREADDRESSType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DECLAREADDRESSType">
+		<xs:attribute name="BLOCKSEQNUMBER" type="xs:string"/>
+		<xs:attribute name="FLAT" type="xs:string"/>
+		<xs:attribute name="HOUSENAME" type="xs:string"/>
+		<xs:attribute name="HOUSENUMBER" type="xs:string"/>
+		<xs:attribute name="STREET" type="xs:string"/>
+		<xs:attribute name="DISTRICT" type="xs:string"/>
+		<xs:attribute name="TOWN" type="xs:string"/>
+		<xs:attribute name="COUNTY" type="xs:string"/>
+		<xs:attribute name="POSTCODE" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ADDRESSTARGETType">
+		<xs:attribute name="ID" type="xs:string"/>
+		<xs:attribute name="BLOCKTYPE" type="xs:string"/>
+		<xs:attribute name="BLOCKSEQNUMBER" type="xs:string"/>
+		<xs:attribute name="RMCCODE" type="xs:string"/>
+		<xs:attribute name="DETAILCODE" type="xs:string"/>
+		<xs:attribute name="REGIONCODE" type="xs:string"/>
+		<xs:attribute name="ADDRESSKEY" type="xs:string"/>
+		<xs:attribute name="FLATENHANCED" type="xs:string" use="optional"/>
+		<xs:attribute name="HOUSENAMEENHANCED" type="xs:string" use="optional"/>
+		<xs:attribute name="HOUSENUMBERENHANCED" type="xs:string" use="optional"/>
+		<xs:attribute name="STREETENHANCED" type="xs:string" use="optional"/>
+		<xs:attribute name="DISTRICTENHANCED" type="xs:string" use="optional"/>
+		<xs:attribute name="TOWNENHANCED" type="xs:string" use="optional"/>
+		<xs:attribute name="COUNTYENHANCED" type="xs:string" use="optional"/>
+		<xs:attribute name="POSTCODEENHANCED" type="xs:string" use="optional"/>
+		<xs:attribute name="FLAT" type="xs:string"/>
+		<xs:attribute name="HOUSENAME" type="xs:string"/>
+		<xs:attribute name="HOUSENUMBER" type="xs:string"/>
+		<xs:attribute name="STREET" type="xs:string"/>
+		<xs:attribute name="DISTRICT" type="xs:string"/>
+		<xs:attribute name="TOWN" type="xs:string"/>
+		<xs:attribute name="COUNTY" type="xs:string"/>
+		<xs:attribute name="POSTCODE" type="xs:string"/>
+		<xs:attribute name="ADDRESSRESOLVED" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="EXPType">
+		<xs:sequence>
+			<xs:element name="EXPERIANREF" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EXPERIANREFType"/>
+</xs:schema>

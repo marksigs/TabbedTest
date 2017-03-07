@@ -1,0 +1,67 @@
+#include "ifx.h" //DO NOT REMOVE
+#include "COMPLUS.rul"
+#include "MTS.rul"
+
+prototype BOOL MTSCOMPLUS_AddLibraryPackageIfNotExist(/*vstrPackageName*/ STRING);
+prototype BOOL MTSCOMPLUS_RemovePackage(/*vstrPackageName*/ STRING);
+prototype BOOL MTSCOMPLUS_AddComponent(/*vstrPackageName*/ STRING, /*vstrDllPath*/ STRING);
+prototype BOOL MTSCOMPLUS_SetTransactionTimeout(/*vstrPackageName*/ STRING, /*vstrProgId*/ STRING, /*nTimeout*/ NUMBER);
+
+
+function BOOL MTSCOMPLUS_AddLibraryPackageIfNotExist(vstrPackageName)
+	BOOL bResult;
+begin
+	LOG_SetStatusWindow("Add library package (if not exist) " + vstrPackageName);
+	if SYSINFO.WINNT.bWin2000 = TRUE then
+		bResult = COMPLUS_AddLibraryPackageIfNotExist(vstrPackageName);
+	else
+		bResult = MTS_AddLibraryPackageIfNotExist(vstrPackageName);
+	endif;
+	return bResult;
+end;
+
+function BOOL MTSCOMPLUS_RemovePackage(vstrPackageName)
+	BOOL bResult;
+begin  
+	LOG_SetStatusWindow("Removing package " + vstrPackageName);
+	if SYSINFO.WINNT.bWin2000 = TRUE then
+		bResult = COMPLUS_RemovePackage(vstrPackageName);
+	else
+		bResult = MTS_RemovePackage(vstrPackageName);
+	endif;
+	return bResult;
+end;
+
+function BOOL MTSCOMPLUS_AddComponent(vstrPackageName, vstrDllPath)
+	BOOL bResult;
+	STRING szFileName;                   
+begin     
+	LOG_Log("Adding component " + vstrDllPath + " to package " + vstrPackageName);
+	ParsePath(szFileName, vstrDllPath, FILENAME_ONLY);
+	SetStatusWindow(-1, "Adding component " + szFileName);
+
+	if SYSINFO.WINNT.bWin2000 = TRUE then
+		bResult = COMPLUS_AddComponent(vstrPackageName, vstrDllPath);
+	else
+		bResult = MTS_AddComponent(vstrPackageName, vstrDllPath);
+	endif;
+	return bResult;
+end;
+
+function BOOL MTSCOMPLUS_SetTransactionTimeout(vstrPackageName, vstrProgId, nTimeout)
+	BOOL bResult;
+	STRING szFileName;                   
+	STRING vstrTimeout;
+begin                                 
+
+	if SYSINFO.WINNT.bWin2000 = TRUE || SYSINFO.WINNT.bWinXP = TRUE then
+		NumToStr(vstrTimeout, nTimeout);
+		LOG_Log("Setting transaction timeout of " + vstrProgId + " to " + vstrTimeout + " in package " + vstrPackageName);
+		SetStatusWindow(-1, "Setting transaction timeout of " + vstrProgId);
+		bResult = COMPLUS_SetTransactionTimeout(vstrPackageName, vstrProgId, nTimeout);
+	else
+		// do nothing on NT4
+		bResult = TRUE;
+	endif;
+	return bResult;
+end;

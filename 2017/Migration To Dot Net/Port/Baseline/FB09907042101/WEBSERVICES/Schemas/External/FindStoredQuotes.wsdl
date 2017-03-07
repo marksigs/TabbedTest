@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: FindStoredQuotes WSDL
+
+History:
+
+Version Author      Date       Description
+01.00   Ikemp    	25/07/2005 Created.   
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns="http://FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:msgResponse="http://Response.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" 
+            xmlns:msgResponse="http://Response.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" >
+            <xs:import 
+                namespace="http://Request.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="FindStoredQuotesRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="FindStoredQuotesResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="FindStoredQuotesRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="FindStoredQuotesRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="FindStoredQuotesPort">
+        <wsdl:operation name="findStoredQuotes">
+            <wsdl:input message="FindStoredQuotesRequestSoapIn" />
+            <wsdl:output message="FindStoredQuotesRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="FindStoredQuotesPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="findStoredQuotes">
+             <soap:operation 
+                soapAction="http://Request.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaFindStoredQuotes">
+        <wsdl:port name="FindStoredQuotesPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/FindStoredQuotesWS/OmigaFindStoredQuotesService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+Project;        ING Direct Diect Gateway (Project MARS)
+
+File:           Delay Completion .xsd
+
+File Version:   0.1
+
+History;        version 0.0.1 - productionisation factoring
+
+Type Versions;  Type versioning is via namepaces.   
+                Namespace versioning follows this pattern; "url/[major_version].[minor_version].[release_version]"
+
+Author(s):      Vivek Kumar.
+
+Description;    Code classification; implementation pattern.
+                This XSD defines request and response types for validate payment account details.
+
+============================================================================================== -->
+<!--
+    Note that the schema attributes 'attributeFormDefault="unqualified"' 
+    and 'elementFormDefault="unqualified"' are critical to the correct 
+    interpretation of this schema for the Direct Gatway application to 
+    consume the generated document literal SOAP messages.
+-->
+<schema targetNamespace="http://delaycompletion.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:DelayCompletion="http://delaycompletion.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation> Document Version = 0.1 </documentation>
+		<documentation> This schema is used for Mortgage Delayed Completion</documentation>
+	</annotation>
+	<annotation>
+		<documentation> Document Version = 0.2 </documentation>
+		<documentation> Modified data type of RevisedCompletionDate, added four new elements in Response Type</documentation>
+	</annotation>
+	<annotation>
+		<documentation> Document Version = 0.3 </documentation>
+		<documentation> Added annotations as per Use Case DIS03 dated (27th July 2005)</documentation>
+	</annotation>
+	<annotation>
+		<documentation> Document Version = 0.4 </documentation>
+		<documentation>Changed schema name to DelayCompletion from DelayedCompletionDetails</documentation>
+		<documentation>Rename DelayedCompletionDetailsRequestType to DelayCompletionRequestType</documentation>
+		<documentation>Rename DelayedCompletionDetailsResponseType to DelayCompletionResponseType</documentation>
+		<documentation>Rename DelayedCompletionDetailsRequest to DelayCompletionRequest</documentation>
+		<documentation>Rename DelayedCompletionDetailsResponse to DelayCompletionResponse</documentation>
+	</annotation>
+	<!-- start of type imports -->
+	<!-- 
+            Note that all Direct Gateway messages must extend either 'generic:GenericRequestType' or 'generic:GenericResponseType'
+            Thus they must import the 'generic' namespace from GenericMessages.xsd.
+        -->
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<!-- end of type imports -->
+	<complexType name="DelayCompletionRequestType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="RevisedCompletionDate" type="common:SimpleDateType" nillable="false">
+						<annotation>
+							<documentation>New completion date. Profile field = LN.ODD</documentation>
+						</annotation>
+					</element>
+					<element name="MortgageAccountNumber" type="string" nillable="true">
+						<annotation>
+							<documentation>Mortgage Account Number. Profile field = LN.CID</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="DelayCompletionResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="MortgageAccountNumber" type="string" nillable="false">
+						<annotation>
+							<documentation>Mortgage Account Number. Profile field = LN.CID</documentation>
+						</annotation>
+					</element>	
+					<element name="DateOfFirstPayment" type="common:SimpleDateType" nillable="false">
+						<annotation>
+							<documentation>Due date for the first payment of the Mortgage. Profile field = LN.DFP</documentation>
+						</annotation>
+					</element>
+					<element name="AmountOfFirstPayment" type="string" nillable="false">
+						<annotation>
+							<documentation>Amount of first mortgage payment. May differ from standard payment amount due to method for determining first payment date. Profile field = LN.ZPMTAMT1.</documentation>
+						</annotation>
+					</element>
+					<element name="AmountOfSubsequentPayment" type="string" nillable="false">
+						<annotation>
+							<documentation>The standard repayment amount for the Mortgage account. Profile field = LN.ZMLFPA</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="DelayCompletionRequest" type="DelayCompletion:DelayCompletionRequestType"/>
+	<element name="DelayCompletionResponse" type="DelayCompletion:DelayCompletionResponseType"/>
+</schema>

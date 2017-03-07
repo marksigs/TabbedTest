@@ -1,0 +1,80 @@
+<!-- ODIConverter.xml
+
+Please see "ODIConverter DTD.doc" for a full description of the parameters within this configuration file.
+A brief summary of selected items is given below for quick reference.
+	
+ODICONVERTER/ODIENVIRONMENT/@NAME		- This should match a value of Combo "AdminSystemEnvironment"
+
+ODICONVERTER/ODIENVIRONMENT/OPTIMUSHOST		- Hosts used at MSG are SCHD400 and MSG02461
+
+ODICONVERTER/ODIENVIRONMENT/TESTRESPONSE	- If set to "Y", generate a dummy response
+
+ODICONVERTER/ODIENVIRONMENT/LISTENPORT 		- Omitted as not yet implemented 
+
+ODICONVERTER/ODIENVIRONMENT/OPTIMUSOBJECTMAP	- The path to the Optimus object map. 
+If the directory name is omitted from the path, it defaults to the ODI Converter run time directory.
+
+ODICONVERTER/ODIENVIRONMENT/CODEPAGEMAP		- The path to the code page map, which maps Optimus locales 
+(country and language) to Windows Ebcdic code pages. 
+If the directory name is omitted from the path, it defaults to the ODI Converter run time directory.
+
+ODICONVERTER/ODIENVIRONMENT/LOOKUPTABLEMAP	- The path to the look up tables, which map Optimus look up codes onto Omiga look up codes.
+If the directory name is omitted from the path, it defaults to the ODI Converter run time directory.
+
+======================================================================================================
+History:
+AS  22/08/01  Created
+RF  22/01/02  Added comments and multiple environments
+======================================================================================================
+
+-->
+
+<!-- This environment is set up for a typical system test / UAT environment -->
+
+<ODICONVERTER>
+   <ODIENVIRONMENT NAME="UAT" TYPE="OPTIMUS">	
+
+      	<OPTIMUSHOST>SCHD400</OPTIMUSHOST>
+      	<OPTIMUSPORT>7822</OPTIMUSPORT>
+      	<OPTIMUSENVIRONMENT>OSGDBX</OPTIMUSENVIRONMENT>
+      	<SKTTIMEOUTMS>30000</SKTTIMEOUTMS>
+      	<PROFILE>N</PROFILE>
+      	<LOG>
+         	<LOGDEBUG>N</LOGDEBUG>
+         	<LOGHEX>N</LOGHEX>
+      	</LOG>
+      	<TESTRESPONSE>N</TESTRESPONSE>
+
+      	<OPTIMUSOBJECTMAP>C:\Program Files\Marlborough Stirling\Omiga 4\XML\ODI\OBJECTMAPOSG.XML</OPTIMUSOBJECTMAP>
+      	<CODEPAGEMAP>C:\Program Files\Marlborough Stirling\Omiga 4\XML\ODI\CODEPAGEMAP.XML</CODEPAGEMAP>
+      	<LOOKUPTABLEMAP>C:\Program Files\Marlborough Stirling\Omiga 4\XML\ODI\LOOKUPTABLES.XML</LOOKUPTABLEMAP>
+
+   </ODIENVIRONMENT>
+</ODICONVERTER>
+
+
+<!-- This environment is set up for a typical developer environment -->
+<!--
+<ODICONVERTER>
+
+   <ODIENVIRONMENT NAME="Dev" TYPE="OPTIMUS">
+
+	<OPTIMUSHOST>SCHD400</OPTIMUSHOST>
+      	<OPTIMUSPORT>7822</OPTIMUSPORT>
+      	<OPTIMUSENVIRONMENT>OSGDBX</OPTIMUSENVIRONMENT>
+      	<SKTTIMEOUTMS>30000</SKTTIMEOUTMS>
+      	<PROFILE>N</PROFILE>
+      	<LOG>
+         	<LOGDEBUG>Y</LOGDEBUG>
+         	<LOGHEX>N</LOGHEX>
+      	</LOG>
+      	<TESTRESPONSE>N</TESTRESPONSE>
+
+	<OPTIMUSOBJECTMAP>C:\projects\Omiga 4 Core Development\dev\ExternalXML\ODI\OBJECTMAPOSG.XML</OPTIMUSOBJECTMAP>
+	<CODEPAGEMAP>C:\projects\Omiga 4 Core Development\dev\ExternalXML\ODI\CODEPAGEMAP.XML</CODEPAGEMAP>
+	<LOOKUPTABLEMAP>C:\projects\Omiga 4 Core Development\dev\ExternalXML\ODI\LOOKUPTABLES.XML</LOOKUPTABLEMAP>
+
+   </ODIENVIRONMENT>
+</ODICONVERTER>
+-->
+

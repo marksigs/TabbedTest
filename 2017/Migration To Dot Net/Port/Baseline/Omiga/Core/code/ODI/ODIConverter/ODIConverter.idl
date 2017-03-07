@@ -1,0 +1,64 @@
+// ODIConverter.idl : IDL source for ODIConverter.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ODIConverter.tlb) and marshalling code.
+
+typedef enum Errors
+{
+    E_GENERICERROR		= 4600,	// ODI has been allocated the range 4600 to 4699.
+	E_EBCDIC2UNICODE,
+	E_UNICODE2EBCDIC,
+	E_INVALIDCODEPAGE,
+	E_INVALIDLOOKUPTABLE,
+	E_REGISTRYOPEN,
+	E_REGISTRYREAD,
+	E_INVALIDMETADATAFILE,
+	E_INVALIDMETADATA,
+	E_INVALIDMETADATAENV,
+	E_NULLELEMENT,
+	E_BUFFEROVERRUN,
+	E_INVALIDTYPE,
+	E_FILEDOESNOTEXIST,
+	E_LOADXML,
+	E_WSASOCKET,
+	E_INVALIDREQUEST,
+	E_INVALIDRESPONSE,
+	E_INVALIDMANDATORYATTRIBUTE
+} Errors;
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(8DD22DE1-D96B-4335-9C77-0204E9FBA9A4),
+		dual,
+		helpstring("IODIConverter Interface"),
+		pointer_default(unique)
+	]
+	interface IODIConverter : IDispatch
+	{
+		[id(1), helpstring("method Request")] HRESULT Request([in] BSTR bstrRequest, [out, retval] BSTR* pbstrResponse);
+	};
+
+[
+	uuid(12A83E98-ACDD-4FF9-87A8-F895DD747E07),
+	version(1.0),
+	helpstring("ODIConverter 1.0 Type Library")
+]
+library ODICONVERTER
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+    enum Errors;
+
+	[
+		uuid(46E5E4F9-1859-4510-A44A-3273209A1EC3),
+		helpstring("ODIConverter Class")
+	]
+	coclass ODIConverter
+	{
+		[default] interface IODIConverter;
+	};
+};

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: GetDocumentID WSDL 
+
+History:
+
+Version Author      Date       Description
+01.00   RFairlie    14/10/2005 Created for WS45.          
+================================================================================-->
+<wsdl:definitions xmlns="http://GetDocumentID.IDUK.Omiga.marlboroughstirling.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msgRequest="http://Request.GetDocumentID.IDUK.Omiga.marlboroughstirling.com" xmlns:msgResponse="http://Response.GetDocumentID.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://GetDocumentID.IDUK.Omiga.marlboroughstirling.com">
+	<wsdl:types>
+		<xs:schema xmlns:msgRequest="http://Request.GetDocumentID.IDUK.Omiga.marlboroughstirling.com" xmlns:msgResponse="http://Response.GetDocumentID.IDUK.Omiga.marlboroughstirling.com">
+			<xs:import namespace="http://Request.GetDocumentID.IDUK.Omiga.marlboroughstirling.com" schemaLocation="GetDocumentIDRequest.xsd"/>
+			<xs:import namespace="http://Response.GetDocumentID.IDUK.Omiga.marlboroughstirling.com" schemaLocation="GetDocumentIDResponse.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="GetDocumentIDRequestSoapIn">
+		<wsdl:part name="request" element="msgRequest:REQUEST"/>
+	</wsdl:message>
+	<wsdl:message name="GetDocumentIDRequestSoapOut">
+		<wsdl:part name="response" element="msgResponse:RESPONSE"/>
+	</wsdl:message>
+	<wsdl:portType name="GetDocumentIDPort">
+		<wsdl:operation name="getDocumentID">
+			<wsdl:input message="GetDocumentIDRequestSoapIn"/>
+			<wsdl:output message="GetDocumentIDRequestSoapOut"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OmigaSoapRpcSoap" type="GetDocumentIDPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getDocumentID">
+			<soap:operation soapAction="http://Request.GetDocumentID.IDUK.Omiga.marlboroughstirling.com" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OmigaGetDocumentID">
+		<wsdl:port name="GetDocumentIDPort" binding="OmigaSoapRpcSoap">
+			<soap:address location="http://localhost/OmigaWebServices/GetDocumentIDWS/OmigaGetDocumentIDService.asmx"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

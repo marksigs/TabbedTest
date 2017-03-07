@@ -1,0 +1,79 @@
+body 
+{
+  font-family:Arial;
+  font-size: 11pt;
+  padding: 0.25em 0.25em 0.25em 0.25em;
+  background: white;
+}
+
+#header,#footer, #menubar, #col1, #col3, #clear, #mainmenu, #masthead, .button, .helplink, .fancylink
+{
+  font-family:Arial;
+  padding: 0.25em 0.25em 0.25em 0.25em;
+  display:none;
+  font-size: x-small;
+}
+
+
+h1
+{   
+   font-family:Arial;
+   font-size: 13pt;
+   margin-bottom:0.5em;
+   background-color:#fff;
+   padding: 0.25em 0.25em 0.25em 0.25em;
+   border:1px solid #A8B9DC; 
+}
+
+h2
+{   
+   font-family:Arial;
+   font-size: 12pt;
+   margin-bottom:0.5em;
+   background-color:#fff;
+   padding: 0.25em 0.25em 0.25em 0.25em;
+   border:1px solid #A8B9DC; 
+}
+
+#main-content 
+{ 
+  font-family:Arial;
+  font-size: x-small;
+  width: auto;
+  padding: 0.25em 0.25em 0.25em 0.25em;
+  border: 0;
+  margin: 0 5%;
+  float: none;
+}
+
+.displaytable td 
+{
+  font-family:Arial;
+  font-size: x-small;
+  width: 25%;
+  padding: 0.25em 0.25em 0.25em 0.25em;
+  margin: 0;
+  vertical-align: top;
+}
+
+.displaytable td.prompt 
+{
+  font-family:Arial;
+  font-size: x-small;
+  padding: 0.25em 0.25em 0.25em 0.25em;
+  color: #003399;
+  font-weight: normal;
+}
+
+#ProductCascadeListBox 
+{
+  display: none;
+}
+.applicationdeclaration 
+{
+  display: block;
+}
+.notprinted
+{
+  display: none;
+}

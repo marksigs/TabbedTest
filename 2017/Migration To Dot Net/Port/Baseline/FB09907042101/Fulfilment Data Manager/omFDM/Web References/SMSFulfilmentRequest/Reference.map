@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost/ExternalWebServices/services/ProcessSMSFulfilmentRequest.xsd" filename="ProcessSMSFulfilmentRequest.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost/ExternalWebServices/services/GenericMessages.xsd" filename="GenericMessages.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost/ExternalWebServices/services/CommonTypes.xsd" filename="CommonTypes.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost/ExternalWebServices/services/ProcessSMSFulfilmentRequest.wsdl" filename="ProcessSMSFulfilmentRequest.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>

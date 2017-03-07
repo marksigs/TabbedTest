@@ -1,0 +1,42 @@
+// omPC.idl : IDL source for omPC.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (omPC.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(D9012EE1-4F9D-48D6-8C04-1A816A8D67AD),
+		dual,
+		helpstring("IPCAttributesBO Interface"),
+		pointer_default(unique)
+	]
+	interface IPCAttributesBO : IDispatch
+	{
+		[id(1), helpstring("method NameOfPC")] HRESULT NameOfPC([out, retval] BSTR * pbstrPCName);
+		[id(2), helpstring("method FindLocalPrinterList")] HRESULT FindLocalPrinterList([in] BSTR bstrXMLRequest, [out,retval] BSTR * pbstrPrinterList);
+		[id(3), helpstring("method GetMACAddress")] HRESULT GetMACAddress([out, retval] BSTR* pbstrMACAddress);
+		[id(4), helpstring("method Sleep")] HRESULT Sleep([in] int dwMilliseconds);
+	};
+
+[
+	uuid(80238F8C-227E-4887-8C47-8F5B00FBFD84),
+	version(1.0),
+	helpstring("omPC 1.0 Type Library")
+]
+library OMPCLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(E31AAD92-37B6-45E1-A84A-481094EBAECE),
+		helpstring("PCAttributesBO Class")
+	]
+	coclass PCAttributesBO
+	{
+		[default] interface IPCAttributesBO;
+	};
+};

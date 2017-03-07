@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: FindStoredQuotes- Response
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RMH	 		29/06/2005 		Created
+01.02           TLiu				20/07/2005      Changed mars to IDUK in path, named a complexType, added MESSAGE & ERROR.
+01.03           TLiu				22/07/2005      Imported msgCommonTypes.
+01.04			TLiu				22/07/2005		Changed omiga to Omiga in name space.
+01.05			IK					02/08/2005		standard namespace definitions
+01.06			TLiu				26/05/2005		Added some missing fields and fixed bugs for FINALRATEMONTHLYCOST & TOTALQUOTATIONCOST
+================================================================================-->
+<!-- as modified by XDSPreReleaseProcessing utility: 21/03/2006 15:00:23 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Response.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd" />
+  <xs:element name="ACCEPTEDQUOTENUMBER" type="xs:string" />
+  <xs:element name="ACCOUNTGUID" type="xs:string" />
+  <xs:element name="ACTIVEQUOTENUMBER" type="xs:string" />
+  <xs:element name="ADDITIONALBROKERFEE" type="xs:string" />
+  <xs:element name="ADDITIONALBROKERFEEDESC" type="xs:string" />
+  <xs:element name="ADDITIONALINTERMEDIARYDETAILS" type="xs:string" />
+  <xs:element name="ANNUALBUILDINGSPREMIUM" type="xs:string" />
+  <xs:element name="ANNUALCONTENTSPREMIUM" type="xs:string" />
+  <xs:complexType name="APPLICATIONType">
+    <xs:sequence>
+      <xs:element ref="APPLICATIONNUMBER" />
+      <xs:element ref="PACKAGENUMBER" />
+      <xs:element ref="CORRESPONDENCESALUTATION" />
+      <xs:element ref="ACCOUNTGUID" />
+      <xs:element ref="INTERMEDIARYGUID" />
+      <xs:element ref="APPLICATIONDATE" />
+      <xs:element name="TYPEOFBUYER" type="TYPEOFBUYERType" />
+      <xs:element ref="CHANNELID" />
+      <xs:element ref="OTHERSYSTEMACCOUNTNUMBER" />
+      <xs:element ref="PIPELINEBTLNUMBER" />
+      <xs:element ref="PIPELINEBTLBALANCE" />
+      <xs:element ref="COMPLETEDBTLNUMBER" />
+      <xs:element ref="COMPLETEDBTLBALANCE" />
+      <xs:element ref="PIPELINERESIDENTIALBALANCE" />
+      <xs:element ref="COMPLETEDRESIDENTIALBALANCE" />
+      <xs:element ref="PIPELINEMANDATEBALANCE" />
+      <xs:element ref="PIPELINEAGGREGATEDLTV" />
+      <xs:element ref="LASTACCOUNTDOWNLOADDATE" />
+      <xs:element name="APPLICATIONFACTFIND" type="APPLICATIONFACTFINDType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="APPLICATIONAPPROVALDATE" type="xs:string" />
+  <xs:element name="APPLICATIONAPPROVALUNITID" type="xs:string" />
+  <xs:element name="APPLICATIONAPPROVALUSERID" type="xs:string" />
+  <xs:element name="APPLICATIONCURRENCY" type="xs:string" />
+  <xs:element name="APPLICATIONDATE" type="xs:string" />
+  <xs:complexType name="APPLICATIONFACTFINDType">
+    <xs:sequence>
+      <xs:element ref="APPLICATIONNUMBER" />
+      <xs:element ref="APPLICATIONFACTFINDNUMBER" />
+      <xs:element ref="ACTIVEQUOTENUMBER" />
+      <xs:element ref="APPLICATIONCURRENCY" />
+      <xs:element ref="ACCEPTEDQUOTENUMBER" />
+      <xs:element ref="ADDITIONALINTERMEDIARYDETAILS" />
+      <xs:element ref="ATTITUDETOBORROWINGSCORE" />
+      <xs:element ref="CREDITSCORE" />
+      <xs:element ref="CREDITSTATUS" />
+      <xs:element ref="CURRENTTOTALLOANS" />
+      <xs:element name="DIRECTINDIRECTBUSINESS" type="DIRECTINDIRECTBUSINESSType" />
+      <xs:element ref="FUTURETOTALLOANS" />
+      <xs:element ref="INTRODUCINGAGENTREF" />
+      <xs:element ref="LENDERCODE" />
+      <xs:element name="MARKETINGSOURCE" type="MARKETINGSOURCEType" />
+      <xs:element ref="MAXIMUMBORROWINGAMOUNT" />
+      <xs:element ref="MIRASOPTION1AMOUNT" />
+      <xs:element ref="MIRASOPTION2AMOUNT" />
+      <xs:element ref="MIRASOPTION3AMOUNT" />
+      <xs:element ref="NEXTQUOTENUMBER" />
+      <xs:element ref="NUMBEROFAPPLICANTS" />
+      <xs:element ref="NUMBEROFGUARANTORS" />
+      <xs:element ref="OUTSTANDINGLOANAMOUNT" />
+      <xs:element ref="APPLICATIONPACKAGEINDICATOR" />
+      <xs:element ref="QUICKQUOTEQUOTENUMBER" />
+      <xs:element ref="RECOMMENDEDQUOTENUMBER" />
+      <xs:element name="SPECIALSCHEME" type="SPECIALSCHEMEType" />
+      <xs:element ref="TOTALMONTHLYREPAYMENT" />
+      <xs:element name="TYPEOFAPPLICATION" type="TYPEOFAPPLICATIONType" />
+      <xs:element name="NATUREOFLOAN" type="NATUREOFLOANType" />
+      <xs:element ref="GROUPCONNECTIONINDICATOR" />
+      <xs:element ref="BCDECLARATIONNOTES" />
+      <xs:element ref="PURCHASEPRICEORESTIMATEDVALUE" />
+      <xs:element ref="APPLICATIONAPPROVALDATE" />
+      <xs:element ref="APPLICATIONAPPROVALUSERID" />
+      <xs:element ref="APPLICATIONAPPROVALUNITID" />
+      <xs:element ref="APPLICATIONRECOMMENDEDDATE" />
+      <xs:element ref="APPLICATIONRECOMMENDEDUSERID" />
+      <xs:element ref="APPLICATIONRECOMMENDEDUNITID" />
+      <xs:element ref="BMDECLARATIONIND" />
+      <xs:element ref="FURTHERADVANCETERMIND" />
+      <xs:element ref="FURTHERADVANCEREPTYPEIND" />
+      <xs:element ref="INTRODUCERIDLEVEL1" />
+      <xs:element ref="INTRODUCERIDLEVEL2" />
+      <xs:element ref="INTRODUCERIDLEVEL3" />
+      <xs:element ref="INTRODUCERMCCBLEVEL1" />
+      <xs:element ref="INTRODUCERMCCBLEVEL2" />
+      <xs:element ref="INTRODUCERMCCBLEVEL3" />
+      <xs:element ref="INTRODUCERCORRESPONDINDLEVEL1" />
+      <xs:element ref="INTRODUCERCORRESPONDINDLEVEL2" />
+      <xs:element ref="INTRODUCERCORRESPONDINDLEVEL3" />
+      <xs:element ref="LANDUSAGE" />
+      <xs:element ref="KFIRECEIVEDBYALLAPPS" />
+      <xs:element name="LEVELOFADVICE" type="LEVELOFADVICEType" />
+      <xs:element name="REGULATIONINDICATOR" type="REGULATIONINDICATORType" />
+      <xs:element ref="ESTIMATEDCOMPLETIONDATE" />
+      <xs:element ref="APPLICATIONRECEIVEDDATE" />
+      <xs:element ref="ADDITIONALBROKERFEE" />
+      <xs:element ref="ADDITIONALBROKERFEEDESC" />
+      <xs:element ref="OPTOUTINDICATOR" />
+      <xs:element ref="EXTERNALSYSTEMTPDDECLARATION" />
+      <xs:element ref="MAINRESIDENCEIND" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="APPLICATIONFACTFINDNUMBER" type="xs:string" />
+  <xs:element name="APPLICATIONNUMBER" type="xs:string" />
+  <xs:element name="APPLICATIONPACKAGEINDICATOR" type="xs:string" />
+  <xs:element name="APPLICATIONRECEIVEDDATE">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="02/06/2005" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="APPLICATIONRECOMMENDEDDATE" type="xs:string" />
+  <xs:element name="APPLICATIONRECOMMENDEDUNITID" type="xs:string" />
+  <xs:element name="APPLICATIONRECOMMENDEDUSERID" type="xs:string" />
+  <xs:element name="APR" type="xs:string" />
+  <xs:element name="ATTITUDETOBORROWINGSCORE" type="xs:string" />
+  <xs:element name="BCCOVERTYPE" type="xs:string" />
+  <xs:element name="BCDECLARATIONNOTES" type="xs:string" />
+  <xs:element name="BMDECLARATIONIND" type="xs:string" />
+  <xs:element name="CHANNELID" type="xs:string" />
+  <xs:element name="COMPLETEDBTLBALANCE" type="xs:string" />
+  <xs:element name="COMPLETEDBTLNUMBER" type="xs:string" />
+  <xs:element name="COMPLETEDRESIDENTIALBALANCE" type="xs:string" />
+  <xs:element name="CORRESPONDENCESALUTATION" type="xs:string" />
+  <xs:element name="CREDITSCORE" type="xs:string" />
+  <xs:element name="CREDITSTATUS" type="xs:string" />
+  <xs:element name="CURRENTTOTALLOANS" type="xs:string" />
+  <xs:complexType name="DIRECTINDIRECTBUSINESSType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:element name="ESTIMATEDCOMPLETIONDATE" type="xs:string" />
+  <xs:element name="EXTERNALSYSTEMTPDDECLARATION" type="xs:string" />
+  <xs:element name="FINALRATEMONTHLYCOST" type="xs:float" />
+  <xs:element name="FURTHERADVANCEREPTYPEIND" type="xs:string" />
+  <xs:element name="FURTHERADVANCETERMIND" type="xs:string" />
+  <xs:element name="FUTURETOTALLOANS" type="xs:string" />
+  <xs:element name="GROUPCONNECTIONINDICATOR" type="xs:string" />
+  <xs:element name="INTERMEDIARYGUID" type="xs:string" />
+  <xs:element name="INTRODUCERCORRESPONDINDLEVEL1" type="xs:string" />
+  <xs:element name="INTRODUCERCORRESPONDINDLEVEL2" type="xs:string" />
+  <xs:element name="INTRODUCERCORRESPONDINDLEVEL3" type="xs:string" />
+  <xs:element name="INTRODUCERIDLEVEL1" type="xs:string" />
+  <xs:element name="INTRODUCERIDLEVEL2" type="xs:string" />
+  <xs:element name="INTRODUCERIDLEVEL3" type="xs:string" />
+  <xs:element name="INTRODUCERMCCBLEVEL1" type="xs:string" />
+  <xs:element name="INTRODUCERMCCBLEVEL2" type="xs:string" />
+  <xs:element name="INTRODUCERMCCBLEVEL3" type="xs:string" />
+  <xs:element name="INTRODUCINGAGENTREF" type="xs:string" />
+  <xs:element name="KFIRECEIVEDBYALLAPPS" type="xs:string" />
+  <xs:element name="LANDUSAGE" type="xs:string" />
+  <xs:element name="LASTACCOUNTDOWNLOADDATE" type="xs:string" />
+  <xs:element name="LENDERCODE" type="xs:string" />
+  <xs:complexType name="LEVELOFADVICEType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:element name="LIFECOVER" type="xs:string" />
+  <xs:complexType name="LOANCOMPONENTType">
+    <xs:sequence>
+      <xs:element ref="LOANCOMPONENTSEQUENCENUMBER" />
+      <xs:element name="REPAYMENTMETHOD" type="REPAYMENTMETHODType" />
+      <xs:element ref="APR" />
+      <xs:element ref="FINALRATEMONTHLYCOST" />
+      <xs:element name="LOANAMOUNT" type="xs:double" />
+      <xs:element name="CAPITALANDINTERESTELEMENT" type="xs:double" />
+      <xs:element name="PRODUCTNAME" type="xs:string" />
+      <xs:element name="GROUPTYPE" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LOANCOMPONENTLISTType">
+    <xs:sequence>
+      <xs:element name="LOANCOMPONENT" type="LOANCOMPONENTType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LOANCOMPONENTSEQUENCENUMBER" type="xs:string" />
+  <xs:element name="MAINRESIDENCEIND" type="xs:string" />
+  <xs:complexType name="MARKETINGSOURCEType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:element name="MAXIMUMBORROWINGAMOUNT" type="xs:string" />
+  <xs:element name="MIRASOPTION1AMOUNT" type="xs:string" />
+  <xs:element name="MIRASOPTION2AMOUNT" type="xs:string" />
+  <xs:element name="MIRASOPTION3AMOUNT" type="xs:string" />
+  <xs:element name="MORTGAGESUBQUOTENUMBER" type="xs:string" />
+  <xs:complexType name="NATUREOFLOANType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:element name="NEXTQUOTENUMBER" type="xs:string" />
+  <xs:element name="NUMBEROFAPPLICANTS" type="xs:string" />
+  <xs:element name="NUMBEROFGUARANTORS" type="xs:string" />
+  <xs:element name="OPTOUTINDICATOR" type="xs:string" />
+  <xs:element name="OTHERSYSTEMACCOUNTNUMBER" type="xs:string" />
+  <xs:element name="OUTSTANDINGLOANAMOUNT" type="xs:string" />
+  <xs:element name="PACKAGENUMBER" type="xs:string" />
+  <xs:element name="PIPELINEAGGREGATEDLTV" type="xs:string" />
+  <xs:element name="PIPELINEBTLBALANCE" type="xs:string" />
+  <xs:element name="PIPELINEBTLNUMBER" type="xs:string" />
+  <xs:element name="PIPELINEMANDATEBALANCE" type="xs:string" />
+  <xs:element name="PIPELINERESIDENTIALBALANCE" type="xs:string" />
+  <xs:element name="PPCOVERTYPE" type="xs:string" />
+  <xs:element name="PURCHASEPRICEORESTIMATEDVALUE" type="xs:string" />
+  <xs:element name="QUICKQUOTEQUOTENUMBER" type="xs:string" />
+  <xs:element name="QUOTATIONNUMBER" type="xs:string" />
+  <xs:element name="QUOTATIONTYPE" type="xs:string" />
+  <xs:element name="RECOMMENDEDQUOTENUMBER" type="xs:string" />
+  <xs:complexType name="REGULATIONINDICATORType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="REPAYMENTMETHODType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:element name="RESPONSE" type="RESPONSEType" />
+  <xs:complexType name="RESPONSEType">
+    <xs:sequence minOccurs="0">
+      <xs:element name="STOREDQUOTATIONLIST" type="STOREDQUOTATIONLISTType" minOccurs="0" />
+      <xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="SPECIALSCHEMEType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="STOREDQUOTATIONLISTType">
+    <xs:sequence>
+      <xs:element name="STOREDQUOTATION" type="STOREDQUOTATIONType" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="STOREDQUOTATIONType">
+    <xs:sequence>
+      <xs:element ref="APPLICATIONNUMBER" />
+      <xs:element ref="APPLICATIONFACTFINDNUMBER" />
+      <xs:element ref="QUOTATIONNUMBER" />
+      <xs:element ref="QUOTATIONTYPE" />
+      <xs:element ref="TOTALQUOTATIONCOST" />
+      <xs:element ref="MORTGAGESUBQUOTENUMBER" />
+      <xs:element ref="LIFECOVER" />
+      <xs:element ref="BCCOVERTYPE" />
+      <xs:element ref="ANNUALBUILDINGSPREMIUM" />
+      <xs:element ref="ANNUALCONTENTSPREMIUM" />
+      <xs:element ref="PPCOVERTYPE" />
+      <xs:element name="TOTALNETMONTHLYCOST" type="xs:float" />
+      <xs:element name="TOTALBCMONTHLYCOST" type="xs:float" />
+      <xs:element name="TOTALPPMONTHLYCOST" type="xs:float" />
+      <xs:element name="LOANCOMPONENTLIST" type="LOANCOMPONENTLISTType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TOTALMONTHLYREPAYMENT" type="xs:string" />
+  <xs:element name="TOTALQUOTATIONCOST" type="xs:float" />
+  <xs:complexType name="TYPEOFAPPLICATIONType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="TYPEOFBUYERType">
+    <xs:attribute name="TEXT" type="xs:string" use="required" />
+  </xs:complexType>
+</xs:schema>

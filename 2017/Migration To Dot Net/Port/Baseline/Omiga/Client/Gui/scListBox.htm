@@ -1,0 +1,916 @@
+<html>
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Workfile:		scListBox.htm
+Copyright:		Copyright © 1999 Marlborough Stirling
+
+Description:	File containing list box functionality.
+				Based on scTableListScroll.htm.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+History:
+
+Prog	Date		Description
+RF		29/11/99	Created to fix AQR MC4 (problem when re-initialising a list box).
+BG		17/05/00	SYS0752 Removed Tooltips
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+BMIDS Specific History :
+
+Prog	Date		AQR			Description
+MV		08/08/2002	BMIDS00302	Core Ref : SYS4728 remove non-style sheet styles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MARS Specific History :
+
+Prog	Date		AQR			Description
+GHun	22/07/2005	MAR14		Apply ING Style Sheet and GUI Images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<head>
+	<meta name="vs_targetSchema" content="http://schemas.marlborough-stirling.com/intellisense/ie5_omiga4">
+	<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+	<title></title>
+</head>
+
+<body>
+	<div id="divScrollNumbers0" 
+		style="LEFT: 0px; POSITION: absolute; TOP: 1px; HEIGHT: 22px; WIDTH: 154px; background-color:FFEFE5"
+		class="msgLabel">		
+		<div id="divScrollNumbers1" 
+			style="LEFT: 1px; POSITION: absolute; TOP: 2px; HEIGHT: 18px; WIDTH: 151px; background-color:FFEFE5"
+			class="msgLabel">
+			<div id="divScrollNumbers2" 
+				style="LEFT: 4px; POSITION: absolute; TOP: 2px; VISIBILITY: hidden">
+				<span style="LEFT: 0px; POSITION: absolute; TOP: 0px" class="msgLabel">records</span>
+				<span id="spStartingRecNo" 
+					style="LEFT: 40px; POSITION: absolute; TOP: 0px" class="msgLabel">999</span> 
+				<span style="LEFT: 64px; POSITION: absolute; TOP: 0px" class="msgLabel">to</span>
+				<span id="spMaxOnScreen" 
+					style="LEFT: 80px; POSITION: absolute; TOP: 0px" class="msgLabel">999</span>
+				<span style="LEFT: 104px; POSITION: absolute; TOP: 0px" class="msgLabel">of</span>
+				<span id="spNoOfRecords" 
+					style="LEFT: 120px; POSITION: absolute; TOP: 0px" class="msgLabel">9999</span>
+			</div>
+		</div>
+	</div>
+
+	<div id="idScrollButtons" 
+		style="HEIGHT: 24px; LEFT: 156px; POSITION: absolute; TOP: 0px; WIDTH: 148px; background-color:FFEFE5">
+		<form id="frmScrollButtons" style="VISIBILITY: hidden">
+			<button id="btnStart" class="msgButton" style="WIDTH: 24px" type="button">|&lt;</button> 
+			<button id="btnPageUp" class="msgButton" style="WIDTH: 24px" type="button">&lt;&lt;</button> 
+			<button id="btnOneUp" class="msgButton" style="WIDTH: 24px" type="button">&lt;</button> 
+			<button id="btnOneDown" class="msgButton" style="WIDTH: 24px" type="button">&gt;</button> 
+			<button id="btnPageDown" class="msgButton" style="WIDTH: 24px" type="button">&gt;&gt;</button> 
+			<button id="btnEnd" class="msgButton" style="WIDTH: 24px" type="button">&gt;|</button> 
+		</form>
+	</div> 
+</body>
+
+<script language="javascript" type="text/javascript">
+
+	public_description = new TableScrollListMgr;
+	
+	// ---- Table data begin ----
+	
+	var m_refTable = null;
+	var m_refKeyInput = null;
+	var m_nKeyCol = null;
+	var m_nRecSelected = null;
+
+	var m_nArrayRecsSelected = new Array();
+	
+	var m_bIsDisabled = null;
+	var m_bIsTableMultiSelect = null;
+	var m_CtrlKey	= null;
+	var m_ShiftKey	= null;
+	
+	// ---- Table data end ---- 
+	
+	// ---- Scroll data begin ----
+	
+	var m_fnShowList		= null;
+	var m_nVisibleStartRec	= null;
+	var m_nVisibleEndRec	= null;
+	var m_nTotalRecs		= null;
+	
+	// AY 23/09/99 
+	// number of rows in the table field, excluding any header row
+	var m_nNumVisibleTableRows	= null; 
+	
+	// ---- Scroll data end ----
+	
+	function TableScrollListMgr()
+	{
+		// ---- Table functions begin ----
+		
+		this.initialiseTable			= initialiseTable;
+				
+		this.getRecSelected				= getRecSelected;
+		this.getAllRecsSelected			= getAllRecsSelected;
+		this.setRowSelected				= setRowSelected;
+		this.setAllRowsSelected			= setAllRowsSelected;		
+		
+		this.DisableTable				= DisableTable;
+		this.EnableTable				= EnableTable;
+		
+		this.EnableMultiSelectTable		= EnableMultiSelectTable;
+		this.DisableMultiSelectTable	= DisableMultiSelectTable;
+
+		// ---- Table functions end ---- 
+		
+		// ---- Scroll functions begin ----
+		
+		this.RowDeleted = RowDeleted;
+
+		// ---- Scroll functions end ----
+	}	
+	
+	function initialiseTable(
+		refTable, nKeyCol, refKeyInput, fnShowList, nNumVisibleTableRows, nTotalRecs)
+	{
+		m_refTable					= refTable;
+		m_nKeyCol					= nKeyCol;
+		m_refKeyInput				= refKeyInput;
+		m_fnShowList				= fnShowList;		
+		m_nNumVisibleTableRows		= nNumVisibleTableRows;		
+		m_nTotalRecs				= nTotalRecs;
+		
+		m_refTable.onmouseover		= table_mouseover;
+		m_refTable.onmouseout		= table_mouseout;
+		m_refTable.onclick			= table_onclick;
+		m_refTable.onkeydown		= table_onkeydown;
+		m_refTable.onkeyup			= table_onkeyup;		
+		
+		m_bIsDisabled				= false;		
+		m_bIsTableMultiSelect		= false; //MCS 22/10/99 table defaults to single selection				
+		m_CtrlKey					= false;
+		m_ShiftKey					= false;			
+
+		divScrollNumbers0.style.backgroundColor = "FFEFE5";
+		divScrollNumbers2.style.visibility = "hidden";
+		frmScrollButtons.style.visibility = "hidden";
+		
+		if(m_nTotalRecs > 0)
+		{
+			m_nVisibleStartRec = 1;
+			
+			if(m_nTotalRecs > m_nNumVisibleTableRows)
+			{
+				m_nVisibleEndRec = m_nNumVisibleTableRows;
+				frmScrollButtons.style.visibility = "visible";
+				divScrollNumbers0.style.backgroundColor = "616161";
+				divScrollNumbers2.style.visibility = "visible";
+				showPosition();
+			}
+			else
+			{
+				m_nVisibleEndRec = m_nTotalRecs;
+			}
+		}
+		
+		doButtonStates();			
+		// fixme - do a clear()???
+	}	
+	
+	function DisableTable()
+	{
+		m_bIsDisabled = true;
+	}
+	
+	function EnableTable()
+	{
+		m_bIsDisabled = false;
+	}
+	
+	function DisableMultiSelectTable()
+	{
+		if(m_bIsDisabled == false)
+		{
+			m_bIsTableMultiSelect = false;
+		}
+	}
+	
+	function EnableMultiSelectTable()
+	{
+		if(m_bIsDisabled == false)
+		{
+			m_bIsTableMultiSelect = true;
+		}
+	}
+	
+	function clear()
+	{
+		for(var nRow = 0; nRow < m_refTable.rows.length; nRow++)
+		{
+			if(m_refTable.rows(nRow).id != "rowTitles")
+			{
+				m_refTable.rows(nRow).style.background = "FFFFFF";
+				for(var j = 0; j < m_refTable.rows(nRow).cells.length; j++)
+				{
+					m_refTable.rows(nRow).cells(j).innerText = "";
+					// APS 12/08/99 Remove tooltip text
+					m_refTable.rows(nRow).cells(j).title = "";
+					m_refTable.rows(nRow).cells(j).style.color = "616161";
+				}
+			}
+		}
+		m_nRecSelected = null;
+	}
+	
+	function frmScrollButtons.btnOneDown.onclick()
+	{		
+		oneDown();
+	}
+		
+	function frmScrollButtons.btnOneUp.onclick()
+	{
+		oneUp();
+	}
+	
+	function frmScrollButtons.btnPageDown.onclick()
+	{
+		pageDown();
+	}
+	
+	function frmScrollButtons.btnPageUp.onclick()
+	{
+		pageUp();
+	}
+	
+	function frmScrollButtons.btnStart.onclick()
+	{
+		toTop();
+	}
+	
+	function frmScrollButtons.btnEnd.onclick()
+	{
+		toEnd;
+	}
+
+	function getRecSelected()
+	{
+		return m_nRecSelected;
+	}
+	
+	// get Array of Recs Selected
+	function getAllRecsSelected()
+	{
+		return m_nArrayRecsSelected;
+	}
+	
+	/*function getRowSelected()
+	{
+		if(m_nRecSelected != null)
+		{
+			for(var i = 0; i < m_refTable.rows.length; i++)
+			{
+				if(m_refTable.rows(i).rowIndex == ( m_nRecSelected - getOffset()))				
+				{
+					return i;
+				}
+			}
+		}
+		return -1;
+	}*/
+	
+	function setRowSelected(nRow)
+	{
+		for(var nRow = 0; nRow < m_refTable.rows.length; nRow++)
+		{
+			if(m_refTable.rows(nRow).id != "rowTitles")
+			{
+				if(nRow == nRow)
+				{
+					m_nRecSelected = m_nArrayRecsSelected[0]= m_refTable.rows(nRow).rowIndex;
+					m_refTable.rows(nRow).style.background = "FFEFE5";
+					for(var j = 0; j < m_refTable.rows(nRow).children.length; j++)
+					{
+						m_refTable.rows(nRow).children(j).style.color = "616161";
+					}
+				}
+				else
+				{
+					m_refTable.rows(nRow).style.background = "FFFFFF";
+					for(var j = 0; j < m_refTable.rows(nRow).children.length; j++)
+					{
+						m_refTable.rows(nRow).children(j).style.color = "616161";
+					}
+				}
+			}
+		}
+		
+		if(nRow == -1)
+		{
+			m_nRecSelected = null;
+			m_nArrayRecsSelected.length=0;
+		}
+	}
+
+	function setAllRowsSelected()
+	{		
+		if(m_bIsTableMultiSelect == true)
+		{
+			for(var nRow = 0; nRow < m_nTotalRecs; nRow++)
+			{
+				if(nRow >= m_nVisibleStartRec && nRow <= m_nVisibleEndRec)
+				{	
+					if(m_refTable.rows(nRow).id != "rowTitles" )
+					{
+						m_nRecSelected = m_nVisibleStartRec;
+
+						m_refTable.rows(nRow).style.background = "FFEFE5";
+						for(var j = 0; j < m_refTable.rows(nRow).children.length; j++)
+						{
+							m_refTable.rows(nRow).children(j).style.color = "616161";
+						}
+					}
+				}
+				m_nArrayRecsSelected[nRow]=nRow+1;			
+			}		
+		}
+	}
+	
+	function table_mouseover()
+	{	
+		var thisEvent = this.document.parentWindow.event.srcElement;
+																	
+		if(	m_bIsDisabled == false && 
+			thisEvent.parentElement.id != "rowTitles" && 
+			thisEvent.tagName == "TD" && 
+			thisEvent.parentElement.rowIndex != m_nRecSelected - getOffset())
+		{
+			var bModify = false;
+						
+			if(m_bIsTableMultiSelect == true)
+			{				
+				var nNumSelectedRows = m_nArrayRecsSelected.length;
+								
+				if( nNumSelectedRows == 0 )// nothing selected
+				{	
+					//just do normal processing as we don't have a current selection
+					bModify =true;// shouldn't happen
+				}
+				else
+				{	
+					bModify = true;
+					//need to loop round all of the possible rows that are selected							
+					for(var loop = 0; 
+						loop < nNumSelectedRows && bModify == true;
+						loop++)
+					{						
+						idRowSelected = m_nArrayRecsSelected[loop];
+						
+						if(idRowSelected >= m_nVisibleStartRec && idRowSelected <= m_nVisibleEndRec)
+						{							
+							if(thisEvent.parentElement.rowIndex == idRowSelected - getOffset())
+							{										
+								bModify = false;
+							}
+						}
+					}
+				}					
+			}
+			else if(thisEvent.parentElement.rowIndex != ( m_nRecSelected - getOffset() ))
+			{
+				bModify = true;
+			}			
+
+			if(bModify == true && 
+				thisEvent.parentElement.cells(m_nKeyCol).innerText.length > 0)
+			{
+				thisEvent.parentElement.style.background = "D4DDE9";
+				thisEvent.style.cursor = "hand";
+			}			
+		}
+	}
+
+	function table_onkeydown()
+	{
+		if(m_bIsDisabled == false && m_bIsTableMultiSelect == true)
+		{
+			var thisEvent = this.document.parentWindow.event;
+			m_ShiftKey = thisEvent.shiftKey;
+			m_CtrlKey = thisEvent.ctrlKey;
+		}
+	}
+
+	function table_onkeyup()
+	{
+		if(m_bIsDisabled == false && m_bIsTableMultiSelect == true)
+		{
+			var thisEvent = this.document.parentWindow.event;
+			m_ShiftKey = thisEvent.shiftKey;
+			m_CtrlKey = thisEvent.ctrlKey;
+		}
+	}
+
+	function table_mouseout()
+	{			
+		var thisEvent = this.document.parentWindow.event.srcElement;		
+		
+		if(	m_bIsDisabled == false && 
+			thisEvent.tagName == "TD" && 
+			thisEvent.parentElement.id != "rowTitles" && 
+			thisEvent.parentElement.rowIndex != m_nRecSelected - getOffset())
+		{
+			var bModify = false;
+			
+			if (m_bIsTableMultiSelect == true)
+			{	
+				var iArraySize = m_nArrayRecsSelected.length;
+						
+				if( iArraySize == 0 )
+				{	
+					//just do normal processing as we don't have a current selection
+					bModify = true;
+				}
+				else
+				{
+					bModify	= true;
+					
+					//need to loop round all of the possible rows that are selected							
+					for(var loop = 0; loop < iArraySize && bModify	== true;loop++)
+					{													
+						idRowSelected = m_nArrayRecsSelected[loop];
+
+						if(idRowSelected >= m_nVisibleStartRec && 
+							idRowSelected <= m_nVisibleEndRec)
+						{
+							if(thisEvent.parentElement.rowIndex == idRowSelected - getOffset())
+							{
+								bModify = false;
+							}
+						}	
+					}								
+				}									
+			}
+			else
+			{
+				bModify = true;
+			}
+			
+			if(bModify == true )
+			{
+				thisEvent.parentElement.style.background = "FFFFFF";
+				thisEvent.parentElement.style.color = "D4DDE9";
+				thisEvent.style.cursor = "";
+			}			
+		}		
+	}
+
+	function table_onclick()
+	{
+		var thisEvent = this.document.parentWindow.event.srcElement;
+		
+		if(	m_bIsDisabled == false && 
+			thisEvent.tagName == "TD" && 
+			thisEvent.parentElement.id != "rowTitles")
+		{		
+			var bInCurrentSelection = false;			
+			var idRowSelected;
+
+			var nNumSelectedRows = m_nArrayRecsSelected.length;
+			var iValue;						
+
+			for(var loop = 0; loop < nNumSelectedRows;loop++)
+			{	
+				//loop round all the elements in the array					
+				
+				idRowSelected = m_nArrayRecsSelected[loop];											
+				
+				if(idRowSelected >= m_nVisibleStartRec && 
+					idRowSelected <= m_nVisibleEndRec)
+				{					
+					if(thisEvent.parentElement.rowIndex == idRowSelected - getOffset())
+					{	
+						bInCurrentSelection = true;
+						iValue=loop;						
+					}
+				}	
+			}		
+				
+			var bDeSelect		= false;
+			var bDeSelectMulti	= false;
+			var bDeSelectShift	= false;
+			var bSelect			= false;
+			var bShiftSelect	= false;
+			var bDeSelectAll	= false;
+			var bSelectMulti	= false;
+				
+			if(m_bIsTableMultiSelect)
+			{												
+				if(m_CtrlKey == true && m_ShiftKey == false)
+				{
+					if(bInCurrentSelection == true && nNumSelectedRows > 1)
+					{	
+						//we have more than one element so de-select current selection
+						bDeSelectMulti	= true;
+					}
+					else if(bInCurrentSelection == false)
+					{	
+						//add this current selection to the array
+						bSelectMulti	= true;
+					}	
+				}						
+				else if(m_ShiftKey == true && m_CtrlKey == false)
+				{
+					if(bInCurrentSelection == true && nNumSelectedRows > 1)
+					{	
+						//select all elements upto and including this element
+						bDeSelectShift	= true;
+					}
+					else
+					{
+						//select from current selection to this selection								
+						bShiftSelect	= true;
+					}
+				}						
+				else if(m_ShiftKey == false && m_CtrlKey == false)
+				{
+					if(nNumSelectedRows > 1 )
+					{
+						bDeSelectAll	= true;
+						bSelect			= true;
+					}							
+					else if (bInCurrentSelection == false)
+					{							
+						bDeSelect	= true;									
+						bSelect		= true;
+					}
+				}				
+			}
+			else if(bInCurrentSelection == false && 
+				nNumSelectedRows > 0)//single selection // AY 25/11/99
+			{
+				bDeSelect	= true;//de-select previous
+				bSelect		= true;//select this one
+			}
+			else if(m_nRecSelected == null) // AY 25/11/99
+			{
+				bSelect = true;
+				nNumSelectedRows = 1;
+			}
+			
+			if(bDeSelect == true || bDeSelectAll == true || bDeSelectMulti == true)
+			{
+				if(thisEvent.parentElement.cells(m_nKeyCol).innerText.length > 0)
+				{
+					var bLoop = true;
+
+					for(var loop = 0; loop < nNumSelectedRows && bLoop == true;loop++)
+					{	
+						//loop round all the elements in the array
+						
+						idRowSelected = m_nArrayRecsSelected[loop];											
+						
+						if(idRowSelected >= m_nVisibleStartRec && 
+							idRowSelected <= m_nVisibleEndRec)
+						{							
+							if(((bDeSelect == true || bDeSelectAll == true) && 
+								thisEvent.parentElement.rowIndex != idRowSelected - getOffset())
+								|| 
+								(bDeSelectMulti == true && 
+								thisEvent.parentElement.rowIndex == idRowSelected - getOffset()))
+							{
+								var bContinue	= true;
+								var bModify		= true;
+								for(var nRow = 0; 
+									nRow < m_refTable.rows.length && bContinue == true; 
+									nRow++)
+								{
+									if(m_refTable.rows(nRow).id != "rowTitles")
+									{																				
+										if(bDeSelectMulti == true)
+										{
+											if(m_refTable.rows(nRow).rowIndex == thisEvent.parentElement.rowIndex) 
+											{	
+												bContinue	= false;
+												bLoop		= false;
+												bModify		= true;
+											}
+											else
+											{	
+												// dont do modify											
+												bModify		= false;
+											}
+										}
+										
+										if(bModify == true)
+										{
+											m_refTable.rows(nRow).style.background = "FFFFFF";
+																						
+											for(var j = 0; j < m_refTable.rows(nRow).children.length; j++)
+											{
+												m_refTable.rows(nRow).children(j).style.color = "616161";
+											}
+												
+											m_refKeyInput.value = m_refTable.rows(nRow).cells(m_nKeyCol).innerText;
+										}		
+										
+										if(bDeSelectAll == false)
+										{
+											bLoop	= false;
+										}										
+									}
+								}
+							}
+						}
+					}
+				}					
+				
+				if(bDeSelectMulti == true )
+				{	
+					var aidOldCurrentRowSelected = new Array();	
+					//copy the currentarray to the oldarray
+					aidOldCurrentRowSelected = m_nArrayRecsSelected;
+
+					for(var loop2 = iValue; loop2 < nNumSelectedRows;loop2++)
+					{	
+						m_nRecSelected = 
+							m_nArrayRecsSelected[loop2] = 
+								aidOldCurrentRowSelected[loop2+1];
+							
+						bInCurrentSelection	= true;
+					}
+													
+					m_nArrayRecsSelected.length = nNumSelectedRows-1;
+				}
+				
+				if(bDeSelectAll == true )
+				{
+					m_nArrayRecsSelected.length = 1;
+					nNumSelectedRows=1;						
+				}
+			}
+
+			if(bSelect == true || bSelectMulti == true || bShiftSelect == true)
+			{					
+				if(bShiftSelect == true)
+				{	
+					// fixme - no shift processing yet	
+				}
+																				
+				thisEvent.parentElement.style.background = "FFEFE5";
+																	
+				for(var i = 0; i < thisEvent.parentElement.children.length; i++)
+				{
+					thisEvent.parentElement.children(i).style.color = "616161";
+				}
+					
+				if(bSelect == true)
+				{
+					m_nRecSelected = 
+						m_nArrayRecsSelected[nNumSelectedRows-1] = 
+							thisEvent.parentElement.rowIndex + getOffset();
+				}
+
+				if(bSelectMulti == true)
+				{
+					m_nRecSelected = 
+						m_nArrayRecsSelected[nNumSelectedRows] = 
+							thisEvent.parentElement.rowIndex + getOffset();
+				}							
+			}				
+		}
+	}						
+
+	function redisplaySelection()	
+	{	
+		// RF 30/11/99
+		m_fnShowList(m_nVisibleStartRec - 1);
+		showPosition();			
+		doButtonStates();			
+		
+		var nNumSelectedRows = m_nArrayRecsSelected.length;
+							
+		// for each visible row
+		for(var nRow = 0; nRow <= m_nNumVisibleTableRows ; nRow++)
+		{
+			var bSetWhite = true;
+			
+			if(m_refTable.rows(nRow).id != "rowTitles" )
+			{
+				var bExit=false;
+				
+				for(var loop = 0; 
+					loop < nNumSelectedRows && bExit == false;
+					loop++)
+				{					
+					idAbsoluteRowSelected = m_nArrayRecsSelected[loop];
+										
+					idNewRowSelected = idAbsoluteRowSelected - getOffset();
+					
+					if(idNewRowSelected == nRow)
+					{
+						bExit		=	true;
+						bSetWhite	=	false;
+					}
+					else if(idNewRowSelected > nRow)
+					{
+						//gone passed the current index
+						bExit	=	true;
+					}
+				}
+
+				if(nRow >= (m_nVisibleStartRec - getOffset() ) && 
+					nRow <= (m_nVisibleEndRec - getOffset()))
+				{								
+					if(bSetWhite == false)
+					{
+						m_refTable.rows(nRow).style.background = "FFEFE5";
+							
+						for(var j = 0; j < m_refTable.rows(nRow).children.length; j++)
+						{
+							m_refTable.rows(nRow).children(j).style.color = "616161";
+						}
+					}
+					else
+					{
+						m_refTable.rows(nRow).style.background = "FFFFFF";
+														
+						for(var j = 0; j < m_refTable.rows(nRow).children.length; j++)
+						{
+							m_refTable.rows(nRow).children(j).style.color = "616161";
+						}						
+					}					
+				}
+			}
+		}							
+	}
+
+//--------------------------------------- END TABLE FUNCTIONALITY  ------------------------------------------
+
+//--------------------------------------- BEGIN SCROLL FUNCTIONALITY ---------------------------------------
+
+	function showPosition()
+	{
+		// set the numbers in the boxes
+		
+		spStartingRecNo.innerHTML = m_nVisibleStartRec;
+		spMaxOnScreen.innerHTML = m_nVisibleEndRec;
+		spNoOfRecords.innerHTML = m_nTotalRecs;
+	}
+	
+	function toEnd()
+	{
+		if(m_nTotalRecs > m_nNumVisibleTableRows && 
+			(m_nVisibleStartRec < m_nTotalRecs - (m_nNumVisibleTableRows - 1)))
+		{
+			m_nVisibleStartRec = m_nTotalRecs - (m_nNumVisibleTableRows - 1);
+			m_nVisibleEndRec = m_nTotalRecs;
+
+			redisplaySelection();
+		}
+	}
+	
+	function toTop()
+	{
+		if(m_nTotalRecs > m_nNumVisibleTableRows && 
+			m_nVisibleStartRec > 1)
+		{
+			m_nVisibleStartRec = 1;
+			m_nVisibleEndRec = m_nNumVisibleTableRows;
+
+			redisplaySelection();
+		}
+	}
+	
+	function oneDown()
+	{
+		if(m_nTotalRecs > m_nNumVisibleTableRows && 
+			(m_nVisibleStartRec + m_nNumVisibleTableRows <= m_nTotalRecs))
+		{
+			m_nVisibleStartRec++;
+			m_nVisibleEndRec++;
+
+			redisplaySelection();
+		}
+	}
+
+	function oneUp()
+	{
+		if(m_nTotalRecs > m_nNumVisibleTableRows && 
+			m_nVisibleStartRec > 0)
+		{
+			m_nVisibleStartRec--;
+			m_nVisibleEndRec--;
+
+			redisplaySelection();
+		}
+	}
+	
+	function pageUp()
+	{
+		if(m_nTotalRecs > m_nNumVisibleTableRows && 
+			m_nVisibleStartRec > 0)
+		{
+			m_nVisibleStartRec -= m_nNumVisibleTableRows;
+			if(m_nVisibleStartRec < 1)
+			{
+				m_nVisibleStartRec = 1;
+			}
+			m_nVisibleEndRec = m_nVisibleStartRec + (m_nNumVisibleTableRows - 1);
+
+			redisplaySelection();
+		}
+	}
+	
+	function pageDown()
+	{
+		if(m_nTotalRecs > m_nNumVisibleTableRows && 
+			(m_nVisibleStartRec < m_nTotalRecs - (m_nNumVisibleTableRows - 1)))
+		{
+			m_nVisibleStartRec += m_nNumVisibleTableRows;
+			if(m_nVisibleStartRec + m_nNumVisibleTableRows > m_nTotalRecs)
+			{
+				m_nVisibleStartRec = m_nTotalRecs - (m_nNumVisibleTableRows - 1);
+			}
+			m_nVisibleEndRec = m_nVisibleStartRec + (m_nNumVisibleTableRows - 1);
+
+			redisplaySelection();
+		}
+	}	
+	
+	function doButtonStates()
+	{
+		// do the buttons moving towards first rec
+		if(m_nVisibleStartRec == 1)
+		{
+			frmScrollButtons.btnStart.disabled = true;
+			frmScrollButtons.btnPageUp.disabled = true;
+			frmScrollButtons.btnOneUp.disabled = true;
+		}
+		else
+		{
+			frmScrollButtons.btnStart.disabled = false;
+			frmScrollButtons.btnPageUp.disabled = false;
+			frmScrollButtons.btnOneUp.disabled = false;
+		}
+
+		// do the buttons moving towards last rec
+		if(m_nVisibleStartRec < (m_nTotalRecs - (m_nNumVisibleTableRows - 1)))
+		{
+			frmScrollButtons.btnOneDown.disabled = false;
+			frmScrollButtons.btnPageDown.disabled = false;
+			frmScrollButtons.btnEnd.disabled = false;
+		}
+		else
+		{
+			frmScrollButtons.btnOneDown.disabled = true;
+			frmScrollButtons.btnPageDown.disabled = true;
+			frmScrollButtons.btnEnd.disabled = true;
+		}
+		
+		// If the total rows fall below the table length, hide the scroll controls
+		if(m_nTotalRecs <= m_nNumVisibleTableRows)
+		{
+			divScrollNumbers0.style.backgroundColor = "FFEFE5";
+			divScrollNumbers2.style.visibility = "hidden";
+			frmScrollButtons.style.visibility = "hidden";
+		}
+	}
+	
+	function getOffset()
+	{
+		return (m_nVisibleStartRec - 1);
+	}
+
+	function RowDeleted()
+	{
+		// Decrement the total number of rows; if the end number is 
+		// greater than this set it to the total
+		m_nTotalRecs--;
+		
+		if(m_nVisibleEndRec > m_nTotalRecs)
+		{
+			m_nVisibleEndRec = m_nTotalRecs;
+		}
+
+		// If the number of rows displayed is less than the length of the table
+		// and we are not displaying record #1, move the display up one row
+		if(m_nVisibleStartRec > 1 && 
+			m_nVisibleEndRec - m_nVisibleStartRec < (m_nNumVisibleTableRows - 1))
+		{
+			m_nVisibleStartRec--;
+		}
+		
+		// Redisplay
+		
+		clear(); // AY 25/11/99
+
+		redisplaySelection();
+		
+		/* RF 30/11/99 - Moved into doButtonStates for consistency
+				
+		// If the total rows fall below the table length, hide the scroll controls
+		if(m_nTotalRecs <= m_nNumVisibleTableRows)
+		{
+			divScrollNumbers0.style.backgroundColor = "FFEFE5";
+			divScrollNumbers2.style.visibility = "hidden";
+			frmScrollButtons.style.visibility = "hidden";
+		}*/		
+	}
+
+</script>
+</body>
+</html>

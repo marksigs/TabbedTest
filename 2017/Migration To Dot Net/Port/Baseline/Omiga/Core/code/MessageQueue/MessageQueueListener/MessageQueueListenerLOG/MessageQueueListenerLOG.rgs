@@ -1,0 +1,35 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		{63060F9F-82C8-4302-8B9D-8FB632183B07} = s 'MessageQueueListenerLOG'
+		'MessageQueueListenerLOG.EXE'
+		{
+			val AppID = s {63060F9F-82C8-4302-8B9D-8FB632183B07}
+		}
+	}
+}
+
+HKLM
+{
+	SYSTEM
+	{
+		CurrentControlSet
+		{
+			Services
+			{
+				EventLog
+				{
+					Application
+					{
+						MessageQueueListenerLOG
+						{
+							val EventMessageFile = s '%MODULE%'
+							val TypesSupported = d '7'
+						}
+					}
+				}
+			}
+		}
+	}
+}

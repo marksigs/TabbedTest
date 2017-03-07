@@ -1,0 +1,135 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "dmsCompression"=.\dmsCompression.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/Core/dmsCompression", EIHBAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name zlibwapi
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name zlibzip
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "miniunz"=.\ZLIB\msg\src\vstudio\vc6\miniunz\miniunz.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/Core/dmsCompression", EIHBAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name zlibwapi
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "minizip"=.\ZLIB\msg\src\vstudio\vc6\minizip\minizip.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/Core/dmsCompression", EIHBAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name zlibwapi
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "zlibwapi"=.\ZLIB\msg\src\vstudio\vc6\zlibwapi\zlibwapi.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/Core/dmsCompression", EIHBAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "zlibzip"=.\ZLIB\msg\src\vstudio\vc6\zlibzip\zlibzip.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/Core/dmsCompression", EIHBAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name zlibwapi
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "zlibzipTest"=.\ZLIB\msg\src\vstudio\vc6\zlibzipTest\zlibzipTest.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    zlibzipTest
+    .\ZLIB\msg\src\vstudio\vc6\zlibzip
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name zlibzip
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+    begin source code control
+    dmsCompression
+    .
+    end source code control
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

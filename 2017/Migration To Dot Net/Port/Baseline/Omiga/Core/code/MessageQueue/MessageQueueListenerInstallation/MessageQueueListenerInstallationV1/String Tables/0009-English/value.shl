@@ -1,0 +1,15 @@
+[General]
+Type=STRINGTABLESPECIFIC
+Version=1.00.000
+Language=0009
+
+[Data]
+TITLE_MAIN=MessageQueueListener
+TITLE_CAPTIONBAR=MessageQueueListener Setup
+COMPANY_NAME=Marlborough Stirling
+PRODUCT_NAME=MessageQueueListener
+PRODUCT_KEY=MessageQueueListener.exe
+PRODUCT_VERSION=2001.10.5.0
+FOLDER_NAME=MessageQueueListener
+MQLCOMPLUSAPPLICATIONNAME=MessageQueueListenerMTS
+

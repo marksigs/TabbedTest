@@ -1,0 +1,215 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""MessageQueueComponentVC.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2004,3,5,0
+ PRODUCTVERSION 2004,3,5,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MessageQueueComponentVC Module\0"
+            VALUE "FileVersion", "2004, 3, 5, 0\0"
+            VALUE "InternalName", "MessageQueueComponentVC\0"
+            VALUE "LegalCopyright", "Copyright 2000\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OLESelfRegister", "\0"
+            VALUE "OriginalFilename", "MessageQueueComponentVC.DLL\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "MessageQueueComponentVC Module\0"
+            VALUE "ProductVersion", "2004, 3, 5, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_MESSAGEQUEUECOMPONENTVC2SUCCESS REGISTRY DISCARDABLE    "MessageQueueComponentVC2Success.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROJNAME            "MessageQueueComponentVC"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_MESSAGEQUEUECOMPONENTVC1 REGISTRY DISCARDABLE    "MessageQueueComponentVC1.rgs"
+IDR_MESSAGEQUEUECOMPONENTVC2 REGISTRY DISCARDABLE    "MessageQueueComponentVC2.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_VC1RESPONSEDIALOG1 DIALOG DISCARDABLE  0, 0, 176, 135
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "VC1 Component"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "MESSQ_RESP_SUCCESS",IDC_MESSQ_RESP_SUCCESS,9,29,158,14
+    PUSHBUTTON      "MESSQ_RESP_RETRY_NOW",IDC_MESSQ_RESP_RETRY_NOW,9,46,158,
+                    14
+    PUSHBUTTON      "MESSQ_RESP_RETRY_LATER",IDC_MESSQ_RESP_RETRY_LATER,9,63,
+                    158,14
+    PUSHBUTTON      "MESSQ_RESP_RETRY_MOVE_MESSAGE",
+                    IDC_MESSQ_RESP_RETRY_MOVE_MESSAGE,9,80,158,14
+    PUSHBUTTON      "MESSQ_RESP_STALL_COMPONENT",
+                    IDC_MESSQ_RESP_STALL_COMPONENT,9,97,158,14
+    PUSHBUTTON      "MESSQ_RESP_STALL_QUEUE",IDC_MESSQ_RESP_STALL_QUEUE,9,
+                    114,158,14
+    CTEXT           "Message",IDC_MESSAGE,9,7,158,14,SS_CENTERIMAGE
+END
+
+IDD_VC2RESPONSEDIALOG1 DIALOG DISCARDABLE  0, 0, 176, 154
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "VC2 Component"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "MESSQ_RESP_SUCCESS",IDC_MESSQ_RESP_SUCCESS,9,29,158,14
+    PUSHBUTTON      "MESSQ_RESP_RETRY_NOW",IDC_MESSQ_RESP_RETRY_NOW,9,46,158,
+                    14
+    PUSHBUTTON      "MESSQ_RESP_RETRY_LATER",IDC_MESSQ_RESP_RETRY_LATER,9,63,
+                    158,14
+    PUSHBUTTON      "MESSQ_RESP_RETRY_MOVE_MESSAGE",
+                    IDC_MESSQ_RESP_RETRY_MOVE_MESSAGE,9,80,158,14
+    PUSHBUTTON      "MESSQ_RESP_STALL_COMPONENT",
+                    IDC_MESSQ_RESP_STALL_COMPONENT,9,97,158,14
+    PUSHBUTTON      "MESSQ_RESP_STALL_QUEUE",IDC_MESSQ_RESP_STALL_QUEUE,9,
+                    114,158,14
+    CTEXT           "Message",IDC_MESSAGE,9,7,158,14,SS_CENTERIMAGE
+    EDITTEXT        IDC_CONFIG,10,133,157,14,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_VC1RESPONSEDIALOG1, DIALOG
+    BEGIN
+        RIGHTMARGIN, 167
+        BOTTOMMARGIN, 134
+    END
+
+    IDD_VC2RESPONSEDIALOG1, DIALOG
+    BEGIN
+        RIGHTMARGIN, 167
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "MessageQueueComponentVC.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

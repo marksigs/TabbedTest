@@ -1,0 +1,256 @@
+VERSION 5.00
+Begin VB.PropertyPage ppgESAccount 
+   Caption         =   "PropertyPage1"
+   ClientHeight    =   6165
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   5790
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   6165
+   ScaleWidth      =   5790
+   Begin VB.CheckBox LogonAsCurrentUser 
+      Caption         =   "Logon as current user"
+      Height          =   255
+      Left            =   360
+      TabIndex        =   8
+      Top             =   1440
+      Width           =   2535
+   End
+   Begin VB.TextBox Password 
+      BeginProperty DataFormat 
+         Type            =   1
+         Format          =   "0"
+         HaveTrueFalseNull=   0
+         FirstDayOfWeek  =   0
+         FirstWeekOfYear =   0
+         LCID            =   2057
+         SubFormatType   =   1
+      EndProperty
+      Height          =   315
+      Left            =   2400
+      TabIndex        =   6
+      Top             =   3240
+      Width           =   1815
+   End
+   Begin VB.TextBox Username 
+      BeginProperty DataFormat 
+         Type            =   1
+         Format          =   "0"
+         HaveTrueFalseNull=   0
+         FirstDayOfWeek  =   0
+         FirstWeekOfYear =   0
+         LCID            =   2057
+         SubFormatType   =   1
+      EndProperty
+      Height          =   315
+      Left            =   2400
+      TabIndex        =   4
+      Top             =   2640
+      Width           =   1815
+   End
+   Begin VB.TextBox Domain 
+      BeginProperty DataFormat 
+         Type            =   1
+         Format          =   "0"
+         HaveTrueFalseNull=   0
+         FirstDayOfWeek  =   0
+         FirstWeekOfYear =   0
+         LCID            =   2057
+         SubFormatType   =   1
+      EndProperty
+      Height          =   315
+      Left            =   2400
+      TabIndex        =   0
+      Top             =   2040
+      Width           =   1815
+   End
+   Begin VB.Label Label1 
+      BackStyle       =   0  'Transparent
+      Caption         =   $"ppgESAccount.pgx":0000
+      Height          =   615
+      Left            =   240
+      TabIndex        =   3
+      Top             =   240
+      Width           =   5280
+   End
+   Begin VB.Label LabelDomain 
+      Caption         =   "Domain"
+      Height          =   255
+      Left            =   720
+      TabIndex        =   1
+      Top             =   2160
+      Width           =   1215
+   End
+   Begin VB.Label LabelPassword 
+      Caption         =   "Password"
+      Height          =   255
+      Left            =   720
+      TabIndex        =   7
+      Top             =   3360
+      Width           =   1215
+   End
+   Begin VB.Label LabelUsername 
+      Caption         =   "Username"
+      Height          =   255
+      Left            =   720
+      TabIndex        =   5
+      Top             =   2760
+      Width           =   1215
+   End
+   Begin VB.Label Label7 
+      Caption         =   "Label7"
+      Height          =   15
+      Left            =   4080
+      TabIndex        =   2
+      Top             =   3240
+      Width           =   135
+   End
+   Begin VB.Shape Shape1 
+      FillColor       =   &H00FFFFFF&
+      FillStyle       =   0  'Solid
+      Height          =   1095
+      Left            =   0
+      Top             =   0
+      Width           =   5775
+   End
+End
+Attribute VB_Name = "ppgESAccount"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+'Workfile:      wpgESAccount.pag
+'Copyright:     Copyright © 2001 Marlborough Stirling
+
+'Description:
+'Dependencies:
+'Issues:
+'------------------------------------------------------------------------------------------
+'History:
+'
+'Prog   Date        Description
+'LD     10/01/01    Created
+'------------------------------------------------------------------------------------------
+
+Option Explicit
+
+Dim m_datappgES As datappgES
+
+Implements IMMCPropertyPage
+
+Private Sub IMMCPropertyPage_Cancel()
+
+End Sub
+
+Private Sub IMMCPropertyPage_Close()
+
+End Sub
+
+Private Sub IMMCPropertyPage_GetDialogUnitSize(Height As Variant, Width As Variant)
+    Height = 218
+    Width = 252
+End Sub
+
+Private Sub IMMCPropertyPage_Help()
+
+End Sub
+
+Private Sub IMMCPropertyPage_Initialize(ByVal Data As Variant, ByVal PropertySheet As SnapInLib.MMCPropertySheet)
+   
+    On Error Resume Next
+    Set m_datappgES = Data
+    Set m_datappgES.m_ppgAccount = Me
+    
+    ' Initial values
+    Select Case m_datappgES.m_eAccount
+        Case Account_CurrentUser
+            LogonAsCurrentUser = 1
+        Case Account_ConnectAsUser
+            LogonAsCurrentUser = 0
+        Case Else
+            Debug.Assert 0
+    End Select
+    
+    Domain = m_datappgES.m_strDomain
+    Username = m_datappgES.m_strUserName
+    Password = ""
+    
+    LogonAsCurrentUser_Click
+    Changed = False
+
+End Sub
+
+Private Sub IMMCPropertyPage_QueryCancel(Allow As Boolean)
+
+End Sub
+
+Private Sub LogonAsCurrentUser_Click()
+
+    Changed = True
+    
+    If LogonAsCurrentUser = 1 Then
+        m_datappgES.m_eAccount = Account_CurrentUser
+        Domain.Enabled = False
+        Username.Enabled = False
+        Password.Enabled = False
+        LabelDomain.Enabled = False
+        LabelUsername.Enabled = False
+        LabelPassword.Enabled = False
+    Else
+        m_datappgES.m_eAccount = Account_ConnectAsUser
+        Domain.Enabled = True
+        Username.Enabled = True
+        Password.Enabled = True
+        LabelDomain.Enabled = True
+        LabelUsername.Enabled = True
+        LabelPassword.Enabled = True
+    End If
+    
+End Sub
+
+' =============================================================================
+' Method:       PropertyPage_ApplyChanges
+' Type:         Event
+' Description:  Called when the user clicks the OK or Apply button on the
+'               property sheet
+'
+' Parameters:   None
+' Output:       None
+' Notes:        This property page notifies the snap-in of the
+'               changes by calling ScopeItem.PropertyChanged. Calling this
+'               method generates the ScopeItems_PropertyChanged event in the
+'               snap-in.
+' =============================================================================
+Private Sub PropertyPage_ApplyChanges()
+
+    m_datappgES.m_strDomain = Domain
+    m_datappgES.m_strUserName = Username
+    m_datappgES.m_strPassword = Password
+    
+    If Not m_datappgES.m_ppgPermit Is Nothing Then
+        m_datappgES.m_ppgPermit.OnAccountChange
+    End If
+    
+    m_datappgES.PropertyPageDone "Account"
+    
+End Sub
+
+' =============================================================================
+' Method:       PropertyPage_SelectionChanged
+' Type:         Event
+' Description:  Called when the property sheet passes the object(s) for which
+'               it is being displayed to the property page.
+' Parameters:   None
+' Output:       None
+' Notes:        Unlike a UserControl property page, SelectedControls(0) will
+'               contain the ScopeItems and/or ListItems for which the property sheet
+'               is being displayed. Changes can be made directly to an item's
+'               properties. The property page can notify the snap-in of the
+'               changes by calling ScopeItem.PropertyChanged or
+'               MMCListItem.PropertyChanged. Calling these methods will
+'               generate the ScopeItems_PropertyChanged or
+'               ResultViews_PropertyChanged event in the snap-in.
+' =============================================================================
+Private Sub PropertyPage_SelectionChanged()
+End Sub
+

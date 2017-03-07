@@ -1,0 +1,20 @@
+;//////////////////////////////////////////////////////////////////////////////
+;/	FILE:			MessageQueueListenerWMI.DEF
+;/	DESCRIPTION:	
+;/	SYSTEM: 		Omiga
+;/	COPYRIGHT:		(c) 2001, Marlborough Stirling Group. All rights reserved 
+;/
+;/	HISTORY
+;/	=======
+;/
+;/	Prog	Date		Description
+;/  LD      12/01/01    Initial version
+;//////////////////////////////////////////////////////////////////////////////
+
+LIBRARY         MessageQueueListenerWMI.DLL
+DESCRIPTION     ''
+EXPORTS
+    DllGetClassObject   = DllGetClassObject   PRIVATE
+    DllCanUnloadNow     = DllCanUnloadNow     PRIVATE
+    DllRegisterServer   = DllRegisterServer   PRIVATE
+    DllUnregisterServer = DllUnregisterServer PRIVATE

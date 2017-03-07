@@ -1,0 +1,193 @@
+/*t/r/b/l*/
+
+/* Section 7.5: The document body */
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 73em;
+  font-size: 75.01%;
+  line-height: 1.5em; 
+  background: white;
+  color: black;
+  font-family: "Arial", sans-serif;
+}
+h1 {
+  font-size: 1.4em; 
+  line-height: 1.1em;
+  margin:  0 0 0.9em 0; 
+  padding:0;
+  color:#003399;
+  border-bottom:1px solid #ccc;
+}
+h2 {
+  font-size: 1.2em;
+  line-height: 1.33em;
+  margin: 0 0 0.2em 0;
+  color:#003399;
+  border-bottom:1px solid #ccc;
+}
+
+h3 {
+  font-size: 1em;
+  line-height: 1.33em;
+  margin: 0 1.07em 0.2em 0;
+  color:#003399;
+}
+h4, h5, h6 {
+  font-size: .75em;
+  line-height: 2em;
+  margin: 1.56em 0;
+}
+h4 {
+  text-transform: uppercase;
+}
+h5 {}
+h6 {
+  font-style: italic;
+}
+address {}
+
+/* Section 9: Text */
+/* 9.2: Structured text */
+em {}
+strong {}
+dfn {}
+code {
+  font-family: "Bitstream Vera Sans Mono", "Courier New", Monaco, Courier, monospace;
+}
+samp {}
+kbd {}
+var {}
+cite {}
+abbr {}
+acronym {}
+blockquote {}
+q {}
+sub {}
+sup {}
+/* End of 9.2 */
+p, td,li {margin-top:0;
+	margin-bottom: 8px;
+	color: #666;
+	font-family: arial,verdana,sans-serif;
+	font-size: 1em;
+	line-height: 15px;
+}
+
+
+pre {
+  font-family: "Bitstream Vera Sans Mono", "Courier New", Monaco, Courier, monospace;
+}
+ins {}
+del {}
+
+/* Section 10: Lists */
+ul {
+  margin: 1em 0;
+  padding: 0 0 0 2.5em;
+}
+ul ul {
+  margin: 0;
+  padding: 0 0 0 1.25em;
+}
+ol {
+  margin: 1em;
+  padding: 0 2em;
+}
+ol ol {
+  margin: 0;
+}
+li {
+  margin: 0;
+  padding: 0;
+}
+dl {}
+dt {}
+dd {}
+
+/* Section 11: Tables */
+table {}
+caption {}
+thead {}
+tfoot {}
+tbody {}
+colgroup {}
+col {}
+tr {}
+th {color:#003399;background-color: #e1e8f3;}
+/*for TD, see P */
+td {}
+
+/* Section 12.2:  The A element */
+a, a:link, a:visited {color:#003399; text-decoration: none; background-color: transparent;}
+a:link:hover,a:visited:hover  {color: #666;text-decoration: underline;background-color: transparent;}
+a:active {}
+a:focus {}
+a:focus:hover {}
+
+/* Section 13: Objects, Images, and Applets */
+img {}
+object {}
+applet {}
+
+/* Section 15: Alignment, font styles, and horizontal rules */
+tt {}
+i {}
+b {}
+big {}
+small {}
+/* End of 15.2 */
+hr{
+	background-color : #ccc;
+	color : #ccc;
+	height : 1px;
+	border : 0 solid #ccc;
+	border-top-width : thin;
+}
+
+/* Section 16: Frames */
+iframe {}
+
+/* Section 17: Forms */
+form {}
+input {
+  font-size: 1em;
+}
+
+input.text, select
+{
+  border: 1px solid #7F9DB9;
+  padding: 3px 3px 3px 3px;
+  font-size: 1em;
+}
+
+input.file 
+{
+  background: #E70063;
+  border: 1px solid #7F9DB9;
+  padding: 2px 5px 2px 5px;
+  font-size: 1em;
+}  
+input:focus {}
+button:focus {}
+select {
+  font-size: 1em;
+  width: 15em;
+}
+select:focus {}
+optgroup {}
+option {}
+textarea {
+	border:1px solid #7F9DB9;
+	padding: 3px 3px 3px 3px;
+	font-size: 1em;
+	font-family: "Arial", sans-serif;
+	width:95%;
+}
+
+fieldset{margin-bottom:0.5em;background-color:#fff;padding:0.5em 0.5em 1em 0.5em;border:1px solid #A8B9DC;}
+fieldset hr {border-color:#A8B9DC;}
+legend{background-color:#fff;padding:0.5em;font-weight:bold; color:#003399;font-size:1.2em;font-weight:normal;}
+
+
+label {color:#003399;}

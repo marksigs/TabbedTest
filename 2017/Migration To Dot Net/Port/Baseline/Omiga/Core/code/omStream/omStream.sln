@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "omStream", "omStream.vcproj", "{4A9365F0-867F-45C5-AECA-26A764CB94EE}"
+EndProject
+Global
+	GlobalSection(RationalClearCase) = preSolution
+		SourceControlProvider = RationalClearCase
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Unicode Debug|Win32 = Unicode Debug|Win32
+		Unicode Release MinDependency|Win32 = Unicode Release MinDependency|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A9365F0-867F-45C5-AECA-26A764CB94EE}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
+		{4A9365F0-867F-45C5-AECA-26A764CB94EE}.Unicode Debug|Win32.Build.0 = Unicode Debug|Win32
+		{4A9365F0-867F-45C5-AECA-26A764CB94EE}.Unicode Release MinDependency|Win32.ActiveCfg = Unicode Release MinDependency|Win32
+		{4A9365F0-867F-45C5-AECA-26A764CB94EE}.Unicode Release MinDependency|Win32.Build.0 = Unicode Release MinDependency|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

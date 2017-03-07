@@ -1,0 +1,1502 @@
+<COMMENT>
+Workfile:      scXMLFunctions.htm
+Copyright:     Copyright © 1999 Marlborough Stirling
+
+Description:   Helper functions for XML parser.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+History:
+
+Prog  Date     Description
+RF    03/11/99 Added filename parameter to WriteXMLToFile.
+RF	  09/11/99 Improved error handling in SetAttribute.
+RF	  03/12/99 Display error source in CheckResponse.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</COMMENT>
+
+<HTML id=XMLFunctions>
+<HEAD>
+<LINK href="stylesheet.css" rel=STYLESHEET type=text/css>
+<TITLE>XML Functions</TITLE>
+</HEAD>
+<script language="JavaScript">
+	/*	List the external function calls and their parameters here:
+
+		XMLObject()
+			Generates an object containing an XML document and functions to manipulate it.
+			
+		The contents of XMLObject() are:
+		
+		
+		ELEMENTS:
+		
+		XMLDocument		- an XMLDOM document object. All the standard IE5 XML functionality is available through this.
+		ActiveTag		- Used to store a tag (node object) which is then used by the functions within XMLObject()
+						  as the 'active' one. i.e. all actions are based on this tag.
+		ActiveBeforeTag	- Used to store a tag (node object) which is then used in the CreateTag_UseBeforeText()
+						  processing.
+		ActiveTagList	- Used to store a tag list (node list object) which is then used by the functions within
+						  XMLObject() as the 'active' one.
+		
+		
+		FUNCTIONS:
+
+		TagNew = CreateActiveTag(sTagName)
+			sTagName	- The name of the tag to be created.
+			TagNew		- The newly created node object.
+
+			Creates a new tag (node object).
+			Attaches it as a child to the ActiveTag, or the base XML document if ActiveTag = null.
+			Sets the new tag as the ActiveTag.
+			Clears the ActiveBeforeTag.
+			Meant primarily for tags which define blocks e.g.
+			<TAGNEW>
+				<SOME>data</SOME>
+				<OTHER>data</OTHER>
+				<TAGS>data</TAGS>
+			</TAGNEW>
+
+
+		TagNew = CreateTag(sTagName, vText)
+			sTagName	- The name of the tag to be created.
+			vText		- The text to be assigned to the tag
+			TagNew		- The newly created node object.
+
+			Creates a new tag (node object).
+			Attaches it as a child to the ActiveTag. An active tag is required.
+			Assigns the specified text to the tag. If no text is required, set sText to null.
+			Meant primarily for data-bearing tags contained within tag blocks e.g.
+			<TAGBLOCK>
+				<TAGNEW>sText</TAGNEW>
+			</TAGBLOCK>
+
+
+		TagNew = CreateTag_UseBeforeText(sTagName)
+			sTagName	- The name of the tag to be created.
+			TagNew		- The newly created node object.
+
+			Creates a new tag (node object).
+			Attaches it as a child to the ActiveTag. An active tag is required.
+			If ActiveBeforeTag is set, it searches this for a child which matches the sTagName. If a match
+			is found, then the text from that tag is copied to the newly created one. Otherwise no text is written.
+			Meant primarily for tags which are not generated from the screen data.  When performing an update
+			action, the tag must contain the same data in the <UPDATE TYPE="AFTER"> section as it does in
+			the <UPDATE TYPE="BEFORE"> section.
+
+
+		SetAttribute(sAttributeName, vAttributeValue)
+			sAttributeName	- The name of the tag attribute to be set.
+			vAttributeValue	- The value that the attribute is to be set to.
+			
+			Sets an attribute on the ActiveTag. An active tag is required.
+			The attribute value is automatically enclosed in "".
+			Attributes are usually set on block tags such as <REQUEST> and <UPDATE> e.g.
+			<REQUEST sAttributeName="vAttributeVale">
+				<SOME>data</SOME>
+				<OTHER>data</OTHER>
+				<TAGS>data</TAGS>
+			</REQUEST>
+
+		SetAttributeOnTag(sTagName, sAttributeName, vAttributeValue)
+			sTagName		- The name of the tag to which the attribute applies
+			sAttributeName	- The name of the tag attribute to be set.
+			vAttributeValue	- The value that the attribute is to be set to.
+			
+			Sets an attribute on the specified Tag. An active tag is required.
+			Searches from the Active tag to find the first occurrence of the specified Tag.
+			The attribute value is automatically enclosed in "".
+			Attributes are usually set on block tags such as <REQUEST> and <UPDATE> e.g.
+			<REQUEST sAttributeName="vAttributeVale">
+				<SOME>data</SOME>
+				<OTHER>data</OTHER>
+				<TAGS>data</TAGS>
+			</REQUEST>
+
+		sText = GetTagText(sTagName)
+			sTagName	- The name of the tag to be read.
+			sText		- The text of the tag.
+			
+			Searches the ActiveTag for a child which matches the sTagName.  An active tag is required.
+			If a match is found the text from that tag is returned, otherwise an empty string is returned.
+			Meant primarily for reading data-bearing tags.  As the destination of the text is often a screen
+			field an empty string must be returned if the tag doesn't exist. If null is returned the word null
+			appears in the field.
+
+		dValue = GetTagFloat(sTagName)
+			sTagName	- The name of the tag to be read.
+			dValue		- The value of the tag as a floating point number.
+			
+			Calls GetTagText and then from the return tag value converst the value into a 
+			floating point number and returns the number.
+		
+		iValue = GetTagInt(sTagName)
+			sTagName	- The name of the tag to be read.
+			iValue		- The value of the tag as a integer number.
+			
+			Calls GetTagText and then from the return tag value converst the value into a 
+			integer and returns the number.
+		
+		SetTagText(sTagName, sText)
+			sTagName	- The name of the existing tag.
+			sText		- The new text of the tag.
+			
+			Searches the ActiveTag for a child which matches the sTagName.  An active tag is required.						
+			If an the serach finds the specified tagname then the associated text for that tag is
+			replaced by sText.
+			
+
+		bValue = GetTagBoolean(sTagName)
+			sTagName	- The name of the tag to be read.
+			sValue		- The value of the tag as a boolean
+			
+			Searches the ActiveTag for a child which matches the sTagName.  An active tag is required.
+			If a match is found the boolean value (true or false) is calculated based on the text returned 
+			being "1" equalling true or other values equal false. 			
+			Meant primarily for reading data-bearing tags.
+
+
+		sText = GetTagAttribute(sTagName,sAttributeName)
+			sTagName	- The name of the tag to be read.
+			sAttributeName	- The name of the attribute to be read.
+			sText			- The value of the attribute.
+			
+			Searches the ActiveTag for a child which matches the sTagName.  An active tag is required.
+			If a match is found the attribute on this tag is read.
+			Returns the value of the attribute.
+			Normally attributes exist on block tags but in the case of, for example, fields which store
+			combo based data then the text which the stored data represents is returned as a TEXT attribute.
+			
+
+		sText = GetAttribute(sAttributeName)
+			sAttributeName	- The name of the attribute to be read.
+			sText			- The value of the attribute.
+			
+			Reads an attribute on the ActiveTag. An active tag is required.
+			Returns the value of the attribute.
+			Attributes are usually read from block tags (see SetAttribute).
+
+
+		RemoveActiveTag()
+			Removes the ActiveTag from the XML Document.
+			Sets the ActiveTag to the deleted tag's parent, unless the parent is the top level document node,
+			in which case set the ActiveTag to null.
+		
+		
+		TagListNew = CreateTagList(sTagName)
+			sTagName	- The name of the tags to search for.
+			TagListNew	- The newly created node list object
+			
+			Creates a node list object containing all the tags which match the specified name.
+			If ActiveTag is set, only the XML from the active tag down is searched, otherwise the entire XML is searched.
+			Sets ActiveTagList to the node list object, even if no matches are found.
+			For example, in a block such as:
+			<PARENT>
+				<CHILD>data</CHILD>
+				<CHILD>more data</CHILD>
+			</PARENT>
+			
+			With ActiveTag equal to the parent, a CreateTagList("CHILD") would generate a node list object
+			containing 2 items.
+
+
+		bReturn = SelectTagListItem(nItem)
+			nItem	- The zero based index of the item to select from ActiveTagList.
+			bReturn	- True if the item exists, false if not.
+			
+			Sets the ActiveTag to the ActiveTagList item matching the nItem index.  An active tag list is required.
+			If there is no item at the nItem index then ActiveTag is set to null.  Using the example for
+			CreateTagList, SelectTagListItem(1) would set ActiveTag to the <CHILD> node object containing 'more data'.
+			
+
+		TagReturn = SelectTag(TagParent,sTagName)
+			TagParent	- The tag node to search for the specified tag. If null, the whole document is searched.
+			sTagName	- The name of the tag to search for.
+			TagReturn	- The selected node object.
+
+			This function is designed to search for a single tag matching the name specified and set the
+			ActiveTag to that tag.  If more than one is found, the first one is selected.
+			Designed to make searching for several block tags in a row easier by effetively combining the
+			processing which would be done by a CreateTagList("ITEM") and SelectTagListItem(0) process.  It
+			also circumvents the need to reset the ActiveTag to the tag you wish to search.
+
+
+		TagReturn = GetTagListItem(nItem)
+			nItem		- The zero based index of the item to select from ActiveTagList.
+			TagReturn	- The selected node object.
+
+			Similar to SelectTagListItem, except it returns the ActiveTagList item matching the nItem indexand
+			does not set ActiveTag.
+			If there is no item at the nItem index then null is returned.
+			Used primarily to store node objects for later use, such as in update-before processing.
+			
+			
+		LoadXML(sXML)
+			sXML	- The XML string to be loaded.
+			
+			Loads the XML string into the XML document, replacing any previous contents.
+			Clears the ActiveTag, ActiveBeforeTag and ActiveTagList.
+
+
+		AddXMLBlock(XMLSource)
+			XMLSource	- The XML document or document fragment to add.
+			
+			Copies and adds all children (and their siblings) to the ActiveTag, or the base XML document
+			if ActiveTag = null.
+			Used, for example, to add the 'before' image to the <UPDATE TYPE="BEFORE"> tag.
+
+
+		bReturn = SelectUPDATE_Before()
+			bReturn	- True if successful, otherwise false.
+			
+			Searches the XML document for the <UPDATE TYPE="BEFORE"> tag.
+			If successful, sets the ActiveTag to this tag and returns true, otherwise sets ActiveTag to null
+			and returns false.
+
+
+		XMLFragment = CreateFragment()
+			XMLFragment	- The document fragment created.
+			
+			Creates a document fragment object.
+			Copies and adds all children (and their siblings) of the ActiveTag to the document fragment.
+			An ActiveTag is required.
+			Note that the ActiveTag itself is not included.
+			Used, for example, to make a copy of the XML on entry ready for the update processing.
+
+
+		RunASP(sASPFile)
+			sASPFile	- The name of the ASP file to run.
+			
+			Performs ResetXMLDocument.
+			The ASP file must be one which generates an XML string. It is expected to be in the xml virtual directory.
+			Loads the result of the file run into the XML document, replacing any previous contents.
+
+
+		RunASPWithTextInput(sASPFile,sRequest)
+			sASPFile	- The name of the ASP file to run.
+			sRequest	- The request for the ASP file in text form.
+			
+			This function operates as above, except that instead of generating the request from the contents of
+			the XML document it uses the string passed in.
+			Meant primarily for such calls as GlobalParameterBO.GetCurrentParameter, where merely the name of the
+			parameter is required.
+
+		
+		WriteXMLToFile(sFileName)	***** FOR DEBUG PURPOSES ONLY *****
+			Writes the XML string contained in the XML document to the file specified.
+			Allows the developer to view any XML using the Microsoft XML Notepad.
+			sFileName	- Name of the file to write to. If this is an empty string,
+						  the xml will be written to "c:\script.xml".
+
+
+		bReturn = GetComboLists(sGroupList,sUserId,sUserType,sUnit)
+			sGroupList	- An array of combo groups
+			sUserId		- User ID of the logged on user
+			sUserType	- User Type of the logged on user
+			sUnit		- Unit ID of the logged on user
+			bReturn		- True if no errors occur, otherwise false
+			
+			Performs ResetXMLDocument.
+			Retrieves the data for all groups specified in the list and loads it into the XML document.
+
+
+		XMLFragment = GetComboListXML(sListName)
+			sListName	- The group name for the combo list required from the XML document.
+			XMLFragment	- The document fragment created.
+
+			Searches the XML document for the combo group specified.
+			If the call is successful a document fragment containing the result of the query is returned,
+			otherwise null is returned.
+			This function should be used in conjunction with GetComboLists.
+
+
+		bReturn = PopulateCombo(refFieldId,sListName,bAddSELECT)
+			refFieldId	- The combo field to be populated (e.g. frmScreen.cbo????)
+			sListName	- The group name for the combo list required from the XML document.
+			bAddSelect	- If true, the <SELECT> option is added. 
+			bReturn		- True if the combo population was successful, false if not.
+						
+			Performs GetComboListXML, passing it sListName.
+			Performs PopulateComboFromXML, passing it the XML fragment returned from GetComboListXML.
+
+	
+		bReturn = PopulateComboFromXML(refFieldId,XMLSource,bAddSELECT)
+			refFieldId	- The combo field to be populated (e.g. frmScreen.cbo????)
+			XMLSource	- The XML fragment to be used for populating the combo.
+			bAddSelect	- If true, the <SELECT> option is added. 
+			bReturn		- True if the XML fragment is not null, false if not.
+			
+			Loads the contents of the XML fragment into a newly created XML document.
+			Any current contents of the combo field are cleared out.
+			If required,a <SELECT> option is added to the combo, followed by all options retrieved 
+			from the database.  Any VALIDATIONTYPE data is added as attributes to the <OPTION> tag.
+ 
+			
+		bReturn = IsInComboValidationList(sListName, sValueID, ValidationList)
+			sListName		- The group name for the combo list required from the database.
+			sValueID		- The combo group entry value-identification number
+			ValidationList	- An array of validation strings
+						
+			Performs ResetXMLDocument.
+			Retrieves the combo validation entries for the specified sListName and sValueID.
+			Loads the result of the RunASP call to GetComboValidationList.asp into the XML document.
+			Compares the validation entries returned in the XML document against those passed in.
+			Returns true if a match is found.
+			Returns false otherwise.
+											
+
+		ResetXMLDocument()
+			Deletes and recreates the XML document, thereby losing all the current contents.
+			Clears the ActiveTag, ActiveBeforeTag and ActiveTagList.
+			This function should not normally be explicitly called.  It is used by all the functions which reload
+			the XML document.
+
+
+		bReturn = IsResponseOK()
+			bReturn	- True if <RESPONSE TYPE="SUCCESS">, else false.
+			
+			Calls CheckResponse with an argument of null.
+
+
+		ErrorReturn = CheckResponse(sErrorType)
+			sErrorType	- A one dimensional array of error types i.e. "RECORDNOTFOUND"
+			ErrorReturn	- A one dimensional array, which is returned to the calling routine
+						ErrorType[0] - True if <RESPONSE TYPE="SUCCESS">, else false.
+						ErrorType[1] - The ErrorType i.e. "RECORDNOTFOUND" which the method failed on, if
+						               that error is one contained in sErrorType. Else it is null.
+						ErrorType[2] - The XML error description if ErrorType[1] is set. Else it is null.
+			
+			Checks for a <RESPONSE> tag and if one is found checks the Error number returned against
+			the error number(s) associated with the error type(s) passed into the routine.
+			If there is an error false is returned.  If the error is contained within sErrorType then
+			the error type and message are returned.
+									
+ 		
+		iErrorNumber = TranslateErrorType(sError)
+			sError		 - The error type to translate i.e. RECORDNOTFOUND
+			iErrorNumber - The VB object error number as returned in the XML response block 
+							of a server side ASP call
+			
+			Translates the supplied sError description into its associated iErrorNumber and returns 
+			this number. This function is necessary because we must always check against the 
+			Error Number and not the Error description.		
+
+		bReturn = GetGlobalParameterBoolean(sParameterName)
+			sParameterName	- the name of the boolean type field to read from the global parameter table.
+			bReturn			- the value of the field, or false if not found.
+			
+			Performs ResetXMLDocument.
+			Gets the value of the specified boolean type field from the global parameter table.
+			Loads the result of the global parameter access into the XML document.
+		
+		sAmount = GetGlobalParameterAmount(sParameterName)
+			sParameterName	- the name of the boolean type field to read from the global parameter table.
+			sAmount			- the value of the field, or "" if not found.
+			
+			Performs ResetXMLDocument.
+			Gets the value of the specified boolean type field from the global parameter table.
+			Loads the result of the global parameter access into the XML document.
+
+		blnReturn = ConvertBoolean(sTagText)
+			sTagText	- the tag value to convert
+			blnReturn	- the boolean value of the converted tag value
+			
+	*/
+
+	public_description = new CreateXMLFunctions;
+
+	//	Initialises the pointers to the externally accessible functions
+	function CreateXMLFunctions()
+	{
+		this.XMLObject	= XMLObject;
+	}
+
+	function XMLObject()
+	{
+		this.XMLDocument				= new ActiveXObject("microsoft.XMLDOM");
+		this.ActiveTag					= null;
+		this.ActiveBeforeTag			= null;
+		this.ActiveTagList				= null;
+		
+		// Tag creation functions
+		this.CreateActiveTag			= CreateActiveTag;
+		this.CreateTag					= CreateTag;
+		this.CreateTag_UseBeforeText	= CreateTag_UseBeforeText;
+		this.SetAttribute				= SetAttribute;
+		this.SetAttributeOnTag			= SetAttributeOnTag;
+		
+		// Tag read functions
+		this.GetTagText					= GetTagText;
+		this.GetTagFloat				= GetTagFloat;
+		this.GetTagInt					= GetTagInt;
+		this.GetTagBoolean				= GetTagBoolean;
+		this.ConvertBoolean				= ConvertBoolean;
+		this.GetTagAttribute			= GetTagAttribute;
+		this.GetAttribute				= GetAttribute;
+
+		// Tag Write functions
+		this.SetTagText					= SetTagText;
+
+		// Tag deletion functions
+		this.RemoveActiveTag			= RemoveActiveTag;
+
+		// Tag List functions
+		this.CreateTagList				= CreateTagList;
+		this.SelectTagListItem			= SelectTagListItem;
+		this.SelectTag					= SelectTag;
+		this.GetTagListItem				= GetTagListItem;
+
+		// XML block functions
+		this.LoadXML					= LoadXML;
+		this.AddXMLBlock				= AddXMLBlock;
+		this.SelectUPDATE_Before		= SelectUPDATE_Before;
+		this.CreateFragment				= CreateFragment;
+		this.RunASP						= RunASP;
+		this.RunASPWithTextInput		= RunASPWithTextInput;
+
+		// Miscellaneous
+		this.WriteXMLToFile				= WriteXMLToFile;
+		this.GetComboLists				= GetComboLists;
+		this.GetComboListXML			= GetComboListXML;
+		this.PopulateCombo				= PopulateCombo;
+		this.PopulateComboFromXML		= PopulateComboFromXML;
+		this.IsInComboValidationList	= IsInComboValidationList;
+		this.IsInComboValidationXML		= IsInComboValidationXML;
+		this.ResetXMLDocument			= ResetXMLDocument;
+		this.IsResponseOK				= IsResponseOK;
+		this.GetGlobalParameterBoolean	= GetGlobalParameterBoolean;
+		this.GetGlobalParameterAmount	= GetGlobalParameterAmount;
+		
+		this.TranslateErrorType			= TranslateErrorType;
+		this.CheckResponse				= CheckResponse;		
+	}
+	
+	// Creates a new tag, attaches it to the active tag or base document and sets it as the new active tag
+	function CreateActiveTag(sTagName)
+	{
+		var TagNew = this.XMLDocument.createElement(sTagName);
+		
+		if(this.ActiveTag != null)
+		{
+			this.ActiveTag.appendChild(TagNew);
+		}
+		else
+		{
+			this.XMLDocument.appendChild(TagNew);
+		}
+		
+		this.ActiveTag			= TagNew;
+		this.ActiveBeforeTag	= null;
+
+		return TagNew;
+	}
+
+	// Creates a new tag, attaches it to the active tag and sets its text
+	function CreateTag(sTagName,vText)
+	{
+		var TagNew = this.XMLDocument.createElement(sTagName);
+
+		// There must be an active tag
+		if(this.ActiveTag != null)
+		{
+			this.ActiveTag.appendChild(TagNew);
+		}
+		else
+		{
+			alert("CreateTag - No Active Tag");
+		}
+			
+		// There doesn't have to be any text
+		if(vText != null)
+		{
+			TagNew.text = vText;
+		}
+
+		return TagNew;
+	}
+
+	// Creates a new tag, attaches it to the active tag and sets its text to match the before tag (if present)
+	function CreateTag_UseBeforeText(sTagName)
+	{
+		var TagNew = this.XMLDocument.createElement(sTagName);
+
+		// There must be an active tag
+		if(this.ActiveTag != null)
+		{
+			this.ActiveTag.appendChild(TagNew);
+
+			// If there is a before tag.
+			// The active before tag should be a tag block, which is then searched to find a tag name which
+			// matches the one created. If one is found the text in the new tag is set to match the text
+			// in the old one.
+			if(this.ActiveBeforeTag != null)
+			{
+				var TagList = this.ActiveBeforeTag.getElementsByTagName(sTagName);
+				
+				if(TagList.length > 0)
+				{
+					TagNew.text = TagList.item(0).text; // Only one match is assumed
+				}
+			}
+		}
+		else
+		{
+			alert("CreateTag_UseBeforeText - No Active Tag");
+		}
+			
+		return TagNew;
+	}
+
+	// Sets an attribute on the active tag
+	function SetAttribute(sAttributeName,vAttributeValue)
+	{
+		// There must be an active tag
+		if(this.ActiveTag != null)
+		{
+			// RF 09/11/99 Attribute value must be specified
+			if (vAttributeValue !=null)
+			{
+				this.ActiveTag.setAttribute(sAttributeName,vAttributeValue);
+			}
+			else
+			{
+				alert("SetAttribute - Null value for attribute " + sAttributeName);
+			}
+		}
+		else
+		{
+			alert("SetAttribute - No Active Tag");
+		}
+	}
+	
+	// Sets the AttributeValue(vAttributeValue) for the Attribute (sAttributeName) on
+	// the tag (sTagName)
+	function SetAttributeOnTag(sTagName, sAttributeName,vAttributeValue)
+	{
+		// There must be an active tag
+		if(this.ActiveTag != null)
+		{
+			var TagList = this.ActiveTag.getElementsByTagName(sTagName);
+				
+			if (TagList.length > 0)
+			{
+				TagList.item(0).setAttribute(sAttributeName, vAttributeValue);
+			}
+		}
+		else
+		{
+			alert("No Active Tag");
+		}
+	}
+
+	// Returns the text contained in the specified tag
+	function GetTagText(sTagName)
+	{
+		// Return an empty string if no match found. If null is returned to a screen field, 'null' actually
+		// appears in the field
+		var sText = "";
+		
+		// There must be an active tag
+		// Search the active tag for a child which matches the tag name. If one is found return the text.
+		if(this.ActiveTag != null)
+		{
+			var TagList = this.ActiveTag.getElementsByTagName(sTagName);
+
+			if(TagList.length > 0)
+			{
+				sText = TagList.item(0).text; // Only one match is assumed
+			}
+		}
+		else
+		{
+			alert("GetTagText - No Active Tag");
+		}
+		
+		return sText;
+	}
+	
+	function GetTagFloat(sTagName)
+	{
+		var sValue = "";
+		var dValue = 0.000;
+		
+		sValue = this.GetTagText(sTagName);
+		
+		if (sValue != "")
+		{
+			dValue = parseFloat(sValue);
+		}
+		
+		if (isNaN(dValue) == true)
+		{
+			alert("GetTagFloat - Tag value is not a number")
+		}
+		
+		return dValue;
+	}
+	
+	function GetTagInt(sTagName)
+	{
+		var sValue = "";
+		var iValue = 0;
+		
+		sValue = this.GetTagText(sTagName);
+		
+		if (sValue != "")
+		{
+			iValue = parseInt(sValue);
+		}
+		
+		if (isNaN(iValue) == true)
+		{
+			alert("GetTagInt - Tag value is not a number")
+		}
+		
+		return iValue;
+	}
+
+	// Sets the text contained in the specified tag
+	function SetTagText(sTagName, sText)
+	{		
+		// There must be an active tag
+		// Search the active tag for a child which matches the tag name. If one is found return the text.
+		if(this.ActiveTag != null)
+		{
+			var TagList = this.ActiveTag.getElementsByTagName(sTagName);
+
+			if (TagList.length > 0)
+			{
+				TagList.item(0).text = sText; // Only one match is assumed
+			}
+		}
+		else
+		{
+			alert("GetTagText - No Active Tag");
+		}				
+	}
+
+	// Returns the boolean contained in the specified tag
+	function GetTagBoolean(sTagName)
+	{
+		// Return an empty string if no match found. If null is returned to a screen field, 'null' actually
+		// appears in the field
+		var bTagValue = false;
+		
+		// There must be an active tag
+		// Search the active tag for a child which matches the tag name. If one is found return the text.
+		if(this.ActiveTag != null)
+		{
+			var TagList = this.ActiveTag.getElementsByTagName(sTagName);
+
+			if (TagList.length > 0)
+			{
+				bTagValue = this.ConvertBoolean(TagList.item(0).text);
+			}
+		}
+		else
+		{
+			alert("GetTagBoolean - No Active Tag");
+		}
+		
+		return bTagValue;
+	}
+	
+	function ConvertBoolean(sTagText)
+	{
+		var blnReturn = true;
+		
+		if ((sTagText == "0") || (sTagText == ""))
+		{
+			blnReturn = false;
+		}
+		
+		return blnReturn;
+	}
+	
+	// Returns the attribute text from the specified tag
+	function GetTagAttribute(sTagName,sAttributeName)
+	{
+		var sText = "";
+		
+		// There must be an active tag
+		// Search the active tag for a child which matches the tag name.
+		if(this.ActiveTag != null)
+		{
+			var TagList = this.ActiveTag.getElementsByTagName(sTagName);
+
+			if(TagList.length > 0)
+			{
+				var AttributeNode;
+				var iLength;
+				var sNodeName;
+			
+				// APS 01/09/99 - Commented out the line below and replaced with code to 
+				// loop through the attribute nodes looking for a matching node and then
+				// to return the node value of the matching node.
+				// This code has changed because I got an JScript object error if I
+				// looked for an attribute which was not there!!!				 
+						
+				iLength = TagList.item(0).attributes.length;
+			
+				for (iLoop=0; iLoop < iLength; iLoop++)
+				{
+					AttributeNode = TagList.item(0).attributes.item(iLoop);
+					sNodeName = AttributeNode.nodeName;
+					if (sNodeName == sAttributeName)
+					{
+						sText = AttributeNode.nodeValue;
+						break;					
+					}
+				}
+				//sText = TagList.item(0).attributes.getNamedItem(sAttributeName).text;
+			}						
+		}
+		else
+		{
+			alert("GetTagAttribute - No ActiveTag");
+		}
+
+		return sText;
+	}
+	
+	// Returns the attribute text from the active tag
+	function GetAttribute(sAttributeName)
+	{
+		var sText = null;
+		
+		// There must be an active tag
+		if(this.ActiveTag != null)
+		{			
+			var AttributeNode;
+			var iLength;
+			var sNodeName;
+			
+			// APS 01/09/99 - Commented out the line below and replaced with code to 
+			// loop through the attribute nodes looking for a matching node and then
+			// to return the node value of the matching node.
+			// This code has changed because I got an JScript object error if I
+			// looked for an attribute which was not there!!!
+			 
+			//sText = this.ActiveTag.attributes.getNamedItem(sAttributeName).text;
+			
+			
+			iLength = this.ActiveTag.attributes.length;
+			
+			for (iLoop=0; iLoop < iLength; iLoop++)
+			{
+				AttributeNode = this.ActiveTag.attributes.item(iLoop);
+				sNodeName = AttributeNode.nodeName;
+				if (sNodeName == sAttributeName)
+				{
+					sText = AttributeNode.nodeValue;
+					break;					
+				}
+			}
+			
+		}
+		else
+		{
+			alert("GetAttribute - No Active Tag");
+		}
+
+		return sText;
+	}
+
+	// Deletes the active tag from the XML document
+	function RemoveActiveTag()
+	{
+		// There must be an active tag
+		if(this.ActiveTag != null)
+		{
+			// Get the parent of the active tag then remove the active tag from the parent tag
+			var TagParent = this.ActiveTag.parentNode;
+			TagParent.removeChild(this.ActiveTag);
+			
+			// If the parent tag itself has a parent then set the active tag to it
+			// otherwise it must be the document node so set active tag to null
+			if(TagParent.parentNode != null)
+			{
+				this.ActiveTag = TagParent;
+			}
+			else
+			{
+				this.ActiveTag = null;
+			}
+		}
+		else
+		{
+			alert("RemoveActiveTag - No Active Tag");
+		}
+	}
+	
+	// Creates a tag list, generated from the active tag or base document, and sets it as the active tag list
+	function CreateTagList(sTagName)
+	{
+		var TagListNew = null;
+		
+		if(this.ActiveTag != null)
+		{
+			TagListNew = this.ActiveTag.getElementsByTagName(sTagName);
+		}
+		else
+		{
+			TagListNew = this.XMLDocument.getElementsByTagName(sTagName);
+		}
+		
+		this.ActiveTagList = TagListNew;
+		
+		return TagListNew;
+	}
+
+	// Sets the active tag to the indexed tag list item
+	function SelectTagListItem(nItem)
+	{
+		var bReturn = false;
+				
+		// must have asked for a valid entry in the tag list
+		if (nItem >= 0)
+		{
+			// There must be a tag list		
+			if (this.ActiveTagList != null)
+			{
+				// If the specified index is valid, set the active tag to that item and return true,
+				// otherwise set the active tag to null and return false.
+				if (this.ActiveTagList.length >= nItem + 1)
+				{
+					this.ActiveTag = this.ActiveTagList.item(nItem);
+					bReturn = true;
+				}
+				else
+				{
+					this.ActiveTag = null;
+				}
+			}
+			else
+			{
+				alert("SelectedTagListItem - No Active Tag List");
+			}
+		}
+		
+		return bReturn;
+	}
+
+	// Sets the Active tag to the specified tag
+	function SelectTag(TagParent,sTagName)
+	{
+		var TagReturn	= null;
+		var TagListNew	= null;
+		
+		// Generate a tag list for the specified tag, generated from the parent tag
+		// or the base document if the parent tag is null
+		if(TagParent != null)
+		{
+			TagListNew = TagParent.getElementsByTagName(sTagName);
+		}
+		else
+		{
+			TagListNew = this.XMLDocument.getElementsByTagName(sTagName);
+		}
+
+		// This function assumes there will be only one tag of that name returned in the list,
+		// so if at least one is found it sets the active tag to the first one in the list and returns it
+		if(TagListNew.length > 0)
+		{
+			TagReturn		= TagListNew.item(0);
+			this.ActiveTag	= TagReturn;
+		}
+		else
+		{
+			this.ActiveTag = null;
+		}
+
+		return TagReturn;
+	}
+
+	// Returns the indexed tag list item
+	function GetTagListItem(nItem)
+	{
+		var TagReturn = null;
+		
+		// There must be a tag list
+		if(this.ActiveTagList != null)
+		{
+			// If the specified index is valid return that item
+			// otherwise null will be returned.
+			if(this.ActiveTagList.length >= nItem + 1)
+			{
+				TagReturn = this.ActiveTagList.item(nItem);
+			}
+		}
+		else
+		{
+			alert("SelectedTagListItem - No Active Tag List");
+		}
+
+		return TagReturn;
+	}
+
+	// Load the XML string into the XML document
+	function LoadXML(sXML)
+	{
+		// Clear and regenerate the XML document
+		this.ResetXMLDocument();
+
+		if(sXML != null)
+		{
+			this.XMLDocument.loadXML(sXML);
+		}
+		else
+		{
+			this.XMLDocument.loadXML("");
+		}
+	}
+
+	// Add the contents of an XML document or document fragment to the active tag or base document
+	function AddXMLBlock(XMLSource)
+	{
+		if(XMLSource != null)
+		{
+			var TagListChildren = XMLSource.childNodes; // Get all the children from the base source document
+
+			for(var nLoop = 0;nLoop < TagListChildren.length;nLoop++)
+			{
+				// The child must be cloned and the clone added to the active tag or base document.
+				// If the child is added directly it is actually removed from the source document.
+				var TagNew = TagListChildren.item(nLoop).cloneNode(true);
+
+				if(this.ActiveTag != null)
+				{
+					this.ActiveTag.appendChild(TagNew);
+				}
+				else
+				{
+					this.XMLDocument.appendChild(TagNew);
+				}
+			}
+		}
+	}
+
+	// Find the <UPDATE TYPE="BEFORE"> tag and set it as the active tag
+	function SelectUPDATE_Before()
+	{
+		var bReturn = false;
+
+		var TagList = this.XMLDocument.getElementsByTagName("UPDATE");
+
+		// If the tag is found return true... 
+		for(var nLoop = 0;nLoop < TagList.length && bReturn == false;nLoop++)
+		{
+			if(TagList.item(nLoop).attributes.getNamedItem("TYPE").text == "BEFORE")
+			{
+				this.ActiveTag = TagList.item(nLoop);
+				bReturn = true;
+			}
+		}
+		
+		// ...otherwise set the active tag to null and return false
+		if(bReturn == false)
+		{
+			this.ActiveTag = null;
+		}
+		
+		return bReturn;
+	}
+
+	// Create and return an XML document fragment object (which is a cut down version of an XML document) 
+	function CreateFragment()
+	{
+		var XMLFragment = null;
+		
+		// There must be an active tag
+		if(this.ActiveTag != null)
+		{
+			// Add all children of the active tag to the document fragment.
+			// Note that the active tag itself is not added.
+			XMLFragment = this.XMLDocument.createDocumentFragment();
+			
+			var TagList = this.ActiveTag.childNodes;
+
+			// The child must be cloned and the clone added to the document fragment.
+			// If the child is added directly it is actually removed from the source document.
+			for(var nLoop = 0;nLoop < TagList.length;nLoop++)
+			{
+				var TagNew = TagList.item(nLoop).cloneNode(true);
+				XMLFragment.appendChild(TagNew);
+			}
+		}
+		else
+		{
+			alert("CreateFragment - No Active Tag");
+		}
+
+		return XMLFragment;
+	}
+
+	// Run an XML generating ASP file and load the result into the XML document
+	function RunASP(sASPFile)
+	{
+		var sXML = this.XMLDocument.xml;
+//		alert("xml Request: " + sXML);
+
+		// Clear and regenerate the XML document
+		this.ResetXMLDocument();
+
+		this.XMLDocument.async = false;  // Ensures this code waits for a response to the load
+
+		this.XMLDocument.load(getURL(sASPFile) + "?Request=" + sXML);
+
+/*		if(this.XMLDocument.load(getURL(sASPFile) + "?Request=" + sXML))
+		{
+			alert(this.XMLDocument.xml);
+		}
+		else
+		{
+			alert("RunASP failed");
+			alert("XML Parser Error, reason : " + this.XMLDocument.parseError.reason);
+			alert("XML Parser Error, line No. : " + this.XMLDocument.parseError.Line);
+			alert("XML Parser Error, character : " + this.XMLDocument.parseError.linepos);
+			alert("XML Parser Error, source text : " + this.XMLDocument.parseError.srcText);
+		}
+*/
+	}
+
+	// Run an XML generating ASP file and load the result into the XML document, using a string for the request
+	// instead of the XML document contents.
+	function RunASPWithTextInput(sASPFile,sRequest)
+	{
+		// Clear and regenerate the XML document
+		this.ResetXMLDocument();
+
+		this.XMLDocument.async = false;  // Ensures this code waits for a response to the load
+
+		this.XMLDocument.load(getURL(sASPFile) + "?Request=" + sRequest);
+	}
+	
+	// Format the ASP file call for RunASP. The file is expected to be in the xml virtual directory
+	function getURL(sTarget)
+	{
+		// Generates a URL for the target screen
+		var s0		= new String(document.location.href);
+		var sUrl	= s0.substring(0, s0.lastIndexOf("/")) + "/xml/" + sTarget;
+
+		return sUrl;
+	}
+
+	// A DEBUG ONLY function. Writes the XML document contents to a file for viewing
+	function WriteXMLToFile(sFileName)
+	{
+		if (sFileName == "")
+		{
+			sFileName = "c:\\script.xml"
+		}
+		
+		var fs	= new ActiveXObject("Scripting.FileSystemObject");		
+		var a	= fs.OpenTextFile(sFileName,2,true);
+
+		a.Write(this.XMLDocument.xml);
+		a.Close();
+	}
+
+	// Get a set of combo lists from the database
+	function GetComboLists(sGroupList,sUserId,sUserType,sUnit)
+	{
+		var bReturn = false;
+		
+		this.ResetXMLDocument();
+
+		// Generate the combo request
+		//<REQUEST>
+		this.CreateActiveTag("REQUEST");
+
+		this.SetAttribute("USERID"  , sUserId);
+		this.SetAttribute("USERTYPE", sUserType);
+		this.SetAttribute("UNIT"    , sUnit);
+
+		// <SEARCH>
+		// <LIST>
+		this.CreateActiveTag("SEARCH");
+		this.CreateActiveTag("LIST");		
+
+		// Make sure at least one group is specified
+		if (sGroupList.length > 0) 
+		{
+			for(var nLoop = 0;nLoop < sGroupList.length;nLoop++)
+			{				
+				this.CreateTag("LISTNAME",sGroupList[nLoop]);
+			}
+		
+			this.RunASP("GetComboList.asp");
+	
+			if(this.IsResponseOK() == true)
+			{
+				bReturn = true;
+			}
+		}
+		else
+		{
+			alert("GetComboLists - No ListNames specified");
+		}
+
+		return bReturn;
+	}
+	
+	// Returns an XML fragment for one combo group
+	function GetComboListXML(sListName)
+	{
+		var XMLFragment		= null;
+		var TagListLISTNAME	= this.CreateTagList("LISTNAME");				
+			
+		// Search the XML document for the group specified
+		for(var nLoop = 0;this.SelectTagListItem(nLoop) == true;nLoop++)
+		{
+			if(this.GetAttribute("NAME") == sListName)
+			{
+				// Generate a document fragment from the result
+				XMLFragment	= this.XMLDocument.createDocumentFragment();
+
+				var TagNew	= this.ActiveTag.cloneNode(true);
+				XMLFragment.appendChild(TagNew);
+			}
+		}
+
+		return XMLFragment;
+	}
+	
+	// Populate a combo from details brought back by GetComboLists()
+	function PopulateCombo(refFieldId,sListName,bAddSELECT)
+	{
+		var bReturn = false;
+		
+		// Check that the field is a combo
+		if(refFieldId.tagName == "SELECT")
+		{
+			var XMLFragment = this.GetComboListXML(sListName);
+			
+			if(XMLFragment != null)
+			{
+				bReturn = this.PopulateComboFromXML(refFieldId,XMLFragment,bAddSELECT);
+			}
+		}
+		else
+		{
+			alert("PopulateComboFromDB - field must be a combo");
+		}
+
+		return bReturn;
+	}
+
+	// Populate a combo from an XML document fragment
+	function PopulateComboFromXML(refFieldId,XMLSource,bAddSELECT)
+	{
+		var bReturn = false;
+		
+		// Check that field is a combo
+		if(refFieldId.tagName == "SELECT")
+		{
+			// Make sure there is some XML
+			if(XMLSource != null)
+			{
+				bReturn = true;
+				
+				// For this function we need to generate an XML document within the XML document
+				// and put the XML fragment into it
+				var XML = new XMLObject();
+
+				XML.AddXMLBlock(XMLSource);
+	
+				// Clear any <OPTION> elements from the combo
+				while(refFieldId.options.length > 0)
+				{
+					refFieldId.options.remove(0);
+				}
+
+				if(bAddSELECT == true)
+				{
+					// Add the "<SELECT>" entry to the combo
+					var TagSELECT	= document.createElement("OPTION");
+					TagSELECT.value	= "";
+					TagSELECT.text	= "<SELECT>";
+					refFieldId.add(TagSELECT);
+				}
+		
+				var TagListLISTENTRY = XML.CreateTagList("LISTENTRY");
+
+				// Add all combo entries brought back from the database
+				for(var nLoop = 0;nLoop < TagListLISTENTRY.length;nLoop++)
+				{
+					XML.ActiveTagList = TagListLISTENTRY;
+					XML.SelectTagListItem(nLoop);
+				
+					// Add the entry
+					var TagOPTION	= document.createElement("OPTION");
+					TagOPTION.value	= XML.GetTagText("VALUEID");
+					TagOPTION.text	= XML.GetTagText("VALUENAME");
+					refFieldId.add(TagOPTION);
+
+					// Get all <VALIDATIONTYPE> entries and add them as attributes to the <OPTION> tag
+					// (the format is ValidationType0 = x ValidationType1 = x etc
+					XML.CreateTagList("VALIDATIONTYPE");
+					for(var nListLoop = 0;nListLoop < XML.ActiveTagList.length;nListLoop++)
+					{
+						TagOPTION.setAttribute("ValidationType" + nListLoop, XML.ActiveTagList.item(nListLoop).text);
+					}
+				}
+		
+				refFieldId.selectedIndex = 0; // select the first option
+
+				XML = null;
+			}
+			else
+			{
+				alert("PopulateComboFromXML - document fragment is null");
+			}
+		}
+		else
+		{
+			alert("PopulateComboFromXML - field must be a combo");
+		}
+
+		return bReturn;
+	}
+	
+	// Find out if the combo entry has the specified validation types
+	function IsInComboValidationList(sListName, sValueID, ValidationList)
+	{
+		var bReturn = false;
+		
+		this.ResetXMLDocument(); // Clear and regenerate the XML document
+
+		// Generate the combo request
+		//<REQUEST>
+		this.CreateActiveTag("REQUEST");
+		this.SetAttribute("USERID","user id");
+		this.SetAttribute("USERTYPE","user type");
+		this.SetAttribute("UNIT","unit");
+
+		//<SEARCH>
+		this.CreateActiveTag("SEARCH");
+		this.CreateActiveTag("LIST");
+		this.CreateTag("GROUPNAME",sListName);
+		this.CreateTag("VALUEID", sValueID);
+		//</SEARCH>
+		//</REQUEST>
+
+		this.RunASP("GetComboValidationList.asp");
+	
+		if (this.IsResponseOK() == true)
+		{						
+			var TagListLISTENTRY = this.CreateTagList("LISTENTRY");
+
+			// Add all combo entries brought back from the database
+			for(var nLoop = 0;nLoop < TagListLISTENTRY.length;nLoop++)
+			{
+				this.ActiveTagList = TagListLISTENTRY;
+				this.SelectTagListItem(nLoop);
+													
+				bReturn = this.IsInComboValidationXML(ValidationList);								
+			}						
+		}
+		return bReturn;
+	}
+	
+	function IsInComboValidationXML(ValidationList)
+	{
+		var blnReturn = false;
+		
+		// Get all <VALIDATIONTYPE> entries and add them as elements
+		// in the array					
+		this.CreateTagList("VALIDATIONTYPE");
+					
+		for(var nListLoop = 0; (nListLoop < this.ActiveTagList.length && (blnReturn == false));nListLoop++)
+		{
+			for (var nValLoop = 0; (nValLoop < ValidationList.length && (blnReturn == false)); nValLoop++) 
+			{
+				// Does the combo entry hold the specfied validation type?
+				if (this.ActiveTagList.item(nListLoop).text == ValidationList[nValLoop])					
+				{
+					blnReturn = true;					
+				}
+			}
+		}
+		
+		return blnReturn;
+	}
+	
+	
+	// Clears all current contents, resetting all document variables.
+	function ResetXMLDocument()
+	{
+		this.XMLDocument		= null;
+		this.XMLDocument		= new ActiveXObject("microsoft.XMLDOM");
+		this.ActiveTag			= null;
+		this.ActiveBeforeTag	= null;
+		this.ActiveTagList		= null;
+	}
+
+	// Checks the <RESPONSE> tag
+	// APS 05/10/99 - Function implementation changed and XML code into 
+	// the CheckResponse function
+	function IsResponseOK()
+	{
+		var bReturn = false;
+		var ErrorReturn;
+		
+		ErrorReturn	= this.CheckResponse(null);
+		bReturn		= ErrorReturn[0];
+		ErrorReturn	= null;
+
+		return bReturn;
+	}
+	
+	// Check the response XML. Passed in to thie routine is an array of errors that
+	// you would like to test against
+	function CheckResponse(sErrorTypes)
+	{
+		var ErrorReturn = new Array(3);
+		
+		/*
+			ErrorReturn is a one dimensional array, which is returned to the calling routine
+			
+			ErrorReturn[0] - A boolean indicating if the object call was successful
+			ErrorReturn[1] - Returns the error type which failed, if that failure is listed in sErrorTypes.
+			                 Otherwise it is null
+			ErrorReturn[2] - The error description of the error type specified by ErrorReturn[1], or null
+		*/
+		
+		// Initialise the ErrorReturn array to a standard failure
+		ErrorReturn[0] = false;
+		ErrorReturn[1] = null;				
+		ErrorReturn[2] = null;
+		
+		var sErrorMessage = "No Response Received"; // Default message
+		
+		this.ActiveTag			= null;
+		this.ActiveBeforeTag	= null;
+		
+		var TagRESPONSE = this.SelectTag(null,"RESPONSE");
+
+		// Is there a response
+		if (TagRESPONSE != null)
+		{
+			// If successful return true
+			if (this.GetAttribute("TYPE") == "SUCCESS")
+			{
+				ErrorReturn[0] = true;
+			}
+			else
+			{
+				sErrorMessage = "Unspecified Error"; // Default error message
+
+				// If there is a returned error
+				if(this.SelectTag(TagRESPONSE,"ERROR") != null)
+				{
+					// Get the error number and description
+					var nErrorNumber	= this.GetTagText("NUMBER");
+					sErrorMessage		= this.GetTagText("DESCRIPTION");
+					
+					// RF 03/12/99 Display error source
+					var sErrorSource    = this.GetTagText("SOURCE");
+					
+					// If we need to look for specific errors
+					if(sErrorTypes != null)
+					{
+						// If the error returned matches one of the errors we are looking for
+						// set ErrorReturn[1] and ErrorReturn[2]
+						for(var nLoop = 0; nLoop < sErrorTypes.length && ErrorReturn[1] == null; nLoop++)
+						{
+							if(nErrorNumber == this.TranslateErrorType(sErrorTypes[nLoop]))
+							{
+								ErrorReturn[1] = sErrorTypes[nLoop];
+								ErrorReturn[2] = sErrorMessage;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// If there is an error and it isn't one we're looking for, display the error message
+		if(ErrorReturn[0] == false && ErrorReturn[1] == null)
+		{
+			// RF 03/12/99 Display error source
+			//alert(sErrorMessage);
+			alert(sErrorMessage + "\nSource: " + sErrorSource);
+		}
+		
+		return ErrorReturn;
+	}
+	
+	// Translates the error types to error numbers for direct comparison with the
+	// ERROR NUMBER returned in an ERROR XML Response block
+	function TranslateErrorType(sError)
+	{
+		var iErrorNumber;				
+		
+		iErrorNumber = -2147221504 + 512;
+		
+		switch (sError)
+		{			
+			case "RECORDNOTFOUND":
+				iErrorNumber += 500;
+				break;
+			
+			case "ONEOFFCOSTS":
+				iErrorNumber += 167;
+				break;
+			
+			case "EXCEEDEDPPCOVERAMOUNT":
+				iErrorNumber += 230;
+				break;
+					
+			// TODO: Add further error types here...			
+				
+			default:
+				iErrorNumber = 0;
+				break;
+		}
+		
+		return iErrorNumber;
+	}
+	
+	// Reads the Global Parameter table for a boolean type parameter
+	function GetGlobalParameterBoolean(sParameterName)
+	{
+		var bReturn = false;
+		
+		// Clears and loads XMLDocument with result of the request to the global parameter table
+		this.RunASPWithTextInput("GetCurrentParameter.asp",sParameterName);
+			
+		// If the response is successful, get the parameter value, if present
+		if(this.IsResponseOK() == true)
+		{
+			this.CreateTagList("GLOBALPARAMETER");
+				
+			if(this.SelectTagListItem(0) == true)
+			{
+				bReturn = this.GetTagBoolean("BOOLEAN");
+			}
+		}
+
+		return bReturn;
+	}
+	
+	// Reads the Global Parameter table for an amount type parameter
+	function GetGlobalParameterAmount(sParameterName)
+	{
+		var sAmount = "";
+		
+		// Clears and loads XMLDocument with result of the request to the global parameter table
+		this.RunASPWithTextInput("GetCurrentParameter.asp",sParameterName);
+			
+		// If the response is successful, get the parameter value, if present
+		if(this.IsResponseOK() == true)
+		{
+			this.CreateTagList("GLOBALPARAMETER");
+				
+			if(this.SelectTagListItem(0) == true)
+			{
+				sAmount = this.GetTagText("AMOUNT");
+			}
+		}
+
+		return sAmount;
+	}
+</script>

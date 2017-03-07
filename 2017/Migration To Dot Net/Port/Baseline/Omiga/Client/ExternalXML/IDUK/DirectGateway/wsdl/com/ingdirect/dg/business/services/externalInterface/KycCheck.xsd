@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Vikram Thakur     
+ 
+
+Description  Schema definations for data transfer between Omiga to Direct Gateway for KYC Request and Response
+
+This schema defines two message types ,
+               	1. KYCRequestType and  2. KYCResponseType	for request and response respectively.
+============================================================================================== -->
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<schema targetNamespace="http://kyccheck.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:kyccheck="http://kyccheck.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:datatype="http://datatypes.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="..//GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="..//CommonTypes.xsd"/>
+	<import namespace="http://datatypes.externalInterface.services.dg.ingdirect.com/0.0.1" schemaLocation="DataType.xsd"/>
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>Define local address that extends Sutructred Address in Common Types and adds  Resy element to its definition 			</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.3 </documentation>
+		<documentation>Removed all ref elements,which were not required.</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.4 </documentation>
+		<documentation>
+		    1) Changed the schema to be in compliance with UC APP 34 changes.
+		    2) Changed date type to SimpleDateTypeExt to allow blank dates and changes GenderType to
+			sexType to allow blank value.
+                 3) Change incude to import for DataTypes.xsd due to technical problems on Omiga side.
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.5 </documentation>
+		<documentation>
+		    1) Renamed Request and Response Types from KycRequestType to KycCheckRequestType
+		    and KycResponseType to KycCheckResponseType respectively.
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.5 </documentation>
+		<documentation>
+		    1) Removed restriction pattern for namerange,titlerange and namerangesur simple data types.
+		</documentation>
+	</annotation>
+	
+	<simpleType name="SimpleDateTypeExt">
+		<union>
+			<simpleType>
+				<annotation>
+					<documentation>This data type is used to represent simple date of the format YYYY/MM/DD.</documentation>
+				</annotation>
+				<restriction base="string">
+					<pattern value="\d{4}/(0?[1-9]|1[0-2])/(3[01]|[1-2][0-9]|0?[1-9])"/>
+				</restriction>
+			</simpleType>
+			<simpleType>
+				<annotation>
+					<documentation>Blank Value if date is not there.</documentation>
+				</annotation>
+				<restriction base="string">
+					<enumeration value=""/>
+				</restriction>
+			</simpleType>
+		</union>
+	</simpleType>
+	<complexType name="KycCheckRequestType">
+		<annotation>
+			<documentation>KycRequestType elements which contains the list elements which are form
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="Eseries">
+						<complexType>
+							<sequence>
+								<element name="FormID" type="kyccheck:strFormId">
+									<annotation>
+										<documentation>Must be set to VML
+									</documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="EXP">
+						<complexType>
+							<sequence>
+								<element name="ExperianREF" type="datatype:str10b">
+									<annotation>
+										<documentation>Experian Reference Number that identifies a specific application. OMIGA will send an empty tag.
+									</documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="Name">
+						<complexType>
+							<sequence>
+								<element name="Code" type="kyccheck:coderange">
+									<annotation>
+										<documentation>Required for alias processing. OMIGA will send an empty tag.
+										</documentation>
+									</annotation>
+								</element>
+								<element name="Title" type="kyccheck:titlerange">
+									<annotation>
+										<documentation>Applicant's title
+									</documentation>
+									</annotation>
+								</element>
+								<element name="ForeName" type="kyccheck:namerange" nillable="false">
+									<annotation>
+										<documentation>Applicant's forename
+									</documentation>
+									</annotation>
+								</element>
+								<element name="Initials" type="kyccheck:namerange">
+									<annotation>
+										<documentation>Applicant's middle name or initial
+									</documentation>
+									</annotation>
+								</element>
+								<element name="SurName" type="kyccheck:namerangesur" nillable="false">
+									<annotation>
+										<documentation>Applicant's surname
+									</documentation>
+									</annotation>
+								</element>
+								<element name="DateOfBirth" type="kyccheck:SimpleDateTypeExt">
+									<annotation>
+										<documentation>Applicant's date of birth
+									</documentation>
+									</annotation>
+								</element>
+								<element name="Sex" type="kyccheck:sexType">
+									<annotation>
+										<documentation>Applicant's gender. Allowed values:
+										Male
+										Female
+										
+										If value is not an allowed value OMIGA will send an empty tag
+									</documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="Addr" type="kyccheck:AddressType" maxOccurs="2">
+						<annotation>
+							<documentation>Only current address and 1st previous address are sent.
+									</documentation>
+						</annotation>
+					</element>
+					<element name="AM09">
+						<complexType>
+							<sequence>
+								<element name="MaritalStatus" type="kyccheck:marstatrange">
+									<annotation>
+										<documentation>Marital status of the applicant
+									</documentation>
+									</annotation>
+								</element>
+								<element name="Dependants" type="datatype:str1b">
+									<annotation>
+										<documentation>Should be set to the number of dependants unless this value is greater than or equal to 7 when 7 should be 														the value sent.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="HomeTelLocal" type="common:PhoneDetailsType">
+									<annotation>
+										<documentation>The applicant's local home telephone number.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="WorkTelLocal" type="common:PhoneDetailsType">
+									<annotation>
+										<documentation>The applicant's local work telephone number.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="CurraCcnHeld" type="kyccheck:cardrange">
+									<annotation>
+										<documentation>Indicates whether the applicant has a current account. Allowed values:
+							Y - Yes
+							N - No
+									</documentation>
+									</annotation>
+								</element>
+								<element name="TimeWithBnkbs" type="datatype:str4b">
+									<annotation>
+										<documentation>The time the applicant has held their current account.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="SortCode" type="datatype:str15b">
+									<annotation>
+										<documentation>OMIGA will send an empty tag.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="AccountNumber" type="datatype:str16b">
+									<annotation>
+										<documentation>OMIGA will send an empty tag.
+									</documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="AP09">
+						<complexType>
+							<sequence>
+								<element name="ProductType" type="kyccheck:productType">
+									<annotation>
+										<documentation>OMIGA will send an empty tag.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="DepositAmount" type="kyccheck:depositAmount">
+									<annotation>
+										<documentation>OMIGA will send an empty tag.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="DocmntType" type="datatype:str35b">
+									<annotation>
+										<documentation>OMIGA will send an empty tag.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="DocmnTypeRefno" type="datatype:str20b">
+									<annotation>
+										<documentation>OMIGA will send an empty tag.
+									</documentation>
+									</annotation>
+								</element>
+								<element name="DocmntIdAddrInd" type="datatype:str1b">
+									<annotation>
+										<documentation>OMIGA will send an empty tag.
+									</documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="KycCheckResponseType">
+		<annotation>
+			<documentation>KYCResponse elements definition. </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<choice minOccurs="0">
+					<element name="KycDetails" type="kyccheck:KycType"/>
+					<element name="KycErrorDetails" type="kyccheck:KycErrorType"/>
+				</choice>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="KycType">
+		<annotation>
+			<documentation>KYCResponseType following response from Experian of KYC Check.</documentation>
+		</annotation>
+		<sequence>
+			<element name="Status" type="datatype:str15b">
+				<annotation>
+					<documentation>The KYC Status
+									</documentation>
+				</annotation>
+			</element>
+			<element name="IdFlag" type="string" minOccurs="0">
+				<annotation>
+					<documentation>Indicates whether identity verification is required
+									</documentation>
+				</annotation>
+			</element>
+			<element name="AddressFlag" type="string" minOccurs="0">
+				<annotation>
+					<documentation>Indicates whether address verification is required.
+									</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="KycErrorType">
+		<annotation>
+			<documentation>KYCErrorResponse elements definition. Contains the response details (error part ) which are resulted from the result of KYC check.</documentation>
+		</annotation>
+		<sequence>
+			<element name="Err1">
+				<complexType>
+					<sequence>
+						<element name="Code" type="datatype:str4">
+							<annotation>
+								<documentation>The error code associated with the eror.
+									</documentation>
+							</annotation>
+						</element>
+						<element name="Severity" type="kyccheck:severitytype">
+							<annotation>
+								<documentation>A numeric indicator from 1 to 9 representing the severity of the error.
+									</documentation>
+							</annotation>
+						</element>
+						<element name="Mesage" type="datatype:str80b">
+							<annotation>
+								<documentation>The error message text associated with the error.
+									</documentation>
+							</annotation>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+		<attribute name="type" type="string" use="optional"/>
+		<attribute name="subtype" type="string" use="optional"/>
+		<attribute name="Exp_ExperianRef" type="datatype:str10b" use="optional"/>
+		<attribute name="success" type="string" use="optional"/>
+		<attribute name="timestamp" type="string" use="optional"/>
+		<attribute name="id" type="string" use="optional"/>
+	</complexType>
+	<complexType name="AddressType">
+		<complexContent>
+			<extension base="common:StructuredAddressDetailsType">
+				<sequence>
+					<element ref="kyccheck:Resy"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="Resy">
+		<complexType>
+			<sequence>
+				<element name="DateFrom" type="kyccheck:SimpleDateTypeExt"/>
+				<element name="DateTo" type="kyccheck:SimpleDateTypeExt"/>
+			</sequence>
+		</complexType>
+	</element>
+	<simpleType name="strFormId">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="40"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="VML"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="severitytype">
+		<restriction base="int">
+			<totalDigits value="1"/>
+			<pattern value="[1-9]"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="namerange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="titlerange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="namerangesur">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="30"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="cardrange">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<enumeration value="Y"/>
+			<enumeration value="N"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="coderange">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<pattern value="[P,E,T,O]"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="sexType">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<enumeration value=""/>
+			<enumeration value="M"/>
+			<enumeration value="F"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="marstatrange">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+			<pattern value="[M,S,D,W,E,C,X,O,Q,Z]"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="addroverseasrange">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<pattern value="[C,P,3]?"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="depositAmount">
+		<restriction base="int">
+			<totalDigits value="7"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="productType">
+		<restriction base="int">
+			<totalDigits value="7"/>
+		</restriction>
+	</simpleType>
+	<element name="KycCheckRequest" type="kyccheck:KycCheckRequestType">
+		<annotation>
+			<documentation>KYC Request Definitions</documentation>
+		</annotation>
+	</element>
+	<element name="KycCheckResponse" type="kyccheck:KycCheckResponseType">
+		<annotation>
+			<documentation>KYC Response Definitions</documentation>
+		</annotation>
+	</element>
+	<element name="Kyc" type="kyccheck:KycType"/>
+	<element name="KycError" type="kyccheck:KycErrorType"/>
+	<element name="Address" type="kyccheck:AddressType"/>
+</schema>

@@ -1,0 +1,1496 @@
+<html>
+<head>
+<meta NAME="GENERATOR" Content="Microsoft Developer Studio">
+
+<title>submit processing scriptlet</title>
+</head>
+<body>
+
+<script language="Javascript">
+
+public_description = new FormMgr;
+
+	var m_nCount = 0;
+	var m_Ctrls = new Array();
+
+	var m_nDaysInMonth 	= new Array(31,29,31,30,31,30,31,31,30,31,30,31);
+	var m_sMsgs = new Array("Invalid Format (for date)", 
+						"Invalid Number Format",
+						"Invalid Date",
+						"Value out of Range",
+						"Invalid Format");
+	var m_sErrMsg = null;
+
+	var m_sStandardCharSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz',.-/&0123456789";
+	var m_sWildcardCharSet = "*"
+								
+function isNumChar(nKey)
+{
+	if(nKey < 48 || nKey > 57)
+	{
+		return false;
+	}
+	return true;
+}
+							
+function isLowerAlpha(nKey)
+{
+	if(nKey < 97 || nKey > 122)
+	{
+		return false;
+	}
+	return true;
+}
+							
+function isUpperAlpha(nKey)
+{
+	if(nKey < 65 || nKey > 90)
+	{
+		return false;
+	}
+	return true;
+}
+							
+function isAlphaChar(nKey)
+{
+	return (isLowerAlpha(nKey) || isUpperAlpha(nKey));
+}
+
+function putMin(nMin)
+{
+	this.m_nMin = nMin;
+}
+
+function putMax(nMax)
+{
+	this.m_nMax = nMax;
+}
+
+function IntDigits(sNum)
+{
+	var nInt = sNum.indexOf(".");
+
+	if(nInt < 0)
+	{
+		nInt = sNum.length;
+	}
+	if(sNum.charAt(0) == '-')
+	{
+		nInt -= 1;
+	}
+	return nInt;
+}
+
+function DecDigits(sNum)
+{
+	var nDp = sNum.indexOf(".");
+	var nDec = 0;
+	if(nDp >= 0)
+	{
+		nDec = sNum.length - (nDp +1);
+	}
+	return nDec;
+}
+
+function isRangeOk()
+{
+	if(this.m_NumRange == null)
+	{
+		return true;
+	}
+	var nInt = parseInt(this.m_CtrlElem.value, 10);
+	if(this.m_NumRange.m_nMin != null)
+	{
+		if(nInt <  this.m_NumRange.m_nMin)
+		{
+			return false;
+		}
+	}
+	if(this.m_NumRange.m_nMax != null)
+	{
+		if(nInt >  this.m_NumRange.m_nMax)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+function setMustEnter(bIsMandatory)
+{
+	this.m_bMustEnter = bIsMandatory;
+}
+
+function ctrlFocus()
+{
+	this.m_CtrlElem.style.textDecorationLineThrough = false;
+	
+	if(this.ScreenFocusFunction != null)
+	{
+		this.ScreenFocusFunction();
+	}
+}
+
+function ctrlKeyDown(thisEvent)
+{
+	this.m_sWasValue = this.m_CtrlElem.value;
+}
+
+function ctrlChange(thisEvent)
+{
+	// AY 15/09/99 - flag the field as changed
+	this.m_bIsFieldChanged = true;
+
+	if(this.m_bMustEnter != null)
+	{
+		this.m_CtrlElem.style.backgroundColor = "window";
+	}
+
+	if(this.ScreenChangeFunction != null)
+	{
+		this.ScreenChangeFunction();
+	}
+}
+
+function ctrlKeyPress(thisEvent)
+{
+	if(this.m_bMustEnter != null)
+	{
+		this.m_CtrlElem.style.backgroundColor = "window";
+	}
+
+	if(this.m_sCharSet != null)
+	{
+		thisEvent.returnValue = CheckCharSet(this.m_sCharSet, this.m_bWildcard, thisEvent);
+	}
+	else
+	{
+		thisEvent.returnValue = CheckCharSet(m_sStandardCharSet, this.m_bWildcard, thisEvent);
+	}
+	
+	if(thisEvent.returnValue == false)
+	{
+		return;
+	}
+	
+	if(this.m_Mask == null)
+	{
+		return;
+	}
+
+	thisEvent.returnValue = this.m_Mask.isValidChar(this.m_CtrlElem, thisEvent);
+}
+
+function ctrlKeyUp(thisEvent)
+{
+	if(this.m_Mask == null)
+	{
+		return;
+	}
+
+	if(thisEvent.keyCode == 8 || thisEvent.keyCode == 46)
+	{
+		return;
+	}
+
+	var thisRange = this.m_document.selection.createRange();
+	thisRange.moveEnd("textEdit",1);
+
+	this.m_sWasValue = this.m_CtrlElem.value;
+
+	if(thisRange.text.length > 0)
+	{
+		return;
+	}
+	
+	var sModText = this.m_Mask.keyAssist(this.m_CtrlElem.value);
+	
+	if(sModText != null)
+	{
+		this.m_CtrlElem.value = sModText;
+	}
+
+	this.m_sWasValue = this.m_CtrlElem.value;
+}
+
+function setTitle()
+{
+	var sTitle;
+	if(this.m_Mask.m_sMask != null)
+	{
+		sTitle = "input mask is: " + this.m_Mask.m_sMask;
+	}
+	if(this.m_NumRange != null)
+	{
+		if(this.m_NumRange.m_nMin != null)
+		{
+			if(sTitle != null)
+			{
+				sTitle += "\r\nminimum value is: ";
+			}
+			else
+			{
+				sTitle = "minimum value is: ";
+			}
+			sTitle += this.m_NumRange.m_nMin;
+		}
+	
+		if(this.m_NumRange.m_nMax != null)
+		{
+			if(sTitle != null)
+			{
+				sTitle += "\r\nmaximum value is: ";
+			}
+			else
+			{
+				sTitle = "maximum value is: ";
+			}
+			sTitle += this.m_NumRange.m_nMax;
+		}
+	}
+
+	if(sTitle != null)
+	{
+		this.m_CtrlElem.title = sTitle;
+	}
+}
+
+function setMask(sMask)
+{
+	if(this.m_Mask == null)
+	{
+		this.m_Mask = new Mask(sMask);
+		this.setTitle();
+	}
+	else
+	{
+		alert("mask already set for this control");
+	}
+}
+
+function setCharSet(sCharSet)
+{
+	if(this.m_sCharSet == null)
+	{
+		this.m_sCharSet = sCharSet;
+	}
+	else
+	{
+		alert("charset already set for this control");
+	}
+}
+
+function setWildcard(bIsWildcard)
+{
+	this.m_bWildcard = bIsWildcard;
+}
+
+function setRange(nMin, nMax)
+{
+	if(this.m_NumRange == null)
+	{
+		this.m_NumRange = new NumRange();
+	}
+	this.m_NumRange.putMin(nMin);
+	this.m_NumRange.putMax(nMax);
+	this.setTitle();
+}
+
+function setMin(nMin)
+{
+	if(this.m_NumRange == null)
+	{
+		this.m_NumRange = new NumRange();
+	}
+	this.m_NumRange.putMin(nMin);
+	this.setTitle();
+}
+
+function setMax(nMax)
+{
+	if(this.m_NumRange == null)
+	{
+		this.m_NumRange = new NumRange();
+	}
+	this.m_NumRange.putMax(nMax);
+	this.setTitle();
+}
+
+function getControl(ctrlId) 
+{
+	var thisCtrl = this.refForm.elements.item(ctrlId);
+	if(thisCtrl != null)
+	{
+		for(var i = 0; i < m_Ctrls.length; i++)
+		{
+			if(m_Ctrls[i].m_CtrlElem.id == thisCtrl.id)
+			{
+				return m_Ctrls[i];
+			}
+		}
+		m_Ctrls[m_nCount] = new Control(thisCtrl);
+		m_Ctrls[m_nCount].m_document = this.formDocument;
+		m_Ctrls[m_nCount].m_window = this.formWindow;
+		return m_Ctrls[m_nCount++];
+	}
+}
+
+function getEventCtrl(thisId)
+{
+	for(var n0 = 0; n0 < m_Ctrls.length; n0++)
+	{
+		if(m_Ctrls[n0].m_CtrlElem.id == thisId)
+		{
+			return m_Ctrls[n0];
+		}
+	}
+	return null;
+}
+
+function doFocus()
+{
+	var thisCtrl = getEventCtrl(this.id);
+	if(thisCtrl)
+	{
+		thisCtrl.ctrlFocus(this.id);
+	}
+}
+
+function doKeyDown()
+{
+	var thisCtrl = getEventCtrl(this.id);
+	if(thisCtrl)
+	{
+		thisCtrl.ctrlKeyDown(this.document.parentWindow.event);
+	}
+}
+
+function doChange()
+{
+	var thisCtrl = getEventCtrl(this.id);
+	if(thisCtrl)
+	{
+		thisCtrl.ctrlChange(this.document.parentWindow.event);
+	}
+}
+
+function doKeyPress()
+{
+	var thisCtrl = getEventCtrl(this.id);
+	if(thisCtrl)
+	{
+		thisCtrl.ctrlKeyPress(this.document.parentWindow.event);
+	}
+}
+
+function doKeyUp()
+{
+	var thisCtrl = getEventCtrl(this.id);
+	if(thisCtrl)
+	{
+		thisCtrl.ctrlKeyUp(this.document.parentWindow.event);
+	}
+}
+
+function doBlur()
+{
+	var thisCtrl = getEventCtrl(this.id);
+	if(thisCtrl)
+	{
+		thisCtrl.checkChange()
+		if(thisCtrl.ScreenBlurFunction != null)
+		{
+			thisCtrl.ScreenBlurFunction();
+		}
+	}
+}
+
+function isValidDate(sDateIn)
+{
+	if(sDateIn.length != 10)
+	{
+		return false;
+	}
+	for(var i=0;i<10;i++)
+	{
+		var c=sDateIn.charAt(i);
+		if(i==2 || i==5)
+		{
+			if(c != '/')
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if(c < '0' || c > '9')
+			{
+				return false;
+			}
+		}
+	}
+	
+	var iDay = parseInt(sDateIn.substr(0,2),10);
+	var iMon = parseInt(sDateIn.substr(3,2),10);
+	var iYr = parseInt(sDateIn.substr(6,4),10);
+	
+	if(iDay < 1 || iDay > 31)
+	{
+		return false;
+	}
+	
+	if(iMon < 1 || iMon > 12)
+	{
+		return false;
+	}
+	
+	if (iDay > m_nDaysInMonth[iMon-1])
+	{
+		return false;
+	}
+	
+	if (iDay == 29 && iMon == 2)
+	{
+		if(!(iYr % 4 == 0 && (iYr % 100 != 0 || iYr % 400 == 0)))
+		{
+			return false;
+		}
+	}  
+	
+	return true;
+}
+
+function checkClass()
+{
+	if(this.m_CtrlElem.className == "msgTxtUpper")
+	{
+		var sString = this.m_CtrlElem.value;
+		sString = sString.toUpperCase();
+		this.m_CtrlElem.value = sString;
+	}
+
+	if(this.m_CtrlElem.className == "msgTxtLower")
+	{
+		var sString = this.m_CtrlElem.value;
+		sString = sString.toLowerCase();
+		this.m_CtrlElem.value = sString;
+	}
+}
+
+function checkChange()
+{
+	if(this.m_CtrlElem.value.length == 0)
+	{
+		return;
+	}
+
+	this.checkClass();
+
+	if(this.m_Mask != null)
+	{
+		if(!this.m_Mask.isFormatOk(this.m_CtrlElem.value))
+		{
+			this.m_CtrlElem.style.textDecorationLineThrough = true;
+			return;
+		}
+	}
+
+	if(this.m_NumRange)
+	{
+		if(!this.isRangeOk())
+		{
+			this.m_CtrlElem.style.textDecorationLineThrough = true;
+			return;
+		}
+	}
+
+	if(this.m_Mask == null)
+	{
+		return;
+	}
+	
+	var sModText = this.m_Mask.blurAssist(this.m_CtrlElem.value);
+	
+	if(sModText != null)
+	{
+		this.m_CtrlElem.value = sModText;
+	}
+}
+
+// AY 15/09/99 - Check the change flags to see if the screen is 'dirty'
+function isChanged()
+{
+	var bIsChanged = false;
+	
+	// If the form flag is true return true
+	if(this.m_bIsChanged == true)
+	{
+		bIsChanged = true;
+	}
+	else
+	{
+		// If a field flag is true return true
+		for(var nLoop = 0; nLoop < m_Ctrls.length && bIsChanged == false; nLoop++)
+		{
+			bIsChanged = m_Ctrls[nLoop].m_bIsFieldChanged;
+		}
+	}
+	
+	return bIsChanged;
+}
+
+// AY 15/09/99 - Set the form change flag
+function flagChange(bIsChange)
+{
+	// The flag may only be set to true by this function
+	if(bIsChange == true)
+	{
+		this.m_bIsChanged = true;
+	}
+}
+
+function isSubmitOK() 
+{
+	var bIsOk = true;
+	var nBadIx = 0;
+	var n0;
+	for(n0 = 0; n0 < m_Ctrls.length; n0++)
+	{
+		if(m_Ctrls[n0].m_CtrlElem.readOnly != true 
+		   && m_Ctrls[n0].m_CtrlElem.disabled != true
+		   && m_Ctrls[n0].m_CtrlElem.style.visibility != "hidden")
+		{
+			if(m_Ctrls[n0].m_bMustEnter && m_Ctrls[n0].m_CtrlElem.value.length == 0)
+			{
+				m_Ctrls[n0].m_CtrlElem.style.backgroundColor = "Firebrick";
+				if(bIsOk)
+				{
+					nBadIx = n0;
+					bIsOk = false;
+				}
+			}
+		}
+	}
+	if(!bIsOk)
+	{
+		alert("mandatory data missing");
+		m_Ctrls[nBadIx].m_CtrlElem.focus();
+		this.formWindow.event.returnValue = false;
+		return false;
+	}
+	for(n0 = 0; n0 < m_Ctrls.length; n0++)
+	{
+		if(m_Ctrls[n0].m_CtrlElem.value.length > 0)
+		{
+			if(m_Ctrls[n0].m_Mask != null)
+			{
+				if(!m_Ctrls[n0].m_Mask.isFormatOk(m_Ctrls[n0].m_CtrlElem.value))
+				{
+					alert(m_sErrMsg);
+					m_Ctrls[n0].m_CtrlElem.focus();
+					this.formWindow.event.returnValue = false;
+					return false;
+				}
+			}
+		
+			if(m_Ctrls[n0].m_NumRange)
+			{
+				if(!m_Ctrls[n0].isRangeOk())
+				{
+					alert("value out out range");
+					m_Ctrls[n0].m_CtrlElem.focus();
+					this.formWindow.event.returnValue = false;
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+
+function NumRange()
+{
+	this.m_nMin = null;
+	this.m_nMax = null;
+	this.putMin = putMin;
+	this.putMax = putMax;
+}
+
+function getMaskType(sMask)
+{
+	if(sMask == "dd/mm/yyyy")
+	{
+		return "date";
+	}
+
+	var nNines = 0;
+	var nStops = 0;
+	var nDash = 0;
+	var nAlphaNum = 0;
+	var nOther = 0;
+	
+	for(i=0; i < sMask.length; i++)
+	{
+		switch(sMask.charAt(i))
+		{
+			case '9':
+			{
+				nNines++;
+				break;
+			}
+			case '.':
+			{
+				nStops++;
+				break;
+			}
+			case '-':
+			{
+				nDash++;
+				break;
+			}
+			case 'A':
+			case 'a':
+			case 'X':
+			case 'x':
+			{
+				nAlphaNum++;
+				break;
+			}
+			default:
+			{
+				nOther++;
+				break;
+			}			
+		}
+	}
+	if(nAlphaNum == 0 && nOther == 0 && nStops < 2 && nDash < 2)
+	{
+		return "num";
+	}
+	
+	return "vanilla";
+}
+
+function isValidIntChar(refCtrl, refEvent)
+{
+	return isNumChar(refEvent.keyCode);
+}
+
+function isValidFloatChar(refCtrl, refEvent)
+{
+	var bOk = false;
+	if(isNumChar(refEvent.keyCode))
+	{
+		bOk =  true;
+	}
+	if(refEvent.keyCode == 46 && this.m_nDecDigits > 0 && refCtrl.value.indexOf(".") == -1)
+	{
+		bOk =  true;
+	}
+	var thisRange = refCtrl.document.selection.createRange();
+	thisRange.moveEnd("textEdit",1);
+	if(refEvent.keyCode == 45 && this.m_Mask.m_bAllowNeg)
+	{
+		if((refCtrl.value.indexOf("-") == -1) && (thisRange.text.length == refCtrl.value.length))
+		{
+			bOk =  true;
+		}
+	}
+	return bOk;
+}
+
+function isValidDateChar(refCtrl, refEvent)
+{
+	if(isNumChar(refEvent.keyCode) || refEvent.keyCode == 47)
+	{
+		return true;
+	}
+	return false;
+}
+
+function isValidMaskChar(refCtrl, refEvent)
+{
+	var thisRange = refCtrl.document.selection.createRange();
+	thisRange.moveEnd("textEdit",1);
+
+	if(thisRange.text.length != 0)
+	{
+		return true;
+	}
+	
+	var cMask=this.m_sMask.charAt(refCtrl.value.length);
+
+	if(cMask == 'A' || 	cMask == 'a')
+	{
+		if(!isAlphaChar(refEvent.keyCode))
+		{
+			return false;
+		}
+		if(cMask == 'A' && isLowerAlpha(refEvent.keyCode))
+		{
+			refEvent.keyCode -= 32;
+		}
+	}
+	else if(cMask == 'X' || cMask == 'x')
+	{
+		if(!(isAlphaChar(refEvent.keyCode) || isNumChar(refEvent.keyCode)))
+		{
+			return false;
+		}
+		if(cMask == 'X' && isLowerAlpha(refEvent.keyCode))
+		{
+			refEvent.keyCode -= 32;
+		}
+	}
+	else if(cMask == '9')
+	{
+		if(!(isNumChar(refEvent.keyCode)))
+		{
+			return false;
+		}
+	}
+	else if(cMask != String.fromCharCode(refEvent.keyCode))
+	{
+		return false;
+	}
+	
+	return true;
+}
+
+function CheckCharSet(sFieldCharSet, bWildcard, refEvent)
+{
+	var nPos;
+	var sSearch = String.fromCharCode(refEvent.keyCode);
+	
+	var sCharSet;
+	if(bWildcard == true)
+	{
+		sCharSet = sFieldCharSet.concat(m_sWildcardCharSet);
+	}
+	else
+	{
+		sCharSet = sFieldCharSet;
+	}
+	
+	nPos = sCharSet.indexOf(sSearch);
+
+	if(nPos == -1)
+	{
+		return false;
+	}
+	
+	return true;
+}
+
+function isIntFormatOk(sValue)
+{
+	if(IntDigits(sValue) > this.m_nIntDigits)
+	{
+		m_sErrMsg = m_sMsgs[1];
+		return false;
+	}
+	return true;
+}
+
+function isFloatFormatOk(sValue)
+{
+	if(IntDigits(sValue) > this.m_nIntDigits || DecDigits(sValue) > this.m_nDecDigits)
+	{
+		m_sErrMsg = m_sMsgs[1];
+		return false;
+	}
+	return true;
+}
+
+function isDateFormatOk(sValue)
+{
+	if(!isValidDate(sValue))
+	{
+		m_sErrMsg = m_sMsgs[0];
+		return false;
+	}
+	return true;
+}
+
+function isMaskFormatOk(sValue)
+{
+	var bIsOk = true;
+	if(sValue.length != this.m_sMask.length)
+	{
+		bIsOk = false;
+	}
+	else
+	{
+		for(i=0; i < sValue.length; i++)
+		{
+			var cMask=this.m_sMask.charAt(i);
+			var cTest=sValue.charCodeAt(i);
+
+			if(cMask == 'A' || 	cMask == 'a')
+			{
+				if(!isAlphaChar(cTest))
+				{
+					bIsOk = false;
+					break;
+				}
+			}
+			else if(cMask == 'X' || cMask == 'x')
+			{
+				if(!(isAlphaChar(cTest) || isNumChar(cTest)))
+				{
+					bIsOk = false;
+					break;
+				}
+			}
+			else if(cMask == '9')
+			{
+				if(!(isNumChar(cTest)))
+				{
+					bIsOk = false;
+					break;
+				}
+			}
+			else if(cMask != String.fromCharCode(cTest))
+			{
+				bIsOk = false;
+				break;
+			}
+		}
+	}
+	if(!bIsOk)
+	{
+		m_sErrMsg = m_sMsgs[0];
+		return false;
+	}
+	return true;
+}
+
+function dateAssist(sDateIn)
+{
+	if(sDateIn.length == 1)
+	{
+		c=sDateIn.charAt(0);
+		if(c > '3')
+		{
+			return "0" + sDateIn + "/";
+		}
+	}
+	else if(sDateIn.length == 4)
+	{
+		c=sDateIn.charAt(3);
+		if(c > '1')
+		{
+			return sDateIn.substr(0,3) + "0" + sDateIn.substr(3,1) + "/";
+		}
+	}
+	else if(sDateIn.length == 2 || sDateIn.length == 5)
+	{
+		return sDateIn += "/";
+	}
+	return null;
+}
+
+function floatAssist(sNumIn)
+{
+	if(sNumIn == "." || sNumIn == "0")
+	{
+		return "0.";
+	}
+	else if(sNumIn == "-." || sNumIn == "-0")
+	{
+		return "-0.";
+	}
+	nInt = sNumIn.indexOf(".");
+	if(nInt == -1)
+	{
+		nLen = sNumIn.length;
+		if(sNumIn.charAt(0) == '-')
+		{
+			nLen -= 1;
+		}
+		if(nLen == this.m_nIntDigits)
+		{
+			return sNumIn += ".";
+		}
+	}
+	return null;
+}
+
+function intAssist(sNumIn)
+{
+	return null;
+}
+
+function maskAssist(sTextIn)
+{
+	var c = this.m_sMask.charAt(sTextIn.length);
+	if(c != 'A' && c != 'a' && c != 'X' && c != 'x' && c != '9')
+	{
+		return sTextIn += c;
+	}
+	return null;
+}
+
+function maskOnBlur(sMaskIn)
+{
+	return null;
+}
+
+function dateOnBlur(sDateIn)
+{
+	return null;
+}
+
+function floatOnBlur(sFloatIn)
+{
+	var sOut = sFloatIn;
+	if(sFloatIn.indexOf(".") == -1)
+	{
+		sOut = sFloatIn + ".";
+	}
+
+	while((sOut.length - (sOut.indexOf(".") +1)) < this.m_nDecDigits)
+	{
+		sOut += "0";
+	}
+	
+	if(sOut != sFloatIn)
+	{
+		return sOut;
+	}
+
+	return null;
+}
+
+function intOnBlur(sIntIn)
+{
+	return null;
+}
+
+function Mask(sMask)
+{
+	this.isValidDateChar = isValidDateChar;
+	this.isValidMaskChar = isValidMaskChar;
+	this.isValidFloatChar = isValidFloatChar;
+	this.isValidIntChar = isValidIntChar;
+	this.m_sMask = sMask;
+	this.m_sType = null;
+	this.m_nIntDigits = null;
+	this.m_nDecDigits = null;
+	this.m_bAllowNeg = null;
+	this.isValidChar = null;
+	this.isFormatOk = null;
+	this.keyAssist = null;
+	this.blurAssist = null;
+	
+	this.m_sType = getMaskType(sMask);
+	
+	if(this.m_sType == "date")
+	{
+		this.isValidChar = this.isValidDateChar;
+		this.isFormatOk = isDateFormatOk;
+		this.keyAssist = dateAssist;
+		this.blurAssist = dateOnBlur;
+	}
+	else if(this.m_sType == "vanilla")
+	{
+		this.isValidChar = this.isValidMaskChar;
+		this.isFormatOk = isMaskFormatOk;
+		this.keyAssist = maskAssist;
+		this.blurAssist = maskOnBlur;
+	}
+	else
+	{
+		if(sMask.charAt(0) == '-')
+		{
+			this.m_bAllowNeg = true;
+		}
+
+		this.m_nIntDigits = sMask.indexOf(".");
+
+		if(this.m_nIntDigits < 0)
+		{
+			this.m_nIntDigits = sMask.length;
+		}
+		else
+		{
+			this.m_nDecDigits = sMask.length - (this.m_nIntDigits +1);
+		}
+		if(this.m_bAllowNeg)
+		{
+			this.m_nIntDigits -= 1;
+		}
+	
+		if(this.m_nDecDigits > 0)
+		{
+			this.m_sType = "float";
+			this.isValidChar = this.isValidFloatChar;
+			this.isFormatOk = isFloatFormatOk;
+			this.keyAssist = floatAssist;
+			this.blurAssist = floatOnBlur;
+		}
+		else
+		{
+			this.m_sType = "int";
+			this.isValidChar = this.isValidIntChar;
+			this.isFormatOk = isIntFormatOk;
+			this.keyAssist = intAssist;
+			this.blurAssist = intOnBlur;
+		}
+	}
+}
+
+function Control(refCtrl)
+{
+	this.m_CtrlElem = refCtrl;
+	this.m_Mask = null;
+	this.m_MustEnter = null;
+	this.m_NumRange = null;
+	this.m_sWasValue = null;
+	this.m_window = null;
+	this.m_document = null;
+	this.m_sCharSet = null;
+	this.m_bWildcard = null;
+	this.setMustEnter = setMustEnter;
+	this.setMask = setMask;
+	this.setRange = setRange;
+	this.setMin = setMin;
+	this.setMax = setMax;
+	this.ctrlFocus = ctrlFocus;
+	this.ctrlKeyDown = ctrlKeyDown;
+	this.ctrlKeyPress = ctrlKeyPress;
+	this.ctrlKeyUp = ctrlKeyUp;
+	this.setTitle = setTitle;
+	this.isRangeOk = isRangeOk;
+	this.checkChange = checkChange;
+	this.checkClass = checkClass;
+	this.setCharSet = setCharSet;
+	this.ctrlChange = ctrlChange;
+	this.setWildcard = setWildcard;
+	this.ScreenFocusFunction = null;
+	this.ScreenBlurFunction = null;
+	this.ScreenChangeFunction = null;
+	this.m_bIsFieldChanged = false; // AY 15/09/99
+}
+
+function putFieldValu()
+{
+	for(var i = 0; i < this.refForm.elements.length; i++)
+	{
+		var thisElem = this.refForm.elements(i);
+		if(thisElem.id == this.sId)
+		{
+			if(thisElem.tagName == "INPUT")
+			{
+				thisElem.value = this.sValu;
+			}
+			else if(thisElem.tagName == "SELECT")
+			{
+				var nIx = parseInt(this.sValu,10);
+				if(!isNaN(nIx))
+				{
+					thisElem.selectedIndex = nIx;
+				}
+			}
+		}
+	}
+}
+
+function initFormData(refFormData)
+{
+	this.putFieldValu = putFieldValu;
+	this.sId = null;
+	this.sValu = null;
+	var sWork = refFormData;
+	var startTag = "<FIELD ID=\"";
+	var endTag = "</FIELD>";
+	var nStart = sWork.indexOf(startTag);
+	while(nStart != -1)
+	{
+		var nEnd = sWork.indexOf(endTag, nStart);
+		var sSlice = sWork.slice(nStart, nEnd + endTag.length);
+//		alert(sSlice);
+		this.sId = sWork.slice(nStart + startTag.length, sWork.indexOf("\"", nStart + startTag.length));
+//		alert(sId);
+		this.sValu = sWork.slice(sWork.indexOf(">", nStart) +1, sWork.indexOf(endTag, nStart));
+//		alert(sValu);
+		this.putFieldValu();
+		sWork = sWork.slice(nEnd + endTag.length);
+		nStart = sWork.indexOf(startTag);
+	}
+}
+
+function initialise(refForm, refFormData)
+{
+	this.getControl = getControl;
+	this.initFormData = initFormData;
+	this.refForm = refForm;
+	this.formDocument = refForm.document;
+	this.formWindow = refForm.document.parentWindow;
+	
+	if(refFormData != null)
+	{	
+		this.initFormData(refFormData);
+	}
+	
+	for(var n0 = 0; n0 < this.refForm.elements.length; n0++)
+	{
+		var thisElem = this.refForm.elements(n0);
+		var thisCtrl = null;
+		var sAttrib = thisElem.style.getAttribute("mask");
+		if(sAttrib != null)
+		{
+			thisCtrl = this.getControl(thisElem.id);
+			if(thisCtrl != null)
+			{
+				thisCtrl.setMask(sAttrib);
+				thisElem.maxLength = sAttrib.length;
+			}
+		}
+
+		sAttrib = thisElem.style.getAttribute("charset");
+		if(sAttrib != null)
+		{
+			if(thisCtrl == null)
+			{
+				thisCtrl = this.getControl(thisElem.id);
+			}
+
+			if(thisCtrl != null)
+			{
+				thisCtrl.setCharSet(sAttrib);
+			}
+		}
+
+		sAttrib = thisElem.style.getAttribute("mustenter");
+		if(sAttrib != null)
+		{
+			if(thisCtrl == null)
+			{
+				thisCtrl = this.getControl(thisElem.id);
+			}
+			if(sAttrib.toLowerCase() == "true")
+			{
+				thisCtrl.setMustEnter(true);
+			}
+			else
+			{
+				thisCtrl.setMustEnter(false);
+			}
+		}
+		sAttrib = thisElem.style.getAttribute("min");
+		if(sAttrib != null)
+		{
+			if(thisCtrl == null)
+			{
+				thisCtrl = this.getControl(thisElem.id);
+			}
+			thisCtrl.setMin(parseInt(sAttrib,10));
+		}
+		sAttrib = thisElem.style.getAttribute("max");
+		if(sAttrib != null)
+		{
+			if(thisCtrl == null)
+			{
+				thisCtrl = this.getControl(thisElem.id);
+			}
+			thisCtrl.setMax(parseInt(sAttrib,10));
+		}
+
+		sAttrib = thisElem.style.getAttribute("wildcard");
+		if(sAttrib != null)
+		{
+			if(thisCtrl == null)
+			{
+				thisCtrl = this.getControl(thisElem.id);
+			}
+			if(sAttrib.toLowerCase() == "true")
+			{
+				thisCtrl.setWildcard(true);
+			}
+			else
+			{
+				thisCtrl.setWildcard(false);
+			}
+		}
+
+		if(thisCtrl == null)
+		{
+			thisCtrl = this.getControl(thisElem.id);
+		}
+
+		if(thisCtrl != null)
+		{
+			thisCtrl.ScreenFocusFunction = thisCtrl.m_CtrlElem.onfocus;
+			thisCtrl.m_CtrlElem.onfocus = doFocus;
+			thisCtrl.m_CtrlElem.onkeydown = doKeyDown;
+			thisCtrl.m_CtrlElem.onkeypress = doKeyPress;
+			thisCtrl.m_CtrlElem.onkeyup = doKeyUp;
+			thisCtrl.ScreenBlurFunction = thisCtrl.m_CtrlElem.onblur;
+			thisCtrl.m_CtrlElem.onblur = doBlur;
+			thisCtrl.ScreenChangeFunction = thisCtrl.m_CtrlElem.onchange;
+			thisCtrl.m_CtrlElem.onchange = doChange;
+		}
+	}
+}
+
+function makeField(sId, sValue)
+{
+	var sQuote = "&quot";
+	return "<FIELD ID=" + sQuote + sId + sQuote + ">" + sValue + "</FIELD>";
+//	return "<FIELD ID=" + sId + ">" + sValue + "</FIELD>";
+}
+	
+function addInput()
+{
+	if(this.refFld.type == "text")
+	{
+		if(this.refFld.value.length > 0)
+		{
+			this.sOut += makeField(this.refFld.id, this.refFld.value);
+		}
+	}
+	else if(this.refFld.type == "radio" || this.refFld.type == "checkbox")
+	{
+		if(this.refFld.checked && this.refFld.value.length > 0)
+		{
+			var sId = this.refFld.id;
+			if(sId == null)
+			{
+				sId = this.refFld.name;
+			}
+			this.sOut += makeField(this.refFld.id, this.refFld.value);
+		}
+	}
+}
+	
+function addSelect()
+{
+	if(this.refFld.selectedIndex >= 0)
+	{
+		this.sOut += makeField(this.refFld.id, this.refFld.options(this.refFld.selectedIndex).text);
+	}
+}
+
+function packField(refFld)
+{
+	this.addInput = addInput;
+	this.addSelect = addSelect;
+	this.refFld = refFld;
+	if(refFld.tagName == "INPUT")
+	{
+		this.addInput();
+	}
+	if(refFld.tagName == "SELECT")
+	{
+		this.addSelect();
+	}
+}
+
+function getFormData(refForm)
+{
+	this.packField = packField;
+	this.sOut = new String("<FORMDATA>");
+		
+	for(var i=0; i < refForm.elements.length; i++)
+	{
+		this.packField(refForm.elements(i));
+	}
+
+	this.sOut += "</FORMDATA>";
+	
+	return this.sOut;
+}
+
+function getErrs(sResp)
+{
+	var aErrs = new Array();
+	var sWork = sResp;
+	var startTag = "<ERROR";
+	var endTag = "</ERROR>";
+	var fieldTag = "<FIELD=";
+	var nStart = sWork.indexOf(startTag);
+	while(nStart != -1)
+	{
+		var nEnd = sWork.indexOf(endTag, nStart);
+		var sSlice = sWork.slice(nStart, nEnd + endTag.length);
+		var nFldIx = sSlice.indexOf(fieldTag);
+		var aThisErr = new Array();
+		aThisErr[0] = sWork.slice(sWork.indexOf(">"), sWork.indexOf(endTag));
+		if(nFldIx != -1)
+		{
+			aThisErr[1] = sWork.slice(nFldIx + fieldTag.length, sWork.indexOf(">"));
+		}
+		aErrs[aErrs.length] = aThisErr;
+		sWork = sWork.slice(nEnd + endTag.length);
+		nStart = sWork.indexOf(startTag);
+	}
+	
+	return aErrs;
+}
+
+function getWarns()
+{
+	var sWork = this.sResponse;
+	var startTag = "<WARNING>";
+	var endTag = "</WARNING>";
+	var nStart = sWork.indexOf(startTag);
+	while(nStart != -1)
+	{
+		var nEnd = sWork.indexOf(endTag, nStart);
+		var sSlice = sWork.slice(nStart, nEnd + endTag.length);
+		var sThisMsg = sSlice.slice(sSlice.indexOf(">") +1, sSlice.indexOf(endTag));
+		this.saWarns[this.saWarns.length] = sThisMsg;
+		sWork = sWork.slice(nEnd + endTag.length);
+		nStart = sWork.indexOf(startTag);
+	}
+}
+
+function getErrs()
+{
+	var sWork = this.sResponse;
+	var startTag = "<ERROR";
+	var endTag = "</ERROR>";
+	var fieldTag = "FIELD=";
+	var nStart = sWork.indexOf(startTag);
+	while(nStart != -1)
+	{
+		var nEnd = sWork.indexOf(endTag, nStart);
+		var sSlice = sWork.slice(nStart, nEnd + endTag.length);
+		var aThisErr = new Array();
+		this.saErrMsg[this.saErrMsg.length] = sSlice.slice(sSlice.indexOf(">") +1, sSlice.indexOf(endTag));
+		if(this.refErrFld == null)
+		{
+			var nFldIx = sSlice.indexOf(fieldTag);
+			if(nFldIx != -1)
+			{
+				var sId = sSlice.slice(nFldIx + fieldTag.length, sSlice.indexOf(">"));
+				for(var j=0; j < this.refForm.elements.length; j++)
+				{
+					if(this.refForm.elements(j).id == sId)
+					{
+						this.refErrFld = this.refForm.elements(j);
+						break;
+					}
+				}
+			}
+		}
+		sWork = sWork.slice(nEnd + endTag.length);
+		nStart = sWork.indexOf(startTag);
+	}
+}
+
+function doSubmit(aspObject)
+{
+	if(!this.isSubmitOK())
+	{
+		return false;
+	}
+	
+	if(aspObject == null)
+	{
+		return true;
+	}
+
+	this.getErrs = getErrs;
+	this.getWarns = getWarns;
+	this.sResponse = null;
+	this.saErrMsg = new Array();
+	this.refErrFld = null;
+	this.saWarns = new Array();
+	
+	var sData = this.getFormData(this.refForm);
+	alert(sData);
+	var co = aspObject.isValid(sData);
+	this.sResponse = co.return_value;
+	alert(this.sResponse);
+	
+	this.getErrs();
+	
+	if(this.saErrMsg.length > 0)
+	{
+		var sMsg = "validation errors:";
+		for (var i = 0; i < this.saErrMsg.length; i++)
+		{
+			sMsg += "\r\n";
+			sMsg += this.saErrMsg[i];
+		}
+
+		alert(sMsg);
+		
+		if(this.refErrFld != null)
+		{
+			this.refErrFld.focus();
+		}
+
+		return false;
+	}
+	
+	this.getWarns();
+	
+	if(this.saWarns.length > 0)
+	{
+		var sMsg = "warnings:";
+		for (var i = 0; i < this.saWarns.length; i++)
+		{
+			sMsg += "\r\n";
+			sMsg += this.saWarns[i];
+		}
+
+		alert(sMsg);
+	}
+
+	return true;	
+	
+}
+
+function FormMgr() 
+{
+	this.refForm = null;
+	this.formDocument = null;
+	this.formWindow = null;
+	this.m_bIsChanged = false; // AY 15/09/99
+	this.initialise = initialise;
+	this.isSubmitOK = isSubmitOK;
+	this.getFormData = getFormData;
+	this.doSubmit = doSubmit;
+	this.isChanged = isChanged; // AY 15/09/99
+	this.flagChange = flagChange; // AY 15/09/99
+}
+
+/*
+	function myCallBack(co)
+	{
+		alert("CALLBACK\n\n" +
+				"status = " + co.status + "\n\n" +
+				"message = " + co.message + "\n\n" +
+				"context = " + co.context + "\n\n" +
+				"data = " + co.data + "\n\n" +
+				"return_value = " + co.return_value);
+	} 
+	
+	function getControl(ctrlId) 
+	{
+		var thisParDoc = window.parent.document;
+		for(var n0 = 0; n0 < thisParDoc.forms.length; n0++)
+		{
+			var thisCtrl = thisParDoc.forms[n0].item(ctrlId);
+			if(thisCtrl != null)
+			{
+				for(var n1 = 0; n1 < m_Ctrls.length; n1++)
+				{
+					if(m_Ctrls[n1].m_CtrlElem.id == thisCtrl.id)
+					{
+						return m_Ctrls[n1];
+					}
+				}
+				m_Ctrls[m_nCount] = new Control(thisCtrl);
+				return m_Ctrls[m_nCount++];
+			}
+		}
+	}
+*/
+
+</script>
+</body>
+</html>

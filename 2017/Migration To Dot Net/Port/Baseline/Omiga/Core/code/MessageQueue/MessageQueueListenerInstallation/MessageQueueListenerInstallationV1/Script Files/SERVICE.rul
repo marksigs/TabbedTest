@@ -1,0 +1,99 @@
+#include "ifx.h" //DO NOT REMOVE
+
+prototype BOOL SERVICE_StartService(/*vstrServiceName*/ STRING);
+prototype BOOL SERVICE_StopService(/*vstrServiceName*/ STRING);
+prototype /*SwbemObject*/ OBJECT SERVICE_GetService(/*vstrServiceName*/ STRING);
+
+function /*SwbemObject*/ OBJECT SERVICE_GetService(vstrServiceName /*STRING*/)
+	OBJECT wbemLocator;
+	OBJECT wbemServices;      
+	OBJECT wbemObjectSet; 
+	OBJECT wbemObject;
+begin  
+	try
+	    set wbemLocator = CreateObject("WbemScripting.SWbemLocator");
+	    if IsObject(wbemLocator) then 
+	    	set wbemServices = wbemLocator.ConnectServer("", "root/cimv2");
+	    	if IsObject(wbemServices) then
+		    	set wbemObjectSet = wbemServices.ExecQuery("SELECT * FROM Win32_Service WHERE Name = '" + vstrServiceName + "'");
+		    	if IsObject(wbemObjectSet) then
+		    		set wbemObject = wbemObjectSet.Item("Win32_Service.Name='" + vstrServiceName + "'");
+		    		if IsObject(wbemObject) = FALSE then
+		    			LOG_MessageBox("Failed to get wbem object", SEVERE);
+		    		endif;
+		    	else
+		    		LOG_MessageBox("Failed to exec query", SEVERE);
+		    	endif;
+		    else
+		    	LOG_MessageBox("Failed to connect to server", SEVERE);
+	    	endif;
+	    else
+			LOG_MessageBox("Failed to CreateObject WbemScripting.SWbemLocator", SEVERE);
+	    endif;
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+			
+	return wbemObject;
+end;
+
+function BOOL SERVICE_StartService(vstrServiceName /*STRING*/)
+	BOOL bResult;
+	OBJECT win32service;
+begin
+	LOG_SetStatusWindow("Starting service " + vstrServiceName); 
+	bResult = FALSE;
+	
+	try
+	    set win32service = SERVICE_GetService(vstrServiceName);
+	    if IsObject(win32service)then 
+	    	if win32service.Started == 0 then
+				if win32service.StartService == 0 then
+					bResult = TRUE;
+				else
+					LOG_MessageBox("Failed to start service " + vstrServiceName, SEVERE);
+				endif;
+			else
+				LOG_Log("Service " + vstrServiceName + " is already running");
+			endif;
+		else
+			LOG_MessageBox("Failed to get wbem object", SEVERE);
+		endif;
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+			
+	return bResult;
+end;
+
+function BOOL SERVICE_StopService(vstrServiceName /*STRING*/)
+	BOOL bResult;
+	OBJECT win32service;
+begin
+	LOG_SetStatusWindow("Stopping service " + vstrServiceName); 
+	bResult = FALSE;
+	
+	try
+	    set win32service = SERVICE_GetService(vstrServiceName);
+	    if IsObject(win32service)then 
+	    	if win32service.Started != 0 then
+				if win32service.StopService == 0 then
+					bResult = TRUE;
+				else
+					LOG_MessageBox("Failed to stop service " + vstrServiceName, SEVERE);
+				endif;
+			else
+				LOG_Log("Service " + vstrServiceName + " is not running");
+			endif;
+		else
+			LOG_MessageBox("Failed to get wbem object", SEVERE);
+		endif;
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+			
+	return bResult;
+end;
+
+
+

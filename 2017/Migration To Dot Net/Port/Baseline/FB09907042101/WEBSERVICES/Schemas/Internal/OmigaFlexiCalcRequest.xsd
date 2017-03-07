@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/OmigaFlexiCalcRequest.xsd $
+Workfile                 $Workfile: OmigaFlexiCalcRequest.xsd $
+Current Version   	$Revision: 1 $
+Last Modified       	$Modtime: 16/03/07 13:37 $
+Modified By          	$Author: Mheys $
+
+History:
+
+Version Author      Date       		Description
+01.00   	IK				15/03/2007 	Created.   
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://Request.FlexiCalc.Omiga.vertex.co.uk" targetNamespace="http://Request.FlexiCalc.Omiga.vertex.co.uk" xmlns:al="http://Alpha.FlexiCalc.Request.vertex.co.uk">
+	<xs:import namespace="http://Alpha.FlexiCalc.Request.vertex.co.uk" schemaLocation="MortgageWhatIfQuoteInputs.xsd"/>
+	<xs:element name="OmigaFlexiCalcRequest" type="OmigaFlexiCalcRequestType"/>
+	<xs:complexType name="OmigaFlexiCalcRequestType">
+		<xs:sequence>
+			<xs:element ref="al:Request"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

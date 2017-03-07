@@ -1,0 +1,26 @@
+<COMPONENTS>
+   <OMAIP CTYPE="1"/>
+   <OMAPP CTYPE="1"/>
+   <OMAQ CTYPE="1"/>
+   <OMAU CTYPE="1"/>
+   <OMBASE CTYPE="1"/>
+   <OMBC CTYPE="1"/>
+   <OMCC CTYPE="1"/>
+   <OMCE CTYPE="1"/>
+   <OMCF CTYPE="1"/>
+   <OMCM CTYPE="1"/>
+   <OMCUST CTYPE="1"/>
+   <OMDM CTYPE="1"/>
+   <OMIMP CTYPE="1"/>
+   <OMIM CTYPE="1"/>
+   <OMLC CTYPE="1"/>
+   <OMMP CTYPE="1"/>
+   <OMORG CTYPE="1"/>
+   <OMPAF CTYPE="1"/>
+   <OMPP CTYPE="1"/>
+   <OMQQ CTYPE="1"/>
+   <OMTP CTYPE="1"/>
+   <OMRA CTYPE="1"/>
+   <OMDATAINGESTION CTYPE="2"/>
+   <OMTRANSACT CTYPE="2"/>
+</COMPONENTS>

@@ -1,0 +1,1 @@
+<%@ Page language="c#" Codebehind="DisplayImage.aspx.cs" AutoEventWireup="false" Inherits="Epsom.Web.WebUserControls.DisplayImage" %>

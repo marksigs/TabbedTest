@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<siteMapNode name="Home" path="/default.asp">
+
+  <siteMapNode nodetype="menu" menuname="DIP" path="DIP/Default.aspx">
+    <siteMapNode name="Adviser details" path="DIP/AdviserDetails.aspx" />
+    <siteMapNode name="Regulation information" path="DIP/MinimumCriteria.aspx" />
+    <siteMapNode name="Loan requirements" path="DIP/LoanRequirements.aspx" />
+    <siteMapNode name="Component" iterates="Component" querystringvariable="component">
+      <siteMapNode name="Product selection" path="DIP/ProductSelection.aspx" />
+    </siteMapNode>
+    <siteMapNode name="Loan summary" path="DIP/LoanSummary.aspx" />
+    <siteMapNode name="Applicant" path="DIP/ApplicantDetails.aspx" iterates="Applicant" querystringvariable="applicant" />
+    <siteMapNode name="Guarantor" path="DIP/GuarantorDetails.aspx" />
+    <siteMapNode name="Commitments" path="DIP/Commitments.aspx" />
+    <siteMapNode name="Additional info" path="DIP/AdditionalInfo.aspx" />
+    <siteMapNode name="Summary And Submit" path="DIP/SummaryAndSubmit.aspx" />
+    <siteMapNode name="Select valid address" path="DIP/SelectValidAddress.aspx" />
+    <siteMapNode name="Response" path="DIP/Response.aspx" />
+  </siteMapNode>
+
+  <siteMapNode nodetype="menu" menuname="KFI" path="KFI/Default.aspx">
+    <siteMapNode name="Adviser details" path="KFI/AdviserDetails.aspx" />
+    <siteMapNode name="Regulation information" path="KFI/MinimumCriteria.aspx" />
+    <siteMapNode name="Loan requirements" path="KFI/LoanRequirements.aspx" />
+    <siteMapNode name="Component" iterates="Component" querystringvariable="component">
+      <siteMapNode name="Product selection" path="KFI/ProductSelection.aspx" />
+    </siteMapNode>
+    <siteMapNode name="Loan summary" path="KFI/LoanSummary.aspx" />
+    <siteMapNode name="Applicant" path="KFI/ApplicantDetails.aspx" iterates="Applicant" querystringvariable="applicant" />
+    <siteMapNode name="Guarantor" path="KFI/GuarantorDetails.aspx" />
+    <siteMapNode name="Fees and Proc Fees" path="KFI/FeesAndProcFees.aspx" />
+    <siteMapNode name="Summary And Submit" path="KFI/SummaryAndSubmit.aspx" />
+    <siteMapNode name="Response" path="KFI/Response.aspx" />
+  </siteMapNode>
+
+  <siteMapNode nodetype="menu" menuname="APP" path="APP/default.aspx">
+    <siteMapNode name="Adviser details" path="APP/AdviserDetails.aspx" />
+    <siteMapNode name="Regulation information" path="APP/MinimumCriteria.aspx" />
+    <siteMapNode name="Component" iterates="Component" querystringvariable="component">
+      <siteMapNode name="Product selection" path="APP/ProductSelection.aspx" />
+    </siteMapNode>
+    <siteMapNode name="Loan summary" path="APP/LoanSummary.aspx" />
+    <siteMapNode name="Personal details">
+      <siteMapNode name="Applicant" path="APP/PersonalDetails.aspx" iterates="Applicant" querystringvariable="applicant" />
+      <siteMapNode name="Guarantor" path="APP/PersonalDetails_Guarantor.aspx" />
+    </siteMapNode>
+    <siteMapNode name="Employment details">
+      <siteMapNode name="Applicant" path="APP/EmploymentDetails.aspx" iterates="Applicant" querystringvariable="applicant" />
+      <siteMapNode name="Guarantor" path="APP/EmploymentDetails_Guarantor.aspx" />
+    </siteMapNode>
+    <siteMapNode name="Income details">
+      <siteMapNode name="Applicant" path="APP/IncomeDetails.aspx" iterates="Applicant" querystringvariable="applicant" />
+      <siteMapNode name="Guarantor" path="APP/IncomeDetails_Guarantor.aspx" />
+    </siteMapNode>
+    <siteMapNode name="Landlord details">
+      <siteMapNode name="Applicant" path="APP/LandlordDetails.aspx" iterates="Applicant" querystringvariable="applicant" />
+      <siteMapNode name="Guarantor" path="APP/LandlordDetails_Guarantor.aspx" />
+    </siteMapNode>
+    <siteMapNode name="Payment history" path="APP/PaymentHistory.aspx" />
+    <siteMapNode name="Lender details" path="APP/LenderDetails.aspx" />
+    <siteMapNode name="Commitments" path="APP/Commitments.aspx" />
+    <siteMapNode name="Property details" path="APP/PropertyDetails.aspx" />
+    <siteMapNode name="Solicitor details" path="APP/SolicitorDetails.aspx" />
+    <siteMapNode name="Fees and proc fees" path="APP/FeesProcFees.aspx" />
+    <siteMapNode name="Additional info" path="APP/AdditionalInfo.aspx" />
+    <siteMapNode name="Declaration" path="APP/Declaration.aspx" />
+    <siteMapNode name="Direct debit guarantee" path="APP/DirectDebitGuarantee.aspx" />
+    <siteMapNode name="Submission checklist" path="APP/SubmissionChecklist.aspx" />
+    <siteMapNode name="Credit card details" path="APP/CreditCardDetails.aspx" />
+    <siteMapNode name="Response" path="APP/Response.aspx" />
+  </siteMapNode>
+
+  <siteMapNode nodetype="menu" menuname="Assign" path="Assign/Default.aspx">
+    <siteMapNode name="Assign work" path="Assign/AssignToPackager.aspx" />
+    <siteMapNode name="Confirmation" path="Assign/Confirmation.aspx" />
+  </siteMapNode>
+
+  <siteMapNode nodetype="menu" menuname="Contact" path="Contact/Default.aspx">
+    <siteMapNode name="BDM Finder" path="Contact/BusinessDevelopmentManagerFinder.aspx" />
+    <siteMapNode name="Support" path="Contact/Support.aspx" />
+    <siteMapNode name="Support" path="Contact/SupportPostLogIn.aspx" />
+  </siteMapNode>
+
+</siteMapNode>
+

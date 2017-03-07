@@ -1,0 +1,13 @@
+XMLAssist = 0, 0, 0, 0, C
+GeneralAssist = 0, 0, 0, 0, C
+ErrAssist = 0, 0, 0, 0, C
+ConvertAssist = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+IntermediaryBO = 0, 0, 0, 0, C
+AddressDO = 0, 0, 0, 0, C
+AddressBO = 0, 0, 0, 0, C
+AddressTxBO = 0, 0, 0, 0, C
+SQLAssist = 0, 0, 0, 0, C
+IntermediaryDO = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C
+guidAssistEx = 0, 0, 0, 0, C

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions;  0.0.1 
+ 
+
+Author(s):         prasanta.sinha@ingdirect.co.uk
+ 
+
+Description      This schema defines the Conveyancing Settlement request and Response
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://settlement.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:settlement="http://settlement.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<!-- ====================== Document History  Starts====================================================-->
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>
+			1.	Removed SettlementResponseType
+			2.	SettlementResponse element type changed from SettlementResponseType to common:ConveyancerResponseType
+			3.   TotalBatchValue datatype changes to long and total digits 13.
+			4.   PaymentDetails.MortgageAdvance datatype changes to long and total digits 11.
+		</documentation>
+	</annotation>
+	<!-- ====================== Document History  Ends====================================================-->
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="../GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="../CommonTypes.xsd"/>
+	<complexType name="SettlementRequestType">
+		<annotation>
+			<documentation>Settlement Request Type</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="Header">
+						<complexType>
+							<complexContent>
+								<extension base="common:ConveyancerHeaderType">
+									<sequence>
+										<element name="SequenceNo" type="common:SequenceNoType"/>
+									</sequence>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+					<element name="PaymentReference">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="18"/>
+								<minLength value="18"/>
+								<pattern value="IDUK\d\d[0-3]\d\d\d\d\d\d\d\d\d\d\d"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="ValueDate" type="common:SimpleDateType"/>
+					<element name="TotalBatchValue">
+						<simpleType>
+							<restriction base="long">
+								<totalDigits value="13"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="ToBankSortCode">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="6"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="ToAccountNumber">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="8"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="PaymentDetail" maxOccurs="unbounded">
+						<complexType>
+							<sequence>
+								<element name="MortgageAccountNo">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="8"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="ConveyancerRef">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="8"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="BorrowerSurName">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="30"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="MortgageAdvance">
+									<simpleType>
+										<restriction base="long">
+											<totalDigits value="11"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="CompletionDate" type="common:SimpleDateType"/>
+								<element name="HubRef">
+									<simpleType>
+										<restriction base="string">
+											<pattern value="\d{1,7}"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--Type definition ends-->
+	<element name="SettlementRequest" type="settlement:SettlementRequestType">
+		<annotation>
+			<documentation>Settlement Request</documentation>
+		</annotation>
+	</element>
+	<element name="SettlementResponse" type="common:ConveyancerResponseType">
+		<annotation>
+			<documentation>Settlement Response</documentation>
+		</annotation>
+	</element>
+</schema>

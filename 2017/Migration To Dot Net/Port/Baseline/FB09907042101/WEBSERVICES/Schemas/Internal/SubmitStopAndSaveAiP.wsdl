@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: SubmitStopAndSaveAiP WSDL
+
+History:
+
+Version	Author		Date				Description
+01.00   	TLiu			05/08/2005		Created.   
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns="http://SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:msgResponse="http://Response.SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com" 
+            xmlns:msgResponse="http://Response.SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com" >
+            <xs:import 
+                namespace="http://Request.SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="SubmitStopAndSaveAiPRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="SubmitStopAndSaveAiPResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="SubmitStopAndSaveAiPRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="SubmitStopAndSaveAiPRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="SubmitStopAndSaveAiPPort">
+        <wsdl:operation name="submitStopAndSaveAiP">
+            <wsdl:input message="SubmitStopAndSaveAiPRequestSoapIn" />
+            <wsdl:output message="SubmitStopAndSaveAiPRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="SubmitStopAndSaveAiPPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="submitStopAndSaveAiP">
+             <soap:operation 
+                soapAction="http://Request.SubmitStopAndSaveAiP.IDUK.Omiga.marlboroughstirling.com" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaSubmitStopAndSaveAiP">
+        <wsdl:port name="SubmitStopAndSaveAiPPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/SubmitStopAndSaveAiPWS/OmigaSubmitStopAndSaveAiPService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

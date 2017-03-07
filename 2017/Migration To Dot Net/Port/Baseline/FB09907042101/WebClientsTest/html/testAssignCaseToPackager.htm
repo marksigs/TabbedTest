@@ -1,0 +1,58 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html><head><title>Test Web Service</title>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta content=http://schemas.microsoft.com/intellisense/ie5 
+name=vs_targetSchema>
+<meta content="MSHTML 6.00.2900.2722" name=GENERATOR></head>
+<body>
+<table width="100%" id="Table1">
+	<tbody>
+		<tr>
+			<td width="10%">URL</td>
+			<td width="90%"><input id=url style="WIDTH: 100%" name=url value="http://localhost/OmigaWebServices/AssignCaseToPackagerWS/OmigaAssignCaseToPackagerService.asmx"></td>
+		</tr>
+		<tr>
+			<td>SOAP action</td>
+			<td><input id=soapAction style="WIDTH: 100%" value="http://Request.AssignCaseToPackager.Omiga.vertex.co.uk" name="soapAction"></td>
+		</tr>
+	</tbody>
+</table>
+Data: 
+<textarea id=requestData style="WIDTH: 100%" rows=12 name="requestData">
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+	<REQUEST xmlns="http://Request.AssignCaseToPackager.Omiga.vertex.co.uk" USERAUTHORITYLEVEL="String" UNITID="String" CHANNELID="String" MACHINEID="String" PASSWORD="String" USERID="String">
+		<ASSIGNCASE APPLICATIONNUMBER="string" PRINCIPALFIRMID="string" USERID="string" UNITID="string" />
+	</REQUEST>
+  </soap:Body>
+</soap:Envelope>
+</textarea>
+<button id=post style="WIDTH: 100px" type=submit>Test</button> 
+<br><br>Response: 
+<textarea id=responseData style="WIDTH: 100%" rows=12 name="responseData"></textarea>
+<script type=text/javascript>
+		<!--
+			function post.onclick()
+			{
+				responseData.innerText = "please wait ...";
+				try
+				{
+					var x = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+					x.open("POST", url.value, false);
+					x.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+					if (soapAction.value == "")
+						soapAction.value = '""';
+					x.setRequestHeader("SOAPAction", soapAction.value);
+					x.send(requestData.value);
+					responseData.value = x.responseText;
+				}
+				catch (error)
+				{
+					alert(error.description);
+				}
+			}
+		-->
+		</script>
+ </body>
+ </html>

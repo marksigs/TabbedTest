@@ -1,0 +1,16 @@
+RegAssist = 0, 0, 0, 0, C
+XMLAssist = 0, 0, 0, 0, C
+ConvertAssist = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+IMortgageProductBO = 0, 0, 0, 0, C
+MortgageProductBO = 0, 0, 0, 0, C
+GeneralAssist = 0, 0, 0, 0, C
+ErrAssist = 0, 0, 0, 0, C
+omOrgClassDef = 0, 0, 0, 0, C
+IMortgageProductDO = 0, 0, 0, 0, C
+IomMPClassDef = 0, 0, 0, 0, C
+omMPClassDef = 0, 0, 0, 0, C
+MortgageProductDO = 0, 0, 0, 0, C
+IOmOrgClassDef = 0, 0, 0, 0, C
+SQLAssist = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C

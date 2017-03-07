@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+Project;		ING Direct Diect Gateway (Project MARS)
+
+File:			GenricMessages.xsd
+
+File Version:	0.0.1
+
+History;		version 0.0.1 - productionisation factoring - john_catlin@uk.ibm.com
+
+Type Versions; 	Type versioning is via namepaces. 	
+				Namespace versioning follows this pattern; "url/[major_version].[minor_version].[release_version]"
+
+Author(s):		david.bowley@ingdirect.co.uk
+				john_catlin@uk.ibm.com
+
+Description; 	Code classification; framework code.
+				This XSD defines the base XML type for all messages flowing across the Direct Gateway.
+				These properties of these types are generic for all Direct Gateway request messages and Direct Gateway response messages. 
+
+============================================================================================== -->
+<!--
+	Note that the schema attributes 'attributeFormDefault="unqualified"' 
+	and 'elementFormDefault="unqualified"' are critical to the correct 
+	interpretation of this schema.
+-->
+<schema targetNamespace="http://generic.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- the definition of the generic request message type -->
+	<!-- abstract='true' forces the creation of an abstract Java base classe -->
+	<complexType name="GenericRequestType" abstract="true">
+		<sequence>
+			<element name="ClientDevice" type="string" nillable="false" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>This is an identifier that is used for Direct Gateway client devices. Examples are DAWT, WEB, IVR, EProcess.</documentation>
+				</annotation>
+			</element>
+			<element name="TellerID" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>A User ID for the end user. This is for a real user account, and is passed in every call to Profile and FileNet.</documentation>
+				</annotation>
+			</element>
+			<element name="TellerPwd" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>The corresponding password for the Teller ID. This too is passed in every call to Profile and FileNet.</documentation>
+				</annotation>
+			</element>
+			<element name="ProxyID" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>The User ID for a system account that is used to establish the connection to Profile.</documentation>
+				</annotation>
+			</element>
+			<element name="ProxyPwd" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>The corresponding password for the Proxy ID.</documentation>
+				</annotation>
+			</element>
+			<element name="Operator" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>The Operator ID for the agent (a DAWebTop or OCC user).</documentation>
+				</annotation>
+			</element>
+			<element name="ProductType" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Product type identifier (savings, mortgage, non-specific)</documentation>
+				</annotation>
+			</element>
+			<element name="SessionID" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Session identifier for correlating contact history entries in the CRM database (call, web)</documentation>
+				</annotation>
+			</element>
+			<element name="CommunicationChannel" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>The channel by which the customer has contacted IDUK – e.g. EMAIL, PHONE etc.</documentation>
+				</annotation>
+			</element>
+			<element name="CommunicationDirection" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>The direction of the communication – e.g. IN or OUT of IDUK.</documentation>
+				</annotation>
+			</element>
+			<element name="ServiceName" nillable="true" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<pattern value=".*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="CustomerNumber" type="string" nillable="false" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Unique customer number (CIF). This is the PERSONID column in the PERSON CRM table.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<!--  abstract='true' forces the creation of an abstract Java base classe  -->
+	<complexType name="GenericResponseType" abstract="true">
+		<sequence>
+			<element name="ErrorCode" type="string" nillable="false" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Used to indicate whether the call to the Direct Gateway Business Service was successful or otherwise. The convention is to use 0 to indicate success, 									and all others indicate failure (be they business or technical failure reasons). Non-zero error codes are typically defined in 												com.ingdirect.dg.error.CommandErrorMessage.</documentation>
+				</annotation>
+			</element>
+			<element name="ErrorMessage" type="string" nillable="true" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Used when Error Code is non-zero, for logging purposes and to give further information to the client.</documentation>
+				</annotation>
+			</element>
+			<element name="CustomerNumber" type="string" nillable="false" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Unique customer number (CIF). This is important so that someone viewing the Direct Gateway XML log can correlate request and response documents.						</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="GenericRequest" type="generic:GenericRequestType"/>
+	<element name="GenericResponse" type="generic:GenericResponseType"/>
+</schema>

@@ -1,0 +1,40 @@
+<VisualStudioProject>
+	<CSHARP ProjectType="Web" ProductVersion="7.10.3077" SchemaVersion="2.0" ProjectGuid="{630875F0-2832-4482-BD4E-517623D675B4}">
+		<Build>
+			<Settings ApplicationIcon="" AssemblyKeyContainerName="" AssemblyName="GuiDotNet" AssemblyOriginatorKeyFile="C:\Build Epsom2\2 Int Code\Keys\Mars.snk" DefaultClientScript="JScript" DefaultHTMLPageLayout="Grid" DefaultTargetSchema="IE50" DelaySign="false" OutputType="Library" PreBuildEvent="" PostBuildEvent="" RootNamespace="Vertex.Fsd.Omiga.Web" RunPostBuildEvent="OnBuildSuccess" StartupObject="">
+				<Config Name="Debug" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="DEBUG;TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="false" OutputPath="bin\" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+				<Config Name="Release" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="true" OutputPath="bin\" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+			</Settings>
+			<References>
+				<Reference Name="System" AssemblyName="System" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"/>
+				<Reference Name="System.Data" AssemblyName="System.Data" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"/>
+				<Reference Name="System.Web" AssemblyName="System.Web" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.dll"/>
+				<Reference Name="System.XML" AssemblyName="System.Xml" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"/>
+				<Reference Name="System.Drawing" AssemblyName="System.Drawing" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"/>
+				<Reference Name="MESSAGEQUEUECOMPONENTVCLib" Guid="{B0C456C2-4DAE-11D4-823C-005004E8D1A7}" VersionMajor="1" VersionMinor="0" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\GuiDotNet\bin\Debug\Interop.MESSAGEQUEUECOMPONENTVCLib.dll"/>
+				<Reference Name="system.enterpriseservices" AssemblyName="System.EnterpriseServices" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\system.enterpriseservices.dll"/>
+				<Reference Name="omBankWizard" AssemblyName="omBankWizard" HintPath="C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omBankWizard.dll"/>
+				<Reference Name="omFirstTitle" AssemblyName="omFirstTitle" HintPath="C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omFirstTitle.dll"/>
+				<Reference Name="omHomeTrack" AssemblyName="omHomeTrack" HintPath="C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omHomeTrack.dll"/>
+				<Reference Name="omUniserv" AssemblyName="omUniserv" HintPath="C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omUniserv.dll"/>
+			</References>
+		</Build>
+		<Files>
+			<Include>
+				<File RelPath="AssemblyInfo.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Web.config" BuildAction="Content"/>
+				<File RelPath="xml\GetBankDetails.aspx" BuildAction="Content"/>
+				<File RelPath="xml\GetBankDetails.aspx.cs" DependentUpon="GetBankDetails.aspx" SubType="ASPXCodeBehind" BuildAction="Compile"/>
+				<File RelPath="xml\GetBankDetails.aspx.resx" DependentUpon="GetBankDetails.aspx.cs" BuildAction="EmbeddedResource"/>
+				<File RelPath="xml\GetPresentValuation.aspx" BuildAction="Content"/>
+				<File RelPath="xml\GetPresentValuation.aspx.cs" DependentUpon="GetPresentValuation.aspx" SubType="ASPXCodeBehind" BuildAction="Compile"/>
+				<File RelPath="xml\GetPresentValuation.aspx.resx" DependentUpon="GetPresentValuation.aspx.cs" BuildAction="EmbeddedResource"/>
+				<File RelPath="xml\omFirstTitle.aspx" BuildAction="Content"/>
+				<File RelPath="xml\omFirstTitle.aspx.cs" DependentUpon="omFirstTitle.aspx" SubType="ASPXCodeBehind" BuildAction="Compile"/>
+				<File RelPath="xml\PAFSearch.aspx" BuildAction="Content"/>
+				<File RelPath="xml\PAFSearch.aspx.cs" DependentUpon="PAFSearch.aspx" SubType="ASPXCodeBehind" BuildAction="Compile"/>
+				<File RelPath="xml\PAFSearch.aspx.resx" DependentUpon="PAFSearch.aspx.cs" BuildAction="EmbeddedResource"/>
+			</Include>
+		</Files>
+	</CSHARP>
+</VisualStudioProject>

@@ -1,0 +1,1143 @@
+BODY
+{
+    BACKGROUND-ATTACHMENT: fixed;
+    BACKGROUND-IMAGE: url(images/stndBack.gif);
+    BACKGROUND-REPEAT: repeat-y;
+    BACKGROUND-COLOR: #ffffff
+}
+H1
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 18px;
+    FILTER: blur;
+    COLOR: #616161;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+H2
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 16px;
+    COLOR: #616161;
+    FONT-STYLE: italic;
+    FONT-FAMILY: Arial, sans-serif
+}
+H3
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 13px;
+    COLOR: #616161;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+H4
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12px;
+    COLOR: #616161;
+    FONT-STYLE: italic;
+    FONT-FAMILY: Arial, sans-serif
+}
+P
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 12px;
+    COLOR: #616161;
+    FONT-STYLE: normal
+}
+UL
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 12px;
+    COLOR: #ffefe5;
+    FONT-STYLE: normal
+}
+HR
+{
+    COLOR: #616161
+}
+.msgButton
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    CURSOR: hand;
+    COLOR: #515151;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: #ffffff
+}
+.TableHead
+{
+    BORDER-RIGHT: 1px;
+    BORDER-TOP: 1px solid;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(Images/tablegradient.jpg);
+    BORDER-LEFT: 1px;
+    COLOR: #616161;
+    BORDER-BOTTOM: 1px solid;
+    BACKGROUND-REPEAT: repeat-x;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.TableTopLeft
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: #a4a4a4 1px solid;
+    BORDER-LEFT: #a4a4a4 1px solid;
+    BORDER-BOTTOM: medium none
+}
+.TableTopLeftBold
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: #616161 1px solid;
+    FONT-WEIGHT: bold;
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: medium none
+}
+.TableTopCenter
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: #a4a4a4 1px solid;
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none
+}
+.TableTopRight
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BORDER-TOP: #a4a4a4 1px solid;
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none
+}
+.TableLeft
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: #a4a4a4 1px solid;
+    BORDER-BOTTOM: medium none
+}
+.TableLeftBold
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: bold;
+    BORDER-LEFT: #a4a4a4 1px solid;
+    BORDER-BOTTOM: medium none
+}
+.TableCenter
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none
+}
+.TableRight
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none
+}
+.TableBottomLeft
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: #a4a4a4 1px solid;
+    BORDER-BOTTOM: #a4a4a4 1px solid
+}
+.TableBottomLeftBold
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: bold;
+    BORDER-LEFT: #a4a4a4 1px solid;
+    BORDER-BOTTOM: #a4a4a4 1px solid
+}
+.TableBottomCenter
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: #a4a4a4 1px solid
+}
+.TableBottomRight
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: #a4a4a4 1px solid
+}
+.msgPageTitle
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 13px;
+    COLOR: #616161;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Verdana, sans-serif
+}
+.msgImgButton
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(graphics/buttonback.gif);
+    CURSOR: hand;
+    COLOR: white;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgGroupLight
+{
+    BORDER-RIGHT: black 0px solid;
+    BORDER-TOP: black 0px solid;
+    BORDER-LEFT: black 0px solid;
+    BORDER-BOTTOM: black 0px solid;
+    BACKGROUND-COLOR: #ffffff
+}
+.msgImageBack
+{
+    BACKGROUND-IMAGE: url(graphics/background.jpg)
+}
+.msgGroupLayer
+{
+    BORDER-RIGHT: black 0px;
+    BORDER-TOP: black 0px;
+    BORDER-LEFT: black 0px;
+    BORDER-BOTTOM: black 0px;
+    BACKGROUND-COLOR: #ffffff
+}
+.msgGroup
+{
+    BORDER-RIGHT: black 0px solid;
+    BORDER-TOP: black 0px solid;
+    BORDER-LEFT: black 0px solid;
+    BORDER-BOTTOM: black 0px solid;
+    BACKGROUND-COLOR: #fffdfd
+}
+.msgGroupRed
+{
+    BORDER-RIGHT: black 0px solid;
+    BORDER-TOP: black 0px solid;
+    BORDER-LEFT: black 0px solid;
+    BORDER-BOTTOM: black 0px solid;
+    BACKGROUND-COLOR: #ffe8d9
+}
+.msgCombo
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.rollover
+{
+    CURSOR: hand
+}
+.msgTableCell
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: medium none;
+    COLOR: #616161;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-COLOR: #e2ecf8
+}
+.msgTableCellLeft
+{
+    BORDER-LEFT: #616161 1px solid;
+    COLOR: #616161;
+    BACKGROUND-COLOR: #bac9dc
+}
+.msgTableCellRight
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BORDER-TOP: #616161 1px;
+    BORDER-LEFT: #616161 1px;
+    COLOR: #616161;
+    BORDER-BOTTOM: #616161 1px;
+    BACKGROUND-COLOR: #bac9dc
+}
+.msgTableSelect
+{
+    BACKGROUND-IMAGE: url(Images/tablegradient.jpg);
+    COLOR: white;
+    BACKGROUND-REPEAT: repeat-x
+}
+.msgTableSelectLeft
+{
+    BORDER-LEFT: #616161 1px solid;
+    COLOR: white;
+    BACKGROUND-COLOR: #ffe8d9
+}
+.msgTableSelectRight
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BACKGROUND-IMAGE: url(Images/tablegradient.jpg);
+    BORDER-LEFT: #616161 1px;
+    COLOR: white;
+    BACKGROUND-REPEAT: repeat-x
+}
+.msgBorder
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BORDER-TOP: #616161 1px solid;
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid
+}
+.msgTableOver
+{
+    COLOR: black;
+    BACKGROUND-COLOR: #bac9dc
+}
+.msgReadOnly
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BORDER-TOP: #a4a4a4 1px solid;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BORDER-LEFT: #a4a4a4 1px solid;
+    BORDER-BOTTOM: #a4a4a4 1px solid;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: #ffe8d9
+}
+.msgLabel
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    COLOR: #616161;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgLabelWait
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 20px;
+    COLOR: #616161;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgLabelHead
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 11px;
+    COLOR: #616161;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgLabelHeadInOrange
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 11px;
+    COLOR: #ff6600;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgList
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgTable
+{
+    PADDING-RIGHT: 7px;
+    PADDING-LEFT: 7px;
+    FONT-SIZE: 11px;
+    PADDING-BOTTOM: 0in;
+    COLOR: #616161;
+    PADDING-TOP: 0in;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: white
+}
+.msgTxt
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgTxtCaps
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    TEXT-TRANSFORM: capitalize;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgTxtLower
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    TEXT-TRANSFORM: lowercase;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgTxtUpper
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    TEXT-TRANSFORM: uppercase;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgMove1
+{
+    LEFT: 100px;
+    FLOAT: none;
+    POSITION: absolute;
+    TOP: 100px
+}
+.TableOneColumnTop
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BORDER-TOP: #616161 1px solid;
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: medium none
+}
+.TableOneColumnCenter
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: medium none
+}
+.TableOneColumnBottom
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BORDER-TOP: medium none;
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid
+}
+.msgReadOnlyCombo
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BORDER-TOP: #616161 1px solid;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: #f5f5f5
+}
+.msgReadOnlyLabel
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    COLOR: gray;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgDDButton
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center center;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/dd_nonMan.gif);
+    BORDER-LEFT: medium none;
+    CURSOR: hand;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgDisabledDDButton
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center center;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/dd_dis.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgMainButton
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: left top;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BORDER-LEFT: medium none;
+    CURSOR: hand;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgWhiteBorder
+{
+    BORDER-RIGHT: white 1px solid;
+    BORDER-TOP: white 1px solid;
+    BORDER-LEFT: white 1px solid;
+    BORDER-BOTTOM: white 1px solid
+}
+.msgMaxBorrowing
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/maxborrow1.gif);
+    BORDER-LEFT: medium none;
+    CURSOR: hand;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgAffordability
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/afford1.gif);
+    BORDER-LEFT: medium none;
+    CURSOR: hand;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgMaxBorrowingSelected
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/maxborrow2.gif);
+    BORDER-LEFT: medium none;
+    CURSOR: hand;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgAffordabilitySelected
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/afford2.gif);
+    BORDER-LEFT: medium none;
+    CURSOR: hand;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgAffordabilityDisabled
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10px;
+    BACKGROUND-IMAGE: url(images/afford3.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.navTitle
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #FF6600;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.navDisabledHead
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #ffffff;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.navHead
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #000066;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.navHead A:link
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #000066;
+    TEXT-DECORATION: none
+}
+.navHead A:visited
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #000066;
+    TEXT-DECORATION: none
+}
+.navHead A:hover
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #ff6600;
+    TEXT-DECORATION: none
+}
+.navDisabledLink
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10px;
+    COLOR: #ffffff;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.navLink
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10px;
+    COLOR: #777777;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.navLink A:link
+{
+    COLOR: #777777;
+    TEXT-DECORATION: none
+}
+.navLink A:visited
+{
+    COLOR: #777777;
+    TEXT-DECORATION: none
+}
+.navLink A:hover
+{
+    COLOR: #ff6600;
+    TEXT-DECORATION: underline
+}
+.navText
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10px;
+    COLOR: #777777;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.navOutline
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BORDER-TOP: #a4a4a4 1px solid;
+    BORDER-LEFT: #a4a4a4 1px solid;
+    BORDER-BOTTOM: #a4a4a4 1px solid
+}
+.TableOneRowLeft
+{
+    BORDER-TOP: #616161 1px solid;
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid
+}
+.TableOneRowCenter
+{
+    BORDER-TOP: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid
+}
+.TableOneRowRight
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BORDER-TOP: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid
+}
+.pageTitleBackground
+{
+    BACKGROUND-COLOR: #ffffff
+}
+.menuBackground
+{
+    PADDING-LEFT: 0px;
+    BACKGROUND-COLOR: #ffffff
+}
+.menuDropDown
+{
+    BORDER-RIGHT: #666666 1px solid;
+    BORDER-TOP: #666666 1px solid;
+    PADDING-LEFT: 15px;
+    PADDING-BOTTOM: 2px;
+    BORDER-LEFT: #666666 1px solid;
+    PADDING-TOP: 2px;
+    BORDER-BOTTOM: #666666 1px solid;
+    BACKGROUND-COLOR: #ffffff
+}
+.menuText
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #616161;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.menuText A:link
+{
+    COLOR: #616161;
+    TEXT-DECORATION: none
+}
+.menuText A:visited
+{
+    COLOR: #616161;
+    TEXT-DECORATION: none
+}
+.menuText A:hover
+{
+    COLOR: #ff6600;
+    TEXT-DECORATION: underline
+}
+.menuDisabledText
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #a2a2a2;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgPageInfo
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    COLOR: #616161;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgCurrency
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10px;
+    COLOR: #616161;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgTick
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/chk_tick.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgTickDisabled
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/chk_tick_dis.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgCross
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center center;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/chk_cross.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgCrossDisabled
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center center;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/chk_cross_dis.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgMortgage
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_mortg1.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgMortgageOver
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_mortg2.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgMortgageDisabled
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_mortg3.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgLife
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_life1.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgLifeOver
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_life2.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgLifeDisabled
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_life3.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgPaymentProtection
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_payprot1.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgPaymentProtectionOver
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_payprot2.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgPaymentProtectionDisabled
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_payprot3.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgBuildingsContents
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_bc1.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgBuildingsContentsOver
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_bc2.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgBuildingsContentsDisabled
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/sml_bc3.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.msgMaxBorrowingDisabled
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    BACKGROUND-IMAGE: url(images/maxborrow3.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: transparent
+}
+.navBarBackground
+{
+    BACKGROUND-IMAGE: none;
+    BACKGROUND-REPEAT: no-repeat;
+    BACKGROUND-COLOR: #ffffff
+}
+.sysMenuBackground
+{
+    BACKGROUND-IMAGE: none;
+    BACKGROUND-REPEAT: no-repeat;
+    BACKGROUND-COLOR: #ffffff
+}
+.msgMenu
+{
+    FONT-SIZE: 10px;
+    COLOR: white;
+    FONT-FAMILY: MS Sans Serif, sans-serif
+}
+.msgMenu2
+{
+    FONT-SIZE: 10px;
+    COLOR: white;
+    FONT-FAMILY: Arial, sans-serif;
+    BACKGROUND-COLOR: #005a9c
+}
+.msgMenu3
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10px;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Arial, sans-serif
+}
+.msgChkBoxTable
+{
+    WIDTH: 15px;
+    HEIGHT: 15px
+}
+.msgYes
+{
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BORDER-LEFT: #616161 1px solid;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgNo
+{
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BORDER-LEFT: #616161 1px solid;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgYesBottom
+{
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgNoBottom
+{
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgYesTop
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center 2px;
+    BORDER-TOP: #616161 1px solid;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgNoTop
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center 2px;
+    BORDER-TOP: #616161 1px solid;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgInput
+{
+    BORDER-RIGHT: #616161 1px solid;
+    BORDER-TOP: #616161 1px solid;
+    BORDER-LEFT: #616161 1px solid;
+    BORDER-BOTTOM: #616161 1px solid
+}
+.msgRightYes
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgRightNo
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgRightYesBottom
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BORDER-BOTTOM: #a4a4a4 1px solid;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgRightNoBottom
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BORDER-BOTTOM: #a4a4a4 1px solid;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgRightYesTop
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BACKGROUND-POSITION: center 2px;
+    BORDER-TOP: #a4a4a4 1px solid;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgRightNoTop
+{
+    BORDER-RIGHT: #a4a4a4 1px solid;
+    BACKGROUND-POSITION: center 2px;
+    BORDER-TOP: #a4a4a4 1px solid;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgCenterYes
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgCenterNo
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgCenterYesBottom
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BORDER-BOTTOM: #a4a4a4 1px solid;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgCenterNoBottom
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center 2px;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BORDER-BOTTOM: #a4a4a4 1px solid;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgCenterYesTop
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center 2px;
+    BORDER-TOP: #a4a4a4 1px solid;
+    BACKGROUND-IMAGE: url(images/tick.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat
+}
+.msgCenterNoTop
+{
+    BORDER-RIGHT: medium none;
+    BACKGROUND-POSITION: center 2px;
+    BORDER-TOP: #a4a4a4 1px solid;
+    BACKGROUND-IMAGE: url(images/NoTick.gif);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    BACKGROUND-REPEAT: no-repeat
+}

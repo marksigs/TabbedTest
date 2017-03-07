@@ -1,0 +1,64 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\system32\stdole2.tlb#OLE Automation
+Reference=*\G{F5078F18-C551-11D3-89B9-0000F81FE221}#4.0#0#C:\WINDOWS\system32\msxml4.dll#Microsoft XML, v4.0
+Reference=*\G{2A005C00-A5DE-11CF-9E66-00AA00A3F464}#1.0#0#C:\WINDOWS\system32\COMSVCS.DLL#COM+ Services Type Library
+Reference=*\G{B2FACE5E-7DFF-4BE7-9B10-1200CB29E841}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omCM.dll#omCM
+Reference=*\G{EF53050B-882E-4776-B643-EDA472E8E3F2}#2.7#0#C:\Program Files\Common Files\System\ado\msado27.tlb#Microsoft ActiveX Data Objects 2.7 Library
+Reference=*\G{10E98D81-E223-4674-BD4E-369841AF4C71}#1.2#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\omBase.dll#omBase
+Reference=*\G{D139DF12-6520-4ACC-B529-2D96E0FCC07D}#1.0#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\omPrint.dll#OmPrint
+Reference=*\G{8A2FE351-C3F3-4B3F-9F45-F70AC2510FEA}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omAQ.dll#
+Reference=*\G{FF0C28FC-BE94-4BBF-AB4F-6E8CEFA596FD}#1.1#0#C:\Build Epsom2\2 Int Code Bin\DLL\omPDM.dll#omPDM
+Reference=*\G{58C02F95-6D43-4D65-B951-4CBDF3C4D48A}#d.0#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\eKFI.dll#eKFI
+Reference=*\G{A837E490-0630-4C75-93A3-B65E8A9F2036}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omKFIHelper.dll#KFI Helper Component
+Reference=*\G{97DC3462-7EF1-4051-B190-B3478443F6DC}#1.0#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\omDPS.dll#omDPS
+Reference=*\G{B15CB0BE-32E7-4B16-B399-A920E3374A60}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omPack.dll#omPack
+Reference=*\G{39DC2E58-E95D-408B-90D7-F9BBC7502FC8}#1.1#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\omCRUD.dll#omCRUD
+Class=CreateKFIBO; CreateKFIBO.cls
+Module=xmlAssistEx; xmlAssist.bas
+Module=errAssistEx; errAssist.bas
+Module=errConstants; errConstants.bas
+Module=ConvertAssistEx; ConvertAssist.bas
+Module=adoAssistEx; adoAssist.bas
+Module=guidAssistEx; guidAssist.bas
+Module=comboAssistEx; comboAssist.bas
+Module=omCKGlobal; omCKGlobal.bas
+Module=StdData; StdData.bas
+Module=globalAssist; globalAssist.bas
+Startup="Sub Main"
+HelpFile=""
+Title="omCK"
+ExeName32="omCK.dll"
+Command32=""
+Name="omCK"
+HelpContextID="0"
+CompatibleMode="0"
+CompatibleEXE32=""
+
+
+MajorVer=7
+MinorVer=421
+RevisionVer=1
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="MSG"
+CondComp="GENERIC_SQL = -1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=-1
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+
+[MS Transaction Server]
+AutoRefresh=1
+Path32="..\..\..\..\..\Program Files\Marlborough Stirling\Omiga 4\DLL"

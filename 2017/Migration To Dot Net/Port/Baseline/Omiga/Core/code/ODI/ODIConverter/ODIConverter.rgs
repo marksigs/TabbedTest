@@ -1,0 +1,35 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		{8CBEA9F1-106D-4B90-A84A-E47FB2788E71} = s 'ODIConverter'
+		'ODIConverter.EXE'
+		{
+			val AppID = s {8CBEA9F1-106D-4B90-A84A-E47FB2788E71}
+		}
+	}
+}
+
+HKLM
+{
+	SYSTEM
+	{
+		CurrentControlSet
+		{
+			Services
+			{
+				EventLog
+				{
+					Application
+					{
+						ODIConverter
+						{
+							val EventMessageFile = s '%MODULE%'
+							val TypesSupported = d '7'
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,7 @@
+VBGROUP 5.0
+Project=Delivery\Delivery.vbp
+Project=eKFI\eKFI.vbp
+Project=eKFIEngine\eKFIEngine.vbp
+Project=..\..\..\BaselineCode\Core\KFI PRINT SOLUTION\KFIPrintProcessor\KFIPrintProcessor.vbp
+StartupProject=..\..\..\BaselineCode\Core\KFI PRINT SOLUTION\PDF Print Testing\pdfPrint.vbp
+Project=..\..\..\BaselineCode\Core\KFI PRINT SOLUTION\TemplateProcessor\TemplateProcessor.vbp

@@ -1,0 +1,148 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>omAU</AssemblyName>
+    <AssemblyOriginatorKeyFile>core.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <RootNamespace>Vertex.Fsd.Omiga.omAU</RootNamespace>
+    <OutputType>Library</OutputType>
+    <StartupObject>omAU.(None)</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <ProjectGuid>{F1732C00-4B25-4357-8CC0-DFD4F5F1114C}</ProjectGuid>
+    <SignAssembly>true</SignAssembly>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <StartArguments>
+    </StartArguments>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <StartArguments>
+    </StartArguments>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.comsvcs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a5b625b2a67e5d3d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Interop\Interop.comsvcs.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <Name>System.Deployment</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AuditDO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AuditNTxBO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IAuditNTxBO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IAuditTxBO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AuditBO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IAuditDO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IomAUClassDef.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AuditTxBO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="omAUClassDef.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IAuditBO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Base\omBase\omBase.csproj">
+      <Project>{EF37042E-7089-44AF-8FD3-471BF60DCE07}</Project>
+      <Name>omBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Vertex.Fsd.Omiga.VisualBasicPort\Vertex.Fsd.Omiga.VisualBasicPort.csproj">
+      <Project>{B27DBF7E-9C29-4A65-A0DF-8A681FDAEEC6}</Project>
+      <Name>Vertex.Fsd.Omiga.VisualBasicPort</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="core.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>REM mcs..\..\..\..\..\bin\regsvcs /appname:OmigaDotNet $(TargetPath)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

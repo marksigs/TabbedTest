@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marlborough-stirling.com/WebServices/AlphaPlus" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://marlborough-stirling.com/WebServices/AlphaPlus" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types />
+  <message name="ACERequestSoapIn">
+    <part name="vstrRequest" type="s:string" />
+  </message>
+  <message name="ACERequestSoapOut">
+    <part name="ACERequestResult" type="s:string" />
+  </message>
+  <portType name="AlphaPlusSoapRpcSoap">
+    <operation name="ACERequest">
+      <documentation>Service which allows a request to be submitted to the Marlborough Stirling Alpha Plus Calculations Engine</documentation>
+      <input message="tns:ACERequestSoapIn" />
+      <output message="tns:ACERequestSoapOut" />
+    </operation>
+  </portType>
+  <binding name="AlphaPlusSoapRpcSoap" type="tns:AlphaPlusSoapRpcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="ACERequest">
+      <soap:operation soapAction="http://marlborough-stirling.com/WebServices/AlphaPlus/ACERequest" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://marlborough-stirling.com/WebServices/AlphaPlus" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://marlborough-stirling.com/WebServices/AlphaPlus" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="AlphaPlusSoapRpc">
+    <port name="AlphaPlusSoapRpcSoap" binding="tns:AlphaPlusSoapRpcSoap">
+      <soap:address location="http://localhost/AlphaPlusWebService/AlphaPlusSoapRpc.asmx" />
+    </port>
+  </service>
+</definitions>

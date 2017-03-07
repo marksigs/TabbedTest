@@ -1,0 +1,24 @@
+HKCR
+{
+	MessageQueueListenerLOG.MessageQueueListenerLOG1.1 = s 'MessageQueueListenerLOG1 Class'
+	{
+		CLSID = s '{A30AF74A-E56F-4452-A7BB-5A5D2AB832F8}'
+	}
+	MessageQueueListenerLOG.MessageQueueListenerLOG1 = s 'MessageQueueListenerLOG1 Class'
+	{
+		CLSID = s '{A30AF74A-E56F-4452-A7BB-5A5D2AB832F8}'
+		CurVer = s 'MessageQueueListenerLOG.MessageQueueListenerLOG1.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {A30AF74A-E56F-4452-A7BB-5A5D2AB832F8} = s 'MessageQueueListenerLOG1 Class'
+		{
+			ProgID = s 'MessageQueueListenerLOG.MessageQueueListenerLOG1.1'
+			VersionIndependentProgID = s 'MessageQueueListenerLOG.MessageQueueListenerLOG1'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '{63060F9F-82C8-4302-8B9D-8FB632183B07}'
+			'TypeLib' = s '{EF519447-D987-478C-B85C-1ADF13AFB13D}'
+		}
+	}
+}

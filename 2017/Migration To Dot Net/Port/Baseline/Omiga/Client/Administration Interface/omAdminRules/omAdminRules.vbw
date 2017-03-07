@@ -1,0 +1,8 @@
+omAdminRulesGlobals = 0, 0, 0, 0, C
+DBHelper = 0, 0, 0, 0, C
+ErrorConstants = 0, 0, 0, 0, C
+ComboHelper = 0, 0, 0, 0, C
+GeneralHelper = 0, 0, 0, 0, C
+XMLHelper = 0, 0, 0, 0, C
+AdminRulesBO = 0, 0, 0, 0, C
+Trace = 0, 0, 0, 0, C

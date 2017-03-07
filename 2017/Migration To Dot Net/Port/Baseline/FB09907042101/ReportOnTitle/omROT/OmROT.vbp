@@ -1,0 +1,61 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\System32\StdOle2.Tlb#OLE Automation
+Reference=*\G{74C08640-CEDB-11CF-8B49-00AA00B8A790}#1.0#0#C:\WINDOWS\SYSTEM32\COMSVCS.DLL#Microsoft Transaction Server Type Library
+Reference=*\G{F5078F18-C551-11D3-89B9-0000F81FE221}#4.0#0#C:\WINDOWS\system32\msxml4.dll#Microsoft XML, v4.0
+Reference=*\G{EF53050B-882E-4776-B643-EDA472E8E3F2}#2.7#0#C:\Program Files\Common Files\System\ADO\msado27.tlb#Microsoft ActiveX Data Objects 2.7 Library
+Reference=*\G{CB0B4C5D-1C59-11D5-B61D-0060087A1ED9}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omAppProc.dll#omAppProc
+Reference=*\G{DFDE0FFA-F117-11D4-B619-0060087A1ED9}#1.2#0#C:\Build Epsom2\2 Int Code Bin\DLL\omApp.dll#omApp
+Reference=*\G{28CA6FDA-F117-11D4-B619-0060087A1ED9}#1.1#0#C:\Build Epsom2\2 Int Code Bin\DLL\omTP.dll#omTP
+Module=omRotGlobals; omRotGlobals.bas
+Class=IomRotTxBO; IomRotTxBO.cls
+Class=omRotTxBO; omRotTxBO.cls
+Class=IomRotDO; IomRotDO.cls
+Class=omRotDO; omRotDO.cls
+Module=adoAssistEx; adoAssist.bas
+Module=comboAssistEx; comboAssist.bas
+Module=ConvertAssistEx; ConvertAssist.bas
+Module=errAssistEx; errAssist.bas
+Module=errConstants; errConstants.bas
+Module=guidAssistEx; guidAssist.bas
+Module=xmlAssistEx; xmlAssist.bas
+Class=omRotBO; omRotBO.cls
+Module=StdData; StdData.bas
+Startup="Sub Main"
+HelpFile=""
+Title="omRot"
+ExeName32="omROT.dll"
+Command32=""
+Name="omROT"
+HelpContextID="0"
+CompatibleMode="0"
+CompatibleEXE32=""
+
+MajorVer=7
+MinorVer=421
+RevisionVer=1
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="msg"
+CondComp="GENERIC_SQL = 1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo = -1
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+ThreadingModel=1
+DebugStartupOption=0
+DllBaseAddress=&H43B0000
+
+[MS Transaction Server]
+AutoRefresh=0
+

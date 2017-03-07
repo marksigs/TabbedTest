@@ -1,0 +1,179 @@
+#include "ifx.h" //DO NOT REMOVE
+
+prototype BOOL MTS_AddLibraryPackageIfNotExist(/*vstrPackageName*/ STRING);
+prototype BOOL MTS_RemovePackage(/*vstrPackageName*/ STRING);
+prototype BOOL MTS_AddComponent(/*vstrPackageName*/ STRING, /*vstrDllPath*/ STRING);
+
+function BOOL MTS_AddLibraryPackageIfNotExist(vstrPackageName)
+	BOOL bResult;
+	OBJECT catalog;
+	OBJECT packages;
+	NUMBER numPackages;
+	NUMBER nPackage;
+	OBJECT newPackage;
+	BOOL bFoundPackage;
+begin   
+	bResult = FALSE;	
+
+	try
+	    // First, we create the catalog object
+	    set catalog = CreateObject("MTSAdmin.Catalog.1");
+	    if IsObject(catalog) then    
+	
+		    // Then we get the packages collection
+		    set packages = catalog.GetCollection("Packages");
+		    if IsObject(packages) then
+			    packages.Populate;
+			    
+			    // Search for existing package of the same name
+			    numPackages = packages.Count;
+			    bFoundPackage = FALSE;
+			    for nPackage = 0 to numPackages-1 step 1
+			        if packages.Item(nPackage).Value("Name") = vstrPackageName then
+			            bFoundPackage = TRUE;
+			        endif;
+			    endfor;
+			    
+			    // Add the new package if it is not found
+			    if bFoundPackage = FALSE then
+			        set newPackage = packages.Add;
+			        if IsObject(newPackage) then
+				        newPackage.Value("Name") = vstrPackageName;
+				        newPackage.Value("SecurityEnabled") = "N";
+				        newPackage.Value("Activation") = "InProc"; // make it a library package
+				    else
+						LOG_MessageBox("Failed to add new package", SEVERE);
+				    endif;
+				    // Commit our deletions
+				    packages.SaveChanges;			    
+				else
+					LOG_Log("Package " + vstrPackageName + " already exists");
+			    endif;
+			           
+			    bResult = TRUE;
+			else
+				LOG_MessageBox("Failed to get packages collection", SEVERE);
+			endif;
+		else
+			LOG_MessageBox("Failed to CreateObject MTSAdmin.Catalog.1", SEVERE);
+		endif; 
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+		
+	return bResult;
+end;
+
+
+function BOOL MTS_RemovePackage(vstrPackageName)
+	BOOL bResult;
+	OBJECT catalog;
+    OBJECT packages;
+	NUMBER numPackages;
+    NUMBER nPackage;
+begin
+	bResult = FALSE;
+
+	try
+	    // First, we create the catalog object
+	    set catalog = CreateObject("MTSAdmin.Catalog.1");
+	    if IsObject(catalog) then
+		    // Then we get the packages collection
+		    set packages = catalog.GetCollection("Packages");
+		    if IsObject(packages) then
+			    packages.Populate;
+			    
+			    // Remove all packages that go by the same name
+			    numPackages = packages.Count;
+			    for nPackage = 0 to numPackages-1 step 1
+			        if packages.Item(numPackages-nPackage-1).Value("Name") = vstrPackageName then
+			            packages.Remove (numPackages-nPackage-1);
+			        endif;
+			    endfor;
+			    
+			    // Commit our deletions
+			    packages.SaveChanges;
+			    
+			    bResult = TRUE;
+			else
+				LOG_MessageBox("Failed to get packages collection", SEVERE);
+			endif;
+		else
+			LOG_MessageBox("Failed to CreateObject MTSAdmin.Catalog.1", SEVERE);
+		endif;   
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+		
+	return bResult;
+end;
+
+
+function BOOL MTS_AddComponent(vstrPackageName, vstrDllPath)
+    OBJECT catalog;
+    OBJECT packages;
+    NUMBER numPackages;
+    NUMBER nPackage;
+    OBJECT Package;
+    OBJECT components;
+    OBJECT util;
+begin
+	try
+	    // Ensure that the package exists
+	    if MTS_AddLibraryPackageIfNotExist(vstrPackageName) then
+	    
+		    // First, we create the catalog object
+		    set catalog = CreateObject("MTSAdmin.Catalog.1");
+			if IsObject(catalog) then   
+			    // Then we get the packages collection
+			    set packages = catalog.GetCollection("Packages");
+			    if IsObject(packages) then
+				    packages.Populate;
+				    
+				    // Search for existing package of the same name
+				    numPackages = packages.Count;
+				    for nPackage = 0 to numPackages-1 step 1
+				        if packages.Item(nPackage).Value("Name") = vstrPackageName then
+				            set Package = packages.Item(nPackage);
+				        endif;
+				    endfor;
+				    
+				    if IsObject(Package) = TRUE then
+					    // Refresh packages
+					    packages.Populate;
+					    
+					    // Get components collection for new package
+					    set components = packages.GetCollection("ComponentsInPackage", Package.Value("ID"));
+					    if IsObject(components) then
+									
+						    // Install components
+						    set util = components.GetUtilInterface;
+							if IsObject(util) then
+							    util.InstallComponent(vstrDllPath, "", "");
+							    
+							    // Refresh components
+							    components.Populate;
+							    
+							    // Commit the changes to the components
+							    components.SaveChanges;               
+							else  
+								LOG_MessageBox("Failed to get util interface", SEVERE);							
+							endif;
+						else
+							LOG_MessageBox("Failed to get components collection", SEVERE);
+						endif;
+					else
+						LOG_MessageBox("Failed to find package", SEVERE);
+					endif;
+				else
+					LOG_MessageBox("Failed to get packages collection", SEVERE);
+				endif;
+			else
+				LOG_MessageBox("Failed to CreateObject MTSAdmin.Catalog.1", SEVERE);
+			endif;	
+		endif;
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+end;
+

@@ -1,0 +1,16 @@
+guidAssistEx = 0, 0, 0, 0, C
+MsgTmDO = 0, 0, 0, 0, C
+MsgTmGlobals = 0, 0, 0, 0, C
+IMsgTmTxBO = 0, 0, 0, 0, C
+IMsgTmBaseBO = 0, 0, 0, 0, C
+errAssistEx = 0, 0, 0, 0, C
+xmlAssistEx = 0, 0, 0, 0, C
+MsgTmBO = 0, 0, 0, 0, C
+adoAssistEx = 0, 0, 0, 0, C
+IMsgTmDO = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C
+ConvertAssistEx = 0, 0, 0, 0, C
+comboAssistEx = 0, 0, 0, 0, C
+MsgTmTxBO = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+GeneralAssist = 0, 0, 0, 0, C

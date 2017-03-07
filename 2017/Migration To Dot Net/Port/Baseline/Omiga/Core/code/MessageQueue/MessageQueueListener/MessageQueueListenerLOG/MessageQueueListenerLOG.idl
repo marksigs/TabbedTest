@@ -1,0 +1,52 @@
+// MessageQueueListenerLOG.idl : IDL source for MessageQueueListenerLOG.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MessageQueueListenerLOG.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(ED3E351B-8218-47FF-BCB8-643167574A10),
+		dual,
+		helpstring("IMessageQueueListenerLOG1 Interface"),
+		pointer_default(unique)
+	]
+	interface IMessageQueueListenerLOG1 : IDispatch
+	{
+		[id(1), helpstring("method OnLog")] HRESULT OnLog([in] long lLOGAREA, [in] BSTR bstr);
+	};
+
+[
+	uuid(EF519447-D987-478C-B85C-1ADF13AFB13D),
+	version(1.0),
+	helpstring("MessageQueueListenerLOG 1.0 Type Library")
+]
+library MESSAGEQUEUELISTENERLOGLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+    typedef [helpstring("Enumerates various logging areas")]
+    enum  {
+        LOGAREA_MQL = 0,
+        LOGAREA_MSMQ1 = 100,
+        LOGAREA_MTS1MSMQ = 200,
+        LOGAREA_OMMQ1 = 300,
+        LOGAREA_MTS1OMMQ = 400,
+        LOGAREA_COMPONENT = 500,
+
+    } LOGAREA;
+
+
+
+	[
+		uuid(A30AF74A-E56F-4452-A7BB-5A5D2AB832F8),
+		helpstring("MessageQueueListenerLOG1 Class")
+	]
+	coclass MessageQueueListenerLOG1
+	{
+		[default] interface IMessageQueueListenerLOG1;
+	};
+};

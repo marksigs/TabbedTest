@@ -1,0 +1,81 @@
+<VisualStudioProject>
+	<CSHARP ProjectType="Local" ProductVersion="7.10.3077" SchemaVersion="2.0" ProjectGuid="{67884891-2D6A-47EA-8232-CA48CF1BFDBB}">
+		<Build>
+			<Settings ApplicationIcon="" AssemblyKeyContainerName="" AssemblyName="omFDM" AssemblyOriginatorKeyFile="C:\Build Epsom2\2 Int Code\Keys\Mars.snk" DefaultClientScript="JScript" DefaultHTMLPageLayout="Grid" DefaultTargetSchema="IE50" DelaySign="false" OutputType="Library" PreBuildEvent="" PostBuildEvent="" RootNamespace="Vertex.Fsd.Omiga.omFDM" RunPostBuildEvent="OnBuildSuccess" StartupObject="">
+				<Config Name="Debug" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="DEBUG;TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="false" OutputPath="bin\Debug\" RegisterForComInterop="true" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+				<Config Name="Release" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="true" OutputPath="bin\Release\" RegisterForComInterop="true" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+			</Settings>
+			<References>
+				<Reference Name="System" AssemblyName="System" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"/>
+				<Reference Name="System.Data" AssemblyName="System.Data" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"/>
+				<Reference Name="System.XML" AssemblyName="System.Xml" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"/>
+				<Reference Name="Microsoft.Web.Services2" AssemblyName="Microsoft.Web.Services2" HintPath="C:\Program Files\Microsoft WSE\v2.0\Microsoft.Web.Services2.dll" AssemblyFolderKey="hklm\microsoft wse 2.0"/>
+				<Reference Name="System.Web.Services" AssemblyName="System.Web.Services" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.Services.dll"/>
+				<Reference Name="omCore" AssemblyName="omCore" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omCore.dll"/>
+				<Reference Name="omLogging" AssemblyName="omLogging" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omLogging.dll"/>
+				<Reference Name="omDG" AssemblyName="omDG" HintPath="C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omDG.dll"/>
+			</References>
+		</Build>
+		<Files>
+			<Include>
+				<File RelPath="app.config" BuildAction="None"/>
+				<File RelPath="AssemblyInfo.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="FulfilmentDataManager.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Web References\CancelFulfilmentRequest\CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\CancelFulfilmentRequest\CommonTypes.xsx" DependentUpon="CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\CancelFulfilmentRequest\GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\CancelFulfilmentRequest\ProcessCancelFulfilmentRequest.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\CancelFulfilmentRequest\ProcessCancelFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\CancelFulfilmentRequest\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\CancelFulfilmentRequest\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\CancelFulfilmentRequest\" WebReferenceUrl="http://localhost/externalwebservices/services/ProcessCancelFulfilmentRequest.wsdl" UrlBehavior="Static"/>
+				<File RelPath="Web References\EmailFulfilmentRequest\CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\EmailFulfilmentRequest\GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\EmailFulfilmentRequest\ProcessEmailFulfilmentRequest.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\EmailFulfilmentRequest\ProcessEmailFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\EmailFulfilmentRequest\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\EmailFulfilmentRequest\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\EmailFulfilmentRequest\" WebReferenceUrl="http://localhost//ExternalWebServices/services/ProcessEmailFulfilmentRequest.wsdl" UrlBehavior="Static"/>
+				<File RelPath="Web References\PinMailerFulfilmentRequest\CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PinMailerFulfilmentRequest\GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PinMailerFulfilmentRequest\ProcessPinMailerFulfilmentRequest.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\PinMailerFulfilmentRequest\ProcessPinMailerFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PinMailerFulfilmentRequest\ProcessPinMailerFulfilmentRequest.xsx" DependentUpon="ProcessPinMailerFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PinMailerFulfilmentRequest\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\PinMailerFulfilmentRequest\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\PinMailerFulfilmentRequest\" WebReferenceUrl="http://localhost/ExternalWebServices/services/ProcessPinMailerFulfilmentRequest.wsdl" UrlBehavior="Static"/>
+				<File RelPath="Web References\PrintFulfilmentRequest\CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PrintFulfilmentRequest\GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PrintFulfilmentRequest\GenericMessages.xsx" DependentUpon="GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PrintFulfilmentRequest\ProcessPrintFulfilmentRequest.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\PrintFulfilmentRequest\ProcessPrintFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PrintFulfilmentRequest\ProcessPrintFulfilmentRequest.xsx" DependentUpon="ProcessPrintFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\PrintFulfilmentRequest\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\PrintFulfilmentRequest\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\PrintFulfilmentRequest\" WebReferenceUrl="http://localhost/ExternalWebServices/services/ProcessPrintFulfilmentRequest.wsdl" UrlBehavior="Static"/>
+				<File RelPath="Web References\ResendFulfilmentRequest\CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\ResendFulfilmentRequest\GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\ResendFulfilmentRequest\ProcessResendFulfilmentRequest.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\ResendFulfilmentRequest\ProcessResendFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\ResendFulfilmentRequest\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\ResendFulfilmentRequest\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\ResendFulfilmentRequest\" WebReferenceUrl="http://localhost/ExternalWebServices/services/ProcessResendFulfilmentRequest.wsdl" UrlBehavior="Static"/>
+				<File RelPath="Web References\SMSFulfilmentRequest\CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\SMSFulfilmentRequest\CommonTypes.xsx" DependentUpon="CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\SMSFulfilmentRequest\GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\SMSFulfilmentRequest\ProcessSMSFulfilmentRequest.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\SMSFulfilmentRequest\ProcessSMSFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\SMSFulfilmentRequest\ProcessSMSFulfilmentRequest.xsx" DependentUpon="ProcessSMSFulfilmentRequest.xsd" BuildAction="None"/>
+				<File RelPath="Web References\SMSFulfilmentRequest\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\SMSFulfilmentRequest\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\SMSFulfilmentRequest\" WebReferenceUrl="http://localhost/ExternalWebServices/services/ProcessSMSFulfilmentRequest.wsdl" UrlBehavior="Static"/>
+				<File RelPath="Web References\WebRefFileNet\fnce-ws-1.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\WebRefFileNet\fnce-ws-10.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\WebRefFileNet\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\WebRefFileNet\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\WebRefFileNet\" WebReferenceUrl="http://localhost/FileNet/fnce-ws-1.0-SOAP-MSG.wsdl" UrlBehavior="Static"/>
+				<Folder RelPath="Web References\" WebReferences="TRUE"/>
+			</Include>
+		</Files>
+	</CSHARP>
+</VisualStudioProject>

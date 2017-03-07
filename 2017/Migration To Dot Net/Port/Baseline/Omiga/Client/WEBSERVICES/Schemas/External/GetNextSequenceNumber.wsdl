@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: GetNextSequenceNumber WSDL. 
+                    Used for WS42 (GetSequenceNumberForFTBACMessage): get next message sequence number for use in sending BACS message to First Title. Also set Omiga configuration to indicate First Title outbound interface messages are in use for BACS messages
+
+History:
+
+Version Author      Date       Description
+01.00   RFairlie    04/10/2005 Created.   
+================================================================================-->
+<wsdl:definitions xmlns="http://GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msgRequest="http://Request.GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com" xmlns:msgResponse="http://Response.GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com">
+	<wsdl:types>
+		<xs:schema xmlns:msgRequest="http://Request.GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com" xmlns:msgResponse="http://Response.GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com">
+			<xs:import namespace="http://Request.GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com" schemaLocation="GetNextSequenceNumberRequest.xsd"/>
+			<xs:import namespace="http://Response.GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com" schemaLocation="GetNextSequenceNumberResponse.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="GetNextSeqNoRequestSoapIn">
+		<wsdl:part name="request" element="msgRequest:REQUEST"/>
+	</wsdl:message>
+	<wsdl:message name="GetNextSeqNoRequestSoapOut">
+		<wsdl:part name="response" element="msgResponse:RESPONSE"/>
+	</wsdl:message>
+	<wsdl:portType name="GetNextSequenceNumberPort">
+		<wsdl:operation name="GetNextSequenceNumber">
+			<wsdl:input message="GetNextSeqNoRequestSoapIn"/>
+			<wsdl:output message="GetNextSeqNoRequestSoapOut"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OmigaSoapRpcSoap" type="GetNextSequenceNumberPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetNextSequenceNumber">
+			<soap:operation soapAction="http://Request.GetNextSequenceNumber.IDUK.Omiga.marlboroughstirling.com" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OmigaGetNextSeqNo">
+		<wsdl:port name="GetNextSequenceNumberPort" binding="OmigaSoapRpcSoap">
+			<soap:address location="http://localhost/OmigaWebServices/GetNextSequenceNumberWS/OmigaGetNextSeqNoService.asmx"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

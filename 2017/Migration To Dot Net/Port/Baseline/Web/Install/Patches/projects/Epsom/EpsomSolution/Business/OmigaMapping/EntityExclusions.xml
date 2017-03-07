@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<EXCLUSIONS>
+		<ENTITY NAME="QUOTATION" DELETE="false" />
+	</EXCLUSIONS>

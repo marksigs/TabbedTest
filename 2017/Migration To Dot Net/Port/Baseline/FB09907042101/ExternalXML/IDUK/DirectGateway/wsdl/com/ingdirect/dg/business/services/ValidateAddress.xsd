@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Prashant Bhavsar    
+ 
+
+Description  Validate Address service interface
+
+
+============================================================================================== -->
+<!--
+    Note that the schema attributes 'attributeFormDefault="unqualified"' 
+    and 'elementFormDefault="unqualified"' are critical to the correct 
+    interpretation of this schema for the Direct Gatway application to 
+    consume the generated document literal SOAP messages.
+-->
+<schema targetNamespace="http://ValidateAddress.services.dg.ingdirect.com/0.0.1" xmlns:commonTypes="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:ValidateAddress="http://ValidateAddress.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+		<documentation>Annotated as per Use Case APP13 (01/08/2005)</documentation>
+	</annotation>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<complexType name="ValidateAddressRequestType">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="Address" type="commonTypes:StructuredAddressDetailsType">
+						<annotation>
+							<documentation>The partially completed address details entered on screen are passed to the PAF facility which performs address or postcode lookup against the Uniserv PAF database. Individual elements are annotated within CommonTypes xsd. Elements within StructuredAddressDetailsType required by this schema are: FlatNameOrNumber; HouseOrBuildingName; HouseOrBuildingNumber; Street; District; TownOrCity; County; PostCode. The address fields used for validation are dependent on what has been entered on screen.</documentation>
+						</annotation>
+					</element>
+					<element name="SelectionList" minOccurs="0">
+						<complexType>
+							<sequence>
+								<element name="Selection" type="string" minOccurs="0" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ValidateAddressResponseType">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="Address" type="commonTypes:StructuredAddressDetailsType" maxOccurs="unbounded">
+						<annotation>
+							<documentation> If successful, the results are returned immediately, with a populated set of address details (valid for postal use in UK). If unsuccessful, this schema will return an Error Code and Error Message (Error elements defined with GenericMessages xsd).</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="ValidateAddressRequest" type="ValidateAddress:ValidateAddressRequestType"/>
+	<element name="ValidateAddressResponse" type="ValidateAddress:ValidateAddressResponseType"/>
+</schema>

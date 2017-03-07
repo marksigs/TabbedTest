@@ -1,0 +1,1586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema">
+  <annotation>
+    <documentation>document version = 0.1</documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.6</documentation>
+    <documentation>Added RedirectedIndicator element to the 
+		BankAccountDetailsType for APP14 - Payment Account Details Screen (S3a) </documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.7</documentation>
+    <documentation>Added BuildingInsuranceReinstallmentAmount, PropertyPurchasePrice and PropertyPurchasePrice elements to the 
+		PropertyDetailsType for DIS03 - Pay Mortgage Advance Interface </documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.8</documentation>
+    <documentation>Added annotations relative to UI0003, and UC APP15 and SRV01</documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.9</documentation>
+    <documentation>Modified ClientDetailsType to make some of elments 'nillable' as per requirements in UC APP33</documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.10</documentation>
+    <documentation>Added PaymentDayInMonth , OriginatorIdentificationNumber elements to the BankAccountDetailsType 
+						as per requirements App14 Screens
+		</documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.11</documentation>
+    <documentation>Added RegistrationRequestSentDate , RegistrationCompletedDate and MortgageOfferSentDate elements to the SolicitorDetailsType 
+						for APP15
+		</documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.12</documentation>
+    <documentation>ConveyancerResponseType - Sequence min occur set to '0'</documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.13</documentation>
+    <documentation>Added FulfilmentResponseType and renamed GUIDType to FulfilmentPackIdType
+		</documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.14</documentation>
+    <documentation>Changed length parameters for AuthorisationReference and TransactionReference in TakeCardPaymentResponse element. </documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.15</documentation>
+    <documentation>CardPaymentDetailsType.MortgageApplicationNumber data type changed from int to String - Ref Defect MAR399  </documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.16</documentation>
+    <documentation>Property Details - For few elements the attribute MinOccurs is set to 0 Ref Defect 739 </documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.17</documentation>
+    <documentation>GenericMessage import / reference removed - 'Diamond dependency'- .Net problem raised by MSG </documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.18</documentation>
+    <documentation>Modified ClientDetailsType to make all the elements optional for Defect 807</documentation>
+  </annotation>
+  <complexType name="BankAccountDetailsType">
+    <annotation>
+      <documentation>Structure for a Payment Account or a Solicitors Bank Account</documentation>
+    </annotation>
+    <sequence>
+      <element minOccurs="0" name="AccountName" nillable="true">
+        <annotation>
+          <documentation>Name of bank account</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="18" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="SortCode">
+        <annotation>
+          <documentation>The 6 digit sort code for the bank account</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="9" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="AccountNumber">
+        <annotation>
+          <documentation>The account number for either the solicitor or applicant bank account.</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="13" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="TransposedIndicator">
+        <annotation>
+          <documentation>Indicates that the bank account number has been altered to comply with BACS/CHAPS file formats.</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="boolean" />
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="RedirectedIndicator">
+        <simpleType>
+          <restriction base="boolean" />
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="DDIStatus" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="BankName">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="18" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="PaymentDayInMonth">
+        <simpleType>
+          <restriction base="integer" />
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="OriginatorIdentificationNumber">
+        <simpleType>
+          <restriction base="string" />
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="BankAddress" type="common:StructuredAddressDetailsType" />
+    </sequence>
+  </complexType>
+  <complexType name="StructuredAddressDetailsType">
+    <annotation>
+      <documentation>Structured address is used for all address capture. For the prospect/customer, structured addresses include Legal, Mailing and Previous addresses. For the mortgage application, structured addresses include the Property Address and Solicitor Address.</documentation>
+    </annotation>
+    <sequence>
+      <element minOccurs="0" name="FlatNameOrNumber" nillable="true">
+        <annotation>
+          <documentation>Flat name or number of address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="HouseOrBuildingName" nillable="true">
+        <annotation>
+          <documentation>House or building name of address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="30" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="HouseOrBuildingNumber" nillable="true">
+        <annotation>
+          <documentation>House number of address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="6" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="Street" nillable="true">
+        <annotation>
+          <documentation>Street name of address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="District" nillable="true">
+        <annotation>
+          <documentation>District name of address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="TownOrCity" nillable="true">
+        <annotation>
+          <documentation>Town or City name of address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="County" nillable="true">
+        <annotation>
+          <documentation>County name of address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="PostCode" type="common:PostCodeType">
+        <annotation>
+          <documentation>Post code of address. See PostCodeType for formats</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="CountryCode" nillable="true">
+        <annotation>
+          <documentation>Indicates the country for the address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="3" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="Overriden" nillable="true">
+        <annotation>
+          <documentation>Indicates that the addresses returned by the PAF search do not include the person's correct address. Allows user to override addrress returned by the PAF search, and enter amended details.</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="boolean" />
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="AddressType" nillable="true">
+        <annotation>
+          <documentation>H = Legal address, P = Previous legal, M = Mail address</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+            <enumeration value="H" />
+            <enumeration value="P" />
+            <enumeration value="M" />
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PhoneDetailsType">
+    <annotation>
+      <documentation>Phone number captured on F/E systems is made up of both "AreaCode" and "LocalNumber" elements.</documentation>
+    </annotation>
+    <sequence>
+      <element minOccurs="0" name="AreaCode">
+        <simpleType>
+          <restriction base="string">
+            <pattern value="[0-9]*" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="LocalNumber">
+        <simpleType>
+          <restriction base="string">
+            <pattern value="[0-9]*" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="Extension">
+        <simpleType>
+          <restriction base="string">
+            <pattern value="[0-9]*" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="PhoneType">
+        <annotation>
+          <documentation>C = Cellphone/Mobile, R = Residential, B = Business, U = Unknown, F = Fax</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+            <enumeration value="C" />
+            <enumeration value="R" />
+            <enumeration value="B" />
+            <enumeration value="U" />
+            <enumeration value="F" />
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="CreditOrDebitCardDetailsType">
+    <annotation>
+      <documentation>This element holds the details of either credit card or debit card details</documentation>
+    </annotation>
+    <sequence>
+      <element name="CardAccountNumber">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="19" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="CardExpiryDate" type="string" />
+      <element minOccurs="0" name="CardVerificationNumber" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="4" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="CardVerificationIndicator">
+        <annotation>
+          <documentation>1- CVM value present, and submitted from the Store, 5 - CVM is intentionally not provided.</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <pattern value="1" />
+            <pattern value="5" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="CardType">
+        <annotation>
+          <documentation>1 - Visa, 2 - MasterCard, 8 - American Express , 9 - Solo, 10 - Switch, 11 - Electron</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <enumeration value="1" />
+            <enumeration value="2" />
+            <enumeration value="9" />
+            <enumeration value="10" />
+            <enumeration value="11" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="CardIssueNumber" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="CardStartDate" nillable="true" type="string" />
+      <element name="PaymentAmount" type="decimal" />
+      <element name="Address" type="common:StructuredAddressDetailsType" />
+    </sequence>
+  </complexType>
+  <complexType name="ConveyancerAcknowledgementType">
+    <annotation>
+      <documentation>This is response to all request except polling</documentation>
+    </annotation>
+    <sequence>
+      <element name="SequenceNo" type="common:SequenceNoType">
+        <annotation>
+          <documentation>IDUK Sequence# sent as part of the request.</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="ConveyancerHeaderType">
+    <sequence>
+      <element name="Timestamp" type="common:TimeStampType" />
+    </sequence>
+  </complexType>
+  <simpleType name="SequenceNoType">
+    <annotation>
+      <documentation>IDUK Sequence No. for Conveyancing Request</documentation>
+    </annotation>
+    <restriction base="string">
+      <pattern value="\d{1,10}" />
+    </restriction>
+  </simpleType>
+  <simpleType name="ConveyancerSequenceNoType">
+    <annotation>
+      <documentation>Conveyancer Sequence No. in the Response</documentation>
+    </annotation>
+    <restriction base="string">
+      <pattern value="\d{1,10}" />
+    </restriction>
+  </simpleType>
+  <simpleType name="SimpleDateType">
+    <annotation>
+      <documentation>This data type is used to represent simple date of the format YYYY/MM/DD.</documentation>
+    </annotation>
+    <restriction base="string">
+      <pattern value="\d{4}/(0?[1-9]|1[0-2])/(3[01]|[1-2][0-9]|0?[1-9])" />
+    </restriction>
+  </simpleType>
+  <simpleType name="TimeStampType">
+    <annotation>
+      <documentation>This data type is used to represent time stamp of the format YYYY/MM/DD hh:mm:ss</documentation>
+    </annotation>
+    <restriction base="string">
+      <pattern value="\d{4}/(0?[1-9]|1[0-2])/(3[01]|[1-2][0-9]|0?[1-9]) (0?\d|1[0-9]|2[0-3]):(0?\d|[1-5]\d):(0?\d|[1-5]\d)" />
+    </restriction>
+  </simpleType>
+  <simpleType name="TargetType">
+    <restriction base="string">
+      <enumeration value="C" />
+      <enumeration value="P" />
+    </restriction>
+  </simpleType>
+  <simpleType name="ActionType">
+    <restriction base="string">
+      <enumeration value="INS" />
+      <enumeration value="UPD" />
+      <enumeration value="DEL" />
+    </restriction>
+  </simpleType>
+  <simpleType name="GenderType">
+    <annotation>
+      <documentation>M = Male; F = Female; X = Not disclosed</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="M" />
+      <enumeration value="F" />
+      <enumeration value="X" />
+    </restriction>
+  </simpleType>
+  <simpleType name="ResidentType">
+    <restriction base="string">
+      <enumeration value="0" />
+      <enumeration value="1" />
+      <enumeration value="2" />
+    </restriction>
+  </simpleType>
+  <simpleType name="RelationshipCodeType">
+    <restriction base="string">
+      <enumeration value="A" />
+      <enumeration value="B" />
+      <enumeration value="PA" />
+    </restriction>
+  </simpleType>
+  <simpleType name="ClientStatusType">
+    <annotation>
+      <documentation>This is the customer status indicator. Values 3 and 4 below are legacy from Canada DAWT, and refer to business prospect and customers. 1 = Prospect; 2 = Customer</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1" />
+      <enumeration value="2" />
+      <enumeration value="3" />
+      <enumeration value="4" />
+    </restriction>
+  </simpleType>
+  <simpleType name="ClientType">
+    <restriction base="string">
+      <enumeration value="0" />
+    </restriction>
+  </simpleType>
+  <simpleType name="EmailOptionType">
+    <restriction base="string">
+      <enumeration value="G" />
+      <enumeration value="H" />
+    </restriction>
+  </simpleType>
+  <simpleType name="BusinessType">
+    <restriction base="string">
+      <enumeration value="1" />
+      <enumeration value="2" />
+      <enumeration value="3" />
+      <enumeration value="4" />
+    </restriction>
+  </simpleType>
+  <simpleType name="SpecialNeedType">
+    <annotation>
+      <documentation>Refers to the Special Needs fulfilment indicator. 0 = No special needs; 1 = Large Print; 2 = Audio fulfilment; 3 = Braille fulfilment</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0" />
+      <enumeration value="L" />
+      <enumeration value="A" />
+      <enumeration value="B" />
+    </restriction>
+  </simpleType>
+  <simpleType name="StatementType">
+    <restriction base="string">
+      <enumeration value="1" />
+      <enumeration value="2" />
+    </restriction>
+  </simpleType>
+  <simpleType name="FulfilmentPackIdType">
+    <annotation>
+      <documentation>defines the GUID type to represent the 128 bit windows guid type as 32 hex digit. This field refers to the unique ID assigned to each fulfilment pack.</documentation>
+    </annotation>
+    <restriction base="string">
+      <pattern value="[A-Fa-f0-9]{32}" />
+    </restriction>
+  </simpleType>
+  <simpleType name="FulfilmentResponseType">
+    <annotation>
+      <documentation>The response is a generic response indicating the outcome of the request. The general values that can be expected are :"Accepted", "Declined", "Error". In case of error/declined response the error message would be set to appropriate message.                             </documentation>
+    </annotation>
+    <restriction base="string" />
+  </simpleType>
+  <complexType name="CampaignPersonType">
+    <sequence>
+      <element name="PersonID" type="integer" />
+      <element name="CampaignPersonID" type="integer" />
+      <element name="PromotionCode" type="integer" />
+      <element name="CampaignReferenceID" type="string" />
+      <element name="Primary" type="boolean" />
+      <element name="Count" type="integer" />
+      <element name="ReferenceRewarded" type="integer" />
+      <element name="OldCount" type="integer" />
+      <element name="Action" type="common:ActionType" />
+    </sequence>
+  </complexType>
+  <complexType name="ClientDetailsType">
+    <sequence>
+      <element minOccurs="0" name="CampaignPerson" nillable="true" type="common:CampaignPersonType" />
+      <element minOccurs="0" name="Gender" type="common:GenderType">
+        <annotation>
+          <documentation>Refers to gender of person record - Male, Female or Not Disclosed</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="MiddleName">
+        <annotation>
+          <documentation>Middle name of person record</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="32" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="DateOfBirth" type="common:SimpleDateType">
+        <annotation>
+          <documentation>Date of birth of person record.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="NamePrefix">
+        <annotation>
+          <documentation>Salutation of person. E.g. Mr, Mrs, etc</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="16" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="ResidentCode" nillable="true" type="common:ResidentType" />
+      <element minOccurs="0" name="FirstName">
+        <annotation>
+          <documentation>First name of person record</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="32" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="LastName">
+        <annotation>
+          <documentation>Last name (surname) of person record</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="32" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="Email1" nillable="true">
+        <annotation>
+          <documentation>Email address - format must be as per BR10 in Use Case APP14. E.g. local@sub-domain.top-level-domain </documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="128" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="Number" nillable="true">
+        <annotation>
+          <documentation>CIF Number of person record</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="10" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" maxOccurs="unbounded" name="AddressDetail" type="common:StructuredAddressDetailsType" />
+      <element minOccurs="0" maxOccurs="unbounded" name="PhoneDetail" type="common:PhoneDetailsType" />
+      <element minOccurs="0" name="DontSolicit" type="boolean">
+        <annotation>
+          <documentation>This is the Marketing Opt In/Out indicator. Refers to the customer choice to receive ING Marketing information.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="PreferEmail" nillable="true" type="boolean" />
+      <element minOccurs="0" name="PreferPhone" nillable="true" type="boolean" />
+      <element minOccurs="0" name="PreferMail" nillable="true" type="boolean" />
+      <element minOccurs="0" name="ClientStatus" type="common:ClientStatusType" />
+      <element minOccurs="0" name="ClientType" nillable="true" type="common:ClientType" />
+      <element minOccurs="0" name="ClientSince" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="PermMsg" nillable="true" type="string" />
+      <element minOccurs="0" name="EmailOption" nillable="true" type="common:EmailOptionType" />
+      <element minOccurs="0" name="Language" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="BusinessName" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="BusinessAs" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="BusinessNumber" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="25" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="BusinessType" nillable="true" type="common:BusinessType" />
+      <element minOccurs="0" name="DayOfReg" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="ProvinceIncorp" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="SoleProprietorFirstName" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="32" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="SoleProprietorLastName" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="32" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="SoleProprietorInitial" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="4" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="IncorpType" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="SoleProprietorNamePrefix" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="16" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="IncorpFlag" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="SoleProprietorDateOfBirth" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="SoleProprietorTaxID" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="12" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="SpecialNeed" type="common:SpecialNeedType" />
+      <element minOccurs="0" name="R85Required" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="NationalInsuranceNumber" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="9" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="StatementType" nillable="true" type="common:StatementType" />
+      <element minOccurs="0" name="EmailValid" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="DataProtectionActDirect" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="R85DeclarationDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="CreateDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="InfoOptionLastUpdatedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="NIIssued" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="CustomizerType">
+    <sequence>
+      <element name="Key" type="string" />
+      <element name="Description" type="string" />
+      <element name="CodeValue" type="string" />
+      <element name="Status" type="string" />
+    </sequence>
+  </complexType>
+  <simpleType name="PostCodeType">
+    <annotation>
+      <documentation>PostCode can be in format [RG11 7XR] or [rg11 7xr]</documentation>
+    </annotation>
+    <restriction base="string">
+      <maxLength value="8" />
+    </restriction>
+  </simpleType>
+  <complexType name="ConveyancerResponseType">
+    <annotation>
+      <documentation>This is response to instruction to Conveyancer.</documentation>
+    </annotation>
+    <sequence minOccurs="0">
+      <element name="Header" type="common:ConveyancerHeaderType" />
+      <element minOccurs="0" name="Acknowledgement" type="common:ConveyancerAcknowledgementType">
+        <annotation>
+          <documentation>This will not be present in case of an error</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="MortgageDetailsType">
+    <annotation>
+      <documentation>This data type is used across SRV12</documentation>
+    </annotation>
+    <sequence>
+      <element name="MortgageValue">
+        <simpleType>
+          <restriction base="positiveInteger">
+            <totalDigits value="6" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="OutstandingTermYears">
+        <simpleType>
+          <restriction base="positiveInteger">
+            <totalDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="OutstandingTermMonths">
+        <simpleType>
+          <restriction base="positiveInteger">
+            <totalDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="RepaymentDetailsType">
+    <sequence>
+      <element name="RepaymentType" type="string" />
+      <element minOccurs="0" name="RepaymentAmount">
+        <simpleType>
+          <restriction base="positiveInteger">
+            <totalDigits value="6" />
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="MonthlyPaymentsType">
+    <sequence>
+      <element name="MonthlyPayment">
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="6" />
+            <fractionDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="InterestSaved" nillable="true">
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="6" />
+            <fractionDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="MortgageReducedByYears" nillable="true">
+        <simpleType>
+          <restriction base="positiveInteger">
+            <totalDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="MortgageReducedByMonths" nillable="true">
+        <simpleType>
+          <restriction base="positiveInteger">
+            <totalDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="SubLoanType">
+    <annotation>
+      <documentation>This data type is used for SubLoan Information</documentation>
+    </annotation>
+    <sequence>
+      <element minOccurs="0" name="AccountNumber" nillable="true">
+        <simpleType>
+          <restriction base="positiveInteger">
+            <totalDigits value="10" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="AccountStatus" nillable="true" type="string" />
+      <element minOccurs="0" name="ClosedDate" nillable="true" type="date" />
+      <element minOccurs="0" name="ProductDescription" nillable="true" type="string" />
+      <element minOccurs="0" name="LedgerBalance" nillable="true" type="decimal" />
+      <element minOccurs="0" name="InterestRate" nillable="true" type="decimal" />
+      <element minOccurs="0" name="OverpaymentBalance" nillable="true" type="decimal" />
+      <element minOccurs="0" name="TotArrearsAmount" nillable="true" type="decimal" />
+      <element minOccurs="0" name="InterestOnlyBalance" nillable="true" type="decimal" />
+      <element minOccurs="0" name="NextDirectDebitAmount" nillable="true" type="decimal" />
+      <element minOccurs="0" name="CompletionDate" nillable="true" type="date" />
+      <element minOccurs="0" name="MaturityDate" nillable="true" type="date" />
+      <element minOccurs="0" name="MaturityFixedRateExpirationPeriod" nillable="true" type="string" />
+      <element minOccurs="0" name="RepaymentBalance" nillable="true" type="decimal" />
+      <element minOccurs="0" name="EarlyRepaymentCharge" nillable="true">
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="6" />
+            <fractionDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="CurrentBalance" nillable="true">
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="6" />
+            <fractionDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="PaymentsExpected" nillable="true">
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="6" />
+            <fractionDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="InterestExpected" nillable="true">
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="6" />
+            <fractionDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="RedemptionAmount" nillable="true">
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="6" />
+            <fractionDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="DailyInterest" nillable="true">
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="6" />
+            <fractionDigits value="2" />
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="SolicitorDetailsType">
+    <annotation>
+      <documentation>Structure for Solicitor Details</documentation>
+    </annotation>
+    <sequence>
+      <element minOccurs="0" name="FirmName" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="SolicitorReference" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="30" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="SolicitorFundingMethod" nillable="true">
+        <simpleType>
+          <restriction base="string" />
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="IsSolicitorOnIngDirectPanel" nillable="true">
+        <simpleType>
+          <restriction base="string" />
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="SolicitorFirmAddress" nillable="true" type="common:StructuredAddressDetailsType" />
+      <element minOccurs="0" name="SolicitorPhoneDetails" nillable="true" type="common:PhoneDetailsType" />
+      <element minOccurs="0" name="SolicitorContactTitle" nillable="true" type="string" />
+      <element minOccurs="0" name="SolicitorContactFirstName" nillable="true" type="string" />
+      <element minOccurs="0" name="SolicitorContactLastName" nillable="true" type="string" />
+      <element minOccurs="0" name="DetailsReceivedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="UndertakingRequestedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="UndertakingReceivedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="SolicitorInstructedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="LegalServicesInstructedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="TitleConfirmedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="RedemptionStatementRequestedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="RedemptionStatementReceivedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="RedemptionExpectedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="RegistrationRequestSentDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="RegistrationCompletedDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="MortgageOfferSentDate" nillable="true" type="common:SimpleDateType" />
+    </sequence>
+  </complexType>
+  <complexType name="PropertyDetailsType">
+    <annotation>
+      <documentation>Structure for Property Details</documentation>
+    </annotation>
+    <sequence>
+      <element name="NumberOfBedRooms" nillable="true" type="string" />
+      <element minOccurs="0" name="PropertyTypeCode" nillable="true" type="string" />
+      <element name="LastValuation" nillable="true" type="decimal">
+        <annotation>
+          <documentation>Present condition Value of the property. Can be sourced from Hometrack or ESurv</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="LastValuationType" nillable="true" type="decimal" />
+      <element name="LastValuationDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="IndexLinkedValuation" nillable="true" type="decimal" />
+      <element minOccurs="0" name="CurrentIndexedValue" nillable="true" type="string" />
+      <element minOccurs="0" name="PartReleaseOfSecurity" nillable="true" type="string" />
+      <element minOccurs="0" name="ConsentToLease" nillable="true" type="string" />
+      <element name="PropertyAddress" nillable="true" type="common:StructuredAddressDetailsType" />
+      <element minOccurs="0" name="NumberOfSubsequentCharges" nillable="true" type="string" />
+      <element minOccurs="0" name="TransferSubjectToMortgage" nillable="true" type="string" />
+      <element minOccurs="0" name="TransferSubectToMortgageDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="OrigBorrower" nillable="true" type="string" />
+      <element minOccurs="0" name="OrigBorrower2" nillable="true" type="string" />
+      <element minOccurs="0" name="UnauthorisedTenancyFlag" nillable="true" type="string" />
+      <element minOccurs="0" name="TenureOfProperty" nillable="true" type="string" />
+      <element minOccurs="0" name="ConsentToTenancyStartDate" nillable="true" type="common:SimpleDateType" />
+      <element minOccurs="0" name="ConsentToTenancyEndDate" nillable="true" type="common:SimpleDateType" />
+      <element name="IsPropertyInScotland" nillable="true" type="string" />
+      <element minOccurs="0" name="PropertyLocation" nillable="true" type="string" />
+      <element minOccurs="0" name="RemortgagePurpose" nillable="true" type="string" />
+      <element minOccurs="0" name="CompletionDatePreference" nillable="true" type="string" />
+      <element minOccurs="0" name="CompletionDateDay" nillable="true" type="string" />
+      <element minOccurs="0" name="CompletionDateMonth" nillable="true" type="string" />
+      <element minOccurs="0" name="CompletionDateYear" nillable="true" type="string" />
+      <element name="PropertyType" nillable="true" type="string">
+        <annotation>
+          <documentation>Obtained from ESurv valuation report, or applicant's indication. Types include: 1=House Terrace; 2=Semi-Detached House; 3=Detached House; 4=Flat or Maisonette; 14=Bungalow; 99=Other.</documentation>
+        </annotation>
+      </element>
+      <element name="GrossExternalFloorArea" nillable="true" type="string" />
+      <element name="UnexpiredTerm" nillable="true" type="string">
+        <annotation>
+          <documentation>Only applicable to Lease hold properties. Term is indicated in years.</documentation>
+        </annotation>
+      </element>
+      <element name="ExLocalAuthority" nillable="true" type="string" />
+      <element name="ApproximateYearPropertyBuild" nillable="true" type="string" />
+      <element name="ConstructionTypeIndicator" nillable="true" type="string">
+        <annotation>
+          <documentation>Is the property a traditional construction type? Y/N.</documentation>
+        </annotation>
+      </element>
+      <element name="ConstructionType" nillable="true" type="string">
+        <annotation>
+          <documentation>If ConstructionTypeIndicator=N, then actual Construction Type provided.</documentation>
+        </annotation>
+      </element>
+      <element name="Tenure" nillable="true" type="string">
+        <annotation>
+          <documentation>Tenure values inlcude: Common hold (C/H); Free hold (F/H); Feuhold (Feu); Lease hold (L/H)</documentation>
+        </annotation>
+      </element>
+      <element name="RegisteredTitleNoOne" nillable="true" type="string" />
+      <element name="RegisteredTitleNoTwo" nillable="true" type="string" />
+      <element name="RegisteredTitleNoThree" nillable="true" type="string" />
+      <element minOccurs="0" name="PlotNumber" nillable="true" type="string" />
+      <element name="IsNewProperty" nillable="true" type="string">
+        <annotation>
+          <documentation>Is the property new? The Valuation report indicator from ESurv, or applicant's indication.</documentation>
+        </annotation>
+      </element>
+      <element name="BuildingStandardIndemnityType" nillable="true" type="string">
+        <annotation>
+          <documentation>One of the following: 1=NHBC; 2=Zurich; 3=Premier Guarantee. This list will increase as more BSIS are added.</documentation>
+        </annotation>
+      </element>
+      <element name="ValuationType" nillable="true" type="string">
+        <annotation>
+          <documentation>Type of valuation report performed. Three Options - 1=Mortgage Valuation; 4=External Appraisal; 5=Hometrack (automated valuation).</documentation>
+        </annotation>
+      </element>
+      <element name="NumberOfLivingRoom" nillable="true" type="string" />
+      <element name="NumberOfKitchens" nillable="true" type="string" />
+      <element name="NumberOfBathrooms" nillable="true" type="string" />
+      <element name="NumberOfGarages" nillable="true" type="string" />
+      <element name="NumberOfParkingSpaces" nillable="true" type="string" />
+      <element name="Saleability" nillable="true" type="string">
+        <annotation>
+          <documentation>Potential prospects of on-selling the property. One of - Above Average; Average, Below Average.</documentation>
+        </annotation>
+      </element>
+      <element name="OverallCondition" nillable="true" type="string">
+        <annotation>
+          <documentation>Condition of the property. One of - Above Average; Average, Below Average.</documentation>
+        </annotation>
+      </element>
+      <element name="ValuerName" nillable="true" type="string">
+        <annotation>
+          <documentation>Company of Form name from the Valuation report.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="BuildingInsuranceReinstallmentAmount" nillable="true" type="string">
+        <annotation>
+          <documentation>Valuation result. Whole £'s only.</documentation>
+        </annotation>
+      </element>
+      <element name="PropertyPurchasePrice" nillable="true" type="string">
+        <annotation>
+          <documentation>The property purchase price or the applicant's estimated value as indicated on KFI</documentation>
+        </annotation>
+      </element>
+      <element name="LoanToValue" nillable="true" type="string">
+        <annotation>
+          <documentation>LTV amount from the valuer.</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PackDetailsType">
+    <annotation>
+      <documentation>Represents the Details of the Pack</documentation>
+    </annotation>
+    <sequence>
+      <element minOccurs="0" name="Address" type="common:StructuredAddressDetailsType">
+        <annotation>
+          <documentation>Details of the Address of the Person</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="Person" type="common:PersonDetailsType">
+        <annotation>
+          <documentation>Person Details</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="MainApplicantIndicator">
+        <annotation>
+          <documentation>Indicates if the applicant is the MainApplicant. Used by DIS07.</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <enumeration value="true" />
+            <enumeration value="false" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="ProductAccountNumber" type="string">
+        <annotation>
+          <documentation>MortgageAccountNumber in case of Mortgage Product;          Savings Account Number in case of Savings Product (Product Type is part of Generic Request)</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="ProductApplicationNumber" type="string">
+        <annotation>
+          <documentation>MortgageApplicationNumber in case of Mortgage Product;                  Savings Application Number in case of Savings Product</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="DateTimeCreated" type="common:TimeStampType">
+        <annotation>
+          <documentation>Date and Time when the  request was made for auditing purpose</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="PropertyLocation">
+        <annotation>
+          <documentation>indicates if the property is Scottish Property</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <enumeration value="0" />
+            <enumeration value="1" />
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PersonDetailsType">
+    <annotation>
+      <documentation>Added the new PersonDetailsTypes currently used in fulfilment
+				 	since most of the elements in ClientDetailsType are mandatory
+				 </documentation>
+    </annotation>
+    <sequence>
+      <element minOccurs="0" name="FirstName" nillable="true" type="string">
+        <annotation>
+          <documentation>First Name of Person</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="MiddleName" nillable="true" type="string">
+        <annotation>
+          <documentation>Middle Name of Person</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="LastName" nillable="true" type="string">
+        <annotation>
+          <documentation>Last Name of Person</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="Salutation" nillable="true" type="string">
+        <annotation>
+          <documentation>Salutation for the person</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="SpecialNeed" type="common:SpecialNeedType">
+        <annotation>
+          <documentation>Indicates if the person has special need like Braille, Large Print, Audio</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="CardPaymentDetailsType">
+    <annotation>
+      <documentation>Card payment request sent to card vendor</documentation>
+    </annotation>
+    <sequence>
+      <element name="CreditCardDetails" type="common:CreditOrDebitCardDetailsType" />
+      <element minOccurs="0" name="MasterAccountNumber" nillable="true">
+        <simpleType>
+          <restriction base="int">
+            <totalDigits value="8" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="0" name="MortgageApplicationNumber" nillable="true" type="string" />
+      <element name="PaymentMechanism" type="string">
+        <annotation>
+          <documentation>This value should be set to "CreditCard"</documentation>
+        </annotation>
+      </element>
+      <element name="TransactionMode" type="string">
+        <annotation>
+          <documentation>P -Production mode. Indicates the transaction is real. 
+							N -Sends the transaction to the internal payment simulator. The simulator sends a No value, indicating the transaction was rejected. 
+							Y -Sends the transaction to the internal payment simulator. The simulator sends a Yes value, indicating the transaction was accepted. 
+							R -Sends the transaction to t	he internal payment simulator. The simulator sends a random Yes or No value. 
+			</documentation>
+        </annotation>
+      </element>
+      <element name="TransactionType" nillable="true" type="string">
+        <annotation>
+          <documentation>This value should be set to "Auth". 
+			</documentation>
+        </annotation>
+      </element>
+      <element name="Pipeline" type="string">
+        <annotation>
+          <documentation>This value should be set to "Payment".
+			</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="CardPaymentResultDetailsType">
+    <annotation>
+      <documentation>Card payment received from card vendor</documentation>
+    </annotation>
+    <sequence>
+      <element name="PaymentResult" type="string">
+        <annotation>
+          <documentation>Defines the result. 
+								"D" = Decline,  "A" = Approve, "E" =  Error
+				</documentation>
+        </annotation>
+      </element>
+      <element name="AuthorisationReference" nillable="true">
+        <annotation>
+          <documentation>Unique ID</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <minLength value="0" />
+            <maxLength value="6" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="TransactionReference" nillable="true">
+        <annotation>
+          <documentation>Unique ID for the transaction</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <minLength value="0" />
+            <maxLength value="36" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="UpFrontPaymentReason" type="string" />
+      <element name="AVSResult" nillable="true" type="string">
+        <annotation>
+          <documentation>YY - Address and zip code or postal code match 
+								YN - Address matches only 
+								NY - Zip code or postal code matches 
+								NN - Neither address nor zip code or postal code matches; address is not parsable. 
+								UU - Address information is unavailable, service is unavailable, or Error; Unknown 
+								FF - Issuer does not participate in AVS 
+								Blank - No AVS performed
+				</documentation>
+        </annotation>
+      </element>
+      <element name="CV2" nillable="true" type="string">
+        <annotation>
+          <documentation>0 - Card type does not support CVM 
+							1 - CVM match 
+							2 - CVM did not match issuer value 
+							3 - CVM was not processed 
+							4 - CVM should be on the card but cardholder indicated otherwise 
+							5 - CVM not supported by issuer 
+							6 - Not valid 
+							7 - No response from server
+			</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="SavingTransferType" abstract="true">
+    <annotation>
+      <documentation>Saving transfer request</documentation>
+    </annotation>
+    <sequence>
+      <element name="SavingAccountNumber" nillable="true" type="string" />
+      <element name="PaymentMethod" nillable="true" type="string" />
+      <element name="PaymentAmount" nillable="true" type="string" />
+    </sequence>
+  </complexType>
+  <complexType name="AccountDetailsType">
+    <annotation>
+      <documentation>Account details</documentation>
+    </annotation>
+    <sequence>
+      <element name="AccountNumber" nillable="true" type="string" />
+      <element name="ProductName" nillable="true" type="string" />
+      <element name="ProductType" nillable="true" type="string" />
+      <element name="Balance" nillable="true" type="string" />
+    </sequence>
+  </complexType>
+  <complexType name="AIPApplicantDataType" abstract="true">
+    <sequence>
+      <element name="CustomerName" type="string" />
+      <element name="CustomerNo" type="string" />
+      <element name="MainApplicant" type="string" />
+      <element name="CustomerPersonalDetails" type="common:CustomerPersonalDetailsType" />
+      <element maxOccurs="unbounded" name="PreviousAddress" type="common:PreviousAddressType" />
+      <element name="AddressHistory" type="common:AddressHistoryType" />
+      <element name="EmploymentIncomeDetails" type="common:EmploymentIncomeDetailsType" />
+    </sequence>
+  </complexType>
+  <complexType name="AIPApplicationDataType" abstract="true">
+    <sequence>
+      <element name="ApplicationNo" type="string" />
+      <element name="ApplicationFactFindNo" type="string" />
+    </sequence>
+  </complexType>
+  <complexType name="CustomerPersonalDetailsType" abstract="true">
+    <sequence>
+      <element ref="common:PersonalDetails" />
+      <element name="ResidenceAddress" type="common:StructuredAddressDetailsTypeExt" />
+      <element maxOccurs="3" ref="common:PhoneDetails" />
+      <element ref="common:EmailAddress" />
+      <element ref="common:ConfirmEmailAddress" />
+      <element ref="common:Transaction" />
+    </sequence>
+  </complexType>
+  <complexType name="PreviousAddressType" abstract="true">
+    <sequence>
+      <element name="IsOverseasAddress" type="string" />
+      <element name="PreviousAddress" type="common:StructuredAddressDetailsTypeExt" />
+      <element name="IsJointAddress" type="string" />
+    </sequence>
+  </complexType>
+  <complexType name="AddressHistoryType" abstract="true">
+    <sequence>
+      <element maxOccurs="unbounded" name="Address" type="common:StructuredAddressDetailsTypeExt" />
+    </sequence>
+  </complexType>
+  <complexType name="EmploymentIncomeDetailsType" abstract="true">
+    <sequence>
+      <element ref="common:EmploymentDetails" />
+      <element ref="common:IncomeDetails" />
+    </sequence>
+  </complexType>
+  <complexType name="StructuredAddressDetailsTypeExt" abstract="true">
+    <complexContent mixed="false">
+      <extension base="common:StructuredAddressDetailsType">
+        <sequence>
+          <element name="DateFromMonth" type="string" />
+          <element name="DateFromYear" type="string" />
+          <element name="ResidentialStatus" type="string" />
+          <element name="AddressUIId" type="string" />
+          <element ref="common:Transaction" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="OutgoingsSummaryType" abstract="true">
+    <sequence>
+      <element maxOccurs="unbounded" ref="common:CurrentAccountSummary" />
+      <element ref="common:CreditStoreCardsSummary" />
+      <element ref="common:PersonalLoanSummary" />
+      <element ref="common:LoanOnCurrentResSummary" />
+      <element ref="common:LoanOnOtherResSummary" />
+      <element ref="common:FinancialObligationsSummaryType" />
+    </sequence>
+  </complexType>
+  <complexType name="OutgoingsDetailsType" abstract="true">
+    <sequence>
+      <element maxOccurs="unbounded" name="CardDetails" type="common:CardDetailsType" />
+      <element maxOccurs="unbounded" name="PersonalLoanDetails" type="common:PersonalLoanDetailsType" />
+      <element maxOccurs="unbounded" name="LoanOnCurrentResDetails" type="common:LoanOnCurrentResDetailsType" />
+      <element maxOccurs="unbounded" name="LoanOnOtherPropDetails" type="common:LoanOnOtherPropDetailsType" />
+      <element maxOccurs="unbounded" name="FinancialObligationsDetails" type="common:FinancialObligationsDetailsType" />
+    </sequence>
+  </complexType>
+  <complexType name="CreditCheckDetailsType" abstract="true">
+    <sequence>
+      <element name="GoToCreditCheck" type="string" />
+    </sequence>
+  </complexType>
+  <complexType name="CardDetailsType">
+    <complexContent mixed="false">
+      <extension base="common:CreditOrDebitCardDetailsType">
+        <sequence>
+          <element name="OutStanding" type="string" />
+          <element name="AppliesToApplicant" type="string" />
+          <element name="RepaidByNewMortgage" type="string" />
+          <element ref="common:Transaction" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PersonalLoanDetailsType">
+    <complexContent mixed="false">
+      <extension base="common:GeneralOutgoingsDetailsType">
+        <sequence>
+          <element ref="common:Transaction" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LoanOnCurrentResDetailsType">
+    <complexContent mixed="false">
+      <extension base="common:GeneralOutgoingsDetailsType">
+        <sequence>
+          <element name="AccountNo" type="string" />
+          <element ref="common:Transaction" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LoanOnOtherPropDetailsType">
+    <complexContent mixed="false">
+      <extension base="common:GeneralOutgoingsDetailsType">
+        <sequence>
+          <element ref="common:Transaction" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FinancialObligationsDetailsType">
+    <complexContent mixed="false">
+      <extension base="common:GeneralOutgoingsDetailsType">
+        <sequence>
+          <element name="TypeOfOutgoing" type="string" />
+          <element ref="common:Transaction" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GeneralOutgoingsDetailsType">
+    <sequence>
+      <element name="Lender" type="string" />
+      <element name="OtherLender" type="string" />
+      <element name="MonthlyPayment" type="string" />
+      <element name="OutStanding" type="string" />
+      <element name="AppliesToApplicant" type="string" />
+      <element name="RepaidByNewMortgage" type="string" />
+    </sequence>
+  </complexType>
+  <complexType name="CreditStoreCardsSummaryType" abstract="true">
+    <sequence>
+      <element name="AnyCreditStoreCards" type="string" />
+      <element name="NoOfCreditStoreCards" type="string" />
+      <element ref="common:Transaction" />
+    </sequence>
+  </complexType>
+  <complexType name="PersonalLoanSummaryType" abstract="true">
+    <sequence>
+      <element name="AnyPersonalLoans" type="string" />
+      <element name="NoOfPersonalLoans" type="string" />
+      <element ref="common:Transaction" />
+    </sequence>
+  </complexType>
+  <complexType name="LoanOnCurrentResSummaryType" abstract="true">
+    <sequence>
+      <element name="AnyLoanOnCurrentRes" type="string" />
+      <element name="NoOfLoanOnCurrentRes" type="string" />
+      <element ref="common:Transaction" />
+    </sequence>
+  </complexType>
+  <complexType name="LoanOnOtherResSummaryType" abstract="true">
+    <sequence>
+      <element name="AnyLoanOnOtherProps" type="string" />
+      <element name="NoOfLoanOnOtherProps" type="string" />
+      <element ref="common:Transaction" />
+    </sequence>
+  </complexType>
+  <complexType name="FinancialObligationsSummaryType" abstract="true">
+    <sequence>
+      <element name="AnyFinancialObligations" type="string" />
+      <element name="NoOfFinancialObligations" type="string" />
+      <element ref="common:Transaction" />
+    </sequence>
+  </complexType>
+  <simpleType name="TransactionType">
+    <restriction base="string" />
+  </simpleType>
+  <complexType name="CurrentAccountSummaryType" abstract="true">
+    <sequence>
+      <element name="AccountHeldMonth" type="string" />
+      <element name="AccountHeldYear" type="string" />
+      <element ref="common:Transaction" />
+      <element name="CustomerNumber" type="string" />
+      <element name="CustomerName" type="string" />
+    </sequence>
+  </complexType>
+  <complexType name="PersonalDetailsType" abstract="true">
+    <sequence>
+      <element name="DOB" type="string" />
+      <element name="MaritalStatus" type="string" />
+      <element name="Dependents" type="string" />
+      <element name="NameChanged">
+        <simpleType>
+          <restriction base="string">
+            <pattern value="true|false" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="NameChangeDetails" type="common:NameChangeDetailsType" />
+    </sequence>
+  </complexType>
+  <complexType name="NameChangeDetailsType">
+    <sequence>
+      <element name="PreviousFirstName" type="string" />
+      <element name="PreviousMiddleName" type="string" />
+      <element name="PreviousLastName" type="string" />
+    </sequence>
+  </complexType>
+  <complexType name="EmploymentDetailsType" abstract="true">
+    <sequence>
+      <element name="EmployerName" type="string" />
+      <element name="EmployerStatus" type="string" />
+      <element name="EmployerType" type="string" />
+      <element ref="common:StructuredAddressDetails" />
+      <element ref="common:PhoneDetails" />
+      <element name="EmploymentStartMonth" type="common:MonthType" />
+      <element name="EmploymentStartYear" type="common:YearType" />
+      <element ref="common:Transaction" />
+    </sequence>
+  </complexType>
+  <simpleType name="YearType">
+    <restriction base="string">
+      <pattern value="[1900-2100]{4}-[1900-2100]{4}" />
+    </restriction>
+  </simpleType>
+  <simpleType name="MonthType">
+    <restriction base="string">
+      <pattern value="(([0-9]*)-([0-9]*))" />
+    </restriction>
+  </simpleType>
+  <complexType name="IncomeDetailsType" abstract="true">
+    <sequence>
+      <element name="GrossIncome" type="string" />
+      <element name="AdditionalIncome" type="string" />
+      <element name="ShiftAllowance" type="string" />
+      <element name="RegionalAllowance" type="string" />
+      <element name="HousingAllowance" type="string" />
+      <element name="OverTime" type="string" />
+      <element name="Bonus" type="string" />
+      <element name="Commission" type="string" />
+      <element name="OtherIncomeDescription" type="string" />
+      <element name="OtherIncomeValue" type="string" />
+      <element ref="common:Transaction" />
+    </sequence>
+  </complexType>
+  <simpleType name="EmailAddressType">
+    <restriction base="string" />
+  </simpleType>
+  <element name="PersonalDetails" type="common:PersonalDetailsType" />
+  <element name="EmploymentDetails" type="common:EmploymentDetailsType" />
+  <element name="IncomeDetails" type="common:IncomeDetailsType" />
+  <element name="EmailAddress" type="common:EmailAddressType" />
+  <element name="ConfirmEmailAddress" type="common:EmailAddressType" />
+  <element name="Transaction" type="common:TransactionType" />
+  <element name="CurrentAccountSummary" type="common:CurrentAccountSummaryType" />
+  <element name="CreditStoreCardsSummary" type="common:CreditStoreCardsSummaryType" />
+  <element name="PersonalLoanSummary" type="common:PersonalLoanSummaryType" />
+  <element name="LoanOnCurrentResSummary" type="common:LoanOnCurrentResSummaryType" />
+  <element name="LoanOnOtherResSummary" type="common:LoanOnOtherResSummaryType" />
+  <element name="FinancialObligationsSummaryType" type="common:FinancialObligationsSummaryType" />
+  <element name="Year" type="common:YearType" />
+  <element name="Month" type="common:MonthType" />
+  <element name="BankAccountDetails" type="common:BankAccountDetailsType" />
+  <element name="StructuredAddressDetails" type="common:StructuredAddressDetailsType" />
+  <element name="PhoneDetails" type="common:PhoneDetailsType" />
+  <element name="CreditOrDebitCardDetails" type="common:CreditOrDebitCardDetailsType" />
+  <element name="Customizer" type="common:CustomizerType">
+    <annotation>
+      <documentation>Mapped to Customizer table, used for lookup</documentation>
+    </annotation>
+  </element>
+  <element name="ConveyancerAcknowledgement" type="common:ConveyancerAcknowledgementType">
+    <annotation>
+      <documentation>Acknowledgement for all conveyancer.</documentation>
+    </annotation>
+  </element>
+  <element name="PostCode" type="common:PostCodeType" />
+  <element name="ConveyancerResponse" type="common:ConveyancerResponseType">
+    <annotation>
+      <documentation>Response to all instruction to Conveyancer</documentation>
+    </annotation>
+  </element>
+  <element name="CardPaymentDetails" type="common:CardPaymentDetailsType">
+    <annotation>
+      <documentation>Card payment request details.</documentation>
+    </annotation>
+  </element>
+  <element name="CardPaymentResultDetails" type="common:CardPaymentResultDetailsType">
+    <annotation>
+      <documentation>Card payment response details</documentation>
+    </annotation>
+  </element>
+  <element name="SavingTransfer" type="common:SavingTransferType" />
+  <element name="AccountDetails" type="common:AccountDetailsType" />
+</schema>

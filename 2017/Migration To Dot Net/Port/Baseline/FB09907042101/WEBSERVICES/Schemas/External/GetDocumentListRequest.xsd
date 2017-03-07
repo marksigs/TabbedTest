@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: GetDocumetnList- Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RMH	 		29/06/2005 		Created / OPI CRUD TYPE
+01.02			TLiu             20/07/2005      Changed mars to IDUK in path, named a complexType.
+01.03			TLiu				26/07/2005		Fixed Name Spaces
+01.04   		TLiu				29/07/2005		Renamed from GetDocumentListomPMRequestDMS105.xsd to GetDocumentListRequest.xsd.   
+01.05			TLiu				08/08/2005		Added 6 attributes to the REQUEST.
+01.06			TLiu				08/08/2005		Named a simpleType.
+01.07			TLiu				15/09/2005		Made OPERATION optional.
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Passing in an application number will return the list of document for the case. Maybe revised after detailed design to extend further functionality for filtering the docu list at the request time as in DMS105</xs:documentation>
+	</xs:annotation>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="OPERATION" type="OPERATIONType"/>
+		<xs:attribute name="SEARCHKEY1" type="xs:string" use="optional"/>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="OPERATIONType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GETDOCUMENTHISTORYLIST"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

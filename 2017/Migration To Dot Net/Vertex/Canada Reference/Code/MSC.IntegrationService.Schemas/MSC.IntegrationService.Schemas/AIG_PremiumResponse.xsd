@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aigug.ca/services/premiumserviceresponse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:response="http://www.aigug.ca/services/premiumserviceresponse" elementFormDefault="qualified" attributeFormDefault="qualified">
+	<!-- Simple Types -->
+	<xsd:element name="ApplicationId" type="xsd:string"/>
+	<xsd:element name="FeeAmount" type="xsd:double"/>
+	<xsd:element name="MessageCode" type="xsd:string"/>
+	<xsd:element name="MessageText" type="xsd:string"/>
+	<xsd:element name="PreferedLanguageCode" type="xsd:integer"/>
+	<xsd:element name="Premium" type="xsd:double"/>
+	<xsd:element name="PremiumPst" type="xsd:double"/>
+	<xsd:element name="PremiumRate" type="xsd:double"/>
+	<xsd:element name="StatusCode" type="xsd:string"/>
+	<xsd:element name="TotalAmountDue" type="xsd:double"/>
+	<!-- Complex Types -->
+	<xsd:element name="Message">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="response:MessageCode" minOccurs="0"/>
+				<xsd:element ref="response:MessageText" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Messages">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="response:Message" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PremiumResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="response:StatusCode" minOccurs="0"/>
+				<xsd:element ref="response:PreferedLanguageCode" minOccurs="0"/>
+				<xsd:element ref="response:ApplicationId" minOccurs="0"/>
+				<xsd:element ref="response:PremiumRate" minOccurs="0"/>
+				<xsd:element ref="response:Premium" minOccurs="0"/>
+				<xsd:element ref="response:FeeAmount" minOccurs="0"/>
+				<xsd:element ref="response:PremiumPst" minOccurs="0"/>
+				<xsd:element ref="response:TotalAmountDue" minOccurs="0"/>
+				<xsd:element ref="response:Messages" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

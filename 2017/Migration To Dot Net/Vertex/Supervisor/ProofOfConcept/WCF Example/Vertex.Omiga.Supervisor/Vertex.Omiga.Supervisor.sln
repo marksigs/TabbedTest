@@ -1,0 +1,113 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Service", "Vertex.Omiga.Supervisor.Service\Vertex.Omiga.Supervisor.Service.csproj", "{91468573-0DAF-418C-8E44-F1378D4A539B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Service.Host", "Vertex.Omiga.Supervisor.Service.Host\Vertex.Omiga.Supervisor.Service.Host.csproj", "{3EB74805-7DC1-4528-84BC-C8174F53FC9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Client", "Vertex.Omiga.Supervisor.Client\Vertex.Omiga.Supervisor.Client.csproj", "{4AF9D25D-3539-47EC-AC3C-D676BB20B948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.ConsoleHost", "Vertex.Omiga.Supervisor.ConsoleHost\Vertex.Omiga.Supervisor.ConsoleHost.csproj", "{89EF599E-D63A-495E-92DF-B6AC499FF3BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Service.Interface", "Vertex.Omiga.Supervisor.Service.Interface\Vertex.Omiga.Supervisor.Service.Interface.csproj", "{48F472D8-2434-4839-8874-E1B1D2111B14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Service.Types", "Vertex.Omiga.Supervisor.Service.Types\Vertex.Omiga.Supervisor.Service.Types.csproj", "{B673297B-BEA8-4DA4-9F15-C0497E6D7966}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Data", "Vertex.Omiga.Supervisor.Data\Vertex.Omiga.Supervisor.Data.csproj", "{340EB7CC-9245-496E-9D7D-05C373B857B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Business", "Vertex.Omiga.Supervisor.Business\Vertex.Omiga.Supervisor.Business.csproj", "{0C695819-8DDE-42A0-98DB-74261CE11A9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Business.Entities", "Vertex.Omiga.Supervisor.Business.Entities\Vertex.Omiga.Supervisor.Business.Entities.csproj", "{D778D7A9-F61A-4096-9887-FEF4C72F17F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertex.Omiga.Supervisor.Service.Tests", "Vertex.Omiga.Supervisor.Service.Tests\Vertex.Omiga.Supervisor.Service.Tests.csproj", "{489B69D6-2C6B-4202-B146-45C0F24B5AEE}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 11
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Vertex.Omiga.Supervisor.Service\\Vertex.Omiga.Supervisor.Service.csproj
+		SccLocalPath1 = .
+		SccProjectFilePathRelativizedFromConnection1 = Vertex.Omiga.Supervisor.Service\\
+		SccProjectUniqueName2 = Vertex.Omiga.Supervisor.Service.Host\\Vertex.Omiga.Supervisor.Service.Host.csproj
+		SccLocalPath2 = .
+		SccProjectFilePathRelativizedFromConnection2 = Vertex.Omiga.Supervisor.Service.Host\\
+		SccProjectUniqueName3 = Vertex.Omiga.Supervisor.Client\\Vertex.Omiga.Supervisor.Client.csproj
+		SccLocalPath3 = .
+		SccProjectFilePathRelativizedFromConnection3 = Vertex.Omiga.Supervisor.Client\\
+		SccProjectUniqueName4 = Vertex.Omiga.Supervisor.ConsoleHost\\Vertex.Omiga.Supervisor.ConsoleHost.csproj
+		SccLocalPath4 = .
+		SccProjectFilePathRelativizedFromConnection4 = Vertex.Omiga.Supervisor.ConsoleHost\\
+		SccProjectUniqueName5 = Vertex.Omiga.Supervisor.Service.Interface\\Vertex.Omiga.Supervisor.Service.Interface.csproj
+		SccLocalPath5 = .
+		SccProjectFilePathRelativizedFromConnection5 = Vertex.Omiga.Supervisor.Service.Interface\\
+		SccProjectUniqueName6 = Vertex.Omiga.Supervisor.Service.Types\\Vertex.Omiga.Supervisor.Service.Types.csproj
+		SccLocalPath6 = .
+		SccProjectFilePathRelativizedFromConnection6 = Vertex.Omiga.Supervisor.Service.Types\\
+		SccProjectUniqueName7 = Vertex.Omiga.Supervisor.Data\\Vertex.Omiga.Supervisor.Data.csproj
+		SccLocalPath7 = .
+		SccProjectFilePathRelativizedFromConnection7 = Vertex.Omiga.Supervisor.Data\\
+		SccProjectUniqueName8 = Vertex.Omiga.Supervisor.Business\\Vertex.Omiga.Supervisor.Business.csproj
+		SccLocalPath8 = .
+		SccProjectFilePathRelativizedFromConnection8 = Vertex.Omiga.Supervisor.Business\\
+		SccProjectUniqueName9 = Vertex.Omiga.Supervisor.Business.Entities\\Vertex.Omiga.Supervisor.Business.Entities.csproj
+		SccLocalPath9 = .
+		SccProjectFilePathRelativizedFromConnection9 = Vertex.Omiga.Supervisor.Business.Entities\\
+		SccProjectUniqueName10 = Vertex.Omiga.Supervisor.Service.Tests\\Vertex.Omiga.Supervisor.Service.Tests.csproj
+		SccLocalPath10 = .
+		SccProjectFilePathRelativizedFromConnection10 = Vertex.Omiga.Supervisor.Service.Tests\\
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91468573-0DAF-418C-8E44-F1378D4A539B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91468573-0DAF-418C-8E44-F1378D4A539B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91468573-0DAF-418C-8E44-F1378D4A539B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91468573-0DAF-418C-8E44-F1378D4A539B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB74805-7DC1-4528-84BC-C8174F53FC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB74805-7DC1-4528-84BC-C8174F53FC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB74805-7DC1-4528-84BC-C8174F53FC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB74805-7DC1-4528-84BC-C8174F53FC9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AF9D25D-3539-47EC-AC3C-D676BB20B948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AF9D25D-3539-47EC-AC3C-D676BB20B948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AF9D25D-3539-47EC-AC3C-D676BB20B948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AF9D25D-3539-47EC-AC3C-D676BB20B948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89EF599E-D63A-495E-92DF-B6AC499FF3BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EF599E-D63A-495E-92DF-B6AC499FF3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EF599E-D63A-495E-92DF-B6AC499FF3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EF599E-D63A-495E-92DF-B6AC499FF3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48F472D8-2434-4839-8874-E1B1D2111B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48F472D8-2434-4839-8874-E1B1D2111B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48F472D8-2434-4839-8874-E1B1D2111B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48F472D8-2434-4839-8874-E1B1D2111B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B673297B-BEA8-4DA4-9F15-C0497E6D7966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B673297B-BEA8-4DA4-9F15-C0497E6D7966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B673297B-BEA8-4DA4-9F15-C0497E6D7966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B673297B-BEA8-4DA4-9F15-C0497E6D7966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{340EB7CC-9245-496E-9D7D-05C373B857B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{340EB7CC-9245-496E-9D7D-05C373B857B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{340EB7CC-9245-496E-9D7D-05C373B857B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{340EB7CC-9245-496E-9D7D-05C373B857B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C695819-8DDE-42A0-98DB-74261CE11A9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C695819-8DDE-42A0-98DB-74261CE11A9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C695819-8DDE-42A0-98DB-74261CE11A9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C695819-8DDE-42A0-98DB-74261CE11A9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D778D7A9-F61A-4096-9887-FEF4C72F17F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D778D7A9-F61A-4096-9887-FEF4C72F17F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D778D7A9-F61A-4096-9887-FEF4C72F17F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D778D7A9-F61A-4096-9887-FEF4C72F17F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{489B69D6-2C6B-4202-B146-45C0F24B5AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{489B69D6-2C6B-4202-B146-45C0F24B5AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{489B69D6-2C6B-4202-B146-45C0F24B5AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{489B69D6-2C6B-4202-B146-45C0F24B5AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		UnLocked = True
+		Locked = False
+		ISWCFSolution = True
+	EndGlobalSection
+EndGlobal

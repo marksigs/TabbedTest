@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: CreateKFI WSDL
+
+History:
+
+Version		Author		Date					Description
+01.00   		TLiu			29/07/2005			Created.   
+01.01			IK				19/06/2006			EPSOM first cut
+01.02			SAB		19/09/2006			EP2_1
+01.03   		PSC			06/11/2006			EP2_41 Added CalculateKFIFees
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://CreateKFI.Omiga.vertex.co.uk" 
+    xmlns="http://CreateKFI.Omiga.vertex.co.uk" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.CreateKFI.Omiga.vertex.co.uk" 
+    xmlns:msgResponse="http://Response.CreateKFI.Omiga.vertex.co.uk" 
+    xmlns:msgCalcFeesRequest="http://Request.CalculateKFIFees.Omiga.vertex.co.uk" 
+    xmlns:msgCalcFeesResponse="http://Response.CalculateKFIFees.Omiga.vertex.co.uk" >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.CreateKFI.Omiga.vertex.co.uk" 
+            xmlns:msgResponse="http://Response.CreateKFI.Omiga.vertex.co.uk" 
+            xmlns:msgCalcFeesRequest="http://Request.CalculateKFIFees.Omiga.vertex.co.uk" 
+            xmlns:msgCalcFeesResponse="http://Response.CalculateKFIFees.Omiga.vertex.co.uk" >
+            <xs:import 
+                namespace="http://Request.CreateKFI.Omiga.vertex.co.uk" 
+                schemaLocation="CreateKFIRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.CreateKFI.Omiga.vertex.co.uk" 
+                schemaLocation="CreateKFIResponse.xsd" />
+              <xs:import 
+                namespace="http://Request.CalculateKFIFees.Omiga.vertex.co.uk" 
+                schemaLocation="CalculateKFIFeesRequest.xsd" />
+             <xs:import 
+                namespace="http://Response.CalculateKFIFees.Omiga.vertex.co.uk" 
+                schemaLocation="CalculateKFIFeesResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="CreateKFIRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="CreateKFIRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+    <wsdl:message name="CalculateKFIFeesSoapIn">
+        <wsdl:part name="request" element="msgCalcFeesRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="CalculateKFIFeesSoapOut">
+        <wsdl:part name="response" element="msgCalcFeesResponse:RESPONSE" />
+    </wsdl:message>
+    
+    <wsdl:portType name="CreateKFIPort">
+        <wsdl:operation name="createKFI">
+            <wsdl:input message="CreateKFIRequestSoapIn" />
+            <wsdl:output message="CreateKFIRequestSoapOut" />
+        </wsdl:operation>
+        <wsdl:operation name="calculateKFIFees">
+			<wsdl:input message="CalculateKFIFeesSoapIn"/>
+			<wsdl:output message="CalculateKFIFeesSoapOut"/>
+		</wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="CreateKFIPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="createKFI">
+             <soap:operation 
+                soapAction="http://Request.CreateKFI.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="calculateKFIFees">
+             <soap:operation 
+                soapAction="http://Request.CalculateKFIFees.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaCreateKFI">
+        <wsdl:port name="CreateKFIPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/CreateKFIWS/OmigaCreateKFIService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

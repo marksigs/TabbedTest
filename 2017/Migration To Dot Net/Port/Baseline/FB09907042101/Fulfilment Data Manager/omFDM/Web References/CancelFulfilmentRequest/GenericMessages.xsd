@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://generic.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema">
+  <complexType name="GenericRequestType" abstract="true">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="ClientDevice" type="string">
+        <annotation>
+          <documentation>This is an identifier that is used for Direct Gateway client devices. Examples are DAWT, WEB, IVR, EProcess.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="TellerID" nillable="true" type="string">
+        <annotation>
+          <documentation>A User ID for the end user. This is for a real user account, and is passed in every call to Profile and FileNet.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="TellerPwd" nillable="true" type="string">
+        <annotation>
+          <documentation>The corresponding password for the Teller ID. This too is passed in every call to Profile and FileNet.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="ProxyID" nillable="true" type="string">
+        <annotation>
+          <documentation>The User ID for a system account that is used to establish the connection to Profile.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="ProxyPwd" nillable="true" type="string">
+        <annotation>
+          <documentation>The corresponding password for the Proxy ID.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="Operator" nillable="true" type="string">
+        <annotation>
+          <documentation>The Operator ID for the agent (a DAWebTop or OCC user).</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="ProductType" nillable="true" type="string">
+        <annotation>
+          <documentation>Product type identifier (savings, mortgage, non-specific)</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="SessionID" nillable="true" type="string">
+        <annotation>
+          <documentation>Session identifier for correlating contact history entries in the CRM database (call, web)</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="CommunicationChannel" nillable="true" type="string">
+        <annotation>
+          <documentation>The channel by which the customer has contacted IDUK – e.g. EMAIL, PHONE etc.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="CommunicationDirection" nillable="true" type="string">
+        <annotation>
+          <documentation>The direction of the communication – e.g. IN or OUT of IDUK.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="ServiceName" nillable="true">
+        <simpleType>
+          <restriction base="string">
+            <pattern value=".*" />
+          </restriction>
+        </simpleType>
+      </element>
+      <element minOccurs="1" maxOccurs="1" name="CustomerNumber" type="string">
+        <annotation>
+          <documentation>Unique customer number (CIF). This is the PERSONID column in the PERSON CRM table.</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="GenericResponseType" abstract="true">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="ErrorCode" type="string">
+        <annotation>
+          <documentation>Used to indicate whether the call to the Direct Gateway Business Service was successful or otherwise. The convention is to use 0 to indicate success, 									and all others indicate failure (be they business or technical failure reasons). Non-zero error codes are typically defined in 												com.ingdirect.dg.error.CommandErrorMessage.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="1" name="ErrorMessage" nillable="true" type="string">
+        <annotation>
+          <documentation>Used when Error Code is non-zero, for logging purposes and to give further information to the client.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" maxOccurs="1" name="CustomerNumber" type="string">
+        <annotation>
+          <documentation>Unique customer number (CIF). This is important so that someone viewing the Direct Gateway XML log can correlate request and response documents.						</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="GenericRequest" type="generic:GenericRequestType" />
+  <element name="GenericResponse" type="generic:GenericResponseType" />
+</schema>

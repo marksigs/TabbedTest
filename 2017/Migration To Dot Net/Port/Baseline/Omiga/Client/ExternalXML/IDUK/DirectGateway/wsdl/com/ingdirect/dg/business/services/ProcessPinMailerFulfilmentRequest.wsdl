@@ -1,0 +1,110 @@
+<!-- ==============================================================================================
+Project;		ING Direct Diect Gateway (Project MARS)
+
+File:			D:/Source/REL_MARS_2.2_Merged_Transact/J2ee/DGW XML Tools/export/com/ingdirect/dg/services/ProcessPinMailerFulfilmentRequest.wsdl
+
+File Version:	0.0.1
+
+History;		version 0.0.1 - productionisation factoring - john_catlin@uk.ibm.com
+
+Type Versions; 	Type versioning is via namepaces. 	
+				Namespace versioning follows this pattern; "url/[major_version].[minor_version].[release_version]"
+
+Author(s):		tool generated using WSDLTypeCaster.java
+Template Author(s) david.bowley@ingdirect.co.uk
+				john_catlin@uk.ibm.com
+
+Description; 	Code classification; tool generated business service specific code.
+
+============================================================================================== -->
+
+<wsdl:definitions 
+	targetNamespace="http://interfaces"
+
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+
+	xmlns:impl="http://interfaces" 
+	xmlns:intf="http://interfaces" 
+
+	xmlns:msg="http://processpinmailerfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1"	
+>
+
+	<wsdl:types>
+		<schema targetNamespace="http://interfaces" 
+			xmlns="http://www.w3.org/2001/XMLSchema" 
+
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	
+			xmlns:impl="http://interfaces" 
+			xmlns:intf="http://interfaces" 
+			xmlns:msg="http://processpinmailerfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" 
+		
+			elementFormDefault="unqualified" 
+			attributeFormDefault="unqualified"
+			>
+		
+			<!-- start of type imports -->
+				<xsd:import namespace="http://processpinmailerfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" schemaLocation="ProcessPinMailerFulfilmentRequest.xsd"/>
+			<!-- end of type imports -->
+				
+			<!-- start of wire message definitions for the SOAP body -->
+				<element name="request">
+					<complexType>
+						<sequence>
+							<element ref="msg:ProcessPinMailerFulfilmentRequest"/>
+						</sequence>
+					</complexType>
+				</element>
+	
+				<element name="response">
+					<complexType>
+						<sequence>
+							<element ref="msg:ProcessPinMailerFulfilmentResponse"/>
+						</sequence>
+					</complexType>
+				</element>
+			<!-- end of wire message definitions for the SOAP body -->
+
+		</schema>
+	</wsdl:types>
+	
+	<wsdl:message name="executeRequest">
+		<wsdl:part name="parameters" element="intf:request"/>
+	</wsdl:message>
+
+	<wsdl:message name="executeResponse">
+		<wsdl:part name="parameters" element="intf:response"/>
+	</wsdl:message>
+
+	<wsdl:portType name="DirectGatewaySoapPortType">
+		<wsdl:operation name="execute">
+			<wsdl:input name="executeRequest" message="intf:executeRequest"/>
+			<wsdl:output name="executeResponse" message="intf:executeResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="DirectGatewaySoapBinding" type="intf:DirectGatewaySoapPortType">
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="execute">
+			<wsdlsoap:operation/>
+			<wsdl:input>
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<!-- this service definition is for the production service deployment -->
+	<wsdl:service name="DirectGatewaySoapService">
+		<wsdl:port name="DirectGatewaySoapEndpoint" binding="intf:DirectGatewaySoapBinding">
+			<wsdlsoap:address location="http://rdgsmarsdgw1/DGWWebServices/services/DirectGatewaySoapEndpoint"/>
+		</wsdl:port>
+	</wsdl:service>
+
+
+</wsdl:definitions>

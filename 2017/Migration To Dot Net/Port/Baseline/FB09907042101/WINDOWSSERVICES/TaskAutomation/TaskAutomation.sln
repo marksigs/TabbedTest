@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAutomation", "TaskAutomation.csproj", "{436F1C14-CAC7-4CA7-8C66-F64D09E66321}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omCore", "..\..\..\..\..\BASELINECODE\Core\DotNet\omCore\omCore.csproj", "{8BAF1158-F952-4949-A676-190B40617B1D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{436F1C14-CAC7-4CA7-8C66-F64D09E66321}.Debug.ActiveCfg = Debug|.NET
+		{436F1C14-CAC7-4CA7-8C66-F64D09E66321}.Debug.Build.0 = Debug|.NET
+		{436F1C14-CAC7-4CA7-8C66-F64D09E66321}.Release.ActiveCfg = Release|.NET
+		{436F1C14-CAC7-4CA7-8C66-F64D09E66321}.Release.Build.0 = Release|.NET
+		{8BAF1158-F952-4949-A676-190B40617B1D}.Debug.ActiveCfg = Debug|.NET
+		{8BAF1158-F952-4949-A676-190B40617B1D}.Debug.Build.0 = Debug|.NET
+		{8BAF1158-F952-4949-A676-190B40617B1D}.Release.ActiveCfg = Release|.NET
+		{8BAF1158-F952-4949-A676-190B40617B1D}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

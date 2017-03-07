@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+Type Versions; Type versioning is via namespaces. 
+                           All Direct Gateway types will have a version of 0.0.1 
+                           Type versions enable Direct Gateway to support multiple versions of the same type and service in the future
+
+Author(s):          Amit Badheka
+
+Description        This is an XML Messaging schema for the service that fetch customer details.
+============================================================================================== -->
+<schema targetNamespace="http://getCustomerOrProspectDetails.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:this="http://getCustomerOrProspectDetails.messages.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>Added annotations specific to Use Cases SRV01, APP15 and APP33</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.3 </documentation>
+		<documentation>Unused type BooleanType removed</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.4 </documentation>
+		<documentation>CustomerCategory name changes as it was mis-spelled</documentation>
+	</annotation>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<!-- start of type definitions -->
+	<complexType name="GetCustomerOrProspectDetailsRequestType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericRequestType"/>
+		</complexContent>
+	</complexType>
+	<complexType name="GetCustomerOrProspectDetailsResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="ClientDetails" type="common:ClientDetailsType">
+						<annotation>
+							<documentation>Elements required from within ClientDetailsType are: (NamePrefix, FirstName, MiddleName, LastName); Gender; DateOfBirth; Number; AddressDetail; PhoneDetail; DontSolicit; ClientStatus; 							SpecialNeed. Mapping: Individual fields are mapped within [CommonTypes] xsd file.
+							</documentation>
+						</annotation>
+					</element>
+					<element name="CustomerCategory">
+						<annotation>
+							<documentation>Refers to customer categories that can be applied to a CIF record. Include - Duplicate, Deceased, Business Closure, and Bankrupt.</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="10"/>
+								<pattern value="BNK|BC|DEC|DUP"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="KYCStatus">
+						<annotation>
+							<documentation>Refers to the KYC status of the customer. The population of this element is dependant on the customer status of the CIF record. If customer status = 1 (Prospect), this will be Blank If customer status = 2 (Customer), this will be populated with one of the following: Satisfied; Unsatisfied; 
+Pending; Under Review; Expired; Not Done</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="integer">
+								<totalDigits value="2"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="KYCAddressFlag">
+						<annotation>
+							<documentation>Either O = Outstanding, or C = Complete.</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="1"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="KYCIdentificationFlag">
+						<annotation>
+							<documentation>Either O = Outstanding, or C = Complete.</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="1"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="PasswordStatus">
+						<annotation>
+							<documentation>Prospect Password Exists: Refers to PasswordStatus.</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="1"/>
+								<pattern value="Y|N"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<!-- -->
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="GetCustomerOrProspectDetailsRequest" type="this:GetCustomerOrProspectDetailsRequestType"/>
+	<element name="GetCustomerOrProspectDetailsResponse" type="this:GetCustomerOrProspectDetailsResponseType"/>
+</schema>

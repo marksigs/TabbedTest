@@ -1,0 +1,482 @@
+/* Presentation stylesheet 
+   t/r/b/l
+*/
+
+#main {background-color: #FFF;}
+#menubar {background-color: #003399;padding-left:0.6em;color: white;height: 2.4em;}
+#menubar ul {margin:0;padding:0;padding-top:6px;list-style:none;}
+#menubar li {float:left;padding-right:2em;}
+#menubar a{color: #87A7CE;font-size: 0.9em;font-family: arial, verdana, sans-serif;font-weight: bold;}
+#menubar a:hover, #menubar a.selected{color: #fff;text-decoration: none;}
+#menubar a.selected{color: #fff;text-decoration: none;}
+
+#mainmenu {
+  margin: 0;
+  margin-left: 345px;
+  padding-left:5px;
+  padding-top:2px;
+  width:640px;
+  padding-bottom:2px;
+  background-color:rgb(209,221,237);
+}
+
+.displayimage 
+{
+  display : none; 
+}
+
+
+#submenu {
+  list-style-type: none;
+  margin: 0.2em 0;
+  padding: 0;
+}
+
+#submenu li {
+  float: left;
+  margin: 0em 0em 0em 0em;
+}
+
+#footer {
+  font-size: 0.9em;
+  padding: 1em 1em 1em 1em;
+  margin: 7em 0 5em 0;
+  height: 2em;
+  background-color: #FFF;
+  border-top: 1px solid #000;
+}
+
+#footer p {
+  margin: 0;
+  text-align: center;
+}
+
+.pagename {
+  float: left;
+  padding: 0 10em 0 0;
+}
+.footerlinks {
+  width: 40em;
+  float: left;
+}
+.w3clogo {
+  float: right;
+}
+
+#col1 p, #col1 hr{margin-left:0.3em;margin-right:0.3em;}
+
+#col2 {border-left:1px solid #fff;border-right: 1px solid #fff;}
+#col1 h2, #col1 h3{margin-left:0.3em;}
+#col1 h2 {margin-top:0.9em;}
+
+/*mini-columns that sit inside Col2 */
+.span1,.span2,.downloadbox{
+margin-right:1.2em;
+margin-bottom:1em;
+
+}
+
+.span1 {width:14.5em;float:left;background-color:#fff;}
+.span2 {width:30.8em;float:left;}
+.span3 {clear:both;margin-bottom:1em;}
+
+.downloadbox {width:14.5em;float:left;}
+.downloadbox img {float:left; margin:0 5px 40px 0;}
+.downloadbox p {font-size:0.8em;}
+
+
+/* to make a blue b/g area*/
+.focus {background-color:#e1e8f3;padding-top:0.5em;padding-bottom:0.5em;}
+.focus h1, .focus h2, .focus p {border:none;margin:0.5em;}
+
+#footer, .sidecol {
+  color: #333;
+}
+
+.sidebox {
+  padding: 0 0 0.5em 0;
+  margin: 1.2em 0 0 0;
+  width: 15.1em;  /* Box headers don't appear without width set */
+  background-color: #e1e8f3;
+}
+
+.sidebox p {
+  margin: 1em;
+}
+
+.sidebox h2 {
+  padding:  0.2em 0 0.2em 0.5em;
+  margin: 0px;
+  background-color: #C4D0E7;
+}
+
+.sidebox2 {
+  width: 15.1em;  /* Box headers don't appear without width set */
+}
+
+h2.form_heading {
+  background-color: #e1e8f3;
+  padding: 0.2em 0.3em 0.2em 0.5em;
+  font-size: 1.1em;
+  margin: 1.7em 0 0.5em 0;
+  border:none;
+}
+
+h3.form_heading {
+  font-style: normal;
+  padding: 0em 0.3em 0em 0.9em;
+  font-size: 0.9em;
+  margin: 0.5em 0 0.5em 0;
+  border-bottom: 1px solid #EEE;
+}
+
+h3.form_subheading {
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: #C4D0E7;
+  padding: 0.5em;
+}
+
+ul.sidemenu {
+  border-top:1px solid #ccc;
+  padding: 0;
+  margin: 2.7em 1em 0em 0.7em; 
+}
+
+.sidemenu li {
+  list-style-type: none;
+  padding: 0 0 0.7em 0;
+  color: #003399;
+  border-bottom:1px solid #ccc;
+  padding:0.5em 0 0.5em 0.5em;
+}
+
+.sidemenu li.selected {
+  background-color: #e1e8f3;
+  font-weight: bold;
+  padding-left: 0.7em;
+}
+
+.sidemenu li.expanded {
+  background-color: #f1f1f1;
+  font-weight: bold;
+  padding-left: 0.7em;
+}
+
+.sidemenu li.selected a {
+  font-weight: bold;
+  color: #C22F16;
+}
+
+.sidemenu li ul {
+  display: none;
+  list-style-type: none;
+  padding: 0.4em 0 0em 2em;
+}
+
+.sidemenu li.expanded ul {
+  display: block;
+  list-style-type: circle;
+  padding: 0.4em 0 0em 2em;
+}
+
+.sidemenu li ul li {
+  list-style-type: none;
+  padding: 0 0 0.1em 0.5em;
+  font-size: 0.9em;
+  font-weight: normal;
+  color: #000;
+  border:0px solid #ccc;
+}
+
+.sidemenu li ul li.selected {
+  list-style-type: none;
+  padding: 0.2em 0 0.2em 0.5em;
+  font-size: 0.9em;
+  color: #C22F16;
+}
+
+table.formtable {
+  width: 100%;
+  margin: 0 0 1em 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.formtable th {
+  text-align: center;
+  font-weight: normal;
+}
+
+.formtable td {
+  padding: 0.5em 1em 0.5em 0.5em;
+  margin: 0;
+  vertical-align: baseline;
+}
+
+.formtable td.prompt {
+  width: 13em;
+  text-align: right;
+  /*color:#003399; - color set on label element*/
+}
+
+.formtable td.wideprompt {
+  width: 35em;
+  text-align: left;
+}
+
+table.formtable_telephone {
+  margin: 0 0 1em 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.formtable_telephone td {
+  padding: 0.5em 0em 0.5em 0.5em;
+  margin: 0;
+  vertical-align: bottom;
+}
+
+.formtable_telephone td.prompt {
+  padding: 0.5em 1em 0.5em 0.5em;
+  width: 13em;
+  text-align: right;
+  color: #003399;
+}
+
+table.displaytable {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.displaytable td {
+  width: 25%;
+  padding: 0.3em 1em 0.3em 1em;
+  margin: 0;
+  vertical-align: top;
+}
+
+.displaytable td.prompt {
+  color: #003399;
+  font-weight: normal;
+}
+
+table.displaytable_small {
+  width: 50%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.displaytable_small td {
+  width: 25%;
+  padding: 0.5em 1em 0em 1em;
+  margin: 0;
+  vertical-align: top;
+}
+
+.displaytable_small td.prompt {
+  color: #003399;
+  font-weight: normal;
+}
+
+.dipnavigationbuttons {
+  text-align: right;
+  margin: 1.5em 0 1.5em 0;
+  font-size: 0.9em;
+}
+
+.dipnavigationbuttonswithbar {
+  text-align: right;
+  margin: 3em 0 1.5em 0;
+  background-color: #A8B9DC;
+  padding: 0.2em 0.3em 0.2em 0.5em;
+  font-size: 0.9em;
+}
+
+.validaddresseslist {
+  width: 20em;
+}
+
+.validationsummary {
+  padding: 1em 0 1em 0.5em;
+  color: red;
+  font-weight: bold;
+}
+
+.validationsummary li {
+  color: red;
+}
+
+.newsheading {
+  font-weight: bold;
+}
+
+.mandatoryfieldasterisk {
+  color: #FF0000;
+}
+
+.mandatoryfieldgroupasterisk {
+  color: blue;
+}
+
+.expandbutton {
+  background: #C4D0E7;
+  border: 1px solid #CCC;
+  padding: 0;
+  height: 1.4em;
+}
+
+table.minimumcriteriatable {
+  width: 90%;
+}
+
+table.minimumcriteriatable td {
+  padding: 0.3em 0.5em 0.3em 0;
+  vertical-align: top;
+}
+
+table.minimumcriteriatable td.date {
+  width: 10em;
+  text-align: right;
+  color: #CCC;
+}
+
+.minimumcriteriondetail {
+  color: #003399;
+  padding: 0.4em 0 0 2em;
+  font-size: 0.9em;
+}
+
+.helplink 
+{
+  float: right;
+  font-weight: bold;
+}
+
+
+table.infotable {width:100%;border-collapse:collapse;}
+table.infotable td {border-bottom:1px solid #ccc;padding:0.3em; vertical-align:bottom;}
+table.infotable th {color:#003399;background-color: #e1e8f3;text-align:left;}
+
+#columns .infotable td a {background-image:none;font-weight: bold;padding:0;}
+
+.newsdate{text-align:right;}
+.newscaption {font-size:0.9em;}
+
+/*fancy link:*/
+a.fancylink { 
+font-size:1em;
+color:#003399;
+text-decoration: none;
+background-color: transparent;
+padding-left:1em;
+background-image: url(../_gfx/arrow.gif);
+background-repeat: no-repeat;
+background-position: 0.1em 0.3em;}
+ 
+/*list o' links:*/
+.linklist{padding:0;margin:1em 0 1em 1em;list-style:none;}
+ 
+.linklist li  {
+font-weight:normal;
+background-image: url(../_gfx/arrow.gif);
+background-repeat: no-repeat;
+background-position: 0 0.2em;
+padding-left: 1em;
+}
+
+#columns .pagecounter {margin:0;padding:0;list-style:none;}
+#columns .pagecounter li {float:left;padding-right:0.5em;}
+#columns .pagecounter a {background-image:none;font-weight: bold;padding:0;}
+#columns .pagecounter a:hover  {color:#666;text-decoration:underline;background-color: transparent;}
+
+
+/*new form styles*/
+
+.fieldsetfooterbutton {text-align:right;margin:0;}
+.button_orphan {text-align:center;margin:0;margin-bottom:1em;font-size:0.9em}
+.resultlabel {color:#003399;text-align:right;}
+.pagefooterbutton {text-align:right;background-color: #A8B9DC;padding: 0.2em 0.3em 0.2em 0.5em;font-size: 1em;margin-top: 2em;}
+
+/* this needs a better name...maybe just leave this for inline styling: */
+.setR {text-align:right;}
+
+/*set standard form element widths*/
+.inputTiny {width:30px;}
+.inputShort {width:100px;}
+.inputLong {width:185px;}
+
+.warning {color:red; font-weight:bold;}
+.error { border:3px double red; padding:0.5em; font-weight:normal;text-align:center;font-weight:bold}
+.note {color:blue; font-weight:bold;}
+
+.lowlight {
+  color: #CCC;
+}
+
+.highlight {
+  color: darkred;
+}
+
+.highlightbold {
+  color: darkred;
+  font-weight: bold;
+}
+
+.forminfo {
+  margin: 1em;
+  font-size:0.9em
+}
+
+.document {
+  width:16em;
+  height:8em;
+}
+
+.document tr {
+  vertical-align: top;
+}
+
+.document td {
+  font-size: 0.9em
+}
+
+table.casetrackertable {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.casetrackertable th {
+  text-align: center;
+  vertical-align: top;
+  background-color: #E1E8F3;
+}
+
+.casetrackertable tr.item {
+  background-color: #FFF;
+}
+
+.casetrackertable tr.alternatingitem {
+  background-color: #EEE;
+}
+
+.casetrackertable td {
+  padding: 0.6em 0.8em 0.6em 0.8em;
+  margin: 0;
+}
+.applicationdeclaration 
+{
+   height: 150px;
+   overflow-x: hidden;
+   overflow-y: scroll;
+   overflow: -moz-scrollbars-vertical !important;
+}
+.notdisplayed
+{
+  display: none;
+}

@@ -1,0 +1,80 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B673297B-BEA8-4DA4-9F15-C0497E6D7966}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vertex.Omiga.Supervisor.Service.Types</RootNamespace>
+    <AssemblyName>Vertex.Omiga.Supervisor.Service.Types</AssemblyName>
+    <MinFrameworkVersionRequired>3.0</MinFrameworkVersionRequired>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contexts\BaseContext.cs" />
+    <Compile Include="Contexts\PagingContext.cs" />
+    <Compile Include="Contexts\ResponseContext.cs" />
+    <Compile Include="Contexts\RequestContext.cs" />
+    <Compile Include="Contexts\SortingContext.cs" />
+    <Compile Include="Entities\GlobalParameter.cs" />
+    <Compile Include="Entities\GlobalParameterMapping.cs" />
+    <Compile Include="Enums\GetGlobalParametersSortBy.cs" />
+    <Compile Include="Enums\SortOrder.cs" />
+    <Compile Include="Faults\OmigaSupervisorFault.cs" />
+    <Compile Include="Requests\BaseOperationRequest.cs" />
+    <Compile Include="Requests\BasePagedOperationRequest.cs" />
+    <Compile Include="Requests\DeleteGlobalParameterRequest.cs" />
+    <Compile Include="Requests\UpdateGlobalParameterRequest.cs" />
+    <Compile Include="Requests\CreateGlobalParameterRequest.cs" />
+    <Compile Include="Responses\BaseOperationResponse.cs" />
+    <Compile Include="Responses\BasePagedOperationResponse.cs" />
+    <Compile Include="Responses\DeleteGlobalParameterResponse.cs" />
+    <Compile Include="Responses\UpdateGlobalParameterResponse.cs" />
+    <Compile Include="Responses\CreateGlobalParameterResponse.cs" />
+    <Compile Include="Responses\GetGlobalParametersResponse.cs" />
+    <Compile Include="Requests\GetGlobalParametersRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vertex.Omiga.Supervisor.Business.Entities\Vertex.Omiga.Supervisor.Business.Entities.csproj">
+      <Project>{D778D7A9-F61A-4096-9887-FEF4C72F17F2}</Project>
+      <Name>Vertex.Omiga.Supervisor.Business.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

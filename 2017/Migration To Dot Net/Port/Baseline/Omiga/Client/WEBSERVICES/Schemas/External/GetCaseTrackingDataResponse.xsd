@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: FindCaseTraking- Response
+
+History:
+
+Version       Author         Date                 Description
+01.02           RMH            29/06/2005      Created 
+01.02           RHart          21/07/2005      Annotated
+01.03           TLiu             21/07/2005      Changed mars to IDUK in path, Named RESPONSEType, added MESSAGE & ERROR.
+01.04           TLiu             22/07/2005      Imported msgCommonTypes.
+01.05			TLiu				22/07/2005		Changed omiga to Omiga in name space.
+01.06			TLiu				26/07/2005		Fixed Name Spaces
+01.07			TLiu				28/07/2005		Deleted name space msgAppData.
+01.08			TLiu				28/07/2005		Renamed File from OPICaseTrackResponse.xsd to GetCaseTrackingDataResponse.xsd.
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.GetCaseTrackingData.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Response.GetCaseTrackingData.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:complexType name="BUSINESSAREAType">
+		<xs:sequence>
+			<xs:element name="GROUP" type="GROUPType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>many groups may exist within a status.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="BUSINESSAREA" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Name of the business area (configurable)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BUSINESSAREA_TEXT" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Configurable text displayed  based on status</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AREASTATUS" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>current status of the area based on the status of groups within the area</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CASETRACKSTATUSType">
+		<xs:sequence>
+			<xs:element name="BUSINESSAREA" type="BUSINESSAREAType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="FREEFORMATTEXT" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="GROUPType">
+		<xs:attribute name="GROUPNAME" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>name of the group</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="STATUS" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>current status of the group</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TEXT" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>configurable text based on the current status of the group.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="COMPLETIONDATE" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>date on which the status was moved to complete for the group</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="CASETRACKSTATUS" type="CASETRACKSTATUSType" minOccurs="0"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+</xs:schema>

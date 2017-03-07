@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+Type Versions; 0.0.1
+
+Author(s):          Deepak Shivaram 
+
+Description        This schema contains the request and response document required for updating a customer or prospect.
+
+============================================================================================== -->
+<schema targetNamespace="http://updatecustomerorprospect.customer.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:this="http://updatecustomerorprospect.customer.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<annotation>
+		<documentation>Document Version =  0.1</documentation>
+		<documentation>Initial Version</documentation>
+	</annotation>
+	<annotation>
+		<documentation>Document Version =  0.2</documentation>
+		<documentation>Added annotations for element names</documentation>
+	</annotation>
+	<annotation>
+		<documentation>Document Version =  0.3</documentation>
+		<documentation>Changed the namespace as per standards.</documentation>
+	</annotation>
+	<annotation>
+		<documentation>Document Version =  0.4</documentation>
+		<documentation>New element MortgagePassword, ClientStatus added</documentation>
+	</annotation>
+	<!-- start of type definitions -->
+	<complexType name="UpdateCustomerOrProspectRequestType" abstract="false">
+		<annotation>
+			<documentation>The Request type used for updating a customer or prospect.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="ClientDetail" type="common:ClientDetailsType">
+						<annotation>
+							<documentation>Elements required from within ClientDetailsType are: (NamePrefix, FirstName, MiddleName, LastName); Gender; DateOfBirth; Number; AddressDetail; PhoneDetail; DontSolicit; SpecialNeed. 							Mapping: Individual fields are mapped within [CommonTypes] xsd file.
+							</documentation>
+						</annotation>
+					</element>	
+					<element name="Target" type="common:TargetType">
+						<annotation>
+							<documentation>Description: Refers to customer status held under TargetType in [CommonTypes] xml file. 
+											 TargetTypes are either 'C' (Customer) or 'P' (Prospect).</documentation>
+						</annotation>
+					</element>
+					<element name="MortgagePassword">
+						<annotation>
+							<documentation>Mortgage password</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="30"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="UpdateCustomerOrProspectResponseType" abstract="false">
+		<annotation>
+			<documentation>The Response type used for updating a customer or prospect.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="CIF" type="integer" minOccurs="0">
+						<annotation>
+							<documentation>Description: The CIF number returned for the prospect record.</documentation>
+						</annotation>
+					</element>
+					<element name="ClientStatus">
+						<simpleType>
+							<restriction base="int"/>
+						</simpleType>
+					</element>
+					<element name="PasswordStatus">
+						<annotation>
+							<documentation>Prospect Password Exists: Refers to PasswordStatus.</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="1"/>
+								<pattern value="Y|N"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="UpdateCustomerOrProspectRequest" type="this:UpdateCustomerOrProspectRequestType">
+		<annotation>
+			<documentation>The Update Customer or Prospect Request.</documentation>
+		</annotation>
+	</element>
+	<element name="UpdateCustomerOrProspectResponse" type="this:UpdateCustomerOrProspectResponseType">
+		<annotation>
+			<documentation>The Update Customer or Prospect Response.</documentation>
+		</annotation>
+	</element>
+</schema>

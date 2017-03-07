@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions;  0.0.1 
+ 
+
+Author(s):         prasanta.sinha@ingdirect.co.uk
+ 
+
+Description       This schema defines the RequestInsurance Request and Response
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://requestinsurance.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ri="http://requestinsurance.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<!-- ====================== Document History  Starts====================================================-->
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>
+			1.	Removed RequestInsuranceResponseType
+			2.	RequestInsuranceResponse element type changed from RequestInsuranceResponseType to common:ConveyancerResponseType
+			3.   NewLender.MortgageAmount datatype changes to long and  total digits 11.
+			4.   PrevoiusLender.RedemptionAmount datatype changes to long and total digits 11.
+			5.   SecondCharge.RedemptionAmount datatype changes to long and total digits 11.
+
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.3 </documentation>
+		<documentation>
+			1.	RequestInsuranceRequestType.PreviousLender.Name size incresed from 20 to 60 characters
+			2.	RequestInsuranceRequestType.SecondCharge.Name size incresed from 20 to 60 characters			
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.4 </documentation>
+		<documentation>
+			GenericMessages.xsd import removed  to fix "Diamond Dependency" problem in .Net
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.5 </documentation>
+		<documentation>
+			RequestInsuranceResponseType  created.
+		</documentation>
+	</annotation>
+
+	<!-- ====================== Document History  Ends====================================================-->
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="../CommonTypes.xsd"/>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="../GenericMessages.xsd"/>
+	<complexType name="RequestInsuranceResponseType">
+		<annotation>
+			<documentation>This is a response type for RequestInsurance operation</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence minOccurs="0">
+					<element ref="common:ConveyancerResponse"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="RequestInsuranceRequestType">
+		<annotation>
+			<documentation>This is the request type from RequestInsurance operation</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="Header">
+						<complexType>
+							<complexContent>
+								<extension base="common:ConveyancerHeaderType">
+									<sequence>
+										<element name="SequenceNo" type="common:SequenceNoType"/>
+										<element name="HubRef">
+											<simpleType>
+												<restriction base="string">
+													<pattern value="\d{0,7}"/>
+												</restriction>
+											</simpleType>
+										</element>
+									</sequence>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+					<element name="Conveyancer">
+						<complexType>
+							<sequence>
+								<element name="Name">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="50"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="Address" type="common:StructuredAddressDetailsType" minOccurs="0">
+									<annotation>
+										<documentation>Note : Not Applicable </documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="CompletionDate" type="common:SimpleDateType" minOccurs="0"/>
+					<element name="Property">
+						<complexType>
+							<sequence>
+								<element name="Address" type="common:StructuredAddressDetailsType"/>
+								<element name="Tenure">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="20"/>
+											<pattern value="Freehold|Leasehold|Commonhold|Feudal|Fee-farm grant"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="Borrower">
+						<complexType>
+							<sequence>
+								<element name="Name" maxOccurs="4">
+									<complexType>
+										<sequence>
+											<element name="Title">
+												<simpleType>
+													<restriction base="string">
+														<maxLength value="10"/>
+													</restriction>
+												</simpleType>
+											</element>
+											<element name="Forename">
+												<simpleType>
+													<restriction base="string">
+														<maxLength value="41"/>
+													</restriction>
+												</simpleType>
+											</element>
+											<element name="Surname">
+												<simpleType>
+													<restriction base="string">
+														<maxLength value="30"/>
+													</restriction>
+												</simpleType>
+											</element>
+										</sequence>
+									</complexType>
+								</element>
+								<element name="Address" type="common:StructuredAddressDetailsType" minOccurs="0"/>
+								<element name="WorkPhone" type="common:PhoneDetailsType" minOccurs="0"/>
+								<element name="HomePhone" type="common:PhoneDetailsType" minOccurs="0"/>
+								<element name="MobilePhone" type="common:PhoneDetailsType" minOccurs="0"/>
+								<element name="EmailAddress" minOccurs="0">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="128"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="NewLender">
+						<complexType>
+							<sequence>
+								<element name="Name">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="50"/>
+											<pattern value="ING Direct"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="OfficeLocation">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="20"/>
+											<pattern value="Reading|Cardiff"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="ApplicationNo">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="10"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="MortgageAdvance">
+									<simpleType>
+										<restriction base="long">
+											<totalDigits value="11"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="PreviousLender" minOccurs="0">
+						<annotation>
+							<documentation>Mandatory if Unencumbered Flag = N</documentation>
+						</annotation>
+						<complexType>
+							<sequence>
+								<element name="Name">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="60"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="AccountNumber">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="20"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="RedemptionAmount">
+									<simpleType>
+										<restriction base="long">
+											<totalDigits value="11"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="SecondCharge" minOccurs="0" maxOccurs="unbounded">
+						<complexType>
+							<sequence>
+								<element name="Name">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="60"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="AccountNumber">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="20"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="RedemptionAmount">
+									<simpleType>
+										<restriction base="long">
+											<totalDigits value="11"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="UnencumberedFlag">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="1"/>
+								<minLength value="1"/>
+								<pattern value="Y|N"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="RequestInsuranceRequest" type="ri:RequestInsuranceRequestType">
+		<annotation>
+			<documentation>Request for Insurance Request</documentation>
+		</annotation>
+	</element>
+	<element name="RequestInsuranceResponse" type="ri:RequestInsuranceResponseType">
+		<annotation>
+			<documentation>Could either be error or acknowledgement to the request</documentation>
+		</annotation>
+	</element>
+</schema>

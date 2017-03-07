@@ -1,0 +1,5 @@
+VBGROUP 5.0
+StartupProject=Super\Supervisor.vbp
+Project=SecurityManager\Security.vbp
+Project=MSGOCX\MSGOCX.vbp
+Project=OSG Interface\OSGInterfaces.vbp

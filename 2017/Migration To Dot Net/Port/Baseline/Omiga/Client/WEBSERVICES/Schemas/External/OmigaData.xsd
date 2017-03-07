@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: OmigaData type, used e.g. in GetApplicationData response
+
+History:
+
+Version Author     Date       Description
+01.00   RMH 	   29/06/2005 Created
+01.01   RFairlie   05/07/2005 Updated for POC - changes to schema attributes.
+01.02   RFairlie   06/07/2005 Pasted in Rob Hart's changes (additional documentation).
+01.03   RFairlie   06/07/2005 APPLICATIONFACTFIND should not be a type extension.
+01.04   RFairlie   07/07/2005 Changed elementFormDefault to "qualified" 
+01.05   RFairlie   07/07/2005 Changed attributeFormDefault to "qualified" 
+01.06   RFairlie   07/07/2005 Uncommented sections which had previously been commented for simplification
+01.07   RFairlie   07/07/2005 Changed attributeFormDefault back to "unqualified" as it caused sample xml to be invalid
+01.08   RFairlie   07/07/2005 Avoid use of xs:group
+01.09   RFairlie   08/07/2005 Renamed omigaData to OmigaDataType for consistency and to avoid use of lower case
+01.10   RFairlie   08/07/2005 Renamed msgdt.xsd to msgDataTypes.xsd. All xsds now share same directory
+01.11   RFairlie   08/07/2005 Added extra response types for testing purposes
+01.12   RFairlie   08/07/2005 Moved the extra response types added for testing purposes into GetApplicationDataResponse.xsd
+01.13   RFairlie   09/07/2005 Changed elementFormDefault to "unqualified" (change had been lost) - nb this is essential for 
+                              correct serialization
+01.14   RFairlie   09/07/2005 Eliminate all OmigaDataType children except CUSTOMER for testing purposes
+01.15   RFairlie   09/07/2005 Eliminate all OmigaDataType children except CUSTOMER and APPLICATION for testing purposes
+01.16   RFairlie   09/07/2005 All elements and attributes need a type - marked APPLICATIONFACTFINDNUMBER as of type xs:int 
+                              (was missing in one place and a string in another)
+01.17   RFairlie   09/07/2005 Put all OmigaDataType children back in, having successfully tested the previous version  
+01.18	RHart	   14/07/2005 Add annotation for each item in MARS client Use Case App04b and App14
+                              Add new Type for FINANCIALSUMMARY
+01.19	RHart	   15/07/2005 Added new complex types for NameAndAddressDirectoy, ContactDetasils and PayeeHistory 
+                              (payeehistory will now be created at the same time as application legal rep.)
+01.20   TLiu       19/07/2005 Changed: mars to IDUK, msgDataTypes to msgCommonTypes, msgdt:date to msgdt:msgDate, etc.
+01.21	RHart	   21/07/2005 Re-structured the xsd so that Address, Account, Person, ContactDetails,
+							 NameAndAddressDirectory 
+                              and ThirdParty types all appear within the hierachy e.g. Employment has a ThirdParty has an 
+                              Address etc. In Addition addedd NewPropertyAddress.
+01.22   TLiu       22/07/2005 Moved somes types to msgCommonTypes.xsd.
+01.23   RFairlie   22/07/2005 Renamed file from GetApplicationData.xsd to OmigaData.xsd
+                              Changed namespace capitalisation to match internal guideline
+01.24	RHart	26/07/2005 Added the following nodes as new complx types Quotation, MortgageSubQuote, 
+						LoanComponent, MortgageOneOffCosts and ApplicationFeeType.
+01.25   TLiu       26/07/2005 Removed ADDRESS, THIRDPARTY, ACCOUNT, PERSON, CONTACTDETAILS from APPLICATIONType.
+01.26	TLiu		02/08/2005	Named complexTypes which had no names.
+01.27	IK			24/08/2005	multiple additions / updates from InterfaceChangeRegister.xls
+01.28	RHart	25/08/2005 Made Account, MortgageAccount, LoansLiabilities, Accounrelationship optional
+01.29   Rhart	  	25/08/2005 Made Account, MortgageAccount, LoansLiabilities, Accounrelationship unbounded
+01.30	IK			09/09/2005		(2.23) re-structured for inherited key values,
+												CUSTOMERROLE now child of APPLICATIONFACTFIND
+												CUSTOMER now child of CUSTOMERROLE
+												CUSTOMERVERSION now child of CUSTOMER
+												FINANCIALSUMMARY, NEWPROPERTYROOMTYPE, APPLICATIONBANKBUILDINGSOC
+												now child of APPLICATIONFACTFIND
+01.31	TLiu		14/09/2005	Added THIRDPARTY to APPLICATIONBANKBUILDINGSOC, etc.
+01.32	RHart	17/09/2005	Added missing attributes to CustomerVersionType
+01.33	RHart	08/10/2005	Changed CustomerWrapUpDetails to match Omiga
+01.33	RHart	08/10.2005	Changes the optionality on Keys and Sequence numbers as detailed in the Issues Register and 
+											Ingestion Spec respectively
+1.34		RHart	14/10/2005	Make CustomerRole/:CustomerRoleType required
+											Make Account / Mortgage Account / Loansliabilities a 1 -1 relationship in terms of cardinlity
+											Make CustomerNumber required in AccountRelationship where AccountRelationship is present
+											Add a CurrentAddressIndictor to the MortgageAccount in the xsd for use in the ingestion rule
+2.01		IK			09/11/2005	MAR429 remove 'required' from attributes not present on initial input
+2.02		IK			16/11/2005	MAR594 NEWPROPERTYADDRESS now optional
+2.03		GHun	23/01/2006	MAR1068 Added EARLIESTCOMPLETIONDATE to APPLICATIONFACTFIND
+2.04		PE		13/03/2006	MAR1061
+2.05		PE		20/03/2006	MAR1437 Added CARDTYPE to LOANSLIABILITIES
+2.06		PE		20/03/2006	MAR1061 Changed MORTGAGESUBQUOTE.PURCHASEPRICE to MORTGAGESUBQUOTE.PURCHASEPRICEORESRTIMATEDVALUE
+2.07     RFairlie 21/03/2006 MAR1474 File was missed from build
+================================================================================-->
+<xs:schema xmlns="http://OmigaData.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://OmigaData.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<!-- <xs:group name="OmigaData"> -->
+	<xs:complexType name="OmigaDataType">
+		<xs:sequence>
+			<xs:element name="APPLICATION" type="APPLICATIONType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONType">
+		<xs:sequence>
+			<xs:element name="APPLICATIONFACTFIND" type="APPLICATIONFACTFINDType"/>
+			<xs:element name="PAYMENTRECORD" type="PAYMENTRECORDType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PAYEEHISTORY" type="PAYEEHISTORYType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="APPLICATIONFEETYPE" type="APPLICATIONFEETYPEType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="PACKAGENUMBER" type="xs:string"/>
+		<xs:attribute name="CORRESPONDENCESALUTATION" type="xs:string"/>
+		<xs:attribute name="ACCOUNTGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="APPLICATIONDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="TYPEOFBUYER" type="xs:int"/>
+		<xs:attribute name="CHANNELID" type="xs:string"/>
+		<xs:attribute name="INTERMEDIARYGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="OTHERSYSTEMACCOUNTNUMBER" type="xs:string"/>
+		<xs:attribute name="INGESTIONAPPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="EXTERNALSYSTEMCREDITSCORE" type="xs:string"/>
+		<xs:attribute name="OTHERSYSTEMROLLNUMBER" type="xs:string"/>
+		<xs:attribute name="PIPELINEBTLNUMBER" type="xs:int"/>
+		<xs:attribute name="PIPELINEBTLBALANCE" type="xs:int"/>
+		<xs:attribute name="COMPLETEDBTLNUMBER" type="xs:int"/>
+		<xs:attribute name="COMPLETEDBTLBALANCE" type="xs:int"/>
+		<xs:attribute name="PIPELINERESIDENTIALBALANCE" type="xs:int"/>
+		<xs:attribute name="COMPLETEDRESIDENTIALBALANCE" type="xs:int"/>
+		<xs:attribute name="PIPELINEMANDATEBALANCE" type="xs:int"/>
+		<xs:attribute name="PIPELINEAGGREGATEDLTV" type="xs:int"/>
+		<xs:attribute name="LASTACCOUNTDOWNLOADDATE" type="msgdt:msgDateTime"/>
+		<xs:attribute name="SLAEXPIRYDATE" type="msgdt:msgDate"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONLEGALREPType">
+		<xs:sequence>
+			<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0"/>
+			<xs:element name="NAMEANDADDRESSDIRECTORY" type="msgdt:NAMEANDADDRESSDIRECTORYType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="SEPARATELEGALREPRESENTATIVE" type="xs:short"/>
+		<xs:attribute name="THIRDPARTYGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="DIRECTORYGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="CONTACTDETAILSGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="DXID" type="xs:string"/>
+		<xs:attribute name="DXLOCATION" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFACTFINDType">
+		<xs:sequence>
+			<xs:element name="APPLICATIONLEGALREP" type="APPLICATIONLEGALREPType" minOccurs="0"/>
+			<xs:element name="NEWPROPERTY" type="NEWPROPERTYType" minOccurs="0"/>
+			<xs:element name="OTHERRESIDENT" type="OTHERRESIDENTType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="QUOTATION" type="QUOTATIONType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="APPLICATIONSTAGE" type="APPLICATIONSTAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="APPLICATIONUNDERWRITING" type="APPLICATIONUNDERWRITINGType" minOccurs="0"/>
+			<xs:element name="FINANCIALSUMMARY" type="FINANCIALSUMMARYType" minOccurs="0"/>
+			<xs:element name="APPLICATIONBANKBUILDINGSOC" type="APPLICATIONBANKBUILDINGSOCType" minOccurs="0"/>
+			<xs:element name="CUSTOMERROLE" type="CUSTOMERROLEType" maxOccurs="5"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="ACTIVEQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="APPLICATIONCURRENCY" type="xs:int"/>
+		<xs:attribute name="ACCEPTEDQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="ADDITIONALINTERMEDIARYDETAILS" type="xs:string"/>
+		<xs:attribute name="ATTITUDETOBORROWINGSCORE" type="xs:int"/>
+		<xs:attribute name="CREDITSCORE" type="xs:int"/>
+		<xs:attribute name="CREDITSTATUS" type="xs:string"/>
+		<xs:attribute name="CURRENTTOTALLOANS" type="xs:float"/>
+		<xs:attribute name="DIRECTINDIRECTBUSINESS" type="xs:int"/>
+		<xs:attribute name="FUTURETOTALLOANS" type="xs:float"/>
+		<xs:attribute name="INTRODUCINGAGENTREF" type="xs:string"/>
+		<xs:attribute name="LENDERCODE" type="xs:string"/>
+		<xs:attribute name="MARKETINGSOURCE" type="xs:int"/>
+		<xs:attribute name="MAXIMUMBORROWINGAMOUNT" type="xs:int"/>
+		<xs:attribute name="MIRASOPTION1AMOUNT" type="xs:int"/>
+		<xs:attribute name="MIRASOPTION2AMOUNT" type="xs:int"/>
+		<xs:attribute name="MIRASOPTION3AMOUNT" type="xs:int"/>
+		<xs:attribute name="NEXTQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="NUMBEROFAPPLICANTS" type="xs:int"/>
+		<xs:attribute name="NUMBEROFGUARANTORS" type="xs:int"/>
+		<xs:attribute name="OUTSTANDINGLOANAMOUNT" type="xs:int"/>
+		<xs:attribute name="APPLICATIONPACKAGEINDICATOR" type="xs:short"/>
+		<xs:attribute name="PURCHASEPRICEORESTIMATEDVALUE" type="xs:int"/>
+		<xs:attribute name="QUICKQUOTEQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="RECOMMENDEDQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="SPECIALSCHEME" type="xs:int"/>
+		<xs:attribute name="TOTALMONTHLYREPAYMENT" type="xs:float"/>
+		<xs:attribute name="TYPEOFAPPLICATION" type="xs:int"/>
+		<xs:attribute name="NATUREOFLOAN" type="xs:int"/>
+		<xs:attribute name="GROUPCONNECTIONINDICATOR" type="xs:short"/>
+		<xs:attribute name="BCDECLARATIONNOTES" type="xs:string"/>
+		<xs:attribute name="CLIENTBCINDICATOR" type="xs:short"/>
+		<xs:attribute name="CLIENTPPINDICATOR" type="xs:short"/>
+		<xs:attribute name="APPLICATIONNOTES" type="xs:string"/>
+		<xs:attribute name="INTENDEDAPPLICANTCOUNT" type="xs:int"/>
+		<xs:attribute name="APPLICATIONAPPROVALDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="APPLICATIONAPPROVALUSERID" type="xs:string"/>
+		<xs:attribute name="APPLICATIONAPPROVALUNITID" type="xs:string"/>
+		<xs:attribute name="APPLICATIONRECOMMENDEDDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="APPLICATIONRECOMMENDEDUSERID" type="xs:string"/>
+		<xs:attribute name="APPLICATIONRECOMMENDEDUNITID" type="xs:string"/>
+		<xs:attribute name="FURTHERADVANCETERMIND" type="xs:short"/>
+		<xs:attribute name="FURTHERADVANCEREPTYPEIND" type="xs:short"/>
+		<xs:attribute name="CUSTOMERCHANGEIND" type="xs:short"/>
+		<xs:attribute name="APPANDBUYERTYPECONFIRMEDIND" type="xs:short"/>
+		<xs:attribute name="INTRODUCERIDLEVEL1" type="xs:string"/>
+		<xs:attribute name="INTRODUCERIDLEVEL2" type="xs:string"/>
+		<xs:attribute name="INTRODUCERIDLEVEL3" type="xs:string"/>
+		<xs:attribute name="INTRODUCERMCCBLEVEL1" type="xs:string"/>
+		<xs:attribute name="INTRODUCERMCCBLEVEL2" type="xs:string"/>
+		<xs:attribute name="INTRODUCERMCCBLEVEL3" type="xs:string"/>
+		<xs:attribute name="INTRODUCERCORRESPONDINDLEVEL1" type="xs:short"/>
+		<xs:attribute name="INTRODUCERCORRESPONDINDLEVEL2" type="xs:short"/>
+		<xs:attribute name="INTRODUCERCORRESPONDINDLEVEL3" type="xs:short"/>
+		<xs:attribute name="OPTOUTINDICATOR" type="xs:short"/>
+		<xs:attribute name="EXTERNALSYSTEMTPDDECLARATION" type="xs:short"/>
+		<xs:attribute name="INTRODUCERLEVEL1CODE" type="xs:string"/>
+		<xs:attribute name="INTRODUCERLEVEL1FEES" type="xs:float"/>
+		<xs:attribute name="INTRODUCERLEVEL1INDUCEMENTVALUE" type="xs:float"/>
+		<xs:attribute name="INTRODUCERLEVEL2CODE" type="xs:string"/>
+		<xs:attribute name="INTRODUCERLEVEL2FEES" type="xs:float"/>
+		<xs:attribute name="INTRODUCERLEVEL2INDUCEMENTVALUE" type="xs:float"/>
+		<xs:attribute name="INTRODUCERLEVEL3CODE" type="xs:string"/>
+		<xs:attribute name="INTRODUCERLEVEL3FEES" type="xs:float"/>
+		<xs:attribute name="INTRODUCERLEVEL3INDUCEMENTVALUE" type="xs:float"/>
+		<xs:attribute name="FIRMFSANUMBERLEVEL1" type="xs:int"/>
+		<xs:attribute name="FIRMFSANUMBERLEVEL2" type="xs:int"/>
+		<xs:attribute name="FIRMFSANUMBERLEVEL3" type="xs:int"/>
+		<xs:attribute name="LEVELOFADVICE" type="xs:int"/>
+		<xs:attribute name="APPLICATIONRECEIVEDDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="ESTIMATEDCOMPLETIONDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="ADDITIONALBROKERFEE" type="xs:int"/>
+		<xs:attribute name="ADDITIONALBROKERFEEDESC" type="xs:string"/>
+		<xs:attribute name="KFIRECEIVEDBYALLAPPS" type="xs:short"/>
+		<xs:attribute name="LANDUSAGE" type="xs:short"/>
+		<xs:attribute name="REGULATIONINDICATOR" type="xs:int"/>
+		<xs:attribute name="MAINRESIDENCEIND" type="xs:short"/>
+		<xs:attribute name="CREDITCHECKWILLINGTOPROCEED" type="xs:short"/>
+		<xs:attribute name="WRAPUPPASSWORDTAKEN" type="xs:boolean"/>
+		<xs:attribute name="SALESLEADSTAUS" type="xs:int"/>
+		<xs:attribute name="ARRANGEOWNCOVERINDICATOR" type="xs:boolean"/>
+		<xs:attribute name="EARLIESTCOMPLETIONDATE" type="msgdt:msgDate"/>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERType">
+		<xs:sequence>
+			<xs:element name="CUSTOMERVERSION" type="CUSTOMERVERSIONType"/>
+		</xs:sequence>
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="OTHERSYSTEMCUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="OTHERSYSTEMTYPE" type="xs:int" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string"/>
+		<xs:attribute name="INTERMEDIARYGUID" type="msgdt:msgGuid" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERVERSIONType">
+		<xs:sequence>
+			<xs:element name="CUSTOMERTELEPHONENUMBER" type="CUSTOMERTELEPHONENUMBERType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="CUSTOMERADDRESS" type="CUSTOMERADDRESSType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ALIAS" type="ALIASType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="EMPLOYMENT" type="EMPLOYMENTType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="BANKCREDITCARD" type="BANKCREDITCARDType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Credit and Store Card Details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CUSTOMERWRAPUPDETAILS" type="CUSTOMERWRAPUPDETAILSType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ACCOUNT" type="ACCOUNTType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int"/>
+		<xs:attribute name="CAROWNER" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CONTACTEMAILADDRESS" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3 Email Address</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CORRESPONDENCESALUTATION" type="xs:string"/>
+		<xs:attribute name="DATEOFBIRTH" type="msgdt:msgDate">
+			<xs:annotation>
+				<xs:documentation>Will be retrieved directly from CRM as a part of the CIF (must be enetered on registration)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FIRSTFORENAME" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>CIF Data</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="GENDER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>CIF Data</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MAILSHOTREQUIRED" type="xs:short"/>
+		<xs:attribute name="MARITALSTATUS" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>CIF Data</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MEMBEROFSTAFF" type="xs:short"/>
+		<xs:attribute name="NATIONALINSURANCENUMBER" type="xs:string"/>
+		<xs:attribute name="NATIONALITY" type="xs:int"/>
+		<xs:attribute name="OTHERFORENAMES" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>CIF Data</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SECONDFORENAME" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>CIF Data</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SMOKERSTATUS" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SURNAME" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>CIF Data</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TITLE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>CIF Data</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TITLEOTHER" type="xs:string"/>
+		<xs:attribute name="YEARADDEDTOVOTERSROLL" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTSYNCJOBTITLE" type="xs:string"/>
+		<xs:attribute name="MOTHERSMAIDENNAME" type="xs:string"/>
+		<xs:attribute name="NORMALLYRESIDENTINUK" type="xs:short"/>
+		<xs:attribute name="GOODHEALTH" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ALIASINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3 Changed Names in Last 3 Years </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="UKRESIDENTINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DEPENDANTINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3 Dependants</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SUFFICIENTREPAYMENTINDICATOR" type="xs:short"/>
+		<xs:attribute name="PREFERREDNAME" type="xs:string"/>
+		<xs:attribute name="EMAILPREFERRED" type="xs:short"/>
+		<xs:attribute name="NUMBEROFDEPENDANTS" type="xs:int"/>
+		<xs:attribute name="CREDITSEARCH" type="xs:short"/>
+		<xs:attribute name="FULLIDONICBS" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="IDWEIGHTING" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="IDCOMBINATION" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="WHOSEENCUSTOMER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HOWCUSTOMERIDSEEN" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NEWTOECUSTOMERIND" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OWNMORTGAGELENDERIND" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MORTGAGEREPAID" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MORTGAGELET" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AXESSAPPLICATION" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Currently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TIMEATBANKYEARS" type="xs:short"/>
+		<xs:attribute name="TIMEATBANKMONTHS" type="xs:short"/>
+		<xs:attribute name="CUSTOMERSTATUS" type="xs:string" use="optional"/>
+		<xs:attribute name="CUSTOMERKYCSTATUS" type="xs:string" use="optional"/>
+		<xs:attribute name="CUSTOMERKYCADDRESSFLAG" type="xs:string" use="optional"/>
+		<xs:attribute name="CUSTOMERKYCIDFLAG" type="xs:string" use="optional"/>
+		<xs:attribute name="CUSTOMERCATEGORY" type="xs:string" use="optional"/>
+		<xs:attribute name="CUSTOMERDORMANTACCOUNTIND" type="xs:string" use="optional"/>
+		<xs:attribute name="WRAPUPEMAILADDRESS" type="xs:string" use="optional"/>
+		<xs:attribute name="WRAPUPEMAILPREFERRED" type="xs:boolean" use="optional"/>
+		<xs:attribute name="SPECIALNEEDS" type="xs:short"/>
+		<xs:attribute name="PROSPECTPASSWORDTAKEN" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERTELEPHONENUMBERType">
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Customer Identifier</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Version of the Customer Data assocaiated with the Current Application</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TELEPHONESEQUENCENUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Unique Identifier with the record</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TELEPHONENUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC APP04b 10.3 Home, Work, Mobile No</xs:documentation>
+				<xs:documentation>Stores the actual telephone number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="USAGE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>ING UC APP04b 10.3 Defines the type of number e.g. Home, Work, Mobile</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CONTACTTIME" type="xs:string"/>
+		<xs:attribute name="EXTENSIONNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC APP04b 10.3 Ext: Stores any Extension Number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PREFERREDMETHODOFCONTACT" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Stores the overall Preferred Method of Contact for the application</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="COUNTRYCODE" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Not required by ING</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AREACODE" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Area Code part of the Phone Number as per ING UC APP04b14.3.2 UI.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERROLEType">
+		<xs:sequence>
+			<xs:element name="CUSTOMER" type="CUSTOMERType"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Application on which the customer has a role</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Currently only one Fact Find per Application is allowed so will allways = "1"</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Unique Identifier for the customer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The version of customer related data usedon a specific application.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERROLETYPE" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>The role which the customer has on the specific application</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERORDER" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>The order 1st, 2nd app that the customer has on the application.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERADDRESSType">
+		<xs:sequence>
+			<xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Address is customer data so not joint address ind is held</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int"/>
+		<xs:attribute name="CUSTOMERADDRESSSEQUENCENUMBER" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Unique identifier for the record</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ADDRESSTYPE" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>Current Previous address type 1 / 2 respectively.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DATEMOVEDIN" type="msgdt:msgDate" use="optional">
+			<xs:annotation>
+				<xs:documentation>ING UC APP04b 10.3 Date From</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DATEMOVEDOUT" type="msgdt:msgDate" use="optional">
+			<xs:annotation>
+				<xs:documentation>Required for Previous Address can be</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NATUREOFOCCUPANCY" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3 Residential Status</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ADDRESSGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Links to the addresss details of the property</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LASTAMENDEDDATE" type="msgdt:msgDate" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ALIASType">
+		<xs:sequence>
+			<xs:element name="PERSON" type="msgdt:PERSONType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Unique Identifer for the Customer to which this record relates</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Unique identifer of the version of the customer data to which the record relates</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ALIASSEQUENCENUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>record Identifier within Customer and Customer Version</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ALIASTYPE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Type of Alias record based on combo value e.g. 10 = alias</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DATEOFCHANGE" type="msgdt:msgDate"/>
+		<xs:attribute name="METHODOFCHANGE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>based on combo value e.g. 1= married </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PERSONGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>unique identifier of linked person guid</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CREDITSEARCH" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="EMPLOYMENTType">
+		<xs:sequence>
+			<xs:element name="EARNEDINCOME" type="EARNEDINCOMEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="EMPLOYEDDETAILS" type="EMPLOYEDDETAILSType" minOccurs="0"/>
+			<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The ident of the customer to whom the record is related</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>The version of the cusomter data with which the </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EMPLOYMENTSEQUENCENUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Unique identifier for the record</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DATELEFTORCEASEDTRADING" type="msgdt:msgDate">
+			<xs:annotation>
+				<xs:documentation>if type is previous employment should be populated</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DATESTARTEDORESTABLISHED" type="msgdt:msgDate">
+			<xs:annotation>
+				<xs:documentation>Used to establish Time in Current Employment App04b </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EMPLOYMENTSTATUS" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Employment status App04b status type subject to configuration</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EMPLOYMENTTYPE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Employment Type App04b status type subject to configuration</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="INDUSTRYTYPE" type="xs:int"/>
+		<xs:attribute name="JOBTITLE" type="xs:string"/>
+		<xs:attribute name="MAINSTATUS" type="xs:short"/>
+		<xs:attribute name="OCCUPATIONTYPE" type="xs:int"/>
+		<xs:attribute name="NETMONTHLYINCOME" type="xs:float"/>
+		<xs:attribute name="ACCOUNTANTGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="DIRECTORYGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Link to the Directory record where the Emploer is in the Directory</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="THIRDPARTYGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Link to ThirdParty record where the employer is not in the Directory</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OTHEREMPLOYMENTSTATUS" type="xs:string"/>
+		<xs:attribute name="SHARESOWNEDINDICATOR" type="xs:short"/>
+	</xs:complexType>
+	<xs:complexType name="EARNEDINCOMEType">
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Unique identifier for the customer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Version of the customer data aginst which the record is held.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EMPLOYMENTSEQUENCENUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Link to employment record</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EARNEDINCOMESEQUENCENUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Unique Sequence for the record used with Customer version and Customer Number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EARNEDINCOMEAMOUNT" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Amount recorded (Basic Annual Gross) Ing APP04b</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EARNEDINCOMETYPE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>e.g. Basic Gross,Shift, Overtime, Commission etc.. as App04b</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PAYMENTFREQUENCYTYPE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>e.g. Annually</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="EMPLOYEDDETAILSType">
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int"/>
+		<xs:attribute name="EMPLOYMENTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="NOTICEPROBLEMINDICATOR" type="xs:short"/>
+		<xs:attribute name="PAYROLLNUMBER" type="xs:string"/>
+		<xs:attribute name="PERCENTSHARESHELD" type="xs:int"/>
+		<xs:attribute name="PROBATIONARYINDICATOR" type="xs:short"/>
+		<xs:attribute name="P60SEENINDICATOR" type="xs:short"/>
+		<xs:attribute name="WAGESLIPSSEENINDICATOR" type="xs:short"/>
+		<xs:attribute name="EMPLOYMENTRELATIONSHIPIND" type="xs:short"/>
+	</xs:complexType>
+	<xs:complexType name="BANKCREDITCARDType">
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int"/>
+		<xs:attribute name="SEQUENCENUMBER" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Unique ID for the record in conjunction with customer and version number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ADDITIONALDETAILS" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Free Text length 255</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ADDITIONALINDICATOR" type="xs:short"/>
+		<xs:attribute name="AVERAGEMONTHLYREPAYMENT" type="xs:float"/>
+		<xs:attribute name="CARDPROVIDER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Provider Name</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CARDTYPE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Combo value e.g. 10 = Visa</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOTALOUTSTANDINGBALANCE" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>Amount outstanding on the card</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CARDTYPEOTHER" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERWRAPUPDETAILSType">
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string"/>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:int"/>
+		<xs:attribute name="WRAPUPSEQUENCENUMBER" type="xs:string"/>
+		<xs:attribute name="TELEPHONENUMBER" type="xs:string"/>
+		<xs:attribute name="USAGE" type="xs:int"/>
+		<xs:attribute name="CONTACTTIME" type="xs:string"/>
+		<xs:attribute name="EXTENSIONNUMBER" type="xs:string"/>
+		<xs:attribute name="PREFERREDMETHODOFCONTACT" type="xs:short"/>
+		<xs:attribute name="COUNTRYCODE" type="xs:string"/>
+		<xs:attribute name="AREACODE" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="LOANSLIABILITIESType">
+		<xs:sequence>
+			<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType"/>
+		</xs:sequence>
+		<xs:attribute name="ADDITIONALDETAILS" type="xs:string"/>
+		<xs:attribute name="ADDITIONALINDICATOR" type="xs:short"/>
+		<xs:attribute name="ENDDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="LOANREPAYMENTINDICATOR" type="xs:short"/>
+		<xs:attribute name="MONTHLYREPAYMENT" type="xs:float"/>
+		<xs:attribute name="TOBEREPAIDINDICATOR" type="xs:short"/>
+		<xs:attribute name="TOTALOUTSTANDINGBALANCE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Amount of Agreement</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="AGREEMENTTYPE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Combo Value e.g. 1 = Personal Loan</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ACCOUNTGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="ORIGINALLOANAMOUNT" type="xs:int"/>
+		<xs:attribute name="UNASSIGNED" type="xs:short"/>
+		<xs:attribute name="CREDITSEARCH" type="xs:short"/>
+		<xs:attribute name="CARDTYPE" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYType">
+		<xs:sequence>
+			<xs:element name="NEWPROPERTYADDRESS" type="NEWPROPERTYADDRESSType" minOccurs="0"/>
+			<xs:element name="NEWPROPERTYROOMTYPE" type="NEWPROPERTYROOMTYPEType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="ANYOTHERRESIDENTSINDICATOR" type="xs:short"/>
+		<xs:attribute name="APPLICANTTOOCCUPYINDICATOR" type="xs:short"/>
+		<xs:attribute name="BUILDINGCONSTRUCTIONTYPE" type="xs:int"/>
+		<xs:attribute name="CURRENTLYOCCUPIEDINDICATOR" type="xs:short"/>
+		<xs:attribute name="DESCRIPTIONOFPROPERTY" type="xs:int"/>
+		<xs:attribute name="DISCOUNTAMOUNT" type="xs:int"/>
+		<xs:attribute name="EXLOCALAUTHORITYINDICATOR" type="xs:short"/>
+		<xs:attribute name="EXTRASINCLUDEDDETAILS" type="xs:string"/>
+		<xs:attribute name="FAMILYSALEINDICATOR" type="xs:short"/>
+		<xs:attribute name="FIRSTOCCUPIERINDICATOR" type="xs:short"/>
+		<xs:attribute name="FLATSERVICEDBYLIFTINDICATOR" type="xs:short"/>
+		<xs:attribute name="FLOORNUMBER" type="xs:int"/>
+		<xs:attribute name="GRANTAMOUNT" type="xs:int"/>
+		<xs:attribute name="GRANTAPPLIEDFORIND" type="xs:short"/>
+		<xs:attribute name="GUARANTEEEXPIRYDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="HOUSEBUILDERSGUARANTEE" type="xs:int"/>
+		<xs:attribute name="LETORPARTLETINDICATOR" type="xs:short"/>
+		<xs:attribute name="LOCATIONOFGARAGETYPE" type="xs:int"/>
+		<xs:attribute name="NEWPROPERTYINDICATOR" type="xs:short"/>
+		<xs:attribute name="NUMBEROFSTOREYS" type="xs:int"/>
+		<xs:attribute name="NUMBEROFGARAGES" type="xs:int"/>
+		<xs:attribute name="NUMBEROFOUTBUILDINGS" type="xs:int"/>
+		<xs:attribute name="PARKINGARRANGEMENTSTYPE" type="xs:int"/>
+		<xs:attribute name="PROPERTYLOCATION" type="xs:int"/>
+		<xs:attribute name="RESALERESTRICTIONSDETAILS" type="xs:string"/>
+		<xs:attribute name="RESIDENTIALPERCENTAGE" type="xs:int"/>
+		<xs:attribute name="RESIDENTIALPERCENTAGEDETAILS" type="xs:string"/>
+		<xs:attribute name="ROOFCONSTRUCTIONTYPE" type="xs:int"/>
+		<xs:attribute name="SELFBUILDINDICATOR" type="xs:short"/>
+		<xs:attribute name="STRUCTUREUSAGECHANGE" type="xs:string"/>
+		<xs:attribute name="STRUCTUREUSAGECHANGEIND" type="xs:short"/>
+		<xs:attribute name="TENURETYPE" type="xs:int"/>
+		<xs:attribute name="TOTALLANDTYPE" type="xs:int"/>
+		<xs:attribute name="TYPEOFPROPERTY" type="xs:int"/>
+		<xs:attribute name="VALUATIONPRICE" type="xs:int"/>
+		<xs:attribute name="VALUATIONTYPE" type="xs:int"/>
+		<xs:attribute name="YEARBUILT" type="xs:int"/>
+		<xs:attribute name="RESALERESTRICTIONSIND" type="xs:short"/>
+		<xs:attribute name="ENTIRELYOWNUSEINDICATOR" type="xs:short"/>
+		<xs:attribute name="RESIDENTIALUSEONLYINDICATOR" type="xs:short"/>
+		<xs:attribute name="EXTRASINCLUDEDIND" type="xs:short"/>
+		<xs:attribute name="NUMBEROFOCCUPANTS" type="xs:int"/>
+		<xs:attribute name="TENANCYTYPE" type="xs:int"/>
+		<xs:attribute name="MONTHLYRENTALINCOME" type="xs:float"/>
+		<xs:attribute name="RENTALINCOMESTATUS" type="xs:int"/>
+		<xs:attribute name="DATEOFENTRY" type="msgdt:msgDate"/>
+		<xs:attribute name="EXCESSMONTHLYRENTALINCOME" type="xs:float"/>
+		<xs:attribute name="FAMILYLET" type="xs:short"/>
+		<xs:attribute name="FAMILYMEMBER" type="xs:string"/>
+		<!--Estate Agent details are not stored against the property rather they are stored as a ThirdParty or Directory entry and  linked to the application by ApplicationEstateAgent-->
+	</xs:complexType>
+	<xs:complexType name="OTHERRESIDENTType">
+		<xs:sequence>
+			<xs:element name="PERSON" type="msgdt:PERSONType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="OTHERRESIDENTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="PERSONGUID" type="msgdt:msgGuid"/>
+		<!--Used to link the "OtherResident" record with the "Person" record and the Application-->
+	</xs:complexType>
+	<xs:complexType name="FEEPAYMENTType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="PAYMENTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="FEETYPE" type="xs:int"/>
+		<xs:attribute name="FEETYPESEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="AMOUNTPAID" type="xs:int"/>
+		<xs:attribute name="PAYMENTEVENT" type="xs:int"/>
+		<xs:attribute name="REFUNDDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="COMPLETIONINDICATOR" type="xs:int"/>
+		<xs:attribute name="NOTES" type="xs:string"/>
+		<xs:attribute name="REFUNDAMOUNT" type="xs:int"/>
+		<xs:attribute name="CARDFAILRESULTCODE" type="xs:string"/>
+		<xs:attribute name="CARDFAILRESON" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="PAYMENTRECORDType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="PAYMENTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="AMOUNT" type="xs:int"/>
+		<xs:attribute name="CHEQUENUMBER" type="xs:string"/>
+		<xs:attribute name="USERID" type="xs:string"/>
+		<xs:attribute name="CREATIONDATETIME" type="msgdt:msgDateTime"/>
+		<xs:attribute name="PAYMENTMETHOD" type="xs:int"/>
+		<xs:attribute name="ASSOCPAYSEQNUMBER" type="xs:int"/>
+		<xs:attribute name="TRANSACTIONREFERENCE" type="xs:string"/>
+		<xs:attribute name="AUTHORISATIONREFERENCE" type="xs:string"/>
+		<xs:attribute name="SAVINGSACCOUNTNUMBER" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="FINANCIALSUMMARYType">
+		<xs:annotation>
+			<xs:documentation>See App04b Outgoing section 10.2.2</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="ARREARSHISTORYINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BANKCARDINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BANKRUPTCYHISTORYINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CCJHISTORYINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DECLINEDMORTGAGEINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EXISTINGMORTGAGEINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LIFEPRODUCTINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LOANLIABILITYINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOTALREGULAROUTGOINGS" type="xs:int"/>
+		<xs:attribute name="REGULAROUTGOINGSINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Set = 1 if true</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PAYEEHISTORYType">
+		<xs:annotation>
+			<xs:documentation>Must be created at the same time as ApplicationLegalRep on the selection of a solicitor</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="PAYEEHISTORYSEQNO" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Unique Identifier</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Appn Number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="THIRDPARTYGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Link to Third Party records</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BANKSORTCODE" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Payees Sort Code</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ACCOUNTNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Payees bank account number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BANKNAME" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Payees bank account name</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NOTES" type="xs:string"/>
+		<xs:attribute name="USERID" type="xs:string"/>
+		<xs:attribute name="CREATIONDATETIME" type="msgdt:msgDateTime"/>
+		<xs:attribute name="DXID" type="xs:string"/>
+		<xs:attribute name="DXLOCATION" type="xs:string"/>
+		<xs:attribute name="BANKWIZARDINDICATOR" type="xs:short"/>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYADDRESSType">
+		<xs:sequence>
+			<xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Address is customer data so not joint address ind is held</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="ADDRESSGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="ARRANGEMENTSFORACCESS" type="xs:int"/>
+		<xs:attribute name="OTHERARRANGEMENTSFORACCESS" type="xs:string"/>
+		<xs:attribute name="ACCESSTELEPHONENUMBER" type="xs:string"/>
+		<xs:attribute name="ACCESSCONTACTNAME" type="xs:string"/>
+		<xs:attribute name="COUNTRYCODE" type="xs:string"/>
+		<xs:attribute name="AREACODE" type="xs:string"/>
+		<xs:attribute name="EXTENSIONNUMBER" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="QUOTATIONType">
+		<xs:sequence>
+			<xs:element name="MORTGAGESUBQUOTE" type="MORTGAGESUBQUOTEType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="QUOTATIONNUMBER" type="xs:int"/>
+		<xs:attribute name="ACCEPTEDAPPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="ACCEPTEDFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="QUICKQUOTEAPPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="QUICKQUOTEFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="RECOMMENDEDAPPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="RECOMMENDEDFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="DATEANDTIMEGENERATED" type="msgdt:msgDateTime"/>
+		<xs:attribute name="LOANSANDLIABILITIES" type="xs:int"/>
+		<xs:attribute name="MONTHLYMORTGAGEPAYMENTS" type="xs:int"/>
+		<xs:attribute name="MORTGAGERELATEDINSURANCE" type="xs:int"/>
+		<xs:attribute name="OTHEROUTGOINGS" type="xs:int"/>
+		<xs:attribute name="QUOTATIONTYPE" type="xs:int"/>
+		<xs:attribute name="TOTALMONTHLYINCOME" type="xs:int"/>
+		<xs:attribute name="TOTALQUOTATIONCOST" type="xs:float"/>
+		<xs:attribute name="MSQAPPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="MSQAPPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="MORTGAGESUBQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="LSQAPPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="LSQAPPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="LIFESUBQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="BCSQAPPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="BCSQAPPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="BCSUBQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="PPSQAPPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="PPSQAPPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="PPSUBQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="QUOTATIONCOMPLETE" type="xs:short"/>
+		<xs:attribute name="LIFESUBQUOTEREQUIRED" type="xs:short"/>
+		<xs:attribute name="BCSUBQUOTEREQUIRED" type="xs:short"/>
+		<xs:attribute name="PPSUBQUOTEREQUIRED" type="xs:short"/>
+		<xs:attribute name="DISPOSABLEMONTHLYINCOME" type="xs:int"/>
+		<xs:attribute name="KFIPRINTEDINDICATOR" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGESUBQUOTEType">
+		<xs:sequence>
+			<xs:element name="LOANCOMPONENT" type="LOANCOMPONENTType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MORTGAGEONEOFFCOST" type="MORTGAGEONEOFFCOSTType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="MORTGAGESUBQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="AMOUNTREQUESTED" type="xs:int"/>
+		<xs:attribute name="DATEANDTIMEGENERATED" type="msgdt:msgDateTime"/>
+		<xs:attribute name="DEPOSIT" type="xs:int"/>
+		<xs:attribute name="LTV" type="xs:float"/>
+		<xs:attribute name="NONPANELLENDERSELECTD" type="xs:short"/>
+		<xs:attribute name="QUOTATIONTYPE" type="xs:int"/>
+		<xs:attribute name="TOTALCHARGES" type="xs:int"/>
+		<xs:attribute name="TOTALGROSSMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="TOTALINITIALCHARGES" type="xs:int"/>
+		<xs:attribute name="TOTALLOANAMOUNT" type="xs:int"/>
+		<xs:attribute name="TOTALNETCHARGES" type="xs:int"/>
+		<xs:attribute name="TOTALNETMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="UNUSEDMIRASAMOUNT" type="xs:int"/>
+		<xs:attribute name="NONPANELLENDERNAME" type="xs:string"/>
+		<xs:attribute name="TOTALACCRUEDINTEREST" type="xs:int"/>
+		<xs:attribute name="TYPEOFAPPLICATION" type="xs:int"/>
+		<xs:attribute name="TYPEOFBUYER" type="xs:int"/>
+		<xs:attribute name="MANUALINCENTIVEAMOUNT" type="xs:int"/>
+		<xs:attribute name="MANUALINCENTIVEUSERID" type="xs:string"/>
+		<xs:attribute name="MANUALINCENTIVEDATETIME" type="msgdt:msgDateTime"/>
+		<xs:attribute name="DRAWDOWN" type="xs:float"/>
+		<xs:attribute name="MONTHLYCOSTLESSDRAWDOWN" type="xs:float"/>
+		<xs:attribute name="INCOMEMULTIPLIERTYPE" type="xs:string"/>
+		<xs:attribute name="INCOMEMULTIPLE" type="xs:float"/>
+		<xs:attribute name="MAXIMUMBORROWINGAMOUNT" type="xs:int"/>
+		<xs:attribute name="AMOUNTPERUNITBORROWED" type="xs:float"/>
+		<xs:attribute name="APR" type="xs:float"/>
+		<xs:attribute name="TOTALAMOUNTPAYABLE" type="xs:float"/>
+		<xs:attribute name="TOTALMORTGAGEPAYMENTS" type="xs:float"/>
+		<xs:attribute name="PURCHASEPRICEORESTIMATEDVALUE" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="MORTGAGESUBQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="LOANCOMPONENTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="MORTGAGEPRODUCTCODE" type="xs:string" use="required"/>
+		<xs:attribute name="STARTDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="APR" type="xs:float"/>
+		<xs:attribute name="CAPITALANDINTERESTELEMENT" type="xs:int"/>
+		<xs:attribute name="GROSSMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="INTERESTONLYELEMENT" type="xs:int"/>
+		<xs:attribute name="LOANAMOUNT" type="xs:int"/>
+		<xs:attribute name="MIRASAMOUNT" type="xs:int"/>
+		<xs:attribute name="MIRASELIGIBILITY" type="xs:short"/>
+		<xs:attribute name="NETMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="PORTEDLOAN" type="xs:short"/>
+		<xs:attribute name="PURPOSEOFLOAN" type="xs:int"/>
+		<xs:attribute name="REPAYMENTMETHOD" type="xs:int"/>
+		<xs:attribute name="TERMINMONTHS" type="xs:int"/>
+		<xs:attribute name="TERMINYEARS" type="xs:int"/>
+		<xs:attribute name="TOTALLOANCOMPONENTAMOUNT" type="xs:int"/>
+		<xs:attribute name="MORTGAGELOANGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="RISKMATRIXADJUSTMENTPERCENT" type="xs:float"/>
+		<xs:attribute name="MANUALADJUSTMENTPERCENT" type="xs:float"/>
+		<xs:attribute name="MANUALADJUSTUSERID" type="xs:string"/>
+		<xs:attribute name="ADMINSUBLEDGERCODE" type="xs:string"/>
+		<xs:attribute name="PRODUCTCODESEARCHIND" type="xs:short"/>
+		<xs:attribute name="RESOLVEDRATE" type="xs:float"/>
+		<xs:attribute name="CURRENTINCENTIVEPERIOD" type="xs:int"/>
+		<xs:attribute name="INCENTIVEPERIODREMAININGTERM" type="xs:int"/>
+		<xs:attribute name="NETCAPANDINTELEMENT" type="xs:int"/>
+		<xs:attribute name="NETINTONLYELEMENT" type="xs:int"/>
+		<xs:attribute name="ADMINSUBLEDGERCODECI" type="xs:string"/>
+		<xs:attribute name="ADMINSUBLEDGERCODEIO" type="xs:string"/>
+		<xs:attribute name="FINALRATE" type="xs:float"/>
+		<xs:attribute name="FINALRATEMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="FINALRATEAPR" type="xs:float"/>
+		<xs:attribute name="MANUALPORTEDLOANIND" type="xs:short"/>
+		<xs:attribute name="SUBPURPOSEOFLOAN" type="xs:int"/>
+		<xs:attribute name="MONTHLYCOSTLESSDRAWDOWN" type="xs:float"/>
+		<xs:attribute name="AMOUNTPERUNITBORROWED" type="xs:float"/>
+		<xs:attribute name="CAPINTMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="INTONLYMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="MINMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="MAXMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="UNROUNDEDAPR" type="xs:float"/>
+		<xs:attribute name="ACCRUEDINTEREST" type="xs:float"/>
+		<xs:attribute name="CAPINTACCRUEDINTEREST" type="xs:float"/>
+		<xs:attribute name="INTONLYACCRUEDINTEREST" type="xs:float"/>
+		<xs:attribute name="INCREASEDMONTHLYCOST" type="xs:float"/>
+		<xs:attribute name="INCREASEDMONTHLYCOSTDIFFERENCE" type="xs:float"/>
+		<xs:attribute name="TOTALAMOUNTPAYABLE" type="xs:float"/>
+		<xs:attribute name="FINALPAYMENT" type="xs:float"/>
+		<xs:attribute name="PRODUCTSTEP" type="xs:int"/>
+		<xs:attribute name="REMAININGSTEPDURATION" type="xs:int"/>
+		<xs:attribute name="PORTEDPRODUCTSTARTDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="MORTGAGEPRODUCTNAME" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGEONEOFFCOSTType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="MORTGAGESUBQUOTENUMBER" type="xs:int"/>
+		<xs:attribute name="MORTGAGEONEOFFCOSTTYPE" type="xs:int"/>
+		<xs:attribute name="ONEOFFCOSTSEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="ADDTOLOAN" type="xs:short"/>
+		<xs:attribute name="AMOUNT" type="xs:int"/>
+		<xs:attribute name="IPT" type="xs:float"/>
+		<xs:attribute name="DESCRIPTION" type="xs:string"/>
+		<xs:attribute name="ADHOCIND" type="xs:short"/>
+		<xs:attribute name="REFUNDAMOUNT" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFEETYPEType">
+		<xs:sequence>
+			<xs:element name="FEEPAYMENT" type="FEEPAYMENTType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="FEETYPE" type="xs:int"/>
+		<xs:attribute name="FEETYPESEQUENCENUMBER" type="xs:int"/>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="AMOUNT" type="xs:int"/>
+		<xs:attribute name="REBATEORADDITION" type="xs:int"/>
+		<xs:attribute name="DESCRIPTION" type="xs:string"/>
+		<xs:attribute name="ADHOCIND" type="xs:short"/>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYROOMTYPEType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:short" use="optional"/>
+		<xs:attribute name="ROOMTYPE" type="xs:int"/>
+		<xs:attribute name="NUMBEROFROOMS" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONBANKBUILDINGSOCType">
+		<xs:sequence>
+			<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:short" use="optional"/>
+		<xs:attribute name="BANKACCOUNTSEQUENCENUMBER" type="xs:short" use="optional"/>
+		<xs:attribute name="ACCOUNTNAME" type="xs:string"/>
+		<xs:attribute name="ACCOUNTNUMBER" type="xs:string" use="required"/>
+		<xs:attribute name="BANKWIZARDINDICATOR" type="xs:boolean" use="optional"/>
+		<xs:attribute name="DDREFERENCE" type="xs:string" use="optional"/>
+		<xs:attribute name="PREFEREDPAYMENTDAY" type="xs:int"/>
+		<xs:attribute name="PROPOSEDPAYMENTMETHOD" type="xs:short" use="optional"/>
+		<xs:attribute name="REPAYMENTBANKACCOUNTINDICATOR" type="xs:boolean" use="optional"/>
+		<xs:attribute name="TIMEATBANK" type="xs:short" use="optional"/>
+		<xs:attribute name="DIRECTORYGUID" type="msgdt:msgGuid" use="optional"/>
+		<xs:attribute name="THIRDPARTYGUID" type="msgdt:msgGuid" use="optional"/>
+		<xs:attribute name="SALARYFEDINDICATOR" type="xs:boolean" use="optional"/>
+		<xs:attribute name="DIRECTDEBITPAPERIND" type="xs:boolean" use="optional"/>
+		<xs:attribute name="DDEXPLAINEDIND" type="xs:boolean" use="required"/>
+		<xs:attribute name="TRANSPOSEDINDICATOR" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ACCOUNTType">
+		<xs:sequence>
+			<xs:element name="MORTGAGEACCOUNT" type="MORTGAGEACCOUNTType" minOccurs="0"/>
+			<xs:element name="LOANSLIABILITIES" type="LOANSLIABILITIESType" minOccurs="0"/>
+			<xs:element name="ACCOUNTRELATIONSHIP" type="ACCOUNTRELATIONSHIPType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="ACCOUNTGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="ACCOUNTNUMBER" type="xs:string"/>
+		<xs:attribute name="IMPORTEDINDICATOR" type="xs:short"/>
+		<xs:attribute name="DIRECTORYGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="THIRDPARTYGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="UNASSIGNED" type="xs:short"/>
+		<xs:attribute name="CREDITSEARCH" type="xs:short"/>
+		<xs:attribute name="CAISRECORDREF" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ACCOUNTRELATIONSHIPType">
+		<xs:attribute name="CUSTOMERNUMBER" type="xs:string" use="required"/>
+		<xs:attribute name="CUSTOMERVERSIONNUMBER" type="xs:short"/>
+		<xs:attribute name="ACCOUNTGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="CUSTOMERROLETYPE" type="xs:short"/>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGEACCOUNTType">
+		<xs:sequence>
+			<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType"/>
+		</xs:sequence>
+		<xs:attribute name="ACCOUNTGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="SECONDCHARGEINDICATOR" type="xs:short"/>
+		<xs:attribute name="ADDITIONALINDICATOR" type="xs:short"/>
+		<xs:attribute name="ADDITIONALDETAILS" type="xs:string"/>
+		<xs:attribute name="MONTHLYRENTALINCOME" type="xs:double"/>
+		<xs:attribute name="TYPE" type="xs:int"/>
+		<xs:attribute name="DESCRIPTION" type="xs:int"/>
+		<xs:attribute name="ADDRESSGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="ESTIMATEDCURRENTVALUE" type="xs:long"/>
+		<xs:attribute name="INTENDEDACTION" type="xs:int"/>
+		<xs:attribute name="LASTVALUATIONAMOUNT" type="xs:double"/>
+		<xs:attribute name="LASTVALUATIONDATE" type="msgdt:msgDate"/>
+		<xs:attribute name="LASTVALUERID" type="xs:string"/>
+		<xs:attribute name="TENURE" type="xs:int"/>
+		<xs:attribute name="YEARBUILT" type="xs:int"/>
+		<xs:attribute name="REINSTATEMENTAMOUNT" type="xs:double"/>
+		<xs:attribute name="LASTVALUERNAME" type="xs:string"/>
+		<xs:attribute name="BUILDINGSSUMINSURED" type="xs:long"/>
+		<xs:attribute name="HOMEINSURANCETYPE" type="xs:int"/>
+		<xs:attribute name="BMIDSACCOUNT" type="xs:short"/>
+		<xs:attribute name="REMORTGAGEINDICATOR" type="xs:short"/>
+		<xs:attribute name="REPOSSESSIONFLAG" type="xs:short"/>
+		<xs:attribute name="COLLATERALID" type="xs:long"/>
+		<xs:attribute name="TOTALCOLLATERALBALANCE" type="xs:long"/>
+		<xs:attribute name="PAYMENTDUEDATE" type="xs:short"/>
+		<xs:attribute name="RMCFLAG" type="xs:short"/>
+		<xs:attribute name="DAILYMONTHLYANNUALINTEREST" type="xs:string"/>
+		<xs:attribute name="DSSFLAG" type="xs:string"/>
+		<xs:attribute name="BANKSORTCODE" type="xs:string"/>
+		<xs:attribute name="BANKACCOUNTNUMBER" type="xs:string"/>
+		<xs:attribute name="BANKACCOUNTNAME" type="xs:string"/>
+		<xs:attribute name="BUSINESSCHANNEL" type="xs:string"/>
+		<xs:attribute name="TOTALMONTHLYCOST" type="xs:double"/>
+		<xs:attribute name="REDEMPTIONSTATUS" type="xs:short"/>
+		<xs:attribute name="CURRENTADDRESSINDICATOR" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONSTAGEType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="CASESEQUENCENO" type="xs:int"/>
+		<xs:attribute name="STAGESEQUENCENO" type="xs:int"/>
+		<xs:attribute name="STAGENUMBER" type="xs:int"/>
+		<xs:attribute name="STAGENAME" type="xs:string"/>
+		<xs:attribute name="DATETIME" type="msgdt:msgDateTime"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONUNDERWRITINGType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+		<xs:attribute name="APPLICATIONFACTFINDNUMBER" type="xs:int"/>
+		<xs:attribute name="USERID" type="xs:string"/>
+		<xs:attribute name="UNDERWRITERSDECISION" type="xs:int"/>
+		<xs:attribute name="UNDERWRITERDECISIONDATETIME" type="msgdt:msgDateTime"/>
+		<xs:attribute name="COUNTEROFFER" type="xs:long"/>
+	</xs:complexType>
+</xs:schema>

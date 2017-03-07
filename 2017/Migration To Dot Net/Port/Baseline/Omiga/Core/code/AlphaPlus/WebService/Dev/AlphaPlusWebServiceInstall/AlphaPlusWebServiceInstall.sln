@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AlphaPlusWebServiceInstall", "AlphaPlusWebServiceInstall.vdproj", "{6EC0922B-5116-4A7E-97A3-76DCD69962C4}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AlphaPlusWebService", "http://localhost/AlphaPlusWebService/AlphaPlusWebService.vbproj", "{1A43388F-EDA7-417F-8707-288F68F9F08B}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{6EC0922B-5116-4A7E-97A3-76DCD69962C4}.Debug.ActiveCfg = Debug
+		{6EC0922B-5116-4A7E-97A3-76DCD69962C4}.Debug.Build.0 = Debug
+		{6EC0922B-5116-4A7E-97A3-76DCD69962C4}.Release.ActiveCfg = Release
+		{6EC0922B-5116-4A7E-97A3-76DCD69962C4}.Release.Build.0 = Release
+		{1A43388F-EDA7-417F-8707-288F68F9F08B}.Debug.ActiveCfg = Debug|.NET
+		{1A43388F-EDA7-417F-8707-288F68F9F08B}.Debug.Build.0 = Debug|.NET
+		{1A43388F-EDA7-417F-8707-288F68F9F08B}.Release.ActiveCfg = Release|.NET
+		{1A43388F-EDA7-417F-8707-288F68F9F08B}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+	GlobalSection(DevPartner) = postSolution
+	EndGlobalSection
+EndGlobal

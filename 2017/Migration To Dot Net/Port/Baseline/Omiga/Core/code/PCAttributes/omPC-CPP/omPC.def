@@ -1,0 +1,9 @@
+; omPC.def : Declares the module parameters.
+
+LIBRARY      "omPC.DLL"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer	PRIVATE

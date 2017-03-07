@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: GetDocumentList WSDL
+
+History:
+
+Version	Author		Date				Description
+01.00   	TLiu			25/07/2005		Created.   
+01.01   	TLiu			29/07/2005		Renamed from GetDocumentListomPMDMS105.wsdl to GetDocumentList.wsdl.   
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://GetDocumentList.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns="http://GetDocumentList.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:msgResponse="http://Response.GetDocumentList.IDUK.Omiga.marlboroughstirling.com"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" 
+            xmlns:msgResponse="http://Response.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" >
+            <xs:import 
+                namespace="http://Request.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="GetDocumentListRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="GetDocumentListResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="GetDocumentListRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="GetDocumentListRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="GetDocumentListPort">
+        <wsdl:operation name="getDocumentList">
+            <wsdl:input message="GetDocumentListRequestSoapIn" />
+            <wsdl:output message="GetDocumentListRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="GetDocumentListPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="getDocumentList">
+             <soap:operation 
+                soapAction="http://Request.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaGetDocumentList">
+        <wsdl:port name="GetDocumentListPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/GetDocumentListWS/OmigaGetDocumentListService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

@@ -1,0 +1,13 @@
+ConvertAssist = 0, 0, 0, 0, C
+GeneralAssist = 0, 0, 0, 0, C
+XMLAssist = 0, 0, 0, 0, C
+ErrAssist = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+SQLAssist = 0, 0, 0, 0, C
+LifeCoverBO = 0, 0, 0, 0, C
+LifeCoverDO = 0, 0, 0, 0, C
+ILifeCoverDO = 0, 0, 0, 0, C
+IomLCClassDef = 0, 0, 0, 0, C
+omLCClassDef = 0, 0, 0, 0, C
+ILifeCoverBO = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C

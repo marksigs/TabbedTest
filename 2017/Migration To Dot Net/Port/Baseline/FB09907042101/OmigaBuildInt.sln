@@ -1,0 +1,333 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAutomation", "WindowsServices\TaskAutomation\TaskAutomation.csproj", "{436F1C14-CAC7-4CA7-8C66-F64D09E66321}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omBankWizard", "BankWizard\omBankWizard\omBankWizard.csproj", "{C1619439-4959-42E0-B87E-AA0A86CB624E}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omUniserv", "Uniserv\omUniserv\omUniserv.csproj", "{A773C428-7C11-412D-A89A-6C7FBA519725}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omCardPayment", "CardPayment\omCardPayment\omCardPayment.csproj", "{98992B3C-9832-4F66-BC9C-C1BCBC3BE443}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omDG", "DIRECTGATEWAY\omDG\omDG.csproj", "{3B391921-6D4D-4A95-9852-C5A78E4B0405}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omExperianHI", "EXPERIAN\OMEXPERIANHI\omExperianHI.csproj", "{622CCD97-DB65-477D-8005-C815275C0A0C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omExperianCC", "EXPERIAN\OMEXPERIANCC\omExperianCC.csproj", "{E6854EFD-E724-4D35-A8B6-44801A38EB68}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omFirstTitle", "First Title\omFirstTitle\omFirstTitle.csproj", "{783859A6-78A6-4283-8421-A92975BA546C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindBusinessForCustomerWS", "http://localhost/OmigaWebServices/FindBusinessForCustomerWS/FindBusinessForCustomerWS.csproj", "{2AD9F7E9-B325-471A-833D-BF9027B7DDAA}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindDirectoryListWS", "http://localhost/OmigaWebServices/FindDirectoryListWS/FindDirectoryListWS.csproj", "{040340FE-0B48-4033-9CB9-ACACCC58D27F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMortgageProductsWS", "http://localhost/OmigaWebServices/FindMortgageProductsWS/FindMortgageProductsWS.csproj", "{794B9CFE-B628-46D4-BD45-605DAC070BA6}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetApplicationDataWS", "http://localhost/OmigaWebServices/GetApplicationDataWS/GetApplicationDataWS.csproj", "{2F771F21-255A-4DEA-A7A3-63F646D09120}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetApplicationSummaryDataWS", "http://localhost/OmigaWebServices/GetApplicationSummaryDataWS/GetApplicationSummaryDataWS.csproj", "{935A2DF6-805D-4872-868F-477B1C68FA75}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCaseTrackingDataWS", "http://localhost/OmigaWebServices/GetCaseTrackingDataWS/GetCaseTrackingDataWS.csproj", "{AE398BA4-3B2D-4C49-8615-DD7B9557321E}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetComboListWS", "http://localhost/OmigaWebServices/GetComboListWS/GetComboListWS.csproj", "{8C6395B1-6BB6-4E71-801C-2827D0050195}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetDocumentListWS", "http://localhost/OmigaWebServices/GetDocumentListWS/GetDocumentListWS.csproj", "{8E3CBCB0-A691-45D1-8AF5-C3F495B3BA54}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunIncomeCalculationsWS", "http://localhost/OmigaWebServices/RunIncomeCalculationsWS/RunIncomeCalculationsWS.csproj", "{8D5FF87C-286D-401B-A5ED-50C209388EFA}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidateQuoteWS", "http://localhost/OmigaWebServices/ValidateQuoteWS/ValidateQuoteWS.csproj", "{A4F6C45C-C8DB-4EF1-81A1-88F29788CF54}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiDotNet", "http://localhost/GuiDotNet/GuiDotNet.csproj", "{630875F0-2832-4482-BD4E-517623D675B4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubmitAiPWS", "http://localhost/OmigaWebServices/SubmitAiPWS/SubmitAiPWS.csproj", "{829BA363-26DC-4344-9BAF-A07DEC53C7C7}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubmitFMAWS", "http://localhost/OmigaWebServices/SubmitFMAWS/SubmitFMAWS.csproj", "{878CD1D3-CB43-470A-B1B7-7AA81A821156}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubmitStopAndSaveAiPWS", "http://localhost/OmigaWebServices/SubmitStopAndSaveAiPWS/SubmitStopAndSaveAiPWS.csproj", "{C72ADB2C-7746-45E2-9DBD-5C3B6D3DF635}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubmitStopAndSaveFMAWS", "http://localhost/OmigaWebServices/SubmitStopAndSaveFMAWS/SubmitStopAndSaveFMAWS.csproj", "{811714FC-0405-4865-996B-28A1B203B0FC}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omHomeTrack", "HomeTrack\omHomeTrack\omHomeTrack.csproj", "{D0D2FCB8-EFD3-490A-B506-23347DE9F7F3}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omFDM", "Fulfilment Data Manager\omFDM\omFDM.csproj", "{67884891-2D6A-47EA-8232-CA48CF1BFDBB}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omESurv", "ESurv\omESurv\omESurv.csproj", "{1B573A3D-50B2-4155-A8AD-B8629F3078B7}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omKnowYourCustomer", "KnowYourCustomer\omKnowYourCustomer\omKnowYourCustomer.csproj", "{DB34014D-82B3-4B62-8180-B4EB7F4B1E34}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omESurvPoller", "WINDOWSSERVICES\ESurv\omESurvPoller\omESurvPoller.csproj", "{6147877A-236F-4594-BA26-A27D14608664}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omFirstTitlePoller", "WINDOWSSERVICES\FirstTitle\omFirstTitlePoller\omFirstTitlePoller.csproj", "{0C1AD61E-0F51-4EB6-A348-42A1A0264B4F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegisterDocumentToCaseWS", "http://localhost/OmigaWebServices/RegisterDocumentToCaseWS/RegisterDocumentToCaseWS.csproj", "{CEC04F20-55DE-4FAA-8298-D74E302790D1}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateKFIWS", "http://localhost/OmigaWebServices/CreateKFIWS/CreateKFIWS.csproj", "{368AA089-0322-41B3-A1D0-70FC4CF916A0}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalXML", "ExternalXML\ExternalXML.csproj", "{5F9EA575-A579-448F-915B-F9F3E885318C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetDocumentIDWS", "http://localhost/OmigaWebServices/GetDocumentIDWS/GetDocumentIDWS.csproj", "{F6BADFF1-5206-4982-9B23-F46ED4E626D4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omPinMailer", "PinMailer\omPinMailer\omPinMailer.csproj", "{F2F76387-F179-458A-9E11-A6E604D163F8}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omLAU", "LegalAddress\omLAU\omLAU.csproj", "{7C1DBD99-BB8F-4689-88B0-EA8E73B578E5}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omDC", "DelayCompletion\omDC\omDC.csproj", "{B6AC5928-8B90-4885-943B-66E308D8714E}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoreFirstTitleInterfaceWS", "http://localhost/OmigaWebServices/RestoreFirstTitleInterfaceWS/RestoreFirstTitleInterfaceWS.csproj", "{06289CBC-250A-43B9-8E02-220AF155F711}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetNextMessageSequenceNumberWS", "http://localhost/OmigaWebServices/GetNextMessageSequenceNumberWS/GetNextMessageSequenceNumberWS.csproj", "{F9993545-D48E-4544-B7AA-3D1D2F5DE348}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omAdminCS", "Administration Interface\omAdminCS\omAdminCS.csproj", "{668CE31F-980B-4A48-B24B-82FEAA7EC746}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omLogConfig", "LogConfig\omLogConfig\omLogConfig.csproj", "{077CB6EA-B062-4E0A-A7DC-1B0D11024968}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{436F1C14-CAC7-4CA7-8C66-F64D09E66321}.Debug.ActiveCfg = Debug|.NET
+		{436F1C14-CAC7-4CA7-8C66-F64D09E66321}.Debug.Build.0 = Debug|.NET
+		{436F1C14-CAC7-4CA7-8C66-F64D09E66321}.Release.ActiveCfg = Release|.NET
+		{436F1C14-CAC7-4CA7-8C66-F64D09E66321}.Release.Build.0 = Release|.NET
+		{C1619439-4959-42E0-B87E-AA0A86CB624E}.Debug.ActiveCfg = Debug|.NET
+		{C1619439-4959-42E0-B87E-AA0A86CB624E}.Debug.Build.0 = Debug|.NET
+		{C1619439-4959-42E0-B87E-AA0A86CB624E}.Release.ActiveCfg = Release|.NET
+		{C1619439-4959-42E0-B87E-AA0A86CB624E}.Release.Build.0 = Release|.NET
+		{A773C428-7C11-412D-A89A-6C7FBA519725}.Debug.ActiveCfg = Debug|.NET
+		{A773C428-7C11-412D-A89A-6C7FBA519725}.Debug.Build.0 = Debug|.NET
+		{A773C428-7C11-412D-A89A-6C7FBA519725}.Release.ActiveCfg = Release|.NET
+		{A773C428-7C11-412D-A89A-6C7FBA519725}.Release.Build.0 = Release|.NET
+		{98992B3C-9832-4F66-BC9C-C1BCBC3BE443}.Debug.ActiveCfg = Debug|.NET
+		{98992B3C-9832-4F66-BC9C-C1BCBC3BE443}.Debug.Build.0 = Debug|.NET
+		{98992B3C-9832-4F66-BC9C-C1BCBC3BE443}.Release.ActiveCfg = Release|.NET
+		{98992B3C-9832-4F66-BC9C-C1BCBC3BE443}.Release.Build.0 = Release|.NET
+		{3B391921-6D4D-4A95-9852-C5A78E4B0405}.Debug.ActiveCfg = Debug|.NET
+		{3B391921-6D4D-4A95-9852-C5A78E4B0405}.Debug.Build.0 = Debug|.NET
+		{3B391921-6D4D-4A95-9852-C5A78E4B0405}.Release.ActiveCfg = Release|.NET
+		{3B391921-6D4D-4A95-9852-C5A78E4B0405}.Release.Build.0 = Release|.NET
+		{622CCD97-DB65-477D-8005-C815275C0A0C}.Debug.ActiveCfg = Debug|.NET
+		{622CCD97-DB65-477D-8005-C815275C0A0C}.Debug.Build.0 = Debug|.NET
+		{622CCD97-DB65-477D-8005-C815275C0A0C}.Release.ActiveCfg = Release|.NET
+		{622CCD97-DB65-477D-8005-C815275C0A0C}.Release.Build.0 = Release|.NET
+		{E6854EFD-E724-4D35-A8B6-44801A38EB68}.Debug.ActiveCfg = Debug|.NET
+		{E6854EFD-E724-4D35-A8B6-44801A38EB68}.Debug.Build.0 = Debug|.NET
+		{E6854EFD-E724-4D35-A8B6-44801A38EB68}.Release.ActiveCfg = Release|.NET
+		{E6854EFD-E724-4D35-A8B6-44801A38EB68}.Release.Build.0 = Release|.NET
+		{783859A6-78A6-4283-8421-A92975BA546C}.Debug.ActiveCfg = Debug|.NET
+		{783859A6-78A6-4283-8421-A92975BA546C}.Debug.Build.0 = Debug|.NET
+		{783859A6-78A6-4283-8421-A92975BA546C}.Release.ActiveCfg = Release|.NET
+		{783859A6-78A6-4283-8421-A92975BA546C}.Release.Build.0 = Release|.NET
+		{2AD9F7E9-B325-471A-833D-BF9027B7DDAA}.Debug.ActiveCfg = Debug|.NET
+		{2AD9F7E9-B325-471A-833D-BF9027B7DDAA}.Debug.Build.0 = Debug|.NET
+		{2AD9F7E9-B325-471A-833D-BF9027B7DDAA}.Release.ActiveCfg = Release|.NET
+		{2AD9F7E9-B325-471A-833D-BF9027B7DDAA}.Release.Build.0 = Release|.NET
+		{040340FE-0B48-4033-9CB9-ACACCC58D27F}.Debug.ActiveCfg = Debug|.NET
+		{040340FE-0B48-4033-9CB9-ACACCC58D27F}.Debug.Build.0 = Debug|.NET
+		{040340FE-0B48-4033-9CB9-ACACCC58D27F}.Release.ActiveCfg = Release|.NET
+		{040340FE-0B48-4033-9CB9-ACACCC58D27F}.Release.Build.0 = Release|.NET
+		{794B9CFE-B628-46D4-BD45-605DAC070BA6}.Debug.ActiveCfg = Debug|.NET
+		{794B9CFE-B628-46D4-BD45-605DAC070BA6}.Debug.Build.0 = Debug|.NET
+		{794B9CFE-B628-46D4-BD45-605DAC070BA6}.Release.ActiveCfg = Release|.NET
+		{794B9CFE-B628-46D4-BD45-605DAC070BA6}.Release.Build.0 = Release|.NET
+		{2F771F21-255A-4DEA-A7A3-63F646D09120}.Debug.ActiveCfg = Debug|.NET
+		{2F771F21-255A-4DEA-A7A3-63F646D09120}.Debug.Build.0 = Debug|.NET
+		{2F771F21-255A-4DEA-A7A3-63F646D09120}.Release.ActiveCfg = Release|.NET
+		{2F771F21-255A-4DEA-A7A3-63F646D09120}.Release.Build.0 = Release|.NET
+		{935A2DF6-805D-4872-868F-477B1C68FA75}.Debug.ActiveCfg = Debug|.NET
+		{935A2DF6-805D-4872-868F-477B1C68FA75}.Debug.Build.0 = Debug|.NET
+		{935A2DF6-805D-4872-868F-477B1C68FA75}.Release.ActiveCfg = Release|.NET
+		{935A2DF6-805D-4872-868F-477B1C68FA75}.Release.Build.0 = Release|.NET
+		{AE398BA4-3B2D-4C49-8615-DD7B9557321E}.Debug.ActiveCfg = Debug|.NET
+		{AE398BA4-3B2D-4C49-8615-DD7B9557321E}.Debug.Build.0 = Debug|.NET
+		{AE398BA4-3B2D-4C49-8615-DD7B9557321E}.Release.ActiveCfg = Release|.NET
+		{AE398BA4-3B2D-4C49-8615-DD7B9557321E}.Release.Build.0 = Release|.NET
+		{8C6395B1-6BB6-4E71-801C-2827D0050195}.Debug.ActiveCfg = Debug|.NET
+		{8C6395B1-6BB6-4E71-801C-2827D0050195}.Debug.Build.0 = Debug|.NET
+		{8C6395B1-6BB6-4E71-801C-2827D0050195}.Release.ActiveCfg = Release|.NET
+		{8C6395B1-6BB6-4E71-801C-2827D0050195}.Release.Build.0 = Release|.NET
+		{8E3CBCB0-A691-45D1-8AF5-C3F495B3BA54}.Debug.ActiveCfg = Debug|.NET
+		{8E3CBCB0-A691-45D1-8AF5-C3F495B3BA54}.Debug.Build.0 = Debug|.NET
+		{8E3CBCB0-A691-45D1-8AF5-C3F495B3BA54}.Release.ActiveCfg = Release|.NET
+		{8E3CBCB0-A691-45D1-8AF5-C3F495B3BA54}.Release.Build.0 = Release|.NET
+		{8D5FF87C-286D-401B-A5ED-50C209388EFA}.Debug.ActiveCfg = Debug|.NET
+		{8D5FF87C-286D-401B-A5ED-50C209388EFA}.Debug.Build.0 = Debug|.NET
+		{8D5FF87C-286D-401B-A5ED-50C209388EFA}.Release.ActiveCfg = Release|.NET
+		{8D5FF87C-286D-401B-A5ED-50C209388EFA}.Release.Build.0 = Release|.NET
+		{A4F6C45C-C8DB-4EF1-81A1-88F29788CF54}.Debug.ActiveCfg = Debug|.NET
+		{A4F6C45C-C8DB-4EF1-81A1-88F29788CF54}.Debug.Build.0 = Debug|.NET
+		{A4F6C45C-C8DB-4EF1-81A1-88F29788CF54}.Release.ActiveCfg = Release|.NET
+		{A4F6C45C-C8DB-4EF1-81A1-88F29788CF54}.Release.Build.0 = Release|.NET
+		{630875F0-2832-4482-BD4E-517623D675B4}.Debug.ActiveCfg = Debug|.NET
+		{630875F0-2832-4482-BD4E-517623D675B4}.Debug.Build.0 = Debug|.NET
+		{630875F0-2832-4482-BD4E-517623D675B4}.Release.ActiveCfg = Release|.NET
+		{630875F0-2832-4482-BD4E-517623D675B4}.Release.Build.0 = Release|.NET
+		{829BA363-26DC-4344-9BAF-A07DEC53C7C7}.Debug.ActiveCfg = Debug|.NET
+		{829BA363-26DC-4344-9BAF-A07DEC53C7C7}.Debug.Build.0 = Debug|.NET
+		{829BA363-26DC-4344-9BAF-A07DEC53C7C7}.Release.ActiveCfg = Release|.NET
+		{829BA363-26DC-4344-9BAF-A07DEC53C7C7}.Release.Build.0 = Release|.NET
+		{878CD1D3-CB43-470A-B1B7-7AA81A821156}.Debug.ActiveCfg = Debug|.NET
+		{878CD1D3-CB43-470A-B1B7-7AA81A821156}.Debug.Build.0 = Debug|.NET
+		{878CD1D3-CB43-470A-B1B7-7AA81A821156}.Release.ActiveCfg = Release|.NET
+		{878CD1D3-CB43-470A-B1B7-7AA81A821156}.Release.Build.0 = Release|.NET
+		{C72ADB2C-7746-45E2-9DBD-5C3B6D3DF635}.Debug.ActiveCfg = Debug|.NET
+		{C72ADB2C-7746-45E2-9DBD-5C3B6D3DF635}.Debug.Build.0 = Debug|.NET
+		{C72ADB2C-7746-45E2-9DBD-5C3B6D3DF635}.Release.ActiveCfg = Release|.NET
+		{C72ADB2C-7746-45E2-9DBD-5C3B6D3DF635}.Release.Build.0 = Release|.NET
+		{811714FC-0405-4865-996B-28A1B203B0FC}.Debug.ActiveCfg = Debug|.NET
+		{811714FC-0405-4865-996B-28A1B203B0FC}.Debug.Build.0 = Debug|.NET
+		{811714FC-0405-4865-996B-28A1B203B0FC}.Release.ActiveCfg = Release|.NET
+		{811714FC-0405-4865-996B-28A1B203B0FC}.Release.Build.0 = Release|.NET
+		{D0D2FCB8-EFD3-490A-B506-23347DE9F7F3}.Debug.ActiveCfg = Debug|.NET
+		{D0D2FCB8-EFD3-490A-B506-23347DE9F7F3}.Debug.Build.0 = Debug|.NET
+		{D0D2FCB8-EFD3-490A-B506-23347DE9F7F3}.Release.ActiveCfg = Release|.NET
+		{D0D2FCB8-EFD3-490A-B506-23347DE9F7F3}.Release.Build.0 = Release|.NET
+		{67884891-2D6A-47EA-8232-CA48CF1BFDBB}.Debug.ActiveCfg = Debug|.NET
+		{67884891-2D6A-47EA-8232-CA48CF1BFDBB}.Debug.Build.0 = Debug|.NET
+		{67884891-2D6A-47EA-8232-CA48CF1BFDBB}.Release.ActiveCfg = Release|.NET
+		{67884891-2D6A-47EA-8232-CA48CF1BFDBB}.Release.Build.0 = Release|.NET
+		{1B573A3D-50B2-4155-A8AD-B8629F3078B7}.Debug.ActiveCfg = Debug|.NET
+		{1B573A3D-50B2-4155-A8AD-B8629F3078B7}.Debug.Build.0 = Debug|.NET
+		{1B573A3D-50B2-4155-A8AD-B8629F3078B7}.Release.ActiveCfg = Release|.NET
+		{1B573A3D-50B2-4155-A8AD-B8629F3078B7}.Release.Build.0 = Release|.NET
+		{DB34014D-82B3-4B62-8180-B4EB7F4B1E34}.Debug.ActiveCfg = Debug|.NET
+		{DB34014D-82B3-4B62-8180-B4EB7F4B1E34}.Debug.Build.0 = Debug|.NET
+		{DB34014D-82B3-4B62-8180-B4EB7F4B1E34}.Release.ActiveCfg = Release|.NET
+		{DB34014D-82B3-4B62-8180-B4EB7F4B1E34}.Release.Build.0 = Release|.NET
+		{6147877A-236F-4594-BA26-A27D14608664}.Debug.ActiveCfg = Debug|.NET
+		{6147877A-236F-4594-BA26-A27D14608664}.Debug.Build.0 = Debug|.NET
+		{6147877A-236F-4594-BA26-A27D14608664}.Release.ActiveCfg = Release|.NET
+		{6147877A-236F-4594-BA26-A27D14608664}.Release.Build.0 = Release|.NET
+		{0C1AD61E-0F51-4EB6-A348-42A1A0264B4F}.Debug.ActiveCfg = Debug|.NET
+		{0C1AD61E-0F51-4EB6-A348-42A1A0264B4F}.Debug.Build.0 = Debug|.NET
+		{0C1AD61E-0F51-4EB6-A348-42A1A0264B4F}.Release.ActiveCfg = Release|.NET
+		{0C1AD61E-0F51-4EB6-A348-42A1A0264B4F}.Release.Build.0 = Release|.NET
+		{CEC04F20-55DE-4FAA-8298-D74E302790D1}.Debug.ActiveCfg = Debug|.NET
+		{CEC04F20-55DE-4FAA-8298-D74E302790D1}.Debug.Build.0 = Debug|.NET
+		{CEC04F20-55DE-4FAA-8298-D74E302790D1}.Release.ActiveCfg = Release|.NET
+		{CEC04F20-55DE-4FAA-8298-D74E302790D1}.Release.Build.0 = Release|.NET
+		{368AA089-0322-41B3-A1D0-70FC4CF916A0}.Debug.ActiveCfg = Debug|.NET
+		{368AA089-0322-41B3-A1D0-70FC4CF916A0}.Debug.Build.0 = Debug|.NET
+		{368AA089-0322-41B3-A1D0-70FC4CF916A0}.Release.ActiveCfg = Release|.NET
+		{368AA089-0322-41B3-A1D0-70FC4CF916A0}.Release.Build.0 = Release|.NET
+		{5F9EA575-A579-448F-915B-F9F3E885318C}.Debug.ActiveCfg = Debug|.NET
+		{5F9EA575-A579-448F-915B-F9F3E885318C}.Debug.Build.0 = Debug|.NET
+		{5F9EA575-A579-448F-915B-F9F3E885318C}.Release.ActiveCfg = Release|.NET
+		{5F9EA575-A579-448F-915B-F9F3E885318C}.Release.Build.0 = Release|.NET
+		{F6BADFF1-5206-4982-9B23-F46ED4E626D4}.Debug.ActiveCfg = Debug|.NET
+		{F6BADFF1-5206-4982-9B23-F46ED4E626D4}.Debug.Build.0 = Debug|.NET
+		{F6BADFF1-5206-4982-9B23-F46ED4E626D4}.Release.ActiveCfg = Release|.NET
+		{F6BADFF1-5206-4982-9B23-F46ED4E626D4}.Release.Build.0 = Release|.NET
+		{F2F76387-F179-458A-9E11-A6E604D163F8}.Debug.ActiveCfg = Debug|.NET
+		{F2F76387-F179-458A-9E11-A6E604D163F8}.Debug.Build.0 = Debug|.NET
+		{F2F76387-F179-458A-9E11-A6E604D163F8}.Release.ActiveCfg = Release|.NET
+		{F2F76387-F179-458A-9E11-A6E604D163F8}.Release.Build.0 = Release|.NET
+		{7C1DBD99-BB8F-4689-88B0-EA8E73B578E5}.Debug.ActiveCfg = Debug|.NET
+		{7C1DBD99-BB8F-4689-88B0-EA8E73B578E5}.Debug.Build.0 = Debug|.NET
+		{7C1DBD99-BB8F-4689-88B0-EA8E73B578E5}.Release.ActiveCfg = Release|.NET
+		{7C1DBD99-BB8F-4689-88B0-EA8E73B578E5}.Release.Build.0 = Release|.NET
+		{B6AC5928-8B90-4885-943B-66E308D8714E}.Debug.ActiveCfg = Debug|.NET
+		{B6AC5928-8B90-4885-943B-66E308D8714E}.Debug.Build.0 = Debug|.NET
+		{B6AC5928-8B90-4885-943B-66E308D8714E}.Release.ActiveCfg = Release|.NET
+		{B6AC5928-8B90-4885-943B-66E308D8714E}.Release.Build.0 = Release|.NET
+		{06289CBC-250A-43B9-8E02-220AF155F711}.Debug.ActiveCfg = Debug|.NET
+		{06289CBC-250A-43B9-8E02-220AF155F711}.Debug.Build.0 = Debug|.NET
+		{06289CBC-250A-43B9-8E02-220AF155F711}.Release.ActiveCfg = Release|.NET
+		{06289CBC-250A-43B9-8E02-220AF155F711}.Release.Build.0 = Release|.NET
+		{F9993545-D48E-4544-B7AA-3D1D2F5DE348}.Debug.ActiveCfg = Debug|.NET
+		{F9993545-D48E-4544-B7AA-3D1D2F5DE348}.Debug.Build.0 = Debug|.NET
+		{F9993545-D48E-4544-B7AA-3D1D2F5DE348}.Release.ActiveCfg = Release|.NET
+		{F9993545-D48E-4544-B7AA-3D1D2F5DE348}.Release.Build.0 = Release|.NET
+		{668CE31F-980B-4A48-B24B-82FEAA7EC746}.Debug.ActiveCfg = Debug|.NET
+		{668CE31F-980B-4A48-B24B-82FEAA7EC746}.Debug.Build.0 = Debug|.NET
+		{668CE31F-980B-4A48-B24B-82FEAA7EC746}.Release.ActiveCfg = Release|.NET
+		{668CE31F-980B-4A48-B24B-82FEAA7EC746}.Release.Build.0 = Release|.NET
+		{077CB6EA-B062-4E0A-A7DC-1B0D11024968}.Debug.ActiveCfg = Debug|.NET
+		{077CB6EA-B062-4E0A-A7DC-1B0D11024968}.Debug.Build.0 = Debug|.NET
+		{077CB6EA-B062-4E0A-A7DC-1B0D11024968}.Release.ActiveCfg = Release|.NET
+		{077CB6EA-B062-4E0A-A7DC-1B0D11024968}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

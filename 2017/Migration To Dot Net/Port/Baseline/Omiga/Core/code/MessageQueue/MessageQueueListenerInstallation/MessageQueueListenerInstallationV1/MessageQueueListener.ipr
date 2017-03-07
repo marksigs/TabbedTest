@@ -1,0 +1,757 @@
+[Components:MDAC:Properties]
+OBJECT:=No
+DESCRIPTION:=
+STATUS:=
+VISIBLE:=No
+FILENEED:=STANDARD
+INCLUDEINBUILD:=Yes
+PASSWORD:=
+ENCRYPT:=No
+UNINSTALLABLE:=Yes
+COMMENT:=
+TARGETDIRCDROM:=
+DISPLAYTEXT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+GUID:=e2277f58-fa36-4f65-9bc0-824d7f624134
+_SPLIT_BEFORE:=
+_SPLIT_AFTER:=
+_DATAASFILES:=
+_NO_SPLIT:=
+_NO_SPLIT_BEFORE:=
+VOLATILE:=
+HANDLERONInstalling:=MDAC_Installing
+HANDLERONInstalled:=MDAC_Installed
+HANDLERONUnInstalling:=
+HANDLERONUnInstalled:=
+
+[Components:MDAC:ReqByComponents]
+Program Files:=
+Program Files 2003:=
+
+[Components:Program Files 2003:FileGroups]
+Program Executable Files (Windows 2003):=
+Shared Executable Files (Windows 2003):=
+
+[Components:Program Files 2003:Properties]
+Object:=No
+Description:=
+Status:=
+Visible:=Yes
+FileNeed:=STANDARD
+IncludeInBuild:=Yes
+Password:=
+Encrypt:=No
+Uninstallable:=Yes
+Comment:=
+DisplayText:=
+TargetDirCDROM:=
+HttpLocation:=
+FTPLocation:=
+Misc:=
+GUID:=196C56B7-E27B-4BE4-B76D-D962A814C1EE
+HandlerOnInstalling:=
+HandlerOnInstalled:=ProgramFiles_Installed
+HandlerOnUnInstalling:=ProgramFiles_UnInstalling
+HandlerOnUnInstalled:=
+
+[Components:Program Files 2003:ReqComponents]
+VC6Redist:=
+MDAC:=
+XMLParser:=
+
+[Components:Program Files:FileGroups]
+Program Executable Files (Windows 2000):=
+Program Executable Files (Windows NT):=
+Shared Executable Files (Windows 2000):=
+Shared Executable Files (Windows NT):=
+
+[Components:Program Files:Properties]
+OBJECT:=No
+DESCRIPTION:=
+STATUS:=
+VISIBLE:=Yes
+FILENEED:=STANDARD
+INCLUDEINBUILD:=Yes
+PASSWORD:=
+ENCRYPT:=No
+UNINSTALLABLE:=Yes
+COMMENT:=
+TARGETDIRCDROM:=
+DISPLAYTEXT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+GUID:=e42337eb-52dd-4f65-ac8f-e5ccae18c514
+_SPLIT_BEFORE:=
+_SPLIT_AFTER:=
+_DATAASFILES:=
+_NO_SPLIT:=
+_NO_SPLIT_BEFORE:=
+VOLATILE:=
+HANDLERONInstalling:=ProgramFiles_Installing
+HANDLERONInstalled:=ProgramFiles_Installed
+HANDLERONUnInstalling:=ProgramFiles_UnInstalling
+HANDLERONUnInstalled:=ProgramFiles_UnInstalled
+
+[Components:Program Files:ReqComponents]
+VC6Redist:=
+MDAC:=
+XMLParser:=
+
+[Components:Sample Configuration Files:FileGroups]
+
+[Components:Sample Configuration Files:Properties]
+OBJECT:=No
+DESCRIPTION:=
+STATUS:=
+VISIBLE:=Yes
+FILENEED:=STANDARD
+INCLUDEINBUILD:=Yes
+PASSWORD:=
+ENCRYPT:=No
+UNINSTALLABLE:=Yes
+COMMENT:=
+TARGETDIRCDROM:=
+DISPLAYTEXT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+GUID:=5ff481a8-6bd5-4802-98a9-7857f5587fd8
+_SPLIT_BEFORE:=
+_SPLIT_AFTER:=
+_DATAASFILES:=
+_NO_SPLIT:=
+_NO_SPLIT_BEFORE:=
+VOLATILE:=
+HANDLERONInstalling:=
+HANDLERONInstalled:=
+HANDLERONUnInstalling:=
+HANDLERONUnInstalled:=
+
+[Components:SetupType]
+setuptype0:=Compact
+setuptype1:=Typical
+setuptype2:=Custom
+
+[Components:SubComponents]
+Program Files:=
+Sample Configuration Files:=
+VC6Redist:=
+MDAC:=
+XMLParser:=
+Program Files 2003:=
+
+[Components:VC6Redist:Properties]
+OBJECT:=No
+DESCRIPTION:=
+STATUS:=
+VISIBLE:=No
+FILENEED:=STANDARD
+INCLUDEINBUILD:=Yes
+PASSWORD:=
+ENCRYPT:=No
+UNINSTALLABLE:=Yes
+COMMENT:=
+TARGETDIRCDROM:=
+DISPLAYTEXT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+GUID:=21f4c188-0b2c-4350-b1d9-b9577c5de574
+_SPLIT_BEFORE:=
+_SPLIT_AFTER:=
+_DATAASFILES:=
+_NO_SPLIT:=
+_NO_SPLIT_BEFORE:=
+VOLATILE:=
+HANDLERONInstalling:=VC6Redist_Installing
+HANDLERONInstalled:=VC6Redist_Installed
+HANDLERONUnInstalling:=
+HANDLERONUnInstalled:=
+
+[Components:VC6Redist:ReqByComponents]
+Program Files:=
+Program Files 2003:=
+
+[Components:XMLParser:Properties]
+OBJECT:=No
+DESCRIPTION:=
+STATUS:=
+VISIBLE:=No
+FILENEED:=STANDARD
+INCLUDEINBUILD:=Yes
+PASSWORD:=
+ENCRYPT:=No
+UNINSTALLABLE:=Yes
+COMMENT:=
+TARGETDIRCDROM:=
+DISPLAYTEXT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+GUID:=3fa72d32-0c88-4b5e-a7e2-2776a2351300
+_SPLIT_BEFORE:=
+_SPLIT_AFTER:=
+_DATAASFILES:=
+_NO_SPLIT:=
+_NO_SPLIT_BEFORE:=
+VOLATILE:=
+HANDLERONInstalling:=XMLParser_Installing
+HANDLERONInstalled:=XMLParser_Installed
+HANDLERONUnInstalling:=
+HANDLERONUnInstalled:=
+
+[Components:XMLParser:ReqByComponents]
+Program Files:=
+Program Files 2003:=
+
+[FileGroups:FileGroups]
+Sample Configuration Files:=
+Shared Executable Files (Windows 2000):=
+Shared Executable Files (Windows NT):=
+Program Executable Files (Windows NT):=
+Program Executable Files (Windows 2000):=
+Program Executable Files (Windows 2003):=
+Shared Executable Files (Windows 2003):=
+
+[FileGroups:FileList:ISFileDestList:<PROGRAMFILES>]
+SubDir0:=<PROGRAMFILES>\<COMMONFILES>
+DISPLAYTEXT:=Program Files Folder
+TYPE:=TEXTSUBFIXED
+
+[FileGroups:FileList:ISFileDestList:<PROGRAMFILES>\<COMMONFILES>]
+DISPLAYTEXT:=Common Files Folder
+TYPE:=TEXTSUBFIXED
+
+[FileGroups:FileList:ISFileDestList:<SUPPORTDIR>]
+DISPLAYTEXT:=Support Folder
+TYPE:=TEXTSUBFIXED
+
+[FileGroups:FileList:ISFileDestList:<TARGETDIR>]
+SubDir0:=<TARGETDIR>\Sample Configuration Files
+DISPLAYTEXT:=General Application Destination
+TYPE:=TEXTSUBFIXED
+
+[FileGroups:FileList:ISFileDestList:<TARGETDIR>\Sample Configuration Files]
+DISPLAYTEXT:=
+TYPE:=FOLDER
+
+[FileGroups:FileList:ISFileDestList:<WINDIR>]
+SubDir0:=<WINDIR>\<WINSYSDIR>
+DISPLAYTEXT:=Windows Operating System
+TYPE:=TEXTSUBFIXED
+
+[FileGroups:FileList:ISFileDestList:<WINDIR>\<WINSYSDIR>]
+DISPLAYTEXT:=Windows System Folder
+TYPE:=TEXTSUBFIXED
+
+[FileGroups:FileList:ISFileDestList:General]
+Type:=FILELIST
+Version:=1.10.000
+
+[FileGroups:FileList:ISFileDestList:TopDir]
+SubDir0:=<WINDIR>
+SubDir1:=<PROGRAMFILES>
+SubDir2:=<TARGETDIR>
+SubDir3:=USERDEFINED
+SubDir4:=<SUPPORTDIR>
+
+[FileGroups:FileList:ISFileDestList:USERDEFINED]
+DISPLAYTEXT:=Script-defined Folders
+TYPE:=USERSTART
+
+[FileGroups:ISFileGroupDestList]
+GUID:=AAD76461-EA87-4CDE-B64A-87D057E15766
+Diff:=Yes
+IncludeSubDir:=No
+Folder:=
+Wildcards:=
+
+[FileGroups:Program Executable Files (Windows 2000):Properties]
+LINKTYPE:=Static Link
+UNINSTALLABLE:=Yes
+FILETYPE:=No
+SELFREGISTERING:=No
+POTENTIALLY:=No
+COMPRESS:=Yes
+OPERATINGSYSTEM:=0000000000100000
+LANGUAGE:=
+COMMENT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+INSTALLATION:=NEWERVERSION\NEWERDATE
+TARGET:=<TARGETDIR>
+Assembly:=NOT_ASSEMBLY
+ExclusionWildcards:=
+GUID:=FBDE3B9C-9336-4333-9419-A28DBA11204E
+Diff:=Yes
+IncludeSubDir:=No
+Folder:=
+Wildcards:=
+
+[FileGroups:Program Executable Files (Windows 2003):Properties]
+LINKTYPE:=Static Link
+UNINSTALLABLE:=Yes
+FILETYPE:=No
+SELFREGISTERING:=No
+POTENTIALLY:=No
+COMPRESS:=Yes
+OPERATINGSYSTEM:=0000000000000000
+LANGUAGE:=
+COMMENT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+INSTALLATION:=NEWERVERSION\NEWERDATE
+TARGET:=<TARGETDIR>
+Assembly:=NOT_ASSEMBLY
+ExclusionWildcards:=
+GUID:=82CCB777-C049-43DE-B0EF-9334B26756E9
+Diff:=Yes
+IncludeSubDir:=No
+Folder:=
+Wildcards:=
+
+[FileGroups:Program Executable Files (Windows NT):Properties]
+LINKTYPE:=Static Link
+UNINSTALLABLE:=Yes
+FILETYPE:=No
+SELFREGISTERING:=No
+POTENTIALLY:=No
+COMPRESS:=Yes
+OPERATINGSYSTEM:=0000000000010000
+LANGUAGE:=
+COMMENT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+INSTALLATION:=NEWERVERSION\NEWERDATE
+TARGET:=<TARGETDIR>
+Assembly:=NOT_ASSEMBLY
+ExclusionWildcards:=
+GUID:=3C5BFD7C-F62F-49CA-9B9A-729964498AB5
+Diff:=Yes
+IncludeSubDir:=No
+Folder:=
+Wildcards:=
+
+[FileGroups:Sample Configuration Files:Properties]
+LINKTYPE:=Static Link
+UNINSTALLABLE:=Yes
+FILETYPE:=No
+SELFREGISTERING:=No
+POTENTIALLY:=No
+COMPRESS:=Yes
+OPERATINGSYSTEM:=0000000000000000
+LANGUAGE:=
+COMMENT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+INSTALLATION:=NEWERVERSION\NEWERDATE
+TARGET:=<TARGETDIR>\Sample Configuration Files
+Assembly:=NOT_ASSEMBLY
+ExclusionWildcards:=
+GUID:=F0A935D0-FD58-4033-9F47-5406288EB6B9
+Diff:=Yes
+IncludeSubDir:=No
+Folder:=
+Wildcards:=
+
+[FileGroups:Shared Executable Files (Windows 2000):Properties]
+LINKTYPE:=Static Link
+UNINSTALLABLE:=Yes
+FILETYPE:=Yes
+SELFREGISTERING:=Yes
+POTENTIALLY:=No
+COMPRESS:=Yes
+OPERATINGSYSTEM:=0000000000100000
+LANGUAGE:=
+COMMENT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+INSTALLATION:=NEWERVERSION\NEWERDATE
+TARGET:=<TARGETDIR>
+Assembly:=NOT_ASSEMBLY
+ExclusionWildcards:=
+GUID:=D181DB0D-D645-4709-8045-EAFF210F2955
+Diff:=Yes
+IncludeSubDir:=No
+Folder:=
+Wildcards:=
+
+[FileGroups:Shared Executable Files (Windows 2003):Properties]
+LINKTYPE:=Static Link
+UNINSTALLABLE:=Yes
+FILETYPE:=Yes
+SELFREGISTERING:=Yes
+POTENTIALLY:=No
+COMPRESS:=Yes
+OPERATINGSYSTEM:=0000000000000000
+LANGUAGE:=
+COMMENT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+INSTALLATION:=NEWERVERSION\NEWERDATE
+TARGET:=<TARGETDIR>
+Assembly:=NOT_ASSEMBLY
+ExclusionWildcards:=
+GUID:=7FF70BA5-B752-4C28-AC58-CED793BCE229
+Diff:=Yes
+IncludeSubDir:=No
+Folder:=
+Wildcards:=
+
+[FileGroups:Shared Executable Files (Windows NT):Properties]
+LINKTYPE:=Static Link
+UNINSTALLABLE:=Yes
+FILETYPE:=Yes
+SELFREGISTERING:=Yes
+POTENTIALLY:=No
+COMPRESS:=Yes
+OPERATINGSYSTEM:=0000000000010000
+LANGUAGE:=
+COMMENT:=
+HTTPLOCATION:=
+FTPLOCATION:=
+MISC:=
+INSTALLATION:=NEWERVERSION\NEWERDATE
+TARGET:=<TARGETDIR>
+Assembly:=NOT_ASSEMBLY
+ExclusionWildcards:=
+GUID:=46C79D53-9D69-43C4-9B4D-E16008CFABFD
+Diff:=Yes
+IncludeSubDir:=No
+Folder:=
+Wildcards:=
+
+[FileList:Program Executable Files (Windows 2000):Files]
+MessageQueueListener.exe:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\ReleaseUMinDependencyW2K
+MessageQueueListenerLOG.exe:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerLOG\ReleaseUMinDependencyW2K
+MessageQueueListenerMTS.dll:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerMTS\ReleaseUMinDependencyW2K
+MessageQueueListenerPRF.dll:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerPRF\ReleaseUMinDependencyW2K
+
+[FileList:Program Executable Files (Windows 2003):Files]
+MessageQueueListener.exe:=C:\projects\Baselinecode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\ReleaseUMinDependencyW2003
+MessageQueueListenerMTS.dll:=C:\projects\Baselinecode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerMTS\ReleaseUMinDependencyW2003
+MessageQueueListenerPRF.dll:=C:\projects\Baselinecode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerPRF\ReleaseUMinDependencyW2003
+MessageQueueListenerLOG.exe:=C:\projects\Baselinecode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerLOG\ReleaseUMinDependencyW2003
+
+[FileList:Program Executable Files (Windows NT):Files]
+MessageQueueListenerPRF.dll:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerPRF\ReleaseUMinDependency
+MessageQueueListenerMTS.dll:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerMTS\ReleaseUMinDependency
+MessageQueueListenerLOG.exe:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListenerLOG\ReleaseUMinDependency
+MessageQueueListener.exe:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\ReleaseUMinDependency
+
+[FileList:Sample Configuration Files:Files]
+MessageQueueListener.xml - OMMQ1_SQLOLEDB_Test:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles
+MessageQueueListener.xml - MSMQ1_Test (DIRECT OS):=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles
+MessageQueueListener.xml - OMMQ1_MSDAORA_Test:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles
+MessageQueueListener.xml - OMMQ1_ORAOLEDB_Test:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles
+MessageQueueListener.xml - MSMQ1_Test:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles
+
+[FileList:Shared Executable Files (Windows 2000):Files]
+MessageQueueComponentVC.dll:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueComponentVC\ReleaseUMinDependencyW2K
+
+[FileList:Shared Executable Files (Windows 2003):Files]
+MessageQueueComponentVC.dll:=C:\projects\Baselinecode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueComponentVC\ReleaseUMinDependencyW2003
+
+[FileList:Shared Executable Files (Windows NT):Files]
+MessageQueueComponentVC.dll:=C:\PROJECTS\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueComponentVC\ReleaseUMinDependency
+
+[General]
+Version:=3.00.000
+
+[Media:Default:CodeSign]
+Sign:=No
+SignPackage:=No
+URL:=
+SPC:=
+PVK:=
+
+[Media:Default:Components]
+e42337eb-52dd-4f65-ac8f-e5ccae18c514:=
+5ff481a8-6bd5-4802-98a9-7857f5587fd8:=
+21f4c188-0b2c-4350-b1d9-b9577c5de574:=
+e2277f58-fa36-4f65-9bc0-824d7f624134:=
+3fa72d32-0c88-4b5e-a7e2-2776a2351300:=
+
+[Media:Default:DataAsFilesComponents]
+Program Files:=No
+Sample Configuration Files:=No
+VC6Redist:=No
+MDAC:=No
+XMLParser:=No
+
+[Media:Default:DiffFileList]
+
+[Media:Default:Filter]
+LanguageDefault:=0009
+
+[Media:Default:GeneralInfo]
+Name:=Default
+MediaType:=CDROM
+BuildType:=Full
+BuildSize:=
+Password:=
+GUID:=2f3e6d2e-256d-47fc-a911-0c8fb71e5abf
+BuildFolder:=
+SingleExeFileName:=
+SetupCommandLine:=
+CompressScript:=No
+ShowPasswordDialog:=No
+PreprocessorDefines:=
+SpecifyComponents:=No
+SingleExeFileIcon:=
+
+[Media:Default:Internet]
+WebPage:=
+CreateDefaultWebPage:=No
+Netscape:=No
+SaveOptionsDlg:=No
+Security:=No
+
+[Media:Default:Languages]
+key0:=0009
+
+[Media:Default:Platforms]
+key0:=0000000000000010
+key1:=0000000000000040
+key2:=0000000000010000
+key3:=0000000000100000
+
+[Media:Default:PostBuild]
+FTPSite:=
+FTPFolder:=
+FTPUser:=
+FTPPassword:=
+Folder:=
+Batch File:=
+
+[Media:Default:SetupInfo]
+ApplicationName:=
+EnableLangDlg:=No
+
+[Media:Default:UI]
+SmallProgress:=No
+UseSkin:=No
+SkinName:=
+
+[Project:General]
+Version:=21
+SubVersion:=1
+
+[Project:Languages]
+0009:=
+
+[Project:Media]
+Default:=
+
+[Project:Properties:CompileLink]
+WaringLevel:=3
+WaringsAsErrors:=No
+WarningMaximum:=50
+ErrorMaximum:=50
+Preproccessor:=
+CompileBeforeBuild:=Yes
+Libraries:=isrt.obl ifx.obl
+LinkPath:=
+InlineDebugInfo:=No
+
+[Project:Properties:DepManager]
+Application:=
+CommandLine:=
+StartInFolder:=
+
+[Project:Properties:General]
+Platforms:=0000000000510050
+RegisterObjectDuringBuild:=Yes
+
+[Project:Properties:Product]
+GUID:=e477e494-05ee-4235-9028-d6e8474264a3
+CompanyName:=Marlborough Stirling
+URL:=
+EmailAddress:=
+Copyright:=
+Summary:=
+Name:=MessageQueueListener
+Version:=2004.4.2.0
+ExeFile:=C:\projects\BaselineCode\Baseline Code R15\Dev\Code\MessageQueue\MessageQueueListener\MessageQueueListener\ReleaseUMinDependency\MessageQueueListener.exe
+Comments:=
+
+[Project:Properties:Project]
+Author:=
+Department:=
+Password:=
+
+[Project:Properties:RunDebug]
+SetupArguments:=
+GenerateMIF:=No
+MIFFileName:=Status.mif
+MIFSerial:=
+
+[Project:Properties:Runtime]
+LogFile:=Standard
+UpdateModeSupported:=No
+UpdateServiceSupported:=No
+EngineBinding:=Dynamic
+
+[Project:Properties:SourceControl]
+ProjName:=
+AuxProjPath:=
+
+[RegistryObj:Data]
+
+[SetupTypes]
+Typical:=
+2003:=
+
+[SetupTypes:2003:Components]
+Sample Configuration Files:=
+VC6Redist:=
+MDAC:=
+XMLParser:=
+Program Files 2003:=
+
+[SetupTypes:2003:Properties]
+Descrip:=
+Comment:=
+DisplayText:=
+
+[SetupTypes:Typical:Components]
+VC6Redist:=
+Sample Configuration Files:=
+Program Files:=
+XMLParser:=
+MDAC:=
+
+[SetupTypes:Typical:Properties]
+Comment:=
+Descrip:=
+DisplayText:=
+
+[ShellObj:Data]
+Folder0:=<FOLDER_DESKTOP>
+Folder1:=<FOLDER_STARTMENU>
+Folder2:=<FOLDER_PROGRAMS>
+Folder3:=<FOLDER_STARTUP>
+
+[StringTable:Data:General]
+TITLE_MAIN:=Do not delete. Setup requires this Identifier even if your script doesn't use it.
+TITLE_CAPTIONBAR:=Do not delete. Setup requires this Identifier even if your script doesn't use it.
+COMPANY_NAME:=Do not delete. Setup requires this Identifier even if your script doesn't use it.
+PRODUCT_NAME:=Do not delete. Setup requires this Identifier even if your script doesn't use it.
+PRODUCT_KEY:=Do not delete. Setup requires this Identifier even if your script doesn't use it.
+PRODUCT_VERSION:=Do not delete. Setup requires this Identifier even if your script doesn't use it.
+FOLDER_NAME:=Do not delete. Setup requires this Identifier even if your script doesn't use it.
+MQLCOMPLUSAPPLICATIONNAME:=
+
+[TextSub:Build:<COMMONFILES>]
+Value:=
+KeyType:=4
+
+[TextSub:Build:<ISPROJECTDIR>]
+Value:=
+KeyType:=4
+
+[TextSub:Build:<PROGRAMFILES>]
+Value:=
+KeyType:=4
+
+[TextSub:Build:<WINDIR>]
+Value:=
+KeyType:=4
+
+[TextSub:Build:<WINSYSDIR>]
+Value:=
+KeyType:=4
+
+[TextSub:Build:Data]
+Key0:=<PROGRAMFILES>
+Key1:=<COMMONFILES>
+Key2:=<WINDIR>
+Key3:=<WINSYSDIR>
+Key4:=<ISPROJECTDIR>
+
+[TextSub:Setup:<COMMONFILES>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<HKCC>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<HKCR>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<HKCU>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<HKDD>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<HKLM>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<HKUS>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<PROGRAMFILES>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<SHELL_OBJECT_FOLDER>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<SRCDIR>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<SUPPORTDIR>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<TARGETDIR>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<UNINST>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<WINDIR>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:<WINSYSDIR>]
+Value:=
+KeyType:=4
+
+[TextSub:Setup:Data]
+Key0:=<PROGRAMFILES>
+Key1:=<COMMONFILES>
+Key2:=<WINDIR>
+Key3:=<WINSYSDIR>
+Key4:=<TARGETDIR>
+Key5:=<SUPPORTDIR>
+Key10:=<HKDD>
+Key6:=<SRCDIR>
+Key11:=<HKUS>
+Key7:=<HKLM>
+Key12:=<HKCR>
+Key8:=<HKCU>
+Key9:=<HKCC>
+Key13:=<SHELL_OBJECT_FOLDER>
+Key14:=<UNINST>
+

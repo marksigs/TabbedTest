@@ -1,0 +1,17 @@
+GeneralAssist = 0, 0, 0, 0, C
+ErrorHandling = 0, 0, 543, 408, C
+MSGDataGrid = 198, 198, 751, 614, C, 22, 29, 635, 454, C
+MSGDataCombo = 0, 0, 0, 0, C, 44, 58, 657, 483, C
+MSGComboBox = 0, 0, 0, 0, C, 66, 87, 679, 512, C
+MSGEditBox = 176, 176, 719, 584, C, 88, 116, 701, 541, C
+MSGHorizontalSwapList = 110, 110, 663, 526, C, 110, 145, 723, 570, C
+MSGListView = 0, 0, 0, 0, C, 132, 174, 745, 599, C
+MSGMulti = 132, 132, 685, 548, C, 0, 0, 613, 425, C
+MSGPasswordEditBox = 0, 0, 0, 0, C, 22, 29, 635, 454, C
+MSGTextMulti = 154, 154, 707, 570, C, 44, 58, 657, 483, C
+RegAssist = 0, 0, 0, 0, C
+SortListView = 0, 0, 0, 0, C
+KeyPress = 0, 0, 0, 0, C
+Constants = 0, 0, 0, 0, C
+TabUtils = 176, 176, 729, 592, C
+Utils = 0, 0, 0, 0, C

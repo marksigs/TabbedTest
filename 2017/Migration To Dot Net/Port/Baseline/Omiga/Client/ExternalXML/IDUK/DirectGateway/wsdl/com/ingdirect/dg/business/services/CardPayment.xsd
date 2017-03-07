@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Rohit Saproo     
+ 
+
+Description  Schema definations for data transfer between Omiga and Direct Gateway for Card Payment Request and Response
+
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://cardpayment.customer.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:cardPayment="http://cardpayment.customer.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<annotation>
+		<documentation> Document Version = 0.1 </documentation>
+	</annotation>
+	<!-- start of type definitions -->
+	<complexType name="CardPaymentRequestType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="CreditCardDetails" type="common:CreditOrDebitCardDetailsType"/>
+					<element name="MasterAccountNumber" nillable="true" minOccurs="0">
+						<simpleType>
+							<restriction base="int">
+								<totalDigits value="8"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="MortgageApplicationNumber" nillable="true" minOccurs="0">
+						<simpleType>
+							<restriction base="int">
+								<totalDigits value="10"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="PaymentMechanism" type="string"/>
+					<element name="TransactionMode" type="string"/>
+					<element name="TransactionType" type="string" nillable="true"/>
+					<element name="Pipeline" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="CardPaymentResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="PaymentResult" type="string"/>
+					<element name="AuthorisationReference" nillable="true">
+						<simpleType>
+							<restriction base="string">
+								<length value="6"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="TransactionReference" nillable="true">
+						<simpleType>
+							<restriction base="string">
+								<length value="36"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="UpFrontPaymentReason" type="string" nillable="false"/>
+					<element name="AVSResult" type="string" nillable="true"/>
+					<element name="CV2" type="string" nillable="true"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="CardPaymentRequest" type="cardPayment:CardPaymentRequestType"/>
+	<element name="CardPaymentResponse" type="cardPayment:CardPaymentResponseType"/>
+</schema>

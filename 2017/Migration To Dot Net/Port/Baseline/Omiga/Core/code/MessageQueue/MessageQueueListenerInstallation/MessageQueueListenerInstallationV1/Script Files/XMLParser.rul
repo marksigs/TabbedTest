@@ -1,0 +1,49 @@
+
+prototype InstallXMLParser();
+
+#define XMLPARSERVERSION "8.10.8308.0"
+
+
+function InstallXMLParser()
+	STRING szFileName, szPath, szVersionNumber, szUpdateVersion, szOption;
+	NUMBER nCompareFlag, nResult;
+	BOOL   bNeedToUpdate;
+
+begin
+	LOG_SetStatusWindow("Checking Version of XML Parser");
+
+    // Check version of XML Parser
+	nCompareFlag = VERSION;
+    bNeedToUpdate = FALSE;
+	szFileName = "MSXML3.DLL";
+	
+	nResult = VerFindFileVersion(szFileName, szPath, szVersionNumber);
+	
+   	if (nResult = FILE_NOT_FOUND || nResult = FILE_NO_VERSION) then
+		bNeedToUpdate = TRUE;
+	elseif (nResult < 0) then
+		LOG_MessageBox("VerFindFileVersion for XML Parser failed", SEVERE);
+	else	
+		szUpdateVersion = XMLPARSERVERSION;
+
+    	nResult = VerCompare(szUpdateVersion, szVersionNumber, nCompareFlag);
+
+		if (nResult = GREATER_THAN) then
+			bNeedToUpdate = TRUE;
+		endif;
+	endif;
+	
+	// Update the parser if required
+	if (bNeedToUpdate = TRUE) then
+		LOG_Log("Installing msxml3sp1.exe");
+		nResult = LaunchAppAndWait(SUPPORTDIR ^ "msxml3sp1.exe", "/Q", WAIT);
+		
+		if nResult < 0 then
+		    LOG_MessageBox("Failed to install XML Parser", SEVERE);
+		endif;
+	else
+		LOG_Log("Current version of XML Parser is ok (" + szVersionNumber + ")");
+	endif;	
+		
+	return nResult;	
+end;

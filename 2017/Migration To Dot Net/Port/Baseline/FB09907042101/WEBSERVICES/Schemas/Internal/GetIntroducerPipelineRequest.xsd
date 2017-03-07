@@ -1,0 +1,45 @@
+<!--==============================XML Document Control=============================
+Description: GetIntroducerPipeline - Request
+
+History:
+
+Version 		Author   	Date				Description
+01.01      		PSC			20/11/2006		Created
+
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.GetIntroducerPipeline.Omiga.vertex.co.uk" targetNamespace="http://Request.GetIntroducerPipeline.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="REQUEST" type="GETINTRODUCERPIPELINEREQUESTType"/>
+	<xs:complexType name="GETINTRODUCERPIPELINEREQUESTType">
+		<xs:sequence>
+			<xs:element name="PIPELINESEARCH" type="PIPELINESEARCHType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="PIPELINESEARCHType">
+		<xs:attribute name="INTRODUCERID" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique identifier of the broker or packager.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="INCLUDEPREVIOUS" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Whether or not cases owned previously or implicitly are to be included. Previously owned cases are ommited from the search by default.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="INCLUDECANCELLED" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Whether or not cancelled cases are to be included. Only relevant to brokers. Cancelled cases are ommited from the search by default.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="INCLUDEFIRM" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Whether or not all cases for the firm are to be included. Only relevant to packagers. All cases for the firm are ommited from the search by default.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Archive               $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/IntroducerDetail.xsd $
+Workfile:             $Workfile: IntroducerDetail.xsd $
+Current Version   $Revision: 12 $
+Last Modified      $Modtime: 5/02/07 12:02 $
+Modified By        $Author: Dbarraclough $
+
+Description: IntroducerDetails.xsd. This is referred used in BrokerRegAndMaintainRequest.xsd and BrokerRegAndMaintainResponse.xsd 
+
+History:
+
+Version 		Author   		Date       			Description
+01.00			SR			18/10/2006			EP2_11 Create INTRODUCERDETAILSType.
+01.01			SR			19/10/2006			EP2_11 add attribute 'CRUD_OP' to relevant groups.
+01.02			SR			19/10/2006			modifed to add missing attributes.
+01.03			SR			25/10/2006			EP2_11 Added this comment to attach to the defect.
+01.04			SR			31/10/2006			EP2_26 : allow multiple 'IntroducerFirm' records attached to 'Introducer'
+01.05			IK				08/11/2006			EP2_35  add FSA INDIVIDUAL data
+01.06			SR			13/11/2006			EP2_76 add attribute CRUD_OP to node INTRODUCERFIRM
+01.07			IK				14/11/2006			EP2_89 fix for PACKAGEINDICATOR / PACKAGERINDICATOR rename
+01.08			SR			17/11/2006			Ep2_131
+01.09			SR			20/11/2006			EP2_136 - make PrincipalFirm.PrincipalFirmId, OrganisationUse.UserId, CONTACTDETAILS.CONTACTDETAILSGUID CONTACTDETAILS.USERID
+																optional 
+01.09			SR			20/11/2006			EP2_136 - modified to check in
+01.10			SR			21/11/2006			EP2_156 - Added optional attribs ListingStatus and NUMBEROFLOGINFAILURES to INTRODUCER
+01.11			IK				12/12/2006			EP2_383 - fix APPOINTMENTS_base
+01.12			IK				14/12/2006  			EP2_435 MORTGAGECLUBNETWORKASSOCIATION.PAYMENTTYPE now
+																MORTGAGECLUBNETWORKASSOCIATION.PAYMENTMETHOD
+																additional MORTGAGECLUBNETWORKASSOCIATION,ARFIRM,PRINCIPALFIRM fields
+01.13			IK				08/01/2007			changes to INDIVIDUALCONTROLS & INDIVIDUALEMPLOYMENT
+01.14			IK				24/01/2007			EP2_986 FIRMPERMISSIONS maxOccurs="unbounded"
+01/15			IK				29/01/2007			EP2_863 ADD INTRODUCERFIRM.TRADINGAS
+01/16			IK				01/02/2007			EP2_338 add ACTIVITYDESCRIPTION, CATEGORY to FIRMPERMISSIONSType
+================================================================================-->
+<xs:schema xmlns="http://IntroducerDetail.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://IntroducerDetail.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:complexType name="ARFIRM_base">
+		<xs:attribute name="ARFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="FSAARFIRMREF" type="xs:string" use="optional"/>
+		<xs:attribute name="ARFIRMNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="STATUSDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="LISTINGSTATUS" type="xs:int" use="optional"/>
+		<xs:attribute name="ADDRESSLINE1" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE2" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE3" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE4" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE5" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE6" type="xs:string" use="optional"/>
+		<xs:attribute name="POSTCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONECOUNTRYCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONEAREACODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONENUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXCOUNTRYCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXAREACODE" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="LASTUPDATEDDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="LASTUPDATEDBY" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" use="optional"/>
+		<xs:attribute name="FIRMSTATUS" type="xs:int"  use="optional"/>
+		<xs:attribute name="PROCFEEONLINEIND" type="xs:short"  use="optional"/>
+		<xs:attribute name="CHANGEOFFIRMTYPE" type="xs:int"  use="optional"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="APPOINTMENTS_base">
+		<xs:attribute name="APPOINTMENTID" type="xs:string" />
+		<xs:attribute name="PRINCIPALFIRMID" type="xs:string" />
+		<xs:attribute name="ARFIRMID" type="xs:string" />
+		<xs:attribute name="STATUSCODE" type="xs:string" />
+		<xs:attribute name="STATUSEFFECTIVEDATE" type="msgdt:msgDate" />
+		<xs:attribute name="LASTUPDATEDDATE" type="msgdt:msgDate" />
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGECLUBNETWORKASSOCIATION_base">
+		<xs:attribute name="CLUBNETWORKASSOCIATIONID" type="xs:string"/>
+		<xs:attribute name="MORCLUBNETWORKASSOCDESCRIPTION" type="xs:string" use="optional"/>
+		<xs:attribute name="MORCLUBNETWORKASSOCNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKACCOUNTNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKACCOUNTNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKACCOUNTBRANCHNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKSORTCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKWIZARDINDICATOR" type="xs:int" use="optional"/>
+		<xs:attribute name="BUILDINGORHOUSENAME" type="xs:string" use="optional"/>
+		<xs:attribute name="BUILDINGORHOUSENUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="FLATNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="STREET" type="xs:string" use="optional"/>
+		<xs:attribute name="DISTRICT" type="xs:string" use="optional"/>
+		<xs:attribute name="TOWN" type="xs:string" use="optional"/>
+		<xs:attribute name="COUNTY" type="xs:string" use="optional"/>
+		<xs:attribute name="COUNTRY" type="xs:int" use="optional"/>
+		<xs:attribute name="POSTCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONECOUNTRYCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONEAREACODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONENUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXCOUNTRYCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXAREACODE" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="VOLPROCFEEADJUSTMENT" type="xs:float" use="optional"/>
+		<xs:attribute name="PROCLOADINGIND" type="xs:int" use="optional"/>
+		<xs:attribute name="PACKAGERINDICATOR" type="xs:int" use="optional"/>
+		<xs:attribute name="LASTUPDATEDDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="LASTUPDATEDBY" type="xs:string" use="optional"/>
+		<xs:attribute name="PAYMENTMETHOD" type="xs:int" />
+		<xs:attribute name="AGREEDPROCFEERATE" type="xs:decimal" />
+		<xs:attribute name="ASSOCIATIONFEEAMOUNT" type="xs:int" />
+		<xs:attribute name="ASSOCIATIONFEERATE" type="xs:decimal" />
+		<xs:attribute name="IDENTIFIER" type="xs:int" />
+	</xs:complexType>
+	<xs:complexType name="PRINCIPALFIRM_base">
+		<xs:attribute name="PRINCIPALFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="FSAREF" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" use="optional"/>
+		<xs:attribute name="PRINCIPALFIRMNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="LISTINGSTATUS" type="xs:int" use="optional"/>
+		<xs:attribute name="FIRMLEGALSTATUSTYPE" type="xs:int" use="optional"/>
+		<xs:attribute name="FIRMTYPECODE" type="xs:int" use="optional"/>
+		<xs:attribute name="BANKACCOUNTNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKACCOUNTNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKACCOUNTBRANCHNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKSORTCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="BANKWIZARDINDICATOR" type="xs:boolean" use="optional"/>
+		<xs:attribute name="ADDRESSLINE1" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE2" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE3" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE4" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE5" type="xs:string" use="optional"/>
+		<xs:attribute name="ADDRESSLINE6" type="xs:string" use="optional"/>
+		<xs:attribute name="POSTCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONECOUNTRYCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONEAREACODE" type="xs:string" use="optional"/>
+		<xs:attribute name="TELEPHONENUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXCOUNTRYCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXAREACODE" type="xs:string" use="optional"/>
+		<xs:attribute name="FAXNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="STATUSDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="AGREEDPROCFEERATE" type="xs:float" use="optional"/>
+		<xs:attribute name="VOLPROCFEEADJUSTMENT" type="xs:float" use="optional"/>
+		<xs:attribute name="PROCLOADINGIND" type="xs:boolean" use="optional"/>
+		<xs:attribute name="LASTUPDATEDBY" type="xs:string" use="optional"/>
+		<xs:attribute name="LASTUPDATEDDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="PAYMENTMETHOD" type="xs:int" use="optional"/>
+		<xs:attribute name="FIRMSTATUS" type="xs:int"  use="optional"/>
+		<xs:attribute name="PACKAGERINDICATOR" type="xs:int" use="optional"/>
+		<xs:attribute name="PROCFEEONLINEIND" type="xs:short"  use="optional"/>
+		<xs:attribute name="IDENTIFIER" type="xs:int"  use="optional"/>
+		<xs:attribute name="CHANGEOFFIRMTYPE" type="xs:int"  use="optional"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="INTRODUCERDETAILS_base">
+		<xs:attribute name="INTRODUCERID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Generated by Omiga- request will not contain value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NATIONALINSURANCENUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="EMAILADDRESS" type="xs:string" use="required"/>
+		<xs:attribute name="USERID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Generated by Omiga- request will not contain value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="INTRODUCERTYPE" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>Set to INTRODUCER- if called from Web screen  for Registration</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="INTRODUCERSTATUS" type="xs:int" use="optional"/>
+		<xs:attribute name="LISTINGSTATUS" type="xs:int" use="optional"/>
+		<xs:attribute name="ARINDICATOR" type="xs:short" use="optional"/>
+		<xs:attribute name="BUILDINGORHOUSENAME" type="xs:string" use="optional"/>
+		<xs:attribute name="BUILDINGORHOUSENUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="FLATNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="STREET" type="xs:string" use="optional"/>
+		<xs:attribute name="DISTRICT" type="xs:string" use="optional"/>
+		<xs:attribute name="TOWN" type="xs:string" use="optional"/>
+		<xs:attribute name="COUNTY" type="xs:string" use="optional"/>
+		<xs:attribute name="COUNTRY" type="xs:int" use="optional"/>
+		<xs:attribute name="POSTCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="NUMBEROFLOGINFAILURES" type="xs:int" use="optional"/>
+		<xs:attribute name="MARKETINGDATAOPTOUT" type="xs:boolean" use="optional"/>
+		<xs:attribute name="LASTUPDATEDDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="LASTUPDATEDBY" type="xs:string" use="optional"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="INTRODUCERFIRM_base">
+		<xs:attribute name="INTRODUCERID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Generated by Omiga while generating INTRODUCER record and populated here.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="INTRODUCERFIRMSEQNO" type="xs:string" use="optional"/>
+		<xs:attribute name="PRINCIPALFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="ARFIRMID" type="xs:string" use="optional"/>
+		<!-- EP2_863 -->
+		<xs:attribute name="TRADINGAS" type="xs:string" use="optional"/>
+		<!-- EP2_863  ends-->
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ORGANISATIONUSER_base">
+		<xs:attribute name="USERID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Generated by Omiga while creating INTRODUCER record and populated - request will not contain value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DATEOFBIRTH" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="EMERGENCYPASSWORD" type="xs:string" use="optional"/>
+		<xs:attribute name="MOTHERSMAIDENNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="USERFORENAME" type="xs:string" use="required"/>
+		<xs:attribute name="USERINITIALS" type="xs:string" use="optional"/>
+		<xs:attribute name="USERSURNAME" type="xs:string" use="required"/>
+		<xs:attribute name="USERTITLE" type="xs:int" use="required"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ORGANISATIONUSERCONTACTDETAILS_base">
+		<xs:attribute name="CONTACTDETAILSGUID" type="msgdt:msgGuid" use="optional">
+			<xs:annotation>
+				<xs:documentation>Generated by CRUD. request does not have value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="USERID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Generated by Omiga while creating INTRODUCER record and populated here- request will not contain value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PASSWORD_base">
+		<xs:attribute name="USERID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Generated by Omiga while creating INTRODUCER record and populated here- request will not contain value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PASSWORDVALUE" type="xs:string" use="required"/>
+		<xs:attribute name="PASSWORDCREATIONDATE" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Set to System Datetime by CRUD - request will not contain value</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="FIRMPERMISSIONS_base">
+		<!-- EP2_986 -->
+		<xs:attribute name="FIRMPERMISSIONSSEQNO" type="xs:int" use="optional"/>
+		<xs:attribute name="PRINCIPALFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="ARFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="ACTIVITYID" type="xs:string" use="optional"/>
+		<xs:attribute name="FRMPERMISSIONS" type="xs:int" use="optional"/>
+		<xs:attribute name="EFFECTIVEDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="LASTUPDATEDDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="INDIVIDUALBASICS_base">
+		<xs:attribute name="FSAINDIVIDUALREF" type="xs:string"/>
+		<xs:attribute name="FULLNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="NINUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="DATEOFBIRTH" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="STATUSCODE" type="xs:short" use="optional"/>
+		<xs:attribute name="LASTUPDATEDATE" type="msgdt:msgDate" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="INDIVIDUALCONTROLS_base">
+		<xs:attribute name="FSAINDIVIDUALREF" type="xs:string"/>
+		<xs:attribute name="PRINCIPALFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="STARTDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="ENDDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="LASTUPDATEDATE" type="msgdt:msgDate" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="INDIVIDUALEMPLOYMENT_base">
+		<xs:attribute name="FSAINDIVIDUALREF" type="xs:string" use="optional"/>
+		<xs:attribute name="ARFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="STATUSCODE" type="xs:short" use="optional"/>
+		<xs:attribute name="STARTDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="ENDDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="LASTUPDATEDATE" type="msgdt:msgDate" use="optional"/>
+		<xs:attribute name="PRINCIPALFIRMID" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="FIRMPERMISSIONSType">
+		<xs:complexContent>
+			<xs:extension base="FIRMPERMISSIONS_base">
+				<xs:attribute name="ACTIVITYDESCRIPTION" type="xs:string" use="optional"/>
+				<xs:attribute name="CATEGORY" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="INTRODUCERDETAILSType">
+		<xs:complexContent>
+			<xs:extension base="INTRODUCERDETAILS_base">
+				<xs:sequence>
+					<xs:element name="INTRODUCERFIRM" type="INTRODUCERFIRMType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="ORGANISATIONUSER" type="ORGANISATIONUSERType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="INTRODUCERFIRMType">
+		<xs:complexContent>
+			<xs:extension base="INTRODUCERFIRM_base">
+				<xs:sequence>
+					<xs:element name="PRINCIPALFIRM" type="PRINCIPALFIRMType" minOccurs="0"/>
+					<xs:element name="ARFIRM" type="ARFIRMType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PRINCIPALFIRMType">
+		<xs:complexContent>
+			<xs:extension base="PRINCIPALFIRM_base">
+				<xs:sequence>
+					<!-- EP2_986 -->
+					<xs:element name="FIRMPERMISSIONS" type="FIRMPERMISSIONSType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ARFIRMType">
+		<xs:complexContent>
+			<xs:extension base="ARFIRM_base">
+				<xs:sequence>
+					<!-- EP2_986 -->
+					<xs:element name="FIRMPERMISSIONS" type="FIRMPERMISSIONSType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ORGANISATIONUSERType">
+		<xs:complexContent>
+			<xs:extension base="ORGANISATIONUSER_base">
+				<xs:sequence>
+					<xs:element name="PASSWORD" type="PASSWORDType" maxOccurs="unbounded"/>
+					<xs:element name="ORGANISATIONUSERCONTACTDETAILS" type="ORGANISATIONUSERCONTACTDETAILSType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PASSWORDType">
+		<xs:complexContent>
+			<xs:extension base="PASSWORD_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ORGANISATIONUSERCONTACTDETAILSType">
+		<xs:complexContent>
+			<xs:extension base="ORGANISATIONUSERCONTACTDETAILS_base">
+				<xs:sequence>
+					<xs:element name="CONTACTDETAILS" type="msgdt:CONTACTDETAILSType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

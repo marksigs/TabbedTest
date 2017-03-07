@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: FindCaseTraking- Request
+
+History:
+
+Version       Author         Date                 Description
+01.01           RMH             29/06/2005      Created / OPI CRUD TYPE
+01.02           RHart           21/07/2005      Annotated
+01.03           TLiu             21/07/2005      Changed mars to IDUK in path, Named REQUESTType.
+01.04			RHart			22/07/2005		Imported the generic request attributes
+01.05			TLiu				26/07/2005		Fixed Name Spaces
+01.06			TLiu				28/07/2005		Renamed File from OPICaseTrackRequest.xsd to GetCaseTrackingDataRequest.xsd.
+01.07			TLiu				08/08/2005		Replaced REQUESTAttribs with 6 attributes.
+01.08			TLiu				08/08/2005		Named 4 simpleTypes.
+01.09			TLiu				25/08/2005		Amended to make fixed rather than enumerated.
+01.10			TLiu				15/09/2005		Made COMPONENT, OBJECT, METHOD, OPERATION optional.
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.GetCaseTrackingData.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.GetCaseTrackingData.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:complexType name="APPLICATIONType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique Identifier for the Applicaton</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="OPIType">
+		<xs:sequence>
+			<xs:element name="APPLICATION" type="APPLICATIONType"/>
+		</xs:sequence>
+		<xs:attribute name="COMPONENT" type="xs:string" fixed="omcasetrack">
+			<xs:annotation>
+				<xs:documentation>Omiga Component Name these values are constant</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OBJECT" type="xs:string" fixed="omcasetrackBO">
+			<xs:annotation>
+				<xs:documentation>Name of the Omiga Object within a component</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="METHOD" type="xs:string" fixed="OmCaseTrackRequest">
+			<xs:annotation>
+				<xs:documentation>Operation on the Object</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="OPI" type="OPIType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="OPERATION" type="xs:string" fixed="GetCaseTrackingAllData"/>
+	</xs:complexType>
+</xs:schema>

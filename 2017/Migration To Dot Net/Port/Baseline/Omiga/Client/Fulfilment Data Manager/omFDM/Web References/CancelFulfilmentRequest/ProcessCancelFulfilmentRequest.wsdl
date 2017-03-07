@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://interfaces" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://interfaces" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema xmlns:impl="http://interfaces" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:intf="http://interfaces" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:msg="http://processcancelfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://interfaces">
+      <xsd:import schemaLocation="ProcessCancelFulfilmentRequest.xsd" namespace="http://processcancelfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" />
+      <xsd:element name="request">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="msg:ProcessCancelFulfilmentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="msg:ProcessCancelFulfilmentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </s:schema>
+  </types>
+  <message name="executeRequest">
+    <part name="parameters" element="s0:request" />
+  </message>
+  <message name="executeResponse">
+    <part name="parameters" element="s0:response" />
+  </message>
+  <portType name="DirectGatewaySoapPortType">
+    <operation name="execute">
+      <input name="executeRequest" message="s0:executeRequest" />
+      <output name="executeResponse" message="s0:executeResponse" />
+    </operation>
+  </portType>
+  <binding name="DirectGatewaySoapBinding" type="s0:DirectGatewaySoapPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="execute">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="DirectGatewaySoapService">
+    <port name="DirectGatewaySoapEndpoint" binding="s0:DirectGatewaySoapBinding">
+      <soap:address location="http://rdgsmarsdgw1/DGWWebServices/services/DirectGatewaySoapEndpoint" />
+    </port>
+  </service>
+</definitions>

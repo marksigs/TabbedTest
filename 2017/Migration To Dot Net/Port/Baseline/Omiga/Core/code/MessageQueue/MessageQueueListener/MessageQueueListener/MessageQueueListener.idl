@@ -1,0 +1,139 @@
+// MessageQueueListener.idl : IDL source for MessageQueueListener.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MessageQueueListener.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(A94D0FA1-4B60-11D4-8237-005004E8D1A7),
+		dual,
+		helpstring("IMessageQueueListener1 Interface"),
+		pointer_default(unique)
+	]
+	interface IMessageQueueListener1 : IDispatch
+	{
+		[id(1), helpstring("method Configure")] HRESULT Configure([in] BSTR in_xml, [out,retval] BSTR *out_xml);
+	};
+	[
+		object,
+		uuid(F6156C78-E301-11d4-82B3-000102125FBA),
+		dual,
+		helpstring("IInternalMessageQueueListener1 Interface"),
+		pointer_default(unique)
+	]
+	interface IInternalMessageQueueListener1 : IDispatch
+	{
+		[id(1), helpstring("method Start")] HRESULT Start();
+		[id(2), helpstring("method Stop")] HRESULT Stop();
+		[id(3), helpstring("method LoadConfigurationDetails")] HRESULT LoadConfigurationDetails();
+	};
+	[
+		object,
+		uuid(A94D0FC9-4B60-11D4-8237-005004E8D1A7),
+		dual,
+		helpstring("IInternalMessageQueueListener1 Interface"),
+		pointer_default(unique)
+	]
+	interface IInternalMSMQEventSink : IDispatch
+	{
+        [id(0), helpstring("User-defined method invoked when a message arrives at a queue.")]
+        HRESULT Arrived(
+                        [in] IDispatch* Queue, 
+                        [in] long Cursor);
+        [id(1), helpstring("User-defined method invoked when an error is returned while reading messages asynchronously.")]
+        HRESULT ArrivedError(
+                        [in] IDispatch* Queue, 
+                        [in] long ErrorCode, 
+                        [in] long Cursor);
+	};
+	[
+		object,
+		uuid(F9420771-A032-11d4-8271-005004E8D1A7),
+		dual,
+		helpstring("IInternalThreadPoolManagerCommon1 Interface"),
+		pointer_default(unique)
+	]
+	interface IInternalThreadPoolManagerCommon1 : IDispatch
+	{
+		[propget, id(1), helpstring("property Started")] HRESULT Started([out, retval] BOOL *pVal);
+		[propput, id(1), helpstring("property Started")] HRESULT Started([in] BOOL newVal);
+		[propget, id(2), helpstring("property NumberOfThreads")] HRESULT NumberOfThreads([out, retval] long *pVal);
+		[propput, id(2), helpstring("property NumberOfThreads")] HRESULT NumberOfThreads([in] long newVal);
+		[propget, id(3), helpstring("property QueueName")] HRESULT QueueName([out, retval] BSTR *pVal);
+		[propput, id(3), helpstring("property QueueName")] HRESULT QueueName([in] BSTR newVal);
+		[propget, id(4), helpstring("property QueueStalled")] HRESULT QueueStalled([out, retval] BOOL *pVal);
+		[propput, id(4), helpstring("property QueueStalled")] HRESULT QueueStalled([in] BOOL newVal);
+		[propget, id(5), helpstring("property ComponentsStalled")] HRESULT ComponentsStalled([out, retval] VARIANT *pVal);
+		[propget, id(6), helpstring("property QueueType")] HRESULT QueueType([out, retval] BSTR *pVal);
+		[propput, id(7), helpstring("property dwNextWaitIntervalms")] HRESULT dwNextWaitIntervalms([in] DWORD dwPollInterval);
+		[propput, id(8), helpstring("property ConnectionString")] HRESULT ConnectionString([in] BSTR bstrConnString);
+		[propput, id(9), helpstring("property RestartComponents")]	HRESULT RestartComponents([in] VARIANT newVal);
+		[propput, id(10), helpstring("property AddStalledComponents")] HRESULT AddStalledComponents([in] VARIANT newVal);
+		[propget, id(11), helpstring("property TableSuffix")] HRESULT TableSuffix([out, retval] BSTR *pVal);
+		[propput, id(11), helpstring("property TableSuffix")] HRESULT TableSuffix([in] BSTR newVal);
+	};
+	[
+		object,
+		uuid(A94D0FCD-4B60-11D4-8237-005004E8D1A7),
+		dual,
+		helpstring("IInternalThreadPoolManagerMSMQ1 Interface"),
+		pointer_default(unique)
+	]
+	interface IInternalThreadPoolManagerMSMQ1 : IDispatch
+	{
+	};
+	[
+		object,
+		uuid(D43E5441-66FB-11D4-8244-005004E8D1A7),
+		dual,
+		helpstring("IInternalThreadPoolManagerOMMQ1 Interface"),
+		pointer_default(unique)
+	]
+	interface IInternalThreadPoolManagerOMMQ1 : IDispatch
+	{
+		[propget, id(1), helpstring("property ConnectionString")] HRESULT ConnectionString([out, retval] BSTR *pVal);
+		[propput, id(1), helpstring("property ConnectionString")] HRESULT ConnectionString([in] BSTR newVal);
+	};
+
+[
+	uuid(2B0E56B1-4B55-11D4-8237-005004E8D1A7),
+	version(1.0),
+	helpstring("MessageQueueListener 1.0 Type Library")
+]
+library MESSAGEQUEUELISTENERLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(A94D0FA2-4B60-11D4-8237-005004E8D1A7),
+		helpstring("MessageQueueListener1 Class")
+	]
+	coclass MessageQueueListener1
+	{
+		[default] interface IMessageQueueListener1;
+		interface IInternalMessageQueueListener1;
+	};
+	[
+		uuid(A94D0FCE-4B60-11D4-8237-005004E8D1A7),
+		helpstring("ThreadPoolManagerMSMQ1 Class")
+	]
+	coclass ThreadPoolManagerMSMQ1
+	{
+		[default] interface IInternalMSMQEventSink;
+		interface IInternalThreadPoolManagerMSMQ1;
+		interface IInternalThreadPoolManagerCommon1;
+	};
+	[
+		uuid(D43E5442-66FB-11D4-8244-005004E8D1A7),
+		helpstring("ThreadPoolManagerOMMQ1 Class")
+	]
+	coclass ThreadPoolManagerOMMQ1
+	{
+		[default] interface IInternalThreadPoolManagerOMMQ1;
+		interface IInternalThreadPoolManagerCommon1;
+	};
+};

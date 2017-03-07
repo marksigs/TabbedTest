@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: AssignCaseToPackager - Response
+
+History:
+
+Version 		Author   	Date					Description
+01.01      		PSC			12/12/2006			Created
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://AssignCaseToPackager.Omiga.vertex.co.uk" 
+    xmlns="http://AssignCaseToPackager.Omiga.vertex.co.uk" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.AssignCaseToPackager.Omiga.vertex.co.uk" 
+    xmlns:msgResponse="http://Response.AssignCaseToPackager.Omiga.vertex.co.uk"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.AssignCaseToPackager.Omiga.vertex.co.uk" 
+            xmlns:msgResponse="http://Response.AssignCaseToPackager.Omiga.vertex.co.uk" >
+            <xs:import 
+                namespace="http://Request.AssignCaseToPackager.Omiga.vertex.co.uk" 
+                schemaLocation="AssignCaseToPackagerRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.AssignCaseToPackager.Omiga.vertex.co.uk" 
+                schemaLocation="AssignCaseToPackagerResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="AssignCaseToPackagerRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="AssignCaseToPackagerResponseSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="AssignCaseToPackagerPort">
+        <wsdl:operation name="assignCaseToPackager">
+            <wsdl:input message="AssignCaseToPackagerRequestSoapIn" />
+            <wsdl:output message="AssignCaseToPackagerResponseSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="AssignCaseToPackagerPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="assignCaseToPackager">
+             <soap:operation 
+                soapAction="http://Request.AssignCaseToPackager.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaAssignCaseToPackager">
+        <wsdl:port name="AssignCaseToPackagerPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/AssignCaseToPackagerWS/OmigaAssignCaseToPackagerService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

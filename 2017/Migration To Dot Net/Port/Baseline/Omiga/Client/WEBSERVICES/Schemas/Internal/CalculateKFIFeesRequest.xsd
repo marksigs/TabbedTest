@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Paul Carter (Vertex Financial Services Ltd) -->
+<!--==============================XML Document Control=============================
+Description: GetAffordability - CalculateKFIFees  Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01			PSC	 			06/11/2006 		EP2_41 Created
+01.02			PSC				07/11/2006		EP2_41 Make types CalculateKFIFees specific
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.CalculateKFIFees.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Request.CalculateKFIFees.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="REQUEST" type="CALCKFIFEESREQUESTType">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CALCKFIFEESREQUESTType">
+		<xs:sequence>
+			<xs:element name="APPLICATION" type="CALCKFIFEESAPPLICATIONRequestType"/>
+			<xs:element name="CUSTOMERLIST" type="CALCKFIFEESCUSTOMERLISTType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CALCKFIFEESAPPLICATIONRequestType">
+		<xs:sequence>
+			<xs:element name="APPLICATIONFACTFIND" type="CALCKFIFEESAPPLICATIONFACTFINDRequestType"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="APPLICATIONDATE" type="msgdt:msgDateTime" use="required"/>
+		<xs:attribute name="TYPEOFVALUATION" type="xs:short" use="required"/>
+		<xs:attribute name="DISPOSABLEKFI" type="xs:short" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CALCKFIFEESAPPLICATIONFACTFINDRequestType">
+		<xs:sequence>
+			<xs:element name="QUOTATION" type="CALCKFIFEESQUOTATIONRequestType"/>
+		</xs:sequence>
+		<xs:attribute name="LOCATION" type="xs:short" use="required"/>
+		<xs:attribute name="PURCHASEPRICE" type="xs:int"/>
+		<xs:attribute name="INCREMENT" type="xs:short"/>
+		<xs:attribute name="REGULATIONINDICATOR" type="xs:short" use="required"/>
+		<xs:attribute name="LEVELOFADVICE" type="xs:short" use="required"/>
+		<xs:attribute name="TYPEOFAPPLICATION" type="xs:short" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CALCKFIFEESMORTGAGESUBQUOTERequestType">
+		<xs:sequence>
+			<xs:element name="LOANCOMPONENTLIST" type="CALCKFIFEESLOANCOMPONENTLISTRequestType"/>
+		</xs:sequence>
+		<xs:attribute name="AMOUNTREQUESTED" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>Amount Requested (in total at SubQuote level)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CALCKFIFEESCUSTOMERLISTType">
+		<xs:sequence>
+			<xs:element name="CUSTOMER" type="CALCKFIFEESCUSTOMERRequestType" maxOccurs="5"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CALCKFIFEESCUSTOMERRequestType">
+		<xs:attribute name="TITLE" type="xs:int" use="required"/>
+		<xs:attribute name="FIRSTNAME" type="xs:string" use="required"/>
+		<xs:attribute name="OTHERNAMES" type="xs:string" use="optional"/>
+		<xs:attribute name="SURNAME" type="xs:string" use="required"/>
+		<xs:attribute name="GENDER" type="xs:string" use="optional"/>
+		<xs:attribute name="DATEOFBIRTH" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CALCKFIFEESQUOTATIONRequestType">
+		<xs:sequence>
+			<xs:element name="MORTGAGESUBQUOTE" type="CALCKFIFEESMORTGAGESUBQUOTERequestType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CALCKFIFEESLOANCOMPONENTRequestType">
+		<xs:attribute name="MORTGAGEPRODUCTCODE" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique Code for the Product</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="STARTDATE" type="msgdt:msgDateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Start Date for the Product</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TERMINYEARS" type="xs:short" use="required">
+			<xs:annotation>
+				<xs:documentation>Duration of the Loan</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TERMINMONTHS" type="xs:short" use="optional">
+			<xs:annotation>
+				<xs:documentation>Duration of the Loan</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOTALLOANCOMPONENTAMOUNT" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>Amount of Loan apportioned to the component</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REPAYMENTMETHOD" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>C and I or Int Only</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NETCAPANDINTELEMENT" type="xs:int"/>
+		<xs:attribute name="NETINTONLYELEMENT" type="xs:int"/>
+		<xs:attribute name="CAPITALANDINTERESTELEMENT" type="xs:int"/>
+		<xs:attribute name="INTERESTONLYELEMENT" type="xs:int"/>
+		<xs:attribute name="LIFETIMEINDICATOR" type="xs:short" use="optional">
+			<xs:annotation>
+				<xs:documentation>Not required</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CALCKFIFEESLOANCOMPONENTLISTRequestType">
+		<xs:sequence>
+			<xs:element name="LOANCOMPONENT" type="CALCKFIFEESLOANCOMPONENTRequestType" maxOccurs="3"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

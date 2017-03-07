@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: GetAffordability - RunIncomeCalcs Response
+
+History:
+
+Version 		Author   		Date       			Description
+01.01  			RMH	 		29/06/2005 		Created
+01.02           TLiu             20/07/2005      Changed mars to IDUK in path, named a complexType, and added "MESSAGE" & "ERROR"
+01.03           TLiu             22/07/2005      Imported msgCommonTypes.
+01.04			TLiu				22/07/2005		Changed omiga to Omiga in name space.
+01.05			TLiu				26/07/2005		Fixed Name Spaces
+01.06			TLiu				28/07/2005		Deleted name space msgAppData.
+01.07			TLiu				28/07/2005		Renamed File from RunIncomeCalculationsResponseDC160.xsd to RunIncomeCalculationsResponse.xsd.
+01.08			TLiu				11/08/2005		Renamed some complex Types to make names different in Request and Response.
+01.09			TLiu				26/08/2005		Fixed bug on CUSTOMERLIST.
+01.10			IK				03/11/2005			component returns CONFIRMEDALLOWABLEINCOME					
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.RunIncomeCalculations.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Response.RunIncomeCalculations.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:complexType name="ALLOWABLEINCOMEType">
+		<xs:sequence>
+			<xs:element name="LENDERLIST" type="LENDERLISTType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AMOUNTREQUESTED" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Amount requested by the applicant</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ANNUALALLOWABLEINCOME" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Gross anual Allowabmle Income Based on the Calculation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CUSTOMERResponseType">
+		<xs:sequence>
+			<xs:element ref="CUSTOMERNUMBER"/>
+			<xs:element ref="CUSTOMERVERSIONNUMBER"/>
+			<xs:element ref="MONTHLYALLOWABLEINCOME"/>
+			<xs:element ref="ANNUALALLOWABLEINCOME"/>
+			<xs:element ref="NETANNUALALLOWABLEINCOME"/>
+			<xs:element ref="CONFIRMEDALLOWABLEINCOME"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERLISTResponseType">
+		<xs:sequence maxOccurs="5">
+			<xs:element name="CUSTOMER" type="CUSTOMERResponseType">
+				<xs:annotation>
+					<xs:documentation>individual customer node within the list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CUSTOMERNUMBER" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Unique identifier for the customer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CUSTOMERVERSIONNUMBER" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Version of the customer data used on the record</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="INCOME1" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Incomes to the calculation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="INCOME2" type="xs:string"/>
+	<xs:complexType name="INCOMECALCULATIONResponseType">
+		<xs:sequence>
+			<xs:element name="ALLOWABLEINCOME" type="ALLOWABLEINCOMEType">
+				<xs:annotation>
+					<xs:documentation>Allowable income branch based on calulcation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MAXIMUMBORROWING" type="MAXIMUMBORROWINGType">
+				<xs:annotation>
+					<xs:documentation>Max Borrowing branch based on calculation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="INCOMEMULTIPLE" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>LIM</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="INCOMEMULTIPLIERTYPE" type="xs:string"/>
+	<xs:complexType name="LENDERDETAILSType">
+		<xs:sequence>
+			<xs:element name="CUSTOMERLIST" type="CUSTOMERLISTResponseType">
+				<xs:annotation>
+					<xs:documentation>Lists the customers with in the appn - allowable income is calculated for each</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LENDERLISTType">
+		<xs:sequence>
+			<xs:element name="LENDERDETAILS" type="LENDERDETAILSType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MAXIMUMBORROWINGType">
+		<xs:sequence>
+			<xs:element ref="INCOME1"/>
+			<xs:element ref="INCOME2"/>
+			<xs:element ref="INCOMEMULTIPLIERTYPE"/>
+			<xs:element ref="INCOMEMULTIPLE"/>
+			<xs:element ref="MAXIMUMBORROWINGAMOUNT"/>
+			<xs:element ref="AMOUNTREQUESTED"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MAXIMUMBORROWINGAMOUNT" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Maximum amount the applicant can borrow</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MONTHLYALLOWABLEINCOME" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Monthly allowable income based on the calculation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NETANNUALALLOWABLEINCOME" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Net allowable anual income based on calulation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CONFIRMEDALLOWABLEINCOME" type="xs:string"/>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="INCOMECALCULATION" type="INCOMECALCULATIONResponseType"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+</xs:schema>

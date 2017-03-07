@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: GetApplicationData WSDL
+
+History:
+
+Version Author      Date       Description
+01.00   RFairlie    05/07/2005 Created.   
+01.01   RFairlie    07/07/2005 Updated soapAction
+01.02   RFairlie    07/07/2005 Added annotation element around documentation
+01.03   RFairlie    07/07/2005 Changed documentation element within <wsdl:service> to be a comment 
+01.04   RFairlie    08/07/2005 Added extra wsdl:operation elements for testing purposes
+01.05   RFairlie    08/07/2005 Removed extra wsdl:operation elements as was causing extra errors
+01.06   RFairlie    22/07/2005 Renamed port type to GetApplicationDataPort.
+                               Removed annotation element as XML Spy and Java tools consider it invalid
+01.07   RFairlie    22/07/2005 Changed namespace to match internal guideline
+01.08   RFairlie    25/07/2005 Changed operation name to start with lower case
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://GetApplicationData.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns="http://GetApplicationData.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.GetApplicationData.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:msgResponse="http://Response.GetApplicationData.IDUK.Omiga.marlboroughstirling.com"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.GetApplicationData.IDUK.Omiga.marlboroughstirling.com" 
+            xmlns:msgResponse="http://Response.GetApplicationData.IDUK.Omiga.marlboroughstirling.com" >
+            <xs:import 
+                namespace="http://Request.GetApplicationData.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="GetApplicationDataRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.GetApplicationData.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="GetApplicationDataResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="GetAppDataRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="GetAppDataRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="GetApplicationDataPort">
+        <wsdl:operation name="getApplicationData">
+            <wsdl:input message="GetAppDataRequestSoapIn" />
+            <wsdl:output message="GetAppDataRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="GetApplicationDataPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="getApplicationData">
+             <soap:operation 
+                soapAction="http://Request.GetApplicationData.IDUK.Omiga.marlboroughstirling.com" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaGetAppData">
+        <wsdl:port name="GetApplicationDataPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/GetApplicationDataWS/OmigaGetAppDataService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

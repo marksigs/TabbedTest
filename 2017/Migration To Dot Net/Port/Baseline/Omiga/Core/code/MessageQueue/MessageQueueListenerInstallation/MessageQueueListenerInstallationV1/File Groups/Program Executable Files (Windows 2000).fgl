@@ -1,0 +1,10 @@
+[General]
+Type=FILELIST
+Version=1.10.000
+
+[TopDir]
+file0=C:\MessageQueue\MessageQueueListener\MessageQueueListenerMTS\ReleaseUMinDependencyW2K\MessageQueueListenerMTS.dll
+file1=C:\MessageQueue\MessageQueueListener\MessageQueueListenerPRF\ReleaseUMinDependencyW2K\MessageQueueListenerPRF.dll
+file2=C:\MessageQueue\MessageQueueListener\MessageQueueListener\ReleaseUMinDependencyW2K\MessageQueueListener.exe
+file3=C:\MessageQueue\MessageQueueListener\MessageQueueListenerLOG\ReleaseUMinDependencyW2K\MessageQueueListenerLOG.exe
+

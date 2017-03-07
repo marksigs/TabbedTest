@@ -1,0 +1,11 @@
+<REQUEST>
+	<OPI COMPONENT="omMQ" OBJECT="omMQBO" METHOD="omRequest" OPERATION="SendToQueue">
+      		<MESSAGEQUEUE 
+			LOGICALQUEUENAME="CBAResponseQueueName" 
+			PROGID="omPayProc.PaymentProcessingBO" 
+			EXECUTEAFTER="">
+			<XML>
+			</XML>
+      		</MESSAGEQUEUE>
+   </OPI>
+</REQUEST>

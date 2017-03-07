@@ -1,0 +1,1 @@
+<%@ Page language="c#" Codebehind="ArticleImage.aspx.cs" AutoEventWireup="false" Inherits="Epsom.Web.ArticleImage" %>

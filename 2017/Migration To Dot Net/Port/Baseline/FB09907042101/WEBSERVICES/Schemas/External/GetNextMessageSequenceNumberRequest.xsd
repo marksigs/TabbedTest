@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: GetNextMessageSequenceNumber Request
+
+History:
+
+Version Author      Date       Description
+01.00   RFairlie    04/10/2005 Created.   
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.GetNextMessageSequenceNumber.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.GetNextMessageSequenceNumber.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="INTERFACE" type="INTERFACEType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="INTERFACEType">
+		<xs:attribute name="NAME" type="xs:string" fixed="FirstTitleOutbound"/>
+	</xs:complexType>
+</xs:schema>

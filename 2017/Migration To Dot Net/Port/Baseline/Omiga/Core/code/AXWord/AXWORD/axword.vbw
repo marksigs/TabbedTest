@@ -1,0 +1,14 @@
+AxwordConstants = 0, 0, 0, 0, C
+CommonFunctions = 22, 29, 669, 548, C
+basSafeCtl = 0, 0, 0, 0, C
+Win32APIAssist = 0, 0, 0, 0, C
+axwordclass = 0, 0, 0, 0, C
+msword = 0, 0, 0, 0, C
+dlgPrint = 0, 0, 0, 0, C, 44, 58, 635, 506, C
+frmaxword = 0, 0, 0, 0, C, 66, 87, 657, 535, C
+frmMessage = 0, 0, 0, 0, C, 88, 116, 679, 564, C
+IMessageOp = 0, 0, 0, 0, C
+MessageOpPrintWordDocument = 0, 0, 0, 0, C
+MessageOpPrintPDFDocument = 0, 0, 0, 0, C
+MessageOpGetPrinters = 0, 0, 0, 0, C
+Log = 0, 0, 0, 0, C

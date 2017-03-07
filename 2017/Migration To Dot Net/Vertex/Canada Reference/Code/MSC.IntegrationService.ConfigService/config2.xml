@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<section name="AIG" type="MSC.IntegrationService.ConfigService.MessageConfig,MSC.IntegrationService.ConfigService"/>
+		<section name="MorWEB" type="MSC.IntegrationService.ConfigService.MessageConfig,MSC.IntegrationService.ConfigService"/>
+		<section name="GMAC" type="MSC.IntegrationService.ConfigService.MessageConfig,MSC.IntegrationService.ConfigService"/>
+	</configSections>
+	<AIG description="" type="provider" debug="">
+		<serviceTypeList>
+			<serviceType name="RequestMI" direction="outbound" aggregateResponse="false">
+				<recipientList>
+					<recipient name="" url="" userId="" password="" protocol="" assembly="" 
+						operation="" operationType="sync|async" 
+						recipientDomain="internal|external" requestMapType="" responseMapType="" />
+				</recipientList>
+			</serviceType>
+			<serviceType name="RequestPremium" direction="outbound" aggregateResponse="false">
+				<recipientList>
+					<recipient name="" url="" userId="" password="" protocol="" assembly="" 
+						operation="" operationType="sync|async" 
+						recipientDomain="internal|external" requestMapType="" responseMapType="" />
+				</recipientList>
+			</serviceType>
+		</serviceTypeList>
+	</AIG>
+	<MorWEB description="" type="provider" debug="">
+		<serviceTypeList>
+			<serviceType name="ReceiveRiskUW" direction="inbound" aggregateResponse="false">
+				<recipientList>
+					<recipient name="" url="" userId="" password="" protocol="" assembly="" 
+						operation="" operationType="sync|async" 
+						recipientDomain="internal|external" requestMapType="" responseMapType="" />
+				</recipientList>
+			</serviceType>
+		</serviceTypeList>
+	</MorWEB>
+	<GMAC description="" type="provider" debug="">
+		<serviceTypeList>
+			<serviceType name="ReceiveRiskUW" direction="inbound" aggregateResponse="false">
+				<recipientList>
+					<recipient name="" url="" userId="" password="" protocol="" assembly="" 
+				operation="" operationType="sync|async" 
+				recipientDomain="internal|external" requestMapType="" responseMapType="" />
+				</recipientList>
+			</serviceType>
+		</serviceTypeList>
+	</GMAC>
+</configuration>

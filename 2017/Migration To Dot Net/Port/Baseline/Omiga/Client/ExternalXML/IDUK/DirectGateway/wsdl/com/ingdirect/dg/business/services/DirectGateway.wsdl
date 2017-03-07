@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://interfaces" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:intf="http://interfaces" xmlns:impl="http://interfaces">
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://interfaces" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://interfaces" xmlns:intf="http://interfaces" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<element name="request">
+				<complexType>
+					<sequence>
+						<xsd:any/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="response">
+				<complexType>
+					<sequence>
+						<xsd:any/>
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+  </wsdl:types>
+  <wsdl:message name="executeResponse">
+    <wsdl:part name="parameters" element="intf:response"/>
+  </wsdl:message>
+  <wsdl:message name="executeRequest">
+    <wsdl:part name="parameters" element="intf:request"/>
+  </wsdl:message>
+  <wsdl:portType name="DirectGatewaySoapPortType">
+    <wsdl:operation name="execute">
+      <wsdl:input name="executeRequest" message="intf:executeRequest"/>
+      <wsdl:output name="executeResponse" message="intf:executeResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DirectGatewaySoapBinding" type="intf:DirectGatewaySoapPortType">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="execute">
+      <wsdlsoap:operation/>
+      <wsdl:input>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DirectGatewaySoapService">
+    <wsdl:port name="DirectGatewaySoapEndpoint" binding="intf:DirectGatewaySoapBinding">
+      <wsdlsoap:address location="http://localhost:9080/MarsWeb2/services/DirectGatewaySoapEndpoint"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

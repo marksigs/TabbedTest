@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: SubmitStopAndSaveFMA WSDL
+
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/SubmitStopAndSaveFMA.wsdl $
+Workfile                 $Workfile: SubmitStopAndSaveFMA.wsdl $
+Current Version   	$Revision: 1 $
+Last Modified       	$Modtime: 24/10/06 10:11 $
+Modified By          	$Author: Dbarraclough $
+
+History:
+
+Version	Author		Date				Description
+01.00   	TLiu			05/08/2005		Created.   
+02.00   	IK				20/09/2006		'product' namespace references
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://SubmitStopAndSaveFMA.Omiga.vertex.co.uk" 
+    xmlns="http://SubmitStopAndSaveFMA.Omiga.vertex.co.uk" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.SubmitStopAndSaveFMA.Omiga.vertex.co.uk" 
+    xmlns:msgResponse="http://Response.SubmitStopAndSaveFMA.Omiga.vertex.co.uk"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.SubmitStopAndSaveFMA.Omiga.vertex.co.uk" 
+            xmlns:msgResponse="http://Response.SubmitStopAndSaveFMA.Omiga.vertex.co.uk" >
+            <xs:import 
+                namespace="http://Request.SubmitStopAndSaveFMA.Omiga.vertex.co.uk" 
+                schemaLocation="SubmitStopAndSaveFMARequest.xsd" />
+            <xs:import 
+                namespace="http://Response.SubmitStopAndSaveFMA.Omiga.vertex.co.uk" 
+                schemaLocation="SubmitStopAndSaveFMAResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="SubmitStopAndSaveFMARequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="SubmitStopAndSaveFMARequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="SubmitStopAndSaveFMAPort">
+        <wsdl:operation name="submitStopAndSaveFMA">
+            <wsdl:input message="SubmitStopAndSaveFMARequestSoapIn" />
+            <wsdl:output message="SubmitStopAndSaveFMARequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="SubmitStopAndSaveFMAPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="submitStopAndSaveFMA">
+             <soap:operation 
+                soapAction="http://Request.SubmitStopAndSaveFMA.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaSubmitStopAndSaveFMA">
+        <wsdl:port name="SubmitStopAndSaveFMAPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/SubmitStopAndSaveFMAWS/OmigaSubmitStopAndSaveFMAService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

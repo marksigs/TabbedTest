@@ -1,0 +1,9 @@
+; dmsCompression.def : Declares the module parameters.
+
+LIBRARY      "dmsCompression.DLL"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer	PRIVATE

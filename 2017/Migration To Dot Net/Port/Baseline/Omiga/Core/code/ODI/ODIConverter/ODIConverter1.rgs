@@ -1,0 +1,24 @@
+HKCR
+{
+	ODIConverter.ODIConverter.1 = s 'ODIConverter Class'
+	{
+		CLSID = s '{46E5E4F9-1859-4510-A44A-3273209A1EC3}'
+	}
+	ODIConverter.ODIConverter = s 'ODIConverter Class'
+	{
+		CLSID = s '{46E5E4F9-1859-4510-A44A-3273209A1EC3}'
+		CurVer = s 'ODIConverter.ODIConverter.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {46E5E4F9-1859-4510-A44A-3273209A1EC3} = s 'ODIConverter Class'
+		{
+			ProgID = s 'ODIConverter.ODIConverter.1'
+			VersionIndependentProgID = s 'ODIConverter.ODIConverter'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '{8CBEA9F1-106D-4B90-A84A-E47FB2788E71}'
+			'TypeLib' = s '{12A83E98-ACDD-4FF9-87A8-F895DD747E07}'
+		}
+	}
+}

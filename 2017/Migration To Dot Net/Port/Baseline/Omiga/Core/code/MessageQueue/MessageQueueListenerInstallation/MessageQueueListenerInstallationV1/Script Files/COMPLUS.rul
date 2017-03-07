@@ -1,0 +1,190 @@
+#include "ifx.h" //DO NOT REMOVE
+
+prototype BOOL COMPLUS_AddLibraryPackageIfNotExist(/*vstrPackageName*/ STRING);
+prototype BOOL COMPLUS_RemovePackage(/*vstrPackageName*/ STRING);
+prototype BOOL COMPLUS_AddComponent(/*vstrPackageName*/ STRING, /*vstrDllPath*/ STRING);
+prototype BOOL COMPLUS_SetTransactionTimeout(/*vstrPackageName*/ STRING, /*vstrProgId*/ STRING, /*nTimeout*/ NUMBER);
+
+function BOOL COMPLUS_AddLibraryPackageIfNotExist(vstrPackageName)
+	BOOL bResult;
+	OBJECT catalog;
+	OBJECT packages;
+	NUMBER numPackages;
+	NUMBER nPackage;
+	OBJECT newPackage;
+	BOOL bFoundPackage;
+begin   
+	bResult = FALSE;	
+
+	try
+	    // First, we create the catalog object
+	    set catalog = CreateObject("COMAdmin.COMAdminCatalog");
+	    if IsObject(catalog) then    
+	
+		    // Then we get the packages collection
+		    set packages = catalog.GetCollection("Applications");
+		    if IsObject(packages) then
+			    packages.Populate;
+			    
+			    // Search for existing package of the same name
+			    numPackages = packages.Count;
+			    bFoundPackage = FALSE;
+			    for nPackage = 0 to numPackages-1 step 1
+			        if packages.Item(nPackage).Value("Name") = vstrPackageName then
+			            bFoundPackage = TRUE;
+			        endif;
+			    endfor;
+			    
+			    // Add the new package if it is not found
+			    if bFoundPackage = FALSE then
+			        set newPackage = packages.Add;
+			        if IsObject(newPackage) then
+				        newPackage.Value("Name") = vstrPackageName;
+				        //newPackage.Value("SecurityEnabled") = "N";
+				        newPackage.Value("Activation") = 0; // make it a library package
+				    else
+						LOG_MessageBox("Failed to add new package", SEVERE);
+				    endif;
+				    // Commit our deletions
+				    packages.SaveChanges;
+				else
+					LOG_Log("Package " + vstrPackageName + " already exists");
+			    endif;
+			    
+			    bResult = TRUE;
+			else
+				LOG_MessageBox("Failed to get packages collection", SEVERE);
+			endif;
+		else
+			LOG_MessageBox("Failed to CreateObject COMAdmin.COMAdminCatalog", SEVERE);
+		endif; 
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+		
+	return bResult;
+end;
+
+
+function BOOL COMPLUS_RemovePackage(vstrPackageName)
+	BOOL bResult;
+	OBJECT catalog;
+    OBJECT packages;
+	NUMBER numPackages;
+    NUMBER nPackage;
+begin
+	bResult = FALSE;
+
+	try
+	    // First, we create the catalog object
+	    set catalog = CreateObject("COMAdmin.COMAdminCatalog");
+	    if IsObject(catalog) then
+		    // Then we get the packages collection
+		    set packages = catalog.GetCollection("Applications");
+		    if IsObject(packages) then
+			    packages.Populate;
+			    
+			    // Remove all packages that go by the same name
+			    numPackages = packages.Count;
+			    for nPackage = 0 to numPackages-1 step 1
+			        if packages.Item(numPackages-nPackage-1).Value("Name") = vstrPackageName then
+			            packages.Remove (numPackages-nPackage-1);
+			        endif;
+			    endfor;
+			    
+			    // Commit our deletions
+			    packages.SaveChanges;
+			    
+			    bResult = TRUE;
+			else
+				LOG_MessageBox("Failed to get packages collection", SEVERE);
+			endif;
+		else
+			LOG_MessageBox("Failed to CreateObject COMAdmin.COMAdminCatalog", SEVERE);
+		endif;   
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+		
+	return bResult;
+end;
+
+
+function BOOL COMPLUS_AddComponent(vstrPackageName, vstrDllPath)
+    OBJECT catalog;
+begin
+	try
+	    // Ensure that the package exists
+	    if COMPLUS_AddLibraryPackageIfNotExist(vstrPackageName) then
+	    
+		    // First, we create the catalog object
+		    set catalog = CreateObject("COMAdmin.COMAdminCatalog");
+			if IsObject(catalog) then 
+				catalog.InstallComponent(vstrPackageName, vstrDllPath, "", "");
+			else
+				LOG_MessageBox("Failed to CreateObject COMAdmin.COMAdminCatalog", SEVERE);
+			endif;
+		endif;
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+end;
+
+function BOOL COMPLUS_SetTransactionTimeout(vstrPackageName, vstrProgId, nTimeout)
+	BOOL bResult;
+	OBJECT catalog;
+	OBJECT packages;
+	NUMBER numPackages;
+	NUMBER nPackage;
+	OBJECT components;
+	NUMBER numComponents;
+	NUMBER nComponent;
+begin   
+	bResult = FALSE;	
+
+	try
+	    // First, we create the catalog object
+	    set catalog = CreateObject("COMAdmin.COMAdminCatalog");
+	    if IsObject(catalog) then    
+	
+		    // Then we get the packages collection
+		    set packages = catalog.GetCollection("Applications");
+		    if IsObject(packages) then
+			    packages.Populate;
+			    
+			    // Search for existing package of the same name
+			    numPackages = packages.Count;
+			    for nPackage = 0 to numPackages-1 step 1
+			        if packages.Item(nPackage).Value("Name") = vstrPackageName then
+						set components = packages.GetCollection("Components", packages.Item(nPackage).Key);
+						components.Populate();
+
+						// Search for component of the same name
+					    numComponents = components.Count;
+					    for nComponent = 0 to numComponents-1 step 1
+					        if components.Item(nComponent).Value("ProgID") = vstrProgId then
+								components.Item(nComponent).Value("ComponentTransactionTimeoutEnabled") = 1;
+								components.Item(nComponent).Value("ComponentTransactionTimeout") = nTimeout;
+						    endif;
+					    endfor;
+
+                        components.SaveChanges();
+						
+			        endif;
+			    endfor;
+			    
+			    // Commit our changes
+			    packages.SaveChanges;
+		    	bResult = TRUE;
+			else
+				LOG_MessageBox("Failed to get packages collection", SEVERE);
+			endif;
+		else
+			LOG_MessageBox("Failed to CreateObject COMAdmin.COMAdminCatalog", SEVERE);
+		endif; 
+	catch
+		LOG_MessageBox("Exception caught", SEVERE);
+	endcatch;
+		
+	return bResult;
+end;

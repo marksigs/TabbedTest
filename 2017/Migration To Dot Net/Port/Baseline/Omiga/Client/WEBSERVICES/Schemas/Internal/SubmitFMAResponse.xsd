@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: SubmitFMS-Response
+
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/SubmitFMAResponse.xsd $
+Workfile                 $Workfile: SubmitFMAResponse.xsd $
+Current Version   	$Revision: 3 $
+Last Modified       	$Modtime: 26/03/07 13:50 $
+Modified By          	$Author: Lesliem $
+
+History:
+
+Version 		Author   		Date       			Description
+01.01  			TLiu	 			02/08/2005 		Created
+01.02			TLiu				24/08/2005		Added DOCUMENTAUDITHISTORY.
+
+Defect		Author		Date					Description
+EP2_1   	IK				20/09/2006		'product' namespace references
+EP2_159	IK				23/11/2006		epsom does not return decision
+EP2_1062	IK				21/03/2007		DOCUMENTCONTENTS (Application Form) added
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.SubmitFMA.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.SubmitFMA.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="DOCUMENTCONTENTS" type="DOCUMENTCONTENTSType" minOccurs="0"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="DOCUMENTCONTENTSType">
+		<xs:attribute name="FILEVERSION" type="xs:string" use="optional"/>
+		<xs:attribute name="FILESIZE" type="xs:string" use="optional"/>
+		<xs:attribute name="FILECONTENTS_TYPE" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="BIN.BASE64"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="FILECONTENTS" type="xs:base64Binary" use="required"/>
+		<xs:attribute name="CONTENTTYPE" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="pdf"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

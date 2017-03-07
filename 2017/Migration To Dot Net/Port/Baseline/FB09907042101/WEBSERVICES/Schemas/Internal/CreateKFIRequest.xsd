@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: GetAffordability - CreateKFI  Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01			RMH	 		29/06/2005 		Created
+01.02			TLiu             20/07/2005      Changed mars to IDUK in path, changed msgdt:dateTime to msgdt:msgDateTime, etc.
+01.03			RHart			22/07/2005		Imported request types from msgCommonTypes
+01.04			TLiu				29/07/2005		Fixed Name Spaces and named complex types.
+01.05			TLiu				08/08/2005		Replaced REQUESTAttribs with 6 attributes.
+01.06			TLiu				11/08/2005		Renamed some complex Types to make names different in Request and Response.
+01.07			IK					25/08/2005		updates as per InterfaceChangeRegister.xls
+01.08			IK					15/09/2005		TERMINMONTHS optional (as per InterfaceChangeRegister.xls item 10)
+01.09			RFairlie        10/10/2005		MAR51: InterfaceChangeRegister.xls items 11-14:
+                                                                Add ApplicationNumber to Request as an optional item
+                                                                Change REGULATEDMORTGAGECONTRACTIND to RegulationIndicator and Move from Application to ApplicationFactFind
+                                                                Change ServiceProvided to LevelOfAdvice and Move from Application to ApplicationFactFind
+                                                                Change ApplicationType to TypeofApplication and Move from Application to ApplicationFactFind
+01.10			RHart			12/10/2005		Changed Level of advice to a short
+01.11			GHun			04/11/2005		Changed MORTGAGEPRODUCTCODE to be a string
+01.12			SAB			19/09/2006		EP2_1 - Updated the Namespaces
+01.13			PSC				06/11/2006		EP2_41 Allow fees to be optionally passed in 
+01.14			PSC				04/12/2006		EP2_288 Make FEELIST optional
+01.15			PSC				14/12/2006		EP2_507 Add DRAWDOWN to MORTGAGESUBQUOTE
+01.16			SR				20/02/2007		EP2_1177 - Add NATUREOFLOAN, PRODUCTSCHEME to APPLICATIONFACTFIND and PURPOSEOFLOAN,
+																REPAYMENTVEHICLE and REPAYMENTVEHICLEMONTHLYCOST to LOANCOMPONENT
+01.07			SR				26/03/2007		EP2_1208 - Add PROCFEETOCUST and PROCFEETOCUSTAMOUNT to APPLICATIONRequestType
+01.08			SR				06/04/2007		EP2_1994 - added APPLICATIONINTRODUCER
+01.09			SR				17/04/2007		EP2_2453 - Added attribute TYPEOFBUYER  to element APPLICATION
+01.10			SR				18/04/2007		EP2_2448 - added SpecialScheme, ApplicationIncomeStatus to AFF and PropertyLocation, ValuationType to NewProperty
+01.11			SR				18/04/2007		EP2_2448 AFF.SPECIALSCHEME is optional now.
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.CreateKFI.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:ob="http://OmigaBase.Omiga.vertex.co.uk" targetNamespace="http://Request.CreateKFI.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:import namespace="http://OmigaBase.Omiga.vertex.co.uk" schemaLocation="OmigaBase.xsd"/>
+	<xs:element name="REQUEST" type="REQUESTType">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="APPLICATION" type="APPLICATIONRequestType"/>
+			<xs:element name="CUSTOMERLIST" type="CUSTOMERLISTType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONRequestType">
+		<xs:sequence>
+			<xs:element name="APPLICATIONFACTFIND" type="APPLICATIONFACTFINDRequestType"/>
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="APPLICATIONDATE" type="msgdt:msgDateTime" use="required"/>
+		<xs:attribute name="TYPEOFBUYER" type="xs:int" use="required"/>
+		<xs:attribute name="TYPEOFVALUATION" type="xs:short" use="required"/>
+		<xs:attribute name="DISPOSABLEKFI" type="xs:short" use="required"/>
+		<xs:attribute name="PROCFEETOCUST" type="xs:short" use="optional"/>
+		<xs:attribute name="PROCFEETOCUSTAMOUNT" type="xs:decimal" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFACTFINDRequestType">
+		<xs:sequence>
+			<xs:element name="APPLICATIONINTRODUCERLIST" type="APPLICATIONINTRODUCERLISTRequestType"/>
+			<xs:element name="QUOTATION" type="QUOTATIONRequestType"/>
+			<xs:element name="NEWPROPERTY" type="NEWPROPERTYRequestType"/>
+		</xs:sequence>
+		<xs:attribute name="LOCATION" type="xs:short" use="required"/>
+		<xs:attribute name="PURCHASEPRICE" type="xs:int"/>
+		<xs:attribute name="INCREMENT" type="xs:short"/>
+		<xs:attribute name="REGULATIONINDICATOR" type="xs:short" use="required"/>
+		<xs:attribute name="LEVELOFADVICE" type="xs:short" use="required"/>
+		<xs:attribute name="TYPEOFAPPLICATION" type="xs:short" use="required"/>
+		<xs:attribute name="NATUREOFLOAN" type="xs:short" use="required"/>
+		<xs:attribute name="PRODUCTSCHEME" type="xs:short" use="optional"/>
+		<xs:attribute name="SPECIALSCHEME" type="xs:int" use="optional"/>
+		<xs:attribute name="APPLICATIONINCOMESTATUS" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGESUBQUOTERequestType">
+		<xs:sequence>
+			<xs:element name="LOANCOMPONENTLIST" type="LOANCOMPONENTLISTRequestType"/>
+			<xs:element name="FEELIST" type="FEELISTRequestType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="AMOUNTREQUESTED" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>Amount Requested (in total at SubQuote level)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DRAWDOWN" type="xs:double" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERLISTType">
+		<xs:sequence>
+			<xs:element name="CUSTOMER" type="CUSTOMERRequestType" maxOccurs="5"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERRequestType">
+		<xs:attribute name="TITLE" type="xs:int" use="required"/>
+		<xs:attribute name="FIRSTNAME" type="xs:string" use="required"/>
+		<xs:attribute name="OTHERNAMES" type="xs:string" use="optional"/>
+		<xs:attribute name="SURNAME" type="xs:string" use="required"/>
+		<xs:attribute name="GENDER" type="xs:string" use="optional"/>
+		<xs:attribute name="DATEOFBIRTH" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="QUOTATIONRequestType">
+		<xs:sequence>
+			<xs:element name="MORTGAGESUBQUOTE" type="MORTGAGESUBQUOTERequestType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYRequestType">
+		<xs:attribute name="PROPERTYLOCATION" type="xs:int" use="required"/>
+		<xs:attribute name="VALUATIONTYPE" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONINTRODUCERLISTRequestType">
+		<xs:sequence>
+			<xs:element name="APPLICATIONINTRODUCER" type="APPLICATIONINTRODUCERRequestType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONINTRODUCERRequestType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONINTRODUCER_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTRequestType">
+		<xs:attribute name="MORTGAGEPRODUCTCODE" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique Code for the Product</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="STARTDATE" type="msgdt:msgDateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Start Date for the Product</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TERMINYEARS" type="xs:short" use="required">
+			<xs:annotation>
+				<xs:documentation>Duration of the Loan</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TERMINMONTHS" type="xs:short" use="optional">
+			<xs:annotation>
+				<xs:documentation>Duration of the Loan</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOTALLOANCOMPONENTAMOUNT" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>Amount of Loan apportioned to the component</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REPAYMENTMETHOD" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>C and I or Int Only</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NETCAPANDINTELEMENT" type="xs:int"/>
+		<xs:attribute name="NETINTONLYELEMENT" type="xs:int"/>
+		<xs:attribute name="CAPITALANDINTERESTELEMENT" type="xs:int"/>
+		<xs:attribute name="INTERESTONLYELEMENT" type="xs:int"/>
+		<xs:attribute name="LIFETIMEINDICATOR" type="xs:short" use="optional">
+			<xs:annotation>
+				<xs:documentation>Not required</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PURPOSEOFLOAN" type="xs:short" use="required"/>
+		<xs:attribute name="REPAYMENTVEHICLE" type="xs:short" use="optional"/>
+		<xs:attribute name="REPAYMENTVEHICLEMONTHLYCOST" type="xs:float" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTLISTRequestType">
+		<xs:sequence>
+			<xs:element name="LOANCOMPONENT" type="LOANCOMPONENTRequestType" maxOccurs="3"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FEERequestType">
+		<xs:attribute name="IDENTIFIER" type="xs:string" use="required"/>
+		<xs:attribute name="AMOUNT" type="xs:int" use="required"/>
+		<xs:attribute name="ADDEDTOLOAN" type="xs:short" use="required"/>
+		<xs:attribute name="REFUNDAMOUNT" type="xs:int" use="optional"/>
+		<xs:attribute name="ADHOCIND" type="xs:short" use="optional"/>
+		<xs:attribute name="PAIDATEND" type="xs:short" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="FEELISTRequestType">
+		<xs:sequence>
+			<xs:element name="FEE" type="FEERequestType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SubmitIncomingURRNMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mESSAGE" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="vERSIONID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOURCEGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingURRNMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitIncomingURRNMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingStatusMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mESSAGE" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="vERSIONID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOURCEGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingStatusMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitIncomingStatusMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingNewHCRCaseMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mESSAGE" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="vERSIONID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOURCEGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingNewHCRCaseMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitIncomingNewHCRCaseMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingInstructionMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mESSAGE" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="vERSIONID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOURCEGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingInstructionMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitIncomingInstructionMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mESSAGE" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="vERSIONID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="vERSIONNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOURCEGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitIncomingMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitIncomingMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SubmitIncomingURRNMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingURRNMessage" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingURRNMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingURRNMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingStatusMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingStatusMessage" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingStatusMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingStatusMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingNewHCRCaseMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingNewHCRCaseMessage" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingNewHCRCaseMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingNewHCRCaseMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingInstructionMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingInstructionMessage" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingInstructionMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingInstructionMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingMessage" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitIncomingMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingURRNMessageHttpGetIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingURRNMessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingStatusMessageHttpGetIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingStatusMessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingNewHCRCaseMessageHttpGetIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingNewHCRCaseMessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingInstructionMessageHttpGetIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingInstructionMessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingMessageHttpGetIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="vERSIONNAME" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingMessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingURRNMessageHttpPostIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingURRNMessageHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingStatusMessageHttpPostIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingStatusMessageHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingNewHCRCaseMessageHttpPostIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingNewHCRCaseMessageHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingInstructionMessageHttpPostIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingInstructionMessageHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingMessageHttpPostIn">
+    <wsdl:part name="mESSAGE" type="s:string" />
+    <wsdl:part name="vERSIONID" type="s:string" />
+    <wsdl:part name="vERSIONNAME" type="s:string" />
+    <wsdl:part name="sOURCEGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitIncomingMessageHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="ValuationMessageSoap">
+    <wsdl:operation name="SubmitIncomingURRNMessage">
+      <wsdl:input message="tns:SubmitIncomingURRNMessageSoapIn" />
+      <wsdl:output message="tns:SubmitIncomingURRNMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingStatusMessage">
+      <wsdl:input message="tns:SubmitIncomingStatusMessageSoapIn" />
+      <wsdl:output message="tns:SubmitIncomingStatusMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingNewHCRCaseMessage">
+      <wsdl:input message="tns:SubmitIncomingNewHCRCaseMessageSoapIn" />
+      <wsdl:output message="tns:SubmitIncomingNewHCRCaseMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingInstructionMessage">
+      <wsdl:input message="tns:SubmitIncomingInstructionMessageSoapIn" />
+      <wsdl:output message="tns:SubmitIncomingInstructionMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingMessage">
+      <wsdl:input message="tns:SubmitIncomingMessageSoapIn" />
+      <wsdl:output message="tns:SubmitIncomingMessageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ValuationMessageHttpGet">
+    <wsdl:operation name="SubmitIncomingURRNMessage">
+      <wsdl:input message="tns:SubmitIncomingURRNMessageHttpGetIn" />
+      <wsdl:output message="tns:SubmitIncomingURRNMessageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingStatusMessage">
+      <wsdl:input message="tns:SubmitIncomingStatusMessageHttpGetIn" />
+      <wsdl:output message="tns:SubmitIncomingStatusMessageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingNewHCRCaseMessage">
+      <wsdl:input message="tns:SubmitIncomingNewHCRCaseMessageHttpGetIn" />
+      <wsdl:output message="tns:SubmitIncomingNewHCRCaseMessageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingInstructionMessage">
+      <wsdl:input message="tns:SubmitIncomingInstructionMessageHttpGetIn" />
+      <wsdl:output message="tns:SubmitIncomingInstructionMessageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingMessage">
+      <wsdl:input message="tns:SubmitIncomingMessageHttpGetIn" />
+      <wsdl:output message="tns:SubmitIncomingMessageHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ValuationMessageHttpPost">
+    <wsdl:operation name="SubmitIncomingURRNMessage">
+      <wsdl:input message="tns:SubmitIncomingURRNMessageHttpPostIn" />
+      <wsdl:output message="tns:SubmitIncomingURRNMessageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingStatusMessage">
+      <wsdl:input message="tns:SubmitIncomingStatusMessageHttpPostIn" />
+      <wsdl:output message="tns:SubmitIncomingStatusMessageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingNewHCRCaseMessage">
+      <wsdl:input message="tns:SubmitIncomingNewHCRCaseMessageHttpPostIn" />
+      <wsdl:output message="tns:SubmitIncomingNewHCRCaseMessageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingInstructionMessage">
+      <wsdl:input message="tns:SubmitIncomingInstructionMessageHttpPostIn" />
+      <wsdl:output message="tns:SubmitIncomingInstructionMessageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingMessage">
+      <wsdl:input message="tns:SubmitIncomingMessageHttpPostIn" />
+      <wsdl:output message="tns:SubmitIncomingMessageHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ValuationMessageSoap" type="tns:ValuationMessageSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="SubmitIncomingURRNMessage">
+      <soap:operation soapAction="http://tempuri.org/SubmitIncomingURRNMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingStatusMessage">
+      <soap:operation soapAction="http://tempuri.org/SubmitIncomingStatusMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingNewHCRCaseMessage">
+      <soap:operation soapAction="http://tempuri.org/SubmitIncomingNewHCRCaseMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingInstructionMessage">
+      <soap:operation soapAction="http://tempuri.org/SubmitIncomingInstructionMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingMessage">
+      <soap:operation soapAction="http://tempuri.org/SubmitIncomingMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ValuationMessageHttpGet" type="tns:ValuationMessageHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SubmitIncomingURRNMessage">
+      <http:operation location="/SubmitIncomingURRNMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingStatusMessage">
+      <http:operation location="/SubmitIncomingStatusMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingNewHCRCaseMessage">
+      <http:operation location="/SubmitIncomingNewHCRCaseMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingInstructionMessage">
+      <http:operation location="/SubmitIncomingInstructionMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingMessage">
+      <http:operation location="/SubmitIncomingMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ValuationMessageHttpPost" type="tns:ValuationMessageHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SubmitIncomingURRNMessage">
+      <http:operation location="/SubmitIncomingURRNMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingStatusMessage">
+      <http:operation location="/SubmitIncomingStatusMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingNewHCRCaseMessage">
+      <http:operation location="/SubmitIncomingNewHCRCaseMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingInstructionMessage">
+      <http:operation location="/SubmitIncomingInstructionMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitIncomingMessage">
+      <http:operation location="/SubmitIncomingMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ValuationMessage">
+    <wsdl:port name="ValuationMessageSoap" binding="tns:ValuationMessageSoap">
+      <soap:address location="https://www.vexcommunication.com/ValExTest/ValuationMessage.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ValuationMessageHttpGet" binding="tns:ValuationMessageHttpGet">
+      <http:address location="https://www.vexcommunication.com/ValExTest/ValuationMessage.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ValuationMessageHttpPost" binding="tns:ValuationMessageHttpPost">
+      <http:address location="https://www.vexcommunication.com/ValExTest/ValuationMessage.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

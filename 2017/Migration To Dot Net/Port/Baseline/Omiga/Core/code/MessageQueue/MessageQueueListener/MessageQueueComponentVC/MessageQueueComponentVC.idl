@@ -1,0 +1,99 @@
+///////////////////////////////////////////////////////////////////////////////
+//	FILE:			MessageQueueComponentVC.idl
+//	DESCRIPTION:	
+//	SYSTEM: 		Omiga
+//	COPYRIGHT:		(c) 2000, Marlborough Stirling Group. All rights reserved 
+//
+//	HISTORY
+//	=======
+//
+//	Prog	Date		Description
+//  LD      30/08/00    Initial version
+//	LD		06/04/01	SYS2248 - Add performance counters
+///////////////////////////////////////////////////////////////////////////////
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MessageQueueComponentVC.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	[
+		object,
+		uuid(B0C456CE-4DAE-11D4-823C-005004E8D1A7),
+		dual,
+		helpstring("IMessageQueueComponentVC1 Interface"),
+		pointer_default(unique)
+	]
+	interface IMessageQueueComponentVC1 : IDispatch
+	{
+		[id(1), helpstring("method OnMessage")] HRESULT OnMessage([in] BSTR in_xml, [out,retval] long* plMESSQ_RESP);
+	};
+
+	[
+		object,
+		uuid(F0D23B8A-BADC-11d4-8294-005004E8D1A7),
+		dual,
+		helpstring("IMessageQueueComponentVC2 Interface"),
+		pointer_default(unique)
+	]
+	interface IMessageQueueComponentVC2 : IDispatch
+	{
+		[id(1), helpstring("method OnMessage")] HRESULT OnMessage([in] BSTR in_xmlConfig, [in] BSTR in_xmlData, [out,retval] long* plMESSQ_RESP);
+	};
+
+[
+	uuid(B0C456C2-4DAE-11D4-823C-005004E8D1A7),
+	version(1.0),
+	helpstring("MessageQueueComponentVC 1.0 Type Library")
+]
+library MESSAGEQUEUECOMPONENTVCLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+    typedef [helpstring("Enumerates various responses having processed the message")]
+    enum  {
+        MESSQ_RESP_SUCCESS = 0,
+        MESSQ_RESP_RETRY_NOW = 1,
+        MESSQ_RESP_RETRY_LATER = 2,
+        MESSQ_RESP_RETRY_MOVE_MESSAGE = 3,
+        MESSQ_RESP_STALL_COMPONENT = 4,
+        MESSQ_RESP_STALL_QUEUE = 5,
+
+		// internal use only
+		MESSQ_RESP_HANDLED_RETRY_NOW = -1,
+		MESSQ_RESP_HANDLED_RETRY_LATER = -2,
+		MESSQ_RESP_HANDLED_RETRY_MOVE_MESSAGE = -3,
+		MESSQ_RESP_HANDLED_STOLEN = -4,
+		MESSQ_RESP_HANDLED_ERROR = -5
+
+    } MESSQ_RESP;
+
+	[
+		uuid(B0C456CF-4DAE-11D4-823C-005004E8D1A7),
+		helpstring("MessageQueueComponentVC1 Class")
+	]
+	coclass MessageQueueComponentVC1
+	{
+		[default] interface IMessageQueueComponentVC1;
+	};
+
+	[
+		uuid(F0D23B8B-BADC-11d4-8294-005004E8D1A7),
+		helpstring("MessageQueueComponentVC2 Class")
+	]
+	coclass MessageQueueComponentVC2
+	{
+		[default] interface IMessageQueueComponentVC2;
+	};
+
+	[
+		uuid(C55A7774-DB8E-44B8-9B05-AB0046C20167),
+		helpstring("MessageQueueComponentVC2Success Class")
+	]
+	coclass MessageQueueComponentVC2Success
+	{
+		[default] interface IMessageQueueComponentVC2;
+	};
+};

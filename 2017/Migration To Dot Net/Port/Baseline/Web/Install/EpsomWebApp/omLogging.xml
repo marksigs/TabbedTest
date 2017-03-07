@@ -1,0 +1,39 @@
+<log4net>
+	<appender name="omEpsomInfoFileAppender" type="log4net.Appender.RollingFileAppender">
+		<file value="..\\Logs\\Web.log"/>
+		<appendToFile value="true"/>
+		<lockingModel type="Vertex.Fsd.Omiga.omLogging.JustInTimeLock"/>
+		<rollingStyle value="Date"/>
+		<datePattern value="yyyyMMdd"/>
+		<maxSizeRollBackups value="7"/>
+		<layout type="log4net.Layout.PatternLayout">
+			<conversionPattern value="%date [%thread] %-5level %logger{2} %message%newline" />
+		</layout>
+	</appender>
+	<appender name="omEpsomErrorFileAppender" type="log4net.Appender.RollingFileAppender">
+		<file value="..\\Logs\\WebError.log"/>
+		<appendToFile value="true"/>
+		<lockingModel type="Vertex.Fsd.Omiga.omLogging.JustInTimeLock"/>
+		<rollingStyle value="Date"/>
+		<datePattern value="yyyyMMdd"/>
+		<maxSizeRollBackups value="7"/>
+		<layout type="log4net.Layout.PatternLayout">
+			<conversionPattern value="%date [%thread] %-5level %logger{2} %message%newline" />
+		</layout>
+	</appender>
+	
+	<root>
+		<level value="INFO"/>
+	</root>
+
+	<logger name="omEpsomInfo">
+		<level value="INFO"/>
+		<appender-ref ref="omEpsomInfoFileAppender"/>
+	</logger>
+
+	<logger name="omEpsomError">
+		<level value="ERROR"/>
+		<appender-ref ref="omEpsomErrorFileAppender"/>
+	</logger>
+
+</log4net>

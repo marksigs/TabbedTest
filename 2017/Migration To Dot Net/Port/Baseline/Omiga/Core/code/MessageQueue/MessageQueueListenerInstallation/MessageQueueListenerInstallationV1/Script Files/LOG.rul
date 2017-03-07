@@ -1,0 +1,60 @@
+#include "ifx.h" //DO NOT REMOVE
+
+prototype LOG_Clear();
+prototype LOG_Log(STRING);
+prototype LOG_SetStatusWindow(STRING);
+prototype LOG_MessageBox(STRING, NUMBER);
+prototype NUMBER LOG_AskYesNo(STRING, NUMBER);
+
+#define LOGFILENAME "Installation.log"
+
+function LOG_Clear()
+	NUMBER nvFileHandle;  
+	NUMBER nSuccess;
+begin
+	nSuccess =  DeleteFile(TARGETDIR ^ LOGFILENAME);
+	OpenFileMode(FILE_MODE_APPEND);
+	if CreateFile(nvFileHandle, TARGETDIR, LOGFILENAME) = 0 then
+		CloseFile(nvFileHandle);
+	endif;
+end;
+
+function LOG_Log(str)
+	NUMBER nvFileHandle;  
+	NUMBER nvResult;
+	STRING svResultDate;
+	STRING svResultTime;
+begin
+	OpenFileMode(FILE_MODE_APPEND);
+	if OpenFile(nvFileHandle, TARGETDIR, LOGFILENAME) = 0 then
+		GetSystemInfo (DATE, nvResult, svResultDate);
+		GetSystemInfo (TIME, nvResult, svResultTime);
+		
+		WriteLine(nvFileHandle, svResultDate + " " + svResultTime + " : " + str);
+		CloseFile(nvFileHandle);
+	endif;
+end;
+
+function LOG_SetStatusWindow(str)
+begin
+	LOG_Log(str);
+	SetStatusWindow(-1, str);
+end;
+
+function LOG_MessageBox(str, severity)
+begin
+	LOG_Log(str);
+	MessageBox(str, severity);
+end;
+
+function NUMBER LOG_AskYesNo(str, nDefault)
+	NUMBER nResult;
+begin
+	nResult = AskYesNo(str, nDefault);
+	if nResult = 1 then
+		LOG_Log(str + " = YES");	
+	else
+		LOG_Log(str + " = NO");	
+	endif;
+	return nResult;
+end;

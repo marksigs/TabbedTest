@@ -1,0 +1,278 @@
+//////////////////////////////////////////////////////////////////////
+/////////////////////////////// Summary //////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+		Components:  			        16
+		File Groups:			        15
+		Number of Files:		        21
+		Size of Files:   		       1426515
+		Size in Library:		        752142
+
+
+		<Support>
+			Engine
+				Log
+				Kernel
+			Main Installation
+				Script
+				Setup
+				StrTbl
+				RunTime
+				Resource
+		<Data>
+			Disk<1>
+			Program Files
+			Example Files
+			Help Files
+			Shared DLLs
+
+
+//////////////////////////////////////////////////////////////////////
+///////////////////////////// Components /////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+*<Support>*
+
+		File Group
+		------------------------------------------------------
+
+*<Support>\Engine*
+
+		File Group
+		------------------------------------------------------
+		"<Engine>Engine Files"
+		"<Engine>SelfRegistering"
+		"<Engine>ScriptEngine"
+
+*<Support>\Engine\Log*
+
+		File Group
+		------------------------------------------------------
+
+*<Support>\Engine\Kernel*
+
+		File Group
+		------------------------------------------------------
+		"<Engine>Kernel Placeholder"
+
+*<Support>\Main Installation*
+
+		File Group
+		------------------------------------------------------
+
+*<Support>\Main Installation\Script*
+
+		File Group
+		------------------------------------------------------
+		"<Support>Script"
+
+*<Support>\Main Installation\Setup*
+
+		File Group
+		------------------------------------------------------
+		"<Support>Language Independent OS Independent Files"
+		"<Support>Language Independent Intel 32 Files"
+		"<Support>English OS Independent Files"
+		"<Support>English Intel 32 Files"
+
+*<Support>\Main Installation\StrTbl*
+
+		File Group
+		------------------------------------------------------
+		"<Support>English String Tables"
+
+*<Support>\Main Installation\RunTime*
+
+		File Group
+		------------------------------------------------------
+		"<Support>Non-SelfRegistering"
+
+*<Support>\Main Installation\Resource*
+
+		File Group
+		------------------------------------------------------
+		"<Support>English Files"
+
+*<Data>*
+
+		File Group
+		------------------------------------------------------
+
+*<Data>\Disk<1>*
+
+		File Group
+		------------------------------------------------------
+		"<Disk1>Disk1 Files(1)"
+		"<Disk1>Disk1 Files(2)"
+		"<Disk1>Disk1 Files(3)"
+
+*<Data>\Program Files*
+
+		File Group
+		------------------------------------------------------
+
+*<Data>\Example Files*
+
+		File Group
+		------------------------------------------------------
+
+*<Data>\Help Files*
+
+		File Group
+		------------------------------------------------------
+
+*<Data>\Shared DLLs*
+
+		File Group
+		------------------------------------------------------
+
+
+//////////////////////////////////////////////////////////////////////
+///////////////////////////// File Groups ////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+><Engine>Engine Files<
+
+		Size of Files:   		         28529
+		Size in Library:		          5841
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"corecomp.ini"                                          16/12/1999     10:24:50        28529  ""                 "A"           "82f9d562-867d-b37e-e4ab-9e6b338348a1"  "c:\program files\installshield\installshield professional 6.2\redistributable\compressed files\language independent\os independent\corecomp.ini"
+
+><Engine>SelfRegistering<
+
+		Size of Files:   		        327680
+		Size in Library:		        127269
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"ctor.dll"                                              14/05/2000     19:19:14        77824  "6.20.100.1364"    "A"           "f6697a38-a46d-5eca-8eb3-87b928f69426"  "c:\program files\common files\installshield\engine\6\intel 32\ctor.dll"
+		"objectps.dll"                                          14/05/2000     19:12:50        32768  "6.20.100.1350"    "A"           "35414a53-3b70-bf8d-dfbd-1e66935cd5ec"  "c:\program files\common files\installshield\engine\6\intel 32\objectps.dll"
+		"iuser.dll"                                             14/05/2000     19:14:24       217088  "6.20.100.1361"    "A"           "75fad9f2-981d-1428-6539-6e5f373d1be8"  "c:\program files\common files\installshield\engine\6\intel 32\iuser.dll"
+
+><Engine>ScriptEngine<
+
+		Size of Files:   		        217088
+		Size in Library:		        101342
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"iscript.dll"                                           14/05/2000     19:18:54       217088  "6.20.100.1359"    "A"           "f521ba53-4d20-31ed-54de-5892cff9139b"  "c:\program files\common files\installshield\iscript\iscript.dll"
+
+><Engine>Kernel Placeholder<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"ikernel.exe"                                           12/07/1999     12:45:30            0  ""                 "A"           "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\installshield professional 6.2\cabdata\ikernel.exe"
+
+><Support>Script<
+
+		Size of Files:   		        136781
+		Size in Library:		        136781
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"setup.inx"                                             05/10/2001     15:58:52       136781  ""                 "A"           "5c63ab9c-2217-e63c-e9ef-66838f64fb20"  "c:\my installations\messagequeuelistener\script files\setup.inx"
+
+><Support>Language Independent OS Independent Files<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+
+><Support>Language Independent Intel 32 Files<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+
+><Support>English OS Independent Files<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+
+><Support>English Intel 32 Files<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+
+><Support>English String Tables<
+
+		Size of Files:   		           331
+		Size in Library:		           207
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"value.shl"                                             05/10/2001     15:58:50          331  ""                 "A"           "7666a3c5-c9b7-0aa9-a152-4708c9a1b138"  "c:\my installations\messagequeuelistener\string tables\0009-english\value.shl"
+
+><Support>Non-SelfRegistering<
+
+		Size of Files:   		        320656
+		Size in Library:		        159146
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"isrt.dll"                                              14/05/2000     19:21:42       319488  "6.20.100.1370"    "A"           "2f4616c4-7466-ac08-f0b9-c5c66739e7eb"  "c:\program files\installshield\installshield professional 6.2\redistributable\compressed files\language independent\intel 32\isrt.dll"
+		"default.pal"                                           16/09/1999     10:24:10         1168  ""                 "A"           "3ffeba0a-d069-4953-4405-061de2629c82"  "c:\program files\installshield\installshield professional 6.2\redistributable\compressed files\language independent\intel 32\default.pal"
+
+><Support>English Files<
+
+		Size of Files:   		        217088
+		Size in Library:		         43194
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"_isres.dll"                                            14/05/2000     19:22:20       217088  "6.20.100.1401"    "A"           "42415537-4ae5-de38-6d21-42ba80353f0f"  "c:\program files\installshield\installshield professional 6.2\redistributable\compressed files\0009-english\intel 32\_isres.dll"
+
+><Disk1>Disk1 Files(1)<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"layout.bin"                                            28/06/1999     17:30:10            0  ""                 "A"           "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\installshield professional 6.2\cabdata\layout.bin"
+		"data1.hdr"                                             28/06/1999     17:30:10            0  ""                 "A"           "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\installshield professional 6.2\cabdata\data1.hdr"
+		"data1.cab"                                             28/06/1999     17:30:10            0  ""                 "A"           "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\installshield professional 6.2\cabdata\data1.cab"
+
+><Disk1>Disk1 Files(2)<
+
+		Size of Files:   		         41581
+		Size in Library:		         41581
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"setup.exe"                                             14/05/2000     19:23:38        41472  "6.20.100.1362"    "A"           "125226b0-460d-8bb1-4786-76577a703416"  "c:\my installations\messagequeuelistener\media\default\disk images\disk1\setup.exe"
+		"setup.ini"                                             05/10/2001     15:58:52          109  ""                 "A"           "f74731ef-ffa2-7a7e-01ad-83f242fa2bfb"  "c:\my installations\messagequeuelistener\media\default\disk images\disk1\setup.ini"
+
+><Disk1>Disk1 Files(3)<
+
+		Size of Files:   		        136781
+		Size in Library:		        136781
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"setup.inx"                                             05/10/2001     15:58:52       136781  ""                 "A"           "5c63ab9c-2217-e63c-e9ef-66838f64fb20"  "c:\my installations\messagequeuelistener\script files\setup.inx"

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: SubmitAiPResponse.xsd
+
+Archive              $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/SubmitAiPResponse.xsd $
+Workfile:            $Workfile: SubmitAiPResponse.xsd $
+Current Version  $Revision: 4 $
+Last Modified     $Modtime: 8/12/06 14:47 $
+Modified By       $Author: Dbarraclough $
+Copyright			Copyright © 2006 Vertex Financial Services
+Description		Ingestion (Stop&Save) at AiP  
+
+History:
+
+Author			Date       			Description
+JBraham		11/01/2006		Created.   
+IK					19/09/2006		remove Epsom idenitifier.   
+IK					26/10/2006		EP2_25 - product cascade response 
+IK					26/10/2006		EP2_10 - address targeting response
+IK					25/11/2006		EP2_202 - product cascade response 
+IK					05/12/2006		EP2_287 - shopping list response
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.SubmitAiP.Omiga.vertex.co.uk" xmlns:OmigaAiPData="http://OmigaAiPData.Omiga.vertex.co.uk" xmlns:mpl="http://Response.FindMortgageProducts.Omiga.vertex.co.uk"  xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:ns1="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.SubmitAiP.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:import namespace="http://OmigaAiPData.Omiga.vertex.co.uk" schemaLocation="OmigaAiPData.xsd"/>
+	<xs:import namespace="http://Response.FindMortgageProducts.Omiga.vertex.co.uk" schemaLocation="FindMortgageProductsResponse.xsd"/>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="RESPONSESTATUS" type="xs:string" minOccurs="0"/>
+			<xs:element name="ERRORCODE" type="xs:long" minOccurs="0"/>
+			<xs:element name="ERRORTEXT" type="xs:string" minOccurs="0"/>
+			<xs:element name="DECISION" type="xs:short" minOccurs="0"/>
+			<xs:element name="PRODUCTSCHEME" type="xs:short" minOccurs="0"/>
+			<xs:element name="OMIGADIPREFERENCENUMBER" type="xs:string" minOccurs="0"/>
+			<xs:element name="GENERALPARAGRAPHCODE" type="xs:short" minOccurs="0"/>
+			<xs:element name="CATEGORYSCHEMEPARAGRAPHCODE" type="xs:short" minOccurs="0"/>
+			<xs:element name="REFERRALPARAGRAPHCODE" type="xs:short" minOccurs="0"/>
+			<xs:element name="APPLICANT1KYCSTATEMENTCODE" type="xs:short" minOccurs="0"/>
+			<xs:element name="APPLICANT2KYCSTATEMENTCODE" type="xs:short" minOccurs="0"/>
+			<!-- EP2_287 -->
+			<xs:element name="SHOPPINGLISTPROFILE" type="xs:string" minOccurs="0"/>
+			<xs:element name="TARGETINGDATA" type="OmigaAiPData:TARGETINGDATAType" minOccurs="0"/>
+			<xs:element name="PRODUCTCASCADING" type="PRODUCTCASCADINGType" minOccurs="0"/>
+			<xs:element name="APPLICATION" type="OmigaAiPData:ATR_APPLICATIONType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- EP2_202 -->
+	<xs:complexType name="PRODUCTCASCADINGType">
+		<xs:sequence>
+			<xs:element name="MORTGAGEPRODUCTLIST" type="mpl:MORTGAGEPRODUCTLISTType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- EP2_202 ends -->
+</xs:schema>

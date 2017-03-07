@@ -1,0 +1,80 @@
+From: Karen Potter
+Sent: 07 December 2007 11:43
+To: Robert Hutson
+Subject: FW: Book1.xls
+
+ 
+
+-----Original Message-----
+From: Robin clay
+Sent: 05 December 2007 08:52
+To: Karen Potter
+Subject: RE: Book1.xls
+
+Karen
+
+Details as promised...
+
+2.1.1.2	Log On Screen in Windows Authentication Mode - KP 3/12need to check with Simon B how to test this	Req
+As I said yesterday there is a global in the system that switches the password checking from the Omiga password to your XP account logon. Note. The user id in Omiga must be the same as your XP account logon.
+
+3.3	Windows Authentication Security KP 3/12 - see  2.1.1.2	Req
+9.15.1.2	Remodel on entry to or exit from Application Costs (PP010)	Req
+
+15.4.1	Risk Assessment scorecard
+A new tag for risk assessment rules to allow a check for scorecard marker to be done. A risk assessment rule with a scorecard indicator will not be displayed in RA010. This relates to a specific type of rule in RA. This may be hard to test.
+
+On the subject of Risk assessment we will need to test the new functionality added for AD on DB. This has net been added to the BFS. This should cover shopping list, auto override and hidden rules etc.
+
+15.6	Strategy Manager Credit Scheme (Epsom)  (KP 3/12 - RC TO CHECK)	Req
+This relates to the scheme returned by experian i.e. Near Prime etc
+
+16.5.17.6	RunHunterInterface (KP 3/12 - RC TO CHECK)	Req
+Think this is an old interface
+
+16.5.17.7	RunHunterExperianInterface (KP 3/12 - RC TO CHECK)	Req
+Think this is an old interface
+
+16.5.17.34	RunXMLExpOneShotCreditCheck (KP 3/12 - RC TO CHECK)	Req
+A task with this interface will generate an Epsom specific XML credit check block setting the search mode to ‘1’ which means there is no address targeting
+
+16.5.17.35	RunXMLExpQuotationConversionCreditCheck  (KP 3/12 - RC TO CHECK)	Req
+A task with his method Upgrades an Enquiry ‘footprint’ Credit Score to a Full Application ‘footprint’.  If this is successful the Upgrade to Full Application task will be completed.  This creates an Epsom Specific XML credit check request. 
+
+16.5.17.38	RunPinNumberTriggerInterface (KP 3/12 - RC TO CHECK)	Req
+ING
+
+16.5.17.39	RunLegalAddressTriggerInterface (KP 3/12 - RC TO CHECK)	Req
+ING
+
+16.5.17.42	SMSFulfilmentExtract (KP 3/12 - RC TO CHECK)	Req
+ING
+
+16.5.17.44	RunEmailSMSInterface (KP 3/12 - RC TO CHECK)	Req
+ING
+
+17.12	Application Costs (PP010)	Req 
+Ignore this is only a pointer to section 11
+
+Regards
+
+Robin Clay
+Senior Systems Analyst - Mortgages
+Vertex Financial Services
+
+*************************************
+Jessop House, Jessop Avenue
+Cheltenham, Gloucestershire, GL50 3SH
+
+Tel  +44 (0) 1242 21 4175
+Fax +44 (0) 1242 21 0308
+http://www.vertex.co.uk
+*************************************
+
+-----Original Message-----
+From: Karen Potter
+Sent: 03 December 2007 17:09
+To: Robin clay
+Subject: Book1.xls
+
+ 

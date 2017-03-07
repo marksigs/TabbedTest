@@ -1,0 +1,51 @@
+///////////////////////////////////////////////////////////////////////////////
+//	FILE:			omStream.idl
+//	DESCRIPTION:	
+//	SYSTEM: 		Omiga
+//	COPYRIGHT:		(c) 2000, Marlborough Stirling Group. All rights reserved 
+//
+//	HISTORY
+//	=======
+//
+//	Prog	Date		Description
+//  LD      13/02/01    Initial version
+///////////////////////////////////////////////////////////////////////////////
+
+// This file will be processed by the MIDL tool to
+// produce the type library (omStream.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(E6BAA591-FE9F-11D4-82BE-005004E8D1A7),
+	version(1.0),
+	helpstring("omStream 1.0 Type Library")
+]
+library OMSTREAMLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		object,
+		uuid(E6BAA59D-FE9F-11D4-82BE-005004E8D1A7),
+		dual,
+		helpstring("IomStream1 Interface"),
+		pointer_default(unique)
+	]
+	interface IomStream1 : IDispatch
+	{
+		[id(1), helpstring("method ObjectToBase64")] HRESULT ObjectToBase64([in] IUnknown* pUnknownObject, [in] IUnknown* pUnknownXMLNode);
+		[id(2), helpstring("method Base64ToObject")] HRESULT Base64ToObject([in] IUnknown* pUnknownXMLNode, [out, retval] IUnknown** ppUnknownObject);
+	};
+
+	[
+		uuid(E6BAA59E-FE9F-11D4-82BE-005004E8D1A7),
+		helpstring("omStream1 Class")
+	]
+	coclass omStream1
+	{
+		[default] interface IomStream1;
+	};
+};

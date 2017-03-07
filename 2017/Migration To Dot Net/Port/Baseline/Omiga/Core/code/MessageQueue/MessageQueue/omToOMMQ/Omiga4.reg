@@ -1,0 +1,16 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\OMIGA4]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\OMIGA4\DATABASE CONNECTION]
+"Data Source"="NrRes"
+"Password"="password"
+"Provider"="MSDAORA"
+"Retries"="1"
+"Server"="5.1.240.1"
+"User ID"="test"
+"connection string"="Data Source=NrRes;User ID=test;Password=test;"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\OMIGA4\SYSTEM CONFIGURATION]
+"Multiple Lender"="0"
+

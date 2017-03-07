@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Rohit Saproo     
+ 
+
+Description  Schema definations for data transfer between Omiga and Direct Gateway for Card Payment Request and Response
+
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://takecardpayment.customer.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:TakeCardPayment="http://takecardpayment.customer.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<annotation>
+		<documentation> Document Version = 0.2 </documentation>
+	</annotation>
+	<!-- start of type definitions -->
+	<complexType name="TakeCardPaymentRequestType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="TakeCardPaymentRequestDetails" type="common:CardPaymentDetailsType"/>
+					<element name="PaymentDetails" maxOccurs="unbounded">
+						<annotation>
+							<documentation>Element added to include fee type and amount. These values are used to update payments, as made through HSBC, in profile. </documentation>
+						</annotation>
+						<complexType>
+							<all>
+								<element name="FeeType" type="string"/>
+								<element name="Amount" type="double"/>
+							</all>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="TakeCardPaymentResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="TakeCardPaymentResponseDetails" type="common:CardPaymentResultDetailsType" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="TakeCardPaymentRequest" type="TakeCardPayment:TakeCardPaymentRequestType"/>
+	<element name="TakeCardPaymentResponse" type="TakeCardPayment:TakeCardPaymentResponseType"/>
+</schema>

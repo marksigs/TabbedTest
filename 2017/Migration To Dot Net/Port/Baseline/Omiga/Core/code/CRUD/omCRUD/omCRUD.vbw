@@ -1,0 +1,12 @@
+omCRUDBO = 0, 0, 0, 0, C
+ConvertAssistEx = 0, 0, 0, 0, C
+errAssistEx = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C
+guidAssistEx = 0, 0, 0, 0, C
+xmlAssistEx = 22, 29, 733, 560, C
+omCRUDTxBO = 0, 0, 0, 0, C
+omCRUDPreProc = 0, 0, 0, 0, C
+omCRUDPostProc = 0, 0, 0, 0, C
+omCRUDGlobals = 0, 0, 0, 0, C
+adoAssistCRUD = 0, 0, 0, 0, C
+omCRUDNTxBO = 0, 0, 0, 0, C

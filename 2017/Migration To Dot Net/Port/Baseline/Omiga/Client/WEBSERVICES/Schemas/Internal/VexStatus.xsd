@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by dr john rogers (xit2) -->
+<!-- Peter Edney - 7/11/2006 - EP2_64-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Instruction">
+		<xs:annotation>
+			<xs:documentation>An example status xsd</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="InstructionRef"/>
+				<xs:element ref="InstructionRef1"/>
+				<xs:element ref="InstructionRef2"/>
+				<xs:element ref="InstructionRef3"/>
+				<xs:element ref="InstructionDX"/>
+				<xs:element name="SourceGUID">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="32"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="WhenCreated"/>
+				<xs:element ref="ReadyToSend"/>
+				<xs:element ref="IsSent"/>
+				<xs:element ref="WhenSent"/>
+				<xs:element name="Status">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="InstructionSystemID"/>
+							<xs:element name="StatusCode" nillable="false">
+								<xs:annotation>
+									<xs:documentation>The type of status</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="12"/>
+										<xs:enumeration value="ACCEPT"/>
+										<xs:enumeration value="ALLOCATED"/>
+										<xs:enumeration value="APPOINTMENT"/>
+										<xs:enumeration value="AUTOREPANEL"/>
+										<xs:enumeration value="CREATED"/>
+										<xs:enumeration value="DECLINE"/>
+										<xs:enumeration value="DELIVERED"/>
+										<xs:enumeration value="PMCHECK"/>
+										<xs:enumeration value="REPANELLED"/>
+										<xs:enumeration value="RPTYPCHNGE"/>
+										<xs:enumeration value="SAVE"/>
+										<xs:enumeration value="SUBMIT"/>
+										<xs:enumeration value="VALCANCEL"/>
+										<xs:enumeration value="VALONHOLD"/>
+										<xs:enumeration value="VALOFFHOLD"/>
+										<xs:enumeration value="OFFHOLD"/>
+										<xs:enumeration value="ONHOLD"/>
+										<xs:enumeration value="CANCEL"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="StatusDateActioned" type="xs:dateTime" nillable="false">
+								<xs:annotation>
+									<xs:documentation>Date time stamp of when the status occured</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="SourceFirm">
+								<xs:annotation>
+									<xs:documentation>The company that actioned the status</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="SourceFirmName" nillable="false">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="50"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SourceFirmID" nillable="false" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="32"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SourceFirmAddress" type="AddressType"/>
+										<xs:element name="SourceFirmContact" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Phone" maxOccurs="4">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Number">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:maxLength value="25"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="Type">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="Home"/>
+																			<xs:enumeration value="Work"/>
+																			<xs:enumeration value="Mobile"/>
+																			<xs:enumeration value="Other"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Fax">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Number">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:maxLength value="25"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="Type">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="Work"/>
+																			<xs:enumeration value="Home"/>
+																			<xs:enumeration value="Other"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Email" maxOccurs="2">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:maxLength value="50"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="SourceUser">
+								<xs:annotation>
+									<xs:documentation>The user that actioned the status</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="SourceUserID" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="50"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="SourceUserName" type="NameType"/>
+										<xs:element name="SourceUserContact" type="ContactType" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="AppointmentDate" type="xs:dateTime" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Date Time stamp of an appointment</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Reason">
+								<xs:annotation>
+									<xs:documentation>Notes or Reason for the status change</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1000"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AddressType">
+		<xs:sequence>
+			<xs:element name="HouseName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="HouseNumber">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Street">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="130"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="District">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Area">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="City">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="County">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Country">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PostCode">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NameType">
+		<xs:sequence>
+			<xs:element name="FullName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="180"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Title">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ForeName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="MiddleNames">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LastName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element name="Phone" maxOccurs="4">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Number">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="25"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Type">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="Home"/>
+									<xs:enumeration value="Work"/>
+									<xs:enumeration value="Mobile"/>
+									<xs:enumeration value="Other"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Fax">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Number">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="25"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Type">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="Work"/>
+									<xs:enumeration value="Home"/>
+									<xs:enumeration value="Other"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Email" maxOccurs="2">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="InstructionSystemID" nillable="false">
+		<xs:annotation>
+			<xs:documentation>ID of the instruction on VEx</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="32"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StatusCode" nillable="false">
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="InstructionRef" nillable="false">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="InstructionRef1">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="InstructionRef2">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="InstructionRef3">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="InstructionDX">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="WhenCreated" type="xs:dateTime" nillable="true"/>
+	<xs:element name="ReadyToSend">
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:maxInclusive value="1"/>
+				<xs:minInclusive value="0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IsSent">
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:maxInclusive value="1"/>
+				<xs:minInclusive value="0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="WhenSent" type="xs:dateTime"/>
+</xs:schema>

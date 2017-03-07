@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: FindMortgageProductList-Response
+
+History:
+
+Version 		Author   		Date       			Description
+01.01  			RMH	 		29/06/2005 		Created
+01.02           TLiu             21/07/2005      Changed mars to IDUK in path, Fixed bug in RESPONSEType, added MESSAGE & ERROR.
+01.03           TLiu             22/07/2005      Imported msgCommonTypes.
+01.04			TLiu				22/07/2005		Changed omiga to Omiga in name space.
+01.05			SR				19/09/2006			EP2_1 - Modified namespaces for Epsom.
+01.05			SR				23/10/2006		EP2_1 - Modified to check in
+01.06			IK					29/11/2006	EP2_202 allow 0 MORTGAGEPRODUCT for ingestion product cascade
+01.07			IK					02/03/2007	EP2_1283 add FREELEGALFEES
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.FindMortgageProducts.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.FindMortgageProducts.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="DISCOUNTAMOUNT" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>if a discount applies to the basic rate of the product</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DISCOUNTEDPERIOD" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Period of a specific discount</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FEE" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Any fee associated with the product taken from the fee set</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FIRSTMONTHLYINTERESTRATE" type="xs:string"/>
+	<xs:element name="FIRSTMONTHLYSVRREPAYBYDAILY" type="xs:string"/>
+	<xs:element name="FIRSTMONTHLYSVRREPAYMENT" type="xs:string"/>
+	<xs:element name="FIRSTMONTHSREPAYMENT" type="xs:string"/>
+	<xs:element name="FIRSTMONTHSREPAYMENTBYDAILY" type="xs:string"/>
+	<xs:element name="FLEXIBLEMORTGAGEPRODUCT" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Boolean value</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="INTERESTRATEENDDATE" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>If a specific date span is set agains tht e product rate</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="INTERESTRATEPERIOD" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Rate Period as set at configuration e.g. -1 = whole of term, 60 = five years</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LENDERSNAME" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>If multiple brands the name of the Lender</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="MORTGAGEPRODUCTType">
+		<xs:sequence>
+			<xs:element ref="MORTGAGEPRODUCTCODE"/>
+			<xs:element ref="STARTDATE"/>
+			<xs:element ref="PRODUCTNAME"/>
+			<xs:element ref="PRODUCTTEXTDETAILS" minOccurs="0"/>
+			<xs:element ref="LENDERSNAME"/>
+			<xs:element ref="FIRSTMONTHSREPAYMENT" minOccurs="0"/>
+			<xs:element ref="FIRSTMONTHSREPAYMENTBYDAILY" minOccurs="0"/>
+			<xs:element ref="FIRSTMONTHLYINTERESTRATE" minOccurs="0"/>
+			<xs:element ref="DISCOUNTEDPERIOD" minOccurs="0"/>
+			<xs:element ref="TYPE"/>
+			<xs:element ref="DISCOUNTAMOUNT" minOccurs="0"/>
+			<xs:element ref="FIRSTMONTHLYSVRREPAYMENT" minOccurs="0"/>
+			<xs:element ref="FIRSTMONTHLYSVRREPAYBYDAILY" minOccurs="0"/>
+			<xs:element ref="FEE" minOccurs="0"/>
+			<xs:element ref="PENALTIES" minOccurs="0"/>
+			<xs:element ref="FLEXIBLEMORTGAGEPRODUCT"/>
+			<xs:element ref="NONPANELLENDEROPTION"/>
+			<xs:element ref="INTERESTRATEENDDATE" minOccurs="0"/>
+			<xs:element ref="INTERESTRATEPERIOD"/>
+			<xs:element ref="TYPICALAPR" minOccurs="0"/>
+			<!-- EP2_1283 -->
+			<xs:element ref="FREELEGALFEES" minOccurs="0"/>
+			<xs:element ref="ORGANISATIONID"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MORTGAGEPRODUCTCODE" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Unique ID of the mortgage product</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="MORTGAGEPRODUCTLISTType">
+		<xs:sequence>
+			<xs:element name="MORTGAGEPRODUCT" type="MORTGAGEPRODUCTType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="TOTAL" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Number of Products returned in list</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="NONPANELLENDEROPTION" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Not used</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ORGANISATIONID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Unique Identifier</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PENALTIES" type="xs:string"/>
+	<xs:element name="PRODUCTNAME" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Name of the Product</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PRODUCTTEXTDETAILS" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Description of the Product</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="MORTGAGEPRODUCTLIST" type="MORTGAGEPRODUCTLISTType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+	<xs:element name="STARTDATE" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Start date of the Mortgage Product</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TYPE" type="xs:string"/>
+	<xs:element name="TYPICALAPR" type="xs:string"/>
+	<!-- EP2_1283 -->
+	<xs:element name="FREELEGALFEES" type="xs:boolean"/>
+</xs:schema>

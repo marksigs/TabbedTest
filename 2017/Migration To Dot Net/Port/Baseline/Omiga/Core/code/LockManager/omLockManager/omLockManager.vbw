@@ -1,0 +1,13 @@
+LockManagerTxBO = 0, 0, 0, 0, C
+xmlAssistEx = 66, 87, 657, 535, C
+errConstants = 0, 0, 0, 0, C
+errAssistEx = 0, 0, 0, 0, C
+ConvertAssistEx = 0, 0, 0, 0, C
+adoAssistEx = 0, 0, 0, 0, C
+guidAssistEx = 0, 0, 0, 0, C
+comboAssistEx = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+globalAssist = 0, 0, 0, 0, C
+LockManagerBO = 44, 58, 713, 453, C
+LockManagerNTxBO = 22, 29, 691, 424, C
+omLockManagerGlobals = 0, 0, 0, 0, C

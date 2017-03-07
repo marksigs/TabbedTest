@@ -1,0 +1,223 @@
+<%@ LANGUAGE="JSCRIPT" %>
+<HTML>
+
+<HEAD>
+<TITLE>Axword Test Harness</TITLE>
+</HEAD>
+
+<OBJECT id="axwordclass" 
+	style="DISPLAY: none; LEFT: 0px; VISIBILITY: hidden; TOP: 0px" 
+	tabIndex=-1 
+	CLASSID="CLSID:68575265-E41C-4C2E-808A-CBA63B53D0EF" 
+	CODEBASE="axword.CAB#version=5,1,0,14" 
+	VIEWASTEXT>
+</OBJECT>
+
+<BODY>
+
+<H1>Axword Test Harness</H1>
+
+<form id="frmScreen">
+<P>
+	<input id="chkMethodDisplayDocumentNative" type="radio" name="grpMethod" value="0" checked=1>
+	<label for="chkMethodDisplayDocumentNative">Display document in native application</label>&nbsp;&nbsp;
+	<input id="chkMethodPrintDocument" type="radio" name="grpMethod" value="0" name="chkMethodPrintDocument">
+	<label for="chkMethodPrintDocument">Print document in background</label></P>
+
+	<input id="chkDocTypeWord" type="radio" name="grpDocType" value="0" checked=1>
+	<label for="chkDocTypeWord">Word document</label>&nbsp;&nbsp;
+	<input id="chkDocTypePDF" type="radio" name="grpDocType" value="0">
+	<label for="chkDocTypePDF">PDF document</label>
+	<input id="chkDocTypeTIF" type="radio" name="grpDocType" value="0">
+	<label for="chkDocTypeTIF">TIFF document</label></P>
+
+	<input id="chkCompressed" type="checkbox" value="0" checked=1">
+	<label for="chkCompressed">Document is compressed</label></P>
+
+	<input id="chkDisablePrintOut" type="checkbox" value="0" checked=1>
+	<label for="chkDisablePrintOut">Disable Print Out</label>
+</P>
+<P>
+	<input id=btnAxword type=button value="Run Axword" id=btnAxword  name=button1> 
+</P> 
+</form>
+
+<SCRIPT language="JScript">
+<!--
+
+function window.onload()
+{	
+}
+
+function frmScreen.btnAxword.onclick()
+{
+	CallAxword();
+}
+
+function CallAxword()
+{
+	try
+	{
+		var xmlSrcDoc = new ActiveXObject("Msxml2.DOMDocument");
+		xmlSrcDoc.async = false;
+
+		if (frmScreen.chkDocTypePDF.checked)
+		{
+			if (frmScreen.chkCompressed.checked) 
+			{
+				xmlSrcDoc.load("axword.kfi.pdf.zlib.xml");
+			}
+			else
+			{
+				xmlSrcDoc.load("axword.kfi.pdf.xml");
+			}
+		}
+		else if (frmScreen.chkDocTypeTIF.checked)
+		{
+			if (frmScreen.chkCompressed.checked) 
+			{
+				xmlSrcDoc.load("axword.kfi.tif.zlib.xml");
+			}
+			else
+			{
+				xmlSrcDoc.load("axword.kfi.tif.xml");
+			}
+		}
+		else
+		{
+			if (frmScreen.chkCompressed.checked)
+			{
+				xmlSrcDoc.load("axword.kfi.doc.zlib.xml");
+			}
+			else
+			{
+				xmlSrcDoc.load("axword.kfi.doc.xml");
+			}
+		}
+
+		var xmlTgtDoc = new ActiveXObject("Msxml2.DOMDocument");
+		xmlTgtDoc.appendChild(xmlTgtDoc.createNode(1, "REQUEST", ""));
+		var root = xmlTgtDoc.documentElement;
+
+		var strDeliveryType = "";
+		if (frmScreen.chkDocTypePDF.checked)
+		{
+			root.setAttribute("FILEEXTENSION", ".pdf");
+			strDeliveryType = "20";
+		}
+		else if (frmScreen.chkDocTypeTIF.checked)
+		{
+			root.setAttribute("FILEEXTENSION", ".tif");
+			strDeliveryType = "";
+		}
+		else if (frmScreen.chkDocTypeWord.checked)
+		{
+			root.setAttribute("FILEEXTENSION", ".doc");
+			strDeliveryType = "10";
+		}
+
+		var nodeControlData = xmlTgtDoc.createNode(1, "CONTROLDATA", "");
+		root.appendChild(nodeControlData);
+		nodeControlData.setAttribute("DOCUMENTTITLE", "Axword Test Harness Document");
+		nodeControlData.setAttribute("PRINTER", "");
+		nodeControlData.setAttribute("FIRSTPAGEPRINTERTRAY", "0");
+		nodeControlData.setAttribute("OTHERPAGESPRINTERTRAY", "0");
+		if (frmScreen.chkCompressed.checked)
+		{
+			nodeControlData.setAttribute("COMPRESSIONMETHOD", "ZLIB");
+		}
+		nodeControlData.setAttribute("DELIVERYTYPE", strDeliveryType);
+		nodeControlData.setAttribute("COPIES", "1");
+
+		var newNode = xmlTgtDoc.createNode(1, "DOCUMENTCONTENTS", "");
+		root.appendChild(newNode);
+	
+		var nodePrintDocumentDetails = xmlSrcDoc.selectSingleNode("//RESPONSE/PRINTDOCUMENTDETAILS");
+		newNode.setAttribute("FILECONTENTS", nodePrintDocumentDetails.getAttribute("PRINTDOCUMENT"));
+
+		var strRequest = xmlTgtDoc.xml;
+
+		var ax = new ActiveXObject("axword.axwordclass");
+		//var ax = new ActiveXObject("axwordServer.axwordclass");
+
+/*
+		ax.ViewAsWord = frmScreen.chkViewAsWord.checked;
+		ax.ViewAsPDF = frmScreen.chkViewAsPDF.checked;
+		ax.ReadOnly = frmScreen.chkReadOnly.checked;
+		ax.ResizeableFrame = frmScreen.chkResizableFrame.checked;
+		ax.ShowFindFreeText = frmScreen.chkShowFindFreeText.checked;
+		ax.SpellCheckOnSave = frmScreen.chkSpellCheckOnSave.checked;
+		ax.SpellCheckWhileEditing = frmScreen.chkSpellCheckWhileEditing.checked;
+		ax.ShowCommandBars = frmScreen.chkShowCommandBars.checked;
+		ax.PersistState = frmScreen.chkPersistState.checked;
+		ax.ShowTrackedChanges = frmScreen.chkShowTrackedChanges.checked;
+		ax.ShowPrint = frmScreen.chkShowPrint.checked;
+*/
+		ax.Modeless = true;
+		ax.ShowPrintDialog = true;
+		ax.ShowProgressBar = true;
+		ax.DisablePrintOut = frmScreen.chkDisablePrintOut.checked;
+		ax.EnableLog = true;
+		ax.LogFileName = "c:\\temp\\axword.log";
+
+		ax.ClearLastErr();
+
+		// Invoke Axword.
+		if (frmScreen.chkMethodPrintDocument.checked)
+		{
+			ax.PrintDocument(strRequest);
+		}
+		else if (frmScreen.chkMethodDisplayDocumentNative.checked)
+		{
+			ax.DisplayDocumentNative(strRequest);
+			//ax.DisplayDocument(strRequest);
+		}
+		else
+		{
+			ax.DisplayDocument(strRequest);
+		}
+
+		if (ax.IsLastErr())
+		{
+			alert("Error running Axword: " + ax.LastErrDescription + " in " + ax.LastErrSource + " (" + ax.LastErrNumber + ")");			
+		}
+	}
+	catch(e)
+	{
+		alert("Error running Axword: " + e.description + " (" + e.number + ")");
+	}
+}
+
+
+/*
+	<input id="chkViewAsWord" type="checkbox" value="0" checked=1>
+	<label for="chkViewAsWord">View as Word document (defaults to false)</label></P>
+	<input id="chkViewAsPDF" type="checkbox" value="0">
+	<label for="chkViewAsPDF">View PDF document (defaults to false)</label></P>
+	<input id="chkDeliveryTypePDF" type="checkbox" value="0">
+	<label for="chkDeliveryTypePDF">Delivery Type is PDF (20)</label></P>
+	<input id="chkReadOnly" type="checkbox" value="0">
+	<label for="chkReadOnly">Read only (defaults to true)</label></P>
+	<input id="chkResizableFrame" type="checkbox" value="1" checked=1>
+	<label for="chkResizableFrame">Resizeable frame (defaults to false)</label></P>
+	<input id="chkShowFindFreeText" type="checkbox" value="1" checked=1>
+	<label for="chkShowFindFreeText">Show "Find free text" (defaults to true)</label></P>
+	<input id="chkSpellCheckOnSave" type="checkbox" value="0">
+	<label for="chkSpellCheckOnSave">Spell check on save (defaults to true)</label></P>
+	<input id="chkSpellCheckWhileEditing" type="checkbox" value="1" checked=1>
+	<label for="chkSpellCheckWhileEditing">Spell check while editing (defaults to true)</label></P>
+	<input id="chkShowCommandBars" type="checkbox" value="0">
+	<label for="chkShowCommandBars">Show Word command bars (defaults to false)</label></P>
+	<input id="chkPersistState" type="checkbox" value="0" checked=1>
+	<label for="chkPersistState">Persist state (defaults to false)</label></P>
+	<input id="chkTrackedChangesDoc" type="checkbox" value="0">
+	<label for="chkTrackedChangesDoc">Use document containing tracked changes</label></P>
+	<input id="chkShowTrackedChanges" type="checkbox" value="0">
+	<label for="chkShowTrackedChanges">Show "Show tracked changes" button</label></P>
+*/
+-->
+</SCRIPT>
+
+</BODY>
+
+</HTML>

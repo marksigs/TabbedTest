@@ -1,0 +1,140 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1602"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{D1091D74-4B1F-45A0-8BE9-8AF001F1B9B2}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = "MSCIS"
+                    AssemblyKeyFile = "C:\MSC Products\Intergation Service\Code\MSC.IntegrationService\mscis.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "MSC.IntegrationService.Schemas"
+                    AssemblyName = "MSC.IntegrationService.Schemas"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "MSCIntegrationService"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "AIG_MIRequest.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "AIG_MIRequest"
+                />
+                <File
+                    RelPath = "AIG_MIResponse.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "AIG_MIResponse"
+                />
+                <File
+                    RelPath = "AIG_PremiumRequest.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "AIG_PremiumRequest"
+                />
+                <File
+                    RelPath = "AIG_PremiumResponse.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "AIG_PremiumResponse"
+                />
+                <File
+                    RelPath = "AIG_RiskResponse.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "AIG_RiskResponse"
+                />
+                <File
+                    RelPath = "cdiInterop.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "cdiInterop"
+                />
+                <File
+                    RelPath = "MSC_Insurance_Request.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "MSC_Insurance_Request"
+                />
+                <File
+                    RelPath = "MSC_Insurance_Response.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "MSC_Insurance_Response"
+                />
+                <File
+                    RelPath = "PropertySchema.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas.PropertySchema"
+                    Type = "PropertySchema"
+                />
+                <File
+                    RelPath = "TestIn.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "TestIn"
+                />
+                <File
+                    RelPath = "testMap.btm"
+                    BuildAction = "Compile"
+                    Namespace = "MSC.IntegrationService.Schemas"
+                    Type = "testMap"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

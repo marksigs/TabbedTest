@@ -1,0 +1,132 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<PropertyGroup>
+<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+<ApplicationIcon></ApplicationIcon> 
+<AssemblyKeyContainerName> </AssemblyKeyContainerName>
+<AssemblyName>omLockManager</AssemblyName>
+<AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
+<DefaultClientScript>JScript</DefaultClientScript>
+<DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+<DefaultTargetSchema>IE50</DefaultTargetSchema>
+<DelaySign>false</DelaySign>
+<RootNamespace>omLockManager</RootNamespace>
+<OutputType>Library</OutputType>
+<StartupObject>omLockManager.omLockManagerGlobals</StartupObject>
+<FileUpgradeFlags></FileUpgradeFlags>
+<UpgradeBackupLocation></UpgradeBackupLocation>
+</PropertyGroup>
+<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+<OutputPath>bin\</OutputPath>
+<DebugSymbols>true</DebugSymbols>
+<DefineDebug>true</DefineDebug>
+<DefineTrace>true</DefineTrace>
+<DefineConstants></DefineConstants>
+<StartArguments></StartArguments>
+<DebugType>full</DebugType>
+<ErrorReport>prompt</ErrorReport>
+</PropertyGroup>
+<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+<OutputPath>bin\</OutputPath>
+<DebugSymbols>false</DebugSymbols>
+<DefineDebug>false</DefineDebug>
+<DefineTrace>true</DefineTrace>
+<DefineConstants></DefineConstants>
+<StartArguments>
+</StartArguments>
+<DebugType>none</DebugType>
+<ErrorReport>prompt</ErrorReport>
+</PropertyGroup>
+<ItemGroup>
+<Reference Include="System">
+         <Name>System</Name>
+ </Reference>
+<Reference Include="ADODB">
+         <Name>ADODB</Name>
+         <HintPath>bin\adodb.dll</HintPath>
+ </Reference>
+<Reference Include="MSXML2">
+         <Name>MSXML2</Name>
+         <HintPath>bin\msxml2.dll</HintPath>
+ </Reference>
+<Reference Include="COMSVCSLib">
+         <Name>COMSVCSLib</Name>
+         <HintPath>bin\comsvcslib.dll</HintPath>
+ </Reference>
+<Reference Include="omBase">
+         <Name>omBase</Name>
+         <HintPath>bin\ombase.dll</HintPath>
+ </Reference>
+<Reference Include="omAU">
+         <Name>omAU</Name>
+         <HintPath>bin\omau.dll</HintPath>
+ </Reference>
+<Reference Include="omOrg">
+         <Name>omOrg</Name>
+         <HintPath>bin\omorg.dll</HintPath>
+ </Reference>
+<Reference Include="Microsoft.VisualBasic">
+         <Name>Microsoft.VisualBasic</Name>
+ </Reference>
+<Reference Include="Microsoft.VisualBasic.Compatibility">
+         <Name>Microsoft.VisualBasic.Compatibility</Name>
+ </Reference>
+<Reference Include="System.Data">
+         <Name>System.Data</Name>
+ </Reference>
+<Reference Include="System.Deployment">
+         <Name>System.Deployment</Name>
+ </Reference>
+</ItemGroup>
+<ItemGroup>
+<Compile Include="omLockManagerGlobals.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="adoAssistEx.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="xmlAssistEx.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="StdData.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="ConvertAssistEx.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="errAssistEx.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="guidAssistEx.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="globalAssist.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="comboAssistEx.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="errConstants.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="LockManagerTxBO.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="LockManagerNTxBO.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<Compile Include="LockManagerBO.cs">
+       <SubType>Code</SubType>
+</Compile> 
+<None Include="_vb6tocs.htm">
+       <SubType>Preview</SubType>
+</None> 
+</ItemGroup>
+<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+  <PreBuildEvent>
+  </PreBuildEvent>
+  <PostBuildEvent>
+  </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: Launch Omiga to Customer Existing Business screen CR041 - Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RFairlie        16/09/2005 		Created
+01.02      		RFairlie        05/10/2005 		Additions following Rob Hank's review
+01.03      		RFairlie        19/10/2005 		Added annotations.
+                                                                Added REQUEST/SCREEN. 
+                                                                Amended address and telephonenumber types.
+                                                                Removed customerversion level.
+                                                                Added VERIFICATIONLIST.
+01.04           RFairlie       06/11/2005       MAR430: Release previous last change: CUSTOMER\PROSPECTPASSWORDEXISTS
+                                                                changed to PROSPECTPASSWORDTAKEN by RHanks on 20/10/2005
+================================================================================-->
+<!-- as modified by XDSPreReleaseProcessing utility: 21/03/2006 15:00:23 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.LaunchToMainMenu.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.LaunchToMainMenu.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd" />
+  <xs:element name="REQUEST" type="REQUESTType" />
+  <xs:complexType name="REQUESTType">
+    <xs:sequence>
+      <xs:element name="CUSTOMER" type="CUSTOMERType" />
+    </xs:sequence>
+    <xs:attribute name="USERID" type="xs:string" use="required" />
+    <xs:attribute name="UNITID" type="xs:string" use="required" />
+    <xs:attribute name="MACHINEID" type="xs:string" use="optional" />
+    <xs:attribute name="CHANNELID" type="xs:string" use="optional" />
+    <xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional" />
+    <xs:attribute name="PASSWORD" type="xs:string" use="required" />
+    <xs:attribute name="SCREEN" type="xs:string" fixed="CR041.ASP" />
+  </xs:complexType>
+  <xs:complexType name="CUSTOMERType">
+    <xs:sequence>
+      <xs:element name="TELEPHONENUMBERLIST" type="TELEPHONENUMBERLISTType" />
+      <xs:element name="CURRENTADDRESS" type="CUSTOMERADDRESSType" />
+      <xs:element name="CORRESPONDENCEADDRESS" type="CUSTOMERADDRESSType" minOccurs="0" />
+      <xs:element name="VERIFICATIONLIST" type="VERIFICATIONLISTType" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="FIRSTFORENAME" type="xs:string" use="required" />
+    <xs:attribute name="SECONDFORENAME" type="xs:string" use="optional" />
+    <xs:attribute name="OTHERFORENAME" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Not required for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SURNAME" type="xs:string" use="required" />
+    <xs:attribute name="GENDER" type="xs:int" use="optional" />
+    <xs:attribute name="TITLE" type="xs:int" use="optional" />
+    <xs:attribute name="DATEOFBIRTH" type="msgdt:msgDateTime" use="optional" />
+    <xs:attribute name="AGE" type="xs:short" use="optional" />
+    <xs:attribute name="SPECIALNEEDS" type="xs:int" use="optional" />
+    <xs:attribute name="MAILSHOTREQUIRED" type="xs:short" use="optional">
+      <xs:annotation>
+        <xs:documentation>This relates to Marketing OPT IN</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CUSTOMERSTATUS" type="xs:string" use="optional" />
+    <xs:attribute name="MOTHERESMAIDENNAME" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Does not need to be set for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="MARITALSTATUS" type="xs:int" use="optional" />
+    <xs:attribute name="NATIONALINSURANCENUMBER" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Does not need to be set for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="MEMBEROFSTAFF" type="xs:short" use="optional" />
+    <xs:attribute name="CHANNELID" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>originating source of customer Does not need to be set for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="OTHERSYSTEMTYPE" type="xs:int" use="optional">
+      <xs:annotation>
+        <xs:documentation>Used to set the source of the customer does not need to be set for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="NATIONALITY" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Used to set the source of the customer does not need to be set for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IDWEIGHTING" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>used for internal KYC checks Not required for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IDCOMBINATION" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>used for internal KYC checks Not required for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CUSTOMERKYCSTATUS" type="xs:string" use="optional" />
+    <xs:attribute name="CUSTOMERKYCADDRESSFLAG" type="xs:string" use="optional" />
+    <xs:attribute name="CUSTOMERKYCIDFLAG" type="xs:string" use="optional" />
+    <xs:attribute name="CUSTOMERCATEGORY" type="xs:string" use="optional" />
+    <xs:attribute name="CUSTOMERDORMANTACCOUNTIND" type="xs:string" use="optional" />
+    <xs:attribute name="PROSPECTPASSWORDTAKEN" type="xs:short" use="optional" />
+    <xs:attribute name="CONTACTEMAILADDRESS" type="xs:string" use="optional" />
+    <xs:attribute name="OTHERSYSTEMCUSTOMERNUMBER" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>CIF Number</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="OMIGACUSTOMERNUMBER" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Not Required for MARS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="CUSTOMERADDRESSType">
+    <xs:sequence>
+      <xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TELEPHONENUMBERDETAILSType">
+    <xs:attribute name="TELEPHONENUMBER" type="xs:string" />
+    <xs:attribute name="USAGE" type="xs:int" />
+    <xs:attribute name="CONTACTTIME" type="xs:string" />
+    <xs:attribute name="EXTENSIONNUMBER" type="xs:string" />
+    <xs:attribute name="PREFERREDMETHODOFCONTACT" type="xs:short" />
+    <xs:attribute name="COUNTRYCODE" type="xs:string" />
+    <xs:attribute name="AREACODE" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="TELEPHONENUMBERLISTType">
+    <xs:sequence>
+      <xs:element name="TELEPHONENUMBERDETAILS" type="TELEPHONENUMBERDETAILSType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VERIFICATIONLISTType">
+    <xs:sequence>
+      <xs:element name="VERIFICATION" type="VERIFICATIONType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VERIFICATIONType">
+    <xs:attribute name="VERIFICATIONTYPE" type="xs:int" />
+    <xs:attribute name="IDTYPE" type="xs:int" />
+    <xs:attribute name="ISSUER" type="xs:string" />
+    <xs:attribute name="REFERENCE" type="xs:string" />
+    <xs:attribute name="DATE" type="msgdt:msgDateTime" />
+  </xs:complexType>
+</xs:schema>

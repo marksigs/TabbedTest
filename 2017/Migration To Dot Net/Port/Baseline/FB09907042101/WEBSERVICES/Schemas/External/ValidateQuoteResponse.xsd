@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: ValidateQuote-Response
+
+History:
+
+Version 		Author   		Date       			Description
+01.01  			RHart			10/09/2005		Created: Resposne to Validate Quote passing back the valid / invalid quote indicators
+01.02			IK					10/10/2005		LOANCOMPONENT(s) added as child of MORTGAGESUBQUOTE
+01.03			IK					01/11/2005		ING 702, CURRENTRATEEXPIRYDATE changed to msgDate
+================================================================================-->
+<!-- as modified by XDSPreReleaseProcessing utility: 21/03/2006 15:00:23 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.ValidateQuote.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Response.ValidateQuote.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd" />
+  <xs:element name="RESPONSE" type="RESPONSEType" />
+  <xs:complexType name="RESPONSEType">
+    <xs:sequence>
+      <xs:element name="APPLICATION" type="APPLICATIONResponseType" />
+      <xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="APPLICATIONResponseType">
+    <xs:sequence>
+      <xs:element name="QUOTATION" type="QUOTATIONType" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="required" />
+    <xs:attribute name="ACTIVEQUOTENUMBER" type="xs:short" use="optional" />
+    <xs:attribute name="ACCEPTEDQUOTENUMBER" type="xs:short" use="optional" />
+    <xs:attribute name="RATEDIFFIND" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="QUOTATIONType">
+    <xs:sequence>
+      <xs:element name="MORTGAGESUBQUOTE" type="MORTGAGESUBQUOTEType" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="QUOTATIONNUMBER" type="xs:short" use="required" />
+  </xs:complexType>
+  <xs:complexType name="MORTGAGESUBQUOTEType">
+    <xs:sequence>
+      <xs:element name="LOANCOMPONENT" type="LOANCOMPONENTType" maxOccurs="unbounded" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="MORTGAGESUBQUOTENUMBER" type="xs:short" use="required" />
+    <xs:attribute name="VALFEEDIFFIND" type="xs:boolean" use="required" />
+    <xs:attribute name="PRODUCTWITHDRAWNIND" type="xs:boolean" use="required" />
+    <xs:attribute name="PRODUCTRESERVEDIND" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="LOANCOMPONENTType">
+    <xs:attribute name="LOANCOMPONENTSEQUENCENUMBER" type="xs:short" use="required" />
+    <xs:attribute name="MORTGAGEPRODUCTCODE" type="xs:string" use="required" />
+    <xs:attribute name="CURRENTRATEEXPIRYDATE" type="msgdt:msgDate" use="required" />
+  </xs:complexType>
+</xs:schema>

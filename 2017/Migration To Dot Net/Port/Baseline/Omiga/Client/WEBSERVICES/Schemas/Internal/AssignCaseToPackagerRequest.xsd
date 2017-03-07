@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: AssignCaseToPackager - Request
+
+History:
+
+Version 		Author   	Date					Description
+01.01      		PSC			12/12/2006			Created
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.AssignCaseToPackager.Omiga.vertex.co.uk" targetNamespace="http://Request.AssignCaseToPackager.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="REQUEST" type="ASSIGNCASETOPACKAGERREQUESTType"/>
+	<xs:complexType name="ASSIGNCASETOPACKAGERREQUESTType">
+		<xs:sequence>
+			<xs:element name="ASSIGNCASE" type="ASSIGNCASETOPACKAGERASSIGNCASEType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" use="optional"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ASSIGNCASETOPACKAGERASSIGNCASEType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="required"/>
+		<xs:attribute name="PRINCIPALFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERID" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" use="optional"/>
+	</xs:complexType>
+</xs:schema>

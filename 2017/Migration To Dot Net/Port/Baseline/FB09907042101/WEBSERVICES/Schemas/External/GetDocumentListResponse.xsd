@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: GetDocumetnList- Response
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RMH	 		29/06/2005 		Created / OPI CRUD TYPE
+01.02           TLiu             20/07/2005      Changed mars to IDUK in path, named a complexType, added MESSAGE & ERROR.
+01.03           TLiu             22/07/2005      Imported msgCommonTypes.
+01.04			TLiu				22/07/2005		Changed omiga to Omiga in name space.
+01.05			TLiu				26/07/2005		Fixed Name Spaces
+01.06			TLiu				28/07/2005		Deleted name space msgAppData.
+01.07   		TLiu				29/07/2005		Renamed from GetDocumentListomPMResponseDMS105.xsd to GetDocumentListResponse.xsd.   
+02.01		IK					16/11/2005		CUSTOMERNAME optional
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Response.GetDocumentList.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:complexType name="DOCUMENTDETAILSType">
+		<xs:attribute name="FILEGUID" type="msgdt:msgGuid" use="optional">
+			<xs:annotation>
+				<xs:documentation>FVS Ref</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DOCUMENTGUID" type="msgdt:msgGuid" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DOCUMENTVERSION" type="xs:string" use="required"/>
+		<xs:attribute name="DOCUMENTNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="DOCUMENTDESCRIPTION" type="xs:string" use="optional"/>
+		<xs:attribute name="HOSTTEMPLATEID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>For documents produced from Omiga will be populated with the ID of the template the doc was generated from</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="STAGEID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Stage at which the doc was generated</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="USERNAME" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Name of the user that generated the document</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="UNITNAME" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Unit under which the document was generated</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PRINTLOCATION" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Local / Fulfillment</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CUSTOMERNAME" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Customer Associated witht eh document</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="RECIPIENTNAME" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Recipient associated witht eh document</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="EVENTDATE" type="msgdt:msgDateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Latest event date</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SOURCESYSTEM" type="xs:string"/>
+		<xs:attribute name="DOCUMENTGROUP" type="xs:string"/>
+		<xs:attribute name="TEMPLATEID" type="xs:string"/>
+		<xs:attribute name="LANGUAGE" type="xs:string"/>
+		<xs:attribute name="SEARCHKEY1" type="xs:string"/>
+		<xs:attribute name="SEARCHKEY2" type="xs:string"/>
+		<xs:attribute name="SEARCHKEY3" type="xs:string"/>
+		<xs:attribute name="EVENTKEY" type="xs:string"/>
+		<xs:attribute name="ARCHIVEDATE" type="xs:string"/>
+		<xs:attribute name="UNITID" type="xs:string"/>
+		<xs:attribute name="CREATIONDATE" type="xs:string"/>
+		<xs:attribute name="PRINTDATE" type="xs:string"/>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="DOCUMENTHISTORYLISTType">
+		<xs:sequence>
+			<xs:element name="DOCUMENTDETAILS" type="DOCUMENTDETAILSType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="DOCUMENTHISTORYLIST" type="DOCUMENTHISTORYLISTType" minOccurs="0"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+</xs:schema>

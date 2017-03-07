@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: GetIntroducerUserFirms-Response
+
+History:
+
+Version 		Author   	Date					Description
+01.01      		RMH			19/06/2006 		Created
+01.02		    PSC			27/10/2006		Rename FirmType to GETFIRMSFIRMType and RESPONSEType
+															to GETFIRMSRESPONSEType
+01.03		    IK				01/11/2006		restructure response to match SP
+01.04		    IK				02/11/2006		EP2_28 INTRODUCER optional (will not be returned if ERROR)
+01.05		    SR			26/01/2007		EP2_987 Added INTRODUCERUSER. changed the sequence of elements in GETFIRMSRESPONSEType
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.GetIntroducerUserFirms.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:ns1="http://Response.GetIntroducerUserFirms.Omiga.vertex.co.uk" xmlns:ns2="http://Response.GetIntroducerUserFirms.Omiga.vertex.co.uk" targetNamespace="http://Response.GetIntroducerUserFirms.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="RESPONSE" type="GETFIRMSRESPONSEType"/>
+	<xs:complexType name="GETFIRMSRESPONSEType">
+		<xs:sequence>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+			<xs:element name="INTRODUCERUSER" type="INTRODUCERUSERDETAILSType" minOccurs="0"/>
+			<xs:element name="INTRODUCER" type="INTRODUCERDETAILSType" minOccurs="0"/>			
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="GETFIRMSFIRMType">
+		<xs:attribute name="FIRMID" type="xs:string"/>
+		<xs:attribute name="FSAREF" type="xs:string"/>
+		<xs:attribute name="FIRMNAME" type="xs:string"/>
+		<xs:attribute name="UNITID" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="INTRODUCERDETAILSType">
+		<xs:sequence>
+			<xs:element name="ARFIRM" type="GETFIRMSFIRMType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PRINCIPALFIRM" type="GETFIRMSFIRMType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="INTRODUCERID"/>
+	</xs:complexType>
+	<xs:complexType name="INTRODUCERUSERDETAILSType">
+		<xs:attribute name="CHANGEPASSWORDINDICATOR" type="xs:int"/>
+	</xs:complexType> 
+</xs:schema>

@@ -1,0 +1,410 @@
+<html><head><META HTTP-EQUIV="Content-Type" content="text/html;">
+<link rel="stylesheet" href="vb6tocs\service.css">
+<title>Migrates Information</title>
+<script language="javascript">
+function on_off () {
+oMe = window.event.srcElement
+var child = document.all[event.srcElement.getAttribute("child",false)];
+if (null != child)
+child.className = child.className == "collapsed" ? "expanded" : "collapsed";
+}
+function turn() {
+uMe = window.event.srcElement;
+var check = uMe.src.toLowerCase();
+if (check.lastIndexOf("plus.gif") != -1)
+{
+uMe.src = "vb6tocs/minus.gif"
+}
+else
+{
+	uMe.src = "vb6tocs/plus.gif"
+}
+}
+</script>
+</head>
+<body topmargin=0 leftmargin=0 rightmargin=0 onclick="on_off();">
+<h1>Migration Report of C:\projects\astanleyCoreSM\CORE\DotNetPort\PoC\Vertex2Sapient\Delivery1\vb6\LockManager\omLockManager\omLockManager.vbp</h1>
+<h2>This report shows you which VB6 files can be converted successfully by VB6TOCS. </h2><br>
+<h2>Time:&nbsp;03/04/2007 11:23:47</h2>
+<h2>Converted Issues:</h2>
+<table width=98% border=1 bordercolor=white class=firsttable>
+<tr>
+<td nowrap class=tabhd  width="30%">VB6 Files</td>
+<td nowrap class=tabhd  width="30%">New C# Files</td>
+<td nowrap class=tabhd width="30%">Issues</td>
+<td nowrap class=tabhd width="5%">Total lines</td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;LockManagerTxBO.cls</td>
+ <td>LockManagerTxBO.cs</td>
+ <td>0</td>
+ <td>57 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;LockManagerNTxBO.cls</td>
+ <td>LockManagerNTxBO.cs</td>
+ <td>0</td>
+ <td>57 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;LockManagerBO.cls</td>
+ <td>LockManagerBO.cs</td>
+ <td>0</td>
+ <td>537 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;omLockManagerGlobals.bas</td>
+ <td>omLockManagerGlobals.cs</td>
+ <td>0</td>
+ <td>11 </td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file5">&nbsp;..\..\shared\vb6\adoAssist.bas</td>
+ <td >adoAssistEx.cs</td>
+ <td >11</td>
+ <td>1567</td>
+</tr>
+<tr class=collapsed id=file5  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>adoGetRecordSet</td>
+<td>125</td>
+<td>Method or data member not found: 'print'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>adoBuildDbConnectionString</td>
+<td>17</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>adoBuildDbConnectionString</td>
+<td>22</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>adoBuildDbConnectionString</td>
+<td>37</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>5</td>
+<td>adoBuildDbConnectionString</td>
+<td>38</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>6</td>
+<td>adoBuildDbConnectionString</td>
+<td>39</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>7</td>
+<td>adoBuildDbConnectionString</td>
+<td>48</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>8</td>
+<td>adoBuildDbConnectionString</td>
+<td>59</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>9</td>
+<td>adoBuildDbConnectionString</td>
+<td>69</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>10</td>
+<td>adoBuildDbConnectionString</td>
+<td>70</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>11</td>
+<td>adoBuildDbConnectionString</td>
+<td>83</td>
+<td>Method or data member not found: 'RegRead'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file6">&nbsp;..\..\shared\vb6\xmlAssist.bas</td>
+ <td >xmlAssistEx.cs</td>
+ <td >23</td>
+ <td>1456</td>
+</tr>
+<tr class=collapsed id=file6  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>xmlChangeNodeName</td>
+<td>38</td>
+<td>Method or data member not found: 'cloneNode'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>xmlChangeNodeName</td>
+<td>49</td>
+<td>Method or data member not found: 'cloneNode'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>xmlCreateElementRequestFromNode</td>
+<td>39</td>
+<td>Method or data member not found: 'nodeName'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>xmlMakeNodeElementBased</td>
+<td>79</td>
+<td>Method or data member not found: 'nodeName'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>5</td>
+<td>xmlMakeNodeElementBased</td>
+<td>84</td>
+<td>Method or data member not found: 'Text'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>6</td>
+<td>xmlMakeNodeElementBased</td>
+<td>86</td>
+<td>Method or data member not found: 'nodeName'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>7</td>
+<td>xmlMakeNodeElementBased</td>
+<td>88</td>
+<td>Method or data member not found: 'Text'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>8</td>
+<td>xmlMakeNodeElementBased</td>
+<td>93</td>
+<td>Method or data member not found: 'nodeName'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>9</td>
+<td>xmlMakeNodeElementBased</td>
+<td>95</td>
+<td>Method or data member not found: 'Text'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>10</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>30</td>
+<td>Method or data member not found: 'hasChildNodes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>11</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>31</td>
+<td>Method or data member not found: 'childNodes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>12</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>37</td>
+<td>Method or data member not found: 'Text'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>13</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>40</td>
+<td>Method or data member not found: 'nodeName'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>14</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>40</td>
+<td>Method or data member not found: 'Text'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>15</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>42</td>
+<td>Method or data member not found: 'Attributes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>16</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>44</td>
+<td>Method or data member not found: 'Attributes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>17</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>47</td>
+<td>Method or data member not found: 'nodeName'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>18</td>
+<td>xmlCreateAttributeBasedResponse</td>
+<td>47</td>
+<td>Method or data member not found: 'Attributes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>19</td>
+<td>xmlCreateChildRequest</td>
+<td>34</td>
+<td>Method or data member not found: 'Attributes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>20</td>
+<td>xmlCreateChildRequest</td>
+<td>35</td>
+<td>Method or data member not found: 'Attributes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>21</td>
+<td>xmlCreateChildRequest</td>
+<td>35</td>
+<td>Don't know the object type: 'vxmlSchemaNode.childNodes[intSchemaCount].Attributes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>22</td>
+<td>xmlCreateChildRequest</td>
+<td>38</td>
+<td>Method or data member not found: 'nodeName'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>23</td>
+<td>xmlCreateChildRequest</td>
+<td>40</td>
+<td>Method or data member not found: 'nodeName'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\StdData.bas</td>
+ <td>StdData.cs</td>
+ <td>0</td>
+ <td>94 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\ConvertAssist.bas</td>
+ <td>ConvertAssistEx.cs</td>
+ <td>0</td>
+ <td>194 </td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file9">&nbsp;..\..\shared\vb6\errAssist.bas</td>
+ <td >errAssistEx.cs</td>
+ <td >4</td>
+ <td>778</td>
+</tr>
+<tr class=collapsed id=file9  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>CreateErrorResponseNode</td>
+<td>74</td>
+<td>Method or data member not found: 'LogEvent'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>errCreateErrorResponse</td>
+<td>30</td>
+<td>Method or data member not found: 'LogEvent'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>errGetMessageText</td>
+<td>12</td>
+<td>Function is not defined: 'adoCRUDGetMessageText'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>errGetExceptionType</td>
+<td>14</td>
+<td>Method or data member not found: 'HelpFile'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\guidAssist.bas</td>
+ <td>guidAssistEx.cs</td>
+ <td>0</td>
+ <td>45 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\globalAssist.bas</td>
+ <td>globalAssist.cs</td>
+ <td>0</td>
+ <td>248 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\comboAssist.bas</td>
+ <td>comboAssistEx.cs</td>
+ <td>0</td>
+ <td>266 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\errConstants.bas</td>
+ <td>errConstants.cs</td>
+ <td>0</td>
+ <td>99 </td>
+</tr>
+<tr>
+<td colspan=2><IMG height=11 src="vb6tocs/minus.gif" width=9><font color=red>&nbsp;omLockManager_vs2005.csproj</font></td>
+<td colspan=2>the project for VS 2005</td>
+</tr>
+<tr>
+<td colspan=2><IMG height=11 src="vb6tocs/minus.gif" width=9><font color=red>&nbsp;omLockManager.csproj</font></td>
+<td colspan=2>the project for VS 2003</td>
+</tr>
+<tr valign=top class=foot >
+<td colspan=4>File(s): 13&nbsp;&nbsp;&nbsp;&nbsp; 
+TotalLines: 5409&nbsp;&nbsp;&nbsp;&nbsp;
+</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>
+.NET SDK: 1.1.4322.2032
+</td></tr>
+<tr valign=top class=foot >
+<td colspan=4><br><br><b>ActiveX/COM:</b></td></tr>
+<tr valign=top class=foot >
+<td colspan=4>C:\WINDOWS\System32\stdole2.tlb</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>C:\Program Files\Common Files\System\ado\msado27.tlb</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>C:\WINDOWS\system32\msxml4.dll</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>C:\WINDOWS\System32\COMSVCS.DLL</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>..\..\Base\omBase\omBase.dll</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>..\..\Audit\omAU\omAU.dll</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>..\..\Organisation\omOrg\omOrg.dll</td></tr>
+</table>
+</body>
+</html>

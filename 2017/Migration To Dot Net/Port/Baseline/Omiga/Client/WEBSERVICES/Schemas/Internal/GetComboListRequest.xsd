@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: GetComboList-Request
+
+History:
+
+Version 		Author   	Date			Description
+01.01      		RMH			29/06/2005 		Created
+01.02			TLiu		20/07/2005      Changed mars to Epsom in path, Named a complexType
+01.03			TLiu		26/07/2005		Fixed Name Spaces
+01.04			TLiu		08/08/2005		Added 6 attributes to the REQUEST.
+01.05			TLiu		08/08/2005		Named 2 simpleTypes.
+01.06			IK			19/06/2006		Epsom first cut
+01.07			SR			19/09/2006		EP2_1 Modified namespaces for Epsom
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.GetComboList.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Request.GetComboList.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="COMBOGROUPType">
+		<xs:attribute name="GROUPNAME" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="COMBOGROUP"   type="COMBOGROUPType"  minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="CRUD_OP" type="CRUD_OPType" use="required"/>
+		<xs:attribute name="ENTITY_REF" type="ENTITY_REFType" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="CRUD_OPType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="READ"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ENTITY_REFType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="COMBOGROUP"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

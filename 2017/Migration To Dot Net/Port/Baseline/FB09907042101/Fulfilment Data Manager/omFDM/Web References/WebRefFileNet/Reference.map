@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost/FileNet/fnce-ws-1.0.wsdl" filename="fnce-ws-1.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost/FileNet/fnce-ws-1.0-SOAP-MSG.wsdl" filename="fnce-ws-10.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>

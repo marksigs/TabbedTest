@@ -1,0 +1,20 @@
+;//////////////////////////////////////////////////////////////////////////////
+;/	FILE:			omStream.def
+;/	DESCRIPTION:	
+;/	SYSTEM: 		Omiga
+;/	COPYRIGHT:		(c) 2000, Marlborough Stirling Group. All rights reserved 
+;/
+;/	HISTORY
+;/	=======
+;/
+;/	Prog	Date		Description
+;/  LD      13/02/01    Initial version
+;//////////////////////////////////////////////////////////////////////////////
+
+LIBRARY      "omStream.DLL"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer	PRIVATE

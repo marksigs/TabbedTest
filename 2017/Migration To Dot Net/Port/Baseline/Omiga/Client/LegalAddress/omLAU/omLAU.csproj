@@ -1,0 +1,32 @@
+<VisualStudioProject>
+	<CSHARP ProjectType="Local" ProductVersion="7.10.3077" SchemaVersion="2.0" ProjectGuid="{7C1DBD99-BB8F-4689-88B0-EA8E73B578E5}">
+		<Build>
+			<Settings ApplicationIcon="" AssemblyKeyContainerName="" AssemblyName="omLAU" AssemblyOriginatorKeyFile="C:\Build Epsom2\2 Int Code\Keys\Mars.snk" DefaultClientScript="JScript" DefaultHTMLPageLayout="Grid" DefaultTargetSchema="IE50" DelaySign="false" OutputType="Library" PreBuildEvent="" PostBuildEvent="" RootNamespace="Vertex.Fsd.Omiga.omLAU" RunPostBuildEvent="OnBuildSuccess" StartupObject="">
+				<Config Name="Debug" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="DEBUG;TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="false" OutputPath="bin\Debug\" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+				<Config Name="Release" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="true" OutputPath="bin\Release\" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+			</Settings>
+			<References>
+				<Reference Name="System" AssemblyName="System" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"/>
+				<Reference Name="System.Data" AssemblyName="System.Data" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"/>
+				<Reference Name="System.XML" AssemblyName="System.Xml" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"/>
+				<Reference Name="System.Web.Services" AssemblyName="System.Web.Services" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.Services.dll"/>
+				<Reference Name="omCore" AssemblyName="omCore" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omCore.dll"/>
+				<Reference Name="omLogging" AssemblyName="omLogging" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omLogging.dll"/>
+				<Reference Name="omDG" AssemblyName="omDG" HintPath="C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omDG.dll"/>
+			</References>
+		</Build>
+		<Files>
+			<Include>
+				<File RelPath="AssemblyInfo.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="LegalAddressBO.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Web References\ChangeLegalAddress\ChangeLegalAddress.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\ChangeLegalAddress\ChangeLegalAddress.xsd" BuildAction="None"/>
+				<File RelPath="Web References\ChangeLegalAddress\GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\ChangeLegalAddress\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\ChangeLegalAddress\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\ChangeLegalAddress\" WebReferenceUrl="http://localhost/ExternalWebServices/services/ChangeLegalAddress.wsdl" UrlBehavior="Static"/>
+				<Folder RelPath="Web References\" WebReferences="TRUE"/>
+			</Include>
+		</Files>
+	</CSHARP>
+</VisualStudioProject>

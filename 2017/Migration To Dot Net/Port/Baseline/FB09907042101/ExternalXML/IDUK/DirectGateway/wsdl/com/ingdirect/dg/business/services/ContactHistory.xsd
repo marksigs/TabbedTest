@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ==============================================================================================
+Project;        ING Direct Diect Gateway (Project MARS)
+
+File:           ContactHistory.xsd
+
+File Version:   0.0.1
+
+History;        version 0.0.1 - productionisation factoring - john_catlin@uk.ibm.com
+
+Type Versions;  Type versioning is via namepaces.   
+                Namespace versioning follows this pattern; "url/[major_version].[minor_version].[release_version]"
+
+Author(s):      david.bowley@ingdirect.co.uk
+                john_catlin@uk.ibm.com
+
+Description;    Code classification; framework test code + implementation pattern.
+                This XSD defines tests message for the Direct Gateway.
+                This code can be used as a pattern for real message implementations.
+                
+                *CAUTION - this code contains a temporary fix for Filenet integration (filenet does not recognise XML inheritance).
+
+============================================================================================== -->
+
+<!--
+    Note that the schema attributes 'attributeFormDefault="unqualified"' 
+    and 'elementFormDefault="unqualified"' are critical to the correct 
+    interpretation of this schema for the Direct Gatway application to 
+    consume the generated document literal SOAP messages.
+-->
+<schema targetNamespace="http://contactHistory.services.dg.ingdirect.com/0.0.1" 
+        xmlns="http://www.w3.org/2001/XMLSchema" 
+        
+        xmlns:ContactHistory="http://contactHistory.services.dg.ingdirect.com/0.0.1"
+        xmlns:generic="http://generic.dg.ingdirect.com/0.0.1"
+        
+        attributeFormDefault="unqualified"
+        elementFormDefault="unqualified">
+
+    <!-- start of type imports -->
+        <!-- 
+            Note that all Direct Gateway messages must extend either 'generic:GenericRequestType' or 'generic:GenericResponseType'
+            Thus they must import the 'generic' namespace from GenericMessages.xsd.
+        -->
+        <import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+    <!-- end of type imports -->
+    
+    <!-- start of type definitions -->
+        <complexType name="ContactHistoryRequestType" abstract="false">
+            <complexContent>
+                <extension base="generic:GenericRequestType">
+                    <sequence>
+                        <element name="personId" nillable="true" minOccurs="0" type="string" />          
+                        <element name="contPurpos" nillable="true" minOccurs="0" type="int" />            
+                        <element name="contPurps2" nillable="true" minOccurs="0" type="int" />                    
+                        <element name="contResult" nillable="true" minOccurs="0" type="string" />          
+                        <element name="contType" nillable="true" minOccurs="0" type="int" />            
+                        <element name="dataSource" nillable="true" minOccurs="0" type="int" />                    
+                        <element name="createOP" nillable="true" minOccurs="0" type="string" />          
+                        <element name="note" nillable="true" minOccurs="0" type="string" />            
+                        <element name="errCode" nillable="true" minOccurs="0" type="string" />                    
+                        <element name="errMsg" nillable="true" minOccurs="0" type="string" />          
+                        <element name="securityFlag" nillable="true" minOccurs="0" type="string" />            
+                        <element name="securityStatus" nillable="true" minOccurs="0" type="string" />                    
+						<element name="calledFrom" nillable="true" minOccurs="0" type="string" />                                            
+						<element name="sequence" nillable="true" minOccurs="0" type="string" />   
+						
+						<element name="objectStoreId" nillable="true" minOccurs="0" type="string" />  
+						<element name="folderId" nillable="true" minOccurs="0" type="string" />  						
+                    </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+        
+  
+        <complexType name="ContactHistoryResponseType" abstract="false">
+            <complexContent>
+                <extension base="generic:GenericResponseType">
+                    <sequence>
+                        <element name="sequence" nillable="true" minOccurs="0" type="string" />          
+                        <element name="errorCode" nillable="true" minOccurs="0" type="int" />            
+                    </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+
+        
+    <!-- end of type definitions -->
+
+
+        <element name="ContactHistoryRequest" type="ContactHistory:ContactHistoryRequestType"/>
+        <element name="ContactHistoryResponse" type="ContactHistory:ContactHistoryResponseType"/>
+
+
+</schema>
+

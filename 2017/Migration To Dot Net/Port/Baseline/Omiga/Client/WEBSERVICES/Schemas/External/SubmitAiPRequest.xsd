@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: Ingestion (Stop&Save) at AiP  - Request
+
+History:
+
+Version 		Author   	Date       			Description
+01.01      	RMH				29/06/2005 		Created
+01.02			  TLiu				20/07/2005    Changed mars to IDUK in path, named a complex type.
+01.03			  TLiu				26/07/2005		Changed to use 2 imported files.
+01.04			  TLiu			  26/07/2005		Changed format for Element THIRDPARTY.
+01.05			  IK					  05/08/2005		renamed as SubmitAIPRequest.xsd
+01.06			  IK					  05/08/2005		restructured as per revised OmigaAiPData.xsd
+01.07			  TLiu			  08/08/2005		Changed some attributes.
+01.08			  IK					  09/09/2005		modified as per re-structured OmigaAiPData 
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" xmlns:OmigaAiPData="http://OmigaAiPData.IDUK.Omiga.marlboroughstirling.com" xmlns="http://Request.SubmitAiP.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.SubmitAiP.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+  <xs:import namespace="http://OmigaAiPData.IDUK.Omiga.marlboroughstirling.com" schemaLocation="OmigaAiPData.xsd"/>
+  <xs:element name="REQUEST" type="REQUESTType"/>
+  <xs:complexType name="REQUESTType">
+    <xs:sequence>
+      <xs:element name="APPLICATION" type="OmigaAiPData:APPLICATIONType"/>
+    </xs:sequence>
+    <xs:attribute name="USERID" type="xs:string" use="required"/>
+    <xs:attribute name="UNITID" type="xs:string" use="required"/>
+    <xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+    <xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+    <xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+    <xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:schema>

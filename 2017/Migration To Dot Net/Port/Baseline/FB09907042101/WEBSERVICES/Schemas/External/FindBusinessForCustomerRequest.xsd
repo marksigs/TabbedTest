@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: FindBusinessForCustomer - Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RMH	 		29/06/2005 		Created
+01.02           TLiu             20/07/2005      Changed mars to IDUK in path, named a complexType.
+01.03			TLiu				29/07/2005		Fixed Name Spaces.
+01.04			TLiu				08/08/2005		Changed some attributes.
+01.05			TLiu				14/09/2005		Set OPERATION & ACTION to fixed values.
+01.06           RFairlie        14/10/2005      Made ADMINSYSTEMSTATE explicitly non-mandatory (as per InterfaceChangeRegister.xls item 1)
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.FindBusinessForCustomer.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.FindBusinessForCustomer.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="CUSTOMERType">
+		<xs:sequence>
+			<xs:element ref="CUSTOMERNUMBER" minOccurs="0"/>
+			<xs:element ref="OTHERSYSTEMCUSTOMERNUMBER"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CUSTOMERNUMBER" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Omiga Customer Number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OTHERSYSTEMCUSTOMERNUMBER" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>CIF Number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="CUSTOMER" type="CUSTOMERType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="ADMINSYSTEMSTATE" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="OPERATION" type="xs:string" fixed="SEARCH"/>
+		<xs:attribute name="ACTION" type="xs:string" fixed="SEARCH"/>
+	</xs:complexType>
+</xs:schema>

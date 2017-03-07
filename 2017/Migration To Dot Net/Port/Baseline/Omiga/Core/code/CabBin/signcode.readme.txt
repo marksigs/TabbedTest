@@ -1,0 +1,45 @@
+How to Automate SignCode in a Build
+===================================
+
+Adrian Stanley
+24/01/2007
+
+SignCode usually prompts for the certificate password to be entered, which is inconvenient 
+when running an automated build.
+
+Overcome this as follows:
+
+Run the Microsoft Management Console (mmc) from the command line.
+Add the Certificates snap-in for the "Computer account".
+Expand the Certificates node and right click the "Personal" node. Select All Tasks, Import
+from the menu.
+Browse to the spc file to import it.
+The certificates should appear in the Personal\Certificates node. Make a note of the
+Issued To name, e.g., "Vertex Financial Services Limited".
+
+Sign as follows:
+
+SIGNCODE.EXE -cn "Vertex Financial Services Limited" -r "localMachine" -s "my" -n "PC Attributes" -i "http://www.vertexfinancialservices.co.uk" -t http://timestamp.verisign.com/scripts/timstamp.dll .\omPC.dll
+
+where:
+
+  -cn is the same as the Issued To name.
+  -r is "localMachine", which denotes that the certificate has been added to the local computer.
+  -s is "my", which is the same as the Personal store.
+
+
+If the spc certificate does not work it may be necessary to import it to a pfx file:
+
+Download pvkimprt from Microsoft.
+Run pvkimprt as follows
+
+pvkimprt -pfx Authenticode_Keys\vfscertificate.spc Authenticode_Keys\vfsprivatekey.pvk
+
+In the wizard enter the certificate password.
+Choose Yes, export the private key.
+Choose Include all certificates in the certificate path if possible
+Choose Enable Strong protected
+Enter the password again.
+Enter the file location for the new pfx file, e.g., Authenticode_Keys\vfscertificate.pfx
+Now in mmc Certificates, import the pfx file as above for the spc file. 
+The SignCode command is the same.

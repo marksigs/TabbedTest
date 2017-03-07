@@ -1,0 +1,60 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\System32\STDOLE2.TLB#OLE Automation
+Reference=*\G{F5078F18-C551-11D3-89B9-0000F81FE221}#4.0#0#C:\WINDOWS\system32\msxml4.dll#Microsoft XML, v4.0
+Reference=*\G{74C08640-CEDB-11CF-8B49-00AA00B8A790}#1.0#0#C:\WINDOWS\SYSTEM32\COMSVCS.DLL#Microsoft Transaction Server Type Library
+Reference=*\G{EF53050B-882E-4776-B643-EDA472E8E3F2}#2.7#0#C:\Program Files\Common Files\System\ADO\msado27.tlb#Microsoft ActiveX Data Objects 2.7 Library
+Reference=*\G{3D64FAE4-95FD-11D3-B5CE-0050DA1556E4}#13.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omCust.dll#
+Reference=*\G{E1F67E47-A7E4-11D3-B5EC-0050DA1556E4}#4f.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omApp.dll#
+Reference=*\G{10E98D81-E223-4674-BD4E-369841AF4C71}#1.2#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\omBase.dll#omBase
+Reference=*\G{6FA03AC2-24B9-11D4-B6AC-0050DA1556E4}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omSub.dll#
+Reference=*\G{6FA03A5A-24B9-11D4-B6AC-0050DA1556E4}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\om4To3.dll#
+Reference=*\G{E1F67DC4-A7E4-11D3-B5EC-0050DA1556E4}#5.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omCF.dll#
+Reference=*\G{E1F67D71-A7E4-11D3-B5EC-0050DA1556E4}#2.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omCE.dll#
+Class=GeneralAssist; GeneralAssist.cls
+Class=ErrAssist; errAssist.cls
+Class=ImportBO; ImportBO.cls
+Class=IImportBO; IImportBO.cls
+Class=IImportTxBO; IImportTxBO.cls
+Class=ImportTxBO; ImportTxBO.cls
+Class=XMLAssist; ParserAssist.cls
+Module=StdData; StdData.bas
+Module=errConstants; errConstants.bas
+Startup="(None)"
+HelpFile=""
+Title="omImp"
+ExeName32="omImp.dll"
+Command32=""
+Name="omImp"
+HelpContextID="0"
+CompatibleMode="0"
+CompatibleEXE32=""
+
+MajorVer=7
+MinorVer=421
+RevisionVer=1
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="MSG"
+CondComp="GENERIC_SQL = 1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo = -1
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+ThreadingModel=1
+DebugStartupOption=0
+DllBaseAddress=&H46C0000
+
+[MS Transaction Server]
+AutoRefresh=1
+

@@ -1,0 +1,4 @@
+PreProcBO = 0, 0, 0, 0, C
+omIngestionGlobal = 0, 0, 0, 0, C
+PostProcBO = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C

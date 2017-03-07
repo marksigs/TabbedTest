@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<CONFIGURATION>
+   <INSTALL>
+      <DEPENDANTSERVICES>
+         <SERVICE>
+            <NAME>MSMQ</NAME>
+         </SERVICE>
+      </DEPENDANTSERVICES>
+   </INSTALL>
+   <SCM>
+      <WAITHINTSTARTPENDING>140000</WAITHINTSTARTPENDING>
+      <WAITHINTSTOPPENDING>160000</WAITHINTSTOPPENDING>
+   </SCM>
+   <REQUEST ACTION="CREATE">
+      <QUEUELIST>
+         <QUEUE>
+            <NAME>.\Test</NAME>
+            <TYPE>MSMQ1</TYPE>
+            <THREADSLIST>
+               <THREADS>
+                  <NUMBER>2</NUMBER>
+               </THREADS>
+            </THREADSLIST>
+         </QUEUE>
+      </QUEUELIST>
+   </REQUEST>
+</CONFIGURATION>

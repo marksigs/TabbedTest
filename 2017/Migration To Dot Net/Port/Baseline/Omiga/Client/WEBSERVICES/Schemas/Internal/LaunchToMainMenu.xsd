@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: Launch Omiga to Main Menu screen MN011 - Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RFairlie        16/09/2005 		Created
+01.02      		RFairlie        19/10/2005 		Added REQUEST/SCREEN
+01.03           RFairlie        06/11/2005      Ensure previous change is included in release
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.LaunchToMainMenu.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.LaunchToMainMenu.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="SCREEN" type="xs:string" fixed="MN010.ASP"/>
+	</xs:complexType>
+</xs:schema>

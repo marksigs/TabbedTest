@@ -1,0 +1,24 @@
+// OmigaToMessageQueueInterface.idl
+[
+	uuid(EB11E2D1-3B22-11d5-94E3-00104B3FBCCB),
+	helpstring("Omiga to Message Queue Type Library"),
+	version(1.0)
+]
+library OmigaToMessageQueueInterface 
+{
+	importlib("STDOLE32.TLB");
+
+	[
+		uuid(EB11E2D2-3B22-11d5-94E3-00104B3FBCCB),
+		oleautomation,
+		object
+	]
+	interface IOmigaToMessageQueue : IUnknown
+	{
+        HRESULT AsyncSend([in] BSTR vobjRequestNode, 
+                          [in] BSTR strMessage, 
+                          [out, retval] BSTR* );
+
+	};
+};
+

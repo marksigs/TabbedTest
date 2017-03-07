@@ -1,0 +1,281 @@
+<html>
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Workfile:      scListScroll.htm
+Copyright:     Copyright © 1999 Marlborough Stirling
+
+Description:   File containing List Scroll functionality
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MARS Specific History :
+
+Prog	Date		AQR			Description
+GHun	22/07/2005	MAR14		Apply ING Style Sheet and GUI Images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+<head>
+	<meta name="vs_targetSchema" content="http://schemas.marlborough-stirling.com/intellisense/ie5_omiga4">
+	<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+	<div id="divNumbers0" style="BACKGROUND-COLOR: FFEFE5; HEIGHT: 22px; LEFT: 0px; POSITION: absolute; TOP: 1px; WIDTH: 154px" style="msgLabel">
+		<div id="divNumbers1" style="BACKGROUND-COLOR: FFEFE5; COLOR: 616161; HEIGHT: 18px; LEFT: 1px; POSITION: absolute; TOP: 2px; WIDTH: 151px" style="msgLabel">
+			<div id="divNumbers2" style="LEFT: 4px; POSITION: absolute; TOP: 2px; VISIBILITY: hidden">
+				<span style="LEFT: 0px; POSITION: absolute; TOP: 0px" class="msgLabel">records</span>
+				<span id="spStartingRecNo" style="LEFT: 40px; POSITION: absolute; TOP: 0px" class="msgLabel">999</span> 
+				<span style="LEFT: 64px; POSITION: absolute; TOP: 0px" class="msgLabel">to</span>
+				<span id="spMaxOnScreen" style="LEFT: 80px; POSITION: absolute; TOP: 0px" class="msgLabel">999</span>
+				<span style="LEFT: 104px; POSITION: absolute; TOP: 0px" class="msgLabel">of</span>
+				<span id="spNoOfRecords" style="LEFT: 120px; POSITION: absolute; TOP: 0px" class="msgLabel">9999</span> 
+			</div> 
+		</div> 
+	</div>
+
+	<div id="idScrollButtons" style="BACKGROUND-COLOR: FFEFE5; HEIGHT: 24px; LEFT: 156px; POSITION: absolute; TOP: 0px; WIDTH: 148px">
+		<form id="frmScrollButtons" style="VISIBILITY: hidden">
+			<button id="btnStart" class="msgButton" style="WIDTH: 24px" type="button">|&lt;</button> 
+			<button id="btnPageUp" class="msgButton" style="WIDTH: 24px" type="button">&lt;&lt;</button> 
+			<button id="btnOneUp" class="msgButton" style="WIDTH: 24px" type="button">&lt;</button> 
+			<button id="btnOneDown" class="msgButton" style="WIDTH: 24px" type="button">&gt;</button> 
+			<button id="btnPageDown" class="msgButton" style="WIDTH: 24px" type="button">&gt;&gt;</button> 
+			<button id="btnEnd" class="msgButton" style="WIDTH: 24px" type="button">&gt;|</button> 
+		</form>
+	</div> 
+
+<script language="JavaScript" type="text/javascript">
+
+	public_description = new CreateScrollButtonFunctions;
+	
+	var mfnShowList		= null;
+	var mnStart			= null;
+	var mnEnd			= null;
+	var mnTotalRows		= null;
+	var mnTableLength	= null; // AY 23/09/99 - the number of rows in the table field
+	
+	function showPosition()
+	{
+		spStartingRecNo.innerHTML = mnStart;
+		spMaxOnScreen.innerHTML = mnEnd;
+		spNoOfRecords.innerHTML = mnTotalRows;
+	}
+	
+	function toEnd()
+	{
+		if(mnTotalRows > mnTableLength && (mnStart < mnTotalRows - (mnTableLength - 1)))
+		{
+			mnStart = mnTotalRows - (mnTableLength - 1);
+			mnEnd = mnTotalRows;
+			mfnShowList(mnStart -1);
+			doButtonStates();
+			showPosition();
+		}
+	}
+	
+	function toTop()
+	{
+		if(mnTotalRows > mnTableLength && mnStart > 1)
+		{
+			mnStart = 1;
+			mnEnd = mnTableLength;
+			mfnShowList(mnStart -1);
+			doButtonStates();
+			showPosition();
+		}
+	}
+	
+	function oneDown()
+	{
+		if(mnTotalRows > mnTableLength && (mnStart + mnTableLength <= mnTotalRows))
+		{
+			mnStart++;
+			mnEnd++;
+			mfnShowList(mnStart -1);
+			doButtonStates();
+			showPosition();
+		}
+	}
+	
+	function pageUp()
+	{
+		if(mnTotalRows > mnTableLength && mnStart > 0)
+		{
+			mnStart -= mnTableLength;
+			if(mnStart < 1)
+			{
+				mnStart = 1;
+			}
+			mnEnd = mnStart + (mnTableLength - 1);
+			mfnShowList(mnStart -1);
+			doButtonStates();
+			showPosition();
+		}
+	}
+	
+	function pageDown()
+	{
+		if(mnTotalRows > mnTableLength && (mnStart < mnTotalRows - (mnTableLength - 1)))
+		{
+			mnStart += mnTableLength;
+			if(mnStart + mnTableLength > mnTotalRows)
+			{
+				mnStart = mnTotalRows - (mnTableLength - 1);
+			}
+			mnEnd = mnStart + (mnTableLength - 1);
+			mfnShowList(mnStart -1);
+			doButtonStates();
+			showPosition();
+		}
+	}
+		
+	function oneUp()
+	{
+		if(mnTotalRows > mnTableLength && mnStart > 0)
+		{
+			mnStart--;
+			mnEnd--;
+			mfnShowList(mnStart -1);
+			doButtonStates();
+			showPosition();
+		}
+	}
+	
+	function gotoRecord(iOffset)
+	{		
+		if ((iOffset > 0) && (iOffset <= mnTotalRows))				
+		{
+			mnStart = iOffset;
+			if(mnStart + mnTableLength > mnTotalRows)
+			{
+				mnStart = mnTotalRows - (mnTableLength - 1);
+			}
+			mnEnd = mnStart + (mnTableLength - 1);
+			mfnShowList(mnStart -1);
+			doButtonStates();
+			showPosition();
+		}
+		
+		return mnStart;
+	}
+	
+	function doButtonStates()
+	{
+		if(mnStart == 1)
+		{
+			frmScrollButtons.btnStart.disabled = true;
+			frmScrollButtons.btnPageUp.disabled = true;
+			frmScrollButtons.btnOneUp.disabled = true;
+		}
+		else
+		{
+			frmScrollButtons.btnStart.disabled = false;
+			frmScrollButtons.btnPageUp.disabled = false;
+			frmScrollButtons.btnOneUp.disabled = false;
+		}
+
+		if(mnStart < (mnTotalRows - (mnTableLength - 1)))
+		{
+			frmScrollButtons.btnOneDown.disabled = false;
+			frmScrollButtons.btnPageDown.disabled = false;
+			frmScrollButtons.btnEnd.disabled = false;
+		}
+		else
+		{
+			frmScrollButtons.btnOneDown.disabled = true;
+			frmScrollButtons.btnPageDown.disabled = true;
+			frmScrollButtons.btnEnd.disabled = true;
+		}
+	}
+	
+	function getOffset()
+	{
+		return (mnStart -1);
+	}
+
+	function Initialise(fnShowList, nTableLength, nTotalRows)
+	{
+		mfnShowList		= fnShowList;
+		// AY 23/09/99 - set the number of rows in the table control, excluding any header row
+		//               (was previously hard-coded as 10)
+		mnTableLength	= nTableLength;
+		mnTotalRows		= nTotalRows;
+
+		divNumbers0.style.backgroundColor = "FFEFE5";
+		divNumbers2.style.visibility = "hidden";
+		frmScrollButtons.style.visibility = "hidden";
+		
+		if(mnTotalRows > 0)
+		{
+			mnStart = 1;
+			if(mnTotalRows > mnTableLength)
+			{
+				mnEnd = mnTableLength;
+				frmScrollButtons.style.visibility = "visible";
+				divNumbers0.style.backgroundColor = "616161";
+				divNumbers2.style.visibility = "visible";
+				showPosition();
+			}
+			else
+			{
+				mnEnd = mnTotalRows;
+			}
+		}
+		
+		doButtonStates();
+	}
+
+	function CreateScrollButtonFunctions()
+	{
+		this.Initialise = Initialise;
+		this.getOffset	= getOffset;
+		this.RowDeleted = RowDeleted;
+
+		this.oneDown	= oneDown;
+		this.oneUp		= oneUp;
+		this.pageDown	= pageDown;
+		this.pageUp		= pageUp;
+		this.toTop		= toTop;
+		this.toEnd		= toEnd;
+		this.gotoRecord = gotoRecord;
+		
+		frmScrollButtons.btnOneDown.onclick		= oneDown;
+		frmScrollButtons.btnOneUp.onclick		= oneUp;
+		frmScrollButtons.btnPageDown.onclick	= pageDown;
+		frmScrollButtons.btnPageUp.onclick		= pageUp;
+		frmScrollButtons.btnStart.onclick		= toTop;
+		frmScrollButtons.btnEnd.onclick			= toEnd;
+	}
+
+	function RowDeleted()
+	{
+		// Decrement the total number of rows
+		// If the end number is then greater than this set it to the total
+		mnTotalRows--;
+		
+		if(mnEnd > mnTotalRows)
+		{
+			mnEnd = mnTotalRows;
+		}
+
+		// If the number of rows displayed is less than the length of the table
+		// and we are not displaying record #1, move the display up one row
+		if(mnStart > 1 && mnEnd - mnStart < (mnTableLength - 1))
+		{
+			mnStart--;
+		}
+		
+		// Redisplay
+		mfnShowList(mnStart-1);
+		showPosition();
+		doButtonStates();
+				
+		// If the total rows fall below the table length, hide the scroll controls
+		if(mnTotalRows <= mnTableLength)
+		{
+			divNumbers0.style.backgroundColor = "FFEFE5";
+			divNumbers2.style.visibility = "hidden";
+			frmScrollButtons.style.visibility = "hidden";
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<HTML id=MathFunctions>
+<HEAD>
+<LINK href="stylesheet.css" rel=STYLESHEET type=text/css>
+<TITLE>Math Functions</TITLE>
+</HEAD>
+<script language="JavaScript">
+	/*	List the external function calls and their parameters here:
+			
+		iNumber = RoundValue(iNumber, iDecimalPrecision)
+			iNumber				- the number to be rounded
+			iDecimalPrecision	- the number of decimal places to round to
+			
+			Rounds a number to the Decimal Precision indicated.
+			This routine calls GetRoundingFactor.
+			
+		iRoundingFactor = GetRoundingFactor(iDecimalPrecision)
+			iDecimalPrecision	- the number of decimal places to round to
+			
+			Calculates the rounding factor to apply in rounding a number to a certain 
+			Precision. Not an external routine.
+		
+		iNumber = Truncate(iNumber)
+			Truncates a number to just its integer part i.e. 1.234 -> 1			
+			iNumber			- the number to be truncated
+			
+		nYears = GetYearsBetweenDates(dteFromDate, dteToDate)
+			dteFromDate		- date object for start date
+			dteToDate		- date object for end date
+			nYears			- number of whole years between the start and end dates
+			
+			Returns the number of whole years between the 2 dates or -1 if either date
+			is invalid, or if the start date > end date. 
+			eg. if start date = 18/11/1969 and end date = 19/11/1999 then nYears would be 30
+			    if start date = 20/11/1969 and end date = 19/11/1999 then nYears would be 29
+			    if start date = 19/11/1969 and end date = 19/11/1999 then nYears would be 30 
+	*/
+
+	public_description = new CreateMathFunctions;
+
+	//	Initialises the pointers to the externally accessible functions.
+
+	function CreateMathFunctions()
+	{
+		this.Truncate				= Truncate;
+		this.RoundValue				= RoundValue;
+		this.GetRoundingFactor		= GetRoundingFactor;
+		this.PadToPrecision			= PadToPrecision;
+		this.GetYearsBetweenDates	= GetYearsBetweenDates;
+	}
+
+	// Rounds a number (sNumber) to the specified number of 
+	// decimal places (iDecimalPrecision)
+	function RoundValue(sNumber, iDecimalPrecision)
+	{
+		var sRoundedNumber = "";
+		var iNumber = 0;
+		
+		iNumber = parseFloat(sNumber);
+		
+		if (isNaN(iNumber) != true)
+		{
+			var iRoundingFactor = this.GetRoundingFactor(iDecimalPrecision);
+									
+			if (iRoundingFactor != 1)
+			{
+				iNumber = iNumber + (0.5 / iRoundingFactor);	
+			}
+				
+			iNumber = iNumber * iRoundingFactor;
+			iNumber = parseInt(iNumber);			
+			iNumber = iNumber / iRoundingFactor;
+			
+			sRoundedNumber = this.PadToPrecision(iNumber, iDecimalPrecision);
+		}		
+		
+		return sRoundedNumber;
+	}
+	
+	// Calculates the rounding factor to apply from the required decimal precision 
+	// i.e. iDecimalPrecision = 0 -> iRoundingFactor = 1
+	//		iDecimalPrecision = 1 -> iRoundingFactor = 10
+	//		...
+	//		iDecimalPrecision = 3 -> iRoundingFactor = 10*10*10 = 1000
+	// and so on...
+	function GetRoundingFactor(iDecimalPrecision)
+	{
+		var iRoundingFactor = 1;
+		var iBase = 10;
+		
+		if ((isNaN(iDecimalPrecision) != true) && (iDecimalPrecision > 0))
+		{
+			iRoundingFactor = Math.pow (10, iDecimalPrecision)
+		}
+		
+		return iRoundingFactor;
+	}
+	
+	// Pads a value (iNumber) to the required number of decimal places 
+	// (iDecimalPrecision). Because of the following values i.e. 25.50 
+	// being translated to 25.5 we need to pad the figure to the correct 
+	// number of decimal places
+	function PadToPrecision(iNumber, iDecimalPrecision)
+	{
+		var sNumber		= iNumber.toString();
+		var iDPIndex	= sNumber.indexOf(".");
+		
+		if ((iDPIndex != -1) || (iDecimalPrecision != 0))		
+		{						
+			var iNumberOfDP = 0;
+			
+			if (iDPIndex == -1)
+			{
+				sNumber	+= ".";
+				iNumberOfDP	= 0;
+			}
+			else
+			{
+				iNumberOfDP = sNumber.length - 1 - iDPIndex;
+			}
+			
+			for (var iLoop = 0; iLoop != (iDecimalPrecision - iNumberOfDP); iLoop++)
+			{			
+				sNumber += "0";
+			}			
+		}
+		return sNumber;
+	}
+	
+	function Truncate(iNumber)
+	{
+		if (isNaN(iNumber) != true)
+		{
+			iNumber = Math.floor(iNumber);
+		}
+		
+		return iNumber;
+	}
+	
+	// DATE functions
+
+	function GetYearsBetweenDates(dteFromDate, dteToDate)
+	{
+		var nNumYears = -1;
+		
+		if(dteFromDate != null && dteToDate != null)
+		{
+			if(dteFromDate < dteToDate)
+			{
+				nNumYears = dteToDate.getFullYear() - dteFromDate.getFullYear();
+				if(dteToDate.getMonth() <= dteFromDate.getMonth())
+				{
+					if(dteToDate.getMonth() < dteFromDate.getMonth())
+					{
+						nNumYears -= 1;
+					}
+					else
+					{
+						if(dteToDate.getDate() < dteFromDate.getDate())
+						{
+							nNumYears -=1;
+						}
+					}
+				}
+			}
+			else
+			{
+				alert("Date is invalid");
+			}
+		}
+			
+		return(nNumYears);
+	}	
+
+</script>

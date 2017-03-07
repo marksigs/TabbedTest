@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IK EP2_10 no delete of MEMOPAD -->
+<!-- IK EP2_159 remove data matching nodes, CRUD_OPs on REQUEST -->
+<!-- IK EP2_159 add SubmitFMA stage -->
+<!-- IK EP2_202 add static data requests -->
+<!-- IK EP2_287 shopping list -->
+<!-- IK EP2_352 remote underwiter -->
+<!-- IK EP2_757 global param ExperianApplicantsOnly -->
+<!-- IK EP2_1062 global param / combo for application form print call -->
+<omIngestion>
+	<operation name="SubmitAiP" stage="10"/>
+	<operation name="SubmitFMA" stage="20"/>
+	<operation name="GeneralFailure" task="Web_CaseError"/>
+	<operation name="RunXMLCreditCheck" task="Ingest_CreditCheck"/>
+	<operation name="RunKnowYourCustomer" task="Ingest_KYC"/>
+	<operation name="RunRiskAssess" task="Ingest_CaseAssess"/>
+	<default entity="APPLICATIONPRIORITY" APPLICATIONPRIORITYVALUE="20"/>
+	<default entity="REQUEST" USERID="epsom" UNITID="ADMIN" USERAUTHORITYLEVEL="99"/>
+	<GLOBALPARAMETER NAME="WebChannelId"/>
+	<GLOBALPARAMETER NAME="TMIncludeRemoteOwnership"/>
+	<GLOBALPARAMETER NAME="DefaultProcessingUnit"/>
+	<GLOBALPARAMETER NAME="DefaultProcessingUser"/>
+	<GLOBALPARAMETER NAME="ExperianApplicantsOnly"/>
+	<!-- IK EP2_1062 -->
+	<GLOBALPARAMETER NAME="WebApplicationFormDocumentId"/>
+	<COMBOGROUP GROUPNAME="DocumentDeliveryType"/>
+	<!-- IK EP2_1062 ends -->
+	<COMBOGROUP GROUPNAME="RiskAssessmentDecision"/>
+	<COMBOGROUP GROUPNAME="UserAccessType"/>
+	<COMBOGROUP GROUPNAME="ValuationType"/>
+	<COMBOGROUP GROUPNAME="CustomerRoleType"/>
+	<COMBOGROUP GROUPNAME="Sex"/>
+	<COMBOGROUP GROUPNAME="PropertyLocation"/>
+	<COMBOGROUP GROUPNAME="NatureOfLoan"/>
+	<COMBOGROUP GROUPNAME="EmploymentStatus"/>
+	<COMBOGROUP GROUPNAME="ApplicationIncomeStatus"/>
+	<COMBOGROUP GROUPNAME="ShoppingListProfile"/>
+	<COMBOGROUP GROUPNAME="UserRole"/>
+</omIngestion>

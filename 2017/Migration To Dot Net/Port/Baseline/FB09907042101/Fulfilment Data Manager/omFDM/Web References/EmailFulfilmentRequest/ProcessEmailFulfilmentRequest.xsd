@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:processEmailFulfilment="http://processemailfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://processemailfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="GenericMessages.xsd" namespace="http://generic.dg.ingdirect.com/0.0.1" />
+  <import schemaLocation="CommonTypes.xsd" namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" />
+  <annotation>
+    <documentation>document version = 0.1 </documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.2</documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.3</documentation>
+  </annotation>
+  <complexType name="ProcessEmailFulfilmentRequestType">
+    <complexContent mixed="false">
+      <extension base="generic:GenericRequestType">
+        <sequence>
+          <element name="PackID" type="common:FulfilmentPackIdType" />
+          <element name="PackTypeID" type="string">
+            <annotation>
+              <documentation>Type of Pack i.e WelcomePack etc.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="PackDetails" type="common:PackDetailsType">
+            <annotation>
+              <documentation> Defines a fulfilment pack </documentation>
+            </annotation>
+          </element>
+          <element name="EmailAddress" type="string">
+            <annotation>
+              <documentation> Specifies the Email Address to which the fufilment email is to be sent</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ProcessEmailFulfilmentResponseType">
+    <complexContent mixed="false">
+      <extension base="generic:GenericResponseType">
+        <sequence>
+          <annotation>
+            <documentation>The response is a generic response indicating the outcome of the request. The general values that can be expected are :                      "Accepted"                          "Declined"                           "Error".                               In case of error/declined response the error message would be set to appropriate message.                             </documentation>
+          </annotation>
+          <element name="EmailFulfilmentResponse" type="common:FulfilmentResponseType" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="ProcessEmailFulfilmentRequest" type="processEmailFulfilment:ProcessEmailFulfilmentRequestType" />
+  <element name="ProcessEmailFulfilmentResponse" type="processEmailFulfilment:ProcessEmailFulfilmentResponseType" />
+</schema>

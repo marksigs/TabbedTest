@@ -1,0 +1,14 @@
+<!-- 
+This is the configuration file for omToCBA
+
+Version: 26/03/02
+
+Notes: 
+CBADestinationURL is the URL to which Completions blocks should be posted
+in order for them to be picked up by the CBA.
+
+-->
+
+<OMTOCBA>
+   <CBADestinationURL Value="http://ch005320:84/dispatcher"/> 
+</OMTOCBA>

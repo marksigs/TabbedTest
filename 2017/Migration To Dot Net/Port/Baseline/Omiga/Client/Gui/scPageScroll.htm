@@ -1,0 +1,316 @@
+<html>
+	<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Workfile:      scPageScroll.htm
+Copyright:     Copyright © 1999 Marlborough Stirling
+
+Description:   File containing Page Scroll functionality
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+BMIDS Specific History :
+
+Prog	Date		AQR			Description
+INR		19/03/2004	BMIDS730	Address Targeting Processing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MARS Specific History :
+
+Prog	Date		AQR			Description
+GHun	22/07/2005	MAR14		Apply ING Style Sheet and GUI Images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Epsom Specific History :
+
+Prog	Date		AQR			Description
+SR		05/03/2007	EP2_1644	increased width of the span displaying numbers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-->
+	<head>
+		<meta name="vs_targetSchema" content="http://schemas.marlborough-stirling.com/intellisense/ie5_omiga4">
+		<link href="stylesheet.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<div id="divNumbers0" class="msgMenu3" style="LEFT: 0px; POSITION: absolute; TOP: 1px; HEIGHT: 22px; WIDTH: 206px; background-color:FFEFE5">
+			<div id="divNumbers1" class="msgMenu3" style="LEFT: 1px; POSITION: absolute; TOP: 2px; HEIGHT: 18px; WIDTH: 204px; background-color:FFEFE5; color:616161">
+				<div id="divNumbers2" style="LEFT: 2px; POSITION: absolute; TOP: 2px; VISIBILITY: hidden">
+					<span style="LEFT: 0px; POSITION: absolute; TOP: 0px">records</span>
+					<span id="spStartingRecNo" style="LEFT: 40px; POSITION: absolute; TOP: 0px; width:41px; text-align:center">9999999</span>
+					<span style="LEFT: 85px; POSITION: absolute; TOP: 0px">&nbsp;to</span>
+					<span id="spMaxOnScreen" style="LEFT: 101px; POSITION: absolute; TOP: 0px; width:41px; text-align:center">9999999</span>
+					<span style="LEFT: 143px; POSITION: absolute; TOP: 0px">&nbsp;of</span>
+					<span id="spNoOfRecords" style="LEFT: 160px; POSITION: absolute; TOP: 0px; width:41px; text-align:center">9999999</span>
+				</div>
+			</div>
+		</div>
+		<div id="idScrollButtons" style="HEIGHT: 24px; LEFT: 208px; POSITION: absolute; TOP: 0px; WIDTH: 96px; background-color:FFEFE5">
+			<form id="frmScrollButtons" style="VISIBILITY: hidden">
+				<button id="btnStart" class="msgButton" style="WIDTH: 24px" type="button">|&lt;</button>
+				<button id="btnPageUp" class="msgButton" style="WIDTH: 24px" type="button">&lt;&lt;</button>
+				<button id="btnPageDown" class="msgButton" style="WIDTH: 24px" type="button">&gt;&gt;</button>
+				<button id="btnEnd" class="msgButton" style="WIDTH: 24px" type="button">&gt;|</button>
+			</form>
+		</div>
+		<script language="JavaScript" type="text/javascript">
+public_description = new CreateScrollButtonFunctions;
+	
+var mfnShowList = null;
+var mfnGetData = null;
+var mnSectionNo = null; // Overall section no.
+var mnTotalRows = null; // Total rows found on database
+var mnTableLength = null; // Row length of screen table
+var mnPageSections = null; // No. of sections to a page
+var mnPageNo = null; // Page no.
+var mnPageSectionNo = null; // Section no. within page
+var mnPageLength = null; // Row length of page
+
+function showPosition()
+{
+	spStartingRecNo.innerHTML = ((mnSectionNo - 1) * mnTableLength) + 1;
+	var nEnd = ((mnSectionNo - 1) * mnTableLength) + mnTableLength;
+	if(nEnd > mnTotalRows) nEnd = mnTotalRows;
+	spMaxOnScreen.innerHTML = nEnd;
+	spNoOfRecords.innerHTML = mnTotalRows;
+}
+
+function ShowData(nStart)
+{
+	mfnShowList(nStart);
+	doButtonStates();
+	showPosition();
+}
+	
+function toEnd()
+{
+	// Get end page number
+	// If not already on the end page, get it from the database
+	// If there has been a change to the total sufficient to change the last page, retry.
+	// Find the last section on the page and display that section's data
+	
+	var bOK;
+	var nNewPageNo = Math.ceil(mnTotalRows / mnPageLength);
+	if(nNewPageNo > mnPageNo)
+	{
+		do
+		{
+			bOK = true;
+			mnPageNo = nNewPageNo;
+			var nOldTotal = mnTotalRows;
+			mnTotalRows = mfnGetData(mnPageNo);
+			
+			if(nOldTotal != mnTotalRows && Math.ceil(mnTotalRows / mnPageLength) != mnPageNo)
+			{
+				alert("End record is no longer on the expected page.  Attempting to reposition");
+				nNewPageNo = Math.ceil(mnTotalRows / mnPageLength);
+				bOK = false;
+			}
+		}
+		while(nOldTotal != mnTotalRows)
+	}
+
+	mnSectionNo = (mnPageNo - 1) * mnPageSections;
+	mnPageSectionNo = 0;
+	var nEndRecord;
+	do
+	{
+		mnPageSectionNo++;
+		mnSectionNo++;
+		nEndRecord = ((mnSectionNo - 1) * mnTableLength) + mnTableLength;
+	}
+	while(nEndRecord < mnTotalRows)
+
+	ShowData((mnPageSectionNo - 1) * mnTableLength);
+}
+
+function toTop()
+{
+	// If not already on the first page, get the first page data
+	// Display the first section's data
+	if(mnPageNo > 1)
+	{
+		mnPageNo = 1;
+		mnTotalRows = mfnGetData(1);
+	}
+		
+	mnPageSectionNo = 1;
+	mnSectionNo = 1;
+	ShowData(0);
+}
+	
+function pageUp()
+{
+	// If we need to move to the previous page get the data for that page and set the page section
+	// to the last section on the new page
+	// Display the section of data
+	mnPageSectionNo--;
+	mnSectionNo--;
+	if(mnPageSectionNo == 0)
+	{
+		mnPageNo--;
+		mnTotalRows = mfnGetData(mnPageNo);
+		mnPageSectionNo = mnPageSections;
+	}
+
+	ShowData((mnPageSectionNo - 1) * mnTableLength);
+}
+	
+function pageDown()
+{
+	// If we need to move to the next page get the data for that page and set the page section
+	// to the first section of the new page
+	// Display the section of data
+	mnPageSectionNo++;
+	mnSectionNo++;
+	if(mnPageSectionNo > mnPageSections)
+	{
+		mnPageNo++;
+		mnPageSectionNo = 1;
+		mnTotalRows = mfnGetData(mnPageNo);
+	}
+
+	ShowData((mnPageSectionNo - 1) * mnTableLength);
+}
+
+function InitialiseAtSection(fnGetData, fnShowList, nTableLength, nPageSections, nSectionNo)
+{
+	mfnGetData = fnGetData;
+	mfnShowList = fnShowList;
+	mnTableLength = nTableLength;
+	mnPageLength = nPageSections * nTableLength;
+	mnPageSections = nPageSections;
+	mnSectionNo = nSectionNo;
+	mnPageNo = Math.ceil((mnSectionNo / mnPageSections));
+	mnPageSectionNo = mnSectionNo - ((mnPageNo - 1) * mnPageSections);
+
+	Clear();
+
+	mnTotalRows = mfnGetData(mnPageNo);
+	
+	if(mnTotalRows > 0)
+	{
+		mfnShowList((mnPageSectionNo - 1) * mnTableLength);
+		if(mnTotalRows > mnTableLength)
+		{
+			frmScrollButtons.style.visibility = "visible";
+			divNumbers0.style.backgroundColor = "616161";
+			divNumbers2.style.visibility = "visible";
+			showPosition();
+			doButtonStates();
+		}
+	}
+}
+
+	
+function doButtonStates()
+{
+	// Enable/disable the buttons as appropriate
+	if(mnPageNo == 1 && mnPageSectionNo == 1)
+	{
+		frmScrollButtons.btnStart.disabled = true;
+		frmScrollButtons.btnPageUp.disabled = true;
+	}
+	else
+	{
+		frmScrollButtons.btnStart.disabled = false;
+		frmScrollButtons.btnPageUp.disabled = false;
+	}
+
+	if(((mnSectionNo - 1) * mnTableLength) + mnTableLength < mnTotalRows)
+	{
+		frmScrollButtons.btnPageDown.disabled = false;
+		frmScrollButtons.btnEnd.disabled = false;
+	}
+	else
+	{
+		frmScrollButtons.btnPageDown.disabled = true;
+		frmScrollButtons.btnEnd.disabled = true;
+	}
+}
+	
+function getOffset()
+{
+	return (mnPageSectionNo - 1 * mnTableLength);
+}
+
+//BMIDS730
+function disableScroll()
+{
+	// Disable the buttons
+	frmScrollButtons.btnStart.disabled = true;
+	frmScrollButtons.btnPageUp.disabled = true;
+	frmScrollButtons.btnPageDown.disabled = true;
+	frmScrollButtons.btnEnd.disabled = true;
+}
+	
+//BMIDS730
+function enableScroll()
+{
+	doButtonStates();
+}
+
+function Initialise(fnGetData, fnShowList, nTableLength, nPageSections)
+{
+	// Set the controlling variables
+	// Show the control if necessary
+	mfnGetData = fnGetData;
+	mfnShowList = fnShowList;
+	mnTableLength = nTableLength;
+	mnPageLength = nPageSections * nTableLength;
+	mnPageSections = nPageSections;
+	mnPageNo = 1;
+	mnPageSectionNo = 1;
+	mnSectionNo = 1;
+				
+	Clear();
+
+	mnTotalRows = mfnGetData(1);
+
+	if(mnTotalRows > 0)
+	{
+		mfnShowList(0);
+		if(mnTotalRows > mnTableLength)
+		{
+			frmScrollButtons.style.visibility = "visible";
+			divNumbers0.style.backgroundColor = "616161";
+			divNumbers2.style.visibility = "visible";
+			showPosition();
+			doButtonStates();
+		}
+	}
+}
+
+function Clear()
+{
+	divNumbers0.style.backgroundColor = "FFEFE5";
+	divNumbers2.style.visibility = "hidden";
+	frmScrollButtons.style.visibility = "hidden";
+}
+
+function GetTotalRows()
+{
+	return mnTotalRows;
+}
+
+function CreateScrollButtonFunctions()
+{
+	this.Initialise = Initialise;
+	this.getOffset = getOffset;
+	this.pageDown = pageDown;
+	this.pageUp = pageUp;
+	this.toTop = toTop;
+	this.toEnd = toEnd;
+	this.Clear = Clear;
+	this.GetTotalRows = GetTotalRows;
+	this.InitialiseAtSection = InitialiseAtSection;
+		
+	frmScrollButtons.btnPageDown.onclick = pageDown;
+	frmScrollButtons.btnPageUp.onclick = pageUp;
+	frmScrollButtons.btnStart.onclick = toTop;
+	frmScrollButtons.btnEnd.onclick = toEnd;
+	
+	//BMIDS730
+	this.disableScroll = disableScroll;
+	this.enableScroll = enableScroll;
+
+}
+		</script>
+	</body>
+</html>

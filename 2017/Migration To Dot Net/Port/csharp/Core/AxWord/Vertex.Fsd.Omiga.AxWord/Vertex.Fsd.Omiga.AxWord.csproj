@@ -1,0 +1,135 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0BB9D1BD-7323-4811-9FA8-B6B9E306BE6F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vertex.Fsd.Omiga.AxWord</RootNamespace>
+    <AssemblyName>Vertex.Fsd.Omiga.AxWord</AssemblyName>
+    <ApplicationIcon>AxWord.ico</ApplicationIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>core.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <BaseAddress>57999360</BaseAddress>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <BaseAddress>57999360</BaseAddress>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.dmsCompression, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a5b625b2a67e5d3d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Interop\Interop.dmsCompression.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.wPDF_X01, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a5b625b2a67e5d3d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Interop\Interop.wPDF_X01.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AxWordClass.cs" />
+    <Compile Include="AxWordResponse.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="AxWordRequest.cs" />
+    <Compile Include="AxWordManager.cs" />
+    <Compile Include="Document.cs" />
+    <Compile Include="DocumentBinary.cs" />
+    <Compile Include="DocumentPdf.cs" />
+    <Compile Include="DocumentRtf.cs" />
+    <Compile Include="DocumentText.cs" />
+    <Compile Include="DocumentTif.cs" />
+    <Compile Include="DocumentWord.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="MicrosoftWordConstants.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="PrintDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDialog.Designer.cs">
+      <DependentUpon>PrintDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Printer.cs" />
+    <Compile Include="PrinterBin.cs" />
+    <Compile Include="PrinterBinCollection.cs" />
+    <Compile Include="PrinterCollection.cs" />
+    <Compile Include="PrintJob.cs" />
+    <Compile Include="ProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressForm.Designer.cs">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AxWord.ico" />
+    <Content Include="Package\axword.doc.xml" />
+    <Content Include="Package\axword.html" />
+    <Content Include="Package\axword.kfi.afp.xml" />
+    <Content Include="Package\axword.kfi.afp.zlib.xml" />
+    <Content Include="Package\axword.kfi.doc.xml" />
+    <Content Include="Package\axword.kfi.doc.zlib.xml" />
+    <Content Include="Package\axword.kfi.pdf.xml" />
+    <Content Include="Package\axword.kfi.pdf.zlib.xml" />
+    <Content Include="Package\axword.kfi.rtf.xml" />
+    <Content Include="Package\axword.kfi.rtf.zlib.xml" />
+    <Content Include="Package\axword.kfi.tif.xml" />
+    <Content Include="Package\axword.kfi.tif.zlib.xml" />
+    <Content Include="Package\axword.pdf.xml" />
+    <Content Include="Package\axword.xml" />
+    <Content Include="Package\Build\AxWord.inf" />
+    <Content Include="Package\DocToResponse.vbs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="core.snk" />
+    <None Include="Package\Build\AxWord.ddf" />
+    <None Include="Package\Build\Build.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PrintDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PrintDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

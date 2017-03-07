@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  DRC - MAR1519 - workaround for Send_Aip_Cert task in ingestion -->
+<omIngestion>
+	<match entity="ACCOUNT">
+		<primary attribute="ACCOUNTGUID"/>
+		<clone attribute="DIRECTORYGUID"/>
+		<clone attribute="THIRDPARTYGUID"/>
+	</match>
+	<match entity="ADDRESS">
+		<clone attribute="ADDRESSGUID"/>
+	</match>
+	<match entity="ACCOUNTRELATIONSHIP">
+		<primary attribute="ACCOUNTGUID"/>
+		<secondary attribute="CUSTOMERNUMBER"/>
+		<secondary attribute="CUSTOMERVERSIONNUMBER"/>
+		<clone attribute="CUSTOMERROLETYPE"/>
+	</match>
+	<match entity="OTHERCUSTOMERACCOUNTRELATIONSHIP">
+		<primary attribute="ACCOUNTGUID"/>
+		<secondary attribute="CUSTOMERNUMBER"/>
+		<secondary attribute="CUSTOMERVERSIONNUMBER"/>
+		<clone attribute="CUSTOMERROLETYPE"/>
+	</match>
+	<match entity="ALIAS">
+		<primary attribute="ALIASSEQUENCENUMBER"/>
+	</match>
+	<match entity="APPLICATIONFACTFIND">
+		<clone attribute="APPLICATIONFACTFINDNUMBER"/>
+	</match>
+	<match entity="APPLICATIONFEETYPE">
+		<primary attribute="FEETYPESEQUENCENUMBER"/>
+		<secondary attribute="FEETYPE"/>
+	</match>
+	<match entity="APPLICATIONLEGALREP" noDelete="true"/>
+	<match entity="BANKCREDITCARD">
+		<primary attribute="SEQUENCENUMBER"/>
+	</match>
+	<match entity="APPLICATIONUNDERWRITING" noDelete="true"/>
+	<match entity="CONTACTDETAILS">
+		<clone attribute="CONTACTDETAILSGUID"/>
+	</match>
+	<match entity="CONTACTTELEPHONEDETAILS">
+		<clone attribute="TELEPHONESEQNUM"/>
+		<clone attribute="CONTACTDETAILSGUID"/>
+	</match>
+		<match entity="CUSTOMERADDRESS" noTrim="true">
+		<primary attribute="CUSTOMERADDRESSSEQUENCENUMBER"/>
+		<clone attribute="ADDRESSGUID"/>
+	</match>
+	<match entity="CUSTOMERROLE">
+		<primary attribute="CUSTOMERNUMBER"/>
+		<clone attribute="CUSTOMERVERSIONNUMBER"/>
+	</match>
+	<match entity="CUSTOMERTELEPHONENUMBER">
+		<primary attribute="TELEPHONESEQUENCENUMBER"/>
+	</match>
+	<match entity="CUSTOMERWRAPUPDETAILS">
+		<primary attribute="WRAPUPSEQUENCENUMBER"/>
+	</match>
+	<match entity="EARNEDINCOME">
+		<primary attribute="EARNEDINCOMESEQUENCENUMBER"/>
+		<clone attribute="EMPLOYMENTSEQUENCENUMBER"/>
+	</match>
+	<match entity="EMPLOYEDDETAILS">
+		<clone attribute="EMPLOYMENTSEQUENCENUMBER"/>
+	</match>
+	<match entity="EMPLOYMENT">
+		<primary attribute="EMPLOYMENTSEQUENCENUMBER"/>
+		<clone attribute="THIRDPARTYGUID"/>
+	</match>
+	<match entity="FEEPAYMENT" noDelete="true">
+		<primary attribute="PAYMENTSEQUENCENUMBER"/>
+		<clone attribute="FEETYPE"/>
+		<clone attribute="FEETYPESEQUENCENUMBER"/>
+	</match>
+	<match entity="INCOMESUMMARY" noDelete="true"/>
+	<match entity="LOANCOMPONENT" noDelete="true">
+		<primary attribute="LOANCOMPONENTSEQUENCENUMBER"/>
+		<secondary attribute="MORTGAGESUBQUOTENUMBER"/>
+	</match>
+	<match entity="LOANSLIABILITIES" noDelete="true"/>
+	<match entity="MORTGAGEACCOUNT" noDelete="true"/>
+	<match entity="MORTGAGEONEOFFCOST" noDelete="true">
+		<primary attribute="ONEOFFCOSTSEQUENCENUMBER"/>
+		<secondary attribute="MORTGAGEONEOFFCOSTTYPE"/>
+	</match>
+	<match entity="MORTGAGESUBQUOTE" noDelete="true">
+		<primary attribute="MORTGAGESUBQUOTENUMBER"/>
+	</match>
+	<match entity="NAMEANDADDRESSDIRECTORY" noDelete="true">
+		<clone attribute="DIRECTORYGUID"/>
+		<clone attribute="ADDRESSGUID"/>
+		<clone attribute="CONTACTDETAILSGUID"/>
+	</match>
+	<match entity="NEWPROPERTY" noDelete="true"/>
+	<match entity="NEWPROPERTYADDRESS">
+		<clone attribute="ADDRESSGUID"/>
+	</match>
+	<match entity="NEWPROPERTYROOMTYPE">
+		<primary attribute="ROOMTYPE"/>
+	</match>
+	<match entity="OTHERCUSTOMERACCOUNTRELATIONSHIP">
+		<primary attribute="ACCOUNTGUID"/>
+	</match>
+	<match entity="OTHERRESIDENT">
+		<primary attribute="OTHERRESIDENTSEQUENCENUMBER"/>
+		<clone attribute="PERSONGUID"/>
+	</match>
+	<match entity="PAYEEHISTORY" noDelete="true">
+		<primary attribute="PAYEEHISTORYSEQNO"/>
+	</match>
+	<match entity="PAYMENTRECORD" noDelete="true">
+		<primary attribute="PAYMENTSEQUENCENUMBER"/>
+	</match>
+	<match entity="PERSON">
+		<clone attribute="PERSONGUID"/>
+	</match>
+	<match entity="THIRDPARTY">
+		<clone attribute="THIRDPARTYGUID"/>
+		<clone attribute="ADDRESSGUID"/>
+		<clone attribute="CONTACTDETAILSGUID"/>
+	</match>
+	<match entity="QUOTATION" noDelete="true">
+		<primary attribute="QUOTATIONNUMBER"/>
+		<clone attribute="MORTGAGESUBQUOTENUMBER"/>
+	</match>
+	<operation name="PreAiP" stage="10"/>
+	<operation name="SubmitAiP" stage="20"/>
+	<operation name="AiPDataCapture" stage="25"/>
+	<operation name="SubmitFMA" stage="30"/>
+	<operation name="GeneralFailure" task="Web_CaseError"/>
+	<operation name="RunXMLCreditCheck" task="Web_Exp_CreditScore">
+		<task id='Send_AIP_Cert'/>
+	</operation>
+	<operation name="RunXMLReprocessCreditCheck" task="Web_xml_Credit_Repro">
+		<task id='Send_AIP_Cert'/>
+	</operation>
+	<operation name="RunXMLRescoreCreditCheck" task="Web_xml_Credit_Resco">
+		<task id='Send_AIP_Cert'/>
+	</operation>
+	<operation name="Send_AIP_Cert" task="Send_AIP_Cert"/>
+	<default entity="APPLICATIONPRIORITY" APPLICATIONPRIORITYVALUE="20"/>
+</omIngestion>

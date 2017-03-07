@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: SubmitAiP WSDL
+
+History:
+
+Version Author      Date       		Description
+01.00   Ikemp    	05/08/2005 	Created.   
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://SubmitAiP.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns="http://SubmitAiP.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.SubmitAiP.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:msgResponse="http://Response.SubmitAiP.IDUK.Omiga.marlboroughstirling.com"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.SubmitAiP.IDUK.Omiga.marlboroughstirling.com" 
+            xmlns:msgResponse="http://Response.SubmitAiP.IDUK.Omiga.marlboroughstirling.com" >
+            <xs:import 
+                namespace="http://Request.SubmitAiP.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="SubmitAiPRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.SubmitAiP.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="SubmitAiPResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="SubmitAiPRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="SubmitAiPRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="SubmitAiPPort">
+        <wsdl:operation name="submitAiP">
+            <wsdl:input message="SubmitAiPRequestSoapIn" />
+            <wsdl:output message="SubmitAiPRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="SubmitAiPPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="submitAiP">
+             <soap:operation 
+                soapAction="http://Request.SubmitAiP.IDUK.Omiga.marlboroughstirling.com" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaSubmitAiP">
+        <wsdl:port name="SubmitAiPPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/SubmitAiPWS/OmigaSubmitAiPService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

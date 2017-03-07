@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: AuthenticateFirm
+
+History:
+
+Version 		Author   	Date				Description
+01.01      		PSC			23/10/2006	Created
+01.02		    PSC			27/10/2006	Make types method specific
+01.02			IK				08/11/2006	FIRMPERMISSIONS.EFFECTIVEDATE changed to  msgdt:msgDate
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.ValidateBroker.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.ValidateBroker.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="RESPONSE" type="VALIDATEBROKERRESPONSEType"/>
+	<xs:complexType name="VALIDATEBROKERRESPONSEType">
+		<xs:sequence>
+			<xs:element name="ARFIRM" type="VALIDATEBROKERFIRMType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PRINCIPALFIRM" type="VALIDATEBROKERFIRMType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="VALIDATEBROKERFIRMPERMISSIONSType">
+		<xs:sequence>
+			<xs:element name="ACTIVITYFSA" type="VALIDATEBROKERACTIVITYFSAType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="ACTIVITYID" type="xs:string"/>
+		<xs:attribute name="FRMPERMISSIONS" type="xs:short"/>
+		<xs:attribute name="EFFECTIVEDATE" type="msgdt:msgDate"/>
+	</xs:complexType>
+	<xs:complexType name="VALIDATEBROKERACTIVITYFSAType">
+		<xs:attribute name="ACTIVITYID" type="xs:string"/>
+		<xs:attribute name="ACTIVITYDESCRIPTION" type="xs:string"/>
+		<xs:attribute name="CATEGORY" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="VALIDATEBROKERFIRMType">
+		<xs:sequence>
+			<xs:element name="FIRMPERMISSIONS" type="VALIDATEBROKERFIRMPERMISSIONSType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="FIRMID" type="xs:string"/>
+		<xs:attribute name="FSAREF" type="xs:string"/>
+		<xs:attribute name="FIRMNAME" type="xs:string"/>
+	</xs:complexType>
+</xs:schema>

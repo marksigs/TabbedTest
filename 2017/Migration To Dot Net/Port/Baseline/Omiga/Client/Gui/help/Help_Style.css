@@ -1,0 +1,471 @@
+BODY
+{
+    BACKGROUND-COLOR: #fffff0
+}
+H1
+{
+    COLOR: #00008b;
+    FILTER: blur;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 18px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: bold
+}
+H2
+{
+    COLOR: darkblue;
+    FONT-FAMILY: Times New Roman;
+    FONT-SIZE: 16px;
+    FONT-STYLE: italic;
+    FONT-WEIGHT: bold;
+    font-face: times new roman
+}
+H3
+{
+    COLOR: darkblue;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 13px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: bold
+}
+H4
+{
+    COLOR: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 12px;
+    FONT-STYLE: italic;
+    FONT-WEIGHT: bold
+}
+P
+{
+    COLOR: indigo;
+    FONT-SIZE: 12px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+UL
+{
+    COLOR: maroon;
+    FONT-SIZE: 12px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+HR
+{
+    FONT-SIZE: 10px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    size: 1 color:DarkBlue
+}
+.msgButton
+{
+    BACKGROUND-COLOR: #000695;
+    COLOR: white;
+    CURSOR: hand;
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-WEIGHT: normal
+}
+.TableHead
+{
+    BACKGROUND-COLOR: navy;
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    COLOR: white;
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: bold
+}
+.TableTopLeft
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: navy solid 1px;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: navy solid 1px
+}
+.TableTopCenter
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: navy solid 1px
+}
+.TableTopRight
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: navy solid 1px;
+    BORDER-TOP: navy solid 1px
+}
+.TableLeft
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: navy solid 1px;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none
+}
+.TableCenter
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none
+}
+.TableRight
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: navy solid 1px;
+    BORDER-TOP: medium none
+}
+.TableBottomLeft
+{
+    BORDER-BOTTOM: navy solid 1px;
+    BORDER-LEFT: navy solid 1px;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none
+}
+.TableBottomCenter
+{
+    BORDER-BOTTOM: navy solid 1px;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none
+}
+.TableBottomRight
+{
+    BORDER-BOTTOM: navy solid 1px;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: navy solid 1px;
+    BORDER-TOP: medium none
+}
+.msgPageTitle
+{
+    BACKGROUND-COLOR: #0000a0;
+    BORDER-BOTTOM: #000000 solid 1px;
+    BORDER-LEFT: #0000ff solid 1px;
+    BORDER-RIGHT: #000000 solid 1px;
+    BORDER-TOP: #0000ff solid 1px;
+    COLOR: white;
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 10px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: bold;
+    HEIGHT: 25px
+}
+.msgImgButton
+{
+    BACKGROUND-IMAGE: url(graphics/buttonback.gif);
+    COLOR: white;
+    CURSOR: hand;
+    FONT-FAMILY: MS Sans Serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+.msgGroupLight
+{
+    BACKGROUND-COLOR: #fffff0;
+    BORDER-BOTTOM: black solid 0px;
+    BORDER-LEFT: black solid 0px;
+    BORDER-RIGHT: black solid 0px;
+    BORDER-TOP: black solid 0px
+}
+.msgImageBack
+{
+    BACKGROUND-IMAGE: url(graphics/background.jpg)
+}
+.msgGroupLayer
+{
+    BACKGROUND-COLOR: #fafad2;
+    BORDER-BOTTOM: black 0px;
+    BORDER-LEFT: black 0px;
+    BORDER-RIGHT: black 0px;
+    BORDER-TOP: black 0px
+}
+.msgGroup
+{
+    BACKGROUND-COLOR: #fafad2;
+    BORDER-BOTTOM: black solid 0px;
+    BORDER-LEFT: black solid 0px;
+    BORDER-RIGHT: black solid 0px;
+    BORDER-TOP: black solid 0px
+}
+.msgGroupRed
+{
+    BACKGROUND-COLOR: #cc0000;
+    BORDER-BOTTOM: black solid 0px;
+    BORDER-LEFT: black solid 0px;
+    BORDER-RIGHT: black solid 0px;
+    BORDER-TOP: black solid 0px
+}
+.msgCombo
+{
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+.msgButton1
+{
+    BACKGROUND-ATTACHMENT: fixed;
+    BACKGROUND-IMAGE: url(Logon & Welcome/graphics/custeng.gif);
+    BACKGROUND-REPEAT: no-repeat;
+    CURSOR: hand;
+    HEIGHT: 85px;
+    WIDTH: 120px
+}
+.msgButton2
+{
+    BACKGROUND-IMAGE: url(Logon & Welcome/graphics/mortadmin.jpg);
+    CURSOR: hand;
+    HEIGHT: 85px;
+    WIDTH: 120px
+}
+.msgButton3
+{
+    BACKGROUND-IMAGE: url(Logon & Welcome/graphics/quotation.gif);
+    CURSOR: hand;
+    HEIGHT: 85px;
+    WIDTH: 120px
+}
+.msgButton4
+{
+    BACKGROUND-IMAGE: url(Logon & Welcome/graphics/life.gif);
+    CURSOR: hand;
+    HEIGHT: 85px;
+    WIDTH: 120px
+}
+.msgButton5
+{
+    BACKGROUND-IMAGE: url(Logon & Welcome/graphics/appsmenu.gif);
+    CURSOR: hand;
+    HEIGHT: 85px;
+    WIDTH: 120px
+}
+.msgButton6
+{
+    BACKGROUND-IMAGE: url(Logon & Welcome/graphics/investadmin.gif);
+    CURSOR: hand;
+    HEIGHT: 85px;
+    WIDTH: 120px
+}
+.msgBranchMenu
+{
+    BACKGROUND-COLOR: red;
+    COLOR: white;
+    CURSOR: hand;
+    FONT-FAMILY: MS Sans Serif;
+    FONT-SIZE: 11px;
+    FONT-WEIGHT: normal
+}
+.rollover
+{
+    CURSOR: hand
+}
+.msgTableCell
+{
+    BACKGROUND-COLOR: #fafad2;
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    COLOR: black
+}
+.msgTableCellLeft
+{
+    BACKGROUND-COLOR: #fafad2;
+    BORDER-LEFT: navy solid 1px;
+    COLOR: black
+}
+.msgTableCellRight
+{
+    BACKGROUND-COLOR: #fafad2;
+    BORDER-BOTTOM: navy 1px;
+    BORDER-LEFT: navy 1px;
+    BORDER-RIGHT: navy solid 1px;
+    BORDER-TOP: navy 1px;
+    COLOR: black
+}
+.msgTableSelect
+{
+    BACKGROUND-COLOR: blue;
+    COLOR: white
+}
+.msgTableSelectLeft
+{
+    BACKGROUND-COLOR: blue;
+    BORDER-LEFT: navy solid 1px;
+    COLOR: white
+}
+.msgTableSelectRight
+{
+    BACKGROUND-COLOR: blue;
+    BORDER-LEFT: navy 1px;
+    BORDER-RIGHT: navy solid 1px;
+    COLOR: white
+}
+.msgBorder
+{
+    BORDER-BOTTOM: black solid 1px;
+    BORDER-LEFT: black solid 1px;
+    BORDER-RIGHT: black solid 1px;
+    BORDER-TOP: black solid 1px
+}
+.msgTableOver
+{
+    BACKGROUND-COLOR: #fafad2;
+    COLOR: black
+}
+.msgReadOnly
+{
+    BACKGROUND-COLOR: #fafad2;
+    BORDER-BOTTOM: #ccccff solid 1px;
+    BORDER-LEFT: #ccccff solid 1px;
+    BORDER-RIGHT: #ccccff solid 1px;
+    BORDER-TOP: #ccccff solid 1px;
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+.msgLabel
+{
+    COLOR: navy;
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+.msgList
+{
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+.msgTable
+{
+    BACKGROUND-COLOR: white;
+    COLOR: black;
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    PADDING-BOTTOM: 0in;
+    PADDING-LEFT: 5.4pt;
+    PADDING-RIGHT: 5.4pt;
+    PADDING-TOP: 0in
+}
+.msgTxt
+{
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+.msgTxtCaps
+{
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    TEXT-TRANSFORM: capitalize
+}
+.msgTxtLower
+{
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    TEXT-TRANSFORM: lowercase
+}
+.msgTxtUpper
+{
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    TEXT-TRANSFORM: uppercase
+}
+.msgMove1
+{
+    FLOAT: none;
+    LEFT: 100px;
+    POSITION: absolute;
+    TOP: 100px
+}
+.TableOneColumnTop
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: navy solid 1px;
+    BORDER-RIGHT: navy solid 1px;
+    BORDER-TOP: navy solid 1px
+}
+.TableOneColumnCenter
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: navy solid 1px;
+    BORDER-RIGHT: navy solid 1px;
+    BORDER-TOP: medium none
+}
+.TableOneColumnBottom
+{
+    BORDER-BOTTOM: navy solid 1px;
+    BORDER-LEFT: navy solid 1px;
+    BORDER-RIGHT: navy solid 1px;
+    BORDER-TOP: medium none
+}
+.msgReadOnlyCombo
+{
+    BACKGROUND-COLOR: #fafad2;
+    BORDER-BOTTOM: #ccccff solid 1px;
+    BORDER-LEFT: #ccccff solid 1px;
+    BORDER-RIGHT: #ccccff solid 1px;
+    BORDER-TOP: #ccccff solid 1px;
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+.msgReadOnlyLabel
+{
+    COLOR: gray;
+    FONT-FAMILY: sans-serif;
+    FONT-SIZE: 11px;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal
+}
+.msgDDButton
+{
+    BACKGROUND-COLOR: transparent;
+    BACKGROUND-IMAGE: url(images/dd_nonMan.gif);
+    BACKGROUND-POSITION: center center;
+    BACKGROUND-REPEAT: no-repeat;
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-FAMILY: MS Sans Serif;
+    FONT-SIZE: 11px;
+    FONT-WEIGHT: normal
+}
+.msgVerdanaLeft
+{
+    COLOR: white;
+    background-color: #000695;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 13px;
+    padding-left:9px;
+    FONT-WEIGHT: bold
+}
+.msgVerdanaRight
+{
+    COLOR: white;
+    background-color: #000695;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 9px;
+    padding-right:9px;
+    FONT-WEIGHT: bold
+}

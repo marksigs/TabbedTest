@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebServiceTestHarness", "WebServiceTestHarness.vbproj", "{8928D157-6175-43CE-9CCA-D338D20924FC}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TestHarnessInstall", "TestHarnessInstall\TestHarnessInstall.vdproj", "{3D61EC3B-7A18-44AD-933E-F2E08A90881F}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{8928D157-6175-43CE-9CCA-D338D20924FC}.Debug.ActiveCfg = Debug|.NET
+		{8928D157-6175-43CE-9CCA-D338D20924FC}.Debug.Build.0 = Debug|.NET
+		{8928D157-6175-43CE-9CCA-D338D20924FC}.Release.ActiveCfg = Release|.NET
+		{8928D157-6175-43CE-9CCA-D338D20924FC}.Release.Build.0 = Release|.NET
+		{3D61EC3B-7A18-44AD-933E-F2E08A90881F}.Debug.ActiveCfg = Debug
+		{3D61EC3B-7A18-44AD-933E-F2E08A90881F}.Release.ActiveCfg = Release
+		{3D61EC3B-7A18-44AD-933E-F2E08A90881F}.Release.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+	GlobalSection(DevPartner) = postSolution
+	EndGlobalSection
+EndGlobal

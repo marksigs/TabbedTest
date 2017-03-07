@@ -1,0 +1,295 @@
+/* Presentation stylesheet */
+
+#main {
+  background-color: #FFF;
+}
+
+#header {
+  padding: 0;
+  height: 90px;
+  overflow: hidden;
+  background-color: #D4DCEF;
+  background-image: url(../_gfx/masthead_bg.jpg);
+  background-repeat: no-repeat;
+}
+
+.dblogo {
+  width: 268px;
+  height: 141px;
+  float: right;
+}
+
+#menubar {
+  background-color: #003399;
+  padding: 0 0.6em;
+  color: white;
+  height: 2em;
+}
+
+#menubar a {
+  color: white;
+}
+
+#menubar a.selected {
+  color: #003399;
+  background-color: #A8B9DC;
+  font-weight: bold;
+}
+
+#mainmenu {
+  margin: 0;
+  margin-left: 190px;
+  padding: 0;
+}
+
+ul#submenu {
+  list-style-type: none;
+  margin: 0.2em 0;
+  padding: 0;
+}
+
+ul#submenu li {
+  float: left;
+  margin: 0em 1em 0em 0em;
+}
+
+#footer {
+  font-size: 0.9em;
+  padding: 1em 1em 1em 1em;
+  margin: 3em 0 0 0;
+  height: 2em;
+  background-color: #FFF;
+  border-top: 1px solid #000;
+}
+
+#col2 {
+  border-left: 1px solid #FFF;
+  border-right: 1px solid #FFF;
+}
+
+.cols-wrapper {
+  border: 1px;
+  margin: 0 -1px;
+}
+
+.hide-left .cols-wrapper {
+  border: none;
+  margin-left: 0;
+}
+
+.hide-right .cols-wrapper {
+  border: none;
+  margin-right: 0;
+}
+
+.hide-both .cols-wrapper {
+  border: none;
+  margin: 0;
+}
+
+#footer, .sidecol {
+  color: #333;
+}
+
+.sidebox {
+  padding: 0;
+  margin: 1.2em 0 0 0;
+  width: 15.1em;  /* Box headers don't appear without width set */
+  background-color: #E0E6F3;
+}
+
+.sidebox p {
+  margin: 1em;
+}
+
+.sidebox h2 {
+  font-size: 1.1em;
+  padding:  0.2em 0 0.2em 0.5em;
+  margin: 0px;
+  background-color: #C4D0E7;
+}
+
+h2.form_heading {
+  background-color: #A8B9DC;
+  padding: 0.2em 0.3em 0.2em 0.5em;
+  font-size: 1.1em;
+  margin: 0 0 0.7em 0;
+}
+
+h3.form_heading {
+  font-style: normal;
+  padding: 0em 0.3em 0em 0.9em;
+  font-size: 0.9em;
+  margin: 0.5em 0 0.5em 0;
+  border-bottom: 1px solid #EEE;
+}
+
+h3.form_subheading {
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: #C4D0E7;
+  padding: 0.5em;
+}
+
+ul.sidemenu {
+  padding: 0;
+  margin: 1.6em 1em 0em 0.7em;
+}
+
+.sidemenu li {
+  list-style-type: none;
+  padding: 0 0 0.7em 0;
+  color: #003399;
+}
+
+.sidemenu li.selected {
+  font-weight: bold;
+  color: #C22F16;
+}
+
+.sidemenu li.selected a {
+  font-weight: bold;
+  color: #C22F16;
+}
+
+.sidemenu li ul {
+  display: none;
+  list-style-type: none;
+  padding: 0.4em 0 0em 2em;
+}
+
+.sidemenu li.expanded ul {
+  display: block;
+  list-style-type: circle;
+  padding: 0.4em 0 0em 2em;
+}
+
+.sidemenu li ul li {
+  list-style-type: none;
+  padding: 0 0 0.1em 0em;
+  font-size: 0.9em;
+  font-weight: normal;
+  color: #000;
+}
+
+.sidemenu li ul li.selected {
+  list-style-type: none;
+  padding: 0 0 0.1em 0em;
+  font-size: 0.9em;
+  color: #C22F16;
+}
+
+table.formtable {
+  width: 100%;
+  margin: 0 0 1em 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.formtable td {
+  padding: 0.5em 1em 0.5em 0.5em;
+  margin: 0;
+  vertical-align: top;
+}
+
+.formtable td.prompt {
+  width: 13em;
+  text-align: right;
+  color: #003399;
+}
+
+table.displaytable {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.displaytable td {
+  width: 25%;
+  padding: 0.2em 1em 0em 1em;
+  margin: 0;
+  vertical-align: top;
+}
+
+.displaytable td.prompt {
+  color: #003399;
+  font-weight: normal;
+}
+
+table.formtable_telephone {
+  margin: 0 0 1em 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.formtable_telephone td {
+  padding: 0.5em 0em 0.5em 0.5em;
+  margin: 0;
+  vertical-align: bottom;
+}
+
+.formtable_telephone td.prompt {
+  padding: 0.5em 1em 0.5em 0.5em;
+  width: 13em;
+  text-align: right;
+  color: #003399;
+}
+
+.dipnavigationbuttons {
+  text-align: right;
+  margin: 1.5em 0 1.5em 0;
+}
+
+.validaddresseslist {
+  width: 20em;
+}
+
+.validationsummary {
+  padding: 0 0 2em 0;
+}
+
+.newsheading {
+  font-weight: bold;
+}
+
+.mandatoryfieldasterisk {
+  color: #FF0000;
+}
+
+.expandbutton {
+  background: #C4D0E7;
+  border: 1px solid #CCC;
+  padding: 0;
+  height: 1.4em;
+}
+
+table.minimumcriteriatable {
+  width: 90%;
+}
+
+table.minimumcriteriatable td {
+  padding: 0.3em 0.5em 0.3em 0;
+  vertical-align: top;
+}
+
+table.minimumcriteriatable td.date {
+  width: 10em;
+  text-align: right;
+  color: #CCC;
+}
+
+.minimumcriteriondetail {
+  color: #003399;
+  padding: 0.4em 0 0 2em;
+  font-size: 0.9em;
+}
+
+.helplink {
+  font-weight: bold;
+  text-align: right;
+}
+
+.lowlight {
+  color: #CCC;
+} 

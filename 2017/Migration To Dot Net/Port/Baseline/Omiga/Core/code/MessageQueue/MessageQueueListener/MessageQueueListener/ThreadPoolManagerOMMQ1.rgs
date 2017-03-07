@@ -1,0 +1,24 @@
+HKCR
+{
+	MessageQueueListener.ThreadPoolManagerOMMQ1.1 = s 'ThreadPoolManagerOMMQ1 Class'
+	{
+		CLSID = s '{D43E5442-66FB-11D4-8244-005004E8D1A7}'
+	}
+	MessageQueueListener.ThreadPoolManagerOMMQ1 = s 'ThreadPoolManagerOMMQ1 Class'
+	{
+		CLSID = s '{D43E5442-66FB-11D4-8244-005004E8D1A7}'
+		CurVer = s 'MessageQueueListener.ThreadPoolManagerOMMQ1.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D43E5442-66FB-11D4-8244-005004E8D1A7} = s 'ThreadPoolManagerOMMQ1 Class'
+		{
+			ProgID = s 'MessageQueueListener.ThreadPoolManagerOMMQ1.1'
+			VersionIndependentProgID = s 'MessageQueueListener.ThreadPoolManagerOMMQ1'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '{2B0E56B2-4B55-11D4-8237-005004E8D1A7}'
+			'TypeLib' = s '{2B0E56B1-4B55-11D4-8237-005004E8D1A7}'
+		}
+	}
+}

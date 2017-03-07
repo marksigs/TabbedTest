@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: SubmitFMA WSDL
+
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/SubmitFMA.wsdl $
+Workfile                 $Workfile: SubmitFMA.wsdl $
+Current Version   	$Revision: 1 $
+Last Modified       	$Modtime: 24/10/06 10:11 $
+Modified By          	$Author: Dbarraclough $
+
+History:
+
+Version	Author		Date					Description
+01.00   	TLiu			25/07/2005		Created.   
+
+Defect		Author		Date					Description
+EP2_1   	IK				20/09/2006		'product' namespace references
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://SubmitFMA.Omiga.vertex.co.uk" 
+    xmlns="http://SubmitFMA.Omiga.vertex.co.uk" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.SubmitFMA.Omiga.vertex.co.uk" 
+    xmlns:msgResponse="http://Response.SubmitFMA.Omiga.vertex.co.uk"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.SubmitFMA.Omiga.vertex.co.uk" 
+            xmlns:msgResponse="http://Response.SubmitFMA.Omiga.vertex.co.uk" >
+            <xs:import 
+                namespace="http://Request.SubmitFMA.Omiga.vertex.co.uk" 
+                schemaLocation="SubmitFMARequest.xsd" />
+            <xs:import 
+                namespace="http://Response.SubmitFMA.Omiga.vertex.co.uk" 
+                schemaLocation="SubmitFMAResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="SubmitFMARequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="SubmitFMARequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="SubmitFMAPort">
+        <wsdl:operation name="submitFMA">
+            <wsdl:input message="SubmitFMARequestSoapIn" />
+            <wsdl:output message="SubmitFMARequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="SubmitFMAPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="submitFMA">
+             <soap:operation 
+                soapAction="http://Request.SubmitFMA.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaSubmitFMA">
+        <wsdl:port name="SubmitFMAPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/SubmitFMAWS/OmigaSubmitFMAService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

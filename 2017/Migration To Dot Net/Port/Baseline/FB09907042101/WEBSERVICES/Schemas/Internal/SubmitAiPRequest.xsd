@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: Ingestion (Stop&Save) at AiP  - Request
+
+Archive               $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/SubmitAiPRequest.xsd $
+Workfile:             $Workfile: SubmitAiPRequest.xsd $
+Current Version   $Revision: 2 $
+Last Modified      $Modtime: 20/11/06 12:38 $
+Modified By        $Author: Dbarraclough $
+
+Copyright				Copyright © 2006 Vertex Financial Services
+Description			Ingestion (Stop&Save) at AiP  
+
+History:
+
+Version   Author    Date             Description
+01.01      RMH      29/06/2005    Created
+01.02      TLiu        20/07/2005    Changed mars to IDUK in path, named a complex type.
+01.03      TLiu        26/07/2005    Changed to use 2 imported files.
+01.04      TLiu        26/07/2005    Changed format for Element THIRDPARTY.
+01.05      IK           05/08/2005    renamed as SubmitAIPRequest.xsd
+01.06      IK           05/08/2005    restructured as per revised OmigaAiPData.xsd
+01.07      TLiu        08/08/2005    Changed some attributes.
+01.08      IK           09/09/2005    modified as per re-structured OmigaAiPData 
+02.01      IK           19/09/2005    remove Epsom identifier 
+
+Author		Date				Defect		Description
+IK				11/10/2006	EP2_10	incorporate address targetting response
+IK				16/11/2006	EP2_117	missed previous defect
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:OmigaAiPData="http://OmigaAiPData.Omiga.vertex.co.uk" xmlns="http://Request.SubmitAiP.Omiga.vertex.co.uk" xmlns:ns1="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Request.SubmitAiP.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:import namespace="http://OmigaAiPData.Omiga.vertex.co.uk" schemaLocation="OmigaAiPData.xsd"/>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:element name="ATR_REQUEST" type="atrREQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:all>
+			<xs:element name="APPLICATION" type="OmigaAiPData:APPLICATIONType"/>
+		</xs:all>
+		<xs:attribute name="USERID" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" use="optional"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="atrREQUESTType">
+		<xs:all>
+			<xs:element name="APPLICATION" type="OmigaAiPData:ATR_APPLICATIONType"/>
+			<xs:element name="TARGETINGDATA" type="OmigaAiPData:TARGETINGDATAType" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="USERID" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" use="optional"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="optional"/>
+	</xs:complexType>
+</xs:schema>

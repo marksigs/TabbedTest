@@ -1,0 +1,1760 @@
+<HTML id=ScreenFunctions>
+
+<comment>
+Workfile:      scScreenFunctions.htm
+Copyright:     Copyright © 1999 Marlborough Stirling
+
+Description:   Generic screen functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+History:
+
+Prog	Date		Description
+AY		10/11/1999	Addition of EnableDrillDown and DisableDrillDown
+AY		03/12/1999	Alteration to setting textarea fields read only
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</comment>
+
+<HEAD>
+<LINK href="stylesheet.css" rel=STYLESHEET type=text/css>
+<TITLE>Miscellaneous Screen Functions</TITLE>
+</HEAD>
+<script language="JavaScript">
+	/*	List the external function calls and their parameters here:
+			
+		SetScreenToReadOnly(frmReference)
+			Loops through the specified form and changes all fields to read only.  Does not alter buttons.
+			frmReference	- the form object which contains all the fields you wish to make read only.  In the standard template this is frmScreen.
+
+		
+		SetFieldToReadOnly(frmReference, sFieldId)
+			Changes the specified field to read only.  Does not alter buttons.  In the case of a radio group, see below.
+			frmReference	- the form object which contains the field you wish to make read only.  In the standard template this is frmScreen.
+			sFieldId		- the id of the field you wish to make read only
+
+		
+		SetRadioGroupToReadOnly(frmReference, sGroupName)
+			Changes all elements of the specified radio button group to read only.  Use only against radio groups.
+			frmReference	- the form object which contains the radio button group you wish to make read only.  In the standard template this is frmScreen.
+			sGroupName		- the name of the group you wish to make read only
+
+
+		SetFieldToWritable(frmReference, sFieldId)
+			Changes the specified field to writable.  Does not alter buttons.  In the case of a radio group, see below.
+			frmReference	- the form object which contains the field you wish to make writable.  In the standard template this is frmScreen.
+			sFieldId		- the id of the field you wish to make writable
+
+
+		SetRadioGroupToWritable(frmReference, sGroupName)
+			Changes all elements of the specified radio button group to writable.  Use only against radio groups.
+			frmReference	- the form object which contains the radio button group you wish to make writable.  In the standard template this is frmScreen.
+			sGroupName		- the name of the group you wish to make writable
+
+
+		SetFieldToDisabled(frmReference, sFieldId)
+			Changes the specified field to disabled.  Does not alter buttons.  In the case of a radio group, see below.
+			frmReference	- the form object which contains the field you wish to disable.  In the standard template this is frmScreen.
+			sFieldId		- the id of the field you wish to disable
+
+		
+		SetRadioGroupToDisabled(frmReference, sGroupName)
+			Changes all elements of the specified radio button group to be disabled.  Use only against radio groups.
+			frmReference	- the form object which contains the radio button group you wish to disable.  In the standard template this is frmScreen.
+			sGroupName		- the name of the group you wish to disable
+
+
+		sValue = GetRadioGroupValue(frmReference, sGroupName)
+			Searches the specified radio group for the button which is set and returns the value for that button.
+			frmReference	- the form object which contains the radio group you wish to search.  In the standard template this is frmScreen.
+			sGroupName		- the name of the group you wish to search			
+			sValue			- the value of the radio button set, or null if no button set
+
+
+		SetRadioGroupValue(frmReference, sGroupName, sValue)
+			Searches the specified radio group for the button whose value matches sValue.
+			Radio buttons which do not match are unchecked and the radio button which matches is checked.
+			frmReference	- the form object which contains the radio group you wish to set.  In the standard template this is frmScreen.
+			sGroupName		- the name of the group you wish to set
+			sValue			- the value to match against the radio buttons
+
+
+		SetCheckBoxValue(frmReference, sFieldId, sValue)						
+			Sets the checked box specified by the field id and the value passed in.
+			frmReference	- the form object which contains the checkbox you wish to set.  In the standard template this is frmScreen.
+			sFieldId		- the field id of the check box you wish to set
+			sValue			- the value to determine whether or not the checkbox is checked
+
+		sValue = GetCheckBoxValue(frmReference, sFieldId)						
+			Gets the checked box value specified by the field id
+			frmReference	- the form object which contains the checkbox you wish to set.  In the standard template this is frmScreen.
+			sFieldId		- the field id of the check box you wish to set
+			
+			sValue			- the value returned indicating if the checkbox is checked
+
+					
+		sReturn = DisplayPopup(thisWindow, thisDocument, sPopup, sArguments, nPopupWidth, nPopupHeight)
+			Displays a centralised popup.
+			thisWindow		- the window object (usually window)
+			thisDocument	- the document object (usually document)
+			sPopup			- the filename of the popup screen
+			sArguments		- the vArguments parameter for ShowModalDialog
+			nPopupWidth		- the required width, in pixels, of the popup
+			nPopupHeight	- the required height, in pixels, of the popup
+
+			sReturn			- the value returned by ShowModalDialog
+
+
+		CopyComboList(refFieldFrom, refFieldTo)
+			Copies the options contained in one combo to another combo
+			refFieldFrom	- the combo field to copy from e.g. frmScreen.cboFrom
+			refFieldTo		- the combo field to copy to e.g. frmScreen.cboTo
+
+
+		bReturn = IsValidationType(refField, sValue)
+			Searches the selected combo option for a ValidationType attribute whose value matches sValue
+			(see also scXMLFunctions - GetComboList)
+			refField	- the combo field to check
+			sValue		- the value to look for
+			
+			bReturn		- true if successful, otherwise false
+
+
+		bReturn = IsOptionValidationType(refField, nIndex, sValue)
+			Searches the combo option(nIndex) for a ValidationType attribute whose value matches sValue
+			(see also scXMLFunctions - GetComboList)
+			refField	- the combo field to check
+			nIndex		- the option to check
+			sValue		- the value to look for
+			
+			bReturn		- true if successful, otherwise false
+
+
+		A NOTE REGARDING THE FOLLOWING FOUR FUNCTIONS
+		Normally, the <SPAN> and <DIV> tags are not given ids during screen builds, so remember to assign ids.
+		Also, even when showing or hiding an individual field its better to use these functions on the field's surrounding
+		<SPAN> as they ensure the field is hidden/shown correctly.  They also avoid dealing with the associated labels.
+				
+		HideCollection(refSpnOrDivId)
+			Hides a <SPAN> or <DIV> element.  (It can also work on a <FORM>)
+			It also sets all fields contained within the element to "hidden" so that the mandatory
+			processing doesn't flag any mandatory fields and removes the contents of the fields.
+			refSpnOrDivId	- the id of the span/div (or form) element to hide
+
+
+		ShowCollection(refSpnOrDivId)
+			Shows a <SPAN> or <DIV> element.  (It can also work on a <FORM>)
+			It also sets all fields contained within the element to "visible" so that the mandatory
+			processing will work.			
+			refSpnOrDivId	- the id of the span/div (or form) element to show
+
+
+		DisableCollection(refSpnOrDivId)
+			Enables a <SPAN> or <DIV> element.  (It can also work on a <FORM id=form1 name=form1>)
+			It also sets all fields contained within the to "disabled" so that the mandatory
+			processing doesn't flag any mandatory fields and removes the contents of the fields.
+			refSpnOrDivId	- the id of the span/div (or form) element to hide
+
+
+		EnableCollection(refSpnOrDivId)
+			Enables a <SPAN> or <DIV> element.  (It can also work on a <FORM id=form1 name=form1>)
+			It also sets all fields contained within the element to "enabled" so that the mandatory
+			processing will work.			
+			refSpnOrDivId	- the id of the span/div (or form) element to show
+
+
+		bIsChanged = ClearCollection(refSpnOrDivId)
+			Clears all fields in a <SPAN> or <DIV> element.  (It can also work on a <FORM>)
+			If any field contains data then the fact that the data has changed is flagged.
+			refSpnOrDivId	- the id of the span/div (or form) element to show
+			
+			bIsChanged		- true if the contents of a field have been changed (i.e. if it wasn't already blank)
+
+
+		bReturn = IsOmigaMenuFrame(thisWindow)
+			Checks whether the parent of thisWindow has a frame called "omigamenu".  This should be present
+			if an omiga screen is being run within the framework.
+			thisWindow	- the window object (usually window)
+
+			bReturn		- true if found, otherwise false
+
+
+		sValue = GetContextParameter(thisWindow,sContextParameterId,sDefaultValue)
+			If the omigamenu frame exists then the value of the specified context parameter is obtained.
+			If the omigamenu frame is not present then the user is prompted to input a value.  The prompt
+			is defaulted to the value specified.
+			thisWindow			- the window object (usually window)
+			sContextParameterId	- the id of the context field you wish to read
+			sDefaultValue		- the default value for the prompt if omigamenu is not present
+			
+			sValue				- the value returned from the context field, or from the prompt
+
+
+		SetContextParameter(thisWindow,sContextParameterId,sValue)
+			If the omigamenu frame exists then the value of the specified context parameter is set.
+			thisWindow			- the window object (usually window)
+			sContextParameterId	- the id of the context field you wish to set
+			sValue				- the value you wish to set the context field to
+
+
+		sCustomerName = GetContextCustomerName(thisWindow,sCustomerNumber)
+			If the omigamenu frame exists then the the customer number context fields are searched
+			for sCustomerNumber. If a match is found the associated customer name is returned,
+			else <ERROR> is returned.
+			If the omigamenu frame does not exist then <NO CONTEXT> is returned
+			thisWindow		- the window object (usually window)
+			sCustomerNumber	- the customer number to look for
+			
+			sCustomerName	- the customer name found
+			
+			
+		SetFocusToFirstField(frmReference)
+			Sets the focus to the first field or button on a screen which is enabled.
+			frmReference	- the form object which contains the fields you wish to check.  In the standard template this is frmScreen.
+
+
+		SetFocusToLastField(frmReference)
+			Sets the focus to the last field or button on a screen which is enabled.
+			frmReference	- the form object which contains the fields you wish to check.  In the standard template this is frmScreen.
+
+
+		SizeTextToField(refField,sValue)
+			Currently only works on TD fields.
+			Places the specified text into the field. If it is too big for the field it shortens it to fit
+			and adds ... to the end.
+			If the full text fits into the field then the title attribute is not set, otherwise it is set to
+			the full text.
+			refField	- the field to set
+			sValue		- the value you wish to set the field to 
+
+
+		bIsValid = CompareDateFieldToSystemDate(refDateField,sComparison)
+			Gets the contents of a date field and checks it against the system date, using the comparison specified.
+			refDateField	- the id of the field to check. Must be a date field.
+			sComparison		- the comparison to make. It must be "<", "<=", "=", ">=" or ">".
+
+			bIsValid		- returns true if the check meets the comparison criteria or false if it fails
+							  or is blank.  Therefore it is best to check for the failure criteria rather
+							  than the success. e.g. if the date has to be in the past do a ">" check and if
+							  this is true then the date is invalid.
+
+
+		bIsValid = CompareDateFields(refFirstDateField,sComparison,refSecondDateField)
+			Gets the contents of two date field and compares them, using the comparison specified.
+			refFirstDateField	- the id of the first field to check. Must be a date field.
+			sComparison			- the comparison to make. It must be "<", "<=", "=", ">=" or ">".
+								  e.g. ">" will check whether the first date is greater than the second
+			refSecondDateField	- the id of the second field to check. Must be a date field.
+
+			bIsValid			- returns true if the check meets the comparison criteria or false if it fails
+								  or one or both fields are blank.  Therefore it is best to check for the failure criteria
+								  rather than the success. e.g. if the first date has to be earlier than the second
+								  date do a ">" check and if this is true then one of the dates is invalid.
+
+
+		dtFieldDate = GetDateObject(refDateField)
+			Converts the contents of a date field into a date object.
+			refDateField	- the id of the field to convert. Must be a date field.
+			dtFieldDate		- the date object.  If the field was blank or an invalid format then this is null.
+
+
+		SetCollectionToReadOnly(refSpnOrDivId)
+			Set all fields in a <SPAN> or <DIV> element to read only.  
+			(It can also work on a <FORM id=form1 name=form1>)
+			
+			refSpnOrDivId	- the id of the span/div (or form) element to set to read only
+
+	
+		SetCollectionToWritable(refSpnOrDivId)
+			Set all fields in a <SPAN> or <DIV> element to writable.  
+			(It can also work on a <FORM id=form1 name=form1>)
+			
+			refSpnOrDivId	- the id of the span/div (or form) element to set to writable
+
+
+		SetComboOnValidationType(frmReference, sFieldId, sValue)
+			Sets a combo selection based on the validation record (sValue)
+			
+			frmReference	- the form object which contains the fields you wish to check.  In the standard template this is frmScreen.
+			sFieldId		- The id of the combo field to set
+			sValue			- The value to match the validation record against
+
+
+		sValidationType = GetComboValidationType(frmReference, sFieldId)
+			Gets the currently selected validation record for the combo specified
+			This function will only get the first validation record.
+			
+			frmReference	- the form object which contains the fields you wish to check.  In the standard template this is frmScreen.
+			sFieldId		- The id of the combo field to set
+		
+
+		EnableDrillDown(refField)
+			Enables a drilldown button, changing the classname to show the difference visually.
+			Will only work on a button whose classname has been set to msgDisabledDDButton.
+
+			refField	- the field to enable
+
+
+		DisableDrillDown(refField)
+			Disables a drilldown button, changing the classname to show the difference visually.
+			Will only work on a button whose classname has been set to msgDDButton.
+
+			refField	- the field to disable
+	*/
+
+	public_description = new CreateScreenFunctions;
+
+	//	Initialises the pointers to the externally accessible functions.
+
+	function CreateScreenFunctions()
+	{
+		this.SetScreenToReadOnly			= SetScreenToReadOnly;		
+		this.SetFieldToReadOnly				= SetFieldToReadOnly;
+		this.SetRadioGroupToReadOnly		= SetRadioGroupToReadOnly;
+		this.SetFieldToWritable				= SetFieldToWritable;
+		this.SetRadioGroupToWritable		= SetRadioGroupToWritable;
+		this.SetFieldToDisabled				= SetFieldToDisabled;
+		this.SetRadioGroupToDisabled		= SetRadioGroupToDisabled;
+		this.GetRadioGroupValue				= GetRadioGroupValue;
+		this.SetRadioGroupValue				= SetRadioGroupValue;
+		this.SetCheckBoxValue				= SetCheckBoxValue;
+		this.GetCheckBoxValue				= GetCheckBoxValue;
+		this.DisplayPopup					= DisplayPopup;
+		this.CopyComboList					= CopyComboList;
+		this.IsValidationType				= IsValidationType;
+		this.IsOptionValidationType			= IsOptionValidationType;
+		this.HideCollection					= HideCollection;
+		this.ShowCollection					= ShowCollection;
+		this.ClearCollection				= ClearCollection;
+		this.EnableCollection				= EnableCollection;
+		this.DisableCollection				= DisableCollection;
+		this.IsOmigaMenuFrame				= IsOmigaMenuFrame;
+		this.GetContextParameter			= GetContextParameter;
+		this.SetContextParameter			= SetContextParameter;
+		this.GetContextCustomerName			= GetContextCustomerName;
+		this.SetFocusToFirstField			= SetFocusToFirstField;
+		this.SetFocusToLastField			= SetFocusToLastField;
+		this.SizeTextToField				= SizeTextToField;
+		this.CompareDateFieldToSystemDate	= CompareDateFieldToSystemDate;
+		this.CompareDateFields				= CompareDateFields;
+		this.GetDateObject					= GetDateObject;
+		this.SetCollectionToReadOnly		= SetCollectionToReadOnly;
+		this.SetCollectionToWritable		= SetCollectionToWritable;
+		this.GetComboValidationType			= GetComboValidationType;
+		this.SetComboOnValidationType		= SetComboOnValidationType;
+		this.EnableDrillDown				= EnableDrillDown;
+		this.DisableDrillDown				= DisableDrillDown;
+	}
+
+	//Loops through all elements of the specified form and sets them to read only
+	function SetScreenToReadOnly(frmReference)
+	{
+		for(var nLoop = 0;nLoop < frmReference.elements.length;nLoop++)
+		{
+			SetFieldToReadOnly(frmReference, frmReference.elements(nLoop).id);
+		}
+	}
+
+	//Changes the specified field to read only
+	function SetFieldToReadOnly(frmReference, sFieldId)
+	{
+		//INPUT fields (text boxes, radio buttons and check boxes)
+		//Button type fields are ignored
+		if(frmReference.all(sFieldId).tagName == "INPUT")
+		{
+			//Text boxes
+			if(frmReference.all(sFieldId).type != "button" && frmReference.all(sFieldId).type != "radio" && frmReference.all(sFieldId).type != "checkbox")
+			{
+				frmReference.all(sFieldId).readOnly = true;
+				frmReference.all(sFieldId).tabIndex = -1;
+
+				//Text boxes pose a slight problem in that there are different classes of them.  What we have to do is get the field to
+				//remember the class by setting a style attribute called TxtClass.  We only do this if TxtClass is not already set
+				var sTxtClass = frmReference.all(sFieldId).style.getAttribute("TxtClass");
+				if(sTxtClass == null)
+				{
+					frmReference.all(sFieldId).style.setAttribute("TxtClass", frmReference.all(sFieldId).className);
+				}
+
+				//If a field has the mandatory attribute, the processing in scFormManager sets the background colour.
+				//This overrides the colour setting in the class, so the background colour attribute must be cleared
+				frmReference.all(sFieldId).style.backgroundColor = "";
+
+				frmReference.all(sFieldId).className = "msgReadOnly";
+			}
+	
+			//Radio buttons
+			if(frmReference.all(sFieldId).type == "radio")
+			{
+				frmReference.all(sFieldId).disabled = true;
+				frmReference.all(sFieldId).tabIndex = -1;
+				
+				//Radio buttons do not have a readonly attribute; they may only be disabled.  We also have no control over their
+				//appearance in this state. So to make the checked radio button stand out more we grey out the associated labels of
+				//the unchecked radio buttons within the group.
+				if(frmReference.all(sFieldId).checked != true)
+				{
+					for(var nLoop = 0;nLoop < frmReference.all.length;nLoop++)
+					{
+						if(frmReference.all(nLoop).tagName == "LABEL")
+						{
+							if(frmReference.all(sFieldId).id == frmReference.all(nLoop).htmlFor)
+							{
+								frmReference.all(nLoop).className="msgReadOnlyLabel";
+							}
+						}
+					}
+				}
+			}
+
+			//Checkboxes
+			if(frmReference.all(sFieldId).type == "checkbox")
+			{
+				frmReference.all(sFieldId).disabled = true;
+				frmReference.all(sFieldId).tabIndex = -1;
+
+				//As with radio buttons above, we can only disable a check box and we have no control over its appearance.  Again, to
+				//make its state stand out more we grey out its associated label if the control is unchecked.
+				if(frmReference.all(sFieldId).checked != true)
+				{
+					for(var nLoop = 0;nLoop < frmReference.all.length;nLoop++)
+					{
+						if(frmReference.all(nLoop).tagName == "LABEL")
+						{
+							if(frmReference.all(sFieldId).id == frmReference.all(nLoop).htmlFor)
+							{
+								frmReference.all(nLoop).className="msgReadOnlyLabel";
+							}
+						}
+					}
+				}
+			}
+		}
+
+		//Textarea fields
+		if(frmReference.all(sFieldId).tagName == "TEXTAREA")
+		{
+			frmReference.all(sFieldId).readOnly = true;
+			// AY 03/12/99 - If the text field is just read only, selecting it and typing will clear the class
+			// settings, returning it to default colours.  Setting the disabled attribute as well solves this.
+			frmReference.all(sFieldId).disabled = true;
+			frmReference.all(sFieldId).tabIndex = -1;
+
+			//If a field has the mandatory attribute, the processing in scFormManager sets the background colour.
+			//This overrides the colour setting in the class, so the background colour attribute must be cleared
+			frmReference.all(sFieldId).style.backgroundColor = "";
+
+			frmReference.all(sFieldId).className = "msgReadOnly";
+		}
+		
+		//Combos
+		if(frmReference.all(sFieldId).tagName == "SELECT")
+		{
+			frmReference.all(sFieldId).disabled = true;
+			frmReference.all(sFieldId).tabIndex = -1;
+
+			//Combos also do not have a read only attribute and have to be disabled, but we can alter their appearance to some extent,
+			//using a different class. However, to apply the change of class we have to hide and redisplay the control. We also need to
+			//clear the background colour attribute, as per input fields.
+			frmReference.all(sFieldId).style.backgroundColor = "";
+			frmReference.all(sFieldId).className = "msgReadOnlyCombo";
+			frmReference.all(sFieldId).style.visibility = "hidden";
+			frmReference.all(sFieldId).style.visibility = "visible";
+		}
+	}
+
+	//Changes a radio button group to read only.  Uses the name attribute to search out the required radio buttons.
+	function SetRadioGroupToReadOnly(frmReference, sGroupName)
+	{
+		for(var nLoop = 0;nLoop < frmReference.elements.length;nLoop++)
+		{
+			if(frmReference.elements(nLoop).name == sGroupName)
+			{
+				SetFieldToReadOnly(frmReference, frmReference.elements(nLoop).id);
+			}
+		}
+	}
+
+	//Changes the specified field to writable
+	function SetFieldToWritable(frmReference, sFieldId)
+	{
+		//INPUT fields (text boxes, radio buttons and check boxes)
+		//Button type fields are ignored
+		if(frmReference.all(sFieldId).tagName == "INPUT")
+		{
+			//Text boxes
+			if(frmReference.all(sFieldId).type != "button" && frmReference.all(sFieldId).type != "radio" && frmReference.all(sFieldId).type != "checkbox")
+			{
+				//Text boxes pose a slight problem in that there are different classes of them.  In the read only/disabled processing
+				//for these fields we set a style attribute, TxtClass which specifies the writable class.  When returning the field
+				//to writable state we restore this class.
+				frmReference.all(sFieldId).readOnly = false;
+				frmReference.all(sFieldId).disabled = false;
+				frmReference.all(sFieldId).tabIndex = 0;
+
+				var sTxtClass = frmReference.all(sFieldId).style.getAttribute("TxtClass");
+				if(sTxtClass != null)
+				{
+					frmReference.all(sFieldId).className = sTxtClass;
+				}
+			}
+
+			//Radio buttons
+			if(frmReference.all(sFieldId).type == "radio")
+			{
+				frmReference.all(sFieldId).disabled = false;
+				frmReference.all(sFieldId).tabIndex = 0;
+
+				//As part of the read only processing, the associated labels of radio buttons are altered, so we have to make sure they
+				//are all set back to normal
+				for(var nLoop = 0;nLoop < frmReference.all.length;nLoop++)
+				{
+					if(frmReference.all(nLoop).tagName == "LABEL")
+					{
+						if(frmReference.all(sFieldId).id == frmReference.all(nLoop).htmlFor)
+						{
+							frmReference.all(nLoop).className="msgLabel";
+						}
+					}
+				}
+			}
+
+			//Checkboxes
+			if(frmReference.all(sFieldId).type == "checkbox")
+			{
+				frmReference.all(sFieldId).disabled = false;
+				frmReference.all(sFieldId).tabIndex = 0;
+
+				//As part of the read only processing, the associated labels of check boxes are altered, so we have to make sure they are
+				//set back to normal
+				for(var nLoop = 0;nLoop < frmReference.all.length;nLoop++)
+				{
+					if(frmReference.all(nLoop).tagName == "LABEL")
+					{
+						if(frmReference.all(sFieldId).id == frmReference.all(nLoop).htmlFor)
+						{
+							frmReference.all(nLoop).className="msgLabel";
+						}
+					}
+				}
+			}
+		}
+
+		//Textarea fields
+		if(frmReference.all(sFieldId).tagName == "TEXTAREA")
+		{
+			frmReference.all(sFieldId).readOnly = false;
+			frmReference.all(sFieldId).disabled = false;
+			frmReference.all(sFieldId).tabIndex = 0;
+			frmReference.all(sFieldId).className = "msgTxt";
+		}
+
+		//Combos
+		if(frmReference.all(sFieldId).tagName == "SELECT")
+		{
+			frmReference.all(sFieldId).disabled = false;
+			frmReference.all(sFieldId).tabIndex = 0;
+
+			//To apply the change of class we have to hide and redisplay the control.
+			frmReference.all(sFieldId).className = "msgCombo";
+			frmReference.all(sFieldId).style.visibility = "hidden";
+			frmReference.all(sFieldId).style.visibility = "visible";
+
+			if(frmReference.all(sFieldId).selectedIndex == -1)
+			{
+				frmReference.all(sFieldId).selectedIndex = 0;
+			}
+		}
+	}
+
+	//Changes a radio button group to writable.  Uses the name attribute to search out the required radio buttons.
+	function SetRadioGroupToWritable(frmReference, sGroupName)
+	{
+		for(var nLoop = 0;nLoop < frmReference.elements.length;nLoop++)
+		{
+			if(frmReference.elements(nLoop).name == sGroupName)
+			{
+				SetFieldToWritable(frmReference, frmReference.elements(nLoop).id);
+			}
+		}
+	}
+
+	//Changes the specified field to disabled
+	function SetFieldToDisabled(frmReference, sFieldId)
+	{
+		//INPUT fields (text boxes, radio buttons and check boxes)
+		//Button type fields are ignored
+		if(frmReference.all(sFieldId).tagName == "INPUT")
+		{
+			//Text boxes
+			if(frmReference.all(sFieldId).type != "button" && frmReference.all(sFieldId).type != "radio" && frmReference.all(sFieldId).type != "checkbox")
+			{
+				frmReference.all(sFieldId).disabled = true;
+				frmReference.all(sFieldId).tabIndex = -1;
+
+				//Clear any text stored
+				frmReference.all(sFieldId).value = "";
+				
+				//Text boxes pose a slight problem in that there are different classes of them.  What we have to do is get the field to
+				//remember the class by setting a style attribute called TxtClass.  We only do this if TxtClass is not already set
+				var sTxtClass = frmReference.all(sFieldId).style.getAttribute("TxtClass");
+				if(sTxtClass == null)
+				{
+					frmReference.all(sFieldId).style.setAttribute("TxtClass", frmReference.all(sFieldId).className);
+				}
+
+				//If a field has the mandatory attribute, the processing in scFormManager sets the background colour.
+				//This overrides the colour setting in the class, so the background colour attribute must be cleared
+				frmReference.all(sFieldId).style.backgroundColor = "";
+
+				frmReference.all(sFieldId).className = "msgReadOnly";
+			}
+
+			//Radio buttons
+			if(frmReference.all(sFieldId).type == "radio")
+			{
+				frmReference.all(sFieldId).disabled = true;
+				frmReference.all(sFieldId).tabIndex = -1;
+				
+				//Clear any setting
+				frmReference.all(sFieldId).checked = false;
+				
+				//Disable all labels as well
+				for(var nLoop = 0;nLoop < frmReference.all.length;nLoop++)
+				{
+					if(frmReference.all(nLoop).tagName == "LABEL")
+					{
+						if(frmReference.all(sFieldId).id == frmReference.all(nLoop).htmlFor)
+						{
+							frmReference.all(nLoop).className="msgReadOnlyLabel";
+						}
+					}
+				}
+			}
+
+			//Checkboxes
+			if(frmReference.all(sFieldId).type == "checkbox")
+			{
+				frmReference.all(sFieldId).disabled = true;
+				frmReference.all(sFieldId).tabIndex = -1;
+
+				//Clear any setting
+				frmReference.all(sFieldId).checked = false;
+
+				//Disable the label as well
+				for(var nLoop = 0;nLoop < frmReference.all.length;nLoop++)
+				{
+					if(frmReference.all(nLoop).tagName == "LABEL")
+					{
+						if(frmReference.all(sFieldId).id == frmReference.all(nLoop).htmlFor)
+						{
+							frmReference.all(nLoop).className="msgReadOnlyLabel";
+						}
+					}
+				}
+			}
+		}
+
+		//Textarea fields
+		if(frmReference.all(sFieldId).tagName == "TEXTAREA")
+		{
+			frmReference.all(sFieldId).disabled = true;
+			frmReference.all(sFieldId).tabIndex = -1;
+
+			//Clear any text stored
+			frmReference.all(sFieldId).value = "";
+
+			//If a field has the mandatory attribute, the processing in scFormManager sets the background colour.
+			//This overrides the colour setting in the class, so the background colour attribute must be cleared
+			frmReference.all(sFieldId).style.backgroundColor = "";
+
+			frmReference.all(sFieldId).className = "msgReadOnly";
+		}
+
+		//Combos
+		if(frmReference.all(sFieldId).tagName == "SELECT")
+		{
+			frmReference.all(sFieldId).disabled = true;
+			frmReference.all(sFieldId).tabIndex = -1;
+
+			//Clear any setting
+			frmReference.all(sFieldId).selectedIndex = -1;
+
+			//Clear the background colour attribute as per input fields
+			frmReference.all(sFieldId).style.backgroundColor = "";
+			frmReference.all(sFieldId).className = "msgReadOnlyCombo";
+			frmReference.all(sFieldId).style.visibility = "hidden";
+			frmReference.all(sFieldId).style.visibility = "visible";
+		}
+	}
+
+	// Enable a <SPAN> or a <DIV> 
+	function EnableCollection(refSpnOrDivId)
+	{		
+		for(var nLoop = 0;nLoop < refSpnOrDivId.all.length;nLoop++)
+		{
+			if (refSpnOrDivId.all(nLoop).id != "")
+			{
+				SetFieldToWritable(refSpnOrDivId, refSpnOrDivId.all(nLoop).id);			
+			}
+		}
+	}
+	
+	// Disables a <SPAN> or a <DIV> 
+	function DisableCollection(refSpnOrDivId)
+	{		
+		for(var nLoop = 0;nLoop < refSpnOrDivId.all.length;nLoop++)
+		{
+			if (refSpnOrDivId.all(nLoop).id != "")
+			{
+				SetFieldToDisabled(refSpnOrDivId, refSpnOrDivId.all(nLoop).id);
+			}
+		}
+	}
+
+
+	//Changes a radio button group to disabled.  Uses the name attribute to search out the required radio buttons.
+	function SetRadioGroupToDisabled(frmReference, sGroupName)
+	{
+		for(var nLoop = 0;nLoop < frmReference.elements.length;nLoop++)
+		{
+			if(frmReference.elements(nLoop).name == sGroupName)
+			{
+				SetFieldToDisabled(frmReference, frmReference.elements(nLoop).id);
+			}
+		}
+	}
+
+	// Displays a centralised modal popup
+	function DisplayPopup(thisWindow, thisDocument, sPopup, sInput, nPopupWidth, nPopupHeight)
+	{
+		var nWindowTop;
+		var nWindowLeft;
+		var nWindowWidth;
+		var nWindowHeight;
+
+		//Calculate the Top and Left co-ordinates for the popup depending on whether the calling screen is being
+		//run stand alone or in the framework
+
+		//Calculate the top left of the main window.  This requires a window event to be captured in order to work
+		//(Such as hitting a button which displays a popup)
+		nWindowTop	= thisWindow.event.screenY - thisWindow.event.clientY;
+		nWindowLeft	= thisWindow.event.screenX - thisWindow.event.clientX;
+
+		//For a screen with all the framework, we need to work out the top left by a more circuitous route
+		//We know there are frames to the left and top of of the calling screen, so if we work out the
+		//difference between the dimensions of the parent window and the calling window we can calculate
+		//the top left of the parent window
+		if(IsOmigaMenuFrame(thisWindow) == true)
+		{
+			nWindowWidth	= thisWindow.parent.document.body.clientWidth;
+			nWindowHeight	= thisWindow.parent.document.body.clientHeight;
+			nWindowTop		= nWindowTop - (nWindowHeight - thisDocument.body.clientHeight);
+			nWindowLeft		= nWindowLeft - (nWindowWidth - thisDocument.body.clientWidth);
+		}
+		else
+		{
+			nWindowWidth	= thisDocument.body.clientWidth;
+			nWindowHeight	= thisDocument.body.clientHeight;
+		}
+		
+		//Calculate the top left of the popup
+		var nPopupTop	= Math.floor((nWindowHeight - nPopupHeight) / 2) + nWindowTop;
+		var nPopupLeft	= Math.floor((nWindowWidth - nPopupWidth) / 2) + nWindowLeft;
+			
+
+		// ShowModalDialog currently appears to have a bit of a bug where the popup resizing doesn't
+		// always work when the size co-ordinates are passed in as the features argument.
+		// So instead the co-ordinates are passed in as arguments and the resizing done within the popup
+		// In order to make this as pretty as possible, center is set to true, the left and top co-ordinates
+		// are also passec in and, within the popup itself, the screen contents are not shown until the
+		// resizing has occurred.
+		
+		//Build the features string for ShowModalDialog
+		var sFeatures;
+		sFeatures = "center: 1; help: no";
+
+		// Build the arguments array to pass into ShowModalDialog
+		var sArguments = new Array();
+		sArguments[0] = nPopupTop + "px";
+		sArguments[1] = nPopupLeft + "px";
+		sArguments[2] = nPopupWidth + "px";
+		sArguments[3] = nPopupHeight + "px";
+		sArguments[4] = sInput;
+		
+		var sReturn = thisWindow.showModalDialog(sPopup,sArguments,sFeatures);
+
+		return sReturn;
+	}
+
+	// Get the value from the radio button which is set within a group
+	function GetRadioGroupValue(frmReference,sGroupName)
+	{
+		var sValue = null;
+		
+		for(var nLoop = 0;nLoop < frmReference.elements.length;nLoop++)
+		{
+			if(frmReference.elements(nLoop).name == sGroupName)
+			{
+				if(frmReference.elements(nLoop).checked == true)
+				{
+					sValue = frmReference.elements(nLoop).value;
+				}
+			}
+		}
+		
+		return sValue;
+	}
+
+	// Set the radio button within a group whose value matches the value passed in
+	function SetRadioGroupValue(frmReference,sGroupName,sValue)
+	{
+		for(var nLoop = 0;nLoop < frmReference.elements.length;nLoop++)
+		{
+			if(frmReference.elements(nLoop).name == sGroupName)
+			{
+				if(frmReference.elements(nLoop).value == sValue)
+				{
+					frmReference.elements(nLoop).checked = true;
+				}
+				else
+				{
+					frmReference.elements(nLoop).checked = false;
+				}
+			}
+		}
+	}
+
+	function SetCheckBoxValue(frmReference, sFieldId, sValue)
+	{
+		if (sValue == frmReference.all(sFieldId).value)
+		{
+			frmReference.all(sFieldId).checked = true;
+		}
+		else
+		{
+			frmReference.all(sFieldId).checked = false;
+		}
+	}
+	
+	function GetCheckBoxValue(frmReference, sFieldId)
+	{
+		var sValue = null;
+		
+		if (frmReference.all(sFieldId).checked == true)
+		{
+			sValue = frmReference.all(sFieldId).value;
+		}
+		
+		return sValue;
+	}
+
+	// Copy the options of one combo to another
+	function CopyComboList(refFieldFrom,refFieldTo)
+	{
+		if(refFieldFrom.tagName == "SELECT" && refFieldTo.tagName == "SELECT")
+		{
+			// Remove any existing options
+			while(refFieldTo.options.length > 0)
+			{
+				refFieldTo.options.remove(0);
+			}
+
+			// Copy the options
+			for(var nLoop = 0;nLoop < refFieldFrom.options.length;nLoop++)
+			{
+				var TagOption = refFieldFrom.options.item(nLoop);
+				refFieldTo.add(TagOption);
+			}
+		
+			refFieldTo.value = ""; // Set to the <SELECT> option
+		}
+		else
+		{
+			alert("CopyComboList - fields must be combos");
+		}
+	}
+
+	// Checks if there is a ValidationType attribute on the selected combo option which matches the required value
+	function IsValidationType(refField, sValue)
+	{
+		var bReturn = false;
+		
+		if(refField.tagName == "SELECT")
+		{
+			var nIndex = refField.selectedIndex;
+
+			bReturn = IsOptionValidationType(refField,nIndex,sValue);
+		}
+		else
+		{
+			alert("IsValidationType - field must be a combo");
+		}
+		
+		return bReturn;
+	}
+
+	// Checks if there is a ValidationType attribute on the combo option(nIndex) which matches the required value
+	function IsOptionValidationType(refField,nIndex,sValue)
+	{
+		var bReturn = false;
+		
+		if(refField.tagName == "SELECT")
+		{
+			var TagOption	= refField.options.item(nIndex);
+			var nCount		= 0;
+			var sAttribute	= null;
+		
+			// Read all ValidationType attributes and if one of their values matches the value being looked for return true
+			// (the format is ValidationType0 = x ValidationType1 = x etc
+			do
+			{
+				sAttribute = TagOption.getAttribute("ValidationType" + nCount);
+			
+				if(sAttribute == sValue)
+				{
+					bReturn = true;
+				}	
+
+				nCount++;
+			}
+			while(sAttribute != null && bReturn == false)
+		}
+		else
+		{
+			alert("IsOptionValidationType - field must be a combo");
+		}
+		
+		return bReturn;
+	}
+		
+	// Hides a <SPAN> or a <DIV> and also sets the visibility of the fields contained within it to hidden
+	function HideCollection(refSpnOrDivId)
+	{
+		refSpnOrDivId.style.visibility = "hidden";
+
+		for(var nLoop = 0;nLoop < refSpnOrDivId.all.length;nLoop++)
+		{
+			//INPUT fields (text boxes, radio buttons and check boxes)
+			if(refSpnOrDivId.all(nLoop).tagName == "INPUT")
+			{
+				//Text boxes
+				if(refSpnOrDivId.all(nLoop).type != "button" && refSpnOrDivId.all(nLoop).type != "radio" && refSpnOrDivId.all(nLoop).type != "checkbox")
+				{
+					// When hiding a field, also clear its contents and ensure that if it has been flagged as
+					// mandatory the colour is cleared
+					refSpnOrDivId.all(nLoop).style.visibility		= "hidden";
+					refSpnOrDivId.all(nLoop).value					= "";
+					refSpnOrDivId.all(nLoop).style.backgroundColor	= "";
+				}
+				
+				//Buttons need to be hidden to stop the user tabbing to them     JLD aqr qq ref 10
+				if(refSpnOrDivId.all(nLoop).type == "button")
+				{
+					refSpnOrDivId.all(nLoop).style.visibility		= "hidden";
+				}
+				
+				//Radio buttons
+				if(refSpnOrDivId.all(nLoop).type == "radio")
+				{
+					refSpnOrDivId.all(nLoop).style.visibility = "hidden";
+
+					// If set, clear the radio button
+					if(refSpnOrDivId.all(nLoop).checked == true)
+					{
+						refSpnOrDivId.all(nLoop).checked = false;
+						
+						// If the radio button is disabled, ensure the label is disabled
+						if(refSpnOrDivId.all(nLoop).disabled == true)
+						{
+							for(var nLabelLoop = 0;nLabelLoop < refSpnOrDivId.all.length;nLabelLoop++)
+							{
+								if(refSpnOrDivId.all(nLabelLoop).tagName == "LABEL")
+								{
+									if(refSpnOrDivId.all(nLoop).id == refSpnOrDivId.all(nLabelLoop).htmlFor)
+									{
+										refSpnOrDivId.all(nLabelLoop).className="msgReadOnlyLabel";
+									}
+								}
+							}
+						}
+					}
+				}
+
+				//Checkboxes
+				if(refSpnOrDivId.all(nLoop).type == "checkbox")
+				{
+					refSpnOrDivId.all(nLoop).style.visibility = "hidden";
+
+					// If set, clear the check box
+					if(refSpnOrDivId.all(nLoop).checked == true)
+					{
+						refSpnOrDivId.all(nLoop).checked = false;
+
+						// If the check box is disabled, ensure the label is disabled
+						if(refSpnOrDivId.all(nLoop).disabled == true)
+						{
+							for(var nLabelLoop = 0;nLabelLoop < refSpnOrDivId.all.length;nLabelLoop++)
+							{
+								if(refSpnOrDivId.all(nLabelLoop).tagName == "LABEL")
+								{
+									if(refSpnOrDivId.all(nLoop).id == refSpnOrDivId.all(nLabelLoop).htmlFor)
+									{
+										refSpnOrDivId.all(nLabelLoop).className="msgReadOnlyLabel";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			//Textarea fields
+			if(refSpnOrDivId.all(nLoop).tagName == "TEXTAREA")
+			{
+				// When hiding a field, also clear its contents and ensure that if it has been flagged as
+				// mandatory the colour is cleared
+				refSpnOrDivId.all(nLoop).style.visibility		= "hidden";
+				refSpnOrDivId.all(nLoop).value					= "";
+				refSpnOrDivId.all(nLoop).style.backgroundColor	= "";
+			}
+			
+			//Combos
+			if(refSpnOrDivId.all(nLoop).tagName == "SELECT")
+			{
+				// If the combo is disabled, dont reset it to option 1
+				if(refSpnOrDivId.all(nLoop).selectedIndex != -1)
+				{
+					refSpnOrDivId.all(nLoop).selectedIndex = 0;
+				}
+
+				refSpnOrDivId.all(nLoop).style.visibility		= "hidden";
+				refSpnOrDivId.all(nLoop).style.backgroundColor	= "";
+			}
+		}
+	}
+
+	// Unhides a <SPAN> or <DIV> and also sets the visibility of the fields contained within it to visible
+	function ShowCollection(refSpnOrDivId)
+	{
+		refSpnOrDivId.style.visibility = "visible";
+		
+		for(var nLoop = 0;nLoop < refSpnOrDivId.all.length;nLoop++)
+		{
+			//INPUT fields (text boxes, radio buttons and check boxes)
+			if(refSpnOrDivId.all(nLoop).tagName == "INPUT")
+			{
+				//Text boxes
+				//if(refSpnOrDivId.all(nLoop).type != "button") JLD aqr qq ref10 un-hide buttons too
+				//{
+					refSpnOrDivId.all(nLoop).style.visibility = "visible";
+				//}
+			}
+
+			// Textarea fields
+			if(refSpnOrDivId.all(nLoop).tagName == "TEXTAREA")
+			{
+				refSpnOrDivId.all(nLoop).style.visibility = "visible";
+			}
+
+			//Combos
+			if(refSpnOrDivId.all(nLoop).tagName == "SELECT")
+			{
+				refSpnOrDivId.all(nLoop).style.visibility = "visible";
+			}
+		}
+	}
+
+	//Loops through all elements of the specified <SPAN> or <DIV> and clears their values
+	function ClearCollection(refSpnOrDivId)
+	{
+		var bIsChanged = false;
+		
+		for(var nLoop = 0;nLoop < refSpnOrDivId.all.length;nLoop++)
+		{
+			//INPUT fields (text boxes, radio buttons and check boxes)
+			//Button type fields are ignored
+			if(refSpnOrDivId.all(nLoop).tagName == "INPUT")
+			{
+				//Text boxes
+				if(refSpnOrDivId.all(nLoop).type != "button"
+				   && refSpnOrDivId.all(nLoop).type != "radio"
+				   && refSpnOrDivId.all(nLoop).type != "checkbox")
+				{
+					if(refSpnOrDivId.all(nLoop).value != "")
+					{
+						bIsChanged = true;
+						refSpnOrDivId.all(nLoop).value = "";
+					}
+				}
+	
+				//Radio buttons
+				if(refSpnOrDivId.all(nLoop).type == "radio")
+				{
+					//Only bother if it is actually checked
+					if(refSpnOrDivId.all(nLoop).checked == true)
+					{
+						bIsChanged = true;
+						refSpnOrDivId.all(nLoop).checked = false;
+
+						//If the control is disabled, then we need ensure that the associated label is greyed out
+						if(refSpnOrDivId.all(nLoop).disabled == true)
+						{
+							for(var nButtonLoop = 0;nButtonLoop < refSpnOrDivId.all.length;nButtonLoop++)
+							{
+								if(refSpnOrDivId.all(nButtonLoop).tagName == "LABEL")
+								{
+									if(refSpnOrDivId.all(nLoop).id == refSpnOrDivId.all(nButtonLoop).htmlFor)
+									{
+										refSpnOrDivId.all(nButtonLoop).className="msgReadOnlyLabel";
+									}
+								}
+							}
+						}
+					}
+				}
+
+				//Checkboxes
+				if(refSpnOrDivId.all(nLoop).type == "checkbox")
+				{
+					//Only bother if it is actually checked
+					if(refSpnOrDivId.all(nLoop).checked == true)
+					{
+						bIsChanged = true;
+						refSpnOrDivId.all(nLoop).checked = false;
+
+						//If the control is disabled, then we need to ensure that the associated label is greyed out
+						if(refSpnOrDivId.all(nLoop).disabled == true)
+						{
+							for(nCheckboxLoop = 0;nCheckboxLoop < refSpnOrDivId.all.length;nCheckboxLoop++)
+							{
+								if(refSpnOrDivId.all(nCheckboxLoop).tagName == "LABEL")
+								{
+									if(refSpnOrDivId.all(nLoop).id == refSpnOrDivId.all(nCheckboxLoop).htmlFor)
+									{
+										refSpnOrDivId.all(nCheckboxLoop).className="msgReadOnlyLabel";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			//Textarea fields
+			if(refSpnOrDivId.all(nLoop).tagName == "TEXTAREA")
+			{
+				if(refSpnOrDivId.all(nLoop).value != "")
+				{
+					bIsChanged = true;
+					refSpnOrDivId.all(nLoop).value = "";
+				}
+			}
+
+			//Combos
+			if(refSpnOrDivId.all(nLoop).tagName == "SELECT")
+			{
+				//If the index is -1, the combo is in disabled mode, so we don't want to set it back to option 1
+				if(refSpnOrDivId.all(nLoop).selectedIndex != -1)
+				{
+					if(refSpnOrDivId.all(nLoop).selectedIndex != 0)
+					{
+						refSpnOrDivId.all(nLoop).selectedIndex = 0;
+					}
+				}
+			}
+		}
+
+		return bIsChanged;
+	}
+
+	// Checks to see if the omigamenu frame exists
+	function IsOmigaMenuFrame(thisWindow)
+	{
+		var bReturn = false;
+		
+		// Search through all frames belonging to the parent of thisWindow
+		for(var nLoop = 0; nLoop < thisWindow.parent.frames.length; nLoop++)
+		{
+			var thisFrame = thisWindow.parent.frames.item(nLoop);
+			if(thisFrame.name == "omigamenu")
+			{
+				bReturn = true;
+			}
+		}
+
+		return bReturn;
+	}
+
+	// Gets the value of a field contained in the frmContext form belonging to the omigamenu frame
+	// If omigamenu isn't present, prompts for an input value (should only happen during stand alone testing)
+	function GetContextParameter(thisWindow,sContextParameterId,sDefaultValue)
+	{
+		var sValue = "";
+		
+		if(IsOmigaMenuFrame(thisWindow) == true)
+		{
+			var frmContext	= thisWindow.parent.frames("omigamenu").document.forms("frmContext");
+			sValue			= frmContext(sContextParameterId).value;
+		}
+		else
+		{
+			// If null is specified for sDefaultValue, merely passing it into the prompt causes the word
+			// "null" to appear in the field, so we must ensure that it is replaced by an empty string
+			var sValueToShow = "";
+			if(sDefaultValue != null)
+			{
+				sValueToShow = sDefaultValue;
+			}
+
+			sValue = thisWindow.prompt("Enter value for context parameter " + sContextParameterId, sValueToShow);
+		}
+
+		return sValue;
+	}
+
+	// Sets the value of a field contained in the frmContext form belonging to the omigamenu frame
+	function SetContextParameter(thisWindow,sContextParameterId,sValue)
+	{
+		if(IsOmigaMenuFrame(thisWindow) == true)
+		{
+			// If null is specified for sValue, merely assigning it to the context field causes the word
+			// "null" to appear in the field, so we must ensure that it is replaced by an empty string
+			var sValueToSet = "";
+			if(sValue != null)
+			{
+				sValueToSet = sValue;
+			}
+			
+			var frmContext	= thisWindow.parent.frames("omigamenu").document.forms("frmContext");
+			frmContext(sContextParameterId).value = sValueToSet;
+
+			// AY 08/09/99 Framework Development
+			// When setting the customer name context fields, set the visible customer name fields as well
+			var sDivId = null;
+			var sLabelId = null;
+			
+			switch(sContextParameterId)
+			{
+				case "idCustomerName1":
+					sDivId		= "divCustomer1";
+					sLabelId	= "lblCustomer1";
+				break;
+
+				case "idCustomerName2":
+					sDivId		= "divCustomer2";
+					sLabelId	= "lblCustomer2";
+				break;
+
+				case "idCustomerName3":
+					sDivId		= "divCustomer3";
+					sLabelId	= "lblCustomer3";
+				break;
+
+				case "idCustomerName4":
+					sDivId		= "divCustomer4";
+					sLabelId	= "lblCustomer4";
+				break;
+
+				case "idCustomerName5":
+					sDivId		= "divCustomer5";
+					sLabelId	= "lblCustomer5";
+				break;
+				
+				default:
+				break;
+			}
+
+			// If a customer name context field has been set
+			if(sDivId != null)
+			{
+				// Get the span and label objects, just to make the rest of the code a bit tidier
+				var thisDiv		= thisWindow.parent.frames("omigamenu").document.all(sDivId);
+				var thisLabel	= thisWindow.parent.frames("omigamenu").document.all(sLabelId);
+
+				// Clear the title attribute. This will only be set if the label is visible and has overflowed
+				// N.B. we have to set the title on the background div because it won't work on the label
+				thisDiv.title = "";
+					
+				if(sValueToSet == "")
+				{
+					// If the value is empty, clear the label and hide the span containing
+					// the label and its bullet
+					thisDiv.style.visibility	= "hidden";
+					thisLabel.innerHTML			= "";
+				}
+				else
+				{
+					// Make the label and its bullet visible
+					thisDiv.style.visibility = "visible";
+
+					// Initialise the label with something and get its offsetHeight
+					// If the label was empty, 0 would be returned
+					// Also get the width specified for the label
+					thisLabel.innerHTML	= "X";
+					var nStartHeight	= thisLabel.offsetHeight;
+					var nStartWidth		= thisLabel.style.posWidth;
+					
+					// First of all set the label value to the full input value
+					// Remember the length of the input value at this point
+					var sLabelValue	= sValueToSet;
+					var nLength		= sValueToSet.length;
+					var nNewHeight;
+					var nNewWidth;
+					
+					// Keep populating the label with a modified string until it fits on one line within the allowable
+					// width or until the length of the string is zero (a failsafe only - this shouldn't happen).
+					do
+					{
+						// Set the label to the label value and get the label height
+						thisLabel.innerHTML	= sLabelValue;
+						nNewHeight			= thisLabel.offsetHeight;
+						nNewWidth			= thisLabel.offsetWidth;
+			
+						// If the height has increased then the text has wrapped to more than one line
+						// Is the offsetWidth > available width?
+						// Decrease the length of the label value and add ... to the end
+						if(nNewHeight > nStartHeight || nNewWidth > nStartWidth)
+						{
+							nLength--;
+							sLabelValue = sValueToSet.substr(0,nLength) + "...";
+						}
+					}
+					while((nNewHeight > nStartHeight && nLength > 0 || nNewWidth > nStartWidth) && nLength > 0);
+
+					// If the label value does not equal the full value, set the title attribute
+					if(sLabelValue != sValueToSet)
+					{
+						thisDiv.title = sValueToSet;
+					}
+				}
+				
+				if(thisWindow.parent.frames("omigamenu").document.all("divCustomer1").style.visibility == "visible"
+				   || thisWindow.parent.frames("omigamenu").document.all("divCustomer2").style.visibility == "visible"
+				   || thisWindow.parent.frames("omigamenu").document.all("divCustomer3").style.visibility == "visible"
+				   || thisWindow.parent.frames("omigamenu").document.all("divCustomer4").style.visibility == "visible"
+				   || thisWindow.parent.frames("omigamenu").document.all("divCustomer5").style.visibility == "visible")
+				{
+					thisWindow.parent.frames("omigamenu").document.all("spnCustomers").style.visibility = "visible";
+				}
+				else
+				{
+					thisWindow.parent.frames("omigamenu").document.all("spnCustomers").style.visibility = "hidden";
+				}
+			}
+		}
+	}
+
+	// Searches the context fields for the Customer Number and returns the associated name
+	function GetContextCustomerName(thisWindow,sCustomerNumber)
+	{
+		var sCustomerName = "<ERROR>";
+		
+		if(IsOmigaMenuFrame(thisWindow) == true)
+		{
+			// Go through each set of customer context fields to find a matching customer number
+			for(var nLoop = 1;nLoop <= 5 && sCustomerName == "<ERROR>";nLoop++)
+			{
+				var sCustomerNumberId	= "idCustomerNumber" + nLoop;
+				var sCustomerNameId		= "idCustomerName" + nLoop;
+				var frmContext			= thisWindow.parent.frames("omigamenu").document.forms("frmContext");
+			
+				if(frmContext(sCustomerNumberId).value == sCustomerNumber)
+				{
+					sCustomerName = frmContext(sCustomerNameId).value;
+				}
+			}
+		}
+		else
+		{
+			sCustomerName = "<NO CONTEXT>";
+		}
+
+		return sCustomerName;
+	}
+		
+	// Finds the first field in a screen where the focus can be set
+	function SetFocusToFirstField(frmReference)
+	{
+		var bIsFocusSet = false;
+
+		// Loop through the screen from the top
+		for(var nLoop = 0;nLoop < frmReference.elements.length && bIsFocusSet == false;nLoop++)
+		{
+			bIsFocusSet = DoFocusProcessing(frmReference,nLoop);
+		}
+	}
+
+	// Finds the last field in a screen where the focus can be set
+	function SetFocusToLastField(frmReference)
+	{
+		var bIsFocusSet = false;
+
+		// Loop through the screen from the bottom
+		for(var nLoop = frmReference.elements.length - 1;nLoop >= 0 && bIsFocusSet == false;nLoop--)
+		{
+			bIsFocusSet = DoFocusProcessing(frmReference,nLoop);
+		}
+	}
+
+	// Only available within this file
+	// Check the frmReference(nElement) field to see whether focus can be set on it
+	function DoFocusProcessing(frmReference,nElement)
+	{
+		var bIsFocusSet	= false;
+		var nFocusField	= null;
+			
+		if(frmReference.elements(nElement).tagName == "INPUT")
+		{
+			// These input type fields do not have a readonly attribute
+			if(frmReference.elements(nElement).type == "button"
+			   || frmReference.elements(nElement).type == "radio"
+			   || frmReference.elements(nElement).type == "checkbox")
+			{
+				// Check the attributes
+				if(frmReference.elements(nElement).tabIndex != -1
+				   && frmReference.elements(nElement).disabled != true
+				   && frmReference.elements(nElement).style.visibility != "hidden")
+				{
+					// In the case of radio buttons, we need to set the focus to the checked radio
+					// button of the group, or if none are checked the first in the group
+					if(frmReference.elements(nElement).type == "radio")
+					{
+						// Search for radio buttons belonging to the same group
+						var sGroupName = frmReference.elements(nElement).name;
+
+						for(var nLoop = 0;nLoop < frmReference.elements.length;nLoop++)
+						{
+							if(frmReference.elements(nLoop).name == sGroupName)
+							{
+								// Remember the first radio button
+								if(nFocusField == null)
+								{
+									nFocusField = nLoop;
+								}
+
+								// Remember the checked radio button
+								if(frmReference.elements(nLoop).checked == true)
+								{
+									nFocusField = nLoop;
+								}
+							}
+						}
+					}
+					else
+					{
+						nFocusField = nElement;
+					}
+				}
+			}
+			else
+			{
+				// Check the attributes for the remaining input types, which will include readonly
+				if(frmReference.elements(nElement).tabIndex != -1
+				   && frmReference.elements(nElement).disabled != true
+				   && frmReference.elements(nElement).readonly != true
+				   && frmReference.elements(nElement).style.visibility != "hidden")
+				{
+					nFocusField = nElement;
+				}
+			}
+		}
+		else
+		{
+			if(frmReference.elements(nElement).tagName == "TEXTAREA")
+			{
+				// Check the attributes
+				if(frmReference.elements(nElement).tabIndex != -1
+				   && frmReference.elements(nElement).disabled != true
+				   && frmReference.elements(nElement).style.visibility != "hidden")
+				{
+					nFocusField = nElement;
+				}
+			}
+			else
+			{
+				if(frmReference.elements(nElement).tagName == "SELECT")
+				{
+					// Check the attributes for SELECT fields
+					if(frmReference.elements(nElement).tabIndex != -1
+					   && frmReference.elements(nElement).disabled != true
+					   && frmReference.elements(nElement).style.visibility != "hidden")
+					{
+						nFocusField = nElement;
+					}
+				}
+			}
+		}
+			
+		// If a field is flagged, set the focus to it and return true
+		if(nFocusField != null)
+		{
+				frmReference.elements(nFocusField).focus();
+				bIsFocusSet = true;
+		}
+
+		return bIsFocusSet;
+	}
+
+	// Place text into a field and format it to fit into the field's dimensions dimensions
+	function SizeTextToField(refField,sValue)
+	{
+		if(refField.tagName == "TD")
+		{
+			// Clear the title attribute. This will only be set if the text is visible and has overflowed
+			refField.title = "";
+					
+			if(sValue == "")
+			{
+				// If the value is empty clear the field 
+				refField.innerText = "";
+			}
+			else
+			{
+				// Get the starting width and height
+				var nStartHeight	= refField.offsetHeight;
+				var nStartWidth		= refField.offsetWidth;
+					
+				// First of all set the text value to the full input value
+				// Remember the length of the input value at this point
+				var sTextValue	= sValue;
+				var nLength		= sValue.length;
+				var nNewHeight;
+				var nNewWidth;
+					
+				// Keep populating the text with a modified string until it fits on one line within the allowable
+				// width or until the length of the string is zero (a failsafe only - this shouldn't happen).
+				do
+				{
+					// Set the text to the text value and get the height
+					refField.innerText	= sTextValue;
+					nNewHeight			= refField.offsetHeight;
+					nNewWidth			= refField.scrollWidth;
+			
+					// If the height has increased then the text has wrapped to more than one line
+					// Is the offsetWidth > available width?
+					// Decrease the length of the text value and add ... to the end
+					if(nNewHeight > nStartHeight || nNewWidth > nStartWidth)
+					{
+						nLength--;
+						sTextValue = sValue.substr(0,nLength) + "...";
+					}
+				}
+				while((nNewHeight > nStartHeight && nLength > 0 || nNewWidth > nStartWidth) && nLength > 0);
+
+				// If the text value does not equal the full value, set the title attribute
+				if(sTextValue != sValue)
+				{
+					refField.title = sValue;
+				}
+			}
+		}
+	}
+
+	// Get the date from a field and compare it to the system date
+	function CompareDateFieldToSystemDate(refDateField,sComparison)
+	{
+		var dtFieldDate = GetDateObject(refDateField);
+		
+		// Get the current date (but strip out the time info)
+		var dtTempCurrentDate	= new Date();
+		var dtCurrentDate		= new Date(dtTempCurrentDate.getFullYear(),
+								           dtTempCurrentDate.getMonth(),
+								           dtTempCurrentDate.getDate());
+
+		var bIsValid = CompareDates(dtFieldDate,sComparison,dtCurrentDate);
+
+		return bIsValid;
+	}
+
+	// Get the dates from two fields and compare them
+	function CompareDateFields(refFirstDateField,sComparison,refSecondDateField)
+	{
+		var dtFirstDate		= GetDateObject(refFirstDateField);
+		var dtSecondDate	= GetDateObject(refSecondDateField);
+		var bIsValid		= CompareDates(dtFirstDate,sComparison,dtSecondDate);
+
+		return bIsValid;
+	}
+
+	// Only available within this file
+	// Compare two date objects
+	function CompareDates(dtFirstDate,sComparison,dtSecondDate)
+	{
+		var bIsValid = false;
+		
+		// Only compare if both are valid dates
+		if(dtFirstDate != null && dtSecondDate != null)
+		{
+			// Do the required comparison
+			switch(sComparison)
+			{
+				case "<":
+					if(dtFirstDate < dtSecondDate)
+					{
+						bIsValid = true;
+					}
+				break;
+
+				case "<=":
+					if(dtFirstDate <= dtSecondDate)
+					{
+						bIsValid = true;
+					}
+				break;
+
+				case "=":
+					if(dtFirstDate == dtSecondDate)
+					{
+						bIsValid = true;
+					}
+				break;
+
+				case ">=":
+					if(dtFirstDate >= dtSecondDate)
+					{
+						bIsValid = true;
+					}
+				break;
+
+				case ">":
+					if(dtFirstDate > dtSecondDate)
+					{
+						bIsValid = true;
+					}
+				break;
+
+				default:
+					alert("CompareDates - Invalid comparison string");
+				break;
+			}
+		}
+
+		return bIsValid;
+	}
+		
+	// Return the date contained in a field as a date object
+	function GetDateObject(refDateField)
+	{
+		var dtFieldDate = null;
+		
+		// If the field contains something
+		if(refDateField.value.length > 0)
+		{
+			// Ensure that the date format is valid
+			if(refDateField.value.length == 10 && refDateField.style.textDecorationLineThrough != true)
+			{
+				// Put the date contained in the field into a date object
+				var sFieldDate = refDateField.value;
+				
+				var sDay		= sFieldDate.substr(0,2);
+				var sMonth		= sFieldDate.substr(3,2);
+				var sYear		= sFieldDate.substr(6,4);
+				dtFieldDate		= new Date(sYear,sMonth-1,sDay);
+			}
+			else
+			{
+				alert("Invalid Date Format");
+				refDateField.focus();
+			}
+		}
+		
+		return dtFieldDate;
+	}
+	
+	//Loops through all elements of the specified collection and sets them to read only
+	function SetCollectionToReadOnly(refSpnOrDivId)
+	{
+		for(var nLoop = 0;nLoop < refSpnOrDivId.all.length;nLoop++)
+		{
+			if (refSpnOrDivId.all(nLoop).id != "")
+			{
+				SetFieldToReadOnly(refSpnOrDivId, refSpnOrDivId.all(nLoop).id);
+			}
+		}
+	}
+	
+	//Loops through all elements of the specified collection and sets them to writable
+	function SetCollectionToWritable(refSpnOrDivId)
+	{
+		for(var nLoop = 0;nLoop < refSpnOrDivId.all.length;nLoop++)
+		{
+			if (refSpnOrDivId.all(nLoop).id != "")
+			{
+				SetFieldToWritable(refSpnOrDivId, refSpnOrDivId.all(nLoop).id);
+			}
+		}
+	}
+	
+	function GetComboValidationType(frmReference, sFieldId)
+	{	
+		var sValidationType = "";
+				
+		if (frmReference.all(sFieldId).tagName == "SELECT")
+		{
+			var iIndex = frmReference.all(sFieldId).selectedIndex;
+			
+			if (iIndex != -1)
+			{
+				var TagOption	= frmReference.all(sFieldId).options.item(iIndex);
+						
+				sValidationType = TagOption.getAttribute("ValidationType0");									
+			}
+		}		
+		return sValidationType;
+	}
+	
+	function SetComboOnValidationType(frmReference, sFieldId, sValue)
+	{
+		var blnFound = false;
+		
+		for(var nLoop = 0; nLoop < frmReference.all(sFieldId).options.length && blnFound == false;
+			nLoop++)
+		{			
+			blnFound = IsOptionValidationType(frmReference.all(sFieldId), nLoop, sValue)							
+		}
+		
+		if (blnFound == true)
+		{
+			frmReference.all(sFieldId).value = nLoop-1;
+		}	
+		else
+		{
+			alert("Combo option validation type not found");
+		}
+	}
+
+	// Enables a drilldown
+	function EnableDrillDown(refField)
+	{
+		// Only do something if it is a button type field with the class set to msgDisabledDDButton
+		if(refField.tagName == "INPUT")
+		{
+			if(refField.type == "button")
+			{
+				if(refField.className == "msgDisabledDDButton")
+				{
+					refField.className	= "msgDDButton";
+					refField.disabled	= false;
+					refField.tabIndex	= 0;
+				}
+			}
+		}
+	}
+
+	// Disables a drilldown
+	function DisableDrillDown(refField)
+	{
+		// Only do something if it is a button type field with the class set to msgDDButton
+		if(refField.tagName == "INPUT")
+		{
+			if(refField.type == "button")
+			{
+				if(refField.className == "msgDDButton")
+				{
+					refField.className	= "msgDisabledDDButton";
+					refField.disabled	= true;
+					refField.tabIndex	= -1;
+				}
+			}
+		}
+	}
+</script>

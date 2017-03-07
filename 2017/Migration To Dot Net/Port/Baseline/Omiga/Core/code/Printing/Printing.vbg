@@ -1,0 +1,6 @@
+VBGROUP 5.0
+StartupProject=..\..\..\BaselineCode\Core\Printing\omDPS\omDPS.vbp
+Project=..\..\..\BaselineCode\Core\Printing\omFVS\omFVS.vbp
+Project=..\..\..\BaselineCode\Core\Printing\omPM\omPM.vbp
+Project=..\..\..\BaselineCode\Core\Printing\omPrint\omPrint.vbp
+Project=..\..\..\BaselineCode\Core\Base\omBase\omBase.vbp

@@ -1,0 +1,9 @@
+PaymentProtectionBO = 0, 0, 0, 0, C
+PaymentProtectionDO = 0, 0, 0, 0, C
+ConvertAssist = 0, 0, 0, 0, C
+GeneralAssist = 0, 0, 0, 0, C
+XMLAssist = 0, 0, 0, 0, C
+ErrAssist = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+SQLAssist = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C

@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>7.10.6030</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{668CE31F-980B-4A48-B24B-82FEAA7EC746}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon />
+    <AssemblyKeyContainerName />
+    <AssemblyName>omAdminCS</AssemblyName>
+    <AssemblyOriginatorKeyFile>C:\Build Epsom2\2 Int Code\Keys\Mars.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Vertex.Fsd.Omiga.omAdminCS</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject />
+    <WebReference_EnableProperties>true</WebReference_EnableProperties>
+    <WebReference_EnableSQLTypes>false</WebReference_EnableSQLTypes>
+    <WebReference_EnableLegacyEventingModel>true</WebReference_EnableLegacyEventingModel>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <COMReference Include="COMSVCSLib">
+      <Guid>{2A005C00-A5DE-11CF-9E66-00AA00A3F464}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <HintPath>C:\Build Epsom2\2 Int Code\Administration Interface\omAdminCS\bin\Debug\Interop.COMSVCSLib.dll</HintPath>
+    </COMReference>
+    <COMReference Include="MESSAGEQUEUECOMPONENTVCLib">
+      <Guid>{B0C456C2-4DAE-11D4-823C-005004E8D1A7}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <HintPath>C:\Build Epsom2\2 Int Code\Administration Interface\omAdminCS\bin\Debug\Interop.MESSAGEQUEUECOMPONENTVCLib.dll</HintPath>
+    </COMReference>
+    <COMReference Include="MSXML2">
+      <Guid>{F5078F18-C551-11D3-89B9-0000F81FE221}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <HintPath>C:\Build Epsom2\2 Int Code\Administration Interface\omAdminCS\bin\Debug\Interop.MSXML2.dll</HintPath>
+    </COMReference>
+    <COMReference Include="omMQ">
+      <Guid>{DD3881D7-2F37-47AC-9EEE-011840412E9E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <HintPath>C:\Build Epsom2\2 Int Code\Administration Interface\omAdminCS\bin\Debug\Interop.omMQ.dll</HintPath>
+    </COMReference>
+    <ProjectReference Include="ExternalXML">
+      <Name>ExternalXML</Name>
+      <Project>{5F9EA575-A579-448F-915B-F9F3E885318C}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <Reference Include="omCore">
+      <Name>omCore</Name>
+      <HintPath>C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omCore.dll</HintPath>
+    </Reference>
+    <Reference Include="omDG">
+      <Name>omDG</Name>
+      <HintPath>C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omDG.dll</HintPath>
+    </Reference>
+    <Reference Include="omLogging">
+      <Name>omLogging</Name>
+      <HintPath>C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omLogging.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminInterfaceBO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AdminInterfaceBO_OnMessage_Input.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OptimusInterface.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web References\WebRefCreateMortgageAccount\Reference.cs">
+      <DependentUpon>Reference.map</DependentUpon>
+      <SubType>code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Web References\WebRefGetCustomerOrProspectDetails\Reference.cs">
+      <DependentUpon>Reference.map</DependentUpon>
+      <SubType>code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Web References\WebRefSearchForCustomerOrProspect\Reference.cs">
+      <DependentUpon>Reference.map</DependentUpon>
+      <SubType>code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Web References\WebRefUpdateCustomerOrProspect\Reference.cs">
+      <DependentUpon>Reference.map</DependentUpon>
+      <SubType>code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <EmbeddedResource Include="AdminInterfaceBO_OnMessage_Input.xsd" />
+    <None Include="AdminInterfaceBO_OnMessage_Input.xsx">
+      <DependentUpon>AdminInterfaceBO_OnMessage_Input.xsd</DependentUpon>
+    </None>
+    <None Include="Web References\WebRefCreateMortgageAccount\CommonTypes.xsd" />
+    <None Include="Web References\WebRefCreateMortgageAccount\CommonTypes.xsx">
+      <DependentUpon>CommonTypes.xsd</DependentUpon>
+    </None>
+    <None Include="Web References\WebRefCreateMortgageAccount\CreateMortgageAccount.wsdl" />
+    <None Include="Web References\WebRefCreateMortgageAccount\CreateMortgageAccount.xsd" />
+    <None Include="Web References\WebRefCreateMortgageAccount\CreateMortgageAccount.xsx">
+      <DependentUpon>CreateMortgageAccount.xsd</DependentUpon>
+    </None>
+    <None Include="Web References\WebRefCreateMortgageAccount\GenericMessages.xsd" />
+    <None Include="Web References\WebRefCreateMortgageAccount\GenericMessages.xsx">
+      <DependentUpon>GenericMessages.xsd</DependentUpon>
+    </None>
+    <None Include="Web References\WebRefCreateMortgageAccount\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebRefGetCustomerOrProspectDetails\CommonTypes.xsd" />
+    <None Include="Web References\WebRefGetCustomerOrProspectDetails\GenericMessages.xsd" />
+    <None Include="Web References\WebRefGetCustomerOrProspectDetails\GetCustomerOrProspectDetails.wsdl" />
+    <None Include="Web References\WebRefGetCustomerOrProspectDetails\GetCustomerOrProspectDetails.xsd" />
+    <None Include="Web References\WebRefGetCustomerOrProspectDetails\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebRefSearchForCustomerOrProspect\CommonTypes.xsd" />
+    <None Include="Web References\WebRefSearchForCustomerOrProspect\GenericMessages.xsd" />
+    <None Include="Web References\WebRefSearchForCustomerOrProspect\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebRefSearchForCustomerOrProspect\SearchForCustomerOrProspect.wsdl" />
+    <None Include="Web References\WebRefSearchForCustomerOrProspect\SearchForCustomerOrProspect.xsd" />
+    <None Include="Web References\WebRefUpdateCustomerOrProspect\CommonTypes.xsd" />
+    <None Include="Web References\WebRefUpdateCustomerOrProspect\GenericMessages.xsd" />
+    <None Include="Web References\WebRefUpdateCustomerOrProspect\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebRefUpdateCustomerOrProspect\UpdateCustomerOrProspect.wsdl" />
+    <None Include="Web References\WebRefUpdateCustomerOrProspect\UpdateCustomerOrProspect.xsd" />
+    <WebReferences Include="Web References\" />
+    <WebReferenceUrl Include="http://localhost/ExternalWebServices/services/CreateMortgageAccount.wsdl">
+      <RelPath>Web References\WebRefCreateMortgageAccount\</RelPath>
+      <UrlBehavior>Static</UrlBehavior>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/ExternalWebServices/services/GetCustomerOrProspectDetails.wsdl">
+      <RelPath>Web References\WebRefGetCustomerOrProspectDetails\</RelPath>
+      <UrlBehavior>Static</UrlBehavior>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/ExternalWebServices/services/SearchForCustomerOrProspect.wsdl">
+      <RelPath>Web References\WebRefSearchForCustomerOrProspect\</RelPath>
+      <UrlBehavior>Static</UrlBehavior>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/ExternalWebServices/services/UpdateCustomerOrProspect.wsdl">
+      <RelPath>Web References\WebRefUpdateCustomerOrProspect\</RelPath>
+      <UrlBehavior>Static</UrlBehavior>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent />
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>

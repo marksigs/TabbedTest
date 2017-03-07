@@ -1,0 +1,10 @@
+[StringTable:Data:0009]
+COMPANY_NAME=Marlborough Stirling
+FOLDER_NAME=MessageQueueListener
+MQLCOMPLUSAPPLICATIONNAME=MessageQueueListenerMTS
+PRODUCT_KEY=MessageQueueListener.exe
+PRODUCT_NAME=MessageQueueListener
+PRODUCT_VERSION=2001.10.5.0
+TITLE_CAPTIONBAR=MessageQueueListener Setup
+TITLE_MAIN=MessageQueueListener
+

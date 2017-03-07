@@ -1,0 +1,17 @@
+comboAssistEx = 0, 0, 0, 0, C
+errAssistEx = 0, 0, 0, 0, C
+guidAssistEx = 0, 0, 0, 0, C
+xmlAssistEx = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C
+ConvertAssistEx = 0, 0, 0, 0, C
+globalAssist = 0, 0, 0, 0, C
+adoAssistEx = 0, 0, 0, 0, C
+DataIngestionBO = 0, 0, 0, 0, C
+GeneralAssist = 0, 0, 0, 0, C
+IDataIngestionTxBO = 0, 0, 0, 0, C
+DataIngestionTxBO = 0, 0, 0, 0, C
+PreprocessingBO = 0, 0, 0, 0, C
+omDataIngestionGlobals = 0, 0, 0, 0, C
+PostprocessingBO = 0, 0, 0, 0, C
+IPreprocessingBO = 0, 0, 0, 0, C
+IPostprocessingBO = 0, 0, 0, 0, C

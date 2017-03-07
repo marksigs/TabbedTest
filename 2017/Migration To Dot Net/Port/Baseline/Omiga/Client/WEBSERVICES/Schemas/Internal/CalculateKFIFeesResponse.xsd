@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Paul Carter (Vertex Financial Services Ltd) -->
+<!--==============================XML Document Control=============================
+Description: GetAffordability - CalculateKFIFees  Response
+
+History:
+
+Version 		Author   	Date       			Description
+01.01			PSC	 		06/11/2006 		EP2_41 Created
+01.02			PSC			07/11/2006		EP2_41 Make types CalculateKFIFees specific
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.CalculateKFIFees.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.CalculateKFIFees.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="RESPONSE" type="CALCKFIFEESRESPONSEType"/>
+	<xs:complexType name="CALCKFIFEESRESPONSEType">
+		<xs:sequence>
+			<xs:element name="FEELIST" type="FEELISTResponseType" minOccurs="0"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FEEResponseType">
+		<xs:attribute name="IDENTIFIER" type="xs:string" use="required"/>
+		<xs:attribute name="DESCRIPTION" type="xs:string" use="required"/>
+		<xs:attribute name="AMOUNT" type="xs:int" use="required"/>
+		<xs:attribute name="CANBEADDEDTOLOAN" type="xs:short" use="required"/>
+		<xs:attribute name="CANBEREFUNDED" type="xs:short" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FEELISTResponseType">
+		<xs:sequence>
+			<xs:element name="FEE" type="FEEResponseType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

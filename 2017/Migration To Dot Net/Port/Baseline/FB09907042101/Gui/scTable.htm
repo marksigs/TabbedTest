@@ -1,0 +1,250 @@
+<html>
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Workfile:		scListBox.htm
+Copyright:		Copyright © 1999 Marlborough Stirling
+
+Description:	File containing table functionality.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MARS Specific History :
+
+Prog	Date		AQR			Description
+GHun	22/07/2005	MAR14		Apply ING Style Sheet and GUI Images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+<head>
+	<meta name=vs_targetSchema content="http://schemas.marlborough-stirling.com/intellisense/ie5_omiga4"/>
+</head>
+<body>
+
+<script language="javascript" type="text/javascript">
+
+	public_description = new listMgr;
+	
+	var m_refTable = null;
+	var m_refKeyInput = null;
+	var m_nKeyCol = null;
+	var m_idRowSelected = null;
+	var m_bIsDisabled = null;
+	
+	function listMgr()
+	{
+		this.initialise = initialise;
+		this.clear = clear;
+		this.getRowSelected = getRowSelected;
+		this.getRowSelectedId = getRowSelectedId;
+		this.setRowSelected = setRowSelected;
+		this.DisableTable = DisableTable;
+		this.EnableTable = EnableTable;
+	}
+	
+	function initialise(refTable, nKeyCol, refKeyInput)
+	{
+		m_refTable = refTable;
+		m_refKeyInput = refKeyInput;
+		m_nKeyCol = nKeyCol;
+		m_refTable.onmouseover = table_mouseover;
+		m_refTable.onmouseout = table_mouseout;
+		m_refTable.onclick = table_onclick;
+		m_bIsDisabled = false;
+	}
+	
+	function DisableTable()
+	{
+		m_bIsDisabled = true;
+	}
+	
+	function EnableTable()
+	{
+		m_bIsDisabled = false;
+	}
+	
+	function clear()
+	{
+		for(var i = 0; i < m_refTable.rows.length; i++)
+		{
+			if(m_refTable.rows(i).id != "rowTitles")
+			{
+				m_refTable.rows(i).style.background = "white";
+				for(var j = 0; j < m_refTable.rows(i).cells.length; j++)
+				{
+					m_refTable.rows(i).cells(j).innerText = " ";
+					// APS 12/08/99 Remove tooltip text
+					m_refTable.rows(i).cells(j).title = "";
+					m_refTable.rows(i).cells(j).style.color = "#616161";
+				}
+			}
+		}
+		m_idRowSelected = null;
+	}
+	
+	function getRowSelectedId()
+	{
+		return m_idRowSelected;
+	}
+	
+	function getRowSelected()
+	{
+		if(m_idRowSelected != null)
+		{
+			for(var i = 0; i < m_refTable.rows.length; i++)
+			{
+				if(m_refTable.rows(i).id == m_idRowSelected)
+				{
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	function setRowSelected(nRow)
+	{
+		for(var i = 0; i < m_refTable.rows.length; i++)
+		{
+			if(m_refTable.rows(i).id != "rowTitles")
+			{
+				if(i == nRow)
+				{
+					m_idRowSelected = m_refTable.rows(i).id;
+					m_refTable.rows(i).style.background = "#FFEFE5";
+					for(var j = 0; j < m_refTable.rows(i).children.length; j++)
+					{
+						m_refTable.rows(i).children(j).style.color = "#616161";
+					}
+				}
+				else
+				{
+					m_refTable.rows(i).style.background = "#FFFFFF";
+					for(var j = 0; j < m_refTable.rows(i).children.length; j++)
+					{
+						m_refTable.rows(i).children(j).style.color = "#616161";
+					}
+				}
+			}
+		}
+		
+		if(nRow == -1)
+		{
+			m_idRowSelected = null;
+		}
+	}
+	
+	function table_mouseover()
+	{	
+		if(m_bIsDisabled == false)
+		{
+			var thisEvent = this.document.parentWindow.event;
+			if(thisEvent.srcElement.tagName == "TD")
+			{
+				if(thisEvent.srcElement.parentElement.id != "rowTitles" && thisEvent.srcElement.parentElement.id != m_idRowSelected)
+				{
+					if (thisEvent.srcElement.parentElement.cells(m_nKeyCol).innerText.length > 0 && thisEvent.srcElement.parentElement.cells(m_nKeyCol).innerText != " ")
+					{
+						thisEvent.srcElement.parentElement.style.background = "#D4DDE9";
+						thisEvent.srcElement.style.cursor = "hand";
+					}
+//					for(var i = 0; i < m_refTable.rows.length; i++)
+//					{
+//						if(m_refTable.rows(i).id != "rowTitles")
+//						{
+//							if(m_refTable.rows(i).id != thisEvent.srcElement.parentElement.id && m_refTable.rows(i).id != m_idRowSelected)
+//							{
+//								m_refTable.rows(i).style.background = "#FFFFFF";
+//								for(var j = 0; j < m_refTable.rows(i).children.length; j++)
+//								{
+//									m_refTable.rows(i).children(j).style.color = "#616161";
+//								}
+//							}
+//						}
+//					}
+				}
+			}
+		}
+	}
+
+	function table_mouseout()
+	{	
+		if(m_bIsDisabled == false)
+		{
+			var thisEvent = this.document.parentWindow.event;
+			if(thisEvent.srcElement.tagName == "TD")
+			{
+				if(thisEvent.srcElement.parentElement.id != "rowTitles" && thisEvent.srcElement.parentElement.id != m_idRowSelected)
+				{
+						thisEvent.srcElement.parentElement.style.background = "#FFFFFF";
+						thisEvent.srcElement.parentElement.style.color = "#616161";
+						thisEvent.srcElement.style.cursor = "";
+				}
+			
+//				for(var i = 0; i < m_refTable.rows.length; i++)
+//				{
+//					if(m_refTable.rows(i).id != "rowTitles")
+//					{
+//						if(m_refTable.rows(i).id != m_idRowSelected)
+//						{
+//							m_refTable.rows(i).style.background = "#FFFFFF";
+//							for(var j = 0; j < m_refTable.rows(i).children.length; j++)
+//							{
+//								m_refTable.rows(i).children(j).style.color = "#616161";
+//							}
+//						}
+//					}
+//				}
+			}
+		}
+	}
+	
+	function table_onclick()
+	{
+		if(m_bIsDisabled == false)
+		{
+			var thisEvent = this.document.parentWindow.event;
+			if(thisEvent.srcElement.tagName == "TD")
+			{
+				if(thisEvent.srcElement.parentElement.id != "rowTitles" && thisEvent.srcElement.parentElement.id != m_idRowSelected)
+				{
+					if(thisEvent.srcElement.parentElement.cells(m_nKeyCol).innerText.length > 0 && thisEvent.srcElement.parentElement.cells(m_nKeyCol).innerText != " ")
+					{
+						thisEvent.srcElement.parentElement.style.background = "#FFEFE5";
+						for(var i = 0; i < thisEvent.srcElement.parentElement.children.length; i++)
+						{
+							thisEvent.srcElement.parentElement.children(i).style.color = "#616161";
+						}
+						for(var i = 0; i < m_refTable.rows.length; i++)
+						{
+							if(m_refTable.rows(i).id != "rowTitles")
+							{
+								if(m_refTable.rows(i).id == m_idRowSelected)
+								{
+									m_refTable.rows(i).style.background = "#FFFFFF";
+									for(var j = 0; j < m_refTable.rows(i).children.length; j++)
+									{
+										m_refTable.rows(i).children(j).style.color = "#616161";
+									}
+									break;
+								}
+							}
+						}
+
+						m_idRowSelected = thisEvent.srcElement.parentElement.id;
+
+						for(var i = 0; i < m_refTable.rows.length; i++)
+						{
+							if(m_refTable.rows(i).id != "rowTitles")
+							{
+								if(m_refTable.rows(i).id == m_idRowSelected)
+								{
+									m_refKeyInput.value = m_refTable.rows(i).cells(m_nKeyCol).innerText;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+</script>
+</body>
+</html>

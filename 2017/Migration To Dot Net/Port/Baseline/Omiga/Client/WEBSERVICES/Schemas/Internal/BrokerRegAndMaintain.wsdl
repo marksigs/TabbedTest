@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: BrokerRegistrationAndMaintain.wsdl
+
+History:
+
+Version Author     Date       		Description
+01.00   SR        	 16/09/2006		Created
+01.01   SR			 31/10/2006		EP2_26 - spelling corrections
+================================================================================-->
+<wsdl:definitions targetNamespace="http://BrokerRegAndMaintain.Omiga.vertex.co.uk" 
+			xmlns="http://BrokerRegAndMaintain.Omiga.vertex.co.uk" 
+			xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+			xmlns:msgRequest="http://Request.BrokerRegAndMaintain.Omiga.vertex.co.uk" 
+			xmlns:msgResponse="http://Response.BrokerRegAndMaintain.Omiga.vertex.co.uk">
+	<wsdl:types>
+		<xs:schema xmlns:msgRequest="http://Request.BrokerRegAndMaintain.Omiga.vertex.co.uk" xmlns:msgResponse="http://Response.BrokerRegAndMaintain.Omiga.vertex.co.uk">
+			<xs:import namespace="http://Request.BrokerRegAndMaintain.Omiga.vertex.co.uk" schemaLocation="BrokerRegAndMaintainRequest.xsd"/>
+			<xs:import namespace="http://Response.BrokerRegAndMaintain.Omiga.vertex.co.uk" schemaLocation="BrokerRegAndMaintainResponse.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="BrokerRegistrationSoapIn">
+		<wsdl:part name="BROKERREGISTER_REQUEST" element="msgRequest:BROKERREGISTER_REQUEST"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBrokerProfileSoapIn">
+		<wsdl:part name="UPDATEBROKERPROFILE_REQUEST" element="msgRequest:UPDATEBROKERPROFILE_REQUEST"/>
+	</wsdl:message>	
+	<wsdl:message name="GetBrokerProfileSoapIn">
+		<wsdl:part name="GETBROKERPROFILE_REQUEST" element="msgRequest:GETBROKERPROFILE_REQUEST"/>
+	</wsdl:message>
+	<wsdl:message name="BrokerRegAndMaintainSoapOut">
+		<wsdl:part name="response" element="msgResponse:RESPONSE"/>
+	</wsdl:message>
+	<wsdl:portType name="BrokerRegAndMaintainPort">
+		<wsdl:operation name="BrokerRegistration">
+			<wsdl:input message="BrokerRegistrationSoapIn"/>
+			<wsdl:output message="BrokerRegAndMaintainSoapOut"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBrokerProfile">
+			<wsdl:input message="UpdateBrokerProfileSoapIn"/>
+			<wsdl:output message="BrokerRegAndMaintainSoapOut"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBrokerProfile">
+			<wsdl:input message="GetBrokerProfileSoapIn"/>
+			<wsdl:output message="BrokerRegAndMaintainSoapOut"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OmigaSoapRpcSoap" type="BrokerRegAndMaintainPort">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<wsdl:operation name="BrokerRegistration">
+			<soap:operation soapAction="http://Request.BrokerRegAndMaintain.BrokerRegistration.Omiga.vertex.co.uk" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBrokerProfile">
+			<soap:operation soapAction="http://Request.BrokerRegAndMaintain.UpdateBrokerProfile.Omiga.vertex.co.uk" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetBrokerProfile">
+			<soap:operation soapAction="http://Request.BrokerRegAndMaintain.GetBrokerProfile.Omiga.vertex.co.uk" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OmigaBrokerRegAndMaintain">
+		<wsdl:port name="BrokerRegAndMaintainPort" binding="OmigaSoapRpcSoap">
+			<soap:address location="http://localhost/OmigaWebServices/BrokerRegAndMaintainWS/OmigaBrokerRegAndMaintainService.asmx"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

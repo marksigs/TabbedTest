@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: FindDirectoryList- Response
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RMH	 		29/06/2005 		Created
+01.02           TLiu             20/07/2005      Changed mars to IDUK in path, named a complexType, added MESSAGE & ERROR.
+01.03           TLiu             22/07/2005      Imported msgCommonTypes.
+01.04			TLiu				22/07/2005		Changed omiga to Omiga in name space.
+01.05			RHart			22/07/2005		Replaced the defined Presponse typ with imported type from common types. Changed the elementFormDefault="qualified" to elementFormDefault="qualified"
+01.06			TLiu				29/07/2005		Fixed Name Spaces.
+01.07			TLiu				11/08/2005		Renamed a complex Type to make names different in Request and Response.
+01.08			TLiu				25/08/2005		Added some missing fields.
+02.01			IK					07/12/2005		NAMEANDADDRESSDIRECTORY, minOccurs="0".
+02.02			PE				21/03/2006		Added DXID and DXLOCATION
+02.03			PE				28/03/2006		Moved DXID and DXLOCATION to NAMEANDADDRESSDIRECTORYResponseType
+02.04			GHun			18/04/2006		Changed DXID and DXLOCATION to have minOccurs="0" attribute
+================================================================================-->
+<!-- as modified by XDSPreReleaseProcessing utility: 21/03/2006 15:00:23 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.FindDirectoryList.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Response.FindDirectoryList.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="AREACODE" type="xs:string"/>
+	<xs:element name="BUILDINGORHOUSENUMBER" type="xs:string"/>
+	<xs:element name="COMPANYNAME" type="xs:string"/>
+	<xs:element name="COUNTRY" type="xs:string"/>
+	<xs:element name="COUNTRYCODE" type="xs:string"/>
+	<xs:element name="COUNTY" type="xs:string"/>
+	<xs:element name="FLATNUMBER" type="xs:string"/>
+	<xs:element name="BUILDINGORHOUSENAME" type="xs:string"/>
+	<xs:element name="DISTRICT" type="xs:string"/>
+	<xs:element name="NAMEANDADDRESSBANKSORTCODE" type="xs:string"/>
+	<xs:element name="EXTENSIONNUMBER" type="xs:string"/>
+	<xs:element name="STATUS" type="xs:short"/>
+	<xs:element name="CONTACTDETAILS" type="msgdt:CONTACTDETAILSType"/>
+	<xs:element name="DIRECTORYGUID" type="msgdt:msgGuid">
+		<xs:annotation>
+			<xs:documentation>Unique Identifier for the type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="HEADOFFICEINDICATOR" type="xs:string"/>
+	<xs:complexType name="NAMEANDADDRESSDIRECTORYResponseType">
+		<xs:sequence>
+			<xs:element ref="DIRECTORYGUID"/>
+			<xs:element ref="NAMEANDADDRESSTYPE"/>
+			<xs:element ref="COMPANYNAME"/>
+			<xs:element ref="HEADOFFICEINDICATOR" minOccurs="0"/>
+			<xs:element ref="NAMEANDADDRESSBANKSORTCODE" minOccurs="0"/>
+			<xs:element ref="BUILDINGORHOUSENAME" minOccurs="0"/>
+			<xs:element ref="BUILDINGORHOUSENUMBER" minOccurs="0"/>
+			<xs:element ref="FLATNUMBER" minOccurs="0"/>
+			<xs:element ref="STREET" minOccurs="0"/>
+			<xs:element ref="DISTRICT" minOccurs="0"/>
+			<xs:element ref="TOWN" minOccurs="0"/>
+			<xs:element ref="COUNTY" minOccurs="0"/>
+			<xs:element ref="COUNTRY" minOccurs="0"/>
+			<xs:element ref="POSTCODE" minOccurs="0"/>
+			<xs:element ref="PANELID" minOccurs="0"/>
+			<xs:element ref="COUNTRYCODE" minOccurs="0"/>
+			<xs:element ref="AREACODE" minOccurs="0"/>
+			<xs:element ref="TELENUMBER" minOccurs="0"/>
+			<xs:element ref="EXTENSIONNUMBER" minOccurs="0"/>
+			<xs:element ref="STATUS" minOccurs="0"/>
+			<xs:element ref="CONTACTDETAILS" minOccurs="0"/>
+			<xs:element name="DXID" type="xs:string" minOccurs="0"/>
+			<xs:element name="DXLOCATION" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NAMEANDADDRESSDIRECTORYLISTType">
+		<xs:sequence>
+			<xs:element name="NAMEANDADDRESSDIRECTORY" type="NAMEANDADDRESSDIRECTORYResponseType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="NAMEANDADDRESSTYPE" type="xs:string"/>
+	<xs:element name="PANELID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Panel Number / ID</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="POSTCODE" type="xs:string"/>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="NAMEANDADDRESSDIRECTORYLIST" type="NAMEANDADDRESSDIRECTORYLISTType" minOccurs="0"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+	<xs:element name="STREET" type="xs:string"/>
+	<xs:element name="TELENUMBER" type="xs:string"/>
+	<xs:element name="TOWN" type="xs:string"/>
+</xs:schema>

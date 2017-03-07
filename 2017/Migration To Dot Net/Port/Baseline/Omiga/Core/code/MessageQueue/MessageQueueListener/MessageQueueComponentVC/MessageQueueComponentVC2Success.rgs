@@ -1,0 +1,26 @@
+HKCR
+{
+	MessageQueueComponentVC.MessageQueueComponentVC2Success.1 = s 'MessageQueueComponentVC2Success Class'
+	{
+		CLSID = s '{C55A7774-DB8E-44B8-9B05-AB0046C20167}'
+	}
+	MessageQueueComponentVC.MessageQueueComponentVC2Success = s 'MessageQueueComponentVC2Success Class'
+	{
+		CLSID = s '{C55A7774-DB8E-44B8-9B05-AB0046C20167}'
+		CurVer = s 'MessageQueueComponentVC.MessageQueueComponentVC2Success.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {C55A7774-DB8E-44B8-9B05-AB0046C20167} = s 'MessageQueueComponentVC2Success Class'
+		{
+			ProgID = s 'MessageQueueComponentVC.MessageQueueComponentVC2Success.1'
+			VersionIndependentProgID = s 'MessageQueueComponentVC.MessageQueueComponentVC2Success'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{B0C456C2-4DAE-11D4-823C-005004E8D1A7}'
+		}
+	}
+}

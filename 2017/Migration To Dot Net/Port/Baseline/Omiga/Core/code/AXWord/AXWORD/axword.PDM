@@ -1,0 +1,208 @@
+[Root]
+Most Recent Package=Axword
+Most Recent Deploy=Folder Deployment (Mike)
+
+[Deploy|axWord Deploy 1|Root]
+Package=axword 1
+Handler=PDWizard.WebPostDplySubWiz
+
+[Deploy|axWord Deploy 1|Package Files]
+C:\Projects\Omiga4\Printing\V2\Package\axword.CAB=Yes
+C:\Projects\Omiga4\Printing\V2\Package\axword.HTM=Yes
+
+[Deploy|axWord Deploy 1|Other Files and Folders]
+
+[Deploy|axWord Deploy 1|WebPost Site]
+URL=http://msgch5838/PrintManager/
+Provider={8B14B770-748C-11D0-A309-00C04FD7CFC5}
+Explode=No
+
+[Deploy|axword Deployment 1|Root]
+Package=axword 1
+Handler=PDWizard.FolderDplySubWiz
+Folder=C:\Program Files\Inetpub\wwwroot\PrintManager
+
+[Deploy|axword Deployment 1|Package Files]
+C:\Projects\Omiga4\Printing\V2\Package\axword.CAB=Yes
+C:\Projects\Omiga4\Printing\V2\Package\axword.HTM=Yes
+
+[Deploy|axword Deployment 1|Other Files and Folders]
+
+[Deploy|axword Deployment 1|WebPost Site]
+URL=http://msgch5838/PrintManager/
+Provider={8B14B770-748C-11D0-A309-00C04FD7CFC5}
+Explode=No
+
+[Deploy|Web Deployment 1|Root]
+Package=axword 1
+Handler=PDWizard.WebPostDplySubWiz
+Folder=C:\Program Files\Inetpub\wwwroot\PrintManager
+
+[Deploy|Web Deployment 1|Package Files]
+C:\PrintManager\Package\axword.CAB=Yes
+C:\PrintManager\Package\axword.HTM=Yes
+
+[Deploy|Web Deployment 1|Other Files and Folders]
+
+[Deploy|Web Deployment 1|WebPost Site]
+URL=http://msgch005061/PrintManager/
+Provider={8B14B770-748C-11D0-A309-00C04FD7CFC5}
+Explode=No
+
+[Deploy|Folder Deployment 1|Root]
+Package=axword 1
+Handler=PDWizard.FolderDplySubWiz
+Folder=C:\INetPub\WWWRoot\PrintManager
+
+[Deploy|Folder Deployment 1|Package Files]
+C:\PrintManager\Package\axword.CAB=Yes
+C:\PrintManager\Package\axword.HTM=Yes
+
+[Deploy|Folder Deployment 1|Other Files and Folders]
+
+[Deploy|Folder Deployment 1|WebPost Site]
+URL=http://msgch005061/PrintManager/
+Provider={8B14B770-748C-11D0-A309-00C04FD7CFC5}
+Explode=No
+
+[Deploy|Folder Deployment (Mike)|Root]
+Package=axword 1
+Handler=PDWizard.FolderDplySubWiz
+Folder=\\ch005365\shared
+
+[Deploy|Folder Deployment (Mike)|Package Files]
+C:\PrintManager\Package\axword.CAB=Yes
+C:\PrintManager\Package\axword.HTM=Yes
+
+[Deploy|Folder Deployment (Mike)|Other Files and Folders]
+
+[Deploy|Folder Deployment (Mike)|WebPost Site]
+URL=http://msgch005061/PrintManager/
+Provider={8B14B770-748C-11D0-A309-00C04FD7CFC5}
+Explode=No
+
+
+[Package|Axword|Root]
+SubWizProgID=PDWizard.InetCABPkgSubWiz
+BuildFolder=C:\Data\Code\Omiga+\AXWord\Package
+
+[Package|Axword|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Axword|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Axword|Files Found]
+
+[Package|Axword|Files Released]
+MSWORD8.OLB=
+
+[Package|Axword|Missing Dependency Information]
+C:\WINNT\system32\msxml3.dll=
+C:\Program Files\Microsoft Office\Office\MSWORD9.OLB=
+C:\WINNT\system32\ObjectSafety.tlb=
+C:\WINNT\system32\psapi.dll=
+C:\WINNT\SYSTEM32\WSpell.ocx=
+C:\WINNT\SYSTEM32\FOXTLIB.OCX=
+C:\WINNT\SYSTEM32\msscript.ocx=
+C:\Program Files\Microsoft Office\Office\WINWORD.EXE=
+C:\WINNT\SYSTEM32\msxml3a.dll=
+C:\WINNT\SYSTEM32\msxml3r.dll=
+C:\Program Files\Microsoft Office\Office\MSWORD8.OLB=
+C:\Program Files\Common Files\Microsoft Shared\Office10\MSO.DLL=
+C:\Program Files\Microsoft Office\Office\MSO9.DLL=
+
+[Package|Axword|Out-of-Date Dependency Information]
+C:\WINNT\system32\scrrun.dll=
+
+[Package|Axword|Files Added]
+c:\winnt\system32\msxml3.dll=
+c:\winnt\system32\msxml3a.dll=
+c:\winnt\system32\msxml3r.dll=
+
+[Package|Axword|Files Removed]
+c:\program files\microsoft office\office\winword.exe=
+c:\program files\microsoft office\office\msword9.olb=
+c:\winnt\system32\wspell.ocx=
+c:\winnt\system32\msvcrt.dll=
+c:\winnt\system32\msscript.ocx=
+c:\winnt\system32\mscomctl.ocx=
+c:\winnt\system32\mscomct2.ocx=
+c:\winnt\system32\comct232.ocx=
+c:\winnt\system32\comct332.ocx=
+c:\winnt\system32\comctl32.ocx=
+c:\winnt\system32\foxtlib.ocx=
+c:\winnt\system32\sysinfo.ocx=
+c:\winnt\system32\scrrun.dll=
+c:\winnt\system32\psapi.dll=
+c:\winnt\system32\objectsafety.tlb=
+c:\program files\microsoft office\office\msword8.olb=
+c:\program files\common files\microsoft shared\office10\mso.dll=
+c:\program files\microsoft office\office\mso9.dll=
+
+[Package|Axword|Files In Project]
+C:\WINNT\system32\msvbvm60.dll=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINNT\system32\psapi.dll=No
+C:\WINNT\system32\ObjectSafety.tlb=No
+C:\WINNT\SYSTEM32\msxml3.dll=Yes
+C:\WINNT\SYSTEM32\msxml3a.dll=Yes
+C:\WINNT\SYSTEM32\msxml3r.dll=Yes
+C:\Data\Code\Omiga+\AXWord\axword.dll=Yes
+C:\Program Files\Microsoft Office\Office\MSWORD9.OLB=No
+C:\Program Files\Microsoft Office\Office\MSO9.DLL=No
+
+[Package|Axword|Configure Registry Files]
+Applicable=No
+
+[Package|Axword|Configure Remote Servers]
+Applicable=No
+
+[Package|Axword|Install Locations]
+
+[Package|Axword|Configure Shared Files]
+Applicable=
+
+[Package|Axword|ComponentInfo]
+axword.dll=thiscab
+msvbvm60.dll=thiscab
+OLEAUT32.DLL=thiscab
+OLEPRO32.DLL=thiscab
+ASYCFILT.DLL=thiscab
+STDOLE2.TLB=thiscab
+COMCAT.DLL=thiscab
+psapi.dll=thiscab
+scrrun.dll=http://activex.microsoft.com/controls/vb6/ScrRun.cab
+msvcrt.dll=thiscab
+ObjectSafety.tlb=thiscab
+MSWORD9.OLB=
+msxml3.dll=thiscab
+WINWORD.EXE=thiscab
+msscript.ocx=thiscab
+COMCT232.OCX=http://activex.microsoft.com/controls/vb6/ComCt232.cab
+Comctl32.ocx=http://activex.microsoft.com/controls/vb6/ComCtl32.cab
+MSCOMCTL.OCX=http://activex.microsoft.com/controls/vb6/MSComCtl.cab
+MSCOMCT2.OCX=http://activex.microsoft.com/controls/vb6/MSComCt2.cab
+FOXTLIB.OCX=thiscab
+COMCT332.OCX=http://activex.microsoft.com/controls/vb6/Comct332.cab
+SYSINFO.OCX=http://activex.microsoft.com/controls/vb6/SysInfo.cab
+WSpell.ocx=thiscab
+msxml3a.dll=thiscab
+msxml3r.dll=thiscab
+
+[Package|Axword|ObjectInfo]
+axwordclass=true;true
+
+[Package|Axword|Package]
+PackageFolder=C:\Data\Code\Omiga+\AXWord\Package
+ProjectFolder=C:\Data\Code\Omiga+\AXWord
+ServerSideCab=C:\Data\Code\Omiga+\AXWord\Package\axword.CAB
+File1=C:\Data\Code\Omiga+\AXWord\Package\axword.CAB
+File2=C:\Data\Code\Omiga+\AXWord\Package\axword.HTM
+Handler1=PDWizard.WebPostDplySubWiz
+Handler2=PDWizard.FolderDplySubWiz

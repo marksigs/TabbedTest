@@ -1,0 +1,1706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):   Ranjit Jain    
+ 
+
+Description  Schema definations for data transfer between Omiga to Direct Gateway for Credit Check Request and Response
+
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://creditcheck.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:datatype="http://datatypes.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:creditcheck="http://creditcheck.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="..//GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="..//CommonTypes.xsd"/>
+	<import namespace="http://datatypes.externalInterface.services.dg.ingdirect.com/0.0.1" schemaLocation="DataType.xsd"/>
+	<!--
+	-->
+	<annotation>
+		<documentation>
+                    	Schema definitions for data transfer between Omiga  and Experian (CreditCheck ) vice versa.
+                    	This schema defines three message types ,
+			                    	1. CreditCheckRequestType and  2. CreditCheckResponseType 3. CreditCheckErrorResponseType
+       		 	for request and response respesctively.
+		</documentation>
+		<documentation>
+       		  	document version = 0.1
+       	</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+				Change the name of the following complex type and elements 
+					1. CreditCheckResponse - CreditCheckResponseType 
+					2. CreditCheckTypeDetails - CreditCheck 
+					3. CdtCkMultAddDetails - CdtCkMultAdd 
+					4. CdtCkAddClarfDetails - CdtCkAddClarf 
+					5. CreditCheckErrorDetails - CreditCheckError 
+			</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+       		  	document version = 0.2
+       	</documentation>
+		<documentation>
+		1) Changes as per Experian Input/Output Definition V 1.8 and V 1.9, V 1.10
+		2) Reference to elements removed and moved inside respective blocks
+		3) Include O in MaritalStatus
+		4) RESINAMEDATE block removed. Elements moved inside RESY block.
+
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+       		  	document version = 0.3
+       	</documentation>
+		<documentation>
+		1) Change incude to import for DataTypes.xsd due to technical problems on Omiga side.
+	       2) Removed Pattern from title, forename and surname
+		3) APPNO Size change from 10 to 16
+		4) SequenceNumber lengh set to 10 digits
+		5) minOccurs=0 added for response elements
+		6) AM90 maxoccurs=2
+              7) EXP_ExperianRef datatype in CreditCheckErrorType modified from str10 to str10b
+              8) Blank value allowed in RESY.ADDRESSINDICATOR and RESY. ADDRESSNUMBER
+              9) SEQBLOCK added with complexType seqType for NAMESEQUENCE, FromDate and ToDate due to problems faced by Omiga while xml transmission
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+       		  	document version = 0.4
+       	</documentation>
+		<documentation>
+				CreditCheckResponseType modified to address the possibility of both CdtCkMultAddResponse and CdtCkAddClarfResponse in response.
+				Choice is replaced by sequence around the element  CreditCheckResponse, CdtCkMultAddResponse, CdtCkAddClarfResponse and CreditCheckErrorResponse.	
+		</documentation>
+	</annotation>
+	<complexType name="CreditCheckRequestType">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="ESERIES">
+						<complexType>
+							<sequence>
+								<element name="FORM_ID" type="datatype:str40FormId">
+									<annotation>
+										<documentation>
+       		  						Must be set to CONFT1
+       		  						</documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="EXP">
+						<complexType>
+							<sequence>
+								<element name="EXPERIANREF" type="datatype:str10b">
+									<annotation>
+										<documentation>
+       		  						The Experian Reference Number that identifies a specific application. 
+       		  						</documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="AC01">
+						<complexType>
+							<sequence>
+								<element name="CLIENTKEY" type="datatype:str10CLIENTKEY">
+									<annotation>
+										<documentation>
+       		  						Must be set to INGDIR
+       		  						</documentation>
+									</annotation>
+								</element>
+								<element name="ENTRYPOINT" type="datatype:entrypointrange">
+									<annotation>
+										<documentation>
+       		  						Set to 0010 for all requests
+       		  						</documentation>
+									</annotation>
+								</element>
+								<element name="FUNCTION" type="creditcheck:str4range">
+									<annotation>
+										<documentation>
+       		  						Allowed values:
+									0010 Application Input
+									0011 Post Archive Application
+									0020 Reprocess
+									0025 Rescore
+       		  						</documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="TPD1">
+						<complexType>
+							<sequence>
+								<element name="SPAOPTOUT" type="datatype:str1range" default="N">
+									<annotation>
+										<documentation>
+       		  						Confirmation of whether the applicant wishes to ‘opt out’ of the return of ‘same person associated‘ bureau data.
+       		  						Set to 'N' - Opt out not set
+       		  						</documentation>
+									</annotation>
+								</element>
+								<element name="TRANSASSOC" type="datatype:str1range" default="N">
+									<annotation>
+										<documentation>
+       		  						Confirmation of whether applicants should be treated as financial associates (i.e. permanent association) or not.
+       		  						Set to 'N' - Association is permanent       		  						</documentation>
+									</annotation>
+								</element>
+								<element name="HHO" type="datatype:str1range" default="N">
+									<annotation>
+										<documentation>
+       		  						    Household override flag.
+       		  						    Set to 'N' - HHO score not required
+       		  						    </documentation>
+									</annotation>
+								</element>
+								<element name="OPTOUTCUTOFF" type="datatype:str4b">
+									<annotation>
+										<documentation>
+       		  						    Opt-out validity cut-off
+       		  						    Set to space
+       		  						    </documentation>
+									</annotation>
+								</element>
+								<element name="DBTYPE" type="datatype:str1DBTyperange">
+									<annotation>
+										<documentation>
+       		  						    Consumer Test Database
+       		  						    Set to space
+       		  						    </documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="NAME" maxOccurs="4">
+						<complexType>
+							<sequence>
+								<element name="TYPE" type="creditcheck:str1Typerange" nillable="false">
+									<annotation>
+										<documentation>
+       		  						    These details may be repeated for the main applicant, joint applicant and any aliases. The name blocks must be supplied in the 											following sequence:
+											Allowed values:
+											1 – Main Applicant
+											5 - Joint Applicant
+											2 – Alias for Main Applicant
+											6 – Alias for Joint Applicant
+       		  						    </documentation>
+									</annotation>
+								</element>
+								<element name="CODE" type="datatype:str1b">
+									<annotation>
+										<documentation>
+       		  						     Used for alias processing. Set to space
+       		  						    </documentation>
+									</annotation>
+								</element>
+								<element name="BirthDate" type="creditcheck:SimpleDateTypeExt">
+									<annotation>
+										<documentation>
+       		  						     Applicant's date of birth. This is three fields in the Experian Interface.
+       		  						    </documentation>
+									</annotation>
+								</element>
+								<element name="TITLE" type="creditcheck:titlerange">
+									<annotation>
+										<documentation>
+       		  						     The applicant’s title.       		  						    </documentation>
+									</annotation>
+								</element>
+								<element name="FORENAME" type="creditcheck:namerange" nillable="false">
+									<annotation>
+										<documentation>
+       		  						     The applicant’s first name.       		  						    </documentation>
+									</annotation>
+								</element>
+								<element name="INITIALS" type="creditcheck:namerangeini">
+									<annotation>
+										<documentation>
+       		  						     The applicant’s middle name or initial.       		  						    </documentation>
+									</annotation>
+								</element>
+								<element name="SURNAME" type="creditcheck:namerangesur" nillable="false">
+									<annotation>
+										<documentation>
+       		  						     The applicant’s last name.
+       		  						      </documentation>
+									</annotation>
+								</element>
+								<element name="SUFFIX" type="datatype:str10b">
+									<annotation>
+										<documentation>
+       		  						     Set to space
+       		  						      </documentation>
+									</annotation>
+								</element>
+								<element name="SEX" type="creditcheck:sexType">
+									<annotation>
+										<documentation>
+       		  						     The applicant’s gender.
+       		  						     Allowed values:
+										M – Male
+										F – Female
+       		  						      </documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="ADDR" type="creditcheck:AddrType" maxOccurs="6">
+						<annotation>
+							<documentation>
+       		  						     	Must be sent in the following sequence:
+       		  						    	Main Applicant current address
+										Main Applicant previous address
+										Main Applicant 2nd previous address
+										Joint Applicant current address
+										Joint Applicant previous address
+										Joint Applicant 2nd previous address
+       		  						      </documentation>
+						</annotation>
+					</element>
+					<element name="RESY" maxOccurs="6">
+						<complexType>
+							<sequence>
+								<element name="ADDRESSNUMBER">
+									<annotation>
+										<documentation>
+       		  						     	Allowed values are:
+										01 Main Applicant Current
+										02 Joint Applicant Current
+										11 Main Applicant Previous
+										12 Joint Applicant Previous
+										21 Main Applicant 2nd Previous
+										22 Joint Applicant 2nd Previous
+       		  						      </documentation>
+									</annotation>
+									<simpleType>
+										<restriction base="string">
+											<enumeration value="01"/>
+											<enumeration value="02"/>
+											<enumeration value="11"/>
+											<enumeration value="12"/>
+											<enumeration value="21"/>
+											<enumeration value="22"/>
+											<enumeration value=""/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="ADDRESSINDICATOR">
+									<annotation>
+										<documentation>
+       		  						     	Allowed values are:
+										C – Current
+										P – 1st Previous
+										3 – 2nd Previous
+									 </documentation>
+									</annotation>
+									<simpleType>
+										<restriction base="string">
+											<enumeration value="C"/>
+											<enumeration value="P"/>
+											<enumeration value="3"/>
+											<enumeration value=""/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="NAMESCOUNT" type="creditcheck:namecountrange">
+									<annotation>
+										<documentation>
+       		  						     The number of names on the application at the address being referenced.
+       		  						      </documentation>
+									</annotation>
+								</element>
+								<element name="SEQBLOCK" type="creditcheck:SeqType" minOccurs="8" maxOccurs="8"/>
+								<element name="SEARCHFLAG" type="creditcheck:searchType">
+									<annotation>
+										<documentation>
+       		  						     Must be set to space for Interactive Address Targeting
+       		  						      </documentation>
+									</annotation>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="AP19">
+						<complexType>
+							<sequence>
+								<element name="AMOUNT">
+									<annotation>
+										<documentation>
+       		  						     Amount of Loan.
+       		  						      </documentation>
+									</annotation>
+									<simpleType>
+										<restriction base="int">
+											<totalDigits value="7"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="TERM">
+									<annotation>
+										<documentation>
+       		  						     Term of Loan
+       		  						      </documentation>
+									</annotation>
+									<simpleType>
+										<restriction base="int">
+											<totalDigits value="7"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="APPTYPE" type="creditcheck:apptyperange">
+									<annotation>
+										<documentation>
+       		  						     Type of Loan. Set to 'MG' - First Mortgage
+       		  						      </documentation>
+									</annotation>
+								</element>
+								<element name="PROPERTYVALUE">
+									<annotation>
+										<documentation>
+       		  						     	Property Purchase Price or Valuation       		  						     												 </documentation>
+									</annotation>
+									<simpleType>
+										<restriction base="int">
+											<totalDigits value="7"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="AM19" maxOccurs="2">
+						<complexType>
+							<sequence>
+								<element name="MARITALSTATUS" type="creditcheck:marstatrange">
+									<annotation>
+										<documentation>
+       		  						     	Marital Status of applicant. Values must be mapped to Experian values specified in UND01.   		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="DEPENDANTS" type="datatype:str1">
+									<annotation>
+										<documentation>
+       		  						     Should be set to the value of Number of Dependents unless this value is greater than or equal to 7 when 7 should be the value 											sent.    					     												 
+										</documentation>
+									</annotation>
+								</element>
+								<element name="RESIDSTATUS" type="creditcheck:str1ResiStatus">
+									<annotation>
+										<documentation>
+       		  						     	Residential Status of applicant. Values must be mapped to Experian values specified in UND01.   		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="CURRACCNTHELD" type="datatype:str1range">
+									<annotation>
+										<documentation>
+       		  						     	Indicates whether the applicant holds acurrent account. Values must be mapped as specified in UND01.   		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="TIMEWITHBANK" type="datatype:str4b">
+									<annotation>
+										<documentation>
+       		  						     	Number of years/months with Bank.		  						     													 </documentation>
+									</annotation>
+								</element>
+								<element name="EMPSTATUS" type="creditcheck:empstrange">
+									<annotation>
+										<documentation>
+       		  						     	Employment Type of applicant. Values must be mapped to Experian values specified in UND01.   		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="EMPTYPE" type="creditcheck:emptyperange">
+									<annotation>
+										<documentation>
+       		  						     	Employment Status of applicant. Values must be mapped to Experian values specified in UND01.   		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="TIMEWITHEMP" type="datatype:str4b">
+									<annotation>
+										<documentation>
+       		  						     	Time with employer in years and months.   		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="CITIZENSHIP" type="creditcheck:citizenrange">
+									<annotation>
+										<documentation>
+       		  						     	Set as space. 		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="CURRADDRTYPE" type="creditcheck:ctrycoderange">
+									<annotation>
+										<documentation>
+       		  						     	Set as space. 		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="PREVADDRTYPE" type="creditcheck:ctrycoderange">
+									<annotation>
+										<documentation>
+       		  						     	Set as space. 		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="PREVPREVADDRTYPE" type="creditcheck:ctrycoderange">
+									<annotation>
+										<documentation>
+       		  						     	Set as space. 		  						     						 </documentation>
+									</annotation>
+								</element>
+								<element name="HomePhone" type="common:PhoneDetailsType">
+									<annotation>
+										<documentation>
+       		  						     	Home telephone number 		  						     						 									</documentation>
+									</annotation>
+								</element>
+								<element name="CARDSHELD1" type="creditcheck:cardrange">
+									<annotation>
+										<documentation>
+       		  						     	Credit Card Type held. Values must be mapped to Experian values specified in UND01.  	  						     						 		</documentation>
+									</annotation>
+								</element>
+								<element name="CARDSHELD2" type="creditcheck:cardrange">
+									<annotation>
+										<documentation>
+       		  						     	Credit Card Type held. Values must be mapped to Experian values specified in UND01.  	  						     						 		</documentation>
+									</annotation>
+								</element>
+								<element name="CARDSHELD3" type="creditcheck:cardrange">
+									<annotation>
+										<documentation>
+       		  						     	Credit Card Type held. Values must be mapped to Experian values specified in UND01.  	  						     						 		</documentation>
+									</annotation>
+								</element>
+								<element name="CARDSHELD4" type="creditcheck:cardrange">
+									<annotation>
+										<documentation>
+       		  						     	Credit Card Type held. Values must be mapped to Experian values specified in UND01.  	  						     						 		</documentation>
+									</annotation>
+								</element>
+								<element name="CARDSHELD5" type="creditcheck:cardrange">
+									<annotation>
+										<documentation>
+       		  						     	Credit Card Type held. Values must be mapped to Experian values specified in UND01.  	  						     						 		</documentation>
+									</annotation>
+								</element>
+								<element name="CARDSHELD6" type="creditcheck:cardrange">
+									<annotation>
+										<documentation>
+       		  						     	Credit Card Type held. Values must be mapped to Experian values specified in UND01.  	  						     						 		</documentation>
+									</annotation>
+								</element>
+								<element name="WorkPhone" type="common:PhoneDetailsType">
+									<annotation>
+										<documentation>
+       		  						     	Applicant's work telephone number  						     						 									</documentation>
+									</annotation>
+								</element>
+								<element name="MobilePhone" type="common:PhoneDetailsType">
+									<annotation>
+										<documentation>
+       		  						     	Applicant's mobile telephone number						     						 									</documentation>
+									</annotation>
+								</element>
+								<element name="EMAILADDR" type="datatype:str60b">
+									<annotation>
+										<documentation>
+       		  						     	Applicant's email address.  						     						 											</documentation>
+									</annotation>
+								</element>
+								<!-- HOME -->
+								<!-- WORK -->
+								<!-- Mobile -->
+							</sequence>
+						</complexType>
+					</element>
+					<element name="AM90" maxOccurs="2">
+						<complexType>
+							<sequence>
+								<element name="PERSONSTATUS" type="creditcheck:personstatrange">
+									<annotation>
+										<documentation>
+       		  						     	Allowed values:
+										1 – Prospect
+										2 - Customer
+ 						     				</documentation>
+									</annotation>
+								</element>
+								<element name="BASICANNUALINCOME" type="datatype:str7b">
+									<annotation>
+										<documentation>
+       		  						     	Basic Annual Income. Refer to APP12 BR9
+										</documentation>
+									</annotation>
+								</element>
+								<element name="QUALIFYINGREGULARINCOME" type="datatype:str7b">
+									<annotation>
+										<documentation>
+       		  						     Qualifying Regular Income. Refer to APP12 BR9
+										</documentation>
+									</annotation>
+								</element>
+								<element name="OTHERINCOME" type="datatype:str7b">
+									<annotation>
+										<documentation>
+       		  						    Other Income. Refer to APP12 BR9
+										</documentation>
+									</annotation>
+								</element>
+								<element name="ANNUALOUTGOINGS" type="datatype:str7b">
+									<annotation>
+										<documentation>
+       		  						     Annual Outgoings. Refer to APP12 BR10
+										</documentation>
+									</annotation>
+								</element>
+								<element name="BALANCEOUTSTANDING" type="datatype:str7b">
+									<annotation>
+										<documentation>
+       		  						     Total Balance Outstanding. This is the sum of all the balances outstanding captured on the Outgoings screen for each applicant. 											Where this is a joint commitment the whole of the balance outstanding is included.
+
+										This does NOT exclude:
+										•	commitments to be repaid by the new loan
+										•	commitments to be repaid within the next 12 months
+										</documentation>
+									</annotation>
+								</element>
+								<element name="FIRSTTIMEBUYER" type="datatype:str1range">
+									<annotation>
+										<documentation>
+       		  						     	If Application Type = ‘First Time Buyer’ set to ‘Y’ otherwise set to ‘N’.																	</documentation>
+									</annotation>
+								</element>
+								<element name="APPNO" type="datatype:str16">
+									<annotation>
+										<documentation>
+       		  						     Mortgage Application Number
+										</documentation>
+									</annotation>
+								</element>
+								<element name="SEQUENCENUMBER" default="0">
+									<annotation>
+										<documentation>
+       		  						     Message Sequence Number
+										</documentation>
+									</annotation>
+									<simpleType>
+										<restriction base="long">
+											<totalDigits value="10"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="LIM">
+									<annotation>
+										<documentation>
+       		  						     Loan Income Multiple as calculated in OMIGA
+										</documentation>
+									</annotation>
+									<simpleType>
+										<restriction base="int">
+											<totalDigits value="5"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<simpleType name="detailcodereqtype">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="1"/>
+			<enumeration value=""/>
+			<enumeration value="1"/>
+			<enumeration value="8"/>
+		</restriction>
+	</simpleType>
+	<complexType name="AddrType">
+		<complexContent>
+			<extension base="common:StructuredAddressDetailsType">
+				<sequence>
+					<element name="DETAILCODE" type="creditcheck:detailcodereqtype">
+						<annotation>
+							<documentation>
+       		  				 Should only be submitted as a response to addess targeting.
+							</documentation>
+						</annotation>
+					</element>
+					<element name="DATAITEM" type="datatype:str7b" maxOccurs="2">
+						<annotation>
+							<documentation>
+       		  				 Should only be submitted as a response to addess targeting.
+							</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="AddrUKType">
+		<complexContent>
+			<extension base="common:StructuredAddressDetailsType">
+				<sequence>
+					<element name="DETAILCODE" type="creditcheck:detailcodetype"/>
+				</sequence>
+				<attribute name="seq" use="required">
+					<simpleType>
+						<restriction base="NMTOKEN">
+							<enumeration value="01"/>
+							<enumeration value="02"/>
+							<enumeration value="11"/>
+							<enumeration value="12"/>
+							<enumeration value="21"/>
+							<enumeration value="22"/>
+						</restriction>
+					</simpleType>
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="AddrBureaType">
+		<complexContent>
+			<extension base="common:StructuredAddressDetailsType">
+				<sequence>
+					<element name="DETAILCODE" type="creditcheck:detailcodetype"/>
+					<element name="RMC" type="datatype:str7b" minOccurs="0"/>
+					<element name="REGIONNUMBER" type="datatype:str1b" minOccurs="0"/>
+					<element name="ADDRESSKEY" type="datatype:str26b" minOccurs="0"/>
+					<element name="CHK1" type="common:StructuredAddressDetailsType"/>
+				</sequence>
+				<attribute name="seq" use="required">
+					<simpleType>
+						<restriction base="NMTOKEN">
+							<enumeration value="01"/>
+							<enumeration value="02"/>
+							<enumeration value="11"/>
+							<enumeration value="12"/>
+							<enumeration value="21"/>
+							<enumeration value="22"/>
+						</restriction>
+					</simpleType>
+				</attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+	<simpleType name="SimpleDateTypeExt">
+		<union>
+			<simpleType>
+				<annotation>
+					<documentation>This data type is used to represent simple date of the format YYYY/MM/DD.</documentation>
+				</annotation>
+				<restriction base="string">
+					<pattern value="\d{4}/(0?[1-9]|1[0-2])/(3[01]|[1-2][0-9]|0?[1-9])"/>
+				</restriction>
+			</simpleType>
+			<simpleType>
+				<annotation>
+					<documentation>Blank Value if date is not there.</documentation>
+				</annotation>
+				<restriction base="string">
+					<enumeration value=""/>
+				</restriction>
+			</simpleType>
+		</union>
+	</simpleType>
+	<complexType name="CreditCheckResponseType">
+		<annotation>
+			<documentation>
+       		This response is defined in Experian Appendix 1.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="CreditCheckResponse" type="creditcheck:CreditCheckType" minOccurs="0"/>
+					<element name="CdtCkMultAddResponse" type="creditcheck:CdtCkMultAddType" minOccurs="0"/>
+					<element name="CdtCkAddClarfResponse" type="creditcheck:CdtCkAddClarfType" minOccurs="0"/>
+					<element name="CreditCheckErrorResponse" type="creditcheck:CreditCheckErrorType" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="CreditCheckType">
+		<choice maxOccurs="unbounded">
+			<element name="TPD1_RES">
+				<complexType>
+					<all>
+						<element name="SPAOPTOUT" type="datatype:str1range" default="N"/>
+						<element name="TRANSASSOC" type="datatype:str1range" default="N"/>
+						<element name="HHO" type="datatype:str1" default="N"/>
+						<element name="OPTOUTCUTOFF" type="datatype:str4b" minOccurs="0"/>
+						<element name="DBTYPE" type="datatype:str1DBTyperange" minOccurs="0"/>
+						<element name="OUTCOMECODE" type="datatype:str2"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX01">
+				<complexType>
+					<all>
+						<element name="E4Q01" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q02" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q03" type="datatype:str3b" minOccurs="0"/>
+						<element name="E4Q04" type="datatype:str3b" minOccurs="0"/>
+						<element name="E4Q05" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q06" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q07" type="datatype:str3b" minOccurs="0"/>
+						<element name="E4Q08" type="datatype:str3b" minOccurs="0"/>
+						<element name="E4Q09" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q10" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q11" type="datatype:str3b" minOccurs="0"/>
+						<element name="E4Q12" type="datatype:str3b" minOccurs="0"/>
+						<element name="E4Q13" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q14" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q15" type="datatype:str3b" minOccurs="0"/>
+						<element name="E4Q16" type="datatype:str3b" minOccurs="0"/>
+						<element name="E4Q17" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4Q18" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4R01" type="datatype:str1b" minOccurs="0"/>
+						<element name="E4R02" type="datatype:str7b" minOccurs="0"/>
+						<element name="E4R03" type="datatype:str7b" minOccurs="0"/>
+						<element name="EA4R01PM" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4R01CJ" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4R01PJ" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDERL01" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDERL02" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2Q01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2Q02" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDERLMACA" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDERLMAPA" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDERLJACA" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDERLJAPA" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA5U01" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA5U02" type="datatype:str2b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX02">
+				<complexType>
+					<all>
+						<element name="E1A01" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1A02" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1A03" type="datatype:str3b" minOccurs="0"/>
+						<element name="EA1C01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA1D01" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA1D02" type="datatype:str4b" minOccurs="0"/>
+						<element name="EA1D03" type="datatype:str3b" minOccurs="0"/>
+						<element name="E2G01" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2G02" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2G03" type="datatype:str3b" minOccurs="0"/>
+						<element name="EA2I01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2J01" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2J02" type="datatype:str4b" minOccurs="0"/>
+						<element name="EA2J03" type="datatype:str3b" minOccurs="0"/>
+						<element name="EA4Q06" type="datatype:str1b" minOccurs="0"/>
+						<element name="SP_BR_PRESENT" type="datatype:str1b" minOccurs="0"/>
+						<element name="SPA_BR_PRESENT" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+				<!-- seq problem -->
+			</element>
+			<element name="BX03">
+				<complexType>
+					<all>
+						<element name="E1A04" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1A05" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1A06" type="datatype:str3b" minOccurs="0"/>
+						<element name="E1A07" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1A08" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1A09" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1A10" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1A11" type="datatype:str3b" minOccurs="0"/>
+						<element name="E1B01" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1B02" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1B03" type="datatype:str1b" minOccurs="0"/>
+						<element name="E1B04" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1B05" type="datatype:str1b" minOccurs="0"/>
+						<element name="E1B06" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1B07" type="datatype:str1b" minOccurs="0"/>
+						<element name="E1B08" type="datatype:str1b" minOccurs="0"/>
+						<element name="E1B09" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1B10" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1B11" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1B12" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1B13" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDECC01" type="datatype:str4b" minOccurs="0"/>
+						<element name="NDECC02" type="datatype:str4b" minOccurs="0"/>
+						<element name="NDECC03" type="datatype:str4b" minOccurs="0"/>
+						<element name="NDECC04" type="datatype:str4b" minOccurs="0"/>
+						<element name="NDECC07" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDECC08" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1C01" type="datatype:str1b" minOccurs="0"/>
+						<element name="E1C02" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1C03" type="datatype:str4b" minOccurs="0"/>
+						<element name="E1C04" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1C05" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1C06" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA1B02" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1D01" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1D02" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1D03" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1D04" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDHAC01" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDHAC02" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDHAC03" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDHAC04" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDHAC05" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDHAC09" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDINC01" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA1F01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA1F02" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA1F03" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDFCS01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA1F04" type="datatype:str1b" minOccurs="0"/>
+						<element name="E2G04" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2G05" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2G06" type="datatype:str3b" minOccurs="0"/>
+						<element name="E2G07" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2G08" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2G09" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2G10" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2G11" type="datatype:str3b" minOccurs="0"/>
+						<element name="E2H01" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2H02" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2H03" type="datatype:str1b" minOccurs="0"/>
+						<element name="E2H04" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2H05" type="datatype:str1b" minOccurs="0"/>
+						<element name="E2H06" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2H07" type="datatype:str1b" minOccurs="0"/>
+						<element name="E2H08" type="datatype:str1b" minOccurs="0"/>
+						<element name="E2H09" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2H10" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2H11" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2H12" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2H13" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDECC05" type="datatype:str4b" minOccurs="0"/>
+						<element name="NDECC09" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDECC10" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2I01" type="datatype:str1b" minOccurs="0"/>
+						<element name="E2I02" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2I03" type="datatype:str4b" minOccurs="0"/>
+						<element name="E2I04" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2I05" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2I06" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2H02" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2J01" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2J02" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2J03" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2J04" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDHAC10" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDHAC06" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDHAC07" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDHAC08" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDINC02" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2L01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2L02" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2L03" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDFCS02" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2L04" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDECC06" type="datatype:str4b" minOccurs="0"/>
+						<element name="NDINC03" type="datatype:str2b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+					<!-- what to fo-->
+				</complexType>
+				<!-- seq problem -->
+			</element>
+			<element name="BX04">
+				<complexType>
+					<all>
+						<element name="E1E01" type="datatype:str2b" minOccurs="0"/>
+						<element name="E1E02" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA1B01" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD01" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD02" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD03" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD04" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD05" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD06" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA1E01" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA1E02" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA1E03" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA1E04" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2K01" type="datatype:str2b" minOccurs="0"/>
+						<element name="E2K02" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2H01" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD07" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD08" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD09" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD10" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2K01" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2K02" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2K03" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA2K04" type="datatype:str2b" minOccurs="0"/>
+						<element name="NDPSD11" type="datatype:str2b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX05">
+				<complexType>
+					<all>
+						<element name="EA1A01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2G01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4P01" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX06">
+				<complexType>
+					<all>
+						<element name="EA1C02" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2I02" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX07">
+				<complexType>
+					<all>
+						<element name="EA1G01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA1G02" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2M01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA2M02" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX08">
+				<complexType>
+					<all>
+						<element name="EA4Q07" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q08" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q09" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q10" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q11" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q01" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q02" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q03" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q04" type="datatype:str1b" minOccurs="0"/>
+						<element name="EA4Q05" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX09">
+				<complexType>
+					<all>
+						<element name="NDOPTOUT" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX10">
+				<complexType>
+					<all>
+						<element name="NDPA" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDHHO" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDOPTOUTVALID" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX11">
+				<complexType>
+					<all>
+						<element name="NDSPCII" type="datatype:str3b" minOccurs="0"/>
+						<element name="NDSPACII" type="datatype:str3b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX12">
+				<complexType>
+					<all>
+						<element name="EA4M01" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M02" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M03" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M04" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M05" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M06" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M07" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M08" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M09" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M10" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M11" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4M12" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4T01" type="datatype:str4b" minOccurs="0"/>
+						<element name="EA5T01" type="datatype:str4b" minOccurs="0"/>
+						<element name="EA5T02" type="datatype:str4b" minOccurs="0"/>
+						<element name="NDG01" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA4N01" type="datatype:str7b" minOccurs="0"/>
+						<element name="EA4N02" type="datatype:str7b" minOccurs="0"/>
+						<element name="EA4N03" type="datatype:str7b" minOccurs="0"/>
+						<element name="EA4N04" type="datatype:str7b" minOccurs="0"/>
+						<element name="EA4N05" type="datatype:str7b" minOccurs="0"/>
+						<element name="NDG02" type="datatype:str5b" minOccurs="0"/>
+						<element name="NDG03" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG04" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG05" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG06" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG07" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG08" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG09" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG10" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG11" type="datatype:str6b" minOccurs="0"/>
+						<element name="NDG12" type="datatype:str6b" minOccurs="0"/>
+						<element name="UKMOSAIC" type="datatype:str3b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX13">
+				<complexType>
+					<all>
+						<element name="NDSI2-1" type="datatype:str5b" minOccurs="0"/>
+						<element name="NDSI2-2" type="datatype:str5b" minOccurs="0"/>
+						<element name="NDSI2-3" type="datatype:str5b" minOccurs="0"/>
+						<element name="E5S01" type="datatype:str1b" minOccurs="0"/>
+						<element name="E5S02" type="datatype:str1b" minOccurs="0"/>
+						<element name="E5S04-1" type="datatype:str3b" minOccurs="0"/>
+						<element name="E5S05-1" type="datatype:str5"/>
+						<element name="E5S04-2" type="datatype:str3b" minOccurs="0"/>
+						<element name="E5S05-2" type="datatype:str5"/>
+						<element name="E5S04-3" type="datatype:str3b" minOccurs="0"/>
+						<element name="E5S05-3" type="datatype:str5"/>
+						<element name="NDHHOSCORE" type="datatype:str5b" minOccurs="0"/>
+						<element name="NDVALSCORE" type="datatype:str5b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX14">
+				<complexType>
+					<all>
+						<element name="NDLNK01" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX15">
+				<complexType>
+					<all>
+						<element name="NDDIRSP" type="datatype:str1b" minOccurs="0"/>
+						<element name="NDDIRSPA" type="datatype:str1b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX17">
+				<complexType>
+					<all>
+						<element name="NDDOB" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA5S01" type="datatype:str3b" minOccurs="0"/>
+						<element name="EA4S01" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA4S02" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4S03" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA4S04" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4S05" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA4S06" type="datatype:str6b" minOccurs="0"/>
+						<element name="EA4S07" type="datatype:str2b" minOccurs="0"/>
+						<element name="EA4S08" type="datatype:str6b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="BX18">
+				<complexType>
+					<all>
+						<element name="ND_ICH" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_SEC_ARR" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_UNSEC_ARR" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_CCJ" type="datatype:str5b" minOccurs="0"/>
+						<element name="ND_IVA" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_BANKRUPT" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_MA_ICH" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_MA_SEC_ARR" type="string" minOccurs="0"/>
+						<element name="ND_MA_UNSEC_ARR" type="datatype:str1b"/>
+						<element name="ND_MA_CCJ" type="datatype:str6b" minOccurs="0"/>
+						<element name="ND_MA_IVA" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_MA_BANKRUPT" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_JA_ICH" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_JA_SEC_ARR" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_JA_UNSEC_ARR" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_JA_CCJ" type="datatype:str6b" minOccurs="0"/>
+						<element name="ND_JA_IVA" type="datatype:str1b" minOccurs="0"/>
+						<element name="ND_JA_BANKRUPT" type="datatype:str1b"/>
+					</all>
+					<attribute name="seq" type="string" use="required"/>
+				</complexType>
+			</element>
+			<element name="INGO">
+				<complexType>
+					<all>
+						<element name="SECARR2PAY" type="datatype:str1b" minOccurs="0"/>
+						<element name="APPNO" type="datatype:str16"/>
+						<element name="SEQUENCENUMBER" type="long" default="0"/>
+					</all>
+					<attribute name="seq" type="string" use="optional"/>
+				</complexType>
+			</element>
+			<element name="RRP2">
+				<complexType>
+					<all>
+						<element name="VERSIONNUMBER" type="datatype:str4b" minOccurs="0"/>
+						<element name="CURRENTAFFORDABILITYINDEX" type="datatype:str4b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" type="string" use="optional"/>
+				</complexType>
+			</element>
+			<element name="ADDR-UKFMTD" maxOccurs="6">
+				<complexType>
+					<all>
+						<element name="DETAILCODE" type="creditcheck:detailcodetype" minOccurs="0"/>
+						<element name="FMTDNAME" type="datatype:str40"/>
+						<element name="FMTDNAMEJOINT" type="datatype:str40b" minOccurs="0"/>
+						<element name="ADDRLINE1" type="datatype:str40"/>
+						<element name="ADDRLINE2" type="datatype:str40b" minOccurs="0"/>
+						<element name="ADDRLINE3" type="datatype:str40b" minOccurs="0"/>
+						<element name="ADDRLINE4" type="datatype:str40b" minOccurs="0"/>
+						<element name="ADDRLINE5" type="datatype:str40b" minOccurs="0"/>
+					</all>
+					<attribute name="seq" use="required">
+						<simpleType>
+							<restriction base="NMTOKEN">
+								<enumeration value="01"/>
+								<enumeration value="02"/>
+								<enumeration value="11"/>
+								<enumeration value="12"/>
+								<enumeration value="21"/>
+								<enumeration value="22"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</complexType>
+			</element>
+			<element name="BDX1">
+				<complexType>
+					<choice maxOccurs="unbounded">
+						<element name="DET_CRED_SCR" type="creditcheck:detcredscrtype" minOccurs="0"/>
+						<element name="FRAUDINDEX" type="creditcheck:fraudindextype" minOccurs="0"/>
+						<element name="DET_APP_SCR" type="creditcheck:detappscrtype" minOccurs="0"/>
+						<element name="NUM_RULES" type="datatype:str3b" minOccurs="0"/>
+						<element name="RULES" minOccurs="0">
+							<complexType>
+								<all>
+									<element name="RULE" type="datatype:str3b"/>
+								</all>
+							</complexType>
+						</element>
+					</choice>
+					<attribute name="seq" use="required">
+						<simpleType>
+							<restriction base="NMTOKEN">
+								<enumeration value="01"/>
+								<enumeration value="02"/>
+								<enumeration value="11"/>
+								<enumeration value="12"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</complexType>
+				<!-- sequance problem -->
+			</element>
+			<element name="DEC1">
+				<complexType>
+					<choice maxOccurs="unbounded">
+						<element name="ROOTID" type="datatype:str8b" minOccurs="0"/>
+						<element name="DECTESTGRP" type="datatype:str2b" minOccurs="0"/>
+						<element name="DECCLASS" type="creditcheck:decclasstype"/>
+						<element name="DELPHISCORESIGN" type="creditcheck:delphisigntype"/>
+						<element name="DELPHISCORE" type="int"/>
+						<element name="SCORING" type="datatype:str3b" minOccurs="0"/>
+						<element name="POLICY" type="datatype:str3b" minOccurs="0"/>
+						<element name="BUSINESS" type="datatype:str3b" minOccurs="0"/>
+						<element name="APPMAN" type="datatype:str3b" minOccurs="0"/>
+						<element name="STRATEGYTEXTID" type="datatype:str8b" minOccurs="0"/>
+						<element name="BURFLAG" type="datatype:str3b" minOccurs="0"/>
+						<element name="QUEUEID" type="datatype:str3b" minOccurs="0"/>
+						<element name="RSNCODELEN" type="datatype:str3b" minOccurs="0"/>
+						<element name="NUMSCORENODES" type="int" minOccurs="0"/>
+						<element name="NUMLETTERCODES" type="int" minOccurs="0"/>
+						<element name="REASONCODEDATA" type="string" minOccurs="0"/>
+						<element name="SCORENODE" minOccurs="0" maxOccurs="10">
+							<complexType>
+								<all>
+									<element name="ID" type="datatype:str8b" minOccurs="0"/>
+									<element name="TESTGRP" type="datatype:str2b" minOccurs="0"/>
+									<element name="SIGN" type="datatype:str1b" minOccurs="0"/>
+									<element name="SCORE" type="datatype:str7b" minOccurs="0"/>
+									<element name="SCORECARDID" type="datatype:str8b" minOccurs="0"/>
+								</all>
+							</complexType>
+						</element>
+						<element name="LETTERCODE" minOccurs="0" maxOccurs="20">
+							<complexType>
+								<all>
+									<element name="CODE" type="datatype:str3b"/>
+								</all>
+							</complexType>
+						</element>
+						<element name="FILLER" type="datatype:str50b"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="DEC7">
+				<complexType>
+					<choice maxOccurs="unbounded">
+						<element name="RANNUM1" minOccurs="0">
+							<simpleType>
+								<restriction base="int">
+									<totalDigits value="3"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="EXCEPTION" type="datatype:str1b" minOccurs="0"/>
+						<element name="EXCEPTIONTYPE" type="datatype:ExceptionTypeRange" minOccurs="0"/>
+						<element name="EXCEPTIONKEY" type="datatype:ExceptionKeyRange" minOccurs="0"/>
+						<element name="RISKIND" type="datatype:str2"/>
+						<element name="VALIDITY">
+							<simpleType>
+								<restriction base="int">
+									<totalDigits value="3"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="LIM">
+							<simpleType>
+								<restriction base="int">
+									<totalDigits value="5"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="ILTV">
+							<simpleType>
+								<restriction base="int">
+									<totalDigits value="5"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="CAISTOOUT" minOccurs="0">
+							<simpleType>
+								<restriction base="int">
+									<totalDigits value="5"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="CHAMPION1" type="creditcheck:championtype" minOccurs="0"/>
+						<element name="CHAMPION2" type="creditcheck:championtype" minOccurs="0"/>
+						<element name="CHAMPION3" type="creditcheck:championtype" minOccurs="0"/>
+						<element name="CHAMPION4" type="creditcheck:championtype" minOccurs="0"/>
+						<element name="CHAMPION5" type="creditcheck:championtype" minOccurs="0"/>
+						<element name="FILLER" type="datatype:str50b" minOccurs="0"/>
+						<element name="DUPLICATEREF" type="datatype:str2b" minOccurs="0"/>
+						<element name="REASONCODECOUNT" type="int" minOccurs="0"/>
+						<element name="REASONCODEAREA" minOccurs="0" maxOccurs="20">
+							<complexType>
+								<all>
+									<element name="REASONCODE" type="datatype:str4b" minOccurs="0"/>
+									<element name="CODEDESCRIPTION" type="datatype:str33b" minOccurs="0"/>
+								</all>
+							</complexType>
+						</element>
+					</choice>
+				</complexType>
+			</element>
+		</choice>
+		<attribute name="type" type="string" use="optional"/>
+		<attribute name="subtype" type="string" use="optional"/>
+		<attribute name="EXP_ExperianRef" type="datatype:str10" use="required"/>
+		<attribute name="success" type="string" use="optional"/>
+		<attribute name="timestamp" type="string" use="optional"/>
+		<attribute name="id" type="string" use="optional"/>
+	</complexType>
+	<complexType name="CdtCkMultAddType">
+		<sequence>
+			<element name="APPNO" type="datatype:str10"/>
+			<element name="SEQUENCENUMBER" type="long" default="0"/>
+			<element name="ADDR-UK" type="creditcheck:AddrUKType" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="type" type="string" use="optional"/>
+		<attribute name="subtype" type="string" use="optional"/>
+		<attribute name="EXP_ExperianRef" type="datatype:str10" use="required"/>
+		<attribute name="success" type="string" use="optional"/>
+		<attribute name="timestamp" type="string" use="optional"/>
+		<attribute name="id" type="string" use="optional"/>
+	</complexType>
+	<complexType name="CdtCkAddClarfType">
+		<sequence>
+			<element name="APPNO" type="datatype:str10"/>
+			<element name="SEQUENCENUMBER" type="long" default="0"/>
+			<element name="ADDR-UKBUREA" type="creditcheck:AddrBureaType" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="type" type="string" use="optional"/>
+		<attribute name="subtype" type="string" use="optional"/>
+		<attribute name="EXP_ExperianRef" type="datatype:str10" use="required"/>
+		<attribute name="success" type="string" use="optional"/>
+		<attribute name="timestamp" type="string" use="optional"/>
+		<attribute name="id" type="string" use="optional"/>
+	</complexType>
+	<complexType name="CreditCheckErrorType">
+		<sequence>
+			<element name="ERR1">
+				<complexType>
+					<all>
+						<element name="CODE" minOccurs="0">
+							<simpleType>
+								<restriction base="string">
+									<minLength value="0"/>
+									<maxLength value="4"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="SEVERITY" minOccurs="0">
+							<simpleType>
+								<restriction base="long"/>
+							</simpleType>
+						</element>
+						<element name="MESSAGE" minOccurs="0">
+							<simpleType>
+								<restriction base="string">
+									<maxLength value="80"/>
+									<minLength value="0"/>
+								</restriction>
+							</simpleType>
+						</element>
+					</all>
+				</complexType>
+			</element>
+		</sequence>
+		<attribute name="type" type="string" use="optional"/>
+		<attribute name="subtype" type="string" use="optional"/>
+		<attribute name="EXP_ExperianRef" type="datatype:str10b" use="optional"/>
+		<attribute name="success" type="string" use="optional"/>
+		<attribute name="timestamp" type="string" use="optional"/>
+		<attribute name="id" type="string" use="optional"/>
+	</complexType>
+	<complexType name="SeqType">
+		<sequence>
+			<element name="NAMESEQUENCE" type="creditcheck:nameseqrange">
+				<annotation>
+					<documentation>
+       		  						     	Values are:
+										01 Main Applicant
+										02 Joint Applicant
+										11 Main Applicant 1st Alias
+										12 Joint Applicant 1st Alias
+										
+										May need to include 4 additional values as 8 fields are required.
+       		  						      </documentation>
+				</annotation>
+			</element>
+			<element name="FromDate" type="creditcheck:SimpleDateTypeExt" nillable="true">
+				<annotation>
+					<documentation>
+       		  						     Date applicant moved into address. Three fields in Experian interface.
+       		  						      </documentation>
+				</annotation>
+			</element>
+			<element name="ToDate" type="creditcheck:SimpleDateTypeExt">
+				<annotation>
+					<documentation>
+       		  						     Date applicant moved out of address. Three fields in Experian interface.
+       		  						      </documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<simpleType name="tmbkrange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="4"/>
+			<whiteSpace value="collapse"/>
+			<pattern value="(([0-9]{2})+((0[1-9])|(1[0-2])))"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="apptyperange">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="2"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="MG"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="citizenrange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="2"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="UK"/>
+			<enumeration value="NE"/>
+			<enumeration value=""/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ctrycoderange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="U"/>
+			<enumeration value=""/>
+		</restriction>
+	</simpleType>
+	<simpleType name="cardrange">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<enumeration value=""/>
+			<enumeration value="A"/>
+			<enumeration value="D"/>
+			<enumeration value="M"/>
+			<enumeration value="N"/>
+			<enumeration value="O"/>
+			<enumeration value="S"/>
+			<enumeration value="V"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="emptyperange">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<enumeration value="E"/>
+			<enumeration value="T"/>
+			<enumeration value="S"/>
+			<enumeration value="P"/>
+			<enumeration value="N"/>
+			<enumeration value="H"/>
+			<enumeration value="R"/>
+			<enumeration value="U"/>
+			<enumeration value="Z"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="empstrange">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<enumeration value="T"/>
+			<enumeration value="M"/>
+			<enumeration value="O"/>
+			<enumeration value="S"/>
+			<enumeration value="P"/>
+			<enumeration value="N"/>
+			<enumeration value="J"/>
+			<enumeration value="X"/>
+			<enumeration value="Z"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="namerange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="namerangeini">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="namerangesur">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="30"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="titlerange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="namecountrange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="personstatrange">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+			<pattern value="[1,2]"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="marstatrange">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+			<pattern value="[M,S,D,W,C,D,O]"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str1ResiStatus">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+			<pattern value="[O,P,C,T,X]"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="nameseqrange">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value=""/>
+		</restriction>
+	</simpleType>
+	<simpleType name="addrnumberrange">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<enumeration value=""/>
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="21"/>
+			<enumeration value="22"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="addrindicatorrange">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<pattern value="[C,P,3]?"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str1Typerange">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value=""/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="sexType">
+		<restriction base="string">
+			<whiteSpace value="collapse"/>
+			<enumeration value=""/>
+			<enumeration value="M"/>
+			<enumeration value="F"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str4range">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="4"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="0010"/>
+			<enumeration value="0011"/>
+			<enumeration value="0020"/>
+			<enumeration value="0025"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="detailcodetype">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<enumeration value=""/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+			<enumeration value="7"/>
+			<enumeration value="8"/>
+			<enumeration value="9"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="fraudindextype">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="5"/>
+			<whiteSpace value="collapse"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="detcredscrtype">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="6"/>
+			<whiteSpace value="collapse"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="searchType">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="1"/>
+			<enumeration value=""/>
+		</restriction>
+	</simpleType>
+	<simpleType name="detappscrtype">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="6"/>
+			<whiteSpace value="collapse"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="decclasstype">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="2"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="RA"/>
+			<enumeration value="RR"/>
+			<enumeration value="RD"/>
+			<enumeration value="RP"/>
+			<enumeration value="RO"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="championtype">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="2"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="CH"/>
+			<enumeration value="C1"/>
+			<enumeration value="C2"/>
+			<enumeration value="C3"/>
+			<enumeration value="C4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="delphisigntype">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+			<whiteSpace value="collapse"/>
+			<enumeration value="+"/>
+			<enumeration value="-"/>
+		</restriction>
+	</simpleType>
+	<element name="CreditCheckRequest" type="creditcheck:CreditCheckRequestType"/>
+	<element name="CreditResponse" type="creditcheck:CreditCheckResponseType"/>
+	<element name="CreditCheck" type="creditcheck:CreditCheckType"/>
+	<element name="CdtCkMultAdd" type="creditcheck:CdtCkMultAddType"/>
+	<element name="CdtCkAddClarf" type="creditcheck:CdtCkAddClarfType"/>
+	<element name="CreditCheckError" type="creditcheck:CreditCheckErrorType"/>
+	<element name="ADDR" type="creditcheck:AddrType"/>
+	<element name="ADDR-UK" type="creditcheck:AddrUKType"/>
+	<element name="ADDR-UKBUREA" type="creditcheck:AddrBureaType"/>
+	<element name="SEQBLOCK" type="creditcheck:SeqType"/>
+</schema>

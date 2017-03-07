@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: RestoreFirstTitleInterface WSDL. 
+                    Used for WS43 (BACMessageAcknowledgement): reset Omiga configuration to indicate First Title outbound interface messages are not in use for BACS messages.
+
+History:
+
+Version Author      Date       Description
+01.00   RFairlie    04/10/2005 Created.   
+================================================================================-->
+<wsdl:definitions xmlns="http://RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msgRequest="http://Request.RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com" xmlns:msgResponse="http://Response.RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com">
+	<wsdl:types>
+		<xs:schema xmlns:msgRequest="http://Request.RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com" xmlns:msgResponse="http://Response.RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com">
+			<xs:import namespace="http://Request.RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com" schemaLocation="RestoreFirstTitleInterfaceRequest.xsd"/>
+			<xs:import namespace="http://Response.RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com" schemaLocation="RestoreFirstTitleInterfaceResponse.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="RestoreFirstTitleInterfaceRequestSoapIn">
+		<wsdl:part name="request" element="msgRequest:REQUEST"/>
+	</wsdl:message>
+	<wsdl:message name="RestoreFirstTitleInterfaceRequestSoapOut">
+		<wsdl:part name="response" element="msgResponse:RESPONSE"/>
+	</wsdl:message>
+	<wsdl:portType name="RestoreFirstTitleInterfacePort">
+		<wsdl:operation name="restoreFirstTitleInterface">
+			<wsdl:input message="RestoreFirstTitleInterfaceRequestSoapIn"/>
+			<wsdl:output message="RestoreFirstTitleInterfaceRequestSoapOut"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OmigaSoapRpcSoap" type="RestoreFirstTitleInterfacePort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="restoreFirstTitleInterface">
+			<soap:operation soapAction="http://Request.RestoreFirstTitleInterface.IDUK.Omiga.marlboroughstirling.com" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="RestoreFirstTitleInterface">
+		<wsdl:port name="RestoreFirstTitleInterfacePort" binding="OmigaSoapRpcSoap">
+			<soap:address location="http://localhost/OmigaWebServices/RestoreFirstTitleInterfaceWS/OmigaRestoreFirstTitleInterfaceService.asmx"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

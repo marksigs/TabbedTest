@@ -1,0 +1,26 @@
+HKCR
+{
+	OmStream.omStream1.1 = s 'omStream1 Class'
+	{
+		CLSID = s '{E6BAA59E-FE9F-11D4-82BE-005004E8D1A7}'
+	}
+	OmStream.omStream1 = s 'omStream1 Class'
+	{
+		CLSID = s '{E6BAA59E-FE9F-11D4-82BE-005004E8D1A7}'
+		CurVer = s 'OmStream.omStream1.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E6BAA59E-FE9F-11D4-82BE-005004E8D1A7} = s 'omStream1 Class'
+		{
+			ProgID = s 'OmStream.omStream1.1'
+			VersionIndependentProgID = s 'OmStream.omStream1'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{E6BAA591-FE9F-11D4-82BE-005004E8D1A7}'
+		}
+	}
+}

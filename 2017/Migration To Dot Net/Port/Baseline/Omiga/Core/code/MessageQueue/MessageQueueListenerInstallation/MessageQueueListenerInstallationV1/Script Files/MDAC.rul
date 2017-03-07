@@ -1,0 +1,36 @@
+
+prototype InstallMDAC();
+
+#define MDACVERSION "2.60.6526.2"
+
+function InstallMDAC()
+	NUMBER nvType, nvSize; 
+	STRING szVersionNumber;
+	NUMBER nCompareFlag, nResult;
+	STRING szUpdateVersion;
+	BOOL bNeedToUpdate, bMDACInstalled;
+	STRING szOption;
+begin
+	LOG_SetStatusWindow("Checking Version of MDAC");
+
+	RegDBSetDefaultRoot (HKEY_LOCAL_MACHINE); 
+	RegDBGetKeyValueEx ("SOFTWARE\\Microsoft\\DataAccess", "Version", nvType, szVersionNumber, nvSize); 
+	
+	nCompareFlag = VERSION;
+	szUpdateVersion = MDACVERSION;
+	nResult = VerCompare(szUpdateVersion, szVersionNumber, nCompareFlag);
+
+	// Update MDAC if required
+	if (bNeedToUpdate = TRUE) then
+	    szOption = "/C:\"DASETUP /Q\"";
+		nResult = LaunchAppAndWait(SUPPORTDIR ^ "mdac_typ.exe", szOption, WAIT);
+
+	    if nResult < 0 then
+	        LOG_MessageBox("Failed to install MDAC", SEVERE);
+		endif;	
+		bMDACInstalled = TRUE;
+	else
+		LOG_Log("Current version of MDAC is ok (" + szVersionNumber + ")");	
+	endif;	
+end; 
+

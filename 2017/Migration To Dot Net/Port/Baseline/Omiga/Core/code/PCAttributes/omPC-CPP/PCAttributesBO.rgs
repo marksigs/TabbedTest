@@ -1,0 +1,26 @@
+HKCR
+{
+	OmPC.PCAttributesBO.1 = s 'PCAttributesBO Class'
+	{
+		CLSID = s '{E31AAD92-37B6-45E1-A84A-481094EBAECE}'
+	}
+	OmPC.PCAttributesBO = s 'PCAttributesBO Class'
+	{
+		CLSID = s '{E31AAD92-37B6-45E1-A84A-481094EBAECE}'
+		CurVer = s 'OmPC.PCAttributesBO.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E31AAD92-37B6-45E1-A84A-481094EBAECE} = s 'PCAttributesBO Class'
+		{
+			ProgID = s 'OmPC.PCAttributesBO.1'
+			VersionIndependentProgID = s 'OmPC.PCAttributesBO'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{80238F8C-227E-4887-8C47-8F5B00FBFD84}'
+		}
+	}
+}

@@ -1,0 +1,66 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\System32\stdole2.tlb#OLE Automation
+Reference=*\G{2A005C00-A5DE-11CF-9E66-00AA00A3F464}#1.0#0#C:\WINDOWS\SYSTEM32\COMSVCS.DLL#Microsoft Transaction Server Type Library
+Reference=*\G{10E98D81-E223-4674-BD4E-369841AF4C71}#1.2#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\omBase.dll#omBase
+Reference=*\G{F5078F18-C551-11D3-89B9-0000F81FE221}#4.0#0#C:\WINDOWS\system32\msxml4.dll#Microsoft XML, v4.0
+Reference=*\G{A5648C33-A7D3-11D3-92C1-0060087A1EBE}#1.0#0#C:\Build Epsom2\2 Int Code\ExternalComponents\TypeLibraries\PolarisInterface.tlb#PolarisInterface 1.0 Type Library
+Reference=*\G{EF53050B-882E-4776-B643-EDA472E8E3F2}#2.7#0#C:\Program Files\Common Files\System\ADO\msado27.tlb#Microsoft ActiveX Data Objects 2.7 Library
+Class=BuildingsAndContentsDO; BuildingsAndContentsDO.cls
+Class=IBuildingsAndContentsDO; IBuildingsAndContentsDO.cls
+Class=ConvertAssist; ConvertAssist.cls
+Class=ErrAssist; errAssist.cls
+Class=GeneralAssist; GeneralAssist.cls
+Class=XMLAssist; ParserAssist.cls
+Module=StdData; StdData.bas
+Class=IBuildingsAndContentsBO; IBuildingsAndContentsBO.cls
+Class=BuildingsAndCOntentsBO; BuildingsAndContentsBO.cls
+Class=IomBCClassDef; IomBCClassDef.cls
+Class=omBCClassDef; omBCClassDef.cls
+Module=errConstants; errConstants.bas
+Class=SQLAssist; SQLAssist.cls
+Startup="(None)"
+HelpFile=""
+Title="omBC"
+ExeName32="omBC.dll"
+Command32=""
+Name="omBC"
+HelpContextID="0"
+CompatibleMode="2"
+CompatibleEXE32="\\msgchhost5\omiga vss\INGDUK\OUTPUT\EPSOM2IntegrationTest\Compatibility\CORE_V7.0.2\omBC.dll"
+
+MajorVer=7
+MinorVer=421
+RevisionVer=1
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName=Vertex Financial Services
+CondComp="GENERIC_SQL = 1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo = -1
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+DllBaseAddress=&H03CB0000
+
+Path32="C:\Build Epsom2\2 Int Code Bin\DLL\"
+Description=""
+VersionComments=Build: FB.099.07.04.21.01  [21 Apr 2007]
+VersionFileDescription=EPSOM2 Omiga 4
+VersionLegalCopyright=© 2007
+VersionLegalTrademarks=© 2007 Vertex Financial Services
+CodeViewDebugInfo=1
+
+[MS Transaction Server]
+AutoRefresh=1
+

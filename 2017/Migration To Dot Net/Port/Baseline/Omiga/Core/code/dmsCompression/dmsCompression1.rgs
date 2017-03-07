@@ -1,0 +1,26 @@
+HKCR
+{
+	DmsCompression.dmsCompression1.1 = s 'dmsCompression1 Class'
+	{
+		CLSID = s '{87BB92EB-8EA1-44EC-BDE2-B81B5B07874D}'
+	}
+	DmsCompression.dmsCompression1 = s 'dmsCompression1 Class'
+	{
+		CLSID = s '{87BB92EB-8EA1-44EC-BDE2-B81B5B07874D}'
+		CurVer = s 'DmsCompression.dmsCompression1.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {87BB92EB-8EA1-44EC-BDE2-B81B5B07874D} = s 'dmsCompression1 Class'
+		{
+			ProgID = s 'DmsCompression.dmsCompression1.1'
+			VersionIndependentProgID = s 'DmsCompression.dmsCompression1'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{85EEB9C0-CB35-46DE-A282-6E112AE5D9D4}'
+		}
+	}
+}

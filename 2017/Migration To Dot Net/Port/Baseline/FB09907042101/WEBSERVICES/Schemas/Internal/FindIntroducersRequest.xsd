@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Archive               $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/FindIntroducersRequest.xsd $
+Workfile:             $Workfile: FindIntroducersRequest.xsd $
+Current Version   $Revision: 6 $
+Last Modified      $Modtime: 26/03/07 13:50 $
+Modified By        $Author: Lesliem $
+
+Description: FindIntroducersRequest.xsd. used by FindIntroducersWS 
+
+History:
+
+Author   	Date       		Defect			Description
+IK				23/10/2006	EP2_21 		created
+IK				08/11/2006	EP2_35		add FSAONLYINDIVIDUAL search
+IK				24/01/2007	EP2_947		add ARFIRMID search
+PSC			08/03/2007  EP2_1190	Amend ARFIRMLENGTH to include ALLPARENTPRINCIPALS, MORTGAGENETWORKS and SELECTEDNETWORK options
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.FindIntroducers.Omiga.vertex.co.uk" targetNamespace="http://Request.FindIntroducers.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="INTRODUCERLIST" type="INTRODUCERSEARCHType"/>
+			<xs:element name="TARGETSEARCH" type="TARGETSEARCHType" minOccurs="0"/>
+			<xs:element name="LENGTHSEARCH" type="LENGTHSEARCHType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" use="optional"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="INTRODUCERSEARCHType">
+		<xs:attribute name="MORTGAGECLUBINDICATOR" type="xs:int" use="optional"/>
+		<xs:attribute name="PACKAGINGASSOCIATIONINDICATOR" type="xs:int" use="optional"/>
+		<xs:attribute name="BROKERINDICATOR" type="xs:int" use="optional"/>
+		<xs:attribute name="PACKAGERINDICATOR" type="xs:int" use="optional"/>
+		<xs:attribute name="ARFIRMINDICATOR" type="xs:int" use="optional"/>
+		<xs:attribute name="OMIGAINDIVIDUALBROKERAR" type="xs:int" use="optional"/>
+		<xs:attribute name="OMIGAINDIVIDUALBROKERDA" type="xs:int" use="optional"/>
+		<xs:attribute name="OMIGAINDIVIDUALPACKAGER" type="xs:int" use="optional"/>
+		<xs:attribute name="FSAONLYINDIVIDUAL" type="xs:int" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="TARGETSEARCHType">
+		<xs:attribute name="CLUBNETWORKASSOCIATIONID" type="xs:string" use="optional"/>
+		<xs:attribute name="PRINCIPALFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="ARFIRMID" type="xs:string" use="optional"/>
+		<xs:attribute name="FSAREFERENCENUMBER" type="xs:string" use="optional"/>
+		<xs:attribute name="COMPANYNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="TOWN" type="xs:string" use="optional"/>
+		<xs:attribute name="POSTCODE" type="xs:string" use="optional"/>
+		<xs:attribute name="INDIVIDUALFSAREF" type="xs:string" use="optional"/>
+		<xs:attribute name="INDIVIDUALFORENAME" type="xs:string" use="optional"/>
+		<xs:attribute name="INDIVIDUALSURNAME" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="LENGTHSEARCHType">
+		<xs:all>
+			<xs:element name="MORTGAGECLUBLENGTH" type="MortgageClubNetworkAssociationLengthType" minOccurs="0"/>
+			<xs:element name="PACKAGINGASSOCIATIONLENGTH" type="MortgageClubNetworkAssociationLengthType" minOccurs="0"/>
+			<xs:element name="BROKERLENGTH" type="PrincipalFirmLengthType" minOccurs="0"/>
+			<xs:element name="PACKAGERLENGTH" type="PrincipalFirmLengthType" minOccurs="0"/>
+			<xs:element name="ARFIRMLENGTH" type="ARFirmLengthType" minOccurs="0"/>
+			<xs:element name="OMIGAINDIVIDUALBROKERARLENGTH" type="OmigaIndividualLengthType" minOccurs="0"/>
+			<xs:element name="OMIGAINDIVIDUALBROKERDALENGTH" type="OmigaIndividualLengthType" minOccurs="0"/>
+			<xs:element name="OMIGAINDIVIDUALPACKAGERLENGTH" type="OmigaIndividualLengthType" minOccurs="0"/>
+			<xs:element name="FSAONLYINDIVIDUALLENGTH" type="FsaIndividualLengthType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MortgageClubNetworkAssociationLengthType">
+		<xs:attribute name="ADDRESS" type="xs:int" use="optional"/>
+		<xs:attribute name="PROCFEEDATA" type="xs:int" use="optional"/>
+		<xs:attribute name="TELEPHONECONTACTDETAILS" type="xs:int" use="optional"/>
+		<xs:attribute name="BANKDETAILS" type="xs:int" use="optional"/>
+		<xs:attribute name="ALL" type="xs:int" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ARFirmLengthType">
+		<xs:attribute name="ADDRESS" type="xs:int" use="optional"/>
+		<xs:attribute name="TELEPHONECONTACTDETAILS" type="xs:int" use="optional"/>
+		<xs:attribute name="LISTINGSTATUS" type="xs:int" use="optional"/>
+		<xs:attribute name="ALLPARENTPRINCIPALS" type="xs:int" use="optional"/>
+		<xs:attribute name="MORTGAGENETWORKS" type="xs:int" use="optional"/>
+		<xs:attribute name="SELECTEDNETWORK" type="xs:int" use="optional"/>
+		<xs:attribute name="ALL" type="xs:int" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="PrincipalFirmLengthType">
+		<xs:attribute name="ADDRESS" type="xs:int" use="optional"/>
+		<xs:attribute name="LISTINGSTATUS" type="xs:int" use="optional"/>
+		<xs:attribute name="PROCFEEDATA" type="xs:int" use="optional"/>
+		<xs:attribute name="TELEPHONECONTACTDETAILS" type="xs:int" use="optional"/>
+		<xs:attribute name="BANKDETAILS" type="xs:int" use="optional"/>
+		<xs:attribute name="ALL" type="xs:int" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="OmigaIndividualLengthType">
+		<xs:attribute name="ADDRESS" type="xs:int" use="optional"/>
+		<xs:attribute name="LISTINGSTATUS" type="xs:int" use="optional"/>
+		<xs:attribute name="ALL" type="xs:int" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="FsaIndividualLengthType">
+		<xs:attribute name="INDIVIDUALCONTROL" type="xs:int" use="optional"/>
+		<xs:attribute name="INDIVIDUALEMPLOYMENT" type="xs:int" use="optional"/>
+		<xs:attribute name="APPOINTMENTS" type="xs:int" use="optional"/>
+		<xs:attribute name="ALL" type="xs:int" use="optional"/>
+	</xs:complexType>
+</xs:schema>

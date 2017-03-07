@@ -1,0 +1,54 @@
+<VisualStudioProject>
+	<CSHARP ProjectType="Local" ProductVersion="7.10.6030" SchemaVersion="2.0" ProjectGuid="{F7DFB701-91B6-4B4C-ACEF-F4B1DD797365}">
+		<Build>
+			<Settings ApplicationIcon="" AssemblyKeyContainerName="" AssemblyName="omVex" AssemblyOriginatorKeyFile="C:\Build Epsom2\2 Int Code\Keys\Mars.snk" DefaultClientScript="JScript" DefaultHTMLPageLayout="Grid" DefaultTargetSchema="IE50" DelaySign="false" OutputType="Library" PreBuildEvent="" PostBuildEvent="" RootNamespace="Vertex.Fsd.Omiga.omVex" RunPostBuildEvent="OnBuildSuccess" StartupObject="">
+				<Config Name="Debug" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="DEBUG;TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="false" OutputPath="bin\Debug\" RegisterForComInterop="true" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+				<Config Name="Release" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="true" OutputPath="bin\Release\" RegisterForComInterop="true" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+			</Settings>
+			<References>
+				<Reference Name="System" AssemblyName="System" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"/>
+				<Reference Name="System.Data" AssemblyName="System.Data" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"/>
+				<Reference Name="System.XML" AssemblyName="System.Xml" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"/>
+				<Reference Name="System.Web.Services" AssemblyName="System.Web.Services" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.Services.dll"/>
+				<Reference Name="VBA" Guid="{000204EF-0000-0000-C000-000000000046}" VersionMajor="6" VersionMinor="0" Lcid="9" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.VBA.dll"/>
+				<Reference Name="MSXML2" Guid="{F5078F18-C551-11D3-89B9-0000F81FE221}" VersionMajor="2" VersionMinor="6" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.MSXML2.dll"/>
+				<Reference Name="omAppProc" Guid="{57915948-6E1A-4E8B-9EE8-41E1F0F07DAC}" VersionMajor="1" VersionMinor="0" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.omAppProc.dll"/>
+				<Reference Name="omApp" Guid="{D7B2484B-41B8-415B-9111-8C0B70B86C6A}" VersionMajor="1" VersionMinor="2" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.omApp.dll"/>
+				<Reference Name="omTM" Guid="{976119B1-5EA1-41BF-8B8C-C6BA41F7030E}" VersionMajor="1" VersionMinor="1" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.omTM.dll"/>
+				<Reference Name="omCore" AssemblyName="omCore" HintPath="C:\Program Files\Marlborough Stirling\Omiga 4\DLLDotNet\omCore.dll"/>
+				<Reference Name="ADODB" Guid="{EF53050B-882E-4776-B643-EDA472E8E3F2}" VersionMajor="2" VersionMinor="7" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.ADODB.dll"/>
+				<Reference Name="omTP" Guid="{19EC7F05-98DE-46D5-B44E-D6FAF5C8AC88}" VersionMajor="1" VersionMinor="0" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.omTP.dll"/>
+				<Reference Name="omLogging" AssemblyName="omLogging" HintPath="C:\Program Files\Marlborough Stirling\Omiga 4\DLLDotNet\omLogging.dll"/>
+				<Reference Name="omAQ" Guid="{90C527CC-59CA-4C26-BF5B-43BB766A7E02}" VersionMajor="1" VersionMinor="3" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.omAQ.dll"/>
+				<Reference Name="MsgTm" Guid="{B00B1DA4-74D8-400E-A019-8907BE52816F}" VersionMajor="1" VersionMinor="2" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.MsgTm.dll"/>
+				<Reference Name="omCM" Guid="{B2FACE5E-7DFF-4BE7-9B10-1200CB29E841}" VersionMajor="1" VersionMinor="3" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.omCM.dll"/>
+				<Reference Name="omRA" Guid="{1FC6CC27-0BD5-4D70-AFB8-958A942F09AC}" VersionMajor="1" VersionMinor="0" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.omRA.dll"/>
+				<Reference Name="Interop.omPM" AssemblyName="Interop.omPM" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\Interop\Interop.omPM.dll"/>
+				<Reference Name="Interop.comsvcs" AssemblyName="Interop.comsvcs" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\Interop\Interop.comsvcs.dll"/>
+				<Reference Name="COMSVCSLib" AssemblyName="COMSVCSLib" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\Interop\COMSVCSLib.dll"/>
+				<Reference Name="Interop.MessageQueueComponentVC" AssemblyName="Interop.MessageQueueComponentVC" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\Interop\Interop.MessageQueueComponentVC.dll"/>
+				<Reference Name="MESSAGEQUEUECOMPONENTVCLib" AssemblyName="MESSAGEQUEUECOMPONENTVCLib" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\Interop\MESSAGEQUEUECOMPONENTVCLib.dll"/>
+				<Reference Name="omValuationRules" Guid="{AE1627C5-D5BA-4549-87E7-E0CE5E56651A}" VersionMajor="1" VersionMinor="2" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\Vex\omVex\bin\Debug\Interop.omValuationRules.dll"/>
+			</References>
+		</Build>
+		<Files>
+			<Include>
+				<File RelPath="AssemblyInfo.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Combo.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Logging.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="OmigaData.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Request.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="TaskManager.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Vex.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Xi2.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="xml.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Web References\vexWebService\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\vexWebService\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<File RelPath="Web References\vexWebService\ValuationMessage.disco" BuildAction="None"/>
+				<File RelPath="Web References\vexWebService\ValuationMessage.wsdl" BuildAction="None"/>
+				<Folder RelPath="Web References\vexWebService\" WebReferenceUrl="https://www.vexcommunication.com/ValExTest/ValuationMessage.asmx" UrlBehavior="Static"/>
+				<Folder RelPath="Web References\" WebReferences="TRUE"/>
+			</Include>
+		</Files>
+	</CSHARP>
+</VisualStudioProject>

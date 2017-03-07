@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omBaseConfig>
+	<exclude name="DUMP"/>
+	<exclude name="ExperianTempAddress"/>
+	<exclude name="FSAALTERNATIVEFIRMSHIST"/>
+	<exclude name="FSAALTERNATIVEFIRMSUPDATE"/>
+	<exclude name="FSAAPPOINTMENTSHIST"/>
+	<exclude name="FSAAPPOINTMENTSUPDATE"/>
+	<exclude name="FSAAUTHORISEDFIRMSHIST"/>
+	<exclude name="FSAAUTHORISEDFIRMSUPDATE"/>
+	<exclude name="FSAAUTHORISEDPRODUCTSHIST"/>
+	<exclude name="FSAAUTHORISEDPRODUCTSUPDATE"/>
+	<exclude name="FSAFIRMPERMISSIONSHIST"/>
+	<exclude name="FSAFIRMPERMISSIONSUPDATE"/>
+	<exclude name="FSAINDIVIDUALBASICSHIST"/>
+	<exclude name="FSAINDIVIDUALBASICSUPDATE"/>
+	<exclude name="FSAIndividualControlsHist"/>
+	<exclude name="FSAINDIVIDUALCONTROLSUPDATE"/>
+	<exclude name="FSAINDIVIDUALEMPLOYMENTSHIST"/>
+	<exclude name="FSAINDIVIDUALEMPLOYMENTSUPDATE"/>
+	<exclude name="MQ" like="true"/>
+	<exclude name="FV" like="true"/>
+	<exclude name="TEMP" like="true">
+		<include name="TEMPLATE"/>
+	</exclude>
+	<!--  DateTime overrides -->
+	<modify table="APPLICATION" attribute="APPLICATIONDATE"  type="msgdt:msgDateTime"/>
+	<modify table="APPLICATION" attribute="LASTACCOUNTDOWNLOADDATE"  type="msgdt:msgDateTime"/>
+	<modify table="APPLICATIONSTAGE" attribute="DATETIME"  type="msgdt:msgDateTime"/>
+	<modify table="APPLICATIONUNDERWRITING" attribute="UNDERWRITERDECISIONDATETIME"  type="msgdt:msgDateTime"/>
+	<modify table="MEMOPAD" attribute="ENTRYDATETIME"  type="msgdt:msgDateTime"/>
+	<modify table="MORTGAGESUBQUOTE" attribute="DATEANDTIMEGENERATED"  type="msgdt:msgDateTime"/>
+	<modify table="MORTGAGESUBQUOTE" attribute="MANUALINCENTIVEDATETIME"  type="msgdt:msgDateTime"/>
+	<modify table="PAYEEHISTORY" attribute="CREATIONDATETIME"  type="msgdt:msgDateTime"/>
+	<modify table="PAYMENTRECORD" attribute="CREATIONDATETIME"  type="msgdt:msgDateTime"/>
+	<modify table="QUOTATION" attribute="DATEANDTIMEGENERATED"  type="msgdt:msgDateTime"/>
+	<modify table="RISKASSESSMENT" attribute="RISKASSESSMENTDATETIME"  type="msgdt:msgDateTime"/>
+	<!--  boolean -->
+	<modify table="APPLICATIONBANKBUILDINGSOC" attribute="REPAYMENTBANKACCOUNTINDICATOR"  type="xs:boolean"/>
+	<modify table="APPLICATIONBANKBUILDINGSOC" attribute="SALARYFEDINDICATOR"  type="xs:boolean"/>
+	<modify table="APPLICATIONBANKBUILDINGSOC" attribute="DIRECTDEBITPAPERIND"  type="xs:boolean"/>
+	<modify table="APPLICATIONBANKBUILDINGSOC" attribute="DDEXPLAINEDIND"  type="xs:boolean"/>
+	<modify table="APPLICATIONBANKBUILDINGSOC" attribute="TRANSPOSEDINDICATOR"  type="xs:boolean"/>
+	<modify table="APPLICATIONFACTFIND" attribute="GROUPCONNECTIONINDICATOR" type="xs:boolean"/>
+	<modify table="APPLICATIONFACTFIND" attribute="CLIENTBCINDICATOR" type="xs:boolean"/>
+	<modify table="APPLICATIONFACTFIND" attribute="CLIENTPPINDICATOR" type="xs:boolean"/>
+	<modify table="APPLICATIONFACTFIND" attribute="ARRANGEOWNCOVERINDICATOR" type="xs:boolean"/>
+	<modify table="APPLICATIONFACTFIND" attribute="WRAPUPPASSWORDTAKEN" type="xs:boolean"/>
+	<modify table="APPLICATIONFACTFIND" attribute="SELFCERTIND" type="xs:boolean"/>
+	<modify table="CUSTOMERVERSION" attribute="MEMBEROFSTAFF" type="xs:boolean"/>
+	<modify table="CUSTOMERVERSION" attribute="PROSPECTPASSWORDTAKEN" type="xs:boolean"/>
+	<modify table="CUSTOMERVERSION" attribute="WRAPUPEMAILPREFERRED" type="xs:boolean"/>
+	<modify table="CUSTOMERVERSION" attribute="RIGHTTOWORK" type="xs:boolean"/>
+	<modify table="CUSTOMERVERSION" attribute="DIPLOMATICIMMUNITY" type="xs:boolean"/>
+	<modify table="CUSTOMERVERSION" attribute="HOUSINGBENEFIT" type="xs:boolean"/>
+	<modify table="CUSTOMERTELEPHONENUMBER" attribute="PREFERREDMETHODOFCONTACT" type="xs:boolean"/>
+	<modify table="EMPLOYMENT" attribute="MAINSTATUS" type="xs:boolean"/>
+	<modify table="NEWLOAN" attribute="INCREASINGBORROWINGIND" type="xs:boolean"/>
+	<modify table="PACKAGEBUSINESSCUSTOMERAREA" attribute="CUSTOMERBUSINESSAREASTATUSIND" type="xs:boolean"/>
+	<modify table="PAYEEHISTORY" attribute="BANKWIZARDINDICATOR" type="xs:boolean"/>
+	<modify table="PREFERENCEQUESTION" attribute="PREFERENCEQUESTIONRESPONSEIND" type="xs:boolean"/>
+	<modify table="PRODUCT" attribute="DELETIONIND" type="xs:boolean"/>
+	<modify table="QUOTATION" attribute="KFIPRINTEDINDICATOR" type="xs:boolean"/>
+	<modify table="QUOTATION" attribute="INVALIDQUOTEIND" type="xs:boolean"/>
+	<!--  required -->
+	<modify table="APPLICATION" attribute="APPLICATIONNUMBER"  use="required"/>
+	<modify table="APPLICATIONFACTFIND" attribute="APPLICATIONFACTFINDNUMBER"  use="required"/>
+	<modify table="CUSTOMERROLE" attribute="CUSTOMERNUMBER"  use="required"/>
+	<modify table="CUSTOMERROLE" attribute="CUSTOMERVERSIONNUMBER"  use="required"/>
+	<modify table="CUSTOMERROLE" attribute="CUSTOMERROLETYPE"  use="required"/>
+	<modify table="CUSTOMERROLE" attribute="CUSTOMERORDER"  use="required"/>
+	<!--  description -->
+	<modify table="ALIAS" attribute="ALIASTYPE" desc="from combogroup AliasType"/>
+</omBaseConfig>

@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Insurance_Response.xsd was generated from CMHC_GE_Response.dtd by George Jin (GJ)
+       Modification history
+_________________________________________________________________________________________________ 
+ Date 	          Version	Author   What was changed?													 
+_________________________________________________________________________________________________ 
+15-Feb-2007	v1.00	GJ         Initial creation
+							       Added new Operation ProcessRiskResp for incoming Risk Response
+								Added new Operation ProcessPremRespfor Premium Response
+								Changed the attribute name "OTHERSYSTEMACCOUNTNUMBER" of REQUEST element to "INSURERAPPID"
+								Replaced  the attribute name "RESPONSEINDICATOR" with "INSURANCESTATUS"
+								Added the attribute name "VERSION" and set it to be 'fixed' value "1.0"
+								Added new repeatable element "CUSTOMER" under "APPLICATION" element
+								Added new attributes: "PREMIUMRATE", "TOTALAMOUNT", "INSUREDAMOUNT", "INSURANCECOVERAGEPERCENTAGE",
+								"CERTIFICATEEXPIRYDATE","FUNDINGDATE" 
+								Added element "INSURANCEREQUESTER", "CONDITION", "MESSAGE" and "DOCUMENT" under "REQUEST" element and 
+								moved the "INSTITUTIONNUMBER" and "TRANSITNUMBER" attibute from "REQUEST" element to "INSURANCEREQUESTER" element
+								Changed the attribute name "FEEAMOUNTDUE" of APPLICATION element to "FEEAMOUNT"
+								Added the attribute name "INSURANCESTATUSMESSAGE" under "REQUEST" element.
+								Deleted the attribute "COMPONENT" and "OBJECT" from "REQUEST" element
+								Added an optional attribute name "MESSAGECODE" under "MESSAGE" element
+								Change the attribute name "INSURERREFERENCENUMBER" to "INSURERCERTIFICATENUMBER"
+								Added a value "SUCCESS" to "INSURANCESTATUS"
+ 			
+								
+
+_________________________________________________________________________________________________ 
+ dd-mm-yyyy	v		...																	
+_________________________________________________________________________________________________ 
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="APPLICATION">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CUSTOMER" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="FEEAMOUNT">
+				<xs:annotation>
+					<xs:documentation>The application processing fee. </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PREMIUMAMOUNT">
+				<xs:annotation>
+					<xs:documentation>Total insurance premium amount</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TAXAMOUNT">
+				<xs:annotation>
+					<xs:documentation>Total tax amount on the insurance premium</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PREMIUMRATE">
+				<xs:annotation>
+					<xs:documentation>Premium rate for calculating the premium. Express rate in numeric digits. E.g. "0.25"</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="9" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TOTALAMOUNT">
+				<xs:annotation>
+					<xs:documentation>Total Amount Due.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="INSUREDAMOUNT">
+				<xs:annotation>
+					<xs:documentation>Insured Amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="INSURANCECOVERAGEPERCENTAGE">
+				<xs:annotation>
+					<xs:documentation>Insurance coverage percentage.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:totalDigits value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CERTIFICATEEXPIRYDATE" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Certificate Expiry Date.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FUNDINGDATE" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Funding Date.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="COMMENT">
+		<xs:complexType>
+			<xs:attribute name="COMMENTTEXT" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Comment Text.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CONDITION">
+		<xs:complexType>
+			<xs:attribute name="CONDITIONTEXT" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Condition Text.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CUSTOMER">
+		<xs:complexType>
+			<xs:attribute name="FIRSTFORENAME" type="xs:string" use="required"/>
+			<xs:attribute name="MIDDLENAME" type="xs:string" use="optional"/>
+			<xs:attribute name="SURNAME" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DOCUMENT">
+		<xs:annotation>
+			<xs:documentation>Contains a document for the application from insurance system.It is a Certificate PDF file</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="DATA" use="required">
+						<xs:annotation>
+							<xs:documentation>Document Data Format  value:1-PDF 2-WORD</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="PDF"/>
+								<xs:enumeration value="WORD"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="TYPE" use="required">
+						<xs:annotation>
+							<xs:documentation>Document Type  value:1-Pre-approval Certificate 2-Commitment Letter 3-Decline Letter 4-Lender Document - Other, 5-Insurance Certificate</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="PREAPPROVALCERTIFICATE"/>
+								<xs:enumeration value="COMMITMENTLETTER"/>
+								<xs:enumeration value="DECLINELETTER"/>
+								<xs:enumeration value="LENDERDOCUMENT"/>
+								<xs:enumeration value="INSURANCECERTIFICATE"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="CDATAEXISTS" type="xs:boolean" use="required" fixed="true"/>
+					<xs:attribute name="ENCODE" use="required">
+						<xs:annotation>
+							<xs:documentation>Encoding of the Document data  value:1-Base64bin</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Base64bin"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="COMPRESSION" use="required">
+						<xs:annotation>
+							<xs:documentation>Compression method used for the Document datat  value: 0-No Compression; 1-ZIP </xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="NoCompression"/>
+								<xs:enumeration value="ZIP"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="DOCUMENTNAME" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ERROR">
+		<xs:annotation>
+			<xs:documentation>In case the Insurance Status (INSURANCESTATUS attribute) = 'ERROR', populate this element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NUMBER" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Error number defined by insurance system. If it does not exist, set to '9999'. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SOURCE" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Error source defined by insurance system. It can be a name of missing data element or attribute. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DESCRIPTION" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Error description defined by insurance system. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="INSURANCEREQUESTER">
+		<xs:complexType>
+			<xs:attribute name="INSTITUTIONNUMBER" use="optional">
+				<xs:annotation>
+					<xs:documentation> This is the insurance requester's institution number in insurance system
+					Institution number is defaulted to 999 FOR CMHC AND 590 FOR GE
+					what is institution number for AIG? 
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TRANSITNUMBER" use="optional">
+				<xs:annotation>
+					<xs:documentation>Transit Number must come a unique value against organization STRUCTURE</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MESSAGE">
+		<xs:complexType>
+			<xs:attribute name="MESSAGECODE" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Message Code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MESSAGETEXT" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Message Text.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="REQUEST">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="APPLICATION" minOccurs="0"/>
+				<xs:element ref="INSURANCEREQUESTER" minOccurs="0"/>
+				<xs:element ref="CONDITION" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="COMMENT" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MESSAGE" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ERROR" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="DOCUMENT" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="OPERATION" use="required">
+				<xs:annotation>
+					<xs:documentation>
+						ProcessInsResp - Process Insurance Response for MI Request
+						ProcessPremResp - Process Premium Response for Premium Request
+						ProcessRiskResp - Process Risk Response
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="ProcessInsResp"/>
+						<xs:enumeration value="ProcessPremResp"/>
+						<xs:enumeration value="ProcessRiskResp"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TYPE" use="optional">
+				<xs:annotation>
+					<xs:documentation>
+						If there's an error related to the application, then populate "APPERR", 
+						If there's a system error in insurance system, then populate "SYSERR" (Not used)
+						otherwise populate "SUCCESS"
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="SUCCESS"/>
+						<xs:enumeration value="APPERR"/>
+						<xs:enumeration value="SYSERR"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="APPLICATIONNUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This is application number in Omiga or MorWEB.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INSURERCERTIFICATENUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This is insurance reference number or certificate number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INSURERAPPID" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>This is the application ID from mortgage insurance system. 
+					CMHC: It is optional. We set it to the certificate number for CMHC
+					GE: It is mandatory. It is different from the certificate number in GE. 
+					AIG: It is optional.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INSURANCESTATUS" use="optional">
+				<xs:annotation>
+					<xs:documentation>This is the insurance status from AIG. Here're the definitions:
+					1- Error                 set to 'ERROR'
+					2- Referred          set to 'REFERRED'
+					6- Declined           set to 'DECLINED'
+					9- Cancelled         set to 'CANCELLED'
+					10- Approved       set to 'APPROVED'	
+					premium response status code ="S"   set to "SUCCESS"				
+					premium response status code ="E"   set to "ERROR"				
+					CMHC: It is optional. 
+					GE: It is optional. 
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="ERROR"/>
+						<xs:enumeration value="REFERRED"/>
+						<xs:enumeration value="DECLINED"/>
+						<xs:enumeration value="CANCELLED"/>
+						<xs:enumeration value="APPROVED"/>
+						<xs:enumeration value="SUCCESS"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="INSURANCESTATUSCODE" use="optional">
+				<xs:annotation>
+					<xs:documentation>This is the status code from AIG. Here're the definitions:
+        				A        Approved 
+        				D        Declined by AIG UG 
+        				M        Manual underwriting required 
+        				C        Cancellation acknowledged 
+        				R        Rejected due to errors 
+        				E        Error (Premium Response)
+        				S        Successful  (Premium Response)
+					CMHC: It is optional. 
+					GE: It is optional. 
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="A"/>
+						<xs:enumeration value="D"/>
+						<xs:enumeration value="M"/>
+						<xs:enumeration value="C"/>
+						<xs:enumeration value="R"/>
+						<xs:enumeration value="E"/>
+						<xs:enumeration value="S"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="INSURANCESTATUSMESSAGE" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>This is the insurance status message from AIG. It's free format text. For example, "Approved" (long description)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RESPONSEDATETIME" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation> Response Date and Time in standard dateTime format. E.g. "2001-12-17T09:30:47-05:00"</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VERSION" type="xs:string" use="optional" fixed="1.0">
+				<xs:annotation>
+					<xs:documentation>Each version defines a slightly different data format. This is the version number of the document. We define the first version number as "1.0".</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CORRESPONDENCELANGUAGE" use="optional">
+				<xs:annotation>
+					<xs:documentation>CORRESPONDENCE LANGUAGE: 1-English, 2-French</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

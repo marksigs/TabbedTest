@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://marlborough-stirling.com/WebServices/AlphaPlus" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://marlborough-stirling.com/WebServices/AlphaPlus" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://marlborough-stirling.com/WebServices/AlphaPlus">
+      <s:element name="ACERequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vstrRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ACERequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ACERequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </types>
+  <message name="ACERequestSoapIn">
+    <part name="parameters" element="s0:ACERequest" />
+  </message>
+  <message name="ACERequestSoapOut">
+    <part name="parameters" element="s0:ACERequestResponse" />
+  </message>
+  <portType name="AlphaPlusSoapDocSoap">
+    <operation name="ACERequest">
+      <documentation>Service which allows a request to be submitted to the Marlborough Stirling Alpha Plus Calculations Engine</documentation>
+      <input message="s0:ACERequestSoapIn" />
+      <output message="s0:ACERequestSoapOut" />
+    </operation>
+  </portType>
+  <binding name="AlphaPlusSoapDocSoap" type="s0:AlphaPlusSoapDocSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="ACERequest">
+      <soap:operation soapAction="http://marlborough-stirling.com/WebServices/AlphaPlus/ACERequest" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="AlphaPlusSoapDoc">
+    <port name="AlphaPlusSoapDocSoap" binding="s0:AlphaPlusSoapDocSoap">
+      <soap:address location="http://localhost/AlphaPlusWebService/AlphaPlusSoapDoc.asmx" />
+    </port>
+  </service>
+</definitions>

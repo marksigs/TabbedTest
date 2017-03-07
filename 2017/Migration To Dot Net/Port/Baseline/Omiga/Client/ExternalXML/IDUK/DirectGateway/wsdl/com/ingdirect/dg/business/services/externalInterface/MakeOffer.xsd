@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions;  0.0.1 
+ 
+
+Author(s):         prasanta.sinha@ingdirect.co.uk
+ 
+
+Description       This schema defines the Make Offer Request and Response 
+
+============================================================================================== -->
+<schema targetNamespace="http://makeoffer.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:mo="http://makeoffer.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<!-- ====================== Document History  Starts====================================================-->
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>
+			1.	Removed MakeOfferResponseType
+			2.	MakeOfferResponse element type changed from MakeOfferResponseType to common:ConveyancerResponseType
+			3.    MortgageAdvance datatype changes to long and total digits 11.
+
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.3 </documentation>
+		<documentation>
+			GenericMessages.xsd import removed to fix "Diamond Dependency" problem in .Net
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.4 </documentation>
+		<documentation>
+			MakeOfferResponseType created
+		</documentation>
+	</annotation>
+
+	<!-- ====================== Document History  Ends====================================================-->
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="../CommonTypes.xsd"/>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="../GenericMessages.xsd"/>
+	<complexType name="MakeOfferRequestType">
+		<annotation>
+			<documentation>Make Offer Request Type </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="Header">
+						<complexType>
+							<complexContent>
+								<extension base="common:ConveyancerHeaderType">
+									<sequence>
+										<element name="MessageType">
+											<simpleType>
+												<restriction base="string">
+													<pattern value="MOF|MOR"/>
+												</restriction>
+											</simpleType>
+										</element>
+										<element name="SequenceNo" type="common:ConveyancerSequenceNoType"/>
+										<element name="HubRef">
+											<simpleType>
+												<restriction base="string">
+													<pattern value="\d{1,7}"/>
+												</restriction>
+											</simpleType>
+										</element>
+									</sequence>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+					<element name="MortgageApplicationNo">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="10"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="ConveyancerRef">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="8"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="MortgageAdvance">
+						<simpleType>
+							<restriction base="long">
+								<totalDigits value="11"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="MakeOfferResponseType">
+		<annotation>
+			<documentation>Make Offer Response Type</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence minOccurs="0">
+					<element ref="common:ConveyancerResponse"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--Type definition ends-->
+	<element name="MakeOfferRequest" type="mo:MakeOfferRequestType">
+		<annotation>
+			<documentation>Holds the details for Make / Revise Offer Request to Conveyancer</documentation>
+		</annotation>
+	</element>
+	<element name="MakeOfferResponse" type="mo:MakeOfferResponseType">
+		<annotation>
+			<documentation>Acknowledgement to Make Offer Request </documentation>
+		</annotation>
+	</element>
+</schema>

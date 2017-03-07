@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: GetComboList WSDL
+
+History:
+
+Version		Author		Date			Description
+01.00   	TLiu		25/07/2005		Created.   
+01.07		IK			19/06/2006		Epsom first cut
+01.08		SR			19/09/2006		EP2_1. Name space changes for Epsom.
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://GetComboList.Omiga.vertex.co.uk" 
+    xmlns="http://GetComboList.Omiga.vertex.co.uk" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.GetComboList.Omiga.vertex.co.uk" 
+    xmlns:msgResponse="http://Response.GetComboList.Omiga.vertex.co.uk"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.GetComboList.Omiga.vertex.co.uk" 
+            xmlns:msgResponse="http://Response.GetComboList.Omiga.vertex.co.uk" >
+            <xs:import 
+                namespace="http://Request.GetComboList.Omiga.vertex.co.uk" 
+                schemaLocation="GetComboListRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.GetComboList.Omiga.vertex.co.uk" 
+                schemaLocation="GetComboListResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="GetComboListRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="GetComboListRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="GetComboListPort">
+        <wsdl:operation name="getComboList">
+            <wsdl:input message="GetComboListRequestSoapIn" />
+            <wsdl:output message="GetComboListRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="GetComboListPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="getComboList">
+             <soap:operation 
+                soapAction="http://Request.GetComboList.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaGetComboList">
+        <wsdl:port name="GetComboListPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/GetComboListWS/OmigaGetComboListService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

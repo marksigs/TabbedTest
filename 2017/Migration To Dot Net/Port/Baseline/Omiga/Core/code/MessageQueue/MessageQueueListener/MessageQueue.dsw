@@ -1,0 +1,134 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "Files"=.\Files\Files.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/1 Dev Code/MessageQueue/MessageQueueListener/Files", VHSAAAAA
+    .\files
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "MessageQueueComponentVC"=.\MessageQueueComponentVC\MessageQueueComponentVC.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/1 Dev Code/MessageQueue/MessageQueueListener/MessageQueueComponentVC", NHSAAAAA
+    .\messagequeuecomponentvc
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name MessageQueueListenerLOG
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "MessageQueueListener"=.\MessageQueueListener\MessageQueueListener.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/1 Dev Code/MessageQueue/MessageQueueListener/MessageQueueListener", SCQAAAAA
+    .\messagequeuelistener
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name MessageQueueComponentVC
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MessageQueueListenerMTS
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MessageQueueListenerPRF
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MessageQueueListenerLOG
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "MessageQueueListenerLOG"=.\MessageQueueListenerLOG\MessageQueueListenerLOG.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/1 Dev Code/MessageQueue/MessageQueueListener/MessageQueueListenerLOG", UHSAAAAA
+    .\messagequeuelistenerlog
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "MessageQueueListenerMTS"=.\MessageQueueListenerMTS\MessageQueueListenerMTS.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/1 Dev Code/MessageQueue/MessageQueueListener/MessageQueueListenerMTS", QHSAAAAA
+    .\messagequeuelistenermts
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name MessageQueueComponentVC
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MessageQueueListenerLOG
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "MessageQueueListenerPRF"=.\MessageQueueListenerPRF\MessageQueueListenerPRF.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/1 Dev Code/MessageQueue/MessageQueueListener/MessageQueueListenerPRF", SHSAAAAA
+    .\messagequeuelistenerprf
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: GetComboList-Response
+
+History:
+
+Version 		Author		Date			Description
+01.01  			RMH	 		29/06/2005 		Created
+01.02           TLiu		20/07/2005      Changed mars to Epsom in path, named a complexType, and added "MESSAGE" & "ERROR"
+01.03           TLiu		22/07/2005      Imported msgCommonTypes.
+01.04			TLiu		22/07/2005		Changed omiga to Omiga in name space.
+01.05			TLiu		26/07/2005		Fixed Name Spaces
+01.06			TLiu		28/07/2005		Deleted name space msgAppData.
+01.07			IK			19/06/2006		Epsom first cut
+01.08			SR			19/09/2006		EP2_1 Modified namespaces for Epsom
+01.08			SR		23/10/2006		EP2_1 Modified to check in
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.GetComboList.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.GetComboList.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:complexType name="COMBOGROUPType">
+		<xs:sequence>
+			<xs:element name="COMBOVALUE" type="COMBOVALUEType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Every group must have one or more values these each have adn ID and a Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="GROUPNAME" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Combos are defined as groups each must have a unique name</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="COMBOVALIDATIONType">
+		<xs:attribute name="VALIDATIONTYPE" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="COMBOVALUEType">
+		<xs:sequence>
+			<xs:element name="COMBOVALIDATION" type="COMBOVALIDATIONType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Enery value may have have one or more validation types</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="VALUEID" type="xs:string" use="required"/>
+		<xs:attribute name="VALUENAME" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="COMBOGROUP" type="COMBOGROUPType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required">
+			<xs:annotation>
+				<xs:documentation>Success; AppError; SysError etc..</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

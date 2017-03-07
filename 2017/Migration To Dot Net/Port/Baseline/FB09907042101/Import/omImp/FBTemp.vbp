@@ -1,0 +1,68 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\System32\STDOLE2.TLB#OLE Automation
+Reference=*\G{F5078F18-C551-11D3-89B9-0000F81FE221}#4.0#0#C:\WINDOWS\system32\msxml4.dll#Microsoft XML, v4.0
+Reference=*\G{2A005C00-A5DE-11CF-9E66-00AA00A3F464}#1.0#0#C:\WINDOWS\SYSTEM32\COMSVCS.DLL#Microsoft Transaction Server Type Library
+Reference=*\G{EF53050B-882E-4776-B643-EDA472E8E3F2}#2.7#0#C:\Program Files\Common Files\System\ADO\msado27.tlb#Microsoft ActiveX Data Objects 2.7 Library
+Reference=*\G{FA57A684-263F-4B7F-BD47-014BF526041A}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omCust.dll#
+Reference=*\G{D7B2484B-41B8-415B-9111-8C0B70B86C6A}#1.2#0#C:\Build Epsom2\2 Int Code Bin\DLL\omApp.dll#
+Reference=*\G{10E98D81-E223-4674-BD4E-369841AF4C71}#1.2#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\omBase.dll#omBase
+Reference=*\G{62B58C21-4295-466E-9BB7-DBFCC6D37D53}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omSub.dll#
+Reference=*\G{C1EFD01D-753B-48B4-9D1B-1326DCDA783A}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\om4To3.dll#
+Reference=*\G{AD7B7C8A-F46F-4EFD-B2D8-AB909A87241D}#1.1#0#C:\Build Epsom2\2 Int Code Bin\DLL\omCF.dll#
+Reference=*\G{7F401C6E-6D2D-4D2B-984A-846967CA1617}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omCE.dll#
+Class=GeneralAssist; GeneralAssist.cls
+Class=ErrAssist; errAssist.cls
+Class=ImportBO; ImportBO.cls
+Class=IImportBO; IImportBO.cls
+Class=IImportTxBO; IImportTxBO.cls
+Class=ImportTxBO; ImportTxBO.cls
+Class=XMLAssist; ParserAssist.cls
+Module=StdData; StdData.bas
+Module=errConstants; errConstants.bas
+Startup="(None)"
+HelpFile=""
+Title="omImp"
+ExeName32="omImp.dll"
+Command32=""
+Name="omImp"
+HelpContextID="0"
+CompatibleMode="2"
+CompatibleEXE32="\\msgchhost5\omiga vss\INGDUK\OUTPUT\EPSOM2IntegrationTest\Compatibility\CORE_V7.0.2\omImp.dll"
+
+MajorVer=7
+MinorVer=421
+RevisionVer=1
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName=Vertex Financial Services
+CondComp="GENERIC_SQL = 1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo = -1
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+ThreadingModel=1
+DebugStartupOption=0
+DllBaseAddress=&H046C0000
+
+Path32="C:\Build Epsom2\2 Int Code Bin\DLL\"
+Description=""
+VersionComments=Build: FB.099.07.04.21.01  [21 Apr 2007]
+VersionFileDescription=EPSOM2 Omiga 4
+VersionLegalCopyright=© 2007
+VersionLegalTrademarks=© 2007 Vertex Financial Services
+CodeViewDebugInfo=1
+
+[MS Transaction Server]
+AutoRefresh=1
+

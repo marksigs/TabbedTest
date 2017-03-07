@@ -1,0 +1,74 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{91468573-0DAF-418C-8E44-F1378D4A539B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vertex.Omiga.Supervisor.Service</RootNamespace>
+    <AssemblyName>Vertex.Omiga.Supervisor.Service</AssemblyName>
+    <MinFrameworkVersionRequired>3.0</MinFrameworkVersionRequired>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseService.cs" />
+    <Compile Include="OmigaSupervisorService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vertex.Omiga.Supervisor.Business.Entities\Vertex.Omiga.Supervisor.Business.Entities.csproj">
+      <Project>{D778D7A9-F61A-4096-9887-FEF4C72F17F2}</Project>
+      <Name>Vertex.Omiga.Supervisor.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vertex.Omiga.Supervisor.Business\Vertex.Omiga.Supervisor.Business.csproj">
+      <Project>{0C695819-8DDE-42A0-98DB-74261CE11A9A}</Project>
+      <Name>Vertex.Omiga.Supervisor.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vertex.Omiga.Supervisor.Service.Interface\Vertex.Omiga.Supervisor.Service.Interface.csproj">
+      <Project>{48F472D8-2434-4839-8874-E1B1D2111B14}</Project>
+      <Name>Vertex.Omiga.Supervisor.Service.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vertex.Omiga.Supervisor.Service.Types\Vertex.Omiga.Supervisor.Service.Types.csproj">
+      <Project>{B673297B-BEA8-4DA4-9F15-C0497E6D7966}</Project>
+      <Name>Vertex.Omiga.Supervisor.Service.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

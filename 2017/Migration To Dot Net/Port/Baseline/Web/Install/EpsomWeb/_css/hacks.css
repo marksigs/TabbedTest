@@ -1,0 +1,28 @@
+body {
+  text-align: center;
+}
+#em {
+  width: 1em;
+  height: 0;
+  overflow: hidden;
+}
+
+#main{
+  text-align: left;}
+
+/* --- MIN-height ---*/
+
+/* for Mozilla/Safari/Opera */
+*>.minpageheight {
+ padding-top: 500px;
+ min-height: 1px;
+}
+*>#col2 .main-content {
+ margin-top: -490px;
+}
+/* for IE, with IE5/Mac backslash filter \*/
+* html .minpageheight {
+ height: 500px;
+}
+/* end filter */
+/*  --- MIN-height ---*/

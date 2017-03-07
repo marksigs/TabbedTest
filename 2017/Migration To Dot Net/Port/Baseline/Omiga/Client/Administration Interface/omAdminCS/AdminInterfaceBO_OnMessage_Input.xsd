@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="AdminInterfaceBO" elementFormDefault="qualified" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" 
+  xmlns:generic="http://generic.dg.ingdirect.com/0.0.1"
+	xmlns:CreateMortgageAccount="http://createmortgageaccount.services.dg.ingdirect.com/0.0.1"
+  >
+  <xs:import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="..\..\ExternalXML\IDUK\DirectGateway\wsdl\com\ingdirect\dg\business\services\GenericMessages.xsd"/>
+  <xs:import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="..\..\ExternalXML\IDUK\DirectGateway\wsdl\com\ingdirect\dg\business\services\CommonTypes.xsd"/>
+  <xs:import namespace="http://createmortgageaccount.services.dg.ingdirect.com/0.0.1" schemaLocation="..\..\ExternalXML\IDUK\DirectGateway\wsdl\com\ingdirect\dg\business\services\createmortgageaccount.xsd" />
+	<xs:element name="REQUEST" type="AdminInterfaceBO_OnMessage_Input"></xs:element>
+	<xs:complexType name="AdminInterfaceBO_OnMessage_Input">
+		<xs:sequence>
+			<xs:element name="BATCHAUDIT" type="BATCHAUDIT" />
+			<xs:element name="PAYMENTRECORD" type="PAYMENTRECORD" />
+			<xs:element ref="CreateMortgageAccount:CreateMortgageAccountRequest" />
+		</xs:sequence>
+		<xs:attribute name="OPERATION" type="xs:string" />
+		<xs:attribute name="USERID" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" />
+		<xs:attribute name="PASSWORD" type="xs:string" use="optional"/>
+		<xs:attribute name="OTHERSYSTEMCUSTOMERNUMBER" type="xs:string" use="optional"/>
+		<xs:anyAttribute namespace="##any" processContents="skip"/>
+	</xs:complexType>
+	<xs:complexType name="BATCHAUDIT">
+		<xs:sequence />
+		<xs:attribute name="BATCHRUNNUMBER" type="xs:string" />
+		<xs:attribute name="BATCHNUMBER" type="xs:string" />
+		<xs:attribute name="BATCHAUDITGUID" type="xs:string" />
+		<xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:complexType>
+	<xs:complexType name="PAYMENTRECORD">
+		<xs:sequence />
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" />
+		<xs:attribute name="PAYMENTSEQUENCENUMBER" type="xs:string" />
+		<xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:complexType>
+</xs:schema>

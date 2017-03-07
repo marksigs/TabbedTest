@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>Omiga IV</title>
+
+<style type="text/css">
+<!--
+.rollover {  cursor: hand}
+p {COLOR: white;
+   FONT-FAMILY: sans-serif;
+   FONT-SIZE: 8pt;
+   FONT-STYLE: normal;
+   FONT-WEIGHT: normal}
+-->
+</style>
+<style>
+<--!
+a.{text-decoration:none}
+-->
+</style>
+
+<script language="javascript" src="foldernav.js"></script>
+  <script language="JavaScript">
+<!--
+function MM_showHideLayers() { //v1.2
+  var i, visStr, args, theObj;
+  args = MM_showHideLayers.arguments;
+  for (i=0; i<(args.length-2); i+=3) { //with arg triples (objNS,objIE,visStr)
+    visStr   = args[i+2];
+    if (navigator.appName == 'Netscape' && document.layers != null) {
+      theObj = eval(args[i]);
+      if (theObj) theObj.visibility = visStr;
+    } else if (document.all != null) { //IE
+      if (visStr == 'show') visStr = 'visible'; //convert vals
+      if (visStr == 'hide') visStr = 'hidden';
+      theObj = eval(args[i+1]);
+      if (theObj) theObj.style.visibility = visStr;
+  } }
+}
+//-->
+</script>
+<script language="JavaScript">
+<!--
+function MM_preloadImages() { //v1.2
+  if (document.images) {
+    var imgFiles = MM_preloadImages.arguments;
+    var preloadArray = new Array();
+    for (var i=0; i<imgFiles.length; i++) {
+      preloadArray[i] = new Image;
+      preloadArray[i].src = imgFiles[i];
+    }
+  }
+}
+
+function MM_swapImage() { //v1.2
+  var i,j=0,objStr,obj,swapArray=new Array,oldArray=document.MM_swapImgData;
+  for (i=0; i < (MM_swapImage.arguments.length-2); i+=3) {
+    objStr = MM_swapImage.arguments[(navigator.appName == 'Netscape')?i:i+1];
+    if ((objStr.indexOf('document.layers[')==0 && document.layers==null) ||
+        (objStr.indexOf('document.all[')   ==0 && document.all   ==null))
+      objStr = 'document'+objStr.substring(objStr.lastIndexOf('.'),objStr.length);
+    obj = eval(objStr);
+    if (obj != null) {
+      swapArray[j++] = obj;
+      swapArray[j++] = (oldArray==null || oldArray[j-1]!=obj)?obj.src:oldArray[j];
+      obj.src = MM_swapImage.arguments[i+2];
+  } }
+  document.MM_swapImgData = swapArray; //used for restore
+}
+//-->
+</script>
+
+<script Language="vbScript">
+
+Sub menuDown_onClick
+	menuDown.style.zindex="1"
+	navBar.style.top="190px"
+end Sub
+
+Sub menuUp_onClick
+	menuDown.style.zindex="3"
+	navBar.style.top="60px"
+end Sub
+</script>
+
+  <script language="JavaScript">
+<!--
+function MM_goToURL() { //v1.2
+  for (var i=0; i< (MM_goToURL.arguments.length - 1); i+=2) //with arg pairs
+    eval(MM_goToURL.arguments[i]+".location='"+MM_goToURL.arguments[i+1]+"'");
+  document.MM_returnValue = false;
+}
+//-->
+</script>
+</head>
+
+<body topmargin="15" leftmargin="15" marginwidth="15" marginheight="11" bgcolor="#000695" alink="black" vlink="gray" link="black">
+<!-- #BeginBehavior MM_swapImage2 --> 
+<script language="JavaScript">
+  MM_preloadImages('omiga4.gif');
+</script>
+<!-- #EndBehavior MM_swapImage2 --> <!-- #BeginBehavior MM_swapImage1 --> 
+<script language="JavaScript">
+  MM_preloadImages('mainback.gif');
+</script>
+<!-- #EndBehavior MM_swapImage1 --> <!-- #BeginBehavior MM_swapImage25 --> 
+<script language="JavaScript">
+  MM_preloadImages('graphics/omiga4.gif');
+</script>
+
+<!-- ----------- Nav Menu ---------- --> 
+<div id="navbar" style="LEFT: -7px; POSITION: absolute; TOP: 5px; z-index: 5; width: 350px; height: 80px; visibility: hidden"> 
+  <!-- ------------- QUICK QUOTE ------------- --> 
+  <div ID="m4Parent" class="parent">
+	 <a name="m4a" href="#" onClick="FolderExpand('m4')"><img name="m4Tree" src="images/Tplus.gif" align="absmiddle" border="0" WIDTH="10" HEIGHT="20"><img name="m4Folder" src="images/foldericon.gif" class="icon" align="absmiddle" border="0" width="19" height="20"><font color="black" size="1" class="item" face="MS Sans Serif">Quick 
+    Quote </font></a> </div>
+
+<div ID="m4Child" CLASS="child">
+	<img src="images/I.gif" align="absmiddle" WIDTH="10" HEIGHT="20"><img src="images/T.gif" align="absmiddle" WIDTH="10" HEIGHT="20"><img src="images/greenbullet.gif" border="0" align="absmiddle" WIDTH="10" HEIGHT="14">&nbsp;<a class="item" href="#" onClick="MM_goToURL('parent.main','QuickQuoteData.asp');return document.MM_returnValue">Data Capture</a><br>
+    <img src="images/I.gif" align="absmiddle" WIDTH="10" HEIGHT="20"><img src="images/T.gif" align="absmiddle" WIDTH="10" HEIGHT="20"><img src="images/greenbullet.gif" border="0" align="absmiddle" WIDTH="10" HEIGHT="14">&nbsp;<a class="item" href="#" onClick="MM_goToURL('parent.main','QuoteModelling.asp');return document.MM_returnValue">Modelling</a><br>
+    <img src="images/I.gif" align="absmiddle" WIDTH="10" HEIGHT="20"><img src="images/L.gif" align="absmiddle" WIDTH="10" HEIGHT="20"><img src="images/greenbullet.gif" border="0" align="absmiddle" WIDTH="10" HEIGHT="14">&nbsp;<a class="item" href="#" onClick="MM_goToURL('parent.main','Costs.asp');return document.MM_returnValue">Costs</a><br>
+</div>
+<!-- ----------- END QUICK QUOTE ----------- -->
+</div>
+
+<comment>
+<div id="fixedRates" style="position:absolute; left:4px; top:102px; width:21px; height:20px; z-index:2; visibility: visible"> 
+  <div id="house" style="position:absolute; left:9px; top:9px; width:26px; height:26px; z-index:1; visibility: visible"><img src="graphics/house_ani.gif" width="53" height="75"></div>
+  <img src="graphics/advert2_ani.gif" width="142" height="96"></div>
+<div style="position:absolute; z-index:-1; left:5px; top:31px;; width: 246px; height: 13px; visibility: hidden" id="enqName2"> 
+  <p><font face="MS Sans Serif" size="-4" color="White">Enquirer 2: <span id="mbSurname2"></span></font> 
+  </p>
+</div>
+<div style="position:absolute; z-index:-1; left:5px; top:1px;; width: 191px; height: 13px; visibility: hidden" id="owner"> 
+  <p><font face="MS Sans Serif" color="White">Owner: <span id="mbAdvisor"></span></font> 
+  </p>
+</div>
+<div style="position:absolute; z-index:-1; left:5px; top:16px;; width: 246px; height: 13px; visibility: hidden" id="enqName"> 
+  <p><font face="MS Sans Serif" size="-4" color="White">Enquirer 1: <span id="mbSurname"></span></font> 
+  </p>
+</div>
+</comment>
+</body>
+
+<script language="vbscript">
+<!--
+Sub swapMenus()
+	if packageMenu.style.visibility = "hidden" then
+		applicantMenu.style.visibility = "hidden"
+		packageMenu.style.visibility = "visible"
+	else 
+		packageMenu.style.visibility = "hidden"
+		applicantMenu.style.visibility = "visible"
+	end if  
+End Sub
+-->
+</script>
+</html>

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: FindMortgageProductList-Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RMH	 		29/06/2005 		Created
+01.02           TLiu             21/07/2005      Changed mars to IDUK in path, named a complexType.
+01.03			TLiu				08/08/2005		Changed some attributes.
+01.04			TLiu				25/08/2005		Made all the elements of MORTGAGEPRODUCTREQUEST non-mandatory.
+01.05			TLiu				15/09/2005		Made OPERATION & ACTION optional.
+01.06			SR				19/09/2006		EP2_1 - Modified namespaces for Epsom.
+01.07			SR				23/10/2006		EP2_1 - Modified to check in
+01.08			SR				14/11/2006		EP2_76 Modified for Epsom - Additional parameters in product search
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.FindMortgageProducts.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Request.FindMortgageProducts.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="ALLPRODUCTSWITHCHECKS" type="xs:string"/>
+	<xs:element name="ALLPRODUCTSWITHOUTCHECKS" type="xs:string"/>
+	<xs:element name="AMOUNTREQUESTED" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>APP04a 1a Mortgage Preferences #1 Loan Amount</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="APPLICATIONFACTFINDNUMBER" type="xs:string"/>
+	<xs:element name="APPLICATIONNUMBER" type="xs:string"/>
+	<xs:element name="CAPPEDFLOOREDPERIOD" type="xs:string"/>
+	<xs:element name="CAPPEDFLOOREDPRODUCTS" type="xs:string"/>
+	<xs:element name="DISCOUNTEDPERIOD" type="xs:string"/>
+	<xs:element name="DISCOUNTEDPRODUCTS" type="xs:string"/>
+	<xs:element name="DISTRIBUTIONCHANNELID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Combo Value e.g. 1 = Direct Phone</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FIXEDRATEPERIOD" type="xs:string"/>
+	<xs:element name="FIXEDRATEPRODUCTS" type="xs:string"/>
+	<xs:element name="FLEXIBLEPRODUCTS" type="xs:string"/>
+	<xs:element name="LOANCOMPONENTAMOUNT" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Amount of the loan apportioned to the component</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LTV" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Loan to Value</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MANUALPORTEDLOANIND" type="xs:string"/>
+	<xs:element name="MORTGAGEPRODUCTCODE" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>If supplied will return a specific product</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NATUREOFLOAN" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>matchin a  value for comboGroup NatureOfLoan</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CREDITSCHEME" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>matching a value for comboGroup SpecialGroup</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GUARANTORIND" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>1 if only guarantor products should be returned. 0 if only non guarantor products should be returned. Blank for all</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="INCOMESTATUS" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>1 - self-certified ; 0 - full status</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FLEXIBLEIND" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>1 - select flexible products only ; 0 - non-flexible products; Empty - all products</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PRINCIPALFIRMID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Unique indicator of principal firm for whom exclusive products are to be selected</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ARFIRMID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Unique indicator of AR firm for whom exclusive products are to be selected</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PACKAGERID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Unique indicator of packager for whom exclusive products are to be selected</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MORTGAGECLUBID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Unique indicator of mortgage club for whom exclusive products are to be selected</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PACKAGERASSOCIATIONID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Unique indicator of packager association for whom exclusive products are to be selected</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MAXRECORDS" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DATABASEVERSION" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="COUNTRYOFORIGIN" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LANGUAGE" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TYPEOFAPPLICATION" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="REPAYMENTMETHOD" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="INTERESTONLYELEMENT" type="xs:float">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CAPITALANDINTERESTELEMENT" type="xs:float">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EMPLOYMENTSTATUS" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LENDERID" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CASHBACKPRODUCTS" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IMPAIREDCREDITRATING" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MEMBEROFSTAFF" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EXISTINGCUSTOMER" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TYPEOFBUYER" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EMPLOYMENTSTATUSLIST" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ORDERBY" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TAGNAME" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MAXAGE" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MINAGE" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="APP1DOB" type="msgdt:msgDate">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="APP2DOB" type="msgdt:msgDate">
+		<xs:annotation>
+			<xs:documentation>??</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="MORTGAGEPRODUCTREQUESTType">
+		<xs:sequence>
+			<xs:element ref="SEARCHCONTEXT" minOccurs="0"/>
+			<xs:element ref="DISTRIBUTIONCHANNELID" minOccurs="0"/>
+			<xs:element ref="APPLICATIONNUMBER" minOccurs="0"/>
+			<xs:element ref="APPLICATIONFACTFINDNUMBER" minOccurs="0"/>
+			<xs:element ref="MORTGAGESUBQUOTENUMBER" minOccurs="0"/>
+			<xs:element ref="PURPOSEOFLOAN" minOccurs="0"/>
+			<xs:element ref="TERMINYEARS" minOccurs="0"/>
+			<xs:element ref="TERMINMONTHS" minOccurs="0"/>
+			<xs:element ref="AMOUNTREQUESTED" minOccurs="0"/>
+			<xs:element ref="LOANCOMPONENTAMOUNT" minOccurs="0"/>
+			<xs:element ref="LTV" minOccurs="0"/>
+			<xs:element ref="FLEXIBLEPRODUCTS" minOccurs="0"/>
+			<xs:element ref="RECORDCOUNT" minOccurs="0"/>
+			<xs:element ref="STARTRECORD" minOccurs="0"/>
+			<xs:element ref="ALLPRODUCTSWITHOUTCHECKS" minOccurs="0"/>
+			<xs:element ref="ALLPRODUCTSWITHCHECKS" minOccurs="0"/>
+			<xs:element ref="PRODUCTSBYGROUP" minOccurs="0"/>
+			<xs:element ref="PRODUCTGROUP" minOccurs="0"/>
+			<xs:element ref="DISCOUNTEDPRODUCTS" minOccurs="0"/>
+			<xs:element ref="DISCOUNTEDPERIOD" minOccurs="0"/>
+			<xs:element ref="FIXEDRATEPRODUCTS" minOccurs="0"/>
+			<xs:element ref="FIXEDRATEPERIOD" minOccurs="0"/>
+			<xs:element ref="STANDARDVARIABLEPRODUCTS" minOccurs="0"/>
+			<xs:element ref="CAPPEDFLOOREDPRODUCTS" minOccurs="0"/>
+			<xs:element ref="CAPPEDFLOOREDPERIOD" minOccurs="0"/>
+			<xs:element ref="MORTGAGEPRODUCTCODE" minOccurs="0"/>
+			<xs:element ref="MANUALPORTEDLOANIND" minOccurs="0"/>
+			<xs:element ref="NATUREOFLOAN" minOccurs="0"/>
+			<xs:element ref="CREDITSCHEME" minOccurs="0"/>
+			<xs:element ref="GUARANTORIND" minOccurs="0"/>
+			<xs:element ref="INCOMESTATUS" minOccurs="0"/>
+			<xs:element ref="FLEXIBLEIND" minOccurs="0"/>
+			<xs:element ref="MAXRECORDS" minOccurs="0"/>
+			<xs:element ref="DATABASEVERSION" minOccurs="0"/>
+			<xs:element ref="COUNTRYOFORIGIN" minOccurs="0"/>
+			<xs:element ref="LANGUAGE" minOccurs="0"/>
+			<xs:element ref="TYPEOFAPPLICATION" minOccurs="0"/>
+			<xs:element ref="REPAYMENTMETHOD" minOccurs="0"/>
+			<xs:element ref="INTERESTONLYELEMENT" minOccurs="0"/>
+			<xs:element ref="CAPITALANDINTERESTELEMENT" minOccurs="0"/>
+			<xs:element ref="EMPLOYMENTSTATUS" minOccurs="0"/>
+			<xs:element ref="LENDERID" minOccurs="0"/>
+			<xs:element ref="CASHBACKPRODUCTS" minOccurs="0"/>
+			<xs:element ref="IMPAIREDCREDITRATING" minOccurs="0"/>
+			<xs:element ref="MEMBEROFSTAFF" minOccurs="0"/>
+			<xs:element ref="EXISTINGCUSTOMER" minOccurs="0"/>
+			<xs:element ref="TYPEOFBUYER" minOccurs="0"/>
+			<xs:element ref="EMPLOYMENTSTATUSLIST" minOccurs="0"/>
+			<xs:element ref="ORDERBY" minOccurs="0"/>
+			<xs:element ref="TAGNAME" minOccurs="0"/>
+			<xs:element ref="MAXAGE" minOccurs="0"/>
+			<xs:element ref="MINAGE" minOccurs="0"/>
+			<xs:element ref="APP1DOB" minOccurs="0"/>
+			<xs:element ref="APP2DOB" minOccurs="0"/>
+			<xs:element ref="PRINCIPALFIRMID" minOccurs="0"/>
+			<xs:element ref="ARFIRMID" minOccurs="0"/>
+			<xs:element ref="PACKAGERID" minOccurs="0"/>
+			<xs:element ref="MORTGAGECLUBID" minOccurs="0"/>
+			<xs:element ref="PACKAGERASSOCIATIONID" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MORTGAGESUBQUOTENUMBER" type="xs:string"/>
+	<xs:element name="PRODUCTGROUP" type="xs:string"/>
+	<xs:element name="PRODUCTSBYGROUP" type="xs:string"/>
+	<xs:element name="PURPOSEOFLOAN" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>APP04a 1a Mortgage Preferences #1 Application Type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RECORDCOUNT" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>This defines the number of records returned in teh response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="MORTGAGEPRODUCTREQUEST" type="MORTGAGEPRODUCTREQUESTType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Origination cahnnel for the application</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ADMINSYSTEMSTATE" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Not used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="OPERATION" type="xs:string"/>
+		<xs:attribute name="ACTION" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="SEARCHCONTEXT" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Set to a constant value = Cost Modelling</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="STANDARDVARIABLEPRODUCTS" type="xs:string"/>
+	<xs:element name="STARTRECORD" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Defines the Record number within the set that the list starts at</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TERMINMONTHS" type="xs:string"/>
+	<xs:element name="TERMINYEARS" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>APP04a 1a Mortgage Preferences #1 Term in Years</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,6 @@
+VBGROUP 5.0
+StartupProject=Base\omBase\omBase.vbp
+Project=CRUD\omCRUD\omCRUD.vbp
+Project=Audit\omAU\omAU.vbp
+Project=Organisation\omOrg\omOrg.vbp
+Project=omRaRules\omRARules.vbp

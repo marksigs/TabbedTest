@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+Type Versions; Type versioning is via namespaces. 
+                           All Direct Gateway types will have a version of 0.0.1 
+                           Type versions enable Direct Gateway to support multiple versions of the same type and service in the future
+
+Author(s):          Amit Badheka
+
+Description        This is an XML Messaging schema for the customer search service.
+============================================================================================== -->
+<schema targetNamespace="http://searchForCustomerOrProspect.messages.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:this="http://searchForCustomerOrProspect.messages.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>Initial Version 
+						Added annotaions concerning elements</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.3 </documentation>
+		<documentation>Updated Version 
+						Added annotaions regarding search customer call from Omiga</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.4 </documentation>
+		<documentation>Updated Version 
+						Removed this:SimpleDateType and updated schema to use commonTypes:SimpleDateType </documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.5 </documentation>
+		<documentation>Salutation, Address criteria removed for search, new elements Response, OtherCustomerType added in response</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.6 </documentation>
+		<documentation>ClientDetails multiplicity chenaged to multiples from one.</documentation>
+	</annotation>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<!-- start of type definitions -->
+	<complexType name="SearchForCustomerOrProspectRequestType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="FirstName">
+						<annotation>
+							<documentation>Search criteria - First Name of customer/prospect record</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="20"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="LastName">
+						<annotation>
+							<documentation>Search criteria - Last Name of customer/prospect record</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="30"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="PostCode" type="common:PostCodeType">
+						<annotation>
+							<documentation>Search criteria - Postcode of LEGAL address for customer/prospect record</documentation>
+						</annotation>
+					</element>
+					<element name="DOB" type="common:SimpleDateType">
+						<annotation>
+							<documentation>Description: Search criteria - Date of Birth for customer record - prospect will likely not have DOB.</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="SearchForCustomerOrProspectResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="Response">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="1"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="ClientDetails" type="common:ClientDetailsType" maxOccurs="unbounded">
+						<annotation>
+							<documentation>Elements required from within ClientDetailsType are: (NamePrefix, FirstName, MiddleName, LastName); Gender; DateOfBirth; Number; AddressDetail; PhoneDetail; DontSolicit; ClientStatus; 							SpecialNeed. Mapping: Individual fields are mapped within [CommonTypes] xsd file.
+							</documentation>
+						</annotation>
+					</element>
+					<element name="OtherCustomerType">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="2"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="SearchForCustomerOrProspectRequest" type="this:SearchForCustomerOrProspectRequestType"/>
+	<element name="SearchForCustomerOrProspectResponse" type="this:SearchForCustomerOrProspectResponseType"/>
+</schema>

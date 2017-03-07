@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: OmigaData type, used e.g. in GetApplicationData response
+
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/OmigaData.xsd $
+Workfile                 $Workfile: OmigaData.xsd $
+Current Version   	$Revision: 9 $
+Last Modified       	$Modtime: 11/04/07 4:56 $
+Modified By          	$Author: Sbajcer $
+
+History:
+
+Version Author     Date       Description
+01.00   RMH 	   29/06/2005 Created
+01.01   RFairlie   05/07/2005 Updated for POC - changes to schema attributes.
+01.02   RFairlie   06/07/2005 Pasted in Rob Hart's changes (additional documentation).
+01.03   RFairlie   06/07/2005 APPLICATIONFACTFIND should not be a type extension.
+01.04   RFairlie   07/07/2005 Changed elementFormDefault to "qualified" 
+01.05   RFairlie   07/07/2005 Changed attributeFormDefault to "qualified" 
+01.06   RFairlie   07/07/2005 Uncommented sections which had previously been commented for simplification
+01.07   RFairlie   07/07/2005 Changed attributeFormDefault back to "unqualified" as it caused sample xml to be invalid
+01.08   RFairlie   07/07/2005 Avoid use of xs:group
+01.09   RFairlie   08/07/2005 Renamed omigaData to OmigaDataType for consistency and to avoid use of lower case
+01.10   RFairlie   08/07/2005 Renamed msgdt.xsd to msgDataTypes.xsd. All xsds now share same directory
+01.11   RFairlie   08/07/2005 Added extra response types for testing purposes
+01.12   RFairlie   08/07/2005 Moved the extra response types added for testing purposes into GetApplicationDataResponse.xsd
+01.13   RFairlie   09/07/2005 Changed elementFormDefault to "unqualified" (change had been lost) - nb this is essential for 
+                              correct serialization
+01.14   RFairlie   09/07/2005 Eliminate all OmigaDataType children except CUSTOMER for testing purposes
+01.15   RFairlie   09/07/2005 Eliminate all OmigaDataType children except CUSTOMER and APPLICATION for testing purposes
+01.16   RFairlie   09/07/2005 All elements and attributes need a type - marked APPLICATIONFACTFINDNUMBER as of type xs:int 
+                              (was missing in one place and a string in another)
+01.17   RFairlie   09/07/2005 Put all OmigaDataType children back in, having successfully tested the previous version  
+01.18	RHart	   14/07/2005 Add annotation for each item in MARS client Use Case App04b and App14
+                              Add new Type for FINANCIALSUMMARY
+01.19	RHart	   15/07/2005 Added new complex types for NameAndAddressDirectoy, ContactDetasils and PayeeHistory 
+                              (payeehistory will now be created at the same time as application legal rep.)
+01.20   TLiu       19/07/2005 Changed: mars to Epsom, msgDataTypes to msgCommonTypes, msgdt:date to msgdt:msgDate, etc.
+01.21	RHart	   21/07/2005 Re-structured the xsd so that Address, Account, Person, ContactDetails,
+							 NameAndAddressDirectory 
+                              and ThirdParty types all appear within the hierachy e.g. Employment has a ThirdParty has an 
+                              Address etc. In Addition addedd NewPropertyAddress.
+01.22   TLiu       22/07/2005 Moved somes types to msgCommonTypes.xsd.
+01.23   RFairlie   22/07/2005 Renamed file from GetApplicationData.xsd to OmigaData.xsd
+                              Changed namespace capitalisation to match internal guideline
+01.24	RHart	26/07/2005 Added the following nodes as new complx types Quotation, MortgageSubQuote, 
+						LoanComponent, MortgageOneOffCosts and ApplicationFeeType.
+01.25   TLiu       26/07/2005 Removed ADDRESS, THIRDPARTY, ACCOUNT, PERSON, CONTACTDETAILS from APPLICATIONType.
+01.26	TLiu		02/08/2005	Named complexTypes which had no names.
+01.27	IK			24/08/2005	multiple additions / updates from InterfaceChangeRegister.xls
+01.28	RHart	25/08/2005 Made Account, MortgageAccount, LoansLiabilities, Accounrelationship optional
+01.29   Rhart	  	25/08/2005 Made Account, MortgageAccount, LoansLiabilities, Accounrelationship unbounded
+01.30	IK			09/09/2005		(2.23) re-structured for inherited key values,
+												CUSTOMERROLE now child of APPLICATIONFACTFIND
+												CUSTOMER now child of CUSTOMERROLE
+												CUSTOMERVERSION now child of CUSTOMER
+												FINANCIALSUMMARY, NEWPROPERTYROOMTYPE, APPLICATIONBANKBUILDINGSOC
+												now child of APPLICATIONFACTFIND
+01.31	TLiu		14/09/2005	Added THIRDPARTY to APPLICATIONBANKBUILDINGSOC, etc.
+01.32	RHart	17/09/2005	Added missing attributes to CustomerVersionType
+01.33	RHart	08/10/2005	Changed CustomerWrapUpDetails to match Omiga
+01.33	RHart	08/10.2005	Changes the optionality on Keys and Sequence numbers as detailed in the Issues Register and 
+											Ingestion Spec respectively
+1.34		RHart	14/10/2005	Make CustomerRole/:CustomerRoleType required
+											Make Account / Mortgage Account / Loansliabilities a 1 -1 relationship in terms of cardinlity
+											Make CustomerNumber required in AccountRelationship where AccountRelationship is present
+											Add a CurrentAddressIndictor to the MortgageAccount in the xsd for use in the ingestion rule
+2.01		IK			09/11/2005	MAR429 remove 'required' from attributes not present on initial input
+2.02		IK			16/11/2005	MAR594 NEWPROPERTYADDRESS now optional
+2.03		GHun	23/01/2006	MAR1068 Added EARLIESTCOMPLETIONDATE to APPLICATIONFACTFIND
+2.04		PE		13/03/2006	MAR1061
+2.05		PE		20/03/2006	MAR1437 Added CARDTYPE to LOANSLIABILITIES
+2.06		PE		20/03/2006	MAR1061 Changed MORTGAGESUBQUOTE.PURCHASEPRICE to MORTGAGESUBQUOTE.PURCHASEPRICEORESRTIMATEDVALUE
+2.07     RFairlie	21/03/2006	MAR1474 File was missed from build
+
+Defect		Author		Date				Description
+				IK				21/03/2006	Epsom first cut
+EP2_1 		IK				19/09/2006	remove Epsom identifier, add NEWLOAN
+EP2_1 		IK				28/09/2006	rationalise use of xs:boolean
+EP2_4		SR			29/09/2006	Added new attribs to ApplicationType,  ApplicationFactFindType, LoanComponentType
+EP2_1		IK				22/09/2006	add msgCrudOps
+EP2_57	IK				07/11/2006	additional data as per: E2CR35
+EP2_134	IK				21/11/2006	drop ACCOUNTRELATIONSHIP, RISKASSESSMENT, CUSTOMERWRAPUPDETAILS, add CRUD_OP attributes
+EP2_134	IK				21/11/2006	add FsaDataType with CRUD_OP attributes
+EP2_170 	IK				23/11/2006	add APPLICATIONINTRODUCER, ADDITIONALDIPDATA (MEMOPAD)
+EP2_700	SR			05/01/2007
+EP2_700	SR			08/01/2007		
+EP2_702	ik				11/01/2007	create ACCOUNTRELATIONSHIP records
+EP2_700	ik				11/01/2007	CUSTOMERVERSIONBANKRUPTCYHISTORY re-ordered
+EP2_756	ik				12/01/2007	MORTGAGEACCOUNT can have (security) ADDRESS
+EP2_833	IK				13/01/2007	add APPLICATIONESTATEAGENT,NEWPROPERTYVENDOR.NEWPROPERTYLEASEHOLD
+EP2_840	IK				13/01/2007	add MEMOPAD
+EP2_862	IK				15/01/2007	add THIRDPARTY to ACCOUNTANT
+EP2_899	IK				09/01/2007	restructure for BANKRUPTCYHISTORY records
+EP2_1039	IK				30/01/2007	DECLINEDMORTGAGE, NEWPROPERTYDEPOSIT maxOccurs="unbounded"
+EP2_1803 MCh			11/04/2007	msgCrudOpU replaced with msgCrudOp in APPLICATIONFEETYPE, PAYMENTRECORD & FEEPAYMENT
+================================================================================-->
+<xs:schema xmlns="http://OmigaData.Omiga.vertex.co.uk" xmlns:ob="http://OmigaBase.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://OmigaData.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://OmigaBase.Omiga.vertex.co.uk" schemaLocation="OmigaBase.xsd"/>
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<!-- EP2_702 -->
+	<xs:complexType name="ACCOUNTRELATIONSHIPType">
+		<xs:complexContent>
+			<xs:extension base="ob:ACCOUNTRELATIONSHIP_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATION_base">
+				<xs:sequence>
+					<xs:element name="APPLICATIONFACTFIND" type="APPLICATIONFACTFINDType"/>
+					<xs:element name="PAYMENTRECORD" type="PAYMENTRECORDType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="PAYEEHISTORY" type="PAYEEHISTORYType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="APPLICATIONFEETYPE" type="APPLICATIONFEETYPEType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpU" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NEWLOANType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWLOAN_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONLEGALREPType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONLEGALREP_base">
+				<xs:sequence>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0"/>
+					<xs:element name="NAMEANDADDRESSDIRECTORY" type="msgdt:NAMEANDADDRESSDIRECTORYType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFACTFINDType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONFACTFIND_base">
+				<xs:sequence>
+					<xs:element name="APPLICATIONINTRODUCER" type="APPLICATIONINTRODUCERType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="NEWLOAN" type="NEWLOANType" minOccurs="0"/>
+					<xs:element name="APPLICATIONLEGALREP" type="APPLICATIONLEGALREPType" minOccurs="0"/>
+					<xs:element name="NEWPROPERTY" type="NEWPROPERTYType" minOccurs="0"/>
+					<xs:element name="OTHERRESIDENT" type="OTHERRESIDENTType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="QUOTATION" type="QUOTATIONType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="APPLICATIONSTAGE" type="APPLICATIONSTAGEType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="APPLICATIONUNDERWRITING" type="APPLICATIONUNDERWRITINGType" minOccurs="0"/>
+					<xs:element name="FINANCIALSUMMARY" type="FINANCIALSUMMARYType" minOccurs="0"/>
+					<xs:element name="APPLICATIONBANKBUILDINGSOC" type="APPLICATIONBANKBUILDINGSOCType" minOccurs="0"/>
+					<xs:element name="NEWPROPERTYDEPOSIT" type="NEWPROPERTYDEPOSITType" minOccurs="0" maxOccurs="unbounded"/>
+					<!-- EP2_833 -->
+					<xs:element name="APPLICATIONESTATEAGENT" type="APPLICATIONESTATEAGENTType" minOccurs="0"/>
+					<!-- EP2_840 -->
+					<xs:element name="MEMOPAD" type="MEMOPADType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="CUSTOMERROLE" type="CUSTOMERROLEType" maxOccurs="5"/>
+					<!-- EP2_702 -->
+					<xs:element name="ACCOUNT" type="ACCOUNTType" minOccurs="0" maxOccurs="unbounded"/>
+					<!-- EP2_899 -->
+					<xs:element name="BANKRUPTCYHISTORY" type="BANKRUPTCYHISTORYType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpU" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMER_base">
+				<xs:sequence>
+					<xs:element name="CUSTOMERVERSION" type="CUSTOMERVERSIONType"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpU" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERVERSIONType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERVERSION_base">
+				<xs:sequence>
+					<xs:element name="CUSTOMERTELEPHONENUMBER" type="CUSTOMERTELEPHONENUMBERType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="CUSTOMERADDRESS" type="CUSTOMERADDRESSType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="ALIAS" type="ALIASType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="EMPLOYMENT" type="EMPLOYMENTType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="BANKCREDITCARD" type="BANKCREDITCARDType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Credit and Store Card Details</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<!-- EP2_57 -->
+					<xs:element name="INCOMESUMMARY" type="INCOMESUMMARYType" minOccurs="0"/>
+					<xs:element name="UNEARNEDINCOME" type="UNEARNEDINCOMEType" minOccurs="0"/>
+					<!-- EP2_57 ends -->
+					<xs:element name="DECLINEDMORTGAGE" type="DECLINEDMORTGAGEType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpU" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERTELEPHONENUMBERType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERTELEPHONENUMBER_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERROLEType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERROLE_base">
+				<xs:sequence>
+					<xs:element name="CUSTOMER" type="CUSTOMERType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERADDRESSType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERADDRESS_base">
+				<xs:sequence>
+					<xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0"/>
+					<xs:element name="TENANCY" type="TENANCYType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ALIASType">
+		<xs:complexContent>
+			<xs:extension base="ob:ALIAS_base">
+				<xs:sequence>
+					<xs:element name="PERSON" type="msgdt:PERSONType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EMPLOYMENTType">
+		<xs:complexContent>
+			<xs:extension base="ob:EMPLOYMENT_base">
+				<xs:sequence>
+					<xs:element name="EARNEDINCOME" type="EARNEDINCOMEType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="EMPLOYEDDETAILS" type="EMPLOYEDDETAILSType" minOccurs="0"/>
+					<!-- EP2_57 -->
+					<xs:element name="SELFEMPLOYEDDETAILS" type="SELFEMPLOYEDDETAILSType" minOccurs="0"/>
+					<xs:element name="CONTRACTDETAILS" type="CONTRACTDETAILSType" minOccurs="0"/>
+					<!-- EP2_57 ends -->
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0"/>
+					<xs:element name="NETPROFIT" type="NETPROFITType" minOccurs="0"/>
+					<xs:element name="ACCOUNTANT" type="ACCOUNTANTType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EARNEDINCOMEType">
+		<xs:complexContent>
+			<xs:extension base="ob:EARNEDINCOME_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EMPLOYEDDETAILSType">
+		<xs:complexContent>
+			<xs:extension base="ob:EMPLOYEDDETAILS_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BANKCREDITCARDType">
+		<xs:complexContent>
+			<xs:extension base="ob:BANKCREDITCARD_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LOANSLIABILITIESType">
+		<xs:complexContent>
+			<xs:extension base="ob:LOANSLIABILITIES_base">
+				<xs:sequence>
+					<xs:element name="NAMEANDADDRESSDIRECTORY" type="msgdt:NAMEANDADDRESSDIRECTORYType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWPROPERTY_base">
+				<xs:sequence>
+					<xs:element name="NEWPROPERTYADDRESS" type="NEWPROPERTYADDRESSType" minOccurs="0"/>
+					<xs:element name="NEWPROPERTYROOMTYPE" type="NEWPROPERTYROOMTYPEType" minOccurs="0" maxOccurs="unbounded"/>
+					<!-- EP2_833 -->
+					<xs:element name="NEWPROPERTYVENDOR" type="NEWPROPERTYVENDORType" minOccurs="0"/>
+					<xs:element name="NEWPROPERTYLEASEHOLD" type="NEWPROPERTYLEASEHOLDType" minOccurs="0"/>
+					<!-- EP2_833 ends -->
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OTHERRESIDENTType">
+		<xs:complexContent>
+			<xs:extension base="ob:OTHERRESIDENT_base">
+				<xs:sequence>
+					<xs:element name="PERSON" type="msgdt:PERSONType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FEEPAYMENTType">
+		<xs:complexContent>
+			<xs:extension base="ob:FEEPAYMENT_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PAYMENTRECORDType">
+		<xs:complexContent>
+			<xs:extension base="ob:PAYMENTRECORD_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FINANCIALSUMMARYType">
+		<xs:complexContent>
+			<xs:extension base="ob:FINANCIALSUMMARY_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PAYEEHISTORYType">
+		<xs:annotation>
+			<xs:documentation>Must be created at the same time as ApplicationLegalRep on the selection of a solicitor</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ob:PAYEEHISTORY_base">
+				<xs:sequence>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpU" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYADDRESSType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWPROPERTYADDRESS_base">
+				<xs:sequence>
+					<xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Address is customer data so not joint address ind is held</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QUOTATIONType">
+		<xs:complexContent>
+			<xs:extension base="ob:QUOTATION_base">
+				<xs:sequence>
+					<xs:element name="MORTGAGESUBQUOTE" type="MORTGAGESUBQUOTEType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGESUBQUOTEType">
+		<xs:complexContent>
+			<xs:extension base="ob:MORTGAGESUBQUOTE_base">
+				<xs:sequence>
+					<xs:element name="LOANCOMPONENT" type="LOANCOMPONENTType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="MORTGAGEONEOFFCOST" type="MORTGAGEONEOFFCOSTType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpU" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LOANCOMPONENTType">
+		<xs:complexContent>
+			<xs:extension base="ob:LOANCOMPONENT_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpU" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGEONEOFFCOSTType">
+		<xs:complexContent>
+			<xs:extension base="ob:MORTGAGEONEOFFCOST_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpU" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONFEETYPEType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONFEETYPE_base">
+				<xs:sequence>
+					<xs:element name="FEEPAYMENT" type="FEEPAYMENTType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYROOMTYPEType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWPROPERTYROOMTYPE_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONBANKBUILDINGSOCType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONBANKBUILDINGSOC_base">
+				<xs:sequence>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ACCOUNTType">
+		<xs:complexContent>
+			<xs:extension base="ob:ACCOUNT_base">
+				<xs:sequence>
+					<!-- EP2_702 -->
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType"/>
+					<xs:element name="MORTGAGEACCOUNT" type="MORTGAGEACCOUNTType" minOccurs="0"/>
+					<xs:element name="LOANSLIABILITIES" type="LOANSLIABILITIESType" minOccurs="0"/>
+					<xs:element name="ARREARSHISTORY" type="ARREARSHISTORYType" minOccurs="0" maxOccurs="unbounded"/>
+					<!-- EP2_702 -->
+					<xs:element name="ACCOUNTRELATIONSHIP" type="ACCOUNTRELATIONSHIPType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGEACCOUNTType">
+		<xs:complexContent>
+			<xs:extension base="ob:MORTGAGEACCOUNT_base">
+				<xs:sequence>
+					<xs:element name="MORTGAGELOAN" type="MORTGAGELOANType" minOccurs="0"/>
+					<xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONSTAGEType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONSTAGE_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONUNDERWRITINGType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONUNDERWRITING_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CONTRACTDETAILSType">
+		<xs:complexContent>
+			<xs:extension base="ob:CONTRACTDETAILS_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYDEPOSITType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWPROPERTYDEPOSIT_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UNEARNEDINCOMEType">
+		<xs:complexContent>
+			<xs:extension base="ob:UNEARNEDINCOME_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_57 -->
+	<xs:complexType name="SELFEMPLOYEDDETAILSType">
+		<xs:complexContent>
+			<xs:extension base="ob:SELFEMPLOYEDDETAILS_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="INCOMESUMMARYType">
+		<xs:complexContent>
+			<xs:extension base="ob:INCOMESUMMARY_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_57 ends -->
+	<!-- EP2_170 -->
+	<xs:complexType name="APPLICATIONINTRODUCERType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONINTRODUCER_base"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_170  ends -->
+	<!-- EP2_700-->
+	<xs:complexType name="ARREARSHISTORYType">
+		<xs:complexContent>
+			<xs:extension base="ob:ARREARSHISTORY_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NETPROFITType">
+		<xs:complexContent>
+			<xs:extension base="ob:NETPROFIT_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ACCOUNTANTType">
+		<xs:complexContent>
+			<xs:extension base="ob:ACCOUNTANT_base">
+				<xs:sequence>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+			<!-- EP2_862 -->
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MORTGAGELOANType">
+		<xs:complexContent>
+			<xs:extension base="ob:MORTGAGELOAN_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TENANCYType">
+		<xs:complexContent>
+			<xs:extension base="ob:TENANCY_base">
+				<xs:sequence>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_899 -->
+	<xs:complexType name="BANKRUPTCYHISTORYType">
+		<xs:complexContent>
+			<xs:extension base="ob:BANKRUPTCYHISTORY_base">
+				<xs:sequence>
+					<xs:element name="CUSTOMERVERSIONBANKRUPTCYHISTORY" type="CUSTOMERVERSIONBANKRUPTCYHISTORYType" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CUSTOMERVERSIONBANKRUPTCYHISTORYType">
+		<xs:complexContent>
+			<xs:extension base="ob:CUSTOMERVERSIONBANKRUPTCYHISTORY_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_899 ends -->
+	<xs:complexType name="DECLINEDMORTGAGEType">
+		<xs:complexContent>
+			<xs:extension base="ob:DECLINEDMORTGAGE_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_700 - End -->
+	<!-- EP2_833 -->
+	<xs:complexType name="APPLICATIONESTATEAGENTType">
+		<xs:complexContent>
+			<xs:extension base="ob:APPLICATIONESTATEAGENT_base">
+				<xs:sequence>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYVENDORType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWPROPERTYVENDOR_base">
+				<xs:sequence>
+					<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NEWPROPERTYLEASEHOLDType">
+		<xs:complexContent>
+			<xs:extension base="ob:NEWPROPERTYLEASEHOLD_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_833 end -->
+	<!-- EP2_840 -->
+	<xs:complexType name="MEMOPADType">
+		<xs:complexContent>
+			<xs:extension base="ob:MEMOPAD_base">
+				<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- EP2_840 end -->
+</xs:schema>

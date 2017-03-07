@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}") = "MSC.IntegrationService.Schemas", "MSC.IntegrationService.Schemas\MSC.IntegrationService.Schemas.btproj", "{D1091D74-4B1F-45A0-8BE9-8AF001F1B9B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Deployment|.NET = Deployment|.NET
+		Development|.NET = Development|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1091D74-4B1F-45A0-8BE9-8AF001F1B9B2}.Deployment|.NET.ActiveCfg = Deployment|.NET
+		{D1091D74-4B1F-45A0-8BE9-8AF001F1B9B2}.Deployment|.NET.Build.0 = Deployment|.NET
+		{D1091D74-4B1F-45A0-8BE9-8AF001F1B9B2}.Deployment|.NET.Deploy.0 = Deployment|.NET
+		{D1091D74-4B1F-45A0-8BE9-8AF001F1B9B2}.Development|.NET.ActiveCfg = Development|.NET
+		{D1091D74-4B1F-45A0-8BE9-8AF001F1B9B2}.Development|.NET.Build.0 = Development|.NET
+		{D1091D74-4B1F-45A0-8BE9-8AF001F1B9B2}.Development|.NET.Deploy.0 = Development|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

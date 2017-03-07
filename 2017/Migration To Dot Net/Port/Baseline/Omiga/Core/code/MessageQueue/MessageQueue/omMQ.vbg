@@ -1,0 +1,5 @@
+VBGROUP 5.0
+StartupProject=omToOMMQ\omToOMMQ.vbp
+Project=omMQ\omMQ.vbp
+Project=omToMSMQ\omToMSMQ.vbp
+Project=omToNOTHING\omToNOTHING.vbp

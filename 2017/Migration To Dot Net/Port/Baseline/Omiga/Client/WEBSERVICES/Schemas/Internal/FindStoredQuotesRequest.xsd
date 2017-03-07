@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: FindStoredQuoteList- Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01      		RMH	 		29/06/2005 		Created
+01.02           TLiu             20/07/2005      	Changed mars to IDUK in path, named a complexType.
+01.03			IK					02/08/2005		standard namespace definitions
+01.04			TLiu				08/08/2005		Changed some attributes.
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.FindStoredQuotes.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="APPLICATIONFACTFINDNUMBER" type="xs:string"/>
+	<xs:element name="APPLICATIONNUMBER" type="xs:string"/>
+	<xs:complexType name="QUOTATIONType">
+		<xs:sequence>
+			<xs:element ref="APPLICATIONNUMBER"/>
+			<xs:element ref="APPLICATIONFACTFINDNUMBER"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="QUOTATION" type="QUOTATIONType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="ADMINSYSTEMSTATE" type="xs:string" use="required"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="OPERATION" type="xs:string" use="required"/>
+		<xs:attribute name="ACTION" type="xs:string" use="required"/>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!-- 
+   ====== Copyright (c) 2004 FileNet Corporation. All rights reserved. =====*
+               
+   Description:
+  
+        FileNet P8 Content Engine Web Service Definition
+  
+   
+  ========================================================================= 
+-->
+
+<definitions
+			name="fnce-ws-1.0-SOAP"
+			targetNamespace="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP/wsdl"
+          	xmlns="http://schemas.xmlsoap.org/wsdl/"
+ 		  	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+          	xmlns:sdef="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP/wsdl"
+          	xmlns:cdef="http://www.filenet.com/ns/fnce/2004/06/ws/wsdl"
+          	xmlns:ctyp="http://www.filenet.com/ns/fnce/2004/06/ws/schema" >
+
+	<import location="http://localhost/FileNet/fnce-ws-1.0.wsdl" namespace="http://www.filenet.com/ns/fnce/2004/06/ws/wsdl"/>
+
+   	<binding name="FNCEWS10SoapBinding" type="cdef:FNCEWS10PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="GetObjects">
+           	<soap:operation soapAction="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP#GetObjects"/>
+           	<input>
+				<soap:header message="cdef:LocalizationHeader" part="header" use="literal"/>
+                <soap:body use="literal"/>
+           	</input>
+           	<output>
+               	<soap:body use="literal"/>
+           </output>
+		   <fault name="GeneralError">
+				<soap:fault name="GeneralError" use="literal"/>
+		   </fault>
+        </operation>
+        <operation name="ExecuteChanges">
+           	<soap:operation soapAction="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP#ExecuteChanges"/>
+           	<input>
+				<soap:header message="cdef:LocalizationHeader" part="header" use="literal"/>
+               	<soap:body use="literal"/>
+           	</input>
+           	<output>
+               	<soap:body use="literal"/>
+           </output>
+		   <fault name="GeneralError">
+				<soap:fault name="GeneralError" use="literal"/>
+		   </fault>
+        </operation>
+        <operation name="ExecuteSearch">
+           	<soap:operation soapAction="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP#ExecuteSearch"/>
+           	<input>
+				<soap:header message="cdef:LocalizationHeader" part="header" use="literal"/>
+                <soap:body use="literal"/>
+           	</input>
+           	<output>
+               	<soap:body use="literal"/>
+           </output>
+		   <fault name="GeneralError">
+				<soap:fault name="GeneralError" use="literal"/>
+		   </fault>
+        </operation>
+        <operation name="GetSearchMetadata">
+           	<soap:operation soapAction="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP#GetSearchMetadata"/>
+           	<input>
+				<soap:header message="cdef:LocalizationHeader" part="header" use="literal"/>
+                <soap:body use="literal"/>
+           	</input>
+           	<output>
+               	<soap:body use="literal"/>
+           </output>
+		   <fault name="GeneralError">
+				<soap:fault name="GeneralError" use="literal"/>
+		   </fault>
+        </operation>
+	</binding>
+
+    <service name="FNCEWS10Service">
+        <documentation>FileNET P8 Content Engine Web Service</documentation>
+        <port name="FNCEWS10InlinePort" binding="sdef:FNCEWS10SoapBinding">
+           <soap:address location="http://localhost:6070/FNCEWS10SOAP/"/>
+        </port>
+    </service>
+
+</definitions>
+

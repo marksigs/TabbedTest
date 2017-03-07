@@ -1,0 +1,67 @@
+VERSION 5.00
+Begin VB.PropertyPage ppgDepServices 
+   Caption         =   "Computer"
+   ClientHeight    =   3600
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   4800
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   3600
+   ScaleWidth      =   4800
+   Begin VB.CommandButton Command1 
+      Caption         =   "TODO - dependent"
+      Height          =   615
+      Left            =   1560
+      TabIndex        =   0
+      Top             =   1440
+      Width           =   1935
+   End
+End
+Attribute VB_Name = "ppgDepServices"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+'Workfile:      ppgDepServices.pag
+'Copyright:     Copyright © 2001 Marlborough Stirling
+
+'Description:
+'Dependencies:
+'Issues:
+'------------------------------------------------------------------------------------------
+'History:
+'
+'Prog   Date        Description
+'LD     10/01/01    Created
+'------------------------------------------------------------------------------------------
+
+Option Explicit
+Implements IMMCPropertyPage
+
+Private Sub IMMCPropertyPage_Cancel()
+
+End Sub
+
+Private Sub IMMCPropertyPage_Close()
+
+End Sub
+
+Private Sub IMMCPropertyPage_GetDialogUnitSize(Height As Variant, Width As Variant)
+    Height = 218
+    Width = 252
+End Sub
+
+Private Sub IMMCPropertyPage_Help()
+
+End Sub
+
+Private Sub IMMCPropertyPage_Initialize(ByVal Data As Variant, ByVal PropertySheet As SnapInLib.MMCPropertySheet)
+
+    Dim strComputerName As String
+    strComputerName = GetComputerFromKey(Data)
+    
+End Sub
+
+Private Sub IMMCPropertyPage_QueryCancel(Allow As Boolean)
+
+End Sub

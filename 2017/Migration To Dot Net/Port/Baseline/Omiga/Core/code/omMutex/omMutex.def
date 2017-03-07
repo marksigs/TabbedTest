@@ -1,0 +1,9 @@
+; omMutex.def : Declares the module parameters.
+
+LIBRARY      "omMutex.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer	PRIVATE

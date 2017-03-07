@@ -1,0 +1,2385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Insurance_Request.xsd was generated from CMHC_GE_Request.dtd by George Jin (GJ)
+       Modification history
+_________________________________________________________________________________________________ 
+ Date 	          Version	Author   What was changed?													 
+_________________________________________________________________________________________________ 
+15-Feb-2007	v1.00	GJ         Initial creation
+							      Added an optional attribute name "COUNTRY" on Address element
+                                                     REDEMPTIONSTATUS mapping change is required for MorWEB & Omiga.
+                                                     MARKETINGSOURCE  mapping change is required for MorWEB & Omiga.
+                                                     USAGE of CONTACTTELEPHONEDETAILS mapping change is required for MorWEB & Omiga.
+								Changed the attribute name "PAYMENTFREQUENCYTYPE" on EarnedIncome element to "PAYMENTFREQUENCY"
+                                                     PURPOSEOFLOAN  mapping change is required for MorWEB & Omiga.
+                                                     INSURERTYPE mapping change is required for MorWEB & Omiga.
+                                                     All the boolean values use standard boolean type instead of using enumerations.
+                                                     PROPERTYUSAGE  mapping change is required for MorWEB & Omiga.
+                                                     OCCUPANCYSTATUS mapping change is required for MorWEB & Omiga.
+								SOURCEOFFUNDING mapping change is required for MorWEB & Omiga.
+								Added new types for REQUESTTYPE: P-Premium, I-Inquire for risked
+								Moved LOCCONVERSION from REQUEST element to LOANCOMPONENT element
+								Added the attribute name "VERSION" and set it to be 'fixed' value "1.0"
+								Changed the attribute name "OTHERSYSTEMID" on REQUEST element to "INSURERAPPID"
+								Added "INSURANCEREQUESTER" element under "REQUEST" element and move the "INSTITUTIONNUMBER" and "TRANSITNUMBER" attibute to "INSURANCEREQUESTER" element
+								Change the attribute "MEMBEROFSTAFF" from string to boolean
+								Added an optional attribute "SELFBUILDINDICATOR" under "NEWPROPERTY" element.
+								Added an optional attribute "VALUATIONTYPE" under "APPRAISAL" element
+								Added an optional attribute "INSURERPROGRAM" under "MORTGAGEINSURER" element.
+								Added an optional attribute "HELOCREPAYMENTTYPE" under "LOANCOMPONENT" element.
+								Added an optional attribute "TASKMEMO" under "APPLICATION" element. Omiga and MorWEB will provide this by getting the task memo (TaskNote) from the task
+								Added an optional attribute "GROUNDRENT" under "NEWPROPERTYLEASEHOLD" element.
+								Change the attribute name "INSURERREFERENCENUMBER" to "INSURERCERTIFICATENUMBER"
+								Added AIG "InsurerProgram" values for Omiga and MorWEB.
+
+_________________________________________________________________________________________________ 
+ dd-mm-yyyy	v		...																	
+_________________________________________________________________________________________________ 
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="ADDITIONALFINANCING">
+		<xs:complexType>
+			<xs:attribute name="CHARGETYPE" use="optional">
+				<xs:annotation>
+					<xs:documentation>Charge Type  value: 1-First Mortgage,2-Second Mortgage,3-Third Mortgage,4-Fourth Mortgage, 5-Bridge Financing, 6-First Charge - Existing Property, 99-Bridge</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="OTHERMORTGAGEAMOUNT">
+				<xs:annotation>
+					<xs:documentation>Other mortgage amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="OTHERMORTGAGEPAYMENT">
+				<xs:annotation>
+					<xs:documentation>Other mortgage payment.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="REDEMPTIONSTATUS" use="required">
+				<xs:annotation>
+					<xs:documentation>Redemption Status  
+					MorWEB values: 1-Remaining, 2-Free and clear, 3-To be paid, 4-Paid with proceeds, 6-Recreational, 7-To be Ported
+					Omiga values: 1-To Remain, 2-Already Paid Out, 3-To Be Paid Out by Client prior to funding, 4-To be paid by these loan proceeds, 5-To Be Ported, 6-To Be Refinanced					
+					New combined values: M1,M2, M3, M4, M6, M7 for MorWEB values
+					                                     O1,O2,O3,O4,O5,O6 for Omiga values					
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="M1"/>
+						<xs:enumeration value="M2"/>
+						<xs:enumeration value="M3"/>
+						<xs:enumeration value="M4"/>
+						<xs:enumeration value="M6"/>
+						<xs:enumeration value="M7"/>
+						<xs:enumeration value="O1"/>
+						<xs:enumeration value="O2"/>
+						<xs:enumeration value="O3"/>
+						<xs:enumeration value="O4"/>
+						<xs:enumeration value="O5"/>
+						<xs:enumeration value="O6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="MONTHLYREPAYMENT">
+				<xs:annotation>
+					<xs:documentation>Monthly repayment.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ADDRESS">
+		<xs:complexType>
+			<xs:attribute name="BUILDINGORHOUSENUMBER" use="required">
+				<xs:annotation>
+					<xs:documentation>House Number</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PROVINCESEQNO">
+				<xs:annotation>
+					<xs:documentation>Province or Territory value: 	
+					10-British Columbia 20-Alberta 30-Saskatchewan 40-Manitoba 50-Ontario 
+					60-Quebec 70-New Brunswick 80-Nova Scotia 90-Newfoundland 100-PEI 
+					110-Yukon 120-NWT 130-Nunavut 140-Other
+					10-British Columbia, 20-Alberta, 30-Saskatchewan, 40-Manitoba, 50-Ontario
+					60-Quebec, 70-New Brunswick, 80-Nova Scotia, 90-Newfoundland and Labrador, 100-Prince Edward Island
+					110-Yukon, 120-North West Territories, 130-Nunavut
+					200-Alabama, 210-Alaska, 220-American Samoa, 230-Arizona, 240-Arkansas, 250-California
+					260-Colorado, 270-Connecticut, 280-Delaware, 290-District Of Columbia, 300-Federated States Of Micronesia
+					310-Florida,320-Georgia,330-Guam,340-Hawaii,350-Idaho
+					360-Illinois,370-Indiana,380-Iowa,390-Kansas,400-Kentucky
+					410-Louisiana,420-Maine,430-Marshall Islands,440-Maryland,450-Massachusetts
+					460-Michigan,470-Minnesota,480-Mississippi,490-Missouri,500-Montana
+					510-Nebraska,520-Nevada,530-New Hampshire,540-New Jersey,550-New Mexico
+					560-New York,570-North carolina,580-North Dakota,590-Northern Mariana Islands,600-Ohio
+					610-Oklahoma,620-Oregon,630-Palau,640-Pennsylvania,650-Puerto Rico
+					660-Rhode Island,670-South Carolina,680-South Dakota,690-Tennessee,700-Texas
+					710-Utah,720-Vermont,730-Virgin Islands,740-Virginia,750-Washington
+					760-West Virginia,770-Wisconsin,780-Wyoming</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="30"/>
+						<xs:enumeration value="40"/>
+						<xs:enumeration value="50"/>
+						<xs:enumeration value="60"/>
+						<xs:enumeration value="70"/>
+						<xs:enumeration value="80"/>
+						<xs:enumeration value="90"/>
+						<xs:enumeration value="100"/>
+						<xs:enumeration value="110"/>
+						<xs:enumeration value="120"/>
+						<xs:enumeration value="130"/>
+						<xs:enumeration value="200"/>
+						<xs:enumeration value="210"/>
+						<xs:enumeration value="220"/>
+						<xs:enumeration value="230"/>
+						<xs:enumeration value="240"/>
+						<xs:enumeration value="250"/>
+						<xs:enumeration value="260"/>
+						<xs:enumeration value="270"/>
+						<xs:enumeration value="280"/>
+						<xs:enumeration value="290"/>
+						<xs:enumeration value="300"/>
+						<xs:enumeration value="310"/>
+						<xs:enumeration value="320"/>
+						<xs:enumeration value="330"/>
+						<xs:enumeration value="340"/>
+						<xs:enumeration value="350"/>
+						<xs:enumeration value="360"/>
+						<xs:enumeration value="370"/>
+						<xs:enumeration value="380"/>
+						<xs:enumeration value="390"/>
+						<xs:enumeration value="400"/>
+						<xs:enumeration value="410"/>
+						<xs:enumeration value="420"/>
+						<xs:enumeration value="430"/>
+						<xs:enumeration value="440"/>
+						<xs:enumeration value="450"/>
+						<xs:enumeration value="460"/>
+						<xs:enumeration value="470"/>
+						<xs:enumeration value="480"/>
+						<xs:enumeration value="490"/>
+						<xs:enumeration value="500"/>
+						<xs:enumeration value="510"/>
+						<xs:enumeration value="520"/>
+						<xs:enumeration value="530"/>
+						<xs:enumeration value="540"/>
+						<xs:enumeration value="550"/>
+						<xs:enumeration value="560"/>
+						<xs:enumeration value="570"/>
+						<xs:enumeration value="580"/>
+						<xs:enumeration value="590"/>
+						<xs:enumeration value="600"/>
+						<xs:enumeration value="710"/>
+						<xs:enumeration value="720"/>
+						<xs:enumeration value="730"/>
+						<xs:enumeration value="740"/>
+						<xs:enumeration value="750"/>
+						<xs:enumeration value="760"/>
+						<xs:enumeration value="770"/>
+						<xs:enumeration value="780"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="FLATNUMBER">
+				<xs:annotation>
+					<xs:documentation>Apartment or Unit Number</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="POSTCODE" use="required">
+				<xs:annotation>
+					<xs:documentation>The postal code portion of address</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="STREET" use="required">
+				<xs:annotation>
+					<xs:documentation>Street Name</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="STREETTYPE">
+				<xs:annotation>
+					<xs:documentation>Street Type based on Canada Post Values: 
+					10-Alley 20-Autoroute 30-Avenue 40-Bay 50-Beach 60-Bend 70-Boulevard 80-Centre 90-Chase 100-Circle 
+					110-Close 120-Concession 130-Court 140-Cove 150-Cresent 160-Cul-du-sac 170-Corners 180-Dale 190-Drive 200-End 
+					210-Esplanada 220-Expressway 230-Gardens 240-Gate 250-Glen 260-Grove 270-Heights 280-Hill 290-Hollow 300-Landing 
+					310-Lane 320-Mall 330-Mews 340-Parade 350-Park 360-Parkway 370-Passage 380-Place 390-Plaza 400-Port 
+					410-Promenade 420-Quay 	430-Range 440-Ridge 450-Road 460-Route 470-Row 480-Square 490-Street 500-Terrace 
+					510-Townline 520-Trail 530-View 540-Vista 550-Walk 560-Way 570-Wharf 
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="30"/>
+						<xs:enumeration value="40"/>
+						<xs:enumeration value="50"/>
+						<xs:enumeration value="60"/>
+						<xs:enumeration value="70"/>
+						<xs:enumeration value="80"/>
+						<xs:enumeration value="90"/>
+						<xs:enumeration value="100"/>
+						<xs:enumeration value="110"/>
+						<xs:enumeration value="120"/>
+						<xs:enumeration value="130"/>
+						<xs:enumeration value="140"/>
+						<xs:enumeration value="150"/>
+						<xs:enumeration value="160"/>
+						<xs:enumeration value="170"/>
+						<xs:enumeration value="180"/>
+						<xs:enumeration value="190"/>
+						<xs:enumeration value="200"/>
+						<xs:enumeration value="210"/>
+						<xs:enumeration value="220"/>
+						<xs:enumeration value="230"/>
+						<xs:enumeration value="240"/>
+						<xs:enumeration value="250"/>
+						<xs:enumeration value="260"/>
+						<xs:enumeration value="270"/>
+						<xs:enumeration value="280"/>
+						<xs:enumeration value="290"/>
+						<xs:enumeration value="300"/>
+						<xs:enumeration value="310"/>
+						<xs:enumeration value="320"/>
+						<xs:enumeration value="330"/>
+						<xs:enumeration value="340"/>
+						<xs:enumeration value="350"/>
+						<xs:enumeration value="360"/>
+						<xs:enumeration value="370"/>
+						<xs:enumeration value="380"/>
+						<xs:enumeration value="390"/>
+						<xs:enumeration value="400"/>
+						<xs:enumeration value="410"/>
+						<xs:enumeration value="420"/>
+						<xs:enumeration value="430"/>
+						<xs:enumeration value="440"/>
+						<xs:enumeration value="450"/>
+						<xs:enumeration value="460"/>
+						<xs:enumeration value="470"/>
+						<xs:enumeration value="480"/>
+						<xs:enumeration value="490"/>
+						<xs:enumeration value="500"/>
+						<xs:enumeration value="510"/>
+						<xs:enumeration value="520"/>
+						<xs:enumeration value="530"/>
+						<xs:enumeration value="540"/>
+						<xs:enumeration value="550"/>
+						<xs:enumeration value="560"/>
+						<xs:enumeration value="570"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="STREETDIRECTION">
+				<xs:annotation>
+					<xs:documentation>Street Direction based on Canada Post Values: 1-E(East)  2-N(North) 3-NE(North East) 4-NW(North West) 5-S(South) 6-SE(South East) 7-SW(South West) 8-W(West)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+						<xs:enumeration value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TOWN" use="required">
+				<xs:annotation>
+					<xs:documentation>Town or City</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="DISTRICT">
+				<xs:annotation>
+					<xs:documentation>Rural Route or Post Office Box Number</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="COUNTRY">
+				<xs:annotation>
+					<xs:documentation>Country value: 1-Canada 2-US 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="APPLICATION">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="APPLICATIONFACTFIND"/>
+				<xs:element ref="INTERMEDIARY" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="TYPEOFBUYER" use="required">
+				<xs:annotation>
+					<xs:documentation>Type of buyer. Values 10-First Time 20-Repeat</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TASKMEMO" use="optional">
+				<xs:annotation>
+					<xs:documentation>Task Memo</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="600"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="APPLICATIONFACTFIND">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CUSTOMERROLE" maxOccurs="unbounded"/>
+				<xs:element ref="QUOTATION"/>
+				<xs:element ref="NEWPROPERTY"/>
+				<xs:element ref="UNITCONTACTDETAILS" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="MARKETINGSOURCE">
+				<xs:annotation>
+					<xs:documentation>Marketing Source.
+					MorWEB values:2-Print Ad,15-Real Estate Agent,25-Co-brokerage,35-Internet Search,40-CP24,41-Previous Client,42-Friend/Relative,43-Employee Mortgage Program,44-Yellow Pages,45-Radio,65-Website,70-Client referral,75-TV advertisement,99-Other
+					Omiga values: 	1-Mortgage Broker, 10-Direct, 25-Staff				
+					New combined values: M2, M15, M25, M35, M40, M41, M42, M43, M44, M45, M65, M70, M75, M99 for MorWEB values
+					                                     O1,O10,O25 for Omiga values					
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="M2"/>
+						<xs:enumeration value="M15"/>
+						<xs:enumeration value="M25"/>
+						<xs:enumeration value="M35"/>
+						<xs:enumeration value="M40"/>
+						<xs:enumeration value="M41"/>
+						<xs:enumeration value="M42"/>
+						<xs:enumeration value="M43"/>
+						<xs:enumeration value="M44"/>
+						<xs:enumeration value="M45"/>
+						<xs:enumeration value="M65"/>
+						<xs:enumeration value="M70"/>
+						<xs:enumeration value="M75"/>
+						<xs:enumeration value="M99"/>
+						<xs:enumeration value="O1"/>
+						<xs:enumeration value="O10"/>
+						<xs:enumeration value="O25"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="IMPROVEMENTSAMOUNT">
+				<xs:annotation>
+					<xs:documentation>Improvement amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="APPRAISAL">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CONTACTDETAILS"/>
+			</xs:sequence>
+			<xs:attribute name="VALUE" use="required">
+				<xs:annotation>
+					<xs:documentation>Appraised value.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="DATE" type="xs:date" use="required">
+				<xs:annotation>
+					<xs:documentation>Appraised date.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VALUATIONTYPE">
+				<xs:annotation>
+					<xs:documentation>Appraisal type = Valuation Type. 
+					Valuation Type value: 10-Full 20-Driveby 30-Realty Property Tax Assessment 99-Other 
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="30"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ASSET">
+		<xs:complexType>
+			<xs:attribute name="ASSETTYPE">
+				<xs:annotation>
+					<xs:documentation>Identifies the type of asset. Asset Type value: 10-Bank Account 20-Insurance Policy 30-RRSP 40-Vehicle 50-Other Real Estate(not used in MorWEB) 60-Investments 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="30"/>
+						<xs:enumeration value="40"/>
+						<xs:enumeration value="50"/>
+						<xs:enumeration value="60"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="VALUE" use="required">
+				<xs:annotation>
+					<xs:documentation>Asset value.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BANK">
+		<xs:complexType>
+			<xs:attribute name="BANKACCOUNT" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is a bank account</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="BANKCARD" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is a bank card</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="YEARSWITHBANK" use="optional">
+				<xs:annotation>
+					<xs:documentation>Years with bank.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="5"/>
+						<xs:fractionDigits value="1" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="SAVINGSINVESTACCOUNT" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is a savings or investment account</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="COMMENT">
+		<xs:complexType>
+			<xs:attribute name="COMMENTTEXT" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Comment Text.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CONTACTDETAILS">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CONTACTTELEPHONEDETAILS" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="CONTACTFORENAME" type="xs:string"/>
+			<xs:attribute name="CONTACTSURNAME" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Contact surname</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="USERID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>User ID.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CONTACTTELEPHONEDETAILS">
+		<xs:annotation>
+			<xs:documentation>ContactTelephoneDetals is populated for UnitContactDetails and is NOT for Intermediary</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="AREACODE" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Telephone area code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="COUNTRYCODE" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Telephone country code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EXTENSIONNUMBER" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Telephone extension number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TELENUMBER" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Telephone Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="USAGE">
+				<xs:annotation>
+					<xs:documentation>Contact Telephone Usage 
+					MorWEB values (ContactTelephoneUsage combo): 10- Work 20-Fax 30-Home 40-Cell 
+					Omiga values (TelephoneUsage combo): 1-Home,2-Work,3-Mobile,4-Fax,5-None
+					New combined values: M10, M20, M30, M40 for MorWEB values
+					                                     O1,O2, O3, O4, O5 for Omiga values					
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="M10"/>
+						<xs:enumeration value="M20"/>
+						<xs:enumeration value="M30"/>
+						<xs:enumeration value="M40"/>
+						<xs:enumeration value="O1"/>
+						<xs:enumeration value="O2"/>
+						<xs:enumeration value="O3"/>
+						<xs:enumeration value="O4"/>
+						<xs:enumeration value="O5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CUSTOMERADDRESS">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ADDRESS"/>
+			</xs:sequence>
+			<xs:attribute name="DATEMOVEDIN" type="xs:date" use="required">
+				<xs:annotation>
+					<xs:documentation>Date of moving in.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OCCUPANCYSTATUS">
+				<xs:annotation>
+					<xs:documentation>
+					Omiga values (using NATUREOFOCCUPANCY combo): 1 -Own, 2-Rent, 3-Live with parents, 99-Other
+					MorWEB values (using OCCUPANCYSTATUS combo): 10-Owner Occupied 20-Tenant 30-Partially Owner Occupied 40-Rental Property
+					New combined values: M10,M20, M30, M40 for MorWEB values
+					                                     O1,O2,O3,O99 for Omiga values					
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="O1"/>
+						<xs:enumeration value="O2"/>
+						<xs:enumeration value="O3"/>
+						<xs:enumeration value="O99"/>
+						<xs:enumeration value="M10"/>
+						<xs:enumeration value="M20"/>
+						<xs:enumeration value="M30"/>
+						<xs:enumeration value="M40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CUSTOMERROLE">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CUSTOMERVERSION"/>
+			</xs:sequence>
+			<xs:attribute name="CUSTOMERORDER" type="xs:integer" use="required">
+				<xs:annotation>
+					<xs:documentation>Customer order based on customer role type.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CUSTOMERROLETYPE" use="required">
+				<xs:annotation>
+					<xs:documentation>Customer Role Type  value:1-Applicant  2-Guarantor </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CUSTOMERTELEPHONENUMBER">
+		<xs:complexType>
+			<xs:attribute name="AREACODE" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Telephone area code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="COUNTRYCODE" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Telephone country code.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EXTENSIONNUMBER" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Telephone extension number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TELEPHONENUMBER" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Telephone Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CUSTOMERVERSION">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CUSTOMERADDRESS"/>
+				<xs:element ref="CUSTOMERTELEPHONENUMBER" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="EMPLOYMENT" maxOccurs="unbounded"/>
+				<xs:element ref="LOANSLIABILITIES" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="MORTGAGEACCOUNT" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="UNEARNEDINCOME" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="BANK" minOccurs="0"/>
+				<xs:element ref="ASSET" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="DATEOFBIRTH" type="xs:date" use="required">
+				<xs:annotation>
+					<xs:documentation>Date of birth.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FIRSTFORENAME" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>First fore name or given name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MARITALSTATUS">
+				<xs:annotation>
+					<xs:documentation>Marital Status  value:1-Single,2-Married,3-Widowed,4-Separated,5-Divorced,6-Common-Law,99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="MEMBEROFSTAFF" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Member of staff indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NATIONALINSURANCENUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Social Insurance Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OTHERFORENAMES" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Other fore names.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SECONDFORENAME" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Second fore name or middle name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SURNAME" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Surname or Last Name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NUMBEROFDEPENDENTS" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>Number of dependents.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PERMANENTRESIDENTINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Permanent resident indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EARNEDINCOME">
+		<xs:complexType>
+			<xs:attribute name="EARNEDINCOMEAMOUNT" use="required">
+				<xs:annotation>
+					<xs:documentation>Earned income amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="EARNEDINCOMETYPE">
+				<xs:annotation>
+					<xs:documentation>Earned Income Type  value:
+1-Basic Income 2-Overtime Income 3-Bonus 4-Commission 5-Interest/Dvidends 6-Government Pension 7-Private Pension 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PAYMENTFREQUENCY">
+				<xs:annotation>
+					<xs:documentation>The income payment frequency  value:1-Annually 2-Semi-annual 4-Quarterly 12-Monthly 24-Semi-monthly 26-Bi-weekly 52-Weekly</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="24"/>
+						<xs:enumeration value="26"/>
+						<xs:enumeration value="52"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="EARNEDINCOMEAMOUNTANNUAL" use="required">
+				<xs:annotation>
+					<xs:documentation>Annual earned income amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EMPLOYMENT">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EARNEDINCOME" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="MAINSTATUS" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is main employment</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DATESTARTEDORESTABLISHED" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Date started or established.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DATELEFTORCEASEDTRADING" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Date left or ceased trading.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EMPLOYMENTSTATUS" default="99">
+				<xs:annotation>
+					<xs:documentation>Employment Status  value:10-Employed 20-Self-Employed 30-Commission Sales 40-Hourly Wages 70-Retired 80-Homemaker 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="30"/>
+						<xs:enumeration value="40"/>
+						<xs:enumeration value="70"/>
+						<xs:enumeration value="80"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="EMPLOYMENTTYPE">
+				<xs:annotation>
+					<xs:documentation>Employment Type value: 1-Permanent full time, 2-Permanent part time, 3-Temporary full time, 4-Temporary part time,5-Permanent - Seasonal, 6-Temporary - Seasonal, 7-Not applicable</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="INDUSTRYTYPE">
+				<xs:annotation>
+					<xs:documentation>Industry Type value: 1-Construction 2-Government 3-Health 4-Education 5-HiTech 6-Retail Sales 7-Leisure/Entertainment 8-Banking/Finance 9-Transport 10-Services 11-Manufacturing 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+						<xs:enumeration value="8"/>
+						<xs:enumeration value="9"/>
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="11"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="OCCUPATIONTYPE">
+				<xs:annotation>
+					<xs:documentation>Occupation Type  value:1-Manager 2-Clerical 3-Labourer/Tradesperson 4-Retired 5-Professional 6-Self-Employed 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="JOBTITLE" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Job title.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SUSTAINABLEINCOMEIND" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Sustainable Income Indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NETMONTHLYINCOME" use="required">
+				<xs:annotation>
+					<xs:documentation>Net monthly income amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="EMPLOYERNAME" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Employer name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="INSURANCEREQUESTER">
+		<xs:complexType>
+			<xs:attribute name="INSTITUTIONNUMBER" use="optional">
+				<xs:annotation>
+					<xs:documentation>Institution number is defaulted to 999 FOR CMHC AND 590 FOR GE, what is institution number for AIG? </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TRANSITNUMBER" use="optional">
+				<xs:annotation>
+					<xs:documentation>TransitNumber must come a unique value against organization STRUCTURE</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="INTERESTRATETYPE">
+		<xs:complexType>
+			<xs:attribute name="RATECHANGEFREQUENCY" use="required">
+				<xs:annotation>
+					<xs:documentation>Rate Change Frequency
+					MorWEB values: 0-Fixed rate, 2-ARM, 12- Monthly charge, 99-Floating rate
+					Omiga values: 0-Fixed rate, 12- Monthly charge, 99-Floating rate
+					New combined values: 0-Fixed rate, 2-ARM (Not used in Omiga), 12- Monthly charge, 99-Floating rate
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BUYDOWN" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is a buy down. It is only used by Omiga</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="INTERMEDIARY">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CONTACTDETAILS"/>
+				<xs:element ref="INTERMEDIARYORGANIZATION"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="INTERMEDIARYORGANIZATION">
+		<xs:complexType>
+			<xs:attribute name="NAME" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Intermediary Organization name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LEGALADDRESS">
+		<xs:complexType>
+			<xs:attribute name="PIN" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>PIN Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LOTNUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Lot Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LEGALPLANNUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Legal Plan Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UNITNUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unit Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LEVELNUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Level Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DETAILS" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>It is optional for Omiga only</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LOANCOMPONENT">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MORTGAGEPRODUCT"/>
+				<xs:element ref="MORTGAGEONEOFFCOST" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="GROSSDEBTSERVICE" use="required">
+				<xs:annotation>
+					<xs:documentation>Gross Debt Service ratio. in percentage</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="6"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TOTALDEBTSERVICE" use="required">
+				<xs:annotation>
+					<xs:documentation>Total Debt Service ratio. in percentage</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="6"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ANNUALSHELTERPAYMENT" use="required">
+				<xs:annotation>
+					<xs:documentation>Annual Shelter payment amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NETRATE">
+				<xs:annotation>
+					<xs:documentation>The requested net rate of the new loan</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="9" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PRODUCTRATE" use="optional">
+				<xs:annotation>
+					<xs:documentation>Product Rate. It is required by Omiga only</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="9" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="POSTRATE3YEARS" use="optional">
+				<xs:annotation>
+					<xs:documentation>3 Years Posted Rate. It is required by Omiga only</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="9" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="RATECHANGEFREQUENCY" use="optional">
+				<xs:annotation>
+					<xs:documentation>Rate Change Frequency. It is required by Omiga only
+					MorWEB values: 0-Fixed rate, 2-ARM, 12- Monthly charge, 99-Floating rate
+					Omiga values: 0-Fixed rate, 12- Monthly charge, 99-Floating rate
+					New combined values: 0-Fixed rate, 2-ARM (Not used in Omiga), 12- Monthly charge, 99-Floating rate
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BASEINTERESTRATE" use="optional">
+				<xs:annotation>
+					<xs:documentation>Product Rate.It is required by Omiga only</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="9" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PURPOSEOFLOAN" use="required">
+				<xs:annotation>
+					<xs:documentation>Purpose of Loan for new application. 
+					 Omiga values: 1-Refinance,2-Equity Take Out ,3-House Purchase,4-Transfer,5-Increase Transfer,6-Pre-Approval,7-Port,8-Refinance Plus,9-Purchase Plus,10-Bridge
+					 MorWEB values: 1-Refinance,2-Equity Take Out,3-House Purchase,4-Transfer,5-Increase Transfer,6-Line Of Credit,13-Port
+					 New combined values: O1,O2,O3,O4, O5, O6, O7, O8, O9, O10 for Omiga values
+					                                      M1,M2, M3, M4, M5, M6, M13 for MorWEB values
+					 </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="O1"/>
+						<xs:enumeration value="O2"/>
+						<xs:enumeration value="O3"/>
+						<xs:enumeration value="O4"/>
+						<xs:enumeration value="O5"/>
+						<xs:enumeration value="O6"/>
+						<xs:enumeration value="O7"/>
+						<xs:enumeration value="O8"/>
+						<xs:enumeration value="O9"/>
+						<xs:enumeration value="O10"/>
+						<xs:enumeration value="M1"/>
+						<xs:enumeration value="M2"/>
+						<xs:enumeration value="M3"/>
+						<xs:enumeration value="M4"/>
+						<xs:enumeration value="M5"/>
+						<xs:enumeration value="M6"/>
+						<xs:enumeration value="M13"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="REPAYMENTMETHOD" use="required">
+				<xs:annotation>
+					<xs:documentation>Repayment Type. 
+					 Omiga values: 1- Interest Only, 2-Blended P and I, 5-Fixed Interest, 9-At Maturity
+					 MorWEB values: 1-Interest Only, 2-Blended P and I
+					 New combined values: 1- Interest Only, 2-Blended P and I, 5-Fixed Interest (Not used in MorWEB), 9-At Maturity (Not used in MorWEB)
+					 </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="9"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TERMINMONTHS" use="required">
+				<xs:annotation>
+					<xs:documentation>The Amortization Term in months.  value range: 0 - 11</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="11"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TERMINYEARS" use="required">
+				<xs:annotation>
+					<xs:documentation>The Amortization Term in years.  value range: 0 - 99</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PRODUCTTERMINMONTHS" use="required">
+				<xs:annotation>
+					<xs:documentation>The Product Term in months.  value range: 0 - 11</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="11"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PRODUCTTERMINYEARS" use="required">
+				<xs:annotation>
+					<xs:documentation>The Product Term in years.  value range: 0 - 99</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BLENDEDAMORTINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Blended amortization Indicator. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TOPUPIND" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Topup Indicator. It is optional for Omiga only</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LOCCONVERSION" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Line of Credit Convertion indicator. This attribute is required by MorWEB only</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LINEOFCREDITIND" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Line of Credit indicator. This attribute is optional for MorWEB only</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LINEOFCREDITREPAYMENT">
+				<xs:annotation>
+					<xs:documentation>????. This attribute is optional for MorWEB only</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="HELOCREPAYMENTTYPE">
+				<xs:annotation>
+					<xs:documentation>HELOC repayment type. 
+					1 - '5 Year / 20 Year'
+					2 - '10 Year / 15 Year'
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LOANSLIABILITIES">
+		<xs:complexType>
+			<xs:attribute name="CARDTYPE">
+				<xs:annotation>
+					<xs:documentation>The credit card type if applicable.  Card Type = CreditCardType.  value: 10-Visa 20-MasterCard 30-Amex 40-Store Cards 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="30"/>
+						<xs:enumeration value="40"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="LOANACCOUNTNUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Loan Account Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MONTHLYREPAYMENT" use="required">
+				<xs:annotation>
+					<xs:documentation>Monthly repayment amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="LOANREPAYMENTINDICATOR" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Loan Repayment Indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INCLUDEINGDS" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Include in GDS indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TOTALOUTSTANDINGBALANCE" use="required">
+				<xs:annotation>
+					<xs:documentation>Total outstanding balance amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="AGREEMENTTYPE">
+				<xs:annotation>
+					<xs:documentation>Agreement Type  value: 1-Personal Loan,2-Secured Loan,3-Car Loan,4-Lease Agreement,6-Credit Card,7-Line Of Credit,8- Child Support,99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+						<xs:enumeration value="8"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MORTGAGEACCOUNT">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MORTGAGELOAN"/>
+			</xs:sequence>
+			<xs:attribute name="ADDITIONALDETAILS" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>It is required for MorWEB</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ADDITIONALINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>This is the indicator for additional details. It is required for MorWEB</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CHARGETYPE" use="required">
+				<xs:annotation>
+					<xs:documentation>Charge Type  value: 1-First Mortgage,2-Second Mortgage,3-Third Mortgage,4-Fourth Mortgage, 5-Bridge Financing, 6-First Charge - Existing Property, 99-Bridge</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ATTACHEDTONEWPROPERTY" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is attached to new property</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="REDEMPTIONSTATUS" use="required">
+				<xs:annotation>
+					<xs:documentation>Redemption Status  
+					MorWEB values: 1-Remaining, 2-Free and clear, 3-To be paid, 4-Paid with proceeds, 6-Recreational, 7-To be Ported
+					Omiga values: 1-To Remain, 2-Already Paid Out, 3-To Be Paid Out by Client prior to funding, 4-To be paid by these loan proceeds, 5-To Be Ported, 6-To Be Refinanced					
+					New combined values: M1,M2, M3, M4, M6, M7 for MorWEB values
+					                                     O1,O2,O3,O4,O5,O6 for Omiga values					
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="M1"/>
+						<xs:enumeration value="M2"/>
+						<xs:enumeration value="M3"/>
+						<xs:enumeration value="M4"/>
+						<xs:enumeration value="M6"/>
+						<xs:enumeration value="M7"/>
+						<xs:enumeration value="O1"/>
+						<xs:enumeration value="O2"/>
+						<xs:enumeration value="O3"/>
+						<xs:enumeration value="O4"/>
+						<xs:enumeration value="O5"/>
+						<xs:enumeration value="O6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PREVIOUSSALEPRICE" use="optional">
+				<xs:annotation>
+					<xs:documentation>Previous sale price amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PREVIOUSCLOSINGDATE" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Previous closing date.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INDEMNITYCOMPANYNAME" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The insurance company name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INSURERCERTIFICATENUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Insurance Reference (certificate) Number for existing mortgage</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MORTGAGEINSURER">
+		<xs:complexType>
+			<xs:attribute name="INSURERTYPE" use="required">
+				<xs:annotation>
+					<xs:documentation>Insurer Type  value:  (It was defined as 999-CMHC; 590-GEMI in combo MortgageInsurerInterfaceCode for Omiga only)
+					Omiga values: 10-CMHC 20-GE Capital 99-Other 
+					MorWEB values: 10-CMHC, 20-GENWORTH (GE), 99-Other, 9050-FirstLine ACCESS (Do not pass through), 99999-Self-Insured Lender Fee (Do not pass through)
+					A new value 30-AIG will be created for Omiga and MorWEB
+					New combined values: 10-CMHC, 20-GE Capital, 30-AIG, 99-Other
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="30"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="SERVICETYPE" use="required">
+				<xs:annotation>
+					<xs:documentation>Service Type
+					Omiga values: 10-Basic, 20-Full, 30-Basic - EE Rebate, 40-Full - EE Rebate, 99-Other
+					MorWEB values: 10-Basic,20-Full,30-Basic - EE Rebate,40-Full - EE Rebate,50-Low Ratio,51-GVS,99-Other,9051-Owner Occupied,9052-Rental,99999-Rate Override
+					New combined values: 10-Basic, 20-Full, 30-Basic - EE Rebate, 40-Full - EE Rebate, 50-Low Ratio, 51-GVS, 99-Other
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="30"/>
+						<xs:enumeration value="40"/>
+						<xs:enumeration value="50"/>
+						<xs:enumeration value="51"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="EXISTINGINSURANCENUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Existing Insurance Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NEWINSURANCENUMBER" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>New Insurance Number.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IDPRODUCT" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>???.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INDDOCUMENTREQUESTED" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Document requested indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INDUWREVIEWREQUESTED" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Underwriter Review Requested indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INSURERPROGRAM" use="required">
+				<xs:annotation>
+					<xs:documentation>Insurer Program
+					Omiga values: 10-Purchase/refinance, 20-Flex Down, 30-Secured LOC 5 (5/20), 40-Secured LOC 10 (10/15), 50-Aboriginal, 60-CLIP, 70-Purchase/Refinance, 80-Cashback 5%, 90-Alt A, 100-Family Plan, 
+					                       110-Heloc 5, 120-Heloc 10, 130-Staff Loan, 140-Spousal Buyout, 150-Foreign Employee, 170-Vacation Properties, 180-Borrowed Down, 190-CMHC LRU,  200-GE LRU  
+					MorWEB values: 
+						ProgramCHMC	10	Purchase-Refinance
+						ProgramCHMC	20	FlexDown
+						ProgramCHMC	30	Aboriginal
+						ProgramCHMC	40	Clip
+						ProgramCHMC	50	Portability
+						ProgramGEMI	10	Staff Loan
+						ProgramGEMI	20	Spousal Buyout
+						ProgramGEMI	30	Foreign Employee
+						ProgramGEMI	40	Alt A Monthly
+						ProgramGEMI	50	Alta A Full
+						ProgramGEMI	60	Heloc Partial
+						ProgramGEMI	70	Heloc Full
+						ProgramGEMI	80	Family Plan
+						ProgramGEMI	90	Cashback
+						ProgramGEMI	100	Vacation Property	
+						ProgramAIG		1	Standard product	
+						ProgramAIG		2	Equity Assist	
+						ProgramAIG		4	Low Doc	
+						ProgramAIG		6	Self-Directed RRSP	
+					AIG values to be defined.
+										1 - Standard				
+										2 - Equity Assist				
+										4 - Low Doc				
+										6 - Self-Directed RRSP				
+					New combined values: O10,O20,O30,O40,O50,O60,O70,O80,O90,O100,O110,O120,O130,O140,O150,O170,O180,O190,O200, O301, O302, O304, O306
+					                                      MC10,MC20,MC30,MC40,MC50, MG10,MG20,MG30,MG40,MG50,MG60,MG70,MG80,MG90,MG100, MA1, MA2, MA4, MA6
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="O10"/>
+						<xs:enumeration value="O20"/>
+						<xs:enumeration value="O30"/>
+						<xs:enumeration value="O40"/>
+						<xs:enumeration value="O50"/>
+						<xs:enumeration value="O60"/>
+						<xs:enumeration value="O70"/>
+						<xs:enumeration value="O80"/>
+						<xs:enumeration value="O90"/>
+						<xs:enumeration value="O100"/>
+						<xs:enumeration value="O110"/>
+						<xs:enumeration value="O120"/>
+						<xs:enumeration value="O130"/>
+						<xs:enumeration value="O140"/>
+						<xs:enumeration value="O150"/>
+						<xs:enumeration value="O170"/>
+						<xs:enumeration value="O180"/>
+						<xs:enumeration value="O190"/>
+						<xs:enumeration value="O200"/>
+						<xs:enumeration value="O301"/>
+						<xs:enumeration value="O302"/>
+						<xs:enumeration value="O304"/>
+						<xs:enumeration value="O306"/>
+						<xs:enumeration value="MC10"/>
+						<xs:enumeration value="MC20"/>
+						<xs:enumeration value="MC30"/>
+						<xs:enumeration value="MC40"/>
+						<xs:enumeration value="MC50"/>
+						<xs:enumeration value="MG10"/>
+						<xs:enumeration value="MG20"/>
+						<xs:enumeration value="MG30"/>
+						<xs:enumeration value="MG40"/>
+						<xs:enumeration value="MG50"/>
+						<xs:enumeration value="MG60"/>
+						<xs:enumeration value="MG70"/>
+						<xs:enumeration value="MG80"/>
+						<xs:enumeration value="MG90"/>
+						<xs:enumeration value="MG100"/>
+						<xs:enumeration value="MA1"/>
+						<xs:enumeration value="MA2"/>
+						<xs:enumeration value="MA4"/>
+						<xs:enumeration value="MA6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MORTGAGELOAN">
+		<xs:complexType>
+			<xs:attribute name="ORIGINALLOANAMOUNT">
+				<xs:annotation>
+					<xs:documentation>ORIGINAL LOAN AMOUNT: The funded loan amount. It is mandatory for MorWEB and optional for Omiga</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="MONTHLYREPAYMENT" use="required">
+				<xs:annotation>
+					<xs:documentation>Monthly repayment amount</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="OUTSTANDINGBALANCE" use="required">
+				<xs:annotation>
+					<xs:documentation>Outstanding balance amount</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="REPAYMENTMETHOD" use="required">
+				<xs:annotation>
+					<xs:documentation>Repayment Type. 
+					 MorWEB values: 1-Interest Only, 2-Blended P and I
+					 Omiga values: 1- Interest Only, 2-Blended P and I, 5-Fixed Interest, 9-At Maturity
+					 New combined values: 1- Interest Only, 2-Blended P and I, 5-Fixed Interest (Not used in MorWEB), 9-At Maturity (Not used in MorWEB)
+					 It is required in Omiga only
+					 </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="9"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="STARTDATE" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>START DATE. It is optional for Omiga only</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OUTSTANDINGTERMYEARS">
+				<xs:annotation>
+					<xs:documentation>OUTSTANDING TERM in YEARS. It is optional for Omiga only.  value range: 0 - 99</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="OUTSTANDINGTERMMONTHS">
+				<xs:annotation>
+					<xs:documentation>OUTSTANDING TERM in MONTHS. It is optional for Omiga only. value range: 0 - 11</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="11"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MORTGAGEONEOFFCOST">
+		<xs:complexType>
+			<xs:attribute name="ADDTOLOAN" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is added to loan</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MORTGAGEPRODUCT">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="INTERESTRATETYPE"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MORTGAGESUBQUOTE">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LOANCOMPONENT"/>
+				<xs:element ref="MORTGAGEINSURER" minOccurs="0"/>
+				<xs:element ref="UWRITER" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="LOANAMOUNT" use="required">
+				<xs:annotation>
+					<xs:documentation>Loan Amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="LTV" use="required">
+				<xs:annotation>
+					<xs:documentation>Loan To Value Percentage</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="6"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CLTV" use="required">
+				<xs:annotation>
+					<xs:documentation>Combined Loan To Value Percentage</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="6"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CHARGETYPE" use="required">
+				<xs:annotation>
+					<xs:documentation>Charge Type  value: 1-First Mortgage,2-Second Mortgage,3-Third Mortgage,4-Fourth Mortgage, 5-Bridge Financing, 6-First Charge - Existing Property, 99-Bridge</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TOTALLOANAMOUNT" use="required">
+				<xs:annotation>
+					<xs:documentation>Total Loan Amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PROGRESSADVANCEIND" type="xs:boolean"/>
+			<xs:attribute name="LENDERCODE" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>LENDER CODE. It is mandatory for MorWEB only</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NEWPROPERTY">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ADDRESS"/>
+				<xs:element ref="NEWPROPERTYDEPOSIT" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="NEWPROPERTYLEASEHOLD" minOccurs="0"/>
+				<xs:element ref="APPRAISAL" minOccurs="0"/>
+				<xs:element ref="LEGALADDRESS" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ANNUALHEATINGCOST">
+				<xs:annotation>
+					<xs:documentation>Annual heating cost.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ANNUALTAXINSTAMOUNT">
+				<xs:annotation>
+					<xs:documentation>Annual tax installment amouint.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="DESCRIPTIONOFPROPERTY">
+				<xs:annotation>
+					<xs:documentation>Description of Property  value:
+1-Detached 2-Semi-detached 3-Duplex 4-Triplex 5-Fourplex 6-Apartment 7-Townhouse 8-Strip 9-High Rise 10-Stacked 11-Row 12-Mobile 13-Modular Home 14-Co-op 15-Fiveplex 16-Sixplex 99-Other </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+						<xs:enumeration value="8"/>
+						<xs:enumeration value="9"/>
+						<xs:enumeration value="11"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="13"/>
+						<xs:enumeration value="14"/>
+						<xs:enumeration value="15"/>
+						<xs:enumeration value="16"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ENTIRELYOWNUSEINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is entirely for own use</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FIRSTOCCUPIERINDICATOR" type="xs:boolean"/>
+			<xs:attribute name="HEATINGTYPE">
+				<xs:annotation>
+					<xs:documentation>Heating Type  value: 1-electric baseboard, 2-Force Air/Gas/Oil/Electric, 3-Hot Water Heating, 4-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="INCOMEFROMRENTAL">
+				<xs:annotation>
+					<xs:documentation>Annual income amouint from rental.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="LETORPARTLETINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is a rental property</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LOTSIZE">
+				<xs:annotation>
+					<xs:documentation>The size of the lot</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="99999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="MLSNUMBER">
+				<xs:annotation>
+					<xs:documentation>MLS number</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NUMBEROFGARAGES">
+				<xs:annotation>
+					<xs:documentation>The number of garages</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="99999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NUMBEROFSTOREYS">
+				<xs:annotation>
+					<xs:documentation>The number of storeys for property</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="99999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NUMBEROFUNITS">
+				<xs:annotation>
+					<xs:documentation>The number of units for property</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="99999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PARKINGARRANGEMENTSTYPE">
+				<xs:annotation>
+					<xs:documentation>Parking Arrangements (Garage) Type  value:  1-Single Attached Garage, 2-Single Detached Garage, 3-Double Attached Garage, 4-Double Detached Garage, 5-Triple Attached Garage, 6-Triple Detached Garage, 7-None</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PROPERTYSIZE">
+				<xs:annotation>
+					<xs:documentation>The size of the property</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="99999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="RESIDENTIALUSEONLYINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is for residental use only</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SELFBUILDINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if the property was a self-build</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TENURETYPE">
+				<xs:annotation>
+					<xs:documentation>Tenure Type  value:  1-Freehold 2-Leasehold 3-Condo 99-Unknown(not used in MorWEB)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UFFIIND" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>UFFI indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VALUATIONPRICE" use="optional">
+				<xs:annotation>
+					<xs:documentation>Valuation price.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="YEARBUILT" type="xs:gYear">
+				<xs:annotation>
+					<xs:documentation>The year the dwelling was built </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NEWPROPERTYINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is a new built property</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FEETMETRES">
+				<xs:annotation>
+					<xs:documentation>Feet Metres  value: 1-Sq Feet, 2-Metres Sq </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="APPLICANTTOOCCUPYINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is a property that applicant to occupy</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CURRENTLYOCCUPIEDINDICATOR" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is currently occupied</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PROPERTYUSAGE">
+				<xs:annotation>
+					<xs:documentation>Property Usage   
+					MorWEB values: 1-Single Family,5-Multiple with unit,6-Apts with Stores,7-Retail,8-Office Building,9-Industrial,10-Hotel/Motel,11-Recreational,12-Land/Farm,90-Other
+					Omiga values: 10-Primary Residential,15-Alternate Residence,17-Rental Residence,20-Multi Family,30-Farm,40-Land,50-Retail,60-Wholesale,70-Office Building,80-Other
+					New combined values: M1,M5, M6, M7, M8, M9. M10, M11, M12, M90 for MorWEB values
+					                                     O10, O15, O17, O20, O30, O40, O50, O60, O70, O80 for Omiga values					
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="M1"/>
+						<xs:enumeration value="M5"/>
+						<xs:enumeration value="M6"/>
+						<xs:enumeration value="M7"/>
+						<xs:enumeration value="M8"/>
+						<xs:enumeration value="M9"/>
+						<xs:enumeration value="M10"/>
+						<xs:enumeration value="M11"/>
+						<xs:enumeration value="M12"/>
+						<xs:enumeration value="M90"/>
+						<xs:enumeration value="O10"/>
+						<xs:enumeration value="O15"/>
+						<xs:enumeration value="O17"/>
+						<xs:enumeration value="O20"/>
+						<xs:enumeration value="O30"/>
+						<xs:enumeration value="O40"/>
+						<xs:enumeration value="O50"/>
+						<xs:enumeration value="O60"/>
+						<xs:enumeration value="O70"/>
+						<xs:enumeration value="O80"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TYPEOFPROPERTY">
+				<xs:annotation>
+					<xs:documentation>The property type. Type of Property  value:1-One Storey 2-Bi-Level 3-Two Storey 4-Split Level 5-One and Half Storey 6-Three Storey 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="VENDORNAME" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Vendor name.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ENVIRONMENTALHAZARD" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is a environmental hazardous</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OCCUPANCYSTATUS">
+				<xs:annotation>
+					<xs:documentation>Occupation Status  
+					MorWEB values (using OCCUPANCYSTATUS combo): 10-Owner Occupied 20-Tenant 30-Partially Owner Occupied 40-Rental Property
+					Omiga values (using OCCUPANCYSTATUS combo): 10-Owner Occupied, 20-Rental / Investment, 99-Other
+					New combined values: M10, M20, M30, M40 for MorWEB values
+					                                     O10, O20, O99 for Omiga values					
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="M10"/>
+						<xs:enumeration value="M20"/>
+						<xs:enumeration value="M30"/>
+						<xs:enumeration value="M40"/>
+						<xs:enumeration value="O10"/>
+						<xs:enumeration value="O20"/>
+						<xs:enumeration value="O99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NEWPROPERTYDEPOSIT">
+		<xs:complexType>
+			<xs:attribute name="AMOUNT" use="required">
+				<xs:annotation>
+					<xs:documentation>Downpayment amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="SOURCEOFFUNDING">
+				<xs:annotation>
+					<xs:documentation>Source of Funding (DepositSource) value:
+					MorWEB values: 1-Cash from own Resources,2-RRSP,3-Borrowed against Liquid Assets,4-Gift,5-Sale of Other Property,8-Government Grant,9-Equity,10-Sweat Equity,99-Other
+					Omiga values: 1-Cash from own Resources,2-RRSP,3-Borrowed against Liquid Assets,4-Gift,5-Sale of Other Property,6-Sweat Equity,8-Government Grant,9-Builder Guarantee,10-Rent To Own,11-Sale of vehicle/asset,12-Inheritance ,13-Insurance settlement,14-Lottery winnings,15-Self-Directed RRSP,16-Seller Contribution,99-Other
+					New combined values: M1, M2, M3, M4, M5, M8, M9, M10, M99 for MorWEB values
+					                                     O1, O2, O3, O4, O5, O6, O8, O9, O10, O11, O12, O13, O14, O15, O16, O99 for Omiga values					
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="M1"/>
+						<xs:enumeration value="M2"/>
+						<xs:enumeration value="M3"/>
+						<xs:enumeration value="M4"/>
+						<xs:enumeration value="M5"/>
+						<xs:enumeration value="M8"/>
+						<xs:enumeration value="M9"/>
+						<xs:enumeration value="M10"/>
+						<xs:enumeration value="M99"/>
+						<xs:enumeration value="O1"/>
+						<xs:enumeration value="O2"/>
+						<xs:enumeration value="O3"/>
+						<xs:enumeration value="O4"/>
+						<xs:enumeration value="O5"/>
+						<xs:enumeration value="O6"/>
+						<xs:enumeration value="O8"/>
+						<xs:enumeration value="O9"/>
+						<xs:enumeration value="O10"/>
+						<xs:enumeration value="O11"/>
+						<xs:enumeration value="O12"/>
+						<xs:enumeration value="O13"/>
+						<xs:enumeration value="O14"/>
+						<xs:enumeration value="O15"/>
+						<xs:enumeration value="O16"/>
+						<xs:enumeration value="O99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NEWPROPERTYLEASEHOLD">
+		<xs:complexType>
+			<xs:attribute name="SERVICECHARGE" use="required">
+				<xs:annotation>
+					<xs:documentation>Condo fees or other annual service charge for the property</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="GROUNDRENT" use="optional">
+				<xs:annotation>
+					<xs:documentation>Ground rent or annual land lease amount</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QUOTATION">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MORTGAGESUBQUOTE"/>
+				<xs:element ref="ADDITIONALFINANCING" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="FUNDINGDATE" type="xs:date" use="required">
+				<xs:annotation>
+					<xs:documentation>The first advance date for new funds</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PURCHASEPRICEORESTIMATEDVALUE" use="required">
+				<xs:annotation>
+					<xs:documentation>Purchased price or estimated value.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="OTHERFINANCINGIND" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is other financing</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="REQUEST">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="APPLICATION"/>
+				<xs:element ref="INSURANCEREQUESTER" minOccurs="0"/>
+				<xs:element ref="COMMENT" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>This is application number in Omiga or MorWEB.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CORRESPONDENCELANGUAGE" use="optional">
+				<xs:annotation>
+					<xs:documentation>CORRESPONDENCE LANGUAGE: 1-English, 2-French</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="REQUESTTYPE" use="required">
+				<xs:annotation>
+					<xs:documentation>REQUEST TYPE: A-Add, U-Update, C-Cancel, L-Low Raio, P-Premium, I-Inquire for risked</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="A"/>
+						<xs:enumeration value="U"/>
+						<xs:enumeration value="C"/>
+						<xs:enumeration value="L"/>
+						<xs:enumeration value="P"/>
+						<xs:enumeration value="I"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="REFERRALREQUESTED" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if referral has been requested</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INSURERCERTIFICATENUMBER" use="optional">
+				<xs:annotation>
+					<xs:documentation>This is insurance reference number or certificate number. INSURERCERTIFICATENUMBER is "" for initial (A) request </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="REQUESTDATE" type="xs:date" use="required">
+				<xs:annotation>
+					<xs:documentation>Request date </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MORGAGEINSURERPRODUCT" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Mortgage Insurer Product </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="USER" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>User </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PASSWORD" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Password </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CUSTID" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation> Customer ID  </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CERTIFAXREQUESTED" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Indicates if CerfiFax has been requested</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="INSURERAPPID" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>This is the application ID from mortgage insurance system. 
+					CMHC: It is optional. We set it to the certificate number for CMHC
+					GE: It is mandatory. It is different from the certificate number in GE. 
+					AIG: It is optional.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FIRSTTIMESUBMISSION" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates if this is first time submission. This attribute is only used by Omiga</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VERSION" type="xs:string" use="optional" fixed="1.0">
+				<xs:annotation>
+					<xs:documentation>Each version defines a slightly different data format. This is the version number of the document. We define the first version number as "1.0".</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UNEARNEDINCOME">
+		<xs:complexType>
+			<xs:attribute name="UNEARNEDINCOMETYPE">
+				<xs:annotation>
+					<xs:documentation>Unearned Income Type (UnEarnedIncomeDescription) value:1-Pension 2-Investments 3-Support/Alimony 4-Car Allowance, 5-Other Rental Property(not used in MorWEB), 6-Child Credit Tax Source(not used in MorWEB) 99-Other</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UNEARNEDINCOMEAMOUNT" use="required">
+				<xs:annotation>
+					<xs:documentation>Unearned income amount.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2" fixed="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="PAYMENTFREQUENCY">
+				<xs:annotation>
+					<xs:documentation>The income payment frequency  value:1-Annually 2-Semi-annual 4-Quarterly 12-Monthly 24-Semi-monthly 26-Bi-weekly 52-Weekly</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="24"/>
+						<xs:enumeration value="26"/>
+						<xs:enumeration value="52"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UNITCONTACTDETAILS">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CONTACTDETAILS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UWRITER">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CONTACTDETAILS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

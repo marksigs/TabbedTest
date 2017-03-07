@@ -1,0 +1,577 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="ab005a1d-df5d-4ad0-9fb7-3c2a5499e06d" LowerBound="1.1" HigherBound="202.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="MSC.IntegrationService" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="PortType" OID="2358f104-2782-4d2b-915b-cc4320e32837" ParentLink="Module_PortType" LowerBound="4.1" HigherBound="11.1">
+            <om:Property Name="Synchronous" Value="True" />
+            <om:Property Name="TypeModifier" Value="Public" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="MSCReceive_PortType" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="OperationDeclaration" OID="c89c4c82-b6e8-4bcb-ba83-440ed5fdd049" ParentLink="PortType_OperationDeclaration" LowerBound="6.1" HigherBound="10.1">
+                <om:Property Name="OperationType" Value="RequestResponse" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ProcessRequest" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="3c36acd1-09b7-4432-9d42-3b378ec43126" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="8.13" HigherBound="8.31">
+                    <om:Property Name="Ref" Value="MSC.IntegrationService.Schemas.cdiInterop" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="MessageRef" OID="4fc6729a-d589-4a0f-a590-4ee8894c622a" ParentLink="OperationDeclaration_ResponseMessageRef" LowerBound="8.33" HigherBound="8.55">
+                    <om:Property Name="Ref" Value="System.Xml.XmlDocument" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Response" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="5451e1f5-138b-402b-b7a5-4c9f00e6779f" ParentLink="Module_PortType" LowerBound="11.1" HigherBound="18.1">
+            <om:Property Name="Synchronous" Value="True" />
+            <om:Property Name="TypeModifier" Value="Public" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="SendRequest_PortType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="c29d34a4-a0de-49ac-a48b-f84a396526f0" ParentLink="PortType_OperationDeclaration" LowerBound="13.1" HigherBound="17.1">
+                <om:Property Name="OperationType" Value="RequestResponse" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SendToMsgBox" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="9e034556-d85c-4947-b2fb-eec29af7931d" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="15.13" HigherBound="15.35">
+                    <om:Property Name="Ref" Value="System.Xml.XmlDocument" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="MessageRef" OID="eea39b04-8c67-400b-b88c-8a6436f30809" ParentLink="OperationDeclaration_ResponseMessageRef" LowerBound="15.37" HigherBound="15.59">
+                    <om:Property Name="Ref" Value="System.Xml.XmlDocument" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Response" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="ServiceDeclaration" OID="d73167d0-c4d7-4e9d-86bb-c2407c320d6f" ParentLink="Module_ServiceDeclaration" LowerBound="22.1" HigherBound="201.1">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="MSCISOrchestration" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="VariableDeclaration" OID="ca198d42-4866-4e5b-9168-c9758d2cc61b" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="34.1" HigherBound="35.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="requestId" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="53c42f97-baaa-4503-b3a6-afcdf1c8d7e5" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="35.1" HigherBound="36.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="serviceType" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="96ce8a35-e99a-4ef1-a278-ecfc6e193046" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="36.1" HigherBound="37.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="provider" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="465d0721-77d6-46f3-90fd-7e1ecaf36ef9" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="37.1" HigherBound="38.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="requestSource" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="da541b1e-7ad5-4c90-887f-569d0d4f46ea" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="38.1" HigherBound="39.1">
+                <om:Property Name="UseDefaultConstructor" Value="True" />
+                <om:Property Name="Type" Value="MSC.IntegrationService.ConfigService.ConfigManager" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="configMgr" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="270fcd29-166c-4deb-8f60-e353d8561403" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="39.1" HigherBound="40.1">
+                <om:Property Name="UseDefaultConstructor" Value="True" />
+                <om:Property Name="Type" Value="MSC.IntegrationService.ConfigService.MessageConfig" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="messageConfig" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="5045893e-230d-42ff-b0dc-6b8ed3ea217c" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="40.1" HigherBound="41.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="requestMapName" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="1a1db885-4c63-41b4-978f-7881a32a0f24" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="41.1" HigherBound="42.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="responseMapName" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="d8ab50e5-4229-4637-a5c6-3c5a672415cd" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="42.1" HigherBound="43.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.Type" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="requestMapType" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="d7b1fb23-b4a8-44a0-9273-807774f8862c" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="43.1" HigherBound="44.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.Type" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="responseMapType" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="d803660e-e3da-4a23-8852-3050b0fc817c" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="44.1" HigherBound="45.1">
+                <om:Property Name="UseDefaultConstructor" Value="True" />
+                <om:Property Name="Type" Value="MSC.IntegrationService.ConfigService.ServiceType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ServiceType" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="639d1020-37ed-42a8-b44e-7aafb9a897a7" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="45.1" HigherBound="46.1">
+                <om:Property Name="UseDefaultConstructor" Value="True" />
+                <om:Property Name="Type" Value="MSC.IntegrationService.ConfigService.Recipient" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Recipient" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="0a7af2e8-e08d-4173-8f74-1f2819ed9cb1" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="46.1" HigherBound="47.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="recipient" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="CorrelationDeclaration" OID="345bfae5-0ba0-4483-9336-a07baad37efe" ParentLink="ServiceDeclaration_CorrelationDeclaration" LowerBound="29.1" HigherBound="30.1">
+                <om:Property Name="Type" Value="MSC.IntegrationService.PromotedProp_CorrelationType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="AnalystComments" Value="Correlation Set to Promote Properties" />
+                <om:Property Name="Name" Value="PromotedProp_Correlation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="StatementRef" OID="d47ab864-eed9-4fc5-8ee1-c9703da6f6f8" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="158.74" HigherBound="158.109">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="654358dc-de7d-40df-af29-d05600515104" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_1" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="f4c7cef3-8a05-4a69-a2b2-c4e22325a24b" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="30.1" HigherBound="31.1">
+                <om:Property Name="Type" Value="MSC.IntegrationService.Schemas.cdiInterop" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="MSCMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="04f7205d-4754-4b5f-9230-94892dac685c" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="31.1" HigherBound="32.1">
+                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="requestMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="b79d15d0-03df-4d99-b6c0-108214f3b35b" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="32.1" HigherBound="33.1">
+                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="responseMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="586da171-7e14-4616-a9bb-61357a4807d4" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="33.1" HigherBound="34.1">
+                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="MSCResponseMsg" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="d6e10124-038a-49b5-ac5f-3ce96388591a" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="15df91f9-3b33-446e-9515-c95751f7ce28" ParentLink="ServiceBody_Statement" LowerBound="49.1" HigherBound="62.1">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="MSCReceive_Port" />
+                    <om:Property Name="MessageName" Value="MSCMessage" />
+                    <om:Property Name="OperationName" Value="ProcessRequest" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Receive_MSCMessage" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="Scope" OID="5e3ab90f-5490-4bde-a650-b3ffe1d233d6" ParentLink="ServiceBody_Statement" LowerBound="62.1" HigherBound="197.1">
+                    <om:Property Name="InitializedTransactionType" Value="True" />
+                    <om:Property Name="IsSynchronized" Value="False" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="OverallOrchScope" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="VariableAssignment" OID="4f10caf6-44a4-4b5b-86ee-982deebe1512" ParentLink="ComplexStatement_Statement" LowerBound="67.1" HigherBound="82.1">
+                        <om:Property Name="Expression" Value="System.Diagnostics.EventLog.WriteEntry(&quot;MSCIS&quot;, &quot;Received request, assigning variables&quot;);&#xD;&#xA;&#xD;&#xA;//get all promoted property values from incoming message&#xD;&#xA;requestId = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.requestId);&#xD;&#xA;serviceType = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.serviceType);&#xD;&#xA;requestSource = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.requestSource);&#xD;&#xA;provider = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.provider);&#xD;&#xA;recipient = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.recipient);&#xD;&#xA;&#xD;&#xA;//get message configuration based on provider of the request&#xD;&#xA;messageConfig = configMgr.GetMessageConfig(provider);&#xD;&#xA;ServiceType = messageConfig.ServiceTypes.GetServicType(serviceType);&#xD;&#xA;Recipient = ServiceType.RecipientList.GetRecipient(recipient);&#xD;&#xA;&#xD;&#xA;" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Assign_Variables" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                    <om:Element Type="VariableAssignment" OID="12016790-ab78-4f33-8d6c-de986d56bd02" ParentLink="ComplexStatement_Statement" LowerBound="82.1" HigherBound="157.1">
+                        <om:Property Name="Expression" Value="System.Diagnostics.EventLog.WriteEntry(&quot;MSCIS&quot;, &quot;In Construct_RequestMsg&quot;);&#xD;&#xA;&#xD;&#xA;//get map name from message config. it should be an assembly type, for example&#xD;&#xA;//mapName = &quot;BTSSchemas.MSC_XYZ, BTSSchemas, Version=1.0.0.0, Culture=neutral, PublicKeyToken=19eedde3bd07a1d2&quot;;&#xD;&#xA;requestMapType = System.Type.GetType(Recipient.RequestMapType);&#xD;&#xA;&#xD;&#xA;//get the protocol and assign adapter specific properties while constructing message&#xD;&#xA;/*&#xD;&#xA;if (Recipient.RequestMapType.Length &gt; 0 )&#xD;&#xA;{&#xD;&#xA;    construct requestMessage&#xD;&#xA;    {&#xD;&#xA;        System.Diagnostics.EventLog.WriteEntry(&quot;MSCIS&quot;, &quot;Transforming.&quot;);&#xD;&#xA;        transform (requestMessage) = requestMapType(MSCMessage);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;*/&#xD;&#xA;if (Recipient.Protocol == &quot;SOAP&quot;)&#xD;&#xA;{&#xD;&#xA;    construct requestMessage&#xD;&#xA;    {&#xD;&#xA;        System.Diagnostics.EventLog.WriteEntry(&quot;MSCIS&quot;, &quot;SOAP protocol, assigning parms.&quot;);&#xD;&#xA;        transform (requestMessage) = requestMapType(MSCMessage);&#xD;&#xA;        requestMessage(BTS.OutboundTransportType) = &quot;SOAP&quot;;&#xD;&#xA;        //make sure the following are correctly assigned - NC&#xD;&#xA;        requestMessage(SOAP.AssemblyName) = Recipient.Assembly ;&#xD;&#xA;        requestMessage(SOAP.MethodName) = Recipient.Operation;&#xD;&#xA;        requestMessage(SOAP.Username) = Recipient.UserId;&#xD;&#xA;        requestMessage(SOAP.Password) = Recipient.Password;&#xD;&#xA;        //requestMessage(BTS.Operation) = &quot;ExternalProcess&quot;;&#xD;&#xA;        //requestMessage(BTSSchemas.PropertySchema.ID) = ID;&#xD;&#xA;        &#xD;&#xA;    }&#xD;&#xA;    &#xD;&#xA;}&#xD;&#xA;else if (Recipient.Protocol == &quot;WSE&quot;)&#xD;&#xA;{&#xD;&#xA;    construct requestMessage&#xD;&#xA;    {&#xD;&#xA;        System.Diagnostics.EventLog.WriteEntry(&quot;MSCIS&quot;, &quot;WSE protocol, assigning parms.&quot;);&#xD;&#xA;        transform (requestMessage) = requestMapType(MSCMessage);&#xD;&#xA;        requestMessage(BTS.OutboundTransportType) = &quot;WSE&quot;;&#xD;&#xA;        requestMessage(WSE.SoapAction) = &quot;&quot;;&#xD;&#xA;        requestMessage(WSE.ConfidentialityUser) = Recipient.UserId;&#xD;&#xA;        requestMessage(WSE.ConfidentialityPassword) = Recipient.Password;&#xD;&#xA;        requestMessage(WSE.IntegrityPasswordOption) = &quot;Hashed&quot;;&#xD;&#xA;        &#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;else if (Recipient.Protocol == &quot;HTTP&quot;)&#xD;&#xA;{&#xD;&#xA;    construct requestMessage&#xD;&#xA;    {&#xD;&#xA;        System.Diagnostics.EventLog.WriteEntry(&quot;MSCIS&quot;, &quot;HTTP protocol, assigning parms.&quot;);&#xD;&#xA;        transform (requestMessage) = requestMapType(MSCMessage);&#xD;&#xA;           &#xD;&#xA;        requestMessage(BTS.OutboundTransportType) = &quot;HTTP&quot;;&#xD;&#xA;        requestMessage(MSC.IntegrationService.Schemas.PropertySchema.provider) = provider;&#xD;&#xA;        requestMessage(MSC.IntegrationService.Schemas.PropertySchema.recipient) = recipient;&#xD;&#xA;        requestMessage(MSC.IntegrationService.Schemas.PropertySchema.requestId) = requestId;&#xD;&#xA;        requestMessage(MSC.IntegrationService.Schemas.PropertySchema.requestSource) = requestSource;&#xD;&#xA;        requestMessage(MSC.IntegrationService.Schemas.PropertySchema.serviceType) = serviceType;&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    construct requestMessage&#xD;&#xA;    {&#xD;&#xA;         System.Diagnostics.EventLog.WriteEntry(&quot;MSCIS&quot;, &quot;NO protocol.&quot;);&#xD;&#xA;         transform (requestMessage) = requestMapType(MSCMessage);&#xD;&#xA;         //default protocol&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Construct_RequestMsg" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                    <om:Element Type="Send" OID="654358dc-de7d-40df-af29-d05600515104" ParentLink="ComplexStatement_Statement" LowerBound="157.1" HigherBound="159.1">
+                        <om:Property Name="PortName" Value="SendRequest_Port" />
+                        <om:Property Name="MessageName" Value="requestMessage" />
+                        <om:Property Name="OperationName" Value="SendToMsgBox" />
+                        <om:Property Name="OperationMessageName" Value="Request" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Send_RequestMsg" />
+                        <om:Property Name="Signal" Value="True" />
+                    </om:Element>
+                    <om:Element Type="Receive" OID="7b385e9c-91c9-463f-8ad2-ed01f3c8cfb1" ParentLink="ComplexStatement_Statement" LowerBound="159.1" HigherBound="161.1">
+                        <om:Property Name="Activate" Value="False" />
+                        <om:Property Name="PortName" Value="SendRequest_Port" />
+                        <om:Property Name="MessageName" Value="responseMessage" />
+                        <om:Property Name="OperationName" Value="SendToMsgBox" />
+                        <om:Property Name="OperationMessageName" Value="Response" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Receive_ResponseMsg" />
+                        <om:Property Name="Signal" Value="True" />
+                    </om:Element>
+                    <om:Element Type="VariableAssignment" OID="c3a10cd2-1ede-4ddd-9e67-ece9a1083e03" ParentLink="ComplexStatement_Statement" LowerBound="161.1" HigherBound="179.1">
+                        <om:Property Name="Expression" Value="if (Recipient.ResponseMapType != &quot;&quot;)&#xD;&#xA;{&#xD;&#xA;    construct MSCResponseMsg&#xD;&#xA;    {&#xD;&#xA;        //get responseMapType using message config&#xD;&#xA;        responseMapType = System.Type.GetType(Recipient.ResponseMapType);&#xD;&#xA;        transform (MSCResponseMsg) = responseMapType(responseMessage);&#xD;&#xA;        &#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    construct MSCResponseMsg&#xD;&#xA;        {     &#xD;&#xA;            MSCResponseMsg = responseMessage;&#xD;&#xA;        }&#xD;&#xA;}" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Construct_ResponseMsg" />
+                        <om:Property Name="Signal" Value="True" />
+                    </om:Element>
+                    <om:Element Type="Catch" OID="4425b88f-7054-41ca-be97-5164d5048958" ParentLink="Scope_Catch" LowerBound="182.1" HigherBound="195.1">
+                        <om:Property Name="ExceptionName" Value="ex" />
+                        <om:Property Name="ExceptionType" Value="System.Exception" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="OrchestrationException" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Construct" OID="a780fd31-1a7b-43bc-bed6-76bbfc237189" ParentLink="Catch_Statement" LowerBound="185.1" HigherBound="194.1">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Construct_ErrorMsg" />
+                            <om:Property Name="Signal" Value="True" />
+                            <om:Element Type="MessageAssignment" OID="c62c90af-1de5-40f1-9fb8-9bdb266cef14" ParentLink="ComplexStatement_Statement" LowerBound="188.1" HigherBound="193.1">
+                                <om:Property Name="Expression" Value="System.Diagnostics.EventLog.WriteEntry(&quot;MSCIS&quot;, &quot;Error occurred:&quot; + ex.Message);&#xD;&#xA;&#xD;&#xA;MSCResponseMsg = MSCMessage;&#xD;&#xA;xpath(MSCResponseMsg, &quot;/*[local-name()='clipboard']/*[local-name()='msgRequest']/*[local-name()='msgErrors']/*[local-name()='msgError']/@*[local-name()='message']&quot;)= ex.Message;" />
+                                <om:Property Name="ReportToAnalyst" Value="False" />
+                                <om:Property Name="Name" Value="MessageAssignment_ErrMsg" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="MessageRef" OID="e2c3ec30-acbd-448f-b0d8-6a768abe3dd6" ParentLink="Construct_MessageRef" LowerBound="186.35" HigherBound="186.49">
+                                <om:Property Name="Ref" Value="MSCResponseMsg" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                        </om:Element>
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="Send" OID="0151f644-04db-442b-a38c-8b3fa502ae93" ParentLink="ServiceBody_Statement" LowerBound="197.1" HigherBound="199.1">
+                    <om:Property Name="PortName" Value="MSCReceive_Port" />
+                    <om:Property Name="MessageName" Value="MSCResponseMsg" />
+                    <om:Property Name="OperationName" Value="ProcessRequest" />
+                    <om:Property Name="OperationMessageName" Value="Response" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Send_MSCResponseMsg" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="9891102d-66ee-4cef-83d6-1ed77dd0de09" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="25.1" HigherBound="27.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="6" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="MSC.IntegrationService.MSCReceive_PortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="MSCReceive_Port" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="b599bfac-fd70-4b39-8216-3a44855929ae" ParentLink="PortDeclaration_CLRAttribute" LowerBound="25.1" HigherBound="26.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="40c1823c-dc5a-4bb8-a44a-3e56d3b20902" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="27.1" HigherBound="29.1">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Right" />
+                <om:Property Name="PortIndex" Value="17" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="MSC.IntegrationService.SendRequest_PortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SendRequest_Port" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="DirectBindingAttribute" OID="bf73a900-e126-4802-beb0-c5343e4ecb81" ParentLink="PortDeclaration_CLRAttribute" LowerBound="27.1" HigherBound="28.1">
+                    <om:Property Name="DirectBindingType" Value="MessageBox" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="CorrelationType" OID="9992c641-a022-45a2-8fb1-aa3af1473cca" ParentLink="Module_CorrelationType" LowerBound="18.1" HigherBound="22.1">
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PromotedProp_CorrelationType" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="PropertyRef" OID="b5aa1521-be2d-49cc-bf9b-f9becce33c87" ParentLink="CorrelationType_PropertyRef" LowerBound="20.9" HigherBound="20.40">
+                <om:Property Name="Ref" Value="MSC.IntegrationService.Schemas.PropertySchema.provider" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+            <om:Element Type="PropertyRef" OID="09bee511-76ed-4288-97a6-213ffc61d504" ParentLink="CorrelationType_PropertyRef" LowerBound="20.42" HigherBound="20.74">
+                <om:Property Name="Ref" Value="MSC.IntegrationService.Schemas.PropertySchema.recipient" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+            <om:Element Type="PropertyRef" OID="68f83811-5610-4daa-aada-943a199583e6" ParentLink="CorrelationType_PropertyRef" LowerBound="20.76" HigherBound="20.108">
+                <om:Property Name="Ref" Value="MSC.IntegrationService.Schemas.PropertySchema.requestId" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+            <om:Element Type="PropertyRef" OID="c73dadb9-7cde-4eca-b68f-9e73684dcf9b" ParentLink="CorrelationType_PropertyRef" LowerBound="20.110" HigherBound="20.146">
+                <om:Property Name="Ref" Value="MSC.IntegrationService.Schemas.PropertySchema.requestSource" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+            <om:Element Type="PropertyRef" OID="b2f8692c-3261-49b9-801d-f5a72858266f" ParentLink="CorrelationType_PropertyRef" LowerBound="20.148" HigherBound="20.182">
+                <om:Property Name="Ref" Value="MSC.IntegrationService.Schemas.PropertySchema.serviceType" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+module MSC.IntegrationService
+{
+    public porttype MSCReceive_PortType
+    {
+        requestresponse ProcessRequest
+        {
+            Schemas.cdiInterop, System.Xml.XmlDocument
+        };
+    };
+    public porttype SendRequest_PortType
+    {
+        requestresponse SendToMsgBox
+        {
+            System.Xml.XmlDocument, System.Xml.XmlDocument
+        };
+    };
+    internal correlationtype PromotedProp_CorrelationType
+    {
+        Schemas.PropertySchema.provider, Schemas.PropertySchema.recipient, Schemas.PropertySchema.requestId, Schemas.PropertySchema.requestSource, Schemas.PropertySchema.serviceType
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service MSCISOrchestration
+    {
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port implements MSCReceive_PortType MSCReceive_Port;
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        port uses SendRequest_PortType SendRequest_Port;
+        correlation PromotedProp_CorrelationType PromotedProp_Correlation;
+        message Schemas.cdiInterop MSCMessage;
+        message System.Xml.XmlDocument requestMessage;
+        message System.Xml.XmlDocument responseMessage;
+        message System.Xml.XmlDocument MSCResponseMsg;
+        System.String requestId;
+        System.String serviceType;
+        System.String provider;
+        System.String requestSource;
+        ConfigService.ConfigManager configMgr;
+        ConfigService.MessageConfig messageConfig;
+        System.String requestMapName;
+        System.String responseMapName;
+        System.Type requestMapType;
+        System.Type responseMapType;
+        ConfigService.ServiceType ServiceType;
+        ConfigService.Recipient Recipient;
+        System.String recipient;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("15df91f9-3b33-446e-9515-c95751f7ce28")]
+            activate receive (MSCReceive_Port.ProcessRequest, MSCMessage);
+            requestId = "";
+            serviceType = "";
+            provider = "";
+            requestSource = "";
+            configMgr = new ConfigService.ConfigManager();
+            messageConfig = new ConfigService.MessageConfig();
+            requestMapName = "";
+            responseMapName = "";
+            ServiceType = new ConfigService.ServiceType();
+            Recipient = new ConfigService.Recipient();
+            recipient = "";
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("5e3ab90f-5490-4bde-a650-b3ffe1d233d6")]
+            scope
+            {
+                body
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("4f10caf6-44a4-4b5b-86ee-982deebe1512")]
+                    System.Diagnostics.EventLog.WriteEntry("MSCIS", "Received request, assigning variables");
+                    
+                    //get all promoted property values from incoming message
+                    requestId = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.requestId);
+                    serviceType = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.serviceType);
+                    requestSource = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.requestSource);
+                    provider = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.provider);
+                    recipient = MSCMessage(MSC.IntegrationService.Schemas.PropertySchema.recipient);
+                    
+                    //get message configuration based on provider of the request
+                    messageConfig = configMgr.GetMessageConfig(provider);
+                    ServiceType = messageConfig.ServiceTypes.GetServicType(serviceType);
+                    Recipient = ServiceType.RecipientList.GetRecipient(recipient);
+                    
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("12016790-ab78-4f33-8d6c-de986d56bd02")]
+                    System.Diagnostics.EventLog.WriteEntry("MSCIS", "In Construct_RequestMsg");
+                    
+                    //get map name from message config. it should be an assembly type, for example
+                    //mapName = "BTSSchemas.MSC_XYZ, BTSSchemas, Version=1.0.0.0, Culture=neutral, PublicKeyToken=19eedde3bd07a1d2";
+                    requestMapType = System.Type.GetType(Recipient.RequestMapType);
+                    
+                    //get the protocol and assign adapter specific properties while constructing message
+                    /*
+                    if (Recipient.RequestMapType.Length > 0 )
+                    {
+                        construct requestMessage
+                        {
+                            System.Diagnostics.EventLog.WriteEntry("MSCIS", "Transforming.");
+                            transform (requestMessage) = requestMapType(MSCMessage);
+                        }
+                    }
+                    */
+                    if (Recipient.Protocol == "SOAP")
+                    {
+                        construct requestMessage
+                        {
+                            System.Diagnostics.EventLog.WriteEntry("MSCIS", "SOAP protocol, assigning parms.");
+                            transform (requestMessage) = requestMapType(MSCMessage);
+                            requestMessage(BTS.OutboundTransportType) = "SOAP";
+                            //make sure the following are correctly assigned - NC
+                            requestMessage(SOAP.AssemblyName) = Recipient.Assembly ;
+                            requestMessage(SOAP.MethodName) = Recipient.Operation;
+                            requestMessage(SOAP.Username) = Recipient.UserId;
+                            requestMessage(SOAP.Password) = Recipient.Password;
+                            //requestMessage(BTS.Operation) = "ExternalProcess";
+                            //requestMessage(BTSSchemas.PropertySchema.ID) = ID;
+                            
+                        }
+                        
+                    }
+                    else if (Recipient.Protocol == "WSE")
+                    {
+                        construct requestMessage
+                        {
+                            System.Diagnostics.EventLog.WriteEntry("MSCIS", "WSE protocol, assigning parms.");
+                            transform (requestMessage) = requestMapType(MSCMessage);
+                            requestMessage(BTS.OutboundTransportType) = "WSE";
+                            requestMessage(WSE.SoapAction) = "";
+                            requestMessage(WSE.ConfidentialityUser) = Recipient.UserId;
+                            requestMessage(WSE.ConfidentialityPassword) = Recipient.Password;
+                            requestMessage(WSE.IntegrityPasswordOption) = "Hashed";
+                            
+                        }
+                    }
+                    else if (Recipient.Protocol == "HTTP")
+                    {
+                        construct requestMessage
+                        {
+                            System.Diagnostics.EventLog.WriteEntry("MSCIS", "HTTP protocol, assigning parms.");
+                            transform (requestMessage) = requestMapType(MSCMessage);
+                               
+                            requestMessage(BTS.OutboundTransportType) = "HTTP";
+                            requestMessage(MSC.IntegrationService.Schemas.PropertySchema.provider) = provider;
+                            requestMessage(MSC.IntegrationService.Schemas.PropertySchema.recipient) = recipient;
+                            requestMessage(MSC.IntegrationService.Schemas.PropertySchema.requestId) = requestId;
+                            requestMessage(MSC.IntegrationService.Schemas.PropertySchema.requestSource) = requestSource;
+                            requestMessage(MSC.IntegrationService.Schemas.PropertySchema.serviceType) = serviceType;
+                        }
+                    }
+                    else
+                    {
+                        construct requestMessage
+                        {
+                             System.Diagnostics.EventLog.WriteEntry("MSCIS", "NO protocol.");
+                             transform (requestMessage) = requestMapType(MSCMessage);
+                             //default protocol
+                        }
+                    }
+                    
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("654358dc-de7d-40df-af29-d05600515104")]
+                    send (SendRequest_Port.SendToMsgBox, requestMessage, initialize PromotedProp_Correlation);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("7b385e9c-91c9-463f-8ad2-ed01f3c8cfb1")]
+                    receive (SendRequest_Port.SendToMsgBox, responseMessage);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("c3a10cd2-1ede-4ddd-9e67-ece9a1083e03")]
+                    if (Recipient.ResponseMapType != "")
+                    {
+                        construct MSCResponseMsg
+                        {
+                            //get responseMapType using message config
+                            responseMapType = System.Type.GetType(Recipient.ResponseMapType);
+                            transform (MSCResponseMsg) = responseMapType(responseMessage);
+                            
+                        }
+                    }
+                    else
+                    {
+                        construct MSCResponseMsg
+                            {     
+                                MSCResponseMsg = responseMessage;
+                            }
+                    }
+                }
+                exceptions
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("4425b88f-7054-41ca-be97-5164d5048958")]
+                    catch (System.Exception ex)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("a780fd31-1a7b-43bc-bed6-76bbfc237189")]
+                        construct MSCResponseMsg
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("c62c90af-1de5-40f1-9fb8-9bdb266cef14")]
+                            System.Diagnostics.EventLog.WriteEntry("MSCIS", "Error occurred:" + ex.Message);
+                            
+                            MSCResponseMsg = MSCMessage;
+                            xpath(MSCResponseMsg, "/*[local-name()='clipboard']/*[local-name()='msgRequest']/*[local-name()='msgErrors']/*[local-name()='msgError']/@*[local-name()='message']")= ex.Message;
+                        }
+                    }
+                }
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("0151f644-04db-442b-a38c-8b3fa502ae93")]
+            send (MSCReceive_Port.ProcessRequest, MSCResponseMsg);
+        }
+    }
+}
+

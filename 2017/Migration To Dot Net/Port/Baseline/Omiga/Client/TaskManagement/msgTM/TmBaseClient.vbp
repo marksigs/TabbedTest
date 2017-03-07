@@ -1,0 +1,39 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\..\..\..\WINDOWS\system32\STDOLE2.TLB#OLE Automation
+Reference=*\G{74C08640-CEDB-11CF-8B49-00AA00B8A790}#1.0#0#..\..\..\..\..\..\..\..\WINDOWS\system32\comsvcs.dll#Microsoft Transaction Server Type Library
+Reference=*\G{C4749ED1-9089-4D6B-9B63-CB5E1E4557AF}#1.0#0#MsgTm.dll#MsgTm
+Class=TmBaseClientBO; TmBaseClientBO.cls
+Startup="(None)"
+HelpFile=""
+Title="TmBaseClient"
+ExeName32="TmBaseClient.dll"
+Command32=""
+Name="TmBaseClient"
+HelpContextID="0"
+CompatibleMode="0"
+MajorVer=1
+MinorVer=0
+RevisionVer=0
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="Marlborough Stirling"
+CondComp="GENERIC_SQL = 1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=-1
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+
+[MS Transaction Server]
+AutoRefresh=1

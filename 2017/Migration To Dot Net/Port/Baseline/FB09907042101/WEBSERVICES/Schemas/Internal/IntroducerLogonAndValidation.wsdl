@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: IntroducerLogonAndValidation.wsdl
+
+History:
+
+Version	Author		Date       			Description
+01.00   	PSC        	24/10/2006		Created
+================================================================================-->
+<wsdl:definitions targetNamespace="http://IntroducerLogonAndValidation.Omiga.vertex.co.uk" 
+			xmlns="http://IntroducerLogonAndValidation.Omiga.vertex.co.uk" 
+			xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+			xmlns:msgGetFirmsRequest="http://Request.GetIntroducerUserFirms.Omiga.vertex.co.uk" 
+			xmlns:msgGetFirmsResponse="http://Response.GetIntroducerUserFirms.Omiga.vertex.co.uk"
+			xmlns:msgAuthenticateFirmRequest="http://Request.AuthenticateFirm.Omiga.vertex.co.uk" 
+			xmlns:msgAuthenticateFirmResponse="http://Response.AuthenticateFirm.Omiga.vertex.co.uk"
+			xmlns:msgValidateBrokerRequest="http://Request.ValidateBroker.Omiga.vertex.co.uk" 
+			xmlns:msgValidateBrokerResponse="http://Response.ValidateBroker.Omiga.vertex.co.uk">
+			
+	<wsdl:types>
+		<xs:schema xmlns:msgGetFirmsRequest="http://Request.GetIntroducerUserFirms.Omiga.vertex.co.uk" xmlns:msgGetFirmsResponse="http://Response.GetIntroducerUserFirms.Omiga.vertex.co.uk" 	xmlns:msgAuthenticateFirmRequest="http://Request.AuthenticateFirm.Omiga.vertex.co.uk" xmlns:msgAuthenticateFirmResponse="http://Response.AuthenticateFirm.Omiga.vertex.co.uk" xmlns:msgValidateBrokerRequest="http://Request.ValidateBroker.Omiga.vertex.co.uk" xmlns:msgValidateBrokerResponse="http://Response.ValidateBroker.Omiga.vertex.co.uk">
+			<xs:import namespace="http://Request.GetIntroducerUserFirms.Omiga.vertex.co.uk" schemaLocation="GetIntroducerUserFirmsRequest.xsd"/>
+			<xs:import namespace="http://Response.GetIntroducerUserFirms.Omiga.vertex.co.uk" schemaLocation="GetIntroducerUserFirmsResponse.xsd"/>
+			<xs:import namespace="http://Request.AuthenticateFirm.Omiga.vertex.co.uk" schemaLocation="AuthenticateFirmRequest.xsd"/>
+			<xs:import namespace="http://Response.AuthenticateFirm.Omiga.vertex.co.uk" schemaLocation="AuthenticateFirmResponse.xsd"/>
+			<xs:import namespace="http://Request.ValidateBroker.Omiga.vertex.co.uk" schemaLocation="ValidateBrokerRequest.xsd"/>
+			<xs:import namespace="http://Response.ValidateBroker.Omiga.vertex.co.uk" schemaLocation="ValidateBrokerResponse.xsd"/>
+		</xs:schema>
+			
+	</wsdl:types>
+	<wsdl:message name="GetIntroducerUserFirmsSoapIn">
+		<wsdl:part name="request" element="msgGetFirmsRequest:REQUEST"/>
+	</wsdl:message>
+	<wsdl:message name="AuthenticateFirmSoapIn">
+		<wsdl:part name="request" element="msgAuthenticateFirmRequest:REQUEST"/>
+	</wsdl:message>	
+	<wsdl:message name="ValidateBrokerSoapIn">
+		<wsdl:part name="request" element="msgValidateBrokerRequest:REQUEST"/>
+	</wsdl:message>
+	<wsdl:message name="GetIntroducerUserFirmsSoapOut">
+		<wsdl:part name="response" element="msgGetFirmsResponse:RESPONSE"/>
+	</wsdl:message>
+		<wsdl:message name="AuthenticateFirmSoapOut">
+		<wsdl:part name="response" element="msgAuthenticateFirmResponse:RESPONSE"/>
+	</wsdl:message>
+	<wsdl:message name="ValidateBrokerSoapOut">
+		<wsdl:part name="response" element="msgValidateBrokerResponse:RESPONSE"/>
+	</wsdl:message>
+
+	<wsdl:portType name="IntroducerLogonAndValidationPort">
+		<wsdl:operation name="getIntroducerUserFirms">
+			<wsdl:input message="GetIntroducerUserFirmsSoapIn"/>
+			<wsdl:output message="GetIntroducerUserFirmsSoapOut"/>
+		</wsdl:operation>
+		<wsdl:operation name="authenticateFirm">
+			<wsdl:input message="AuthenticateFirmSoapIn"/>
+			<wsdl:output message="AuthenticateFirmSoapOut"/>
+		</wsdl:operation>
+		<wsdl:operation name="validateBroker">
+			<wsdl:input message="ValidateBrokerSoapIn"/>
+			<wsdl:output message="ValidateBrokerSoapOut"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OmigaSoapRpcSoap" type="IntroducerLogonAndValidationPort">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<wsdl:operation name="getIntroducerUserFirms">
+			<soap:operation soapAction="http://Request.GetIntroducerUserFirms.Omiga.vertex.co.uk"  style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="authenticateFirm">
+			<soap:operation soapAction="http://Request.AuthenticateFirm.Omiga.vertex.co.uk"  style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="validateBroker">
+			<soap:operation soapAction="http://Request.ValidateBroker.Omiga.vertex.co.uk"  style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OmigaIntroducerLogonAndValidation">
+		<wsdl:port name="IntroducerLogonAndValidationPort" binding="OmigaSoapRpcSoap">
+			<soap:address location="http://localhost/OmigaWebServices/IntroducerLogonAndValidationWS/OmigaIntroducerLogonAndValidationService.asmx"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: RegisterDocumentToCase WSDL
+
+History:
+
+Version Author      Date       Description
+01.00   Ikemp    	25/07/2005 Created.   
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns="http://RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:msgResponse="http://Response.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" 
+            xmlns:msgResponse="http://Response.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" >
+            <xs:import 
+                namespace="http://Request.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="RegisterDocumentToCaseRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="RegisterDocumentToCaseResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="RegisterDocumentToCaseRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="RegisterDocumentToCaseRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="RegisterDocumentToCasePort">
+        <wsdl:operation name="registerDocumentToCase">
+            <wsdl:input message="RegisterDocumentToCaseRequestSoapIn" />
+            <wsdl:output message="RegisterDocumentToCaseRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="RegisterDocumentToCasePort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="registerDocumentToCase">
+             <soap:operation 
+                soapAction="http://Request.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaRegisterDocumentToCase">
+        <wsdl:port name="RegisterDocumentToCasePort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/RegisterDocumentToCaseWS/OmigaRegisterDocumentToCaseService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

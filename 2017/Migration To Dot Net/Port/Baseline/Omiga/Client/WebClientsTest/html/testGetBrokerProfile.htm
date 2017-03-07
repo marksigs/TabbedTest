@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Test Web Service</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content=http://schemas.microsoft.com/intellisense/ie5 
+name=vs_targetSchema>
+<META content="MSHTML 6.00.2900.2722" name=GENERATOR></HEAD>
+<BODY>
+<TABLE width="100%">
+	<TBODY>
+		<TR>
+			<TD width="10%">URL</TD>
+			<TD width="90%"><INPUT id=url style="WIDTH: 100%" name=url value="http://localhost/OmigaWebServices/BrokerRegAndMaintainWS/OmigaBrokerRegAndMaintainService.asmx"></TD>
+		</TR>
+		<TR>
+			<TD>SOAP action</TD>
+			<TD><INPUT id=soapAction style="WIDTH: 100%" value="http://Request.BrokerRegAndMaintain.GetBrokerProfile.Omiga.vertex.co.uk"></TD>
+		</TR>
+	</TBODY>
+</TABLE>
+Data: 
+<TEXTAREA id=requestData style="WIDTH: 100%" rows=12>
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Body>
+		<GETBOKERPROFILE_REQUEST USERID="IKemp" UNITID="Unit1" CHANNELID="1" CRUD_OP="READ" ENTITY_REF="BROKER_GETPROFILE" xmlns="http://Request.BrokerRegAndMaintain.Omiga.vertex.co.uk" xmlns:IntroProf="http://IntroducerDetail.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk"  WSINTERFACEMETHOD="GetBrokerProfile" PASSWORD="123">
+			<INTRODUCER INTRODUCERID="80"/>
+		</GETBOKERPROFILE_REQUEST>
+	</soap:Body>
+</soap:Envelope>
+</TEXTAREA>
+<BUTTON id=post style="WIDTH: 100px" type=submit>Test</BUTTON> 
+<BR><BR>Response: 
+<TEXTAREA id=responseData style="WIDTH: 100%" rows=12></TEXTAREA>
+<SCRIPT type=text/javascript>
+		<!--
+			function post.onclick()
+			{
+				responseData.innerText = "please wait ...";
+				try
+				{
+					var x = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+					x.open("POST", url.value, false);
+					x.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+					if (soapAction.value == "")
+						soapAction.value = '""';
+					x.setRequestHeader("SOAPAction", soapAction.value);
+					x.send(requestData.value);
+					responseData.value = x.responseText;
+				}
+				catch (error)
+				{
+					alert(error.description);
+				}
+			}
+		-->
+		</SCRIPT>
+ </BODY></HTML>

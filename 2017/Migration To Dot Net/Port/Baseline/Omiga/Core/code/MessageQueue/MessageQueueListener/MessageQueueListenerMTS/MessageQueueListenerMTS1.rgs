@@ -1,0 +1,26 @@
+HKCR
+{
+	MessageQueueListenerMTS.MessageQueueListenerMTS1.1 = s 'MessageQueueListenerMTS1 Class'
+	{
+		CLSID = s '{E3DA1BD3-63CB-11D4-8241-005004E8D1A7}'
+	}
+	MessageQueueListenerMTS.MessageQueueListenerMTS1 = s 'MessageQueueListenerMTS1 Class'
+	{
+		CLSID = s '{E3DA1BD3-63CB-11D4-8241-005004E8D1A7}'
+		CurVer = s 'MessageQueueListenerMTS.MessageQueueListenerMTS1.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E3DA1BD3-63CB-11D4-8241-005004E8D1A7} = s 'MessageQueueListenerMTS1 Class'
+		{
+			ProgID = s 'MessageQueueListenerMTS.MessageQueueListenerMTS1.1'
+			VersionIndependentProgID = s 'MessageQueueListenerMTS.MessageQueueListenerMTS1'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{E3DA1BC6-63CB-11D4-8241-005004E8D1A7}'
+		}
+	}
+}

@@ -1,0 +1,1 @@
+<%@ Page language="c#" Codebehind="DisplayFlashMovie.aspx.cs" AutoEventWireup="false" Inherits="Epsom.Web.WebUserControls.DisplayFlashMovie" %>

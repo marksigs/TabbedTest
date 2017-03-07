@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:i0="http://www.filenet.com/ns/fnce/2004/06/ws/wsdl" xmlns:tns="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP/wsdl" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP/wsdl" name="fnce-ws-1.0-SOAP" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <import namespace="http://www.filenet.com/ns/fnce/2004/06/ws/wsdl" location="http://localhost/FileNet/fnce-ws-1.0.wsdl" />
+  <types />
+  <binding name="FNCEWS10SoapBinding" type="i0:FNCEWS10PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="GetObjects">
+      <soap:operation soapAction="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP#GetObjects" />
+      <input>
+        <soap:header message="i0:LocalizationHeader" part="header" use="literal" />
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="GeneralError">
+        <soap:fault use="literal" namespace="" encodingStyle="" />
+      </fault>
+    </operation>
+    <operation name="ExecuteChanges">
+      <soap:operation soapAction="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP#ExecuteChanges" />
+      <input>
+        <soap:header message="i0:LocalizationHeader" part="header" use="literal" />
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="GeneralError">
+        <soap:fault use="literal" namespace="" encodingStyle="" />
+      </fault>
+    </operation>
+    <operation name="ExecuteSearch">
+      <soap:operation soapAction="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP#ExecuteSearch" />
+      <input>
+        <soap:header message="i0:LocalizationHeader" part="header" use="literal" />
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="GeneralError">
+        <soap:fault use="literal" namespace="" encodingStyle="" />
+      </fault>
+    </operation>
+    <operation name="GetSearchMetadata">
+      <soap:operation soapAction="http://www.filenet.com/ns/fnce/2004/06/ws/SOAP#GetSearchMetadata" />
+      <input>
+        <soap:header message="i0:LocalizationHeader" part="header" use="literal" />
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="GeneralError">
+        <soap:fault use="literal" namespace="" encodingStyle="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="FNCEWS10Service">
+    <documentation>FileNET P8 Content Engine Web Service</documentation>
+    <port name="FNCEWS10InlinePort" binding="tns:FNCEWS10SoapBinding">
+      <soap:address location="http://localhost:6070/FNCEWS10SOAP/" />
+    </port>
+  </service>
+</definitions>

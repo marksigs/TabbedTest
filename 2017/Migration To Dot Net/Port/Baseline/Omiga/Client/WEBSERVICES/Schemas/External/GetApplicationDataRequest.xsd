@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: GetApplicationData Request
+
+History:
+
+Version Author     Date       Description
+01.00   RMH        29/06/2005 Created
+01.01   RFairlie   05/07/2005 Updated for POC. Added REQUESTType.   
+01.02   RFairlie   06/07/2005 Changed CRUD_OP and ENTITY_REF to have 'fixed' values
+01.03   RFairlie   07/07/2005 Use "/" insttead of "\" in schemaLocation
+01.04   RFairlie   08/07/2005 Renamed msgdt.xsd to msgDataTypes.xsd. All xsds now share same directory
+01.05   TLiu       19/07/2005 Renamed msgDataTypes.xsd to msgCommonTypes.xsd, mars to IDUK.
+01.06   TLiu       20/07/2005 Added "type" to attributes with default types.
+01.07   RFairlie   22/07/2005 Use REQUESTAttribs
+                              Changed namespace capitalisation to match internal guideline
+01.08	TLiu		  03/08/2005 Substituted an AttributeGROUP.
+01.09	TLiu		  04/08/2005 Changes some attributes from required to optional.
+01.10	TLiu		  14/09/2005 Made PREPROCPROGID and PREPROCREF non-mandatory.
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.GetApplicationData.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.GetApplicationData.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="GETAPPLICATIONDATA" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The entity Ref of GETAPPLICATIONDATA tells the CRUD operation (Read) to look at the 
+                GETAPPLICATIONDATA schema</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element ref="GETAPPLICATIONDATA"/>
+			<xs:element name="APPLICATIONDETAILS" type="APPLICATIONDETAILSType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="CRUD_OP" type="xs:string" use="required" fixed="READ"/>
+		<xs:attribute name="ENTITY_REF" type="xs:string" use="required" fixed="GETAPPLICATIONDATA"/>
+		<xs:attribute name="PREPROCPROGID" type="xs:string"/>
+		<xs:attribute name="PREPROCREF" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="APPLICATIONDETAILSType">
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string"/>
+	</xs:complexType>
+</xs:schema>

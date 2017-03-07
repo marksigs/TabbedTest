@@ -1,0 +1,755 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+History:
+
+Author		Date			Description
+PEdney	12/12/2006	EP2_421 - Created - List of combo items returned by the GetComboList web service
+PEdney	14/12/2006	EP2_480 - Tidied up list
+PEdney	15/12/2006	EP2_526 - Updated list
+RHart	19/12/2006	EP2_591 - Updated list
+RHart	19/12/2006	EP2_654 - Updated list - Now Associated to defect
+VKaur	05/01/2007	EP2_683 - Updated list - MemoPadEntryType
+VKaur	05/01/2007	EP2_695 - Updated list - EmploymentStatus
+VKaur	10/01/2007	EP2_711 - Updated list - MemoPadEntryType
+VKaur	10/01/2007	EP2_745 - Updated list - ApplicantRelationship
+VKaur	11/01/2007	EP2_711 - Updated list - MemoPadEntryType
+PEdney	13/01/2007	EP2_776 - Updated list - WebFeePaymentType - removed valueid = 2
+VKaur	15/01/2007	EP2_711 - Updated list - TypeOfMortgage
+VKaur	16/01/2007	EP2_755 - Updated list - ProductScheme
+VKaur	18/01/2007	EP2_831 - Updated list - HouseBuildersGuarantee
+VKaur	22/01/2007	EP2_628 - Updated list - CaseTrackValStatus
+VKaur	22/01/2007	EP2_940 - Updated list - TypeOfBuyerNewLoan
+VKaur	22/01/2007	EP2_782 - Updated list - NatureOfLoan
+VKaur	24/01/2007	EP2_227 - Updated list - ProductScheme
+VKaur	24/01/2007	EP2_227 - Updated list - TypeOfMortgage
+VKaur	24/01/2007	EP2_227 - Updated list - TypeOfBuyerNewLoan
+VKaur	24/01/2007	EP2_227 - Updated list - PropertyDescription
+VKaur	24/01/2007	EP2_975 - Added new combo - CardPaymentType
+VKaur	24/01/2007	EP2_975 - Added new combo - NewPropertyRoomType
+VKaur	24/01/2007	EP2_975 - Added new combo - IncomeType
+VKaur	24/01/2007	EP2_975 - Added new combo - PropertyLocation
+VKaur	25/01/2007	EP2_991 - Added new combo - NatureOfBusiness, EmploymentType, AccountantQualifications, CompanyStatusType, ThirdPartyType
+VKaur	27/01/2007	EP2_1044 - Updated list - AgreementType
+VKaur	30/01/2007	EP2_1081 - Updated list - ValuationType
+VKaur	30/01/2007	EP2_1120 - Added new combo - TelephoneUsage
+VKaur	01/02/2007	EP2_871 - Added new combo - LevelOfAdvice
+VKaur	01/02/2007	EP2_1118 - Added new combo - TypeOfBuyer
+VKaur	01/02/2007	EP2_1118 - Updated list - TypeOfBuyerRemortgage
+VKaur	02/02/2007	EP2_1118 - Updated list - PurposeOfLoan, PurposeOfLoanNew, PurposeOfLoanRemortgage
+VKaur	02/02/2007	EP2_1118 - Updated list - TypeOfBuyer renamed to TypeOfBuyerSupervisor
+VKaur	03/02/2007	EP2_1193 - Added combo to  list - CustomerAddressType
+VKaur	06/02/2007	EP2_1234 - Added combo to  list - RedemptionStatus
+VKaur	07/02/2007	EP2_561 - Added combo to  list - RoofConstruction, BuildingConstruction
+VKaur	07/02/2007	EP2_1194 - Updated list - RepaymentVehicle
+VKaur	13/02/2007	EP2_1351 - Updated list - OneOffCost
+VKaur	14/02/2007	EP2_1332 - Updated list - UnderwritersDecision
+VKaur	14/02/2007	EP2_1370 - Updated list - TypeOfBuyerSupervisor, TypeOfBuyerNewLoan, TypeOfBuyerRemortgage
+VKaur	14/02/2007	EP2_1357 - Added combo to  list - ListingStatus
+VKaur	14/02/2007	EP2_1649 - Added combo to  list - RegulationIndicator
+VKaur	26/02/2007	EP2_1330 - Updated combo list (correct spelling) - NatureOfBusiness - Reverted back
+VKaur	26/02/2007	EP2_1328 - Updated combo list - WebFeePaymentType
+VKaur	27/02/2007	EP2_1272 - Updated list - OneOffCost
+VKaur	27/02/2007	EP2_1684 - Updated list - EmploymentStatus, IncomeType (reverted back)
+VKaur	27/02/2007	EP2_1649 - Updated list - RegulationIndicator - value id corrected
+MOstime	06/03/2007	EP2_1817 - Updated combo list - WebFeePaymentType
+MOstime	06/03/2007	EP2_1781 - Updated combo list - TypeOfBuyerNewLoan
+MOstime	06/03/2007	EP2_1781 - Removed combo list - TypeOfBuyerSupervisor
+MOstime	07/03/2007	EP2_1199 - Updated combo list - MemoPadEntryType
+MOstime	22/03/2007	EP2_2061 - Added combo to list - ProcFeeToCust
+MCannon	23/03/2007	EP2_1768 - Added new combo - AccessArrangements
+MOstime	26/03/2007	EP2_2101 - Updated list - RepaymentVehicle (Withdrawn)
+BStyman	27/03/2007	EP2_1768 - Added new combo - AccessArrangements (only amendment log changed)
+MCannon 12/04/2007	EP2_1380 - Updated combo list - AgreementType
+MCannon 12/04/2007	EP2_1380 - Added new combo - WebApplicationAgreementType
+MCannon	12/04/2007	EP2_1930 - Updated combo list - OneOffCost, WebFeePaymentType
+MCannon	13/04/2007	EP2_2393 - Updated combo list RepaymentType
+====================================================================================
+  -->
+<COMBOLISTWS>
+	<COMBOGROUP GROUPNAME="Title">
+		<COMBOVALUE VALUEID="1" VALUENAME="Mr">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Mrs">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="3" VALUENAME="Miss">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="4" VALUENAME="Ms">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="5" VALUENAME="Dr">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="6" VALUENAME="Rev">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="Sex">
+		<COMBOVALUE VALUEID="1" VALUENAME="Male">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Female">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="MaritalStatus">
+		<COMBOVALUE VALUEID="10" VALUENAME="Married">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Single">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="25" VALUENAME="Separated">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="30" VALUENAME="Divorced">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="40" VALUENAME="Cohabiting ">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="50" VALUENAME="Widowed">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="60" VALUENAME="Other">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="70" VALUENAME="Civil Partnership">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="80" VALUENAME="Civil Partnership Dissolved">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="Nationality">
+		<COMBOVALUE VALUEID="1" VALUENAME="British">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Other EEA">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="3" VALUENAME="Non-EEA">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="Country">
+		<COMBOVALUE VALUEID="10" VALUENAME="United Kingdom">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Overseas">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="EmploymentStatus">
+		<COMBOVALUE VALUEID="10" VALUENAME="Employed">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="15" VALUENAME="Employed - Temporary">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Self-Employed">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="30" VALUENAME="Contract">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="40" VALUENAME="Not Earning">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="50" VALUENAME="Homemaker">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="60" VALUENAME="Student">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="70" VALUENAME="Retired">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="100" VALUENAME="Other">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="RepaymentType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Interest Only">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Capital and Interest">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="AgreementType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Unsecured Loan"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Secured Loan"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Child Maintenance"/>
+		<COMBOVALUE VALUEID="13" VALUENAME="dbm Income BTL Mortgage"/>
+		<COMBOVALUE VALUEID="17" VALUENAME="Credit/Store Card"/>
+		<COMBOVALUE VALUEID="18" VALUENAME="Residential Mortgage"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="CreditCardType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Visa">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Mastercard">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="3" VALUENAME="Storecard">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="4" VALUENAME="American Express">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="5" VALUENAME="Cheque Guarantee">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="6" VALUENAME="Switch">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="7" VALUENAME="Delta">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="8" VALUENAME="Diners Club">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="PropertyTenure">
+		<COMBOVALUE VALUEID="1" VALUENAME="Freehold">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Leasehold">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="3" VALUENAME="Scottish Freehold">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="4" VALUENAME="Commonhold">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="5" VALUENAME="Unknown">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="PurposeOfLoan">
+		<COMBOVALUE VALUEID="1" VALUENAME="House Purchase - Residential"/>
+		<COMBOVALUE VALUEID="7" VALUENAME="House Purchase - BTL Income"/>
+		<COMBOVALUE VALUEID="8" VALUENAME="House Purchase - BTL Rental"/>
+		<COMBOVALUE VALUEID="10" VALUENAME="House Purchase - Let to Buy"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Remortgage - Residential"/>
+		<COMBOVALUE VALUEID="25" VALUENAME="Remortgage - BTL Income"/>
+		<COMBOVALUE VALUEID="26" VALUENAME="Remortgage - BTL Rental"/>
+		<COMBOVALUE VALUEID="28" VALUENAME="Remortgage - Let to Buy"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="SubPurposeOfLoan">
+		<COMBOVALUE VALUEID="1" VALUENAME="House Purchase">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Remortgage for product">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="3" VALUENAME="Capital Raising">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="4" VALUENAME="2nd Property Purchase">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="5" VALUENAME="Home Improvements">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="10" VALUENAME="Debt Consolidation">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="13" VALUENAME="Other">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ValuationType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Mortgage Valuation"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Homebuyer's Report"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Full Building Survey"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Retype"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="TypeOfBuyerNewLoan">
+		<COMBOVALUE VALUEID="10" VALUENAME="First Time Buyer"/>
+		<COMBOVALUE VALUEID="15" VALUENAME="Subsequent Buyer"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="TypeOfBuyerRemortgage">
+		<COMBOVALUE VALUEID="20" VALUENAME="Remortgage"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="NatureOfLoan">
+		<COMBOVALUE VALUEID="1" VALUENAME="Residential"/>
+		<COMBOVALUE VALUEID="10" VALUENAME="Buy-to-Let Income Based"/>
+		<COMBOVALUE VALUEID="11" VALUENAME="Buy-to-Let Rental Based">	</COMBOVALUE>
+		<COMBOVALUE VALUEID="12" VALUENAME="Let-to-Buy"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ProductScheme">
+		<COMBOVALUE VALUEID="10" VALUENAME="Near Prime +"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Near-Prime"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="Super-Light"/>
+		<COMBOVALUE VALUEID="40" VALUENAME="Light"/>
+		<COMBOVALUE VALUEID="50" VALUENAME="Medium 1"/>
+		<COMBOVALUE VALUEID="60" VALUENAME="Medium 2"/>
+		<COMBOVALUE VALUEID="70" VALUENAME="Heavy 1"/>
+		<COMBOVALUE VALUEID="80" VALUENAME="Heavy 2"/>
+		<COMBOVALUE VALUEID="90" VALUENAME="Unlimited 1"/>
+		<COMBOVALUE VALUEID="100" VALUENAME="Unlimited 2"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="PartRepaymentTerms">
+		<COMBOVALUE VALUEID="90" VALUENAME="No Penalty Code">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="RepaymentVehicle">
+		<COMBOVALUE VALUEID="20" VALUENAME="Endowment"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="ISA"/>
+		<COMBOVALUE VALUEID="40" VALUENAME="Pension"/>
+		<COMBOVALUE VALUEID="70" VALUENAME="Not Known/Other"/>
+		<COMBOVALUE VALUEID="80" VALUENAME="Mixed RPV"/>
+		<COMBOVALUE VALUEID="90" VALUENAME="Sale of Residential Property"/>
+		<COMBOVALUE VALUEID="100" VALUENAME="Inheritance"/>
+		<COMBOVALUE VALUEID="110" VALUENAME="Sale of Business"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="TypeOfMortgage">
+		<COMBOVALUE VALUEID="10" VALUENAME="Purchase"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Remortgage">	</COMBOVALUE>
+		<COMBOVALUE VALUEID="80" VALUENAME="RTB Purchase"/>
+		<COMBOVALUE VALUEID="90" VALUENAME="RTB Remortgage"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ContactTelephoneUsage">
+		<COMBOVALUE VALUEID="10" VALUENAME="Work">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Fax">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="30" VALUENAME="Home">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ContactTitle">
+		<COMBOVALUE VALUEID="1" VALUENAME="Mr">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Mrs">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="3" VALUENAME="Miss">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="4" VALUENAME="Ms">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="5" VALUENAME="Dr">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="6" VALUENAME="Reverend">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="7" VALUENAME="Professor">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="AdminJobTitlePosition">
+		<COMBOVALUE VALUEID="1" VALUENAME="Default">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="NatureOfOccupancy">
+		<COMBOVALUE VALUEID="1" VALUENAME="Owner - Mtg">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Owner - No Mtg">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="4" VALUENAME="Relative/Friend">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="5" VALUENAME="Parents">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="10" VALUENAME="Renting - Private">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="11" VALUENAME="Renting - Public">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ApplicationIncomeStatus">
+		<COMBOVALUE VALUEID="10" VALUENAME="Self Cert">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Full Status">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="SpecialGroup">
+		<COMBOVALUE VALUEID="10" VALUENAME="Near Prime +">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Near Prime">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="30" VALUENAME="Super-Light">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="40" VALUENAME="Light">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="50" VALUENAME="Medium 1">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="60" VALUENAME="Medium 2">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="70" VALUENAME="Heavy 1">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="80" VALUENAME="Heavy 2">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="90" VALUENAME="Unlimited 1">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="100" VALUENAME="Unlimited 2">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="KYCStatus">
+		<COMBOVALUE VALUEID="10" VALUENAME="Authenticated via Experian L1">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Authenticated via Experian L2">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="30" VALUENAME="Not Authenticated">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="40" VALUENAME="Refer High Risk">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="50" VALUENAME="Authenticated Manually">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="PurposeOfLoanRemortgage">
+		<COMBOVALUE VALUEID="20" VALUENAME="Remortgage - Residential"/>
+		<COMBOVALUE VALUEID="25" VALUENAME="Remortgage - BTL Income"/>
+		<COMBOVALUE VALUEID="26" VALUENAME="Remortgage - BTL Rental"/>
+		<COMBOVALUE VALUEID="28" VALUENAME="Remortgage - Let to Buy"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="PurposeOfLoanNew">
+		<COMBOVALUE VALUEID="1" VALUENAME="House Purchase - Residential"/>
+		<COMBOVALUE VALUEID="7" VALUENAME="House Purchase - BTL Income"/>
+		<COMBOVALUE VALUEID="8" VALUENAME="House Purchase - BTL Rental"/>
+		<COMBOVALUE VALUEID="10" VALUENAME="House Purchase - Let to Buy"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="OneOffCost">
+		<COMBOVALUE VALUEID="1" VALUENAME="Arrangement Fee"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Porting Fee"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Valuation Fee"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Reinspection Fee"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Administration Fee"/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Stamp Duty"/>
+		<COMBOVALUE VALUEID="7" VALUENAME="Sealing Fee"/>
+		<COMBOVALUE VALUEID="8" VALUENAME="Redemption Administration Fee"/>
+		<COMBOVALUE VALUEID="9" VALUENAME="Telegraphic Transfer Fee"/>
+		<COMBOVALUE VALUEID="10" VALUENAME="Legal Fee"/>
+		<COMBOVALUE VALUEID="11" VALUENAME="Other Fees"/>
+		<COMBOVALUE VALUEID="12" VALUENAME="Higher Lending Charge"/>
+		<COMBOVALUE VALUEID="13" VALUENAME="Total Indemnity"/>
+		<COMBOVALUE VALUEID="14" VALUENAME="Revaluation Fee"/>
+		<COMBOVALUE VALUEID="15" VALUENAME="Product Switch Fee"/>
+		<COMBOVALUE VALUEID="16" VALUENAME="Broker Fee - Application"/>
+		<COMBOVALUE VALUEID="17" VALUENAME="Packager Valuation Fee"/>
+		<COMBOVALUE VALUEID="18" VALUENAME="Telegraphic Transfer Fee - Retention Release"/>
+		<COMBOVALUE VALUEID="19" VALUENAME="Additional Borrowing Fee"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Credit Limit Increase Fee"/>
+		<COMBOVALUE VALUEID="21" VALUENAME="Packager Valuation Admin Fee"/>
+		<COMBOVALUE VALUEID="22" VALUENAME="Packager Fee"/>
+		<COMBOVALUE VALUEID="23" VALUENAME="Broker Fee - Completion"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="Transfer Of Equity Fee"/>
+		<COMBOVALUE VALUEID="35" VALUENAME="Broker Fee - Paid"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="HouseBuildersGuarantee">
+		<COMBOVALUE VALUEID="1" VALUENAME="NHBC"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Zurich Municipal Building Guarantee"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Architect Certificate"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Premier Guarantee"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="PropertyDescription">
+		<COMBOVALUE VALUEID="1" VALUENAME="Detached">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="2" VALUENAME="Semi-Detached">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="3" VALUENAME="Terraced">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="4" VALUENAME="End-Terraced">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="5" VALUENAME="Converted">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="6" VALUENAME="Purpose-built">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="7" VALUENAME="Back to Back">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="8" VALUENAME="Converted Studio">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="9" VALUENAME="Purpose-built Studio">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="TotalLand">
+		<COMBOVALUE VALUEID="2" VALUENAME="Less than 10 Acres">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="4" VALUENAME="Greater than 10 acres">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="PropertyType">
+		<COMBOVALUE VALUEID="10" VALUENAME="House">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Bungalow">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="30" VALUENAME="Flat">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="40" VALUENAME="Maisonette">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="WebFeePaymentType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Paid on application"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Paid on completion"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Added to loan"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Paid on redemption"/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Already Paid"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="UnderwritersDecision">
+		<COMBOVALUE VALUEID="10" VALUENAME="Accept"/>
+		<COMBOVALUE VALUEID="15" VALUENAME="Accept with Product Cascade"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Referred"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="Decline"/>
+		<COMBOVALUE VALUEID="40" VALUENAME="Further Info required"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="DepositSource">
+		<COMBOVALUE VALUEID="1" VALUENAME="Equity in present property"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Applicant(s) - own savings"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Builders Incentive Scheme"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Gifted Deposit"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Equity from sale of property"/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Inheritance"/>
+		<COMBOVALUE VALUEID="7" VALUENAME="Other source"/>
+		<COMBOVALUE VALUEID="8" VALUENAME="Family Gift"/>
+		<COMBOVALUE VALUEID="9" VALUENAME="Investment Policy"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Not applicable"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="SelfCertReason">
+		<COMBOVALUE VALUEID="10" VALUENAME="Income derived from more than one source">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="20" VALUENAME="Investment income">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="30" VALUENAME="Self employed">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="40" VALUENAME="Speed of service">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="50" VALUENAME="Variable income">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="60" VALUENAME="Existing dbm customer">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="70" VALUENAME="2nd income source non-PAYE">
+		</COMBOVALUE>
+		<COMBOVALUE VALUEID="80" VALUENAME="Other (Specify in additional information section)">
+		</COMBOVALUE>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="MemoPadEntryType">
+		<COMBOVALUE VALUEID="12" VALUENAME="RDIP Additional Info"/>
+		<COMBOVALUE VALUEID="610" VALUENAME="Right to work and reside permanently in the UK"/>
+		<COMBOVALUE VALUEID="611" VALUENAME="Applicant 2 Right to work"/>
+		<COMBOVALUE VALUEID="612" VALUENAME="Guarantor Right to work"/>
+		<COMBOVALUE VALUEID="620" VALUENAME="Diplomatic immunity"/>
+		<COMBOVALUE VALUEID="621" VALUENAME="Applicant 2 Diplomatic immunity"/>
+		<COMBOVALUE VALUEID="622" VALUENAME="Guarantor Diplomatic immunity"/>
+		<COMBOVALUE VALUEID="630" VALUENAME="Applicant 1 Housing benefit details"/>
+		<COMBOVALUE VALUEID="631" VALUENAME="Applicant 2 Housing benefit details"/>
+		<COMBOVALUE VALUEID="632" VALUENAME="Guarantor Housing benefit details"/>
+		<COMBOVALUE VALUEID="640" VALUENAME="Applicant 1-intension of selling existing property"/>
+		<COMBOVALUE VALUEID="641" VALUENAME="Applicant 2-intension of selling existing property"/>
+		<COMBOVALUE VALUEID="642" VALUENAME="Guarantor – intention of selling existing property"/>
+		<COMBOVALUE VALUEID="700" VALUENAME="UK Tax Payer"/>
+		<COMBOVALUE VALUEID="710" VALUENAME="On a probationary period"/>
+		<COMBOVALUE VALUEID="701" VALUENAME="Applicant 2 UK Tax Payer"/>
+		<COMBOVALUE VALUEID="702" VALUENAME="Guarantor UK Tax Payer"/>
+		<COMBOVALUE VALUEID="711" VALUENAME="Applicant 2 - On a probationary period"/>
+		<COMBOVALUE VALUEID="712" VALUENAME="Guarantor - On a probationary period"/>
+		<COMBOVALUE VALUEID="720" VALUENAME="Company owned by a family member"/>
+		<COMBOVALUE VALUEID="721" VALUENAME="Applicant2 – Company Owned by a family member"/>
+		<COMBOVALUE VALUEID="722" VALUENAME="Guarantor – Company Owned by a family member"/>
+		<COMBOVALUE VALUEID="810" VALUENAME="Second job/part time"/>
+		<COMBOVALUE VALUEID="811" VALUENAME="Applicant 2 income - second job/part time"/>
+		<COMBOVALUE VALUEID="812" VALUENAME="Guarantor income - second job/part time"/>
+		<COMBOVALUE VALUEID="820" VALUENAME="Other details"/>
+		<COMBOVALUE VALUEID="821" VALUENAME="Applicant2 Other income details"/>
+		<COMBOVALUE VALUEID="822" VALUENAME="Guarantor Other income details"/>
+		<COMBOVALUE VALUEID="830" VALUENAME="Self Certification"/>
+		<COMBOVALUE VALUEID="1200" VALUENAME="Property purchased at full market value"/>
+		<COMBOVALUE VALUEID="1210" VALUENAME="Are other financial incentives being offered"/>
+		<COMBOVALUE VALUEID="1220" VALUENAME="Type of Property"/>
+		<COMBOVALUE VALUEID="1230" VALUENAME="Detachment type"/>
+		<COMBOVALUE VALUEID="1240" VALUENAME="Flat above commercial premises?"/>
+		<COMBOVALUE VALUEID="1250" VALUENAME="Built of bricks/stone with a slate/tile roof"/>
+		<COMBOVALUE VALUEID="1260" VALUENAME="Affected by an agricultural restriction/covenant"/>
+		<COMBOVALUE VALUEID="1270" VALUENAME="Part of the property be used for business"/>
+		<COMBOVALUE VALUEID="1280" VALUENAME="Let/Used for other purpose than main residence"/>
+		<COMBOVALUE VALUEID="1290" VALUENAME="You/Relative will occupy the property now/future"/>
+		<COMBOVALUE VALUEID="1295" VALUENAME="Property purchase date from local authority"/>
+		<COMBOVALUE VALUEID="1610" VALUENAME="Application Additional Information"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ApplicantRelationship">
+		<COMBOVALUE VALUEID="1" VALUENAME="Husband"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Wife"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Unmarried Partner"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Father"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Mother"/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Brother"/>
+		<COMBOVALUE VALUEID="7" VALUENAME="Sister"/>
+		<COMBOVALUE VALUEID="8" VALUENAME="Son"/>
+		<COMBOVALUE VALUEID="9" VALUENAME="Daughter"/>
+		<COMBOVALUE VALUEID="10" VALUENAME="Friend"/>
+		<COMBOVALUE VALUEID="11" VALUENAME="Tenant"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="CaseTrackValStatus">
+		<COMBOVALUE VALUEID="10" VALUENAME="Awaiting Valuation Report"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Valuation Received"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="CardPaymentType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Visa"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Mastercard"/>
+		<COMBOVALUE VALUEID="9" VALUENAME="Solo"/>
+		<COMBOVALUE VALUEID="10" VALUENAME="Switch"/>
+		<COMBOVALUE VALUEID="11" VALUENAME="Electron"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="IncomeType">
+		<COMBOVALUE VALUEID="10" VALUENAME="Basic Income"/>
+		<COMBOVALUE VALUEID="15" VALUENAME="Guaranteed /Regular Overtime"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Guaranteed/ Regular Bonus"/>
+		<COMBOVALUE VALUEID="23" VALUENAME="Other Non-Guaranteed / Irregular"/>
+		<COMBOVALUE VALUEID="25" VALUENAME="Commission"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="Large Town Allowance, Cost of Living Sub"/>
+		<COMBOVALUE VALUEID="35" VALUENAME="Employers Mortgage Subsidy"/>
+		<COMBOVALUE VALUEID="40" VALUENAME="Rent Allowance (e.g. Police)"/>
+		<COMBOVALUE VALUEID="45" VALUENAME="Company Car Cash allowance"/>
+		<COMBOVALUE VALUEID="50" VALUENAME="Shift or Unsociable Hours Allowance"/>
+		<COMBOVALUE VALUEID="55" VALUENAME="Special Duty and Additional Hours"/>
+		<COMBOVALUE VALUEID="60" VALUENAME="Pension"/>
+		<COMBOVALUE VALUEID="65" VALUENAME="Second Job/Part Time Job"/>
+		<COMBOVALUE VALUEID="70" VALUENAME="Working Family Tax Credit"/>
+		<COMBOVALUE VALUEID="72" VALUENAME="Child Tax Credit"/>
+		<COMBOVALUE VALUEID="75" VALUENAME="Maintenance/ Alimony - Full Status"/>
+		<COMBOVALUE VALUEID="80" VALUENAME="Investment Income"/>
+		<COMBOVALUE VALUEID="85" VALUENAME="Rental Income"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="NewPropertyRoomType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Living Rooms"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Bedrooms"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Bathrooms"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="WCs"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Kitchens"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="PropertyLocation">
+		<COMBOVALUE VALUEID="10" VALUENAME="England and Wales"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Scotland"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="N Ireland"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="AccountantQualifications">
+		<COMBOVALUE VALUEID="1" VALUENAME="Chartered Accountant (ACA, FCA)"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Certified Accountant (ACCA, FCCA)"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Accounting Technician (MAA, MAAT, FMAAT, ATT)"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Management Accountant (ACCMA, FCMA)"/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Public Finance Accountant (CIPFA)"/>
+		<COMBOVALUE VALUEID="7" VALUENAME="Associate Chartered Management Accountant (ACMA)"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="CompanyStatusType">
+		<COMBOVALUE VALUEID="10" VALUENAME="Limited Company"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Partnership"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="Sole Trader"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="EmploymentType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Full Time (Permanent)"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Part Time (Permanent)"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Full Time (Temporary) "/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Part Time (Temporary)"/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Not applicable"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="NatureOfBusiness">
+		<COMBOVALUE VALUEID="1" VALUENAME="Aerospace &amp; Defense"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Agriculture"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Air Transportation"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Apparel &amp; Shoes"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Automotive"/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Banks And S&amp;Ls"/>
+		<COMBOVALUE VALUEID="7" VALUENAME="Broadcast Media"/>
+		<COMBOVALUE VALUEID="8" VALUENAME="Business Products Whsl"/>
+		<COMBOVALUE VALUEID="9" VALUENAME="Business Services"/>
+		<COMBOVALUE VALUEID="10" VALUENAME="Chemicals"/>
+		<COMBOVALUE VALUEID="11" VALUENAME="Computer Hardware"/>
+		<COMBOVALUE VALUEID="12" VALUENAME="Computer Software"/>
+		<COMBOVALUE VALUEID="13" VALUENAME="Construction"/>
+		<COMBOVALUE VALUEID="14" VALUENAME="Construction Materials"/>
+		<COMBOVALUE VALUEID="15" VALUENAME="Consumer Durables"/>
+		<COMBOVALUE VALUEID="16" VALUENAME="Consumer Durables Retl/Whsl"/>
+		<COMBOVALUE VALUEID="17" VALUENAME="Consumer Products"/>
+		<COMBOVALUE VALUEID="18" VALUENAME="Consumer Products Retl/Whsl"/>
+		<COMBOVALUE VALUEID="19" VALUENAME="Consumer Services"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Electrical Equipment"/>
+		<COMBOVALUE VALUEID="21" VALUENAME="Electronic Equipment"/>
+		<COMBOVALUE VALUEID="22" VALUENAME="Entertainment &amp; Leisure"/>
+		<COMBOVALUE VALUEID="23" VALUENAME="Finance Companies"/>
+		<COMBOVALUE VALUEID="24" VALUENAME="Finance Nec"/>
+		<COMBOVALUE VALUEID="25" VALUENAME="Food &amp; Beverage"/>
+		<COMBOVALUE VALUEID="26" VALUENAME="Food &amp; Beverage Retl/Whsl"/>
+		<COMBOVALUE VALUEID="27" VALUENAME="Furniture &amp; Appliances"/>
+		<COMBOVALUE VALUEID="28" VALUENAME="Hotels &amp; Restaurants"/>
+		<COMBOVALUE VALUEID="29" VALUENAME="Insurance - Life"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="Insurance - Prop/Cas/Health"/>
+		<COMBOVALUE VALUEID="31" VALUENAME="Investment Management"/>
+		<COMBOVALUE VALUEID="32" VALUENAME="Lessors"/>
+		<COMBOVALUE VALUEID="33" VALUENAME="Lumber &amp; Forestry"/>
+		<COMBOVALUE VALUEID="34" VALUENAME="Machinery &amp; Equipment"/>
+		<COMBOVALUE VALUEID="35" VALUENAME="Measure &amp; Test Equipment"/>
+		<COMBOVALUE VALUEID="36" VALUENAME="Medical Equipment"/>
+		<COMBOVALUE VALUEID="37" VALUENAME="Medical Services"/>
+		<COMBOVALUE VALUEID="38" VALUENAME="Mining"/>
+		<COMBOVALUE VALUEID="39" VALUENAME="Oil Refining"/>
+		<COMBOVALUE VALUEID="40" VALUENAME="Oil, Gas &amp; Coal Expl/Prod"/>
+		<COMBOVALUE VALUEID="41" VALUENAME="Paper"/>
+		<COMBOVALUE VALUEID="42" VALUENAME="Pharmaceuticals"/>
+		<COMBOVALUE VALUEID="43" VALUENAME="Plastic &amp; Rubber"/>
+		<COMBOVALUE VALUEID="44" VALUENAME="Printing"/>
+		<COMBOVALUE VALUEID="45" VALUENAME="Publishing"/>
+		<COMBOVALUE VALUEID="46" VALUENAME="Real Estate"/>
+		<COMBOVALUE VALUEID="47" VALUENAME="Real Estate Investment Trusts"/>
+		<COMBOVALUE VALUEID="48" VALUENAME="Security Brokers &amp; Dealers"/>
+		<COMBOVALUE VALUEID="49" VALUENAME="Semiconductors"/>
+		<COMBOVALUE VALUEID="50" VALUENAME="Steel &amp; Metal Products"/>
+		<COMBOVALUE VALUEID="51" VALUENAME="Telephone"/>
+		<COMBOVALUE VALUEID="52" VALUENAME="Textiles"/>
+		<COMBOVALUE VALUEID="53" VALUENAME="Transportation Equipment"/>
+		<COMBOVALUE VALUEID="54" VALUENAME="Transportation"/>
+		<COMBOVALUE VALUEID="55" VALUENAME="Trucking"/>
+		<COMBOVALUE VALUEID="56" VALUENAME="Utilities Nec"/>
+		<COMBOVALUE VALUEID="57" VALUENAME="Utilities, Electric"/>
+		<COMBOVALUE VALUEID="58" VALUENAME="Utilities, Gas"/>
+		<COMBOVALUE VALUEID="59" VALUENAME="Cable Television"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ThirdPartyType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Accountant"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Architect"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Bank/Building Society/ Other Lender"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Builder"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Employer "/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Estate Agent "/>
+		<COMBOVALUE VALUEID="7" VALUENAME="Indemnity Company"/>
+		<COMBOVALUE VALUEID="8" VALUENAME="Landlord"/>
+		<COMBOVALUE VALUEID="9" VALUENAME="Life Product Company"/>
+		<COMBOVALUE VALUEID="10" VALUENAME="Legal Representative"/>
+		<COMBOVALUE VALUEID="11" VALUENAME="Valuer"/>
+		<COMBOVALUE VALUEID="12" VALUENAME="Vendor"/>
+		<COMBOVALUE VALUEID="13" VALUENAME="Applicant"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="TelephoneUsage">
+		<COMBOVALUE VALUEID="1" VALUENAME="Home"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Business"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Mobile"/>
+		<COMBOVALUE VALUEID="4" VALUENAME="Fax"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="SMS"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="LevelOfAdvice">
+		<COMBOVALUE VALUEID="10" VALUENAME="Advised"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Non Advised"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="CustomerAddressType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Home/Current"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Correspondence"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Previous"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Security Address"/>
+		<COMBOVALUE VALUEID="6" VALUENAME="Targeted Home"/>
+		<COMBOVALUE VALUEID="7" VALUENAME="Targeted Previous"/>
+		<COMBOVALUE VALUEID="8" VALUENAME="Targeted Previous but 1"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="RedemptionStatus">
+		<COMBOVALUE VALUEID="10" VALUENAME="To Be Redeemed - This advance"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="To Be Redeemed - Other sources"/>
+		<COMBOVALUE VALUEID="30" VALUENAME="Other Security"/>
+		<COMBOVALUE VALUEID="40" VALUENAME="Already Redeemed"/>
+		<COMBOVALUE VALUEID="50" VALUENAME="Not Being Redeemed"/>
+		<COMBOVALUE VALUEID="60" VALUENAME="Other BTL Lender"/>
+		<COMBOVALUE VALUEID="70" VALUENAME="To be Ported"/>
+		<COMBOVALUE VALUEID="90" VALUENAME="Product Switch"/>
+		<COMBOVALUE VALUEID="100" VALUENAME="Transfer of Equity"/>
+		<COMBOVALUE VALUEID="110" VALUENAME="Retained BTL Income"/>
+		<COMBOVALUE VALUEID="120" VALUENAME="Retained BTL Rental"/>
+		<COMBOVALUE VALUEID="130" VALUENAME="Product Switch Retained"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="BuildingConstruction">
+		<COMBOVALUE VALUEID="10" VALUENAME="Brick/Block/Stone (Conventional)"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Non-Conventional"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="RoofConstruction">
+		<COMBOVALUE VALUEID="1" VALUENAME="Tile/Slate (Conventional)"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Non-Conventional"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ListingStatus">
+		<COMBOVALUE VALUEID="0" VALUENAME="Not Applicable"/>
+		<COMBOVALUE VALUEID="1" VALUENAME="Black List"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Grey List"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="White List"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="RegulationIndicator">
+		<COMBOVALUE VALUEID="10" VALUENAME="Regulated"/>
+		<COMBOVALUE VALUEID="20" VALUENAME="Non Regulated"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="ProcFeeToCust">
+		<COMBOVALUE VALUEID="1" VALUENAME="All"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="None"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Some"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="AccessArrangements">
+		<COMBOVALUE VALUEID="1" VALUENAME="Vendor"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Estate Agent"/>
+		<COMBOVALUE VALUEID="3" VALUENAME="Builder"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+	<COMBOGROUP GROUPNAME="WebApplicationAgreementType">
+		<COMBOVALUE VALUEID="1" VALUENAME="Unsecured Loan"/>
+		<COMBOVALUE VALUEID="2" VALUENAME="Secured Loan"/>
+		<COMBOVALUE VALUEID="5" VALUENAME="Child Maintenance"/>
+		<COMBOVALUE VALUEID="13" VALUENAME="dbm Income BTL Mortgage"/>
+		<COMBOVALUE VALUEID="17" VALUENAME="Credit/Store Card"/>
+		<COMBOVALUE VALUEID="99" VALUENAME="Other"/>
+	</COMBOGROUP>
+</COMBOLISTWS>

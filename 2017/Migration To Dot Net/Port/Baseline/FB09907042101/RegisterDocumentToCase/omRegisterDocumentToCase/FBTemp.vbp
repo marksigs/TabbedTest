@@ -1,0 +1,52 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\system32\stdole2.tlb#OLE Automation
+Reference=*\G{2A005C00-A5DE-11CF-9E66-00AA00A3F464}#1.0#0#C:\WINDOWS\System32\COMSVCS.DLL#COM+ Services Type Library
+Reference=*\G{F5078F18-C551-11D3-89B9-0000F81FE221}#4.0#0#C:\WINDOWS\system32\msxml4.dll#Microsoft XML, v4.0
+Class=PreProcBO; PreProcBO.cls
+Class=PostProcBO; PostProcBO.cls
+Module=omRegisterDocumentToCaseGlobal; omRegisterDocumentToCaseGlobal.bas
+Module=errConstants; errConstants.bas
+Startup="(None)"
+HelpFile=""
+Title="omRegisterDocumentToCase"
+ExeName32="omRegisterDocumentToCase.dll"
+Command32=""
+Name="omRegisterDocumentToCase"
+HelpContextID="0"
+CompatibleMode="2"
+CompatibleEXE32="\\msgchhost5\omiga vss\INGDUK\OUTPUT\EPSOM2IntegrationTest\Compatibility\CORE_V7.0.2\omRegisterDocumentToCase.dll"
+
+VersionCompatible32="1"
+MajorVer=7
+MinorVer=421
+RevisionVer=1
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName=Vertex Financial Services
+CompilationType=0
+OptimizationType=2
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=1
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+
+Path32="C:\Build Epsom2\2 Int Code Bin\DLL\"
+Description=""
+VersionComments=Build: FB.099.07.04.21.01  [21 Apr 2007]
+VersionFileDescription=EPSOM2 Omiga 4
+VersionLegalCopyright=© 2007
+VersionLegalTrademarks=© 2007 Vertex Financial Services
+CondComp="GENERIC_SQL = 1"
+
+[MS Transaction Server]
+AutoRefresh=1

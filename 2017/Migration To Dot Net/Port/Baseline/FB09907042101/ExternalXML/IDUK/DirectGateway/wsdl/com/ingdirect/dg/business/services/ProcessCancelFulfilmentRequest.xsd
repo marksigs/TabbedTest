@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Geeta Lachwani  
+ 
+
+Description  Schema definations for data transfer between Omiga and Direct Gateway for cancel Fulfilment
+
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://processcancelfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:processCancelFulfilment="http://processcancelfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.2</documentation>
+	</annotation>
+	<!-- start of type definitions -->
+	<complexType name="ProcessCancelFulfilmentRequestType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="PackID" type="common:FulfilmentPackIdType">
+						<annotation>
+							<documentation>Unique Identifier for the Pack to be cancelled</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ProcessCancelFulfilmentResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<annotation>
+						<documentation>The response is a generic response indicating the outcome of the request. The general values that can be expected are :                      "Accepted"                          "Declined"                           "Error".                               In case of error/declined response the error message would be set to appropriate message.                             </documentation>
+					</annotation>
+					<element name="CancelFulfilmentResponse" type="common:FulfilmentResponseType" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="ProcessCancelFulfilmentRequest" type="processCancelFulfilment:ProcessCancelFulfilmentRequestType"/>
+	<element name="ProcessCancelFulfilmentResponse" type="processCancelFulfilment:ProcessCancelFulfilmentResponseType"/>
+</schema>

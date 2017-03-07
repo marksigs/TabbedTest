@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<CONFIGURATION>
+   <INSTALL>
+      <DEPENDANTSERVICES>
+         <SERVICE>
+            <NAME>MSMQ</NAME>
+         </SERVICE>
+      </DEPENDANTSERVICES>
+   </INSTALL>
+   <SCM>
+      <WAITHINTSTARTPENDING>140000</WAITHINTSTARTPENDING>
+      <WAITHINTSTOPPENDING>160000</WAITHINTSTOPPENDING>
+   </SCM>
+   <REQUEST ACTION="CREATE">
+      <QUEUELIST>
+         <QUEUE>
+            <NAME>DIRECT=OS:LCH007382\PRIVATE$\TEST</NAME>
+            <TYPE>MSMQ1</TYPE>
+            <THREADSLIST>
+               <THREADS>
+                  <NUMBER>1</NUMBER>
+               </THREADS>
+            </THREADSLIST>
+         </QUEUE>
+      </QUEUELIST>
+   </REQUEST>
+</CONFIGURATION>

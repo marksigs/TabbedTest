@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Paul Carter (Vertex Financial Services Ltd) -->
+<!--==============================XML Document Control=============================
+Description: AssignCaseToPackager - Response
+
+History:
+
+Version 		Author   	Date					Description
+01.01      		PSC			12/12/2006			Created
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.AssignCaseToPackager.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.AssignCaseToPackager.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="RESPONSE" type="ASSIGNCASETOPACKAGERRESPONSEType"/>
+	<xs:complexType name="ASSIGNCASETOPACKAGERRESPONSEType">
+		<xs:sequence>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+</xs:schema>

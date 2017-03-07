@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions;  0.0.1 
+ 
+
+Author(s):         prasanta.sinha@ingdirect.co.uk
+ 
+
+Description       This schema defines the Miscellaneous Request and Response
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://miscellaneousinstruction.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:misc="http://miscellaneousinstruction.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<!-- ====================== Document History  Starts====================================================-->
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>
+			1.	Removed MiscellaneousResponseType
+			2.	MiscellaneousResponse element type changed from MiscellaneousResponseType to common:ConveyancerResponseType
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.3 </documentation>
+		<documentation>
+			1.	targetNamespace changed - miscellaneous to miscellaneousinstruction
+			2.	Request type  and response renamed  -MiscellaneousRequestType and MiscellaneousResponse  to 
+				SendMiscInstructionToConveyancerRequestType and SendMiscInstructionToConveyancerResponse respectively
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.4 </documentation>
+		<documentation>
+			GenericMessages.xsd import removed  to fix "Diamond Dependency" problem in .Net.
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.5 </documentation>
+		<documentation>
+			SendMiscInstructionToConveyancerResponseType created.
+		</documentation>
+	</annotation>
+	<!-- ====================== Document History  Ends====================================================-->
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="../CommonTypes.xsd"/>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="../GenericMessages.xsd"/>
+	<complexType name="SendMiscInstructionToConveyancerRequestType">
+		<annotation>
+			<documentation>Miscellaneous Request to conveyancer</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="Header">
+						<complexType>
+							<complexContent>
+								<extension base="common:ConveyancerHeaderType">
+									<sequence>
+										<element name="MessageSubType">
+											<simpleType>
+												<restriction base="string">
+													<pattern value="CAN|ECD|MIS|MOE|NOR|REI"/>
+												</restriction>
+											</simpleType>
+										</element>
+										<element name="SequenceNo" type="common:SequenceNoType"/>
+										<element name="HubRef">
+											<simpleType>
+												<restriction base="string">
+													<pattern value="\d{1,7}"/>
+												</restriction>
+											</simpleType>
+										</element>
+									</sequence>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+					<element name="MortgageApplicationNo">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="10"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="ConveyancerRef">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="8"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="Text">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="100"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="SendMiscInstructionToConveyancerResponseType">
+		<annotation>
+			<documentation>Miscellaneous Response to conveyancer</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence minOccurs="0">
+					<element ref="common:ConveyancerResponse"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--Type definition ends-->
+	<element name="SendMiscInstructionToConveyancerRequest" type="misc:SendMiscInstructionToConveyancerRequestType">
+		<annotation>
+			<documentation>Miscellaneous Request to conveyancer</documentation>
+		</annotation>
+	</element>
+	<element name="SendMiscInstructionToConveyancerResponse" type="misc:SendMiscInstructionToConveyancerResponseType">
+		<annotation>
+			<documentation>Acknowledgement to Miscellaneous Request from Conveyancer</documentation>
+		</annotation>
+	</element>
+</schema>

@@ -1,0 +1,13 @@
+GeneralAssist = 22, 29, 613, 477, C
+ErrAssist = 0, 0, 0, 0, C
+XMLAssist = 0, 0, 0, 0, C
+SubmitBO = 0, 0, 0, 0, C
+ISubmitBO = 0, 0, 0, 0, C
+ISubmitDO = 0, 0, 0, 0, C
+SubmitDO = 0, 0, 0, 0, C
+IomSubClassDef = 0, 0, 0, 0, C
+omSubClassDef = 0, 0, 0, 0, C
+SubmitTxBO = 0, 0, 0, 0, C
+ISubmitTxBO = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C

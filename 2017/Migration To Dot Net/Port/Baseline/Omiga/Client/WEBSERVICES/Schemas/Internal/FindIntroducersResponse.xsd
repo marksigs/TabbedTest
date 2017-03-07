@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Archive               $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/FindIntroducersResponse.xsd $
+Workfile:             $Workfile: FindIntroducersResponse.xsd $
+Current Version   $Revision: 9 $
+Last Modified      $Modtime: 26/03/07 13:50 $
+Modified By        $Author: Lesliem $
+
+Description: FindIntroducersResponse.xsd. used by FindIntroducersWS 
+
+History:
+
+Author   	Date       			Defect			Description
+IK				23/10/2006		EP2_21 		created
+IK				06/11/2006		EP2_32		add FIRMPERMISSIONS to PRINCIPALFIRM, ARFIRM
+IK				08/11/2006		EP2_35		add FSAONLYINDIVIDUAL data
+IK				17/11/2006		EP2_113		remove TOTALRECS from FSAINDIVIDUAL 
+IK				22/11/2006		EP2_160		add MORTGAGECLUBNETWORKASSOCIATION to PRINCIPALFIRM
+IK				05/01/2007		EP2_383		backed-out
+IK				01/02/2007		EP2_338		FIRMPERMISSIONS via FIRMPERMISSIONSType
+PSC			08/03/2007		EP2_1190 	Add PRINCIPALFIRM to ARFIRM
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.FindIntroducers.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:idt="http://IntroducerDetail.Omiga.vertex.co.uk" targetNamespace="http://Response.FindIntroducers.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:import namespace="http://IntroducerDetail.Omiga.vertex.co.uk" schemaLocation="IntroducerDetail.xsd"/>
+	<xs:element name="RESPONSE">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MORTGAGECLUBNETWORKASSOCIATION" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="idt:MORTGAGECLUBNETWORKASSOCIATION_base">
+								<xs:sequence>
+									<xs:element name="ARFIRM" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="idt:ARFIRM_base"/>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="PRINCIPALFIRM" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="idt:PRINCIPALFIRM_base"/>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="PRINCIPALFIRM" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="idt:PRINCIPALFIRM_base">
+								<xs:sequence>
+									<xs:element name="FIRMPERMISSIONS" type="idt:FIRMPERMISSIONSType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="MORTGAGECLUBNETWORKASSOCIATION" type="idt:MORTGAGECLUBNETWORKASSOCIATION_base" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ARFIRM" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="idt:ARFIRM_base">
+								<xs:sequence>
+									<xs:element name="FIRMPERMISSIONS" type="idt:FIRMPERMISSIONSType" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="PRINCIPALFIRM" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="idt:PRINCIPALFIRM_base">
+													<xs:sequence>
+														<xs:element name="FIRMPERMISSIONS" type="idt:FIRMPERMISSIONSType" minOccurs="0" maxOccurs="unbounded"/>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="INTRODUCERDETAILS" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="idt:INTRODUCERDETAILS_base">
+								<xs:sequence>
+									<xs:element name="ARFIRM" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="idt:ARFIRM_base"/>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="PRINCIPALFIRM" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="idt:PRINCIPALFIRM_base"/>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="ORGANISATIONUSER" minOccurs="0">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="idt:ORGANISATIONUSER_base">
+													<xs:sequence>
+														<xs:element name="CONTACTDETAILS" type="msgdt:CONTACTDETAILSType" minOccurs="0"/>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="FSAINDIVIDUAL" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="idt:INDIVIDUALBASICS_base">
+								<xs:sequence>
+									<xs:element name="INDIVIDUALCONTROLS" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="idt:INDIVIDUALCONTROLS_base">
+													<xs:sequence>
+														<xs:element name="PRINCIPALFIRM" minOccurs="0">
+															<xs:complexType>
+																<xs:complexContent>
+																	<xs:extension base="idt:PRINCIPALFIRM_base"/>
+																</xs:complexContent>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="INDIVIDUALEMPLOYMENT" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="idt:INDIVIDUALEMPLOYMENT_base">
+													<xs:sequence>
+														<xs:element name="ARFIRM" minOccurs="0">
+															<xs:complexType>
+																<xs:complexContent>
+																	<xs:extension base="idt:ARFIRM_base"/>
+																</xs:complexContent>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

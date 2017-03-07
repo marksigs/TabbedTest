@@ -1,0 +1,75 @@
+#include "LOG.rul"
+#include "MDAC.rul"
+#include "MTSCOMPLUS.rul"
+#include "SERVICE.rul" 
+#include "XMLParser.rul"
+#include "vc6redist.rul"
+ 
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installed event is sent just after files for the component: 
+//              Program Files are transferred. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype ProgramFiles_Installed();
+function ProgramFiles_Installed()
+begin
+	if (LaunchAppAndWait(TARGETDIR + "\\MessageQueueListenerLOG.exe", " /regserver", WAIT) < 0) then
+		LOG_MessageBox("Unable to register MessageQueueListenerLOG.exe", SEVERE);
+	endif; 
+	SERVICE_StartService("MessageQueueListenerLOG");
+	MTSCOMPLUS_AddLibraryPackageIfNotExist(@MQLCOMPLUSAPPLICATIONNAME);
+	MTSCOMPLUS_AddComponent(@MQLCOMPLUSAPPLICATIONNAME, TARGETDIR + "\\MessageQueueListenerMTS.dll");  
+	MTSCOMPLUS_SetTransactionTimeout(@MQLCOMPLUSAPPLICATIONNAME, "MessageQueueListenerMTS.MessageQueueListenerMTS1.1", 3600);
+	if (LaunchAppAndWait(TARGETDIR + "\\MessageQueueListener.exe", " /regserver", WAIT) < 0) then
+		LOG_MessageBox("Unable to register MessageQueueListener.exe", SEVERE);
+	endif; 
+	SERVICE_StartService("MessageQueueListener");
+end;
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Uninstalling event is sent just before files for the component:
+//              Program Files are removed during uninstallation. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype ProgramFiles_UnInstalling();
+function ProgramFiles_UnInstalling()
+begin
+	SERVICE_StopService("MessageQueueListener");
+	if (LaunchAppAndWait(TARGETDIR + "\\MessageQueueListener.exe", " /unregserver", WAIT) < 0) then
+		LOG_MessageBox("Unable to unregister MessageQueueListener.exe", SEVERE);
+	endif; 
+	MTSCOMPLUS_RemovePackage(@MQLCOMPLUSAPPLICATIONNAME);
+	SERVICE_StopService("MessageQueueListenerLOG");
+	if (LaunchAppAndWait(TARGETDIR + "\\MessageQueueListenerLOG.exe", " /unregserver", WAIT) < 0) then
+		LOG_MessageBox("Unable to unregister MessageQueueListenerLOG.exe", SEVERE);
+	endif; 
+end;
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installed event is sent just after files for the component: 
+//              Program Files\VC6Redist are transferred. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype VC6Redist_Installed();
+function VC6Redist_Installed()
+begin 
+	//InstallVC6Redist();
+end;
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installed event is sent just after files for the component: 
+//              Program Files\XMLParser are transferred. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype XMLParser_Installed();
+function XMLParser_Installed()
+begin
+	//InstallXMLParser();
+end;
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installed event is sent just after files for the component: 
+//              Program Files\MDAC are transferred. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype MDAC_Installed();
+function MDAC_Installed()
+begin
+	//InstallMDAC();
+end;

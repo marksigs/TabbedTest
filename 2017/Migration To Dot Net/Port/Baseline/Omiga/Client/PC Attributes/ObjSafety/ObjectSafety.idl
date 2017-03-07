@@ -1,0 +1,39 @@
+// objectsafety.idl : IDL source for atltest.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (atltest.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(60DB7853-08E4-11D5-B710-0060087A1E40),
+	version(1.0),
+	helpstring("object safety 1.0 Type Library")
+]
+library ObjectSafetyLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	  [
+		  uuid(CB5BDC81-93C1-11cf-8F20-00805F2CD064),
+		  helpstring("IObjectSafety Interface"),
+		  odl
+	  ]
+	  interface IObjectSafety:IUnknown {
+		  [helpstring("GetInterfaceSafetyOptions")]
+		  HRESULT GetInterfaceSafetyOptions(
+					[in]  long  riid,
+					[in]  long *pdwSupportedOptions,
+					[in]  long *pdwEnabledOptions);
+
+		  [helpstring("SetInterfaceSafetyOptions")]
+		  HRESULT SetInterfaceSafetyOptions(
+					[in]  long  riid,
+					[in]  long  dwOptionsSetMask,
+					[in]  long  dwEnabledOptions);
+	   }
+};

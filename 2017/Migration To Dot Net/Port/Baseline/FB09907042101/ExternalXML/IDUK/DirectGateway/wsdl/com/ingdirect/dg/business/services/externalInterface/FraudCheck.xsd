@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Dipen Shah      
+ 
+
+Description  Schema definations for data transfer between Omiga to Direct Gateway for FraudCheck Request and Response
+
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://fraudcheck.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:fraudcheck="http://fraudcheck.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:datatype="http://datatypes.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="..//CommonTypes.xsd"/>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="..//GenericMessages.xsd"/>
+	<import namespace="http://datatypes.externalInterface.services.dg.ingdirect.com/0.0.1" schemaLocation="DataType.xsd"/>
+	<annotation>
+		<documentation>
+                    	Schema definitions for data transfer between Omiga to DGW for FraudCheck and vice versa.
+                    	This schema defines two message types ,
+			                    	1. FraudCheckRequestType and  2. FraudCheckResponseType
+       		 	for request and response respectively.
+       		  </documentation>
+		<documentation>
+       		  	Document version = 0.1
+	       	</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+       		  	Document version = 0.2
+       	</documentation>
+		<documentation>
+                          1) Changes as per Experian Input/Output Definition V 1.8 and V 1.9, V 1.10
+                          2) ERR1 block added which will be sent by Experian.
+                          3) attributes added which will be sent by Experian.               
+	      	</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+       		  	Document version = 0.3
+       	</documentation>
+		<documentation>
+                          1) BAcctNumber field length change from 15 to 16.
+                          2) Change incude to import for DataTypes.xsd due to technical problems on Omiga side.
+                          3) minOccurs=0 added for response elements
+                          4) HunterRequest and HunterResponse renamed to FraudCheckRequest and FraudCheckResponse
+                          5) HunterRequestType and HunterResponseType renamed to FraudCheckRequestType and FraudCheckResponseType
+                          6) Targetnamespace change from hunter to fraudceck
+                          7) AccType values 1,2,3,4,5
+
+	      	</documentation>
+	</annotation>
+	<complexType name="FraudCheckRequestType">
+		<annotation>
+			<documentation>
+                  		REQUEST  ELEMENTS SECTION
+                  	</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="Form_ID" type="datatype:formidrange">
+						<annotation>
+							<documentation>
+                  		Must be set to CONFT.
+                  		Mandatory
+                  	</documentation>
+						</annotation>
+					</element>
+					<element name="Exp_ExperianRef" type="datatype:str10">
+						<annotation>
+							<documentation>
+                  		The Experian reference Number that identifies a specific application. 
+                  	</documentation>
+						</annotation>
+					</element>
+					<element name="ClientKey" type="datatype:str10CLIENTKEY">
+						<annotation>
+							<documentation>
+                  		Must be set to INGDIR
+                  	</documentation>
+						</annotation>
+					</element>
+					<element name="EntryPoint" type="datatype:entrypointrange">
+						<annotation>
+							<documentation>
+                  		Set to 0010 for all requests
+                  		                  	</documentation>
+						</annotation>
+					</element>
+					<element name="Function">
+						<annotation>
+							<documentation>
+                  		This must be set to 0085 for this message
+                  		            		</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<minLength value="0"/>
+								<maxLength value="4"/>
+								<whiteSpace value="collapse"/>
+								<enumeration value="0085"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="HUNI" maxOccurs="2">
+						<annotation>
+							<documentation>
+                  		This data will be submitted once per applicant in the following order:
+
+1. Main Applicant
+2. Joint Applicant
+                  		            		</documentation>
+						</annotation>
+						<complexType>
+							<sequence>
+								<element name="ApplicantType">
+									<annotation>
+										<documentation>
+								Indicates whether the applicant is the main applicant or joint applicant. Allowed values are:
+
+1 – Main Applicant
+2 – Joint Applicant
+</documentation>
+									</annotation>
+									<simpleType>
+										<restriction base="string">
+											<minLength value="1"/>
+											<maxLength value="1"/>
+											<whiteSpace value="collapse"/>
+											<enumeration value="1"/>
+											<enumeration value="2"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="AppNo" type="datatype:str16">
+									<annotation>
+										<documentation>
+                  		The Mortgage Application Number
+                  		            		</documentation>
+									</annotation>
+								</element>
+								<element name="SequenceNumber" type="datatype:str10">
+									<annotation>
+										<documentation>
+                  								The message sequence number
+                  		            					</documentation>
+									</annotation>
+								</element>
+								<element name="SecadAddress" type="common:StructuredAddressDetailsType">
+									<annotation>
+										<documentation>
+					                    		Security (property) Address i.e Address of property to be purchased or re-mortgaged	
+					                    		</documentation>
+									</annotation>
+								</element>
+								<element name="AccType">
+									<annotation>
+										<documentation>
+                    							Accommodation Type
+                                                                   1 = Detached
+                                                                   2 = Semi detached
+                                                                   3 = Bungalow
+                                                                   4 = Terraced
+                                                                   5 = Flat	                    						
+                                                                  </documentation>                                                                   
+									</annotation>
+									<simpleType>
+										<restriction base="string">
+											<minLength value="0"/>
+											<maxLength value="1"/>
+											<whiteSpace value="collapse"/>
+											<enumeration value="1"/>
+											<enumeration value="2"/>
+											<enumeration value="3"/>
+											<enumeration value="4"/>
+											<enumeration value="5"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="EmployerName" type="datatype:str26b">
+									<annotation>
+										<documentation>
+                    							The Name of the Employer
+	                    						</documentation>
+									</annotation>
+								</element>
+								<element name="EmployerAddress" type="common:StructuredAddressDetailsType">
+									<annotation>
+										<documentation>
+                    							The Address of the Employer
+	                    						</documentation>
+									</annotation>
+								</element>
+								<element name="SolName" type="datatype:str26b"/>
+								<element name="SolAddress" type="common:StructuredAddressDetailsType">
+									<annotation>
+										<documentation> Solicitor Address</documentation>
+									</annotation>
+								</element>
+								<element name="BSortCode" type="datatype:str15b"/>
+								<element name="BAcctNumber" type="datatype:str16b"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="FraudCheckResponseType">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<choice minOccurs="0">
+					<annotation>
+						<documentation>
+					FraudCheck Response
+                    	</documentation>
+					</annotation>
+					<element name="HUNO">
+						<complexType>
+							<all>
+								<element name="Experianref" type="datatype:str10"/>
+								<element name="Appno" type="datatype:str16"/>
+								<element name="Seqno" type="datatype:str10"/>
+								<element name="ReturnCode" type="datatype:str4"/>
+								<element name="MessageCode" type="string"/>
+							</all>
+						</complexType>
+					</element>
+					<element name="ERR1">
+						<complexType>
+							<all>
+								<element name="CODE" minOccurs="0">
+									<simpleType>
+										<restriction base="string">
+											<minLength value="0"/>
+											<maxLength value="4"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="SEVERITY" minOccurs="0">
+									<simpleType>
+										<restriction base="long"/>
+									</simpleType>
+								</element>
+								<element name="MESSAGE" minOccurs="0">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="80"/>
+											<minLength value="0"/>
+										</restriction>
+									</simpleType>
+								</element>
+							</all>
+						</complexType>
+					</element>
+				</choice>
+				<attribute name="type" type="string" use="optional"/>
+				<attribute name="subtype" type="string" use="optional"/>
+				<attribute name="EXP_ExperianRef" type="datatype:str10" use="optional"/>
+				<attribute name="success" type="string" use="optional"/>
+				<attribute name="timestamp" type="string" use="optional"/>
+				<attribute name="id" type="string" use="optional"/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="FraudCheckRequest" type="fraudcheck:FraudCheckRequestType"/>
+	<element name="FraudCheckResponse" type="fraudcheck:FraudCheckResponseType"/>
+</schema>

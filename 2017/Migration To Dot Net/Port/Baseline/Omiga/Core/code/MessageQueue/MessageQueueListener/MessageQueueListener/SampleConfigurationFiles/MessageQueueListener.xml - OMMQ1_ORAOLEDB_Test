@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<CONFIGURATION>
+   <INSTALL>
+      <DEPENDANTSERVICES>
+         <SERVICE>
+            <NAME>MSDTC</NAME>
+         </SERVICE>
+      </DEPENDANTSERVICES>
+   </INSTALL>
+   <SCM>
+      <WAITHINTSTARTPENDING>140000</WAITHINTSTARTPENDING>
+      <WAITHINTSTOPPENDING>160000</WAITHINTSTOPPENDING>
+   </SCM>
+   <REQUEST ACTION="CREATE">
+      <QUEUELIST>
+         <QUEUE>
+            <NAME>.\Test</NAME>
+            <TYPE>OMMQ1</TYPE>
+			<CONNECTIONSTRING>Provider=ORAOLEDB.ORACLE;Data Source=ompdev;User ID=omqdevbase;Password=omqdevbase;PLSQLRSet=1;</CONNECTIONSTRING>
+			<POLLINTERVAL>1000</POLLINTERVAL>
+            <THREADSLIST>
+               <THREADS>
+                  <NUMBER>2</NUMBER>
+               </THREADS>
+            </THREADSLIST>
+         </QUEUE>
+      </QUEUELIST>
+   </REQUEST>
+</CONFIGURATION>

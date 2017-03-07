@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:processPinMailerFulfilment="http://processpinmailerfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://processpinmailerfulfilment.fulfilment.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="GenericMessages.xsd" namespace="http://generic.dg.ingdirect.com/0.0.1" />
+  <import schemaLocation="CommonTypes.xsd" namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" />
+  <annotation>
+    <documentation>document version = 0.1 </documentation>
+  </annotation>
+  <annotation>
+    <documentation>document version = 0.2</documentation>
+  </annotation>
+  <complexType name="ProcessPinMailerFulfilmentRequestType">
+    <annotation>
+      <documentation>CIF number is part of GenericRequestType. </documentation>
+    </annotation>
+    <complexContent mixed="false">
+      <extension base="generic:GenericRequestType" />
+    </complexContent>
+  </complexType>
+  <complexType name="ProcessPinMailerFulfilmentResponseType">
+    <complexContent mixed="false">
+      <extension base="generic:GenericResponseType">
+        <sequence>
+          <annotation>
+            <documentation>The response is a generic response indicating the outcome of the request. The general values that can be expected are :                      "Accepted"                          "Declined"                           "Error".                               In case of error/declined response the error message would be set to appropriate message.                             </documentation>
+          </annotation>
+          <element name="PinMailerFulfilmentResponse" nillable="true" type="common:FulfilmentResponseType" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="ProcessPinMailerFulfilmentRequest" type="processPinMailerFulfilment:ProcessPinMailerFulfilmentRequestType" />
+  <element name="ProcessPinMailerFulfilmentResponse" type="processPinMailerFulfilment:ProcessPinMailerFulfilmentResponseType" />
+</schema>

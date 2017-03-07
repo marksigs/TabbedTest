@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><HEAD>
+	<title>Omiga POS ActiveX Control Installation</title>
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Workfile:			$Workfile: Install.htm $
+Copyright:			Copyright © 2005 Marlborough Stirling
+
+Description:		Used by desktop packages to install all ActiveX controls onto desktop.
+					Not to be used within Omiga GUI.
+					Downloads ActiveX controls for both BBG MX and Retail, as their
+					desktops are common.
+
+Current Version:	$Revision: 20 $
+Last Modified:		$JustDate: 19/10/05 $
+Modified By:		$Author: Astanley $
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+History:
+
+Prog	Date		Description
+AS		20/07/2005	BBGR986 First version.
+AS		21/07/2005	BBGR994 New version of Axword.cab with new WPPdfSDK01.dll (version 1.1.5.0).
+AS		02/08/2005	BBGR1092 New version of Axword.cab with new WPPdfSDK01.dll (version 1.1.6.0) and new wRTF2PDF02.dll (version 3.1.7.6).
+AS		05/08/2005	BBGR1130 New versions of wRTF2PDF02 (Version 3.1.8.0) and wpPDFSDK01 (Version 1.1.7.0) for improved handling of Arial font and general improvement in print quality.
+AS		16/08/2005	BBGR1204 Axword 5.1.0.8 with logging and wRTF2PDF02 3.1.8.1
+AS		17/08/2005	BBGR946 omTrigold 1.0.0.1.
+AS		23/08/2005	BBGR1267 Axword 5.1.0.9 with wRTF2PDF02 3.1.8.2 to handle number of pages on a sectionalised single section document.
+AS		26/08/2005	BBGR1300 Track work on Change Control BBGR52 - omTrigold.cab 1.0.0.2
+AS		26/08/2005	BBGR1370 Track work on Change Control BBGR62b - omTrigold.cab 1.0.0.3
+AS		08/09/2005	BBGR1319 CC 072 Investment Vehicle (Sourcing) - omTrigold.cab 1.0.0.4
+SR		16/09/2005	BBGR1478 omTrigold.cab 1.0.0.6
+AS		23/09/2005	BBGR1524 Axword 5.1.0.10 with wRTF2PDF 3.1.8.3 - the font in a section other than the main section was generated as Arial regardless of the font in the main section.
+SR		29/09/2005	BBGR1545 omTrigold.cab 1.0.0.7
+SR		07/10/2005	BBGR1225 omTrigold.cab 1.0.0.8
+SR		10/10/2005	BBGR1613 omTrigold.cab 1.0.0.9
+SR		19/10/2005	BBGR1634 omTrigold.cab 1.0.0.10
+AS		19/10/2005	BBGR1522 Axword 5.1.0.12 with WPPdfSDK01 1.1.7.4 - KFI - Strange characters appearing when printed.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--></HEAD>
+
+<body>
+
+<h1>Omiga POS ActiveX Control Installation</h1>
+
+<p>
+Navigate directly to this page to install onto the desktop the ActiveX controls required by the Omiga POS application.
+</p>
+
+<p>To be able to install the ActiveX controls, you must have the correct security settings in Internet Explorer.</p>
+
+<ol>
+<li>Run Internet Explorer.</li>
+<li>Click on <b>Tools</b> on the menu, and select <b>Internet Options</b>.</li>
+<li>On the <b>Security</b> tab, select <b>Local internet</b>.</li>
+<li>Click <b>Custom Level</b>.</li>
+<li>Ensure the following (all under ActiveX controls and plug-ins) are set:
+	<ul>
+	<li>Download signed ActiveX controls: <b>Enable</b>.</li>
+	<li>Run ActiveX controls and plug-ins: <b>Enable</b>.</li>
+	<li>Script ActiveX controls marked safe for scripting: <b>Enable</b>.</li>
+	</ul>
+</li>
+<li>Click <b>OK</b> twice to exit out of the options.</li>
+</ol>
+
+<p>To install the ActiveX controls:</p>
+
+<ol>
+<li>Navigate to this page by running Internet Explorer, and entering <b>http://<i>server</i>/<i>OmigaWebSite</i>/cabs/install.htm</b>
+into the Address field, where <i>server</i> is the name of the Omiga web server, and <i>OmigaWebSite</i> is the name of the
+Omiga web site on that server (normally called <b>OmigaPOS</b>).</li>
+
+<li>For each ActiveX control being installed, you should see a <b>Security Warning</b> asking if you want to install and run a
+cab file distributed by Marlborough Stirling; answer <b>Yes</b> to each of the warnings.</li>
+
+<li>Wait for <b>Done</b> to appear in the Internet Explorer status bar (at the bottom left of the window).</li>
+
+<li>If you are prompted to restart your computer, answer <b>Yes</b>. Once the computer has restarted, go back to step 2
+until no more ActiveX controls are downloaded.</li>
+</ol>
+
+<p>To verify the ActiveX controls have been successfully downloaded:</p>
+
+<ol>
+<li>Run Internet Explorer.</li>
+<li>Click on <b>Tools</b> on the menu, and select <b>Internet Options</b>.</li>
+<li>In the <b>Temporary Internet Files</b> section, click <b>Settings</b>.</li>
+<li>On the <b>Settings</b> dialog, click <b>View Objects</b>.</li>
+<li>In the <b>Program Files</b> column, there should be an entry, with a <b>Status</b> of Installed, for each of the downloaded
+ActiveX controls. This list is currently:
+	<ul>
+	<li>axword.axwordclass: used by Omiga MX and Omiga POS (Retail).</li>
+	<li>PCAttributesBO Class: used by Omiga MX and Omiga POS (Retail).</li>
+	</ul>
+</li>
+</ol>
+
+
+<object
+	id=PCAttributesBO
+	style="DISPLAY: none; LEFT: 0px; VISIBILITY: hidden; TOP: 0px" tabIndex=-1
+	codeBase=omPC.CAB#version=1,0,0,4
+	type=text/x-scriptlet height=1 width=1
+	classid=CLSID:E31AAD92-37B6-45E1-A84A-481094EBAECE viewastext>
+</object>
+
+<object
+	id=axwordclass
+	style="DISPLAY: none; LEFT: 0px; VISIBILITY: hidden; TOP: 0px" tabIndex=-1
+	codeBase=axword.CAB#version=5,1,0,12
+	type=text/x-scriptlet height=1 width=1
+	classid=CLSID:68575265-E41C-4C2E-808A-CBA63B53D0EF viewastext>
+</object>
+
+
+</body>
+
+</html>

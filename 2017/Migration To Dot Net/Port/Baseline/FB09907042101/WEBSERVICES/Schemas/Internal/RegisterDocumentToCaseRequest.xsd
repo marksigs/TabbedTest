@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: RegisterDocumentToCase-Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01   		RMH	29/06/2005 		Created
+01.02			RMH	15/07/2005		Added OtherFileSystemID and annoted with descriptions
+01.03           TLiu		20/07/2005      Changed '\' to '/' in "schemaLocation"
+														Changed "mars" in path to "IDUK"
+														Named an unnamed complexType to "REQUESTType"
+														Adjusted "import", and changed msgdt:dateTime to msgdt:msgDateTime, etc.
+01.04			TLiu		08/08/2005		Named 2 simpleTypes.
+01.05			RHart	14/10/2005		Made DocumentDetasilsType WrokgroupID a required Item
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" xmlns="http://Request.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.RegisterDocumentToCase.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="DOCUMENTDETAILS" type="DOCUMENTDETAILSType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="DOCUMENTDETAILSType">
+		<xs:attribute name="DOCUMENTGUID" type="msgdt:msgGuid" use="required">
+			<xs:annotation>
+				<xs:documentation>Uniques ID from filenet</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>PPlication Number of the case against which the document is to be index</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DOCUMENTNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="DOCUMENTDESCRIPTION" type="xs:string" use="optional"/>
+		<xs:attribute name="CREATETIMESTAMP" type="msgdt:msgDateTime" use="required">
+			<xs:annotation>
+				<xs:documentation>Date and Time at Index</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="UNITNAME" type="xs:string" use="optional"/>
+		<xs:attribute name="CUSTOMERNAME" type="xs:string"/>
+		<xs:attribute name="WORKGROUPNAME" type="xs:string"/>
+		<xs:attribute name="WORKGROUPID" type="xs:short" use="required"/>
+	</xs:complexType>
+</xs:schema>

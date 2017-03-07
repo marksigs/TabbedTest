@@ -1,0 +1,17 @@
+
+prototype InstallVC6Redist();
+
+function InstallVC6Redist()
+	NUMBER nResult;
+begin
+	nResult = 0;
+	
+	if SYSINFO.WINNT.bWinNT4 = TRUE then
+		LOG_SetStatusWindow("Installing VC6 redistributables");
+		nResult = LaunchAppAndWait(SUPPORTDIR ^ "vcredist.exe", "/q /r:N", WAIT);
+		if nResult < 0 then
+		    LOG_MessageBox("Failed to install VC6 redistributables", SEVERE);
+		endif;             
+	endif;
+	return nResult;	
+end;

@@ -1,0 +1,70 @@
+///////////////////////////////////////////////////////////////////////////////
+//	FILE:			MessageQueueListenerMTS.idl
+//	DESCRIPTION:	
+//	SYSTEM: 		Omiga
+//	COPYRIGHT:		(c) 2000, Marlborough Stirling Group. All rights reserved 
+//
+//	HISTORY
+//	=======
+//
+//	Prog	Date		Description
+//  LD      30/08/00    Initial version
+//	LD		09/04/01	SYS2249 - Corrections for two listeners on the same queue
+//	LD		05/06/01	SYS2341 - Set default transaction status to required
+//	LD		09/02/02	SYS4414	- Add Oracle's OLEDB provider
+//  LD		20/06/02	SYS4933 - Add originating thread id
+//	RF		09/03/04	Add table suffix
+///////////////////////////////////////////////////////////////////////////////
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MessageQueueListenerMTS.tlb) and marshalling code.
+
+#include "mtxattr.h"  // for TRANSACTION_* and QUEUEABLE macros
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(E3DA1BD2-63CB-11D4-8241-005004E8D1A7),
+		dual,
+		helpstring("IMessageQueueListenerMTS1 Interface"),
+		pointer_default(unique)
+	]
+	interface IInternalMessageQueueListenerMTS1 : IDispatch
+	{
+		[propget, id(1), helpstring("property IsInsideMTS")] HRESULT IsInsideMTS([in] DWORD dwOriginatingThreadId, [out, retval] BOOL *pVal);
+		[propget, id(2), helpstring("property IsInMTSTransaction")] HRESULT IsInMTSTransaction([in] DWORD dwOriginatingThreadId, [out, retval] BOOL *pVal);
+		[id(3), helpstring("method MSMQReceiveExecute")] HRESULT MSMQReceiveExecute([in] DWORD dwOriginatingThreadId, [in] BSTR bstrConfig, [in] BSTR bstrQueueName, [in] BSTR bstrFormatName, [in] BSTR bstrMoveQueueName, [in] BSTR bstrMoveFormatName, [in] VARIANT vMsgId, [in] long lMessagesToScan, [out] BSTR* pbstrErrorMessage, [out, retval] long* plMESSQ_RESP);
+		[id(4), helpstring("method MSMQMoveMessage")] HRESULT MSMQMoveMessage([in] DWORD dwOriginatingThreadId, [in] BSTR bstrQueueName, [in] BSTR bstrFormatName, [in] BSTR bstrMoveQueueName, [in] BSTR bstrMoveFormatName, [in] VARIANT vMsgId,  [in] long lMessagesToScan, [out] BSTR* pbstrErrorMessage);
+		[id(5), helpstring("method OMMQReceiveExecute")] HRESULT OMMQReceiveExecute([in] DWORD dwOriginatingThreadId, [in] BSTR bstrConfig, [in] long lProvider, [in] BSTR bstrConnectionString, [in] BSTR bstrQueueName, [in] VARIANT vMsgId, [in] BSTR bstrTableSuffix, [out] BSTR* pbstrErrorMessage, [out, retval] long* plMESSQ_RESP);
+		[id(6), helpstring("method OMMQMoveMessage")] HRESULT OMMQMoveMessage([in] DWORD dwOriginatingThreadId, [in] long lProvider, [in] BSTR bstrConnectionString, [in] BSTR bstrQueueName, [in] BSTR bstrTableSuffix, [in] VARIANT vMsgId,  [out] BSTR* pbstrErrorMessage);
+	};
+
+[
+	uuid(E3DA1BC6-63CB-11D4-8241-005004E8D1A7),
+	version(1.0),
+	helpstring("MessageQueueListenerMTS 1.0 Type Library")
+]
+library MESSAGEQUEUELISTENERMTSLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+    typedef [helpstring("Enumerates various database providers supported")]
+    enum  {
+        PROVIDER_MSDAORA = 0,
+        PROVIDER_SQLOLEDB = 1,
+        PROVIDER_UNKNOWN = 2,
+        PROVIDER_ORAOLEDB = 3
+    } PROVIDER;
+
+	[
+		uuid(E3DA1BD3-63CB-11D4-8241-005004E8D1A7),
+		helpstring("MessageQueueListenerMTS1 Class"),
+		TRANSACTION_REQUIRED
+	]
+	coclass MessageQueueListenerMTS1
+	{
+		[default] interface IInternalMessageQueueListenerMTS1;
+	};
+};

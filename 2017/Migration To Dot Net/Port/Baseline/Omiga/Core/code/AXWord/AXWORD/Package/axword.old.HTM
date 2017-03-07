@@ -1,0 +1,159 @@
+<%@ LANGUAGE="JSCRIPT" %>
+<HTML>
+
+<HEAD>
+<TITLE>Axword Test Harness</TITLE>
+</HEAD>
+
+<OBJECT id="axwordclass" 
+	style="DISPLAY: none; LEFT: 0px; VISIBILITY: hidden; TOP: 0px" 
+	tabIndex=-1 
+	CLASSID="CLSID:68575265-E41C-4C2E-808A-CBA63B53D0EF" 
+	CODEBASE="axword.CAB#version=5,1,0,5" 
+	VIEWASTEXT>
+</OBJECT>
+
+<BODY>
+
+<H1>Axword Test Harness</H1>
+
+<form id="frmScreen">
+<P>
+	<input id="chkViewAsWord" type="checkbox" value="0" checked=1>
+	<label for="chkViewAsWord">View as Word document (defaults to false)</label></P>
+	<input id="chkViewAsPDF" type="checkbox" value="0">
+	<label for="chkViewAsPDF">View PDF document (defaults to false)</label></P>
+	<input id="chkDeliveryTypePDF" type="checkbox" value="0">
+	<label for="chkDeliveryTypePDF">Delivery Type is PDF (20)</label></P>
+	<input id="chkReadOnly" type="checkbox" value="0">
+	<label for="chkReadOnly">Read only (defaults to true)</label></P>
+	<input id="chkResizableFrame" type="checkbox" value="1" checked=1>
+	<label for="chkResizableFrame">Resizeable frame (defaults to false)</label></P>
+	<input id="chkShowFindFreeText" type="checkbox" value="1" checked=1>
+	<label for="chkShowFindFreeText">Show "Find free text" (defaults to true)</label></P>
+	<input id="chkSpellCheckOnSave" type="checkbox" value="0">
+	<label for="chkSpellCheckOnSave">Spell check on save (defaults to true)</label></P>
+	<input id="chkSpellCheckWhileEditing" type="checkbox" value="1" checked=1>
+	<label for="chkSpellCheckWhileEditing">Spell check while editing (defaults to true)</label></P>
+	<input id="chkShowCommandBars" type="checkbox" value="0">
+	<label for="chkShowCommandBars">Show Word command bars (defaults to false)</label></P>
+	<input id="chkPersistState" type="checkbox" value="0" checked=1>
+	<label for="chkPersistState">Persist state (defaults to false)</label></P>
+	<input id="chkTrackedChangesDoc" type="checkbox" value="0">
+	<label for="chkTrackedChangesDoc">Use document containing tracked changes</label></P>
+	<input id="chkShowTrackedChanges" type="checkbox" value="0">
+	<label for="chkShowTrackedChanges">Show "Show tracked changes" button</label></P>
+	<input id="chkShowPrint" type="checkbox" value="0" checked=1>
+	<label for="chkShowPrint">Show Print button</label></P>
+	<input id="chkShowPrintDialog" type="checkbox" value="0">
+	<label for="chkShowPrintDialog">Show Print button invokes Print Dialog</label></P>
+	<input id="chkBackgroundPrint" type="checkbox" value="0">
+	<label for="chkBackgroundPrint">Print document in background</label></P>
+	<input id="chkDisablePrintOut" type="checkbox" value="0">
+	<label for="chkDisablePrintOut">Disable Print Out</label>
+</P>
+<P>
+	<label for="txtPrinter">Printer name:</label>
+	<input id="txtPrinter" maxlength="256" style="WIDTH: 400px">
+</P>
+<P>
+	<input id=btnAxword type=button value="Run Axword" id=btnAxword  name=button1> 
+</P> 
+</form>
+
+<SCRIPT language="JScript">
+<!--
+
+function window.onload()
+{	
+}
+
+function frmScreen.btnAxword.onclick()
+{
+	CallAxword();
+}
+
+function CallAxword()
+{
+	try
+	{
+		var xmlSrcDoc = new ActiveXObject("Msxml2.DOMDocument");
+		xmlSrcDoc.async = false;
+
+		if (frmScreen.chkTrackedChangesDoc.checked)
+		{
+			xmlSrcDoc.load("axword.trackedchanges.xml");
+		}
+		if (frmScreen.chkDeliveryTypePDF.checked)
+		{
+			xmlSrcDoc.load("axword.pdf.xml");
+		}
+		else
+		{
+			xmlSrcDoc.load("axword.xml");
+		}
+
+		var xmlTgtDoc = new ActiveXObject("Msxml2.DOMDocument");
+		xmlTgtDoc.appendChild(xmlTgtDoc.createNode(1, "REQUEST", ""));
+		var root = xmlTgtDoc.documentElement;
+
+		var nodeControlData = xmlTgtDoc.createNode(1, "CONTROLDATA", "");
+		root.appendChild(nodeControlData);
+		nodeControlData.setAttribute("PRINTER", frmScreen.txtPrinter.value);
+		nodeControlData.setAttribute("FIRSTPAGEPRINTERTRAY", "0");
+		nodeControlData.setAttribute("OTHERPAGESPRINTERTRAY", "0");
+
+		var strDeliveryType = "10";
+		if (frmScreen.chkDeliveryTypePDF.checked)
+		{
+			strDeliveryType = "20";
+		}
+		nodeControlData.setAttribute("DELIVERYTYPE", strDeliveryType);
+		nodeControlData.setAttribute("COPIES", "1");
+
+		var newNode = xmlTgtDoc.createNode(1, "DOCUMENTCONTENTS", "");
+		root.appendChild(newNode);
+	
+		var nodePrintDocumentDetails = xmlSrcDoc.selectSingleNode("//RESPONSE/PRINTDOCUMENTDETAILS");
+		newNode.setAttribute("FILECONTENTS", nodePrintDocumentDetails.getAttribute("PRINTDOCUMENT"));
+
+		var strRequest = xmlTgtDoc.xml;
+
+		var ax = new ActiveXObject("axword.axwordclass");
+
+		ax.ViewAsWord = frmScreen.chkViewAsWord.checked;
+		ax.ViewAsPDF = frmScreen.chkViewAsPDF.checked;
+		ax.ReadOnly = frmScreen.chkReadOnly.checked;
+		ax.ResizeableFrame = frmScreen.chkResizableFrame.checked;
+		ax.ShowFindFreeText = frmScreen.chkShowFindFreeText.checked;
+		ax.SpellCheckOnSave = frmScreen.chkSpellCheckOnSave.checked;
+		ax.SpellCheckWhileEditing = frmScreen.chkSpellCheckWhileEditing.checked;
+		ax.ShowCommandBars = frmScreen.chkShowCommandBars.checked;
+		ax.PersistState = frmScreen.chkPersistState.checked;
+		ax.ShowTrackedChanges = frmScreen.chkShowTrackedChanges.checked;
+		ax.ShowPrint = frmScreen.chkShowPrint.checked;
+		ax.ShowPrintDialog = frmScreen.chkShowPrintDialog.checked;
+		ax.DisablePrintOut = frmScreen.chkDisablePrintOut.checked;
+
+		// Invoke Axword.
+		if (frmScreen.chkBackgroundPrint.checked)
+		{
+			ax.PrintDocument(strRequest);
+		}
+		else
+		{
+			ax.XML = strRequest;
+		}
+	}
+	catch(e)
+	{
+		alert("Error running Axword: " + e.description + " (" + e.number + ")");
+	}
+}
+
+-->
+</SCRIPT>
+
+</BODY>
+
+</HTML>

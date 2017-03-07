@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+Project;        ING Direct Diect Gateway (Project MARS)
+
+File:           ValidateBankDetails.xsd
+
+Type Versions;  Type versioning is via namepaces.   
+                Namespace versioning follows this pattern; "url/[major_version].[minor_version].[release_version]"
+
+Author(s):      Subodh Kumar.
+
+Description;    Used for validating sort code and account number using bank wizard.
+
+============================================================================================== -->
+<schema targetNamespace="http://validatebankdetails.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ValidateBankDetails="http://validatebankdetails.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>Rename element PaymentAccountDetails to AccountDetails</documentation>
+		<documentation>Deleted element "Address" type="common:StructuredAddressDetailsType" </documentation>
+		<documentation>Element "Address" has been deleted because AccountDetails contains the Bank Address ,so no need 
+        				to declare a separate element for address.
+         </documentation>
+         <documentation>Annotated as per Use Case APP13 (01/08/2005)</documentation>
+	</annotation>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<!-- end of type imports -->
+	<!-- start of type definitions -->
+	<complexType name="ValidateBankDetailsRequestType" abstract="false">
+		<annotation>
+			<documentation>The bank sort code and account number entered on screen are passed to the Bank Wizard system to check that the sort code is currently valid and that the account number is valid for Direct Debit. This meets the requirement for bank details to be validated prior to use in the AUDDIS and BACS systems for Direct Debit by electronic mandates.</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="NewAccountName" type="string" nillable="true" minOccurs="0"/>
+					<element name="NewAccountNumber" type="string" nillable="true">
+						<annotation>
+							<documentation>Payment Account Number. The bank account number to be used for mortgage payment direct debit. Alphanumeric field, 13 characters max.</documentation>
+						</annotation>
+					</element>
+					<element name="NewSortCode" type="string" nillable="true">
+						<annotation>
+							<documentation>Payment Account Sort Code. The bank sort code for the account to be used for mortgage payment direct debit. Alphanumeric field, 6 numeric characters max.</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ValidateBankDetailsResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="AccountDetails" type="common:BankAccountDetailsType">
+						<annotation>
+							<documentation>The results are returned immediately with either an error (result) code or the entered sortcode, account number and bank name and address.  Exceptionally a different sort code or account number could be returned, for use in place of the original details. Individual elements are annotated within CommonTypes xsd. Elements within BankAccountDetailsType returned by this schema are: SortCode; AccountNumber; BankName (display only); BankAddress (display only); TransposedIndicator (display only). If unsuccessful, this schema will return an Error Code and Error Message (Error elements defined with GenericMessages xsd).</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="ValidateBankDetailsRequest" type="ValidateBankDetails:ValidateBankDetailsRequestType"/>
+	<element name="ValidateBankDetailsResponse" type="ValidateBankDetails:ValidateBankDetailsResponseType"/>
+</schema>

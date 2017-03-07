@@ -1,0 +1,412 @@
+<LOOKUPTABLES>
+	<PROPERTY NAME="AddressDetail.CountryCode" LOOKUPTABLE="CountryCode"/>
+	<PROPERTY NAME="SecurityAddressDetail.CountryCode" LOOKUPTABLE="CountryCode"/>
+	<PROPERTY NAME="AddressDetail.Location" LOOKUPTABLE="County"/>
+	<PROPERTY NAME="SecurityAddressDetail.Location" LOOKUPTABLE="County"/>
+	<PROPERTY NAME="RealEstateImpl.CollateralImprovementType" LOOKUPTABLE="PropertyDescription"/>
+	<PROPERTY NAME="RealEstateImpl.CollateralUsage" LOOKUPTABLE="PropertyDescription"/>
+	<PROPERTY NAME="RealEstateImpl.COLLATERALOCCUPANCYSTATUS" LOOKUPTABLE="PropertyType"/>
+	<PROPERTY NAME="RealEstateImpl.FreeholdTitle" LOOKUPTABLE="PropertyTenure"/>
+	<PROPERTY NAME="CustomerDetailImpl.Gender" LOOKUPTABLE="Gender"/>
+	<PROPERTY NAME="MortgagorImpl.Gender" LOOKUPTABLE="Gender"/>
+	<PROPERTY NAME="PrimaryCustomerImpl.Gender" LOOKUPTABLE="Gender"/>
+	<PROPERTY NAME="PeripheralSecurityImpl.peripheralCIFSuffix" LOOKUPTABLE="HomeInsuranceType"/>
+	<PROPERTY NAME="ChargeImpl.MortgageInsuranceType" LOOKUPTABLE="InsuranceType"/>
+	<PROPERTY NAME="PaymentSourceKey.PaymentMethod" LOOKUPTABLE="PaymentMethod"/>
+	<PROPERTY NAME="RealEstateImpl.FreeholdTitle" LOOKUPTABLE="PropertyTenure"/>
+	<PROPERTY NAME="ChargeImpl.xxx" LOOKUPTABLE="PurposeOfLoan"/>
+	<PROPERTY NAME="PIComponentImpl.PaymentType" LOOKUPTABLE="RepaymentType"/>
+	<PROPERTY NAME="PIComponentImpl.Status" LOOKUPTABLE="ComponentRedemptionStatus"/>
+	<PROPERTY NAME="ChargeImpl.Status" LOOKUPTABLE="AccountRedemptionStatus"/>
+	<PROPERTY NAME="CustomerDetailImpl.PreferredCommunicationMethod" LOOKUPTABLE="CommunicationMethod"/>
+	<PROPERTY NAME="MortgagorImpl.PreferredCommunicationMethod" LOOKUPTABLE="CommunicationMethod"/>
+	<PROPERTY NAME="PrimaryCustomerImpl.PreferredCommunicationMethod" LOOKUPTABLE="CommunicationMethod"/>
+	<PROPERTY NAME="PrimaryCustomerImpl.preferredCommunicationTime" LOOKUPTABLE="CommunicationTime"/>
+	<PROPERTY NAME="CustomerDetailImpl.preferredCommunicationTime" LOOKUPTABLE="CommunicationTime"/>
+	<PROPERTY NAME="NameDetail.Title" LOOKUPTABLE="Title"/>
+	<PROPERTY NAME="CustomerListNameDetail.Title" LOOKUPTABLE="Title"/>
+	<PROPERTY NAME="PrimaryCustomerImpl.BranchCIFSuffix" LOOKUPTABLE="BranchCIFSuffix"/>
+	<PROPERTY NAME="PrimaryCustomerImpl.BranchCIFNumber" LOOKUPTABLE="BranchCIFNumber"/>
+	<PROPERTY NAME="PrimaryCustomerImpl.EntityType" LOOKUPTABLE="EntityType"/>
+	<PROPERTY NAME="ClSearchDescription.ExpirySuffix" LOOKUPTABLE="CustomerRoleType"/>
+	<PROPERTY NAME="CISEARCHDESCRIPTION.Status" LOOKUPTABLE="AccountRedemptionStatus"/>
+	<PROPERTY NAME="CustomerDetailImpl.MaritalStatus" LOOKUPTABLE="MaritalStatus"/>
+	<PROPERTY NAME="MortgagorImpl.MaritalStatus" LOOKUPTABLE="MaritalStatus"/>
+	<PROPERTY NAME="PrimaryCustomerImpl.MaritalStatus" LOOKUPTABLE="MaritalStatus"/>
+	<PROPERTY NAME="ChargeImpl.ProductLineOfBusiness" LOOKUPTABLE="NatureOfLoan"/>
+	<PROPERTY NAME="PIComponentImpl.UserDefinedCode2" LOOKUPTABLE="CreditScheme"/>
+	<PROPERTY NAME="ChargeImpl.ProductLine" LOOKUPTABLE="INCOMESTATUS"/>
+	<!--
+	<PROPERTY NAME="" LOOKUPTABLE=""/>
+	-->
+	<LOOKUPTABLE NAME="NatureOfLoan" SENDSRC="NatureOfLoan" RECVSRC="M.LINOBZ">
+		<ITEM NAME="Residential" 		SENDIN="1"  SENDOUT="RE" RECVIN="RE" RECVOUT="1"/>
+		<ITEM NAME="Buy-to-Let Income Based" 	SENDIN="10" SENDOUT="BI" RECVIN="BI" RECVOUT="10"/>
+		<ITEM NAME="Buy-to-Let Rental Based" 	SENDIN="11" SENDOUT="BR" RECVIN="BR" RECVOUT="11"/>
+		<ITEM NAME="Let-to-Buy" 		SENDIN="12" SENDOUT="LT" RECVIN="LT" RECVOUT="12"/>
+	</LOOKUPTABLE>	
+	<LOOKUPTABLE NAME="CreditScheme" SENDSRC="SpecialGroup" RECVSRC="M.MISC02">
+		<ITEM NAME="Near Prime +" 		SENDIN="10"  SENDOUT="PR" RECVIN="PR" RECVOUT="10"/>
+		<ITEM NAME="Near Prime" 		SENDIN="20"  SENDOUT="NP" RECVIN="NP" RECVOUT="20"/>
+		<ITEM NAME="Super-Light"	 	SENDIN="30"  SENDOUT="SL" RECVIN="SL" RECVOUT="30"/>
+		<ITEM NAME="Light" 			SENDIN="40"  SENDOUT="LI" RECVIN="LI" RECVOUT="40"/>
+		<ITEM NAME="Medium 1" 			SENDIN="50"  SENDOUT="M1" RECVIN="M1" RECVOUT="50"/>
+		<ITEM NAME="Medium 2" 			SENDIN="60"  SENDOUT="M2" RECVIN="M2" RECVOUT="60"/>
+		<ITEM NAME="Heavy 1" 			SENDIN="70"  SENDOUT="H1" RECVIN="H1" RECVOUT="70"/>
+		<ITEM NAME="Heavy 2" 			SENDIN="80"  SENDOUT="H2" RECVIN="H2" RECVOUT="80"/>
+		<ITEM NAME="Unlimited 1" 		SENDIN="90"  SENDOUT="U1" RECVIN="U1" RECVOUT="90"/>
+		<ITEM NAME="Unlimited 2" 		SENDIN="100" SENDOUT="U2" RECVIN="U2" RECVOUT="100"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="INCOMESTATUS" SENDSRC="APPLICATIONINCOMESTATUS" RECVSRC="M.PRDLIN">
+		<ITEM NAME="Full Status Purc" 		SENDIN=""  SENDOUT="FP" RECVIN="FP" RECVOUT="20"/>
+		<ITEM NAME="Full Status Remo" 		SENDIN=""  SENDOUT="FR" RECVIN="FR" RECVOUT="20"/>
+		<ITEM NAME="Self Cert Purc" 		SENDIN=""  SENDOUT="SP" RECVIN="SP" RECVOUT="10"/>
+		<ITEM NAME="Self Cert Remort" 		SENDIN=""  SENDOUT="SR" RECVIN="SR" RECVOUT="10"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="PropertyDescription" SENDSRC="PropertyDescription" RECVSRC="M.PTYIMP">
+		<ITEM NAME="Detached" SENDIN="1" SENDOUT="DE" RECVIN="DE" RECVOUT="1"/>
+		<ITEM NAME="Semi-Detached" SENDIN="2" SENDOUT="SD" RECVIN="SD" RECVOUT="2"/>
+		<ITEM NAME="Mid-Terraced" SENDIN="3" SENDOUT="TE" RECVIN="TE" RECVOUT="3"/>
+		<ITEM NAME="End-Terraced " SENDIN="4" SENDOUT="ET" RECVIN="ET" RECVOUT="4"/>
+		<ITEM NAME="Converted" SENDIN="5" SENDOUT="CO" RECVIN="CO" RECVOUT="5"/>
+		<ITEM NAME="Purpose Built" SENDIN="6" SENDOUT="PB" RECVIN="PB" RECVOUT="6"/>
+		<ITEM NAME="Studio" SENDIN="8" SENDOUT="SF" RECVIN="ST" RECVOUT="8"/>
+		<ITEM NAME="Studio" SENDIN="9" SENDOUT="ST" RECVIN="ST" RECVOUT="8"/>
+		<ITEM NAME="Other" SENDIN="99" SENDOUT="OT" RECVIN="OT" RECVOUT="99"/>
+		<ITEM NAME="Not applicable" SENDIN="99" SENDOUT="OT" RECVIN="NA" RECVOUT="99"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="PropertyType" SENDSRC="PropertyType" RECVSRC="PTYOCC">
+		<ITEM NAME="House" SENDIN="10" SENDOUT="H" RECVIN="H" RECVOUT="10"/>
+		<ITEM NAME="Bungalow" SENDIN="20" SENDOUT="B" RECVIN="B" RECVOUT="20"/>
+		<ITEM NAME="Flat" SENDIN="30" SENDOUT="F" RECVIN="F" RECVOUT="30"/>
+		<ITEM NAME="Maisonette" SENDIN="40" SENDOUT="F" RECVIN="F" RECVOUT="30"/>
+		<ITEM NAME="Other" SENDIN="99" SENDOUT="99" RECVIN="99" RECVOUT="99"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="CommunicationMethod" SENDSRC="CommunicationMethod" RECVSRC="S.COMMTD">
+		<ITEM NAME="Home Phone App 1" SENDIN="1" SENDOUT="01" RECVIN="01" RECVOUT="1"/>
+		<ITEM NAME="Home Phone App 1" SENDIN="" SENDOUT="" RECVIN="02" RECVOUT="1"/>
+		<ITEM NAME="Work App 1" SENDIN="2" SENDOUT="03" RECVIN="03" RECVOUT="2"/>
+		<ITEM NAME="Work App 2" SENDIN="2" SENDOUT="" RECVIN="04" RECVOUT="2"/>
+		<ITEM NAME="Mobile App 1" SENDIN="3" SENDOUT="05" RECVIN="05" RECVOUT="3"/>
+		<ITEM NAME="Mobile App 2" SENDIN="3" SENDOUT="" RECVIN="06" RECVOUT="3"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="CommunicationTime" SENDSRC="" RECVSRC="">
+		<ITEM NAME="Morning" SENDIN="" SENDOUT="" RECVIN="01" RECVOUT="Morning"/>
+		<ITEM NAME="Afternoon" SENDIN="" SENDOUT="" RECVIN="02" RECVOUT="Afternoon"/>
+		<ITEM NAME="Evening" SENDIN="" SENDOUT="" RECVIN="03" RECVOUT="Evening"/>
+		<ITEM NAME="Weekend" SENDIN="" SENDOUT="" RECVIN="04" RECVOUT="Weekend"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="CountryCode" SENDSRC="Country" RECVSRC="S.PRVNBR">
+		<ITEM NAME="UK" SENDIN="10" SENDOUT="UK" RECVIN="UK" RECVOUT="10"/>
+		<ITEM NAME="England" SENDIN="" SENDOUT="ENG" RECVIN="ENG" RECVOUT="10"/>
+		<ITEM NAME="Wales" SENDIN="" SENDOUT="WAL" RECVIN="WAL" RECVOUT="10"/>
+		<ITEM NAME="Scotland" SENDIN="" SENDOUT="SCO" RECVIN="SCO" RECVOUT="10"/>
+		<ITEM NAME="Norther Ireland" SENDIN="" SENDOUT="NI" RECVIN="NI" RECVOUT="10"/>
+		<ITEM NAME="Overseas" SENDIN="20" SENDOUT="OTH" RECVIN="OTH" RECVOUT="20"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="County" SENDSRC="County" RECVSRC="S.PRVNBR">
+		<ITEM NAME="Agryll and Bute" SENDIN="Agryll and Bute" SENDOUT="AB" RECVIN="AB" RECVOUT="Agryll and Bute"/>
+		<ITEM NAME="Aberdeen City" SENDIN="Aberdeen City" SENDOUT="AC" RECVIN="AC" RECVOUT="Aberdeen City"/>
+		<ITEM NAME="Angus" SENDIN="Angus" SENDOUT="AG" RECVIN="AG" RECVOUT="Angus"/>
+		<ITEM NAME="Aberdeenshire" SENDIN="Aberdeenshire" SENDOUT="AN" RECVIN="AN" RECVOUT="Aberdeenshire"/>
+		<ITEM NAME="Avon" SENDIN="Avon" SENDOUT="AV" RECVIN="AV" RECVOUT="Avon"/>
+		<ITEM NAME="Ayrshire" SENDIN="Ayrshire" SENDOUT="AY" RECVIN="AY" RECVOUT="Ayrshire"/>
+		<ITEM NAME="Bedfordshire" SENDIN="Bedfordshire" SENDOUT="BE" RECVIN="BE" RECVOUT="Bedfordshire"/>
+		<ITEM NAME="Bridgend" SENDIN="Bridgend" SENDOUT="BG" RECVIN="BG" RECVOUT="Bridgend"/>
+		<ITEM NAME="Berkshire" SENDIN="Berkshire" SENDOUT="BK" RECVIN="BK" RECVOUT="Berkshire"/>
+		<ITEM NAME="Blaenau Gwent" SENDIN="Blaenau Gwent" SENDOUT="BL" RECVIN="BL" RECVOUT="Blaenau Gwent"/>
+		<ITEM NAME="Bristol" SENDIN="Bristol" SENDOUT="BR" RECVIN="BR" RECVOUT="Bristol"/>
+		<ITEM NAME="Buckinghamshire" SENDIN="Buckinghamshire" SENDOUT="BU" RECVIN="BU" RECVOUT="Buckinghamshire"/>
+		<ITEM NAME="Berwickshire" SENDIN="Berwickshire" SENDOUT="BW" RECVIN="BW" RECVOUT="Berwickshire"/>
+		<ITEM NAME="Caerphilly" SENDIN="Caerphilly" SENDOUT="CA" RECVIN="CA" RECVOUT="Caerphilly"/>
+		<ITEM NAME="County Durham" SENDIN="County Durham" SENDOUT="CD" RECVIN="CD" RECVOUT="County Durham"/>
+		<ITEM NAME="Ceredigion" SENDIN="Ceredigion" SENDOUT="CE" RECVIN="CE" RECVOUT="Ceredigion"/>
+		<ITEM NAME="Cheshire" SENDIN="Cheshire" SENDOUT="CH" RECVIN="CH" RECVOUT="Cheshire"/>
+		<ITEM NAME="Clackmannanshire" SENDIN="Clackmannanshire" SENDOUT="CK" RECVIN="CK" RECVOUT="Clackmannanshire"/>
+		<ITEM NAME="Cleveland" SENDIN="Cleveland" SENDOUT="CL" RECVIN="CL" RECVOUT="Cleveland"/>
+		<ITEM NAME="Cambridgeshire" SENDIN="Cambridgeshire" SENDOUT="CM" RECVIN="CM" RECVOUT="Cambridgeshire"/>
+		<ITEM NAME="Conwy" SENDIN="Conwy" SENDOUT="CN" RECVIN="CN" RECVOUT="Conwy"/>
+		<ITEM NAME="Cornwall" SENDIN="Cornwall" SENDOUT="CO" RECVIN="CO" RECVOUT="Cornwall"/>
+		<ITEM NAME="Cardiff" SENDIN="Cardiff" SENDOUT="CR" RECVIN="CR" RECVOUT="Cardiff"/>
+		<ITEM NAME="Carmarthenshire" SENDIN="Carmarthenshire" SENDOUT="CT" RECVIN="CT" RECVOUT="Carmarthenshire"/>
+		<ITEM NAME="Cumbria" SENDIN="Cumbria" SENDOUT="CU" RECVIN="CU" RECVOUT="Cumbria"/>
+		<ITEM NAME="Clwyd" SENDIN="Clwyd" SENDOUT="CW" RECVIN="CW" RECVOUT="Clwyd"/>
+		<ITEM NAME="County Antrim" SENDIN="County Antrim" SENDOUT="C1" RECVIN="C1" RECVOUT="County Antrim"/>
+		<ITEM NAME="County Armagh" SENDIN="County Armagh" SENDOUT="C2" RECVIN="C2" RECVOUT="County Armagh"/>
+		<ITEM NAME="County Down" SENDIN="County Down" SENDOUT="C3" RECVIN="C3" RECVOUT="County Down"/>
+		<ITEM NAME="County Fermanagh" SENDIN="County Fermanagh" SENDOUT="C4" RECVIN="C4" RECVOUT="County Fermanagh"/>
+		<ITEM NAME="Cnty Londonderry" SENDIN="Cnty Londonderry" SENDOUT="C5" RECVIN="C5" RECVOUT="Cnty Londonderry"/>
+		<ITEM NAME="County Tyrone" SENDIN="County Tyrone" SENDOUT="C6" RECVIN="C6" RECVOUT="County Tyrone"/>
+		<ITEM NAME="Dundee City" SENDIN="Dundee City" SENDOUT="DC" RECVIN="DC" RECVOUT="Dundee City"/>
+		<ITEM NAME="Derbyshire" SENDIN="Derbyshire" SENDOUT="DE" RECVIN="DE" RECVOUT="Derbyshire"/>
+		<ITEM NAME="Dumfriesshire" SENDIN="Dumfriesshire" SENDOUT="DF" RECVIN="DF" RECVOUT="Dumfriesshire"/>
+		<ITEM NAME="Dumfries &amp; Gal'y" SENDIN="Dumfries &amp; Gal'y" SENDOUT="DG" RECVIN="DG" RECVOUT="Dumfries &amp; Gal'y"/>
+		<ITEM NAME="Denbighshire" SENDIN="Denbighshire" SENDOUT="DN" RECVIN="DN" RECVOUT="Denbighshire"/>
+		<ITEM NAME="Dorset" SENDIN="Dorset" SENDOUT="DO" RECVIN="DO" RECVOUT="Dorset"/>
+		<ITEM NAME="Durham" SENDIN="Durham" SENDOUT="DU" RECVIN="DU" RECVOUT="Durham"/>
+		<ITEM NAME="Devon" SENDIN="Devon" SENDOUT="DV" RECVIN="DV" RECVOUT="Devon"/>
+		<ITEM NAME="Dyfed" SENDIN="Dyfed" SENDOUT="DY" RECVIN="DY" RECVOUT="Dyfed"/>
+		<ITEM NAME="East Ayrshire" SENDIN="East Ayrshire" SENDOUT="EA" RECVIN="EA" RECVOUT="East Ayrshire"/>
+		<ITEM NAME="E Dunbartonshire" SENDIN="E Dunbartonshire" SENDOUT="ED" RECVIN="ED" RECVOUT="E Dunbartonshire"/>
+		<ITEM NAME="E Renfrewshire" SENDIN="E Renfrewshire" SENDOUT="EF" RECVIN="EF" RECVOUT="E Renfrewshire"/>
+		<ITEM NAME="Edinburgh" SENDIN="Edinburgh" SENDOUT="EG" RECVIN="EG" RECVOUT="Edinburgh"/>
+		<ITEM NAME="East Lothian" SENDIN="East Lothian" SENDOUT="EL" RECVIN="EL" RECVOUT="East Lothian"/>
+		<ITEM NAME="E.Riding Yorkshr" SENDIN="E.Riding Yorkshr" SENDOUT="ER" RECVIN="ER" RECVOUT="E.Riding Yorkshr"/>
+		<ITEM NAME="East Sussex" SENDIN="East Sussex" SENDOUT="ES" RECVIN="ES" RECVOUT="East Sussex"/>
+		<ITEM NAME="Essex" SENDIN="Essex" SENDOUT="EX" RECVIN="EX" RECVOUT="Essex"/>
+		<ITEM NAME="Fife" SENDIN="Fife" SENDOUT="FI" RECVIN="FI" RECVOUT="Fife"/>
+		<ITEM NAME="Flintshire" SENDIN="Flintshire" SENDOUT="FL" RECVIN="FL" RECVOUT="Flintshire"/>
+		<ITEM NAME="Gloucestershire" SENDIN="Gloucestershire" SENDOUT="GL" RECVIN="GL" RECVOUT="Gloucestershire"/>
+		<ITEM NAME="Greater Manchster" SENDIN="Greater Manchster" SENDOUT="GM" RECVIN="GM" RECVOUT="Greater Manchster"/>
+		<ITEM NAME="Gwynedd" SENDIN="Gwynedd" SENDOUT="GN" RECVIN="GN" RECVOUT="Gwynedd"/>
+		<ITEM NAME="Glasgow" SENDIN="Glasgow" SENDOUT="GO" RECVIN="GO" RECVOUT="Glasgow"/>
+		<ITEM NAME="Guernsey" SENDIN="Guernsey" SENDOUT="GU" RECVIN="GU" RECVOUT="Guernsey"/>
+		<ITEM NAME="Gwent" SENDIN="Gwent" SENDOUT="GW" RECVIN="GW" RECVOUT="Gwent"/>
+		<ITEM NAME="Hampshire" SENDIN="Hampshire" SENDOUT="HA" RECVIN="HA" RECVOUT="Hampshire"/>
+		<ITEM NAME="Herefordshire" SENDIN="Herefordshire" SENDOUT="HE" RECVIN="HE" RECVOUT="Herefordshire"/>
+		<ITEM NAME="Highland" SENDIN="Highland" SENDOUT="HI" RECVIN="HI" RECVOUT="Highland"/>
+		<ITEM NAME="Hertfordshire" SENDIN="Hertfordshire" SENDOUT="HR" RECVIN="HR" RECVOUT="Hertfordshire"/>
+		<ITEM NAME="Hereford &amp; Worc" SENDIN="Hereford &amp; Worc" SENDOUT="HW" RECVIN="HW" RECVOUT="Hereford &amp; Worc"/>
+		<ITEM NAME="Isle of Anglesey" SENDIN="Isle of Anglesey" SENDOUT="IA" RECVIN="IA" RECVOUT="Isle of Anglesey"/>
+		<ITEM NAME="Isle of Lewis" SENDIN="Isle of Lewis" SENDOUT="IL" RECVIN="IL" RECVOUT="Isle of Lewis"/>
+		<ITEM NAME="The Isle of Man" SENDIN="The Isle of Man" SENDOUT="IM" RECVIN="IM" RECVOUT="The Isle of Man"/>
+		<ITEM NAME="Inverclyde" SENDIN="Inverclyde" SENDOUT="IN" RECVIN="IN" RECVOUT="Inverclyde"/>
+		<ITEM NAME="Isles of Scilly" SENDIN="Isles of Scilly" SENDOUT="IS" RECVIN="IS" RECVOUT="Isles of Scilly"/>
+		<ITEM NAME="Inverness-shire" SENDIN="Inverness-shire" SENDOUT="IV" RECVIN="IV" RECVOUT="Inverness-shire"/>
+		<ITEM NAME="Isle of Wight" SENDIN="Isle of Wight" SENDOUT="IW" RECVIN="IW" RECVOUT="Isle of Wight"/>
+		<ITEM NAME="Jersey" SENDIN="Jersey" SENDOUT="JE" RECVIN="JE" RECVOUT="Jersey"/>
+		<ITEM NAME="Kent" SENDIN="Kent" SENDOUT="KE" RECVIN="KE" RECVOUT="Kent"/>
+		<ITEM NAME="Lancashire" SENDIN="Lancashire" SENDOUT="LA" RECVIN="LA" RECVOUT="Lancashire"/>
+		<ITEM NAME="Leicestershire" SENDIN="Leicestershire" SENDOUT="LE" RECVIN="LE" RECVOUT="Leicestershire"/>
+		<ITEM NAME="Greater London" SENDIN="Greater London" SENDOUT="LG" RECVIN="LG" RECVOUT="Greater London"/>
+		<ITEM NAME="Lincolnshire" SENDIN="Lincolnshire" SENDOUT="LI" RECVIN="LI" RECVOUT="Lincolnshire"/>
+		<ITEM NAME="Lanarkshire" SENDIN="Lanarkshire" SENDOUT="LK" RECVIN="LK" RECVOUT="Lanarkshire"/>
+		<ITEM NAME="London" SENDIN="London" SENDOUT="LO" RECVIN="LO" RECVOUT="London"/>
+		<ITEM NAME="Midlothian" SENDIN="Midlothian" SENDOUT="MD" RECVIN="MD" RECVOUT="Midlothian"/>
+		<ITEM NAME="Merseyside" SENDIN="Merseyside" SENDOUT="ME" RECVIN="ME" RECVOUT="Merseyside"/>
+		<ITEM NAME="Mid Glamorgan" SENDIN="Mid Glamorgan" SENDOUT="MG" RECVIN="MG" RECVOUT="Mid Glamorgan"/>
+		<ITEM NAME="Middlesex" SENDIN="Middlesex" SENDOUT="MI" RECVIN="MI" RECVOUT="Middlesex"/>
+		<ITEM NAME="Monmouthshire" SENDIN="Monmouthshire" SENDOUT="MO" RECVIN="MO" RECVOUT="Monmouthshire"/>
+		<ITEM NAME="Moray" SENDIN="Moray" SENDOUT="MR" RECVIN="MR" RECVOUT="Moray"/>
+		<ITEM NAME="Merthyr Tydfil" SENDIN="Merthyr Tydfil" SENDOUT="MT" RECVIN="MT" RECVOUT="Merthyr Tydfil"/>
+		<ITEM NAME="North Ayrshire" SENDIN="North Ayrshire" SENDOUT="NA" RECVIN="NA" RECVOUT="North Ayrshire"/>
+		<ITEM NAME="Newport" SENDIN="Newport" SENDOUT="NE" RECVIN="NE" RECVOUT="Newport"/>
+		<ITEM NAME="North Humberside" SENDIN="North Humberside" SENDOUT="NH" RECVIN="NH" RECVOUT="North Humberside"/>
+		<ITEM NAME="N Lanarkshire" SENDIN="N Lanarkshire" SENDOUT="NL" RECVIN="NL" RECVOUT="N Lanarkshire"/>
+		<ITEM NAME="Northumberland" SENDIN="Northumberland" SENDOUT="NM" RECVIN="NM" RECVOUT="Northumberland"/>
+		<ITEM NAME="Norfolk" SENDIN="Norfolk" SENDOUT="NO" RECVIN="NO" RECVOUT="Norfolk"/>
+		<ITEM NAME="Neath Prt Talbot" SENDIN="Neath Prt Talbot" SENDOUT="NP" RECVIN="NP" RECVOUT="Neath Prt Talbot"/>
+		<ITEM NAME="Northamptonshire" SENDIN="Northamptonshire" SENDOUT="NR" RECVIN="NR" RECVOUT="Northamptonshire"/>
+		<ITEM NAME="Nottinghamshire" SENDIN="Nottinghamshire" SENDOUT="NT" RECVIN="NT" RECVOUT="Nottinghamshire"/>
+		<ITEM NAME="North Yorkshire" SENDIN="North Yorkshire" SENDOUT="NY" RECVIN="NY" RECVOUT="North Yorkshire"/>
+		<ITEM NAME="Orkney" SENDIN="Orkney" SENDOUT="OR" RECVIN="OR" RECVOUT="Orkney"/>
+		<ITEM NAME="Oxfordshire" SENDIN="Oxfordshire" SENDOUT="OX" RECVIN="OX" RECVOUT="Oxfordshire"/>
+		<ITEM NAME="Peeblesshire" SENDIN="Peeblesshire" SENDOUT="PB" RECVIN="PB" RECVOUT="Peeblesshire"/>
+		<ITEM NAME="Pembrokeshire" SENDIN="Pembrokeshire" SENDOUT="PE" RECVIN="PE" RECVOUT="Pembrokeshire"/>
+		<ITEM NAME="Perth &amp; Kinross" SENDIN="Perth &amp; Kinross" SENDOUT="PK" RECVIN="PK" RECVOUT="Perth &amp; Kinross"/>
+		<ITEM NAME="Powys" SENDIN="Powys" SENDOUT="PO" RECVIN="PO" RECVOUT="Powys"/>
+		<ITEM NAME="Perthshire" SENDIN="Perthshire" SENDOUT="PR" RECVIN="PR" RECVOUT="Perthshire"/>
+		<ITEM NAME="Renfrewshire" SENDIN="Renfrewshire" SENDOUT="RF" RECVIN="RF" RECVOUT="Renfrewshire"/>
+		<ITEM NAME="Rhondda C.T." SENDIN="Rhondda C.T." SENDOUT="RH" RECVIN="RH" RECVOUT="Rhondda C.T."/>
+		<ITEM NAME="Rutland" SENDIN="Rutland" SENDOUT="RU" RECVIN="RU" RECVOUT="Rutland"/>
+		<ITEM NAME="Roxburghshire" SENDIN="Roxburghshire" SENDOUT="RX" RECVIN="RX" RECVOUT="Roxburghshire"/>
+		<ITEM NAME="South Ayrshire" SENDIN="South Ayrshire" SENDOUT="SA" RECVIN="SA" RECVOUT="South Ayrshire"/>
+		<ITEM NAME="Scottish Borders" SENDIN="Scottish Borders" SENDOUT="SB" RECVIN="SB" RECVOUT="Scottish Borders"/>
+		<ITEM NAME="Suffolk" SENDIN="Suffolk" SENDOUT="SF" RECVIN="SF" RECVOUT="Suffolk"/>
+		<ITEM NAME="South Glamorgan" SENDIN="South Glamorgan" SENDOUT="SG" RECVIN="SG" RECVOUT="South Glamorgan"/>
+		<ITEM NAME="South Humberside" SENDIN="South Humberside" SENDOUT="SH" RECVIN="SH" RECVOUT="South Humberside"/>
+		<ITEM NAME="Stirlingshire" SENDIN="Stirlingshire" SENDOUT="SI" RECVIN="SI" RECVOUT="Stirlingshire"/>
+		<ITEM NAME="Selkirkshire" SENDIN="Selkirkshire" SENDOUT="SK" RECVIN="SK" RECVOUT="Selkirkshire"/>
+		<ITEM NAME="Shetland" SENDIN="Shetland" SENDOUT="SL" RECVIN="SL" RECVOUT="Shetland"/>
+		<ITEM NAME="Sth Lanarkshire" SENDIN="Sth Lanarkshire" SENDOUT="SN" RECVIN="SN" RECVOUT="Sth Lanarkshire"/>
+		<ITEM NAME="Somerset" SENDIN="Somerset" SENDOUT="SO" RECVIN="SO" RECVOUT="Somerset"/>
+		<ITEM NAME="Shropshire" SENDIN="Shropshire" SENDOUT="SR" RECVIN="SR" RECVOUT="Shropshire"/>
+		<ITEM NAME="Staffordshire" SENDIN="Staffordshire" SENDOUT="ST" RECVIN="ST" RECVOUT="Staffordshire"/>
+		<ITEM NAME="Surrey" SENDIN="Surrey" SENDOUT="SU" RECVIN="SU" RECVOUT="Surrey"/>
+		<ITEM NAME="Swansea" SENDIN="Swansea" SENDOUT="SW" RECVIN="SW" RECVOUT="Swansea"/>
+		<ITEM NAME="South Yorkshire" SENDIN="South Yorkshire" SENDOUT="SY" RECVIN="SY" RECVOUT="South Yorkshire"/>
+		<ITEM NAME="Torfaen" SENDIN="Torfaen" SENDOUT="TO" RECVIN="TO" RECVOUT="Torfaen"/>
+		<ITEM NAME="Tyne and Wear" SENDIN="Tyne and Wear" SENDOUT="TY" RECVIN="TY" RECVOUT="Tyne and Wear"/>
+		<ITEM NAME="Vale of Glamorgn" SENDIN="Vale of Glamorgn" SENDOUT="VG" RECVIN="VG" RECVOUT="Vale of Glamorgn"/>
+		<ITEM NAME="Warwickshire" SENDIN="Warwickshire" SENDOUT="WA" RECVIN="WA" RECVOUT="Warwickshire"/>
+		<ITEM NAME="W Dunbartonshire" SENDIN="W Dunbartonshire" SENDOUT="WD" RECVIN="WD" RECVOUT="W Dunbartonshire"/>
+		<ITEM NAME="Western Isles" SENDIN="Western Isles" SENDOUT="WE" RECVIN="WE" RECVOUT="Western Isles"/>
+		<ITEM NAME="West Glamorgan" SENDIN="West Glamorgan" SENDOUT="WG" RECVIN="WG" RECVOUT="West Glamorgan"/>
+		<ITEM NAME="Wiltshire" SENDIN="Wiltshire" SENDOUT="WI" RECVIN="WI" RECVOUT="Wiltshire"/>
+		<ITEM NAME="West Lothian" SENDIN="West Lothian" SENDOUT="WL" RECVIN="WL" RECVOUT="West Lothian"/>
+		<ITEM NAME="West Midlands" SENDIN="West Midlands" SENDOUT="WM" RECVIN="WM" RECVOUT="West Midlands"/>
+		<ITEM NAME="Worcestershire" SENDIN="Worcestershire" SENDOUT="WO" RECVIN="WO" RECVOUT="Worcestershire"/>
+		<ITEM NAME="Wrexham" SENDIN="Wrexham" SENDOUT="WR" RECVIN="WR" RECVOUT="Wrexham"/>
+		<ITEM NAME="West Sussex" SENDIN="West Sussex" SENDOUT="WS" RECVIN="WS" RECVOUT="West Sussex"/>
+		<ITEM NAME="West Yorkshire" SENDIN="West Yorkshire" SENDOUT="WY" RECVIN="WY" RECVOUT="West Yorkshire"/>
+		<ITEM NAME="Other" SENDIN="Other" SENDOUT="99" RECVIN="99" RECVOUT="Other"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="Gender" SENDSRC="Sex" RECVSRC="S.GENDER">
+		<ITEM NAME="Male" SENDIN="1" SENDOUT="1" RECVIN="1" RECVOUT="1"/>
+		<ITEM NAME="Female" SENDIN="2" SENDOUT="2" RECVIN="2" RECVOUT="2"/>
+		<ITEM NAME="Undefined" SENDIN="" SENDOUT="" RECVIN="9" RECVOUT=""/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="HomeInsuranceType" SENDSRC="InsuranceType" RECVSRC="M.XPRNBR">
+		<ITEM NAME="Buildings Policy" SENDIN="1" SENDOUT="10" RECVIN="10" RECVOUT="1"/>
+		<ITEM NAME="Contents Policy" SENDIN="2" SENDOUT="14" RECVIN="14" RECVOUT="2"/>
+		<ITEM NAME="Buildings and Contents Policy" SENDIN="" SENDOUT="" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Sols instructed" SENDIN="" SENDOUT="" RECVIN="LC" RECVOUT="3"/>
+		<ITEM NAME="Hearing pending" SENDIN="" SENDOUT="" RECVIN="LE" RECVOUT="3"/>
+		<ITEM NAME="Order obtained" SENDIN="" SENDOUT="" RECVIN="LG" RECVOUT="3"/>
+		<ITEM NAME="Order enforced" SENDIN="" SENDOUT="" RECVIN="LH" RECVOUT="3"/>
+		<ITEM NAME="Fire insurance" SENDIN="" SENDOUT="" RECVIN="10" RECVOUT="3"/>
+		<ITEM NAME="Rental insurance" SENDIN="" SENDOUT="" RECVIN="11" RECVOUT="3"/>
+		<ITEM NAME="Construction ins" SENDIN="" SENDOUT="" RECVIN="12" RECVOUT="3"/>
+		<ITEM NAME="Interalia" SENDIN="" SENDOUT="" RECVIN="20" RECVOUT="3"/>
+		<ITEM NAME="Chattel Mortgage" SENDIN="" SENDOUT="" RECVIN="21" RECVOUT="3"/>
+		<ITEM NAME="Assgn't of Rent" SENDIN="" SENDOUT="" RECVIN="22" RECVOUT="3"/>
+		<ITEM NAME="AOR-Central Reg." SENDIN="" SENDOUT="" RECVIN="23" RECVOUT="3"/>
+		<ITEM NAME="Caveat" SENDIN="" SENDOUT="" RECVIN="24" RECVOUT="3"/>
+		<ITEM NAME="Assgn't-Contract" SENDIN="" SENDOUT="" RECVIN="26" RECVOUT="3"/>
+		<ITEM NAME="P.P.S.A" SENDIN="" SENDOUT="" RECVIN="27" RECVOUT="3"/>
+		<ITEM NAME="Land Lease" SENDIN="" SENDOUT="" RECVIN="28" RECVOUT="3"/>
+		<ITEM NAME="Sp. Assg't Lease" SENDIN="" SENDOUT="" RECVIN="29" RECVOUT="3"/>
+		<ITEM NAME="Covenantor" SENDIN="" SENDOUT="" RECVIN="40" RECVOUT="3"/>
+		<ITEM NAME="G'tor-Individual" SENDIN="" SENDOUT="" RECVIN="41" RECVOUT="3"/>
+		<ITEM NAME="G'tor-Joint" SENDIN="" SENDOUT="" RECVIN="42" RECVOUT="3"/>
+		<ITEM NAME="G'tor-Limited" SENDIN="" SENDOUT="" RECVIN="43" RECVOUT="3"/>
+		<ITEM NAME="Borrower" SENDIN="" SENDOUT="" RECVIN="45" RECVOUT="3"/>
+		<ITEM NAME="Borrower-Joint" SENDIN="" SENDOUT="" RECVIN="46" RECVOUT="3"/>
+		<ITEM NAME="Other Guarantor" SENDIN="" SENDOUT="" RECVIN="49" RECVOUT="3"/>
+		<ITEM NAME="Other insurance" SENDIN="3" SENDOUT="13" RECVIN="13" RECVOUT="3"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="InsuranceType" SENDSRC="InsuranceType" RECVSRC="M.INSTYP">
+		<ITEM NAME="Buildings Policy" SENDIN="1" SENDOUT="" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Contents Policy" SENDIN="2" SENDOUT="" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Buildings and Contents Policy" SENDIN="3" SENDOUT="" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Portfolio Insurance" SENDIN="" SENDOUT="" RECVIN="B" RECVOUT=""/>
+		<ITEM NAME="CMHC" SENDIN="" SENDOUT="" RECVIN="C" RECVOUT=""/>
+		<ITEM NAME="GEMI" SENDIN="" SENDOUT="" RECVIN="G" RECVOUT=""/>
+		<ITEM NAME="MICC" SENDIN="1" SENDOUT="M" RECVIN="M" RECVOUT="1"/>
+		<ITEM NAME="Uninsured" SENDIN="2" SENDOUT="U" RECVIN="U" RECVOUT="2"/>
+	</LOOKUPTABLE>
+	<!-- TODO: Get Optimus values -->
+	<LOOKUPTABLE NAME="PropertyTenure" SENDSRC="PropertyTenure" RECVSRC="???">
+		<ITEM NAME="Freehold" SENDIN="1" SENDOUT="true" RECVIN="true" RECVOUT="1"/>
+		<ITEM NAME="Leasehold" SENDIN="2" SENDOUT="false" RECVIN="false" RECVOUT="5"/>
+		<ITEM NAME="Feudal" SENDIN="3" SENDOUT="false" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Flying Freehold" SENDIN="4" SENDOUT="false" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Unknown" SENDIN="5" SENDOUT="false" RECVIN="" RECVOUT=""/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="PurposeOfLoan" SENDSRC="PurposeOfLoan" RECVSRC="M.SOURCE">
+		<ITEM NAME="House Purchase" SENDIN="1" SENDOUT="HP" RECVIN="HP" RECVOUT="1"/>
+		<ITEM NAME="Right to Buy" SENDIN="2" SENDOUT="RB" RECVIN="RB" RECVOUT="2"/>
+		<ITEM NAME="Home Improvement" SENDIN="3" SENDOUT="HI" RECVIN="HI" RECVOUT="3"/>
+		<ITEM NAME="Purchase of Land" SENDIN="4" SENDOUT="PL" RECVIN="PL" RECVOUT="4"/>
+		<ITEM NAME="Further Advance - Transfer of Equity" SENDIN="5" SENDOUT="TE" RECVIN="TE" RECVOUT="5"/>
+		<ITEM NAME="Further Advance - Capital Raising" SENDIN="6" SENDOUT="CR" RECVIN="CR" RECVOUT="6"/>
+		<ITEM NAME="Further Advance - Non-Capital Raising" SENDIN="7" SENDOUT="NC" RECVIN="NC" RECVOUT="7"/>
+		<ITEM NAME="House Purchase - Buy to Let" SENDIN="8" SENDOUT="NC" RECVIN="NC" RECVOUT="8"/>
+		<ITEM NAME="Remortgage" SENDIN="9" SENDOUT="RE" RECVIN="RE" RECVOUT="9"/>
+		<ITEM NAME="Transfer of Equity" SENDIN="10" SENDOUT="" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Porting" SENDIN="20" SENDOUT="" RECVIN="" RECVOUT="20"/>
+		<ITEM NAME="Product Switch" SENDIN="25" SENDOUT="" RECVIN="" RECVOUT="25"/>
+		<ITEM NAME="Refinance" SENDIN="" SENDOUT="" RECVIN="RF" RECVOUT=""/>
+		<ITEM NAME="Standard" SENDIN="" SENDOUT="" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Vendor take back" SENDIN="" SENDOUT="" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Unknown" SENDIN="99" SENDOUT="OT" RECVIN="OT" RECVOUT="99"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="RepaymentType" SENDSRC="" RECVSRC="PMTTYP">
+		<ITEM NAME="Capital and Interest" SENDIN="2" SENDOUT="1" RECVIN="1" RECVOUT="2"/>
+		<ITEM NAME="Interest Only" SENDIN="1" SENDOUT="4" RECVIN="4" RECVOUT="1"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="AccountRedemptionStatus" SENDSRC="RedemptionStatus" RECVSRC="M.STAT02">
+		<ITEM NAME="Not Being Redeemed" SENDIN="50" SENDOUT="N" RECVIN="N" RECVOUT="50"/>
+		<ITEM NAME="Already Redeemed"	SENDIN="40" SENDOUT="W" RECVIN="W" RECVOUT="40"/>
+		<ITEM NAME="To Be Redeemed" 	SENDIN="10" SENDOUT="R" RECVIN="R" RECVOUT="10"/>
+		<ITEM NAME="To Be Ported" 	SENDIN="70" SENDOUT="P" RECVIN="P" RECVOUT="70"/>
+		<ITEM NAME="Memo only" 		SENDIN="" SENDOUT="" RECVIN="M" RECVOUT=""/>
+		<ITEM NAME="Cancelled" 		SENDIN="" SENDOUT="" RECVIN="X" RECVOUT="40"/>
+		<ITEM NAME="Application"	SENDIN="" SENDOUT="" RECVIN="1" RECVOUT="50"/>
+		<ITEM NAME="Approved" 		SENDIN="" SENDOUT="" RECVIN="2" RECVOUT="50"/>
+		<ITEM NAME="Committed" 		SENDIN="" SENDOUT="" RECVIN="3" RECVOUT="50"/>
+		<ITEM NAME="Partially funded" 	SENDIN="" SENDOUT="" RECVIN="4" RECVOUT="50"/>
+		<ITEM NAME="Fully advanced" 	SENDIN="" SENDOUT="" RECVIN="5" RECVOUT="50"/>
+		<ITEM NAME="Renewed NOT USED" 	SENDIN="" SENDOUT="" RECVIN="6" RECVOUT=""/>
+		<ITEM NAME="Matured" 		SENDIN="" SENDOUT="" RECVIN="7" RECVOUT="40"/>
+		<ITEM NAME="Redemption received" SENDIN="" SENDOUT="" RECVIN="8" RECVOUT="40"/>
+		<ITEM NAME="Discharged" 	SENDIN="" SENDOUT="" RECVIN="9" RECVOUT="40"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="ComponentRedemptionStatus" SENDSRC="RedemptionStatus" RECVSRC="">
+		<ITEM NAME="Active"	SENDIN="" SENDOUT="" RECVIN="1" RECVOUT="50"/>
+		<ITEM NAME="Redeemed" 	SENDIN="" SENDOUT="" RECVIN="4" RECVOUT="40"/>
+		<ITEM NAME="History" 	SENDIN="" SENDOUT="" RECVIN="9" RECVOUT="40"/>
+		<ITEM NAME="Cancelled" 	SENDIN="" SENDOUT="" RECVIN="X" RECVOUT="40"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="Title" SENDSRC="Title" RECVSRC="S.CSTTTL">
+		<ITEM NAME="Mr" SENDIN="1" SENDOUT="01" RECVIN="01" RECVOUT="1"/>
+		<ITEM NAME="Mrs" SENDIN="2" SENDOUT="02" RECVIN="02" RECVOUT="2"/>
+		<ITEM NAME="Miss" SENDIN="3" SENDOUT="03" RECVIN="03" RECVOUT="3"/>
+		<ITEM NAME="Ms" SENDIN="4" SENDOUT="04" RECVIN="04" RECVOUT="4"/>
+		<ITEM NAME="Dr" SENDIN="5" SENDOUT="05" RECVIN="05" RECVOUT="5"/>
+		<ITEM NAME="Sir" SENDIN="" SENDOUT="06" RECVIN="06" RECVOUT="99"/>
+		<ITEM NAME="Lady" SENDIN="" SENDOUT="07" RECVIN="07" RECVOUT="99"/>
+		<ITEM NAME="Professor" SENDIN="" SENDOUT="08" RECVIN="08" RECVOUT="99"/>
+		<ITEM NAME="Reverend" SENDIN="6" SENDOUT="09" RECVIN="09" RECVOUT="6"/>
+		<ITEM NAME="Viscountess" SENDIN="" SENDOUT="10" RECVIN="10" RECVOUT="99"/>
+		<ITEM NAME="Joint" SENDIN="" SENDOUT="97" RECVIN="97" RECVOUT="99"/>
+		<ITEM NAME="Other" SENDIN="99" SENDOUT="99" RECVIN="99" RECVOUT="99"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="PaymentMethod" SENDSRC="PaymentMethod" RECVSRC="M.PAYMTD">
+		<ITEM NAME="Direct Debit" SENDIN="DD" SENDOUT="1" RECVIN="1" RECVOUT="DD"/>
+		<ITEM NAME="Post cheque" SENDIN="Post cheque" SENDOUT="2" RECVIN="2" RECVOUT="Post cheque"/>
+		<ITEM NAME="Manual pay" SENDIN="Manual pay" SENDOUT="3" RECVIN="3" RECVOUT="Other"/>
+		<ITEM NAME="Standing order" SENDIN="S.O." SENDOUT="4" RECVIN="4" RECVOUT="Other"/>
+		<ITEM NAME="Cash" SENDIN="Cash" SENDOUT="5" RECVIN="5" RECVOUT="Cash"/>
+		<ITEM NAME="Re Submitted DD" SENDIN="" SENDOUT="" RECVIN="7" RECVOUT="DD"/>
+		<ITEM NAME="Other" SENDIN="Other" SENDOUT="9" RECVIN="9" RECVOUT="Other"/>
+		<ITEM NAME="V" SENDIN="" SENDOUT="" RECVIN="V" RECVOUT="DD"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="BranchCIFSuffix" SENDSRC="" RECVSRC="">
+		<ITEM NAME="Default branch" SENDIN="0" SENDOUT="100" RECVIN="100" RECVOUT="0"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="BranchCIFNumber" SENDSRC="" RECVSRC="">
+		<ITEM NAME="Default branch" SENDIN="0" SENDOUT="1" RECVIN="1" RECVOUT="0"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="EntityType" SENDSRC="" RECVSRC="">
+		<ITEM NAME="Valuer" SENDIN="51" SENDOUT="51" RECVIN="51" RECVOUT="51"/>
+		<ITEM NAME="Legal Rep" SENDIN="61" SENDOUT="61" RECVIN="61" RECVOUT="61"/>
+		<ITEM NAME="Broker" SENDIN="71" SENDOUT="71" RECVIN="71" RECVOUT="71"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="CustomerRoleType" SENDSRC="" RECVSRC="">
+		<ITEM NAME="Borrower" SENDIN="1" SENDOUT="44" RECVIN="44" RECVOUT="1"/>
+		<ITEM NAME="Joint Borrower" SENDIN="1" SENDOUT="40" RECVIN="40" RECVOUT="1"/>
+		<ITEM NAME="Guarantor" SENDIN="2" SENDOUT="48" RECVIN="48" RECVOUT="2"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="AccountStatus" SENDSRC="" RECVSRC="">
+		<ITEM NAME="Memo only" SENDIN="Memo only" SENDOUT="M" RECVIN="M" RECVOUT="Memo only"/>
+		<ITEM NAME="Cancelled" SENDIN="Cancelled" SENDOUT="X" RECVIN="X" RECVOUT="Cancelled"/>
+		<ITEM NAME="Application" SENDIN="Application" SENDOUT="1" RECVIN="1" RECVOUT="Application"/>
+		<ITEM NAME="Approved" SENDIN="Approved" SENDOUT="2" RECVIN="2" RECVOUT="Approved"/>
+		<ITEM NAME="Committed" SENDIN="Committed" SENDOUT="3" RECVIN="3" RECVOUT="Committed"/>
+		<ITEM NAME="Partially funded" SENDIN="Partially funded" SENDOUT="4" RECVIN="4" RECVOUT="Partially funded"/>
+		<ITEM NAME="Active" SENDIN="Active" SENDOUT="5" RECVIN="5" RECVOUT="Active"/>
+		<ITEM NAME="Renewed" SENDIN="Renewed" SENDOUT="6" RECVIN="6" RECVOUT="Renewed"/>
+		<ITEM NAME="Matured" SENDIN="Matured" SENDOUT="7" RECVIN="7" RECVOUT="Matured"/>
+		<ITEM NAME="Payout Received" SENDIN="Payout Received" SENDOUT="8" RECVIN="8" RECVOUT="Payout Received"/>
+		<ITEM NAME="Redeemed" SENDIN="Redeemed" SENDOUT="9" RECVIN="9" RECVOUT="Redeemed"/>
+	</LOOKUPTABLE>
+	<LOOKUPTABLE NAME="MaritalStatus" SENDSRC="MaritalStatus" RECVSRC="MTLSTS">
+		<ITEM NAME="Divorced" SENDIN="30" SENDOUT="1" RECVIN="1" RECVOUT="30"/>
+		<ITEM NAME="Married" SENDIN="10" SENDOUT="2" RECVIN="2" RECVOUT="10"/>
+		<ITEM NAME="Cohabiting/Other" SENDIN="40" SENDOUT="3" RECVIN="3" RECVOUT="40"/>
+		<ITEM NAME="Separated" SENDIN="25" SENDOUT="4" RECVIN="4" RECVOUT="25"/>
+		<ITEM NAME="Single" SENDIN="20" SENDOUT="5" RECVIN="5" RECVOUT="20"/>
+		<ITEM NAME="Widowed" SENDIN="50" SENDOUT="6" RECVIN="6" RECVOUT="50"/>
+		<ITEM NAME="Civil Partnership" SENDIN="60" SENDOUT="2" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Civil Partnership Disolved" SENDIN="70" SENDOUT="1" RECVIN="" RECVOUT=""/>
+		<ITEM NAME="Joint Borrower" SENDIN="" SENDOUT="" RECVIN="97" RECVOUT=""/>
+		<ITEM NAME="Not Applicable" SENDIN="" SENDOUT="" RECVIN="99" RECVOUT=""/>
+	</LOOKUPTABLE>
+	<!--
+
+	<LOOKUPTABLE NAME="" SENDSRC="" RECVSRC="">
+		<ITEM NAME=""				SENDIN=""			SENDOUT=""		RECVIN=""			RECVOUT=""/>
+	</LOOKUPTABLE>
+	-->
+</LOOKUPTABLES>

@@ -1,0 +1,29 @@
+<!--==============================XML Document Control=============================
+Description: GetIntroducerUserFirms - Request
+
+History:
+
+Version 		Author   	Date				Description
+01.01      		RMH		19/10/2006 		Created
+01.02		    PSC			27/10/2006		Rename REQUESTType to GETFIRMSREQUESTType
+
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.GetIntroducerUserFirms.Omiga.vertex.co.uk" targetNamespace="http://Request.GetIntroducerUserFirms.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="REQUEST" type="GETFIRMSREQUESTType"/>
+	<xs:complexType name="GETFIRMSREQUESTType">
+		<xs:sequence>
+			<xs:element name="INTRODUCERCREDENTIALS" type="INTRODUCERCREDENTIALSType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="optional"/>
+		<xs:attribute name="UNITID" type="xs:string" use="optional"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="INTRODUCERCREDENTIALSType">
+		<xs:attribute name="INTRODUCERUSERNAME" type="xs:string" use="required"/>
+		<xs:attribute name="INTRODUCERUSERPASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="LOGINATTEMPTS" type="xs:short" use="required"/>
+	</xs:complexType>
+</xs:schema>

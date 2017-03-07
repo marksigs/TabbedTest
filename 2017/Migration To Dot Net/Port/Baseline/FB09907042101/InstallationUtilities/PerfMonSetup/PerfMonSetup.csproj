@@ -1,0 +1,28 @@
+<VisualStudioProject>
+	<CSHARP ProjectType="Local" ProductVersion="7.10.6030" SchemaVersion="2.0" ProjectGuid="{FEE94DF4-57B0-4790-8FB5-33C169F87033}">
+		<Build>
+			<Settings ApplicationIcon="App.ico" AssemblyKeyContainerName="" AssemblyName="PerfMonSetup" AssemblyOriginatorKeyFile="" DefaultClientScript="JScript" DefaultHTMLPageLayout="Grid" DefaultTargetSchema="IE50" DelaySign="false" OutputType="Exe" PreBuildEvent="" PostBuildEvent="" RootNamespace="PerfMonSetup" RunPostBuildEvent="OnBuildSuccess" StartupObject="">
+				<Config Name="Debug" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="DEBUG;TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="false" OutputPath="bin\Debug\" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+				<Config Name="Release" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="true" OutputPath="bin\Release\" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+			</Settings>
+			<References>
+				<Reference Name="System" AssemblyName="System" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"/>
+				<Reference Name="System.Data" AssemblyName="System.Data" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"/>
+				<Reference Name="System.XML" AssemblyName="System.Xml" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"/>
+				<Reference Name="omLogging" AssemblyName="omLogging" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omLogging.dll"/>
+				<Reference Name="omExperianWrapper" AssemblyName="omExperianWrapper" HintPath="C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omExperianWrapper.dll"/>
+				<Reference Name="omGemini" AssemblyName="omGemini" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omGemini.dll"/>
+				<Reference Name="omGeminiWS" AssemblyName="omGeminiWS" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omGeminiWS.dll"/>
+				<Reference Name="omGeminiPack" AssemblyName="omGeminiPack" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omGeminiPack.dll"/>
+				<Reference Name="omCore" AssemblyName="omCore" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omCore.dll"/>
+			</References>
+		</Build>
+		<Files>
+			<Include>
+				<File RelPath="App.ico" BuildAction="Content"/>
+				<File RelPath="AssemblyInfo.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="Setup.cs" SubType="Code" BuildAction="Compile"/>
+			</Include>
+		</Files>
+	</CSHARP>
+</VisualStudioProject>

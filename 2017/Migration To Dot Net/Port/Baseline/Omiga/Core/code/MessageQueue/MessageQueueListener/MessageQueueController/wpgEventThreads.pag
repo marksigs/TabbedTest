@@ -1,0 +1,235 @@
+VERSION 5.00
+Begin VB.PropertyPage wpgEThreads 
+   Caption         =   "Queue Threads"
+   ClientHeight    =   4695
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   6795
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   4695
+   ScaleWidth      =   6795
+   Begin VB.TextBox QueueEventThreads 
+      BeginProperty DataFormat 
+         Type            =   1
+         Format          =   "0"
+         HaveTrueFalseNull=   0
+         FirstDayOfWeek  =   0
+         FirstWeekOfYear =   0
+         LCID            =   2057
+         SubFormatType   =   1
+      EndProperty
+      Height          =   315
+      Left            =   1800
+      TabIndex        =   1
+      Text            =   "1"
+      Top             =   1440
+      Width           =   735
+   End
+   Begin VB.Label Label5 
+      Caption         =   "Threads"
+      Height          =   375
+      Left            =   120
+      TabIndex        =   4
+      Top             =   1560
+      Width           =   1215
+   End
+   Begin VB.Label Label7 
+      Caption         =   "Label7"
+      Height          =   15
+      Left            =   3480
+      TabIndex        =   3
+      Top             =   2640
+      Width           =   135
+   End
+   Begin VB.Label Label4 
+      Caption         =   "Label4"
+      Height          =   495
+      Left            =   240
+      TabIndex        =   2
+      Top             =   120
+      Width           =   15
+   End
+   Begin VB.Label Label1 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Enter the number of threads to be associated with this queue (at a time to be specified)"
+      Height          =   615
+      Left            =   240
+      TabIndex        =   0
+      Top             =   240
+      Width           =   6475
+   End
+   Begin VB.Shape Shape1 
+      FillColor       =   &H00FFFFFF&
+      FillStyle       =   0  'Solid
+      Height          =   1095
+      Left            =   0
+      Top             =   0
+      Width           =   6855
+   End
+End
+Attribute VB_Name = "wpgEThreads"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+'Workfile:      wpgEventThreads.pag
+'Copyright:     Copyright © 2001 Marlborough Stirling
+
+'Description:
+'Dependencies:
+'Issues:
+'------------------------------------------------------------------------------------------
+'History:
+'
+'Prog   Date        Description
+'LD     10/01/01    Created
+'------------------------------------------------------------------------------------------
+
+Option Explicit
+
+' Property pages used in a configuration wizard must implement the IWizardPage
+' interface defined by the snap-in designer runtime. The runtime uses this
+' interface to communicate Win32 property sheet events to the page. Note that
+' unlike event handlers, methods of an implemented interface must all be present
+' in the source file even if they do not contain any code.
+
+Implements IWizardPage
+
+Dim m_datawpgNewQEvent As datawpgNewQEvent
+
+
+' =============================================================================
+' Method:       IWizardPage_Activate
+' Type:         Interface Method
+' Description:  Called when the page is about to be displayed.
+'
+' Parameters:   EnableBack      Defaults to True. Set to False to disable the
+'                               Back button.
+'               NextOrFinish    Defaults to NextButton. Determines type of
+'                               second button. Other options are
+'                               EnabledFinishButton and DisabledFinishButton.
+'               FinishText      If using a Finish button, determines the text
+'                               that will be displayed in the button. If not
+'                               set then defaults to "Finish".
+' Output:       None
+' Notes:        As this is the first page of the wizard we disable the
+'               back button. As there are more pages to the wizard, we request
+'               a Next button rather than a Finish button.
+' =============================================================================
+'
+Private Sub IWizardPage_Activate(EnableBack As Boolean, _
+                                 NextOrFinish As SnapInLib.WizardPageButtonConstants, _
+                                 FinishText As String)
+    EnableBack = True
+    NextOrFinish = EnabledNextButton
+
+End Sub
+
+' =============================================================================
+' Method:       IWizardPage_Back
+' Type:         Interface Method
+' Description:  Called when the user clicks the Back button
+'
+' Parameters:   NextPage        Defaults to zero to allow the user to return
+'                               to the previous page. Set to -1 to disallow
+'                               the move, or to a positive integer to move to
+'                               another page. Pages are numbered from 1 to n
+'                               based on the order in which the snap-in called
+'                               PropertySheet.AddWizardPage.
+' Output:       None
+' Notes:        None
+' =============================================================================
+'
+Private Sub IWizardPage_Back(NextPage As Long)
+    NextPage = m_datawpgNewQEvent.GetPreviousPage(PAGENEWQUEUEEVENT_ETHREADS)
+End Sub
+
+' =============================================================================
+' Method:       IWizardPage_Cancel
+' Type:         Interface Method
+' Description:  Called when the user clicks the Cancel button
+'
+' Parameters:   Allow           Defaults to True to allow the user to cancel
+'                               the wizard. Set to False to disallow the
+'                               the cancel.
+' Output:       None
+' Notes:        None
+' =============================================================================
+'
+Private Sub IWizardPage_Cancel(Allow As Boolean)
+    Allow = True
+End Sub
+
+' =============================================================================
+' Method:       IWizardPage_Finish
+' Type:         Interface Method
+' Description:  Called when the user clicks the Finish button
+'
+' Parameters:   Allow           Defaults to True to allow the user to finish
+'                               the wizard. Set to False to disallow the
+'                               the finish.
+' Output:       None
+' Notes:        None
+' =============================================================================
+'
+Private Sub IWizardPage_Finish(Allow As Boolean)
+
+End Sub
+
+' =============================================================================
+' Method:       IWizardPage_Next
+' Type:         Interface Method
+' Description:  Called when the user clicks the Next button
+'
+' Parameters:   NextPage        Defaults to zero to allow the user to proceed
+'                               to the next page. Set to -1 to disallow
+'                               the move, or to a positive integer to move to
+'                               another page. Pages are numbered from 1 to n
+'                               based on the order in which the snap-in called
+'                               PropertySheet.AddWizardPage.
+' Output:       None
+' Notes:
+' =============================================================================
+'
+Private Sub IWizardPage_Next(NextPage As Long)
+    
+    On Error GoTo ErrTrap_IWizardPage_Next
+    
+    m_datawpgNewQEvent.m_nQueueEventThreads = QueueEventThreads
+    If m_datawpgNewQEvent.m_nQueueEventThreads < 0 Then
+        NextPage = -1
+    Else
+        NextPage = m_datawpgNewQEvent.GetNextPage(PAGENEWQUEUEEVENT_ETHREADS)
+    End If
+
+    Exit Sub
+    
+ErrTrap_IWizardPage_Next:
+    NextPage = -1
+End Sub
+
+
+' =============================================================================
+' Method:       PropertyPage_SelectionChanged
+' Type:         Event
+' Description:  Called when the property sheet passes the object(s) for which
+'               it is being displayed to the property page. For wizard pages
+'               the snap-in passes an object of its choice.
+' Parameters:   None
+' Output:       None
+' Notes:        Store the object in a member variable for use by
+'               IWizard page methods as the user interacts with the page.
+' =============================================================================
+'
+Private Sub PropertyPage_SelectionChanged()
+    
+    On Error Resume Next
+    Set m_datawpgNewQEvent = SelectedControls(0)
+
+    ' Initial values
+    QueueEventThreads = m_datawpgNewQEvent.m_nQueueEventThreads
+    
+End Sub
+
+
+

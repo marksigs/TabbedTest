@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: BrokerRegistration Request
+
+History:
+
+Version Author     Date       	Description
+01.00   SR        	04/09/2006	Created
+01.01	SR			16/10/2006	Modified to associate with defect
+01.02	SR			18/10/2006	Refer to IntroducerDetails.xsd rather than IntroducerProfile.xsd.  IntroducerProfile.xsd is now redundant.
+01.03	SR			25/10/2006	EP2_11 using  xs:complexType (REQUEST_attribs_base) instead of xs:attributegroup
+01.04	SR			31/10/2006	EP2_26 speeling correction
+==================================================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.BrokerRegAndMaintain.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:IntroProf="http://IntroducerDetail.Omiga.vertex.co.uk" targetNamespace="http://Request.BrokerRegAndMaintain.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:import namespace="http://IntroducerDetail.Omiga.vertex.co.uk" schemaLocation="IntroducerDetail.xsd"/>
+	<xs:complexType name="REQUEST_attribs_base">
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="BROKERREGISTER_REQUEST" type="BROKERREGISTER_REQUESTType"/>
+	<xs:element name="UPDATEBROKERPROFILE_REQUEST" type="UPDATEBROKERPROFILE_REQUESTType"/>
+	<xs:element name="GETBROKERPROFILE_REQUEST" type="GETBROKERPROFILE_REQUESTType"/>
+	<xs:complexType name="BROKERREGISTER_REQUESTType">
+		<xs:complexContent>
+			<xs:extension base="REQUEST_attribs_base">
+				<xs:sequence>
+					<xs:element name="INTRODUCER" type="IntroProf:INTRODUCERDETAILSType"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="xs:string" use="required" fixed="CREATE"/>
+				<xs:attribute name="ENTITY_REF" use="required" fixed="BROKER_REGISTER"/>
+				<xs:attribute name="PREPROCPROGID" type="xs:string"/>
+				<xs:attribute name="PREPROCREF" type="xs:string"/>
+				<xs:attribute name="WSINTERFACEMETHOD" type="xs:string" fixed="BrokerRegistration"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UPDATEBROKERPROFILE_REQUESTType">
+		<xs:complexContent>
+			<xs:extension base="REQUEST_attribs_base">
+				<xs:sequence>
+					<xs:element name="INTRODUCER" type="IntroProf:INTRODUCERDETAILSType"/>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="xs:string" use="required" fixed="IUPDATE"/>
+				<xs:attribute name="ENTITY_REF" use="required" fixed="BROKER_PROFILE"/>
+				<xs:attribute name="PREPROCPROGID" type="xs:string"/>
+				<xs:attribute name="PREPROCREF" type="xs:string"/>
+				<xs:attribute name="WSINTERFACEMETHOD" type="xs:string" fixed="UpdateBrokerProfile"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GETBROKERPROFILE_REQUESTType">
+		<xs:complexContent>
+			<xs:extension base="REQUEST_attribs_base">
+				<xs:sequence>
+					<xs:element name="INTRODUCER">
+						<xs:complexType>
+							<xs:attribute name="INTRODUCERID" type="xs:string" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="CRUD_OP" type="xs:string" use="required" fixed="READ"/>
+				<xs:attribute name="ENTITY_REF" use="required" fixed="BROKER_PROFILE"/>
+				<xs:attribute name="PREPROCPROGID" type="xs:string"/>
+				<xs:attribute name="PREPROCREF" type="xs:string"/>
+				<xs:attribute name="WSINTERFACEMETHOD" type="xs:string" fixed="GetBrokerProfile"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

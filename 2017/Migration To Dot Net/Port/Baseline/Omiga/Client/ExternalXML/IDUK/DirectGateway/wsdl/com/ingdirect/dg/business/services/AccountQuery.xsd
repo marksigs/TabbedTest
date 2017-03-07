@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ==============================================================================================
+Project;        ING Direct Diect Gateway (Project MARS)
+
+File:           SpecificMessageTemplate.xsd
+
+File Version:   0.0.1
+
+History;        version 0.0.1 - productionisation factoring - john_catlin@uk.ibm.com
+
+Type Versions;  Type versioning is via namepaces.   
+                Namespace versioning follows this pattern; "url/[major_version].[minor_version].[release_version]"
+
+Author(s):      david.bowley@ingdirect.co.uk
+                john_catlin@uk.ibm.com
+
+Description;    Code classification; framework test code + implementation pattern.
+                This XSD defines tests message for the Direct Gateway.
+                This code can be used as a pattern for real message implementations.
+                
+                *CAUTION - this code contains a temporary fix for Filenet integration (filenet does not recognise XML inheritance).
+
+============================================================================================== -->
+
+<!--
+    Note that the schema attributes 'attributeFormDefault="unqualified"' 
+    and 'elementFormDefault="unqualified"' are critical to the correct 
+    interpretation of this schema for the Direct Gatway application to 
+    consume the generated document literal SOAP messages.
+-->
+<schema targetNamespace="http://AccountQuery.services.dg.ingdirect.com/0.0.1" 
+        xmlns="http://www.w3.org/2001/XMLSchema" 
+        
+        xmlns:AccountQuery="http://AccountQuery.services.dg.ingdirect.com/0.0.1"
+        xmlns:generic="http://generic.dg.ingdirect.com/0.0.1"
+        
+        attributeFormDefault="unqualified"
+        elementFormDefault="unqualified">
+
+    <!-- start of type imports -->
+        <!-- 
+            Note that all Direct Gateway messages must extend either 'generic:GenericRequestType' or 'generic:GenericResponseType'
+            Thus they must import the 'generic' namespace from GenericMessages.xsd.
+        -->
+        <import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+    <!-- end of type imports -->
+    
+    <!-- start of type definitions -->
+        <complexType name="AccountQueryRequestType" abstract="false">
+            <complexContent>
+                <extension base="generic:GenericRequestType">
+                    <sequence>
+                        <element name="cif" nillable="true" minOccurs="0" type="string" />          
+                        <element name="nAcc" nillable="true" minOccurs="0" type="int" />            
+                        <element name="nRecs" nillable="true" minOccurs="0" type="int" />                    
+                    </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+
+        <complexType name="AccountQueryResponseType" abstract="false">
+            <complexContent>
+                <extension base="generic:GenericResponseType">
+                    <sequence>
+                        <element name="cif" nillable="true" minOccurs="0" type="string" />          
+                        <element name="nAcc" nillable="true" minOccurs="0" type="int" />            
+                        <element name="nRecs" nillable="true" minOccurs="0" type="int" />                  
+                    </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+
+        
+    <!-- end of type definitions -->
+
+
+        <element name="AccountQueryRequest" type="AccountQuery:AccountQueryRequestType"/>
+        <element name="AccountQueryResponse" type="AccountQuery:AccountQueryResponseType"/>
+
+
+</schema>
+

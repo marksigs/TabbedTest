@@ -1,0 +1,12 @@
+<!ELEMENT REQUEST (TYPE, APPLICATIONNUMBER)>
+	<!ATTLIST REQUEST 
+		USERID CDATA #REQUIRED
+		UNITID CDATA #IMPLIED
+		MACHINEID CDATA #IMPLIED
+		CHANNELID CDATA #IMPLIED
+		ACTION (DOWNLOAD) #REQUIRED
+	>
+<!ELEMENT TYPE (#PCDATA)>
+<!-- TYPE currently supports "AIP" & "FormFill" this is then appended with ".XML"
+   to create the name of the MAP File that will be used -->
+<!ELEMENT APPLICATIONNUMBER (#PCDATA)>

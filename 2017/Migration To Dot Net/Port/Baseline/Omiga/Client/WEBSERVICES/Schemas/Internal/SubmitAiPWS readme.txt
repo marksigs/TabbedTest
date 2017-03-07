@@ -1,0 +1,1 @@
+the xsd and wsdl files go in a virtual directory called OmigaWebServices\Schemas

@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+Type Versions; Type versioning is via namespaces. 
+               All Direct Gateway types will have a version of 0.0.1 
+               Type versions enable Direct Gateway to support multiple versions of the same type and service in the future
+
+Author(s):    Vivek Kumar
+
+Description   This XSD is used for the mortgage account creation in profile. 
+
+ 
+
+============================================================================================== -->
+<!--
+    Note that the schema attributes 'attributeFormDefault="unqualified"' 
+    and 'elementFormDefault="unqualified"' are critical to the correct 
+    interpretation of this schema for the Direct Gatway application to 
+    consume the generated document literal SOAP messages.
+-->
+<schema targetNamespace="http://createmortgageaccount.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:CreateMortgageAccount="http://createmortgageaccount.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>Updated with updated Use Case document of DIS03 dated(20th July 2005)</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.3 </documentation>
+		<documentation>Updated with element annotations using Use Case DIS03 dated (27th July 2005)</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.4 </documentation>
+		<documentation>Renamed the schema to CreateMortgageAccount</documentation>
+		<documentation>Renamed the request from MortgageAccountCreationRequestType to CreateMortgageAccountRequestType</documentation>
+		<documentation>Renamed the response from MortgageAccountCreationResponseType to CreateMortgageAccountResponseType</documentation>
+		<documentation>Used PhoneDetailsType from CommonTypes schema</documentation>
+		<documentation>Renamed AccountDetailsType to MortgageAccountDetailsType </documentation>
+		<documentation>Defined corresponding global element for every global complex type</documentation>
+		<documentation>Renamed the request element from MortgageAccountDetailsRequest to CreateMortgageAccountRequest</documentation>
+		<documentation>Renamed the response element from MortgageAccountDetailsResponse to CreateMortgageAccountResponse</documentation>
+		<documentation>Added suitable restrictions in the schema on CurrencyCode, MaritalStatus, EmploymentStatus.</documentation>
+		<documentation>Removed Middle Name element from CustomerDetailsType and Added complex PrevioudAddressType and PersonId</documentation>
+		<documentation>RelationshipCode (restricted on 1 and 2), MortgageApplicationNumber changed to String, removed incorrect documentation for ProductTypeID and ApplicationType changed to 2 characters</documentation>
+		<documentation>minOccurs is set to 0 for HubReferenceNumber and SecondaryApplicantId</documentation>
+	</annotation>
+	<!-- start of type imports -->
+	<!-- 
+            Note that all Direct Gateway messages must extend either 'generic:GenericRequestType' or 'generic:GenericResponseType'
+            Thus they must import the 'generic' namespace from GenericMessages.xsd.
+        -->
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="CommonTypes.xsd"/>
+	<!-- end of type imports -->
+	<!-- start of type definitions -->
+	<element name="MortgageAccountDetails" type="CreateMortgageAccount:MortgageAccountDetailsType"/>
+	<element name="ComponentRecord" type="CreateMortgageAccount:ComponentRecordType"/>
+	<element name="ValuationFeeDetails" type="CreateMortgageAccount:ValuationFeeDetailsType"/>
+	<element name="CustomerDetails" type="CreateMortgageAccount:CustomerDetailsType"/>
+	<complexType name="CreateMortgageAccountRequestType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="CustomerDetails" type="CreateMortgageAccount:CustomerDetailsType" nillable="true" maxOccurs="2">
+						<annotation>
+							<documentation>Customer details for Main applicant to be updated in CRM.  There can be two instances if there is Joint account holder.</documentation>
+						</annotation>
+					</element>
+					<element name="ValuationFeeDetails" type="CreateMortgageAccount:ValuationFeeDetailsType" nillable="false">
+						<annotation>
+							<documentation>Valuation fees only. Excludes all other fee types.</documentation>
+						</annotation>
+					</element>
+					<element name="MortgageAccountDetails" type="CreateMortgageAccount:MortgageAccountDetailsType" nillable="false" maxOccurs="unbounded">
+						<annotation>
+							<documentation>The Master record created within Profile.</documentation>
+						</annotation>
+					</element>
+					<element name="ComponentRecord" type="CreateMortgageAccount:ComponentRecordType" nillable="true" maxOccurs="unbounded">
+						<annotation>
+							<documentation>Fixed rate components only. The sub-loan components under the Mortgage Account. There can be multiple components per Master Account.</documentation>
+						</annotation>
+					</element>
+					<element name="PropertyDetails" type="common:PropertyDetailsType" nillable="true">
+						<annotation>
+							<documentation>The property details applicable to the mortgage application. Passed to Profile from Omiga. Individual fields are annotated within the CommonTypes xsd. Elements required from within PropertyDetailsType are: ValuationType; PropertyAddress; IsNewProperty; Tenure; UnexpiredTerm; PropertyType; ExLocalAuthority; NumberOfLivingRoom; NumberOfBedRooms; NumberOfKitchens; NumberOfBathrooms; NumberOfGarages; NumberOfParkingSpaces; ApproximateYearPropertyBuild; BuildingStandardIndemnityType; GrossExternalFloorArea; ConstructionTypeIndicator; ConstructionType; Saleability; OverallCondition; LastValuation; BuildingInsuranceReinstallmentAmount; ValuerName; LastValuationDate; PropertyPurchasePrice; LoanToValue; IsPropertyInScotland; RegisteredTitleNoOne; RegisteredTitleNoTwo; RegisteredTitleNoThree</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="CreateMortgageAccountResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence>
+					<element name="MortgageAccountNumber" type="integer" nillable="false">
+						<annotation>
+							<documentation>New Mortgage Account Number. Profile field = LN.CID</documentation>
+						</annotation>
+					</element>
+					<element name="DateOfFirstPayment" type="common:SimpleDateType" nillable="false">
+						<annotation>
+							<documentation>Due date for the first payment of the Mortgage. Profile field = LN.DFP</documentation>
+						</annotation>
+					</element>
+					<element name="AmountOfFirstPayment" nillable="false">
+						<annotation>
+							<documentation>Amount of first mortgage payment. May differ from standard payment amount due to method for determining first payment date. Profile field = LN.ZPMTAMT1.</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="12"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="AmountOfSubsequentPayment" nillable="false">
+						<annotation>
+							<documentation>The standard repayment amount for the Mortgage account. Profile field = LN.ZMLFPA</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="12"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="CustomerDetailsType" abstract="false">
+		<sequence>
+			<element name="PersonId" type="string" nillable="false"/>
+			<element name="HomePhoneNumber" type="common:PhoneDetailsType" nillable="false"/>
+			<element name="MobilePhoneNumber" type="common:PhoneDetailsType" nillable="false"/>
+			<element name="WorkPhoneNumber" type="common:PhoneDetailsType" nillable="false"/>
+			<element name="EmailAddress" nillable="false">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="128"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="DateFromCurrentLegalAddress" type="common:SimpleDateType" nillable="false"/>
+			<element name="PreviousAddressDetails" type="CreateMortgageAccount:PreviousAddressType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="MortgageAccountDetailsType" abstract="false">
+		<sequence>
+			<element name="RelationshipCode" nillable="false">
+				<annotation>
+					<documentation>If one applicant = 1. If two applicants = 2. Profile field = LN.ACNRELC</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="2"/>
+						<enumeration value="1"/>
+						<enumeration value="2"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="PrimaryApplicantId" type="integer" nillable="false">
+				<annotation>
+					<documentation>The CIF number for the primary applicant. Profile field = RELCIF1.ACN</documentation>
+				</annotation>
+			</element>
+			<element name="SecondaryApplicantId" type="integer" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>The CIF number for the secondary applicant (if required). Profile field = RELCIF2.ACN</documentation>
+				</annotation>
+			</element>
+			<element name="MortgageApplicationNumber" type="string" nillable="false">
+				<annotation>
+					<documentation>The deal ID; simply the number assigned to the mortgage application. Profile field = LN.ZDEALID</documentation>
+				</annotation>
+			</element>
+			<element name="ProductTypeID" type="integer" nillable="false">
+				<annotation>
+					<documentation>Profile field = LN.TYPE</documentation>
+				</annotation>
+			</element>
+			<element name="CurrencyCode" nillable="false">
+				<annotation>
+					<documentation>The currency the mortgage is payable in. Default to £ (GBP). Profile field = LN.CRCD</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="3"/>
+						<enumeration value="GBP"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="ApplicationType" nillable="true">
+				<annotation>
+					<documentation>The purpose of the loan. 1= Homebuyer, 2= First Homebuyer, 3= Remortgage. Profile field = LN.PURCD</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="2"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="MortgageAmount" nillable="false">
+				<annotation>
+					<documentation>The Offer KFI amount for the mortgage. Profile field = LN.AMTREQ</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="InterestOnlyPortion" nillable="true">
+				<annotation>
+					<documentation>Interest Only Amount of Mortgage. Profile field = LN.ZINONAMT</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="CompletionDate" type="common:SimpleDateType" nillable="false">
+				<annotation>
+					<documentation>The date the mortgage advance will be paid. Profile field = LN.ODD</documentation>
+				</annotation>
+			</element>
+			<element name="PreferredPaymentDay" type="integer" nillable="false">
+				<annotation>
+					<documentation>The day of the month the customer selects for repayments. Profile field = LN.ZPMTDAY</documentation>
+				</annotation>
+			</element>
+			<element name="NumberOfPayments" type="integer" nillable="false">
+				<annotation>
+					<documentation>This is the full term of the loan. Number represents the number of whole months. Profile field = LN.ONP</documentation>
+				</annotation>
+			</element>
+			<element name="ApplicantBankAccountDetails" type="common:BankAccountDetailsType" nillable="false">
+				<annotation>
+					<documentation>The Sortcode, Account Number, and Account Name of the Applicants account. Mortgage payments will be received from this account. Individual fields annotated within CommonTypes xsd. Profile fields = Sortcode (LN.ZPMTACTBNK), Account Number (LN.ZPMTACTNUM), Account Name (LN.ZPMTACTNAM).</documentation>
+				</annotation>
+			</element>
+			<element name="PanelNumber" nillable="false">
+				<annotation>
+					<documentation>Solicitor panel number. Used to cross-reference solicitor details to a table in Profile for FT and RA Direct. Profile field = LN.ZPMTSOLPN</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="8"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="SolicitorBankAccountDetails" type="common:BankAccountDetailsType" nillable="false">
+				<annotation>
+					<documentation>The Sortcode, Account Number, Account Name, and Transposed Flag of the Solicitors account. The mortgage advance is paid into this account. Individual fields annotated within CommonTypes xsd. Profile fields = Sortcode (LN.ZPMTSOLBNK), Account Number (LN.ZPMTSOLNUM), Account Name (LN.ZPMTSOLNAM), Transposed Flag (LN.ZPMTSOLTP).</documentation>
+				</annotation>
+			</element>
+			<element name="SolicitorFundingMethod" nillable="false">
+				<annotation>
+					<documentation>Payment method of funds to solicitor. If 2 working days in advance of completion date = BACS (1). On completion date = CHAPS (2). Profile field = LN.ZFNDMECH</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="1"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="MortgageReferenceNumber" nillable="true">
+				<annotation>
+					<documentation>MortgageApplication.SolicatorReferenceNumber. Profile field = LN.ZSOLREFNO</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="HubReferenceNumber" type="integer" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>First Title Hub reference number, applicable is application is for remortgage. Profile field = LN.ZHUBREF</documentation>
+				</annotation>
+			</element>
+			<element name="IncomeBasis" type="integer" nillable="true">
+				<annotation>
+					<documentation>This denotes how the income amount was derived. Assumes income is always Verified. If 1 income used = 1. If two incomes used (i.e. joint application with 2 verified incomes provided), then = 2. Profile field = LN.ZMLINCBA</documentation>
+				</annotation>
+			</element>
+			<element name="Income" nillable="true">
+				<annotation>
+					<documentation>The total verified income (as defined under IncomeBasis). Profile field = LN.ZMLINCGR</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="MaritalStatus" nillable="true">
+				<annotation>
+					<documentation>The marital status of the primary applicant. M =Married; S =Single; D =Divorced; W =Widowed; C =Co-habiting; O =Other. Profile field = LN.ZMAR</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="5"/>
+						<enumeration value="M"/>
+						<enumeration value="S"/>
+						<enumeration value="D"/>
+						<enumeration value="W"/>
+						<enumeration value="C"/>
+						<enumeration value="O"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="EmploymentStatus" nillable="true">
+				<annotation>
+					<documentation>The employment status of the primary applicant. E =Permanent; T =Contract; P =Self-Employed; U =Not earning; H =Homemaker; R =Retired; S =Student; Z =(blank). Profile field = LN.ZMLBRWES</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="5"/>
+						<enumeration value="E"/>
+						<enumeration value="T"/>
+						<enumeration value="P"/>
+						<enumeration value="U"/>
+						<enumeration value="H"/>
+						<enumeration value="R"/>
+						<enumeration value="S"/>
+						<enumeration value="Z"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="RiskIndicator" nillable="true">
+				<annotation>
+					<documentation>The risk indicator as returned by Experian. Profile field = LN.ZRISKIND</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="2"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="CreditScore" nillable="false">
+				<annotation>
+					<documentation>The Delphi score as returned by Experian. Profile field = LN.ZCRSCRORG</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="6"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="SourceChannel" nillable="true">
+				<annotation>
+					<documentation>Indicates the sales channel for the mortgage application. 1 = DAWT (phone); 2 = WEB; 3 = INT (intermediary); 4 = WF (post)Profile field = LN.ZCHAN</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="6"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ComponentRecordType" abstract="false">
+		<sequence>
+			<element name="ComponentAmount" nillable="false">
+				<annotation>
+					<documentation>The interest only + repayment amounts for a component. Profile field = LN.AMTREQ</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="InterestOnlyPortion" nillable="false">
+				<annotation>
+					<documentation>For each fixed rate component on the KFI, this represents the Interest Only portion of each. Profile field = LN.ZINONAMT</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="FixedRatePeriodEndDate" type="common:SimpleDateType" nillable="false">
+				<annotation>
+					<documentation>The expiry date for a fixed rate component. Profile field = LN.ZFXRTEX</documentation>
+				</annotation>
+			</element>
+			<element name="InterestRate" type="decimal" nillable="true">
+				<annotation>
+					<documentation>The rate payable for each fixed rate component. Profile field = LN.IRN</documentation>
+				</annotation>
+			</element>
+			<element name="EarlyRepaymentCharges" nillable="false">
+				<annotation>
+					<documentation>Charges applicable if component re-payed early. Profile field = LN.ZPOCPPENPR</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="35"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="PercentageOfBalance" type="decimal" nillable="false">
+				<annotation>
+					<documentation>Percentage of balance that is exempt from ERC for a component. Profile field = LN.ZPOCPPENTP</documentation>
+				</annotation>
+			</element>
+			<element name="FixedRateProductCode" type="integer" nillable="true">
+				<annotation>
+					<documentation>The product code for a Fixed rate component . Profile field = LN.ZFXRTIN</documentation>
+				</annotation>
+			</element>
+			<element name="PortingFlag" type="integer" nillable="true">
+				<annotation>
+					<documentation>Indicates whether the componenet has been ported. If Ported = 1. Profile field = LN.ZPORT</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ValuationFeeDetailsType" abstract="false">
+		<sequence>
+			<element name="FeeRefundAmount" nillable="false">
+				<annotation>
+					<documentation>Represents the amount of the Valuation Fee to be refunded. Profile field = LN.ZVALFEEREF</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="FeeAmountNotRefundable" nillable="false">
+				<annotation>
+					<documentation>Represents the amount of the Valuation Fee not to be refunded. Profile field = LN.ZVALFEEINC</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="PreviousAddressType" abstract="false">
+		<sequence>
+			<element name="AddressDetails" type="common:StructuredAddressDetailsType" nillable="false"/>
+			<element name="DateFromPreviousLegalAddress" type="common:SimpleDateType" nillable="false">
+				<annotation>
+					<documentation>Represents the from date for the previous address.</documentation>
+				</annotation>
+			</element>
+			<element name="DateToPreviousLegalAddress" type="common:SimpleDateType" nillable="true">
+				<annotation>
+					<documentation>Represents the to date for the previous address.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="CreateMortgageAccountRequest" type="CreateMortgageAccount:CreateMortgageAccountRequestType"/>
+	<element name="CreateMortgageAccountResponse" type="CreateMortgageAccount:CreateMortgageAccountResponseType"/>
+</schema>

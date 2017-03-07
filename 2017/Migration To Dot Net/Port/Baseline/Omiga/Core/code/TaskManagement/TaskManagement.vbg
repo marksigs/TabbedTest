@@ -1,0 +1,4 @@
+VBGROUP 5.0
+StartupProject=msgTM\MsgTm.vbp
+Project=msgTM\TmBaseClient.vbp
+Project=omTM\omTM.vbp

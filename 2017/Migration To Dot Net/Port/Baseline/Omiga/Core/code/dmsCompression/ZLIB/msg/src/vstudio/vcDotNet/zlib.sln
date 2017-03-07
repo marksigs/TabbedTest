@@ -1,0 +1,60 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlibwapi", "zlibwapi\zlibwapi.vcproj", "{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miniunz", "miniunz\miniunz.vcproj", "{C52F9E7B-498A-42BE-8DB4-85A15694382A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0} = {D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "minizip", "minizip\minizip.vcproj", "{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0} = {D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+		ReleaseAxp = ReleaseAxp
+		ReleaseWithoutAsm = ReleaseWithoutAsm
+		ReleaseWithoutCrtdll = ReleaseWithoutCrtdll
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.Debug.ActiveCfg = Debug|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.Debug.Build.0 = Debug|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.Release.ActiveCfg = Release|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.Release.Build.0 = Release|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.ReleaseAxp.ActiveCfg = ReleaseAxp|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.ReleaseAxp.Build.0 = ReleaseAxp|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.ReleaseWithoutAsm.ActiveCfg = ReleaseWithoutAsm|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.ReleaseWithoutAsm.Build.0 = ReleaseWithoutAsm|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.ReleaseWithoutCrtdll.ActiveCfg = ReleaseWithoutCrtdll|Win32
+		{D27A0298-9BAA-42B9-ACDB-0BE79DCBE7B0}.ReleaseWithoutCrtdll.Build.0 = ReleaseWithoutCrtdll|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.Debug.ActiveCfg = Debug|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.Debug.Build.0 = Debug|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.Release.ActiveCfg = Release|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.Release.Build.0 = Release|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.ReleaseAxp.ActiveCfg = Release|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.ReleaseAxp.Build.0 = Release|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.ReleaseWithoutAsm.ActiveCfg = Release|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.ReleaseWithoutAsm.Build.0 = Release|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.ReleaseWithoutCrtdll.ActiveCfg = Release|Win32
+		{C52F9E7B-498A-42BE-8DB4-85A15694382A}.ReleaseWithoutCrtdll.Build.0 = Release|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.Debug.ActiveCfg = Debug|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.Debug.Build.0 = Debug|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.Release.ActiveCfg = Release|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.Release.Build.0 = Release|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.ReleaseAxp.ActiveCfg = Release|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.ReleaseAxp.Build.0 = Release|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.ReleaseWithoutAsm.ActiveCfg = Release|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.ReleaseWithoutAsm.Build.0 = Release|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.ReleaseWithoutCrtdll.ActiveCfg = Release|Win32
+		{48CDD9DC-E09F-4135-9C0C-4FE50C3C654B}.ReleaseWithoutCrtdll.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

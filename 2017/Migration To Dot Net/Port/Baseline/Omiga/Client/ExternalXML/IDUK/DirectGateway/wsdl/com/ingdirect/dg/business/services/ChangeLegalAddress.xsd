@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ==============================================================================================
+Project;        ING Direct Diect Gateway (Project MARS)
+
+History;        version 0.0.1 - productionisation factoring
+
+Type Versions;  Type versioning is via namespaces. 
+				All Direct Gateway types will have a version of 0.0.1 
+               		 Type versions enable Direct Gateway to support multiple versions of the same type and service in 
+
+Author(s):      Vivek Kumar
+
+Description:	This schema is used to change legal address of mortgage customer    
+============================================================================================== -->
+<schema targetNamespace="http://changelegaladdress.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:ChangeLegalAddress="http://changelegaladdress.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<annotation>
+		<documentation> Document Version = 0.1 </documentation>
+		<documentation> Initial Version</documentation>
+		<documentation>Annotated as per Use Case DIS07 (02/08/2005)</documentation>
+	</annotation>
+	<!-- start of type imports -->
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="GenericMessages.xsd"/>
+	<!-- end of type imports -->
+	<complexType name="ChangeLegalAddressRequestType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="MortgageAccountNumber" type="string" nillable="false">
+						<annotation>
+							<documentation>Uniquely identifies the mortgage account in Profile. Passed from OMIGA to Profile, so that the Property Address can be returned to update Legal Address. This schema will return to OMIGA an Error Code and Error Message if unsuccessful (Error elements defined with GenericMessages xsd.</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ChangeLegalAddressResponseType" abstract="false">
+		<complexContent>
+			<extension base="generic:GenericResponseType"/>
+		</complexContent>
+	</complexType>
+	<!-- end of type definitions -->
+	<element name="ChangeLegalAddressRequest" type="ChangeLegalAddress:ChangeLegalAddressRequestType"/>
+	<element name="ChangeLegalAddressResponse" type="ChangeLegalAddress:ChangeLegalAddressResponseType"/>
+</schema>

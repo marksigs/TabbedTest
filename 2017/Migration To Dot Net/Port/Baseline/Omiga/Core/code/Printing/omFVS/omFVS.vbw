@@ -1,0 +1,16 @@
+traceAssist = 0, 0, 0, 0, C
+FileVersioningDO = 22, 29, 691, 424, C
+StdData = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C
+errAssistEx = 0, 0, 0, 0, C
+guidAssistEx = 0, 0, 0, 0, C
+adoAssistEx = 0, 0, 0, 0, C
+FileVersioningGlobals = 0, 0, 0, 0, C
+ConvertAssistEx = 0, 0, 0, 0, C
+comboAssistEx = 0, 0, 0, 0, C
+xmlAssistEx = 0, 0, 0, 0, C
+FVS_constants = 0, 0, 0, 0, C
+FileVersioningBO = 0, 0, 0, 0, C
+IFileVersioningTxBO = 0, 0, 0, 0, C
+FileVersioningTxBO = 0, 0, 0, 0, C
+IFileVersioningDO = 0, 0, 0, 0, C

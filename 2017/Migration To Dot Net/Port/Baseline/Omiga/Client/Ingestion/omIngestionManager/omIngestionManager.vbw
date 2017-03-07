@@ -1,0 +1,5 @@
+IngestionManagerBO = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C
+omIngestionGlobal = 0, 0, 0, 0, C
+PreProcRules = 0, 0, 0, 0, C
+PostProcRules = 0, 0, 0, 0, C

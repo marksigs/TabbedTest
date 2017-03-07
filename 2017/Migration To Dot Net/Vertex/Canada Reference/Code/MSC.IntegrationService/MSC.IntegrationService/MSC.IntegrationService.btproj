@@ -1,0 +1,103 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1602"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{3EA6DD31-957C-4C62-97B6-8FBB37F4DE76}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = "MSCIS"
+                    AssemblyKeyFile = "C:\MSC Products\Intergation Service\Code\MSC.IntegrationService\mscis.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "MSC.IntegrationService"
+                    AssemblyName = "MSC.IntegrationService"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "MSCIntegrationService"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Adapter.WSE.Properties"
+                    AssemblyName = "Microsoft.BizTalk.Adapter.WSE.Properties"
+                    HintPath = "..\..\..\..\..\Program Files\Microsoft BizTalk Server Adapter for WSE 2.0\Microsoft.BizTalk.Adapter.WSE.Properties.dll"
+                />
+                <Reference
+                    Name = "System.configuration"
+                    AssemblyName = "System.Configuration"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.configuration.dll"
+                />
+                <Reference
+                    Name = "mscorlib"
+                    AssemblyName = "mscorlib"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\mscorlib.dll"
+                />
+                <Reference
+                    Name = "MSC.IntegrationService.ConfigService"
+                    AssemblyName = "MSC.IntegrationService.ConfigService"
+                    HintPath = "..\..\MSC.IntegrationService.ConfigService\MSC.IntegrationService.ConfigService\bin\Debug\MSC.IntegrationService.ConfigService.dll"
+                />
+                <Reference
+                    Name = "MSC.IntegrationService.Schemas"
+                    AssemblyName = "MSC.IntegrationService.Schemas"
+                    HintPath = "..\..\MSC.IntegrationService.Schemas\MSC.IntegrationService.Schemas\bin\Development\MSC.IntegrationService.Schemas.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "Orchestration.odx"
+                    BuildAction = "Compile"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

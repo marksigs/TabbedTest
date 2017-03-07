@@ -1,0 +1,156 @@
+<!--
+GD	22/02/02	SYS4138 - Add Labels to Surname and forename to allow customisation.	
+MV	08/08/2002	BMIDS00302	Core Ref : SYS4728 remove non-style sheet styles
+MV	06/12/2002	BMIDS0020	PAF Search tab Order
+MDC	16/12/2002	BM0184 Increase size of the Flat Number field (in line with GB Mail)
+TLiu02/09/2005	MAR38 Changed layout for House Name & No.
+-->
+<span id="spnAddress" style="TOP: 10px; LEFT: 4px; POSITION: ABSOLUTE">
+	<span style="TOP: 0px; LEFT: 0px; POSITION: ABSOLUTE" class="msgLabel">
+		<strong>Address</strong>
+	</span>
+
+	<span style="TOP: 26px; LEFT: 0px; POSITION: ABSOLUTE; WIDTH: 200px" class="msgLabel">
+		<label id="idPostcode"></label>
+		<span style="TOP: -3px; LEFT: 120px; POSITION: ABSOLUTE">
+			<input id="txtPostcode" name="Postcode" maxlength="8" style="WIDTH: 70px; POSITION: ABSOLUTE" class="msgTxtUpper" onchange="AddressChanged()">
+		</span>
+	</span>
+
+	<span style="TOP: 19px; LEFT: 239px; POSITION: ABSOLUTE;">
+		<input id="btnClear" value="Clear" type="button" style="WIDTH: 80px" class="msgButton" onclick="btnClear.onClick()">
+	</span>
+
+	<span style="TOP: 50px; LEFT: 0px; POSITION: ABSOLUTE; WIDTH: 200px" class="msgLabel">
+		<label id="idFlatNumber"></label>
+		<span style="TOP: -3px; LEFT: 120px; POSITION: ABSOLUTE">
+			<input id="txtFlatNumber" name="FlatNumber" maxlength="40" style="WIDTH: 115px; POSITION: ABSOLUTE" class="msgTxt" onchange="AddressChanged()">
+		</span>
+	</span>
+
+	<span style="TOP: 74px; LEFT: 0px; POSITION: ABSOLUTE; WIDTH: 300px" class="msgLabel">
+		<label id="idHouseName"></label>
+		<span style="TOP: -3px; LEFT: 120px; POSITION: ABSOLUTE">
+			<input id="txtHouseNumber" name="HouseNumber" maxlength="10" style="WIDTH: 45px; POSITION: ABSOLUTE" class="msgTxt" onchange="AddressChanged()">
+		</span>
+
+		<span style="TOP: -3px; LEFT: 170px; POSITION: ABSOLUTE">
+			<input id="txtHouseName" name="HouseName" maxlength="40" style="WIDTH: 150px; POSITION: ABSOLUTE" class="msgTxt" onchange="AddressChanged()">
+		</span>
+	</span>
+
+	<span style="TOP: 45px; LEFT: 239px; POSITION: ABSOLUTE;">
+		<input id="btnPAFSearch" value="P.A.F. Search" type="button" style="WIDTH: 80px" class="msgButton">
+	</span>
+
+	<span style="TOP: 98px; LEFT: 0px; POSITION: ABSOLUTE; WIDTH: 300px" class="msgLabel">
+		Street
+		<span style="TOP: -3px; LEFT: 120px; POSITION: ABSOLUTE">
+			<input id="txtStreet" name="Street" maxlength="40" style="WIDTH: 200px; POSITION: ABSOLUTE" class="msgTxt" onchange="AddressChanged()">
+		</span>
+	</span>
+
+	<span style="TOP: 122px; LEFT: 0px; POSITION: ABSOLUTE; WIDTH: 300px" class="msgLabel">
+		<label id="idDistrict"></label>
+		<span style="TOP: -3px; LEFT: 120px; POSITION: ABSOLUTE">
+			<input id="txtDistrict" name="District" maxlength="40" style="WIDTH: 200px; POSITION: ABSOLUTE" class="msgTxt" onchange="AddressChanged()">
+		</span>
+	</span>
+
+	<span style="TOP: 146px; LEFT: 0px; POSITION: ABSOLUTE; WIDTH: 300px" class="msgLabel">
+		<label id="idTown"></label>
+		<span style="TOP: -3px; LEFT: 120px; POSITION: ABSOLUTE">
+			<input id="txtTown" name="Town" maxlength="40" style="WIDTH: 200px; POSITION: ABSOLUTE" class="msgTxt" onchange="AddressChanged()">
+		</span>
+	</span>
+
+	<span style="TOP: 170px; LEFT: 0px; POSITION: ABSOLUTE; WIDTH: 300px" class="msgLabel">
+		<label id="idCounty"></label>
+		<span id="spnCounty" style="TOP: -3px; LEFT: 120px; POSITION: ABSOLUTE">
+			<input id="txtCounty" name="County" maxlength="40" style="WIDTH: 200px; POSITION: ABSOLUTE" class="msgTxt" onchange="AddressChanged()">
+		</span>
+	</span>
+
+	<span style="TOP: 194px; LEFT: 0px; POSITION: ABSOLUTE; WIDTH: 300px" class="msgLabel">
+		Country
+		<span style="TOP: -3px; LEFT: 120px; POSITION: ABSOLUTE">
+			<select id="cboCountry" name="Country" style="WIDTH: 200px" class="msgCombo" onchange="AddressChanged()">
+			</select>
+		</span>
+	</span>
+</span>
+
+<span id="spnContactDetails" style="TOP: 10px; LEFT: 340px; POSITION: ABSOLUTE">
+	<span style="TOP: 0px; LEFT: 4px; POSITION: ABSOLUTE" class="msgLabel">
+		<strong>Contact Details</strong>
+	</span>
+
+	<span style="LEFT: 4px; POSITION: absolute; TOP: 26px" class="msgLabel">
+		Title
+		<span style="LEFT: 110px; POSITION: absolute; TOP: -3px">
+			<select id="cboTitle" name="ContactTitle" style="POSITION: absolute; WIDTH: 136px" class="msgCombo"></select> <!-- PB 06/07/2006 EP543 -->
+		</span> 
+	</span>
+
+	<% /* PB 06/07/2006 EP543 Begin */ %>
+	<span style="LEFT: 4px; POSITION: absolute; TOP: 50px;" class="msgLabel">
+		<label id="idTitleOther">Other</label>
+		<span style="LEFT: 110px; POSITION: absolute; TOP: -3px">
+			<input id="txtTitleOther" name="TitleOther" maxlength="40" style="POSITION: absolute; WIDTH: 136px" class="msgTxt">
+		</span> 
+	</span>
+	<% /* PB EP543 End */ %>
+	
+	<span style="LEFT: 4px; POSITION: absolute; TOP: 74px" class="msgLabel"> <!-- PB 06/07/06 EP543 -->
+		<label id="idForename"></label>
+		<span style="LEFT: 110px; POSITION: absolute; TOP: -3px">
+			<input id="txtContactForename" name="ContactForename" maxlength="40" style="POSITION: absolute; WIDTH: 136px" class="msgTxt" onchange="ContactDetailsChanged()">
+		</span> 
+	</span>
+
+	<span style="LEFT: 4px; POSITION: absolute; TOP: 98px" class="msgLabel"> <!-- PB 06/07/06 EP543 -->
+		<label id="idSurname"></label>
+		<span style="LEFT: 110px; POSITION: absolute; TOP: -3px">
+			<input id="txtContactSurname" name="ContactSurname" maxlength="40" style="POSITION: absolute; WIDTH: 136px" class="msgTxt" onchange="ContactDetailsChanged()">
+		</span> 
+	</span>
+
+	<!-- 
+		MDC 15/06/2001: OmiPlus 24 Telephone Numbers
+		Remove telephone, fax and e-mail from ThirdParty include.
+		Add button to new popup screen DC241
+	-->
+	<span style="TOP: 122px; LEFT: 4px; POSITION: ABSOLUTE" class="msgLabel">
+		Contact Details
+		<span style="TOP: -9px; LEFT: 110px; POSITION: ABSOLUTE">
+			<input id="btnContact" value="" type="button" style="WIDTH: 32px; HEIGHT: 32px" class="msgDDButton">
+		</span>
+	</span>
+
+<!--
+	<span style="LEFT: 4px; POSITION: absolute; TOP: 98px" class="msgLabel">
+		Telephone No.
+		<span style="LEFT: 110px; POSITION: absolute; TOP: -3px">
+			<input id="txtTelephoneNo" name="TelephoneNo" maxlength="30" style="POSITION: absolute; WIDTH: 136px" class="msgTxt" onchange="ContactDetailsChanged()">
+		</span> 
+	</span>
+
+	<span style="LEFT: 4px; POSITION: absolute; TOP: 122px" class="msgLabel">
+		Fax No.
+		<span style="LEFT: 110px; POSITION: absolute; TOP: -3px">
+			<input id="txtFaxNo" name="FaxNo" maxlength="30" style="POSITION: absolute; WIDTH: 136px" class="msgTxt" onchange="ContactDetailsChanged()">
+		</span> 
+	</span>
+
+	<span style="LEFT: 4px; POSITION: absolute; TOP: 146px" class="msgLabel">
+		E-Mail Address
+		<span style="LEFT: 0px; POSITION: absolute; TOP: 21px">
+			<input id="txtEMailAddress" name="EMailAddress" maxlength="100" style="POSITION: absolute; WIDTH: 246px" class="msgTxt" onchange="ContactDetailsChanged()">
+		</span> 
+	</span>
+-->
+
+	<span style="TOP: 191px; LEFT: 150px; POSITION: ABSOLUTE">
+		<input id="btnAddToDirectory" value="Add To Directory" type="button" style="WIDTH: 100px" class="msgButton">
+	</span>
+</span>

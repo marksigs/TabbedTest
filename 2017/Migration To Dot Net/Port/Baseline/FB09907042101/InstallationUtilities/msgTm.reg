@@ -1,0 +1,10 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\OMIGA4\msgTm\DATABASE CONNECTION]
+"Data Source"="OMIGA4"
+"Password"="taskmansys"
+"Provider"="MSDAORA"
+"Retries"="1"
+"User ID"="taskmansys"
+
+

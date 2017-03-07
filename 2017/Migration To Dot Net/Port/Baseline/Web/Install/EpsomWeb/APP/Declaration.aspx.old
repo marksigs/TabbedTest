@@ -1,0 +1,75 @@
+<%@ Register Src="~/WebUserControls/DIPMenu.ascx" TagName="DIPMenu" TagPrefix="Epsom" %>
+<%@ Register Src="~/WebUserControls/DIPNavigationButtons.ascx" TagName="DIPNavigationButtons" TagPrefix="Epsom" %>
+<%@ Register Src="~/WebUserControls/ApplicantType.ascx" TagName="applicantType" TagPrefix="Epsom" %>
+<%@ Register TagPrefix="mp" namespace="Microsoft.Web.Samples.MasterPages" assembly="MasterPages" %>
+<%@ Register TagPrefix="validators" NameSpace="Epsom.Web.Validators" Assembly="Epsom.Web"%>
+<%@ Page language="c#" Codebehind="Declaration.aspx.cs" AutoEventWireup="false" Inherits="Epsom.Web.App.Declaration" %>
+<%@ Register TagPrefix="CMS" namespace="Epsom.Web.Helpers" assembly="Epsom.Web" %>
+
+<mp:contentcontainer id="Contentcontainer1" runat="server" masterpagefile="../masterpages/masterpage2.ascx">
+
+  <mp:content id="region1" runat="server">
+
+    <epsom:dipmenu id="DipMenu" runat="server"></epsom:dipmenu>
+
+  </mp:content>
+
+  <mp:content id="region2" runat="server">
+	<cms:helplink id="helplink" class="helplink" runat="server" helpref="2210" />
+    <h1><cms:cmsBoilerplate cmsref="621" runat="server" /></h1>
+ 
+    <epsom:dipnavigationbuttons id="ctlDIPNavigationButtons1" runat="server"></epsom:dipnavigationbuttons>
+
+    <asp:validationsummary id="Validationsummary1" runat="server" showsummary="true" CssClass="validationsummary"
+      headertext="Input errors:" displaymode="BulletList"></asp:validationsummary>
+	<cms:cmsBoilerplate cmsref="210" runat="server" />
+	
+    <table class="formtable">
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>
+          <asp:textbox textmode="multiline" cols="80%" rows="25" cssclass="text" id="txtDeclaration" runat="server" enabled="false" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10;        Ut odio nunc, facilsis sit amet, condimentum at, molestie vestibulum tortor.&#13;&#10;        Nulla varius ligula eget est. Vivamus arco justo, lobortis ac, iaculis mattis, luctus et, ipsum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam, aliquet tellus id mi. &#13;&#10; "></asp:textbox></TD>
+      </tr>
+      <tr>
+        <td style="text-align:right">
+          <asp:button cssclass="button" align="right" autopostback="false" id="btnPrint" runat="server" text="Print declaration"></asp:button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <asp:checkbox id="chkAgreeTC" runat="server" text="Agree and understand the above" tooltip="check this box to indicate that you have read and understood the declaration"
+            textalign="right"></asp:checkbox>
+           <validators:checkboxvalidator runat="Server"
+             text="***" errormessage="You must understand and agree the declaration"
+             controltovalidate="chkAgreeTC" enableclientscript="false" id="CheckBoxValidator1">
+           </validators:checkboxvalidator> 
+        </td>
+      </tr>
+      
+     <tr>
+       <td>
+         <asp:checkbox id="chkKeyFactsAccepted" runat="server" text="Has the customer received and accepted a Key Facts Illustration?" tooltip="check this box to indicate that the customer has accepted a Key Facts Illustration"
+           textalign="right"></asp:checkbox>
+         <validators:checkboxvalidator runat="Server"
+            text="***" errormessage="The customer must have received and accepted a Key Facts Illustration"
+            controltovalidate="chkKeyFactsAccepted" enableclientscript="false" id="CheckBoxValidator2">
+         </validators:checkboxvalidator> 
+       </td>
+     </tr>
+     <tr>
+       <td>
+         <asp:label id="lblMarketingOptIn" runat="server" text="Marketing data protection opt-in" tooltip="check these boxes to indicate that you wish to receive marketing material from DB"
+            textalign="right"></asp:label>
+       </td>
+     </tr>
+  </table>
+  
+  <epsom:applicanttype id="ctlApplicantType" runat="server" required="false"/>
+
+  <epsom:dipnavigationbuttons id="ctlDIPNavigationButtons2" buttonbar="true" savepage="true" saveandclosepage="true" runat="server"></epsom:dipnavigationbuttons>
+
+  </mp:content>
+
+</mp:contentcontainer>

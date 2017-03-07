@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: FindBusinessForCustomer - Response
+
+History:
+
+Version 		Author   		Date       		Description
+01.01      		RMH	 			29/06/2005 		Created
+01.02           TLiu            20/07/2005      Changed mars to IDUK in path, named a complexType, added MESSAGE & ERROR.
+01.03           TLiu            22/07/2005      Imported msgCommonTypes.
+01.04			TLiu			22/07/2005		Changed omiga to Omiga in name space.
+01.05			TLiu			29/07/2005		Fixed Name Spaces.
+01.06			TLiu			16/08/2005		Fixed bug for EXISTINGBUSINESSLISTType.
+01.07			RFairlie        16/08/2005		Set CUSTOMERROLETYPEType mixed = "true". 
+                                                                Added LEVELOFADVICE.
+                                                                Set EXISTINGBUSINESSLISTType maxOccurs="unbounded" at sequence level
+01.08			RFairlie        10/10/2005		MAR51: InterfaceChangeRegister.xls items 3 - 5:
+                                                               "Mixed" issue: 
+                                                               Make TYPEOFAPPLICATION a short and remove TYPEOFAPPLICATIONType
+                                                               Make LEVELOFADVICE a short and remove LEVELOFADVICEType
+                                                               Make CUSTOMERROLETYPE a short and remove CUSTOMERROLETYPEType
+01.09			RHart			12/10/2005		Make PACKAGENUMBER, APPLICATIONNUMBERORACCOUNTNUMBER, ACCOUNTNUMBER, DRAWDOWN, OVERPAYMENTS, LOANCLASSTYPE, TYPE all Nillable
+02.01			IK					16/11/2005		add STAGENUMBER
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.FindBusinessForCustomer.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Response.FindBusinessForCustomer.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:complexType name="EXISTINGBUSINESSType">
+		<xs:sequence>
+			<xs:element name="BUSINESSTYPE" type="xs:string"/>
+			<xs:element name="BUSINESSTYPEINDICATOR" type="xs:string"/>
+			<xs:element name="PACKAGENUMBER" type="xs:string" nillable="true"/>
+			<xs:element name="APPLICATIONNUMBERORACCOUNTNUMBER" type="xs:string" nillable="true"/>
+			<xs:element name="APPLICATIONNUMBER" type="xs:string"/>
+			<xs:element name="ACCOUNTNUMBER" type="xs:string" nillable="true"/>
+			<xs:element name="APPLICATIONFACTFINDNUMBER" type="xs:string"/>
+			<xs:element name="DATECREATED" type="xs:string"/>
+			<xs:element name="AMOUNT" type="xs:string"/>
+			<xs:element name="STAGENUMBER" type="xs:short"/>
+			<xs:element name="STATUS" type="xs:string"/>
+			<xs:element name="CORRESPONDENCESALUTATION" type="xs:string"/>
+			<xs:element name="TYPEOFAPPLICATION" type="xs:short"/>
+			<xs:element name="LEVELOFADVICE" type="xs:short" minOccurs="0"/>
+			<xs:element name="NUMBEROFAPPLICANTS" type="xs:string"/>
+			<xs:element name="CUSTOMERROLETYPE" type="xs:short"/>
+			<xs:element name="DRAWDOWN" type="xs:string" nillable="true"/>
+			<xs:element name="OVERPAYMENTS" type="xs:string" nillable="true"/>
+			<xs:element name="LOANCLASSTYPE" type="xs:string" nillable="true"/>
+			<xs:element name="TYPE" type="xs:string" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EXISTINGBUSINESSLISTType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="EXISTINGBUSINESS" type="EXISTINGBUSINESSType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="EXISTINGBUSINESSLIST" type="EXISTINGBUSINESSLISTType" minOccurs="0"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+</xs:schema>

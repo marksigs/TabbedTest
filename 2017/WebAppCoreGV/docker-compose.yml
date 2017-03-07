@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  webappcoregv:
+    image: webappcoregv
+    build:
+      context: ./WebAppCoreGV
+      dockerfile: Dockerfile

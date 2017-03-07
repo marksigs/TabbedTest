@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.filenet.com/ns/fnce/2004/06/ws/schema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.filenet.com/ns/fnce/2004/06/ws/wsdl" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://www.filenet.com/ns/fnce/2004/06/ws/wsdl" name="fnce-ws-1.0" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema xmlns="http://www.filenet.com/ns/fnce/2004/06/ws/schema" elementFormDefault="qualified" targetNamespace="http://www.filenet.com/ns/fnce/2004/06/ws/schema">
+      <s:simpleType name="GuidType">
+        <s:restriction base="s:string">
+          <s:pattern value="\{[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}\}" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="PropertyType" abstract="true">
+        <s:attribute name="propertyId" type="s:string" use="required" />
+        <s:attribute name="settable" type="s:boolean" />
+      </s:complexType>
+      <s:complexType name="ModifiablePropertyType" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:PropertyType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SingletonBoolean">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" name="Value" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SingletonBinary">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" name="Value" type="s:base64Binary" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SingletonDateTime">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" name="Value" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SingletonFloat64">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" name="Value" type="s:double" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SingletonId">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" name="Value" type="s0:GuidType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SingletonInteger32">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" name="Value" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SingletonObject">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" name="Value" type="s0:ObjectEntryType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SingletonString">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" name="Value" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ListOfBoolean">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ListOfBinary">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s:base64Binary" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ListOfDateTime">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ListOfFloat64">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s:double" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ListOfId">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s0:GuidType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ListOfInteger32">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ListOfObject">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s0:DependentObjectType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ListOfString">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EnumOfObject">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:PropertyType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s0:ObjectValue" />
+              <s:element minOccurs="0" name="CollectionTerminator" type="s0:CollectionTerminatorType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ContentData">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ModifiablePropertyType">
+            <s:sequence>
+              <s:element name="Value" type="s0:ContentType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ObjectEntryType" abstract="true" />
+      <s:complexType name="WithObjectIdentityType" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ObjectEntryType">
+            <s:attribute name="classId" type="s:string" />
+            <s:attribute name="objectId" type="s:string" />
+            <s:attribute name="objectStore" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ObjectValue">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:WithObjectIdentityType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Property" type="s0:PropertyType" />
+            </s:sequence>
+            <s:attribute name="updateSequenceNumber" type="s:int" />
+            <s:attribute name="accessAllowed" type="s:int" />
+            <s:attribute name="superClasses">
+              <s:simpleType>
+                <s:list itemType="s:string" />
+              </s:simpleType>
+            </s:attribute>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ObjectReference">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:WithObjectIdentityType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RetrievalError">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:WithObjectIdentityType">
+            <s:sequence>
+              <s:element ref="s0:ErrorStack" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Unevaluated">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ObjectEntryType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ObjectSpecification">
+        <s:annotation>
+          <s:documentation xml:lang="en">
+						An ObjectSpecification can be used in a request anywhere
+						that calls for an ObjectReference
+					</s:documentation>
+        </s:annotation>
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ObjectReference">
+            <s:attribute name="path" type="s:string" />
+            <s:attribute name="propertyId" type="s:string" />
+            <s:attribute name="itemIndex" type="s:int" />
+            <s:attribute name="batchRef" type="s:IDREF" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DependentObjectType">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ObjectValue">
+            <s:attribute name="originalIndex" type="s:int" />
+            <s:attribute name="newIndex" type="s:int" />
+            <s:attribute name="dependentAction">
+              <s:simpleType>
+                <s:restriction base="s:string">
+                  <s:enumeration value="Update" />
+                  <s:enumeration value="Move" />
+                  <s:enumeration value="Insert" />
+                  <s:enumeration value="Delete" />
+                </s:restriction>
+              </s:simpleType>
+            </s:attribute>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ObjectSetType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Object" type="s0:ObjectValue" />
+          <s:element minOccurs="0" name="CollectionTerminator" type="s0:CollectionTerminatorType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CollectionTerminatorType" abstract="true" />
+      <s:complexType name="EndOfCollection">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:CollectionTerminatorType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EndOfPage">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:CollectionTerminatorType">
+            <s:attribute name="continueFrom" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TraversalError">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:CollectionTerminatorType">
+            <s:sequence>
+              <s:element ref="s0:ErrorStack" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ContentType" abstract="true">
+        <s:attribute name="size" type="s:unsignedLong" />
+      </s:complexType>
+      <s:complexType name="InlineContent">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ContentType">
+            <s:sequence>
+              <s:element name="Binary" type="s:base64Binary" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FilterElementType">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="maxRecursion" type="s:int" />
+            <s:attribute name="maxSize" type="s:unsignedLong" />
+            <s:attribute name="maxElements" type="s:int" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="PropertyFilterType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IncludeProperties" type="s0:FilterElementType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IncludeTypes" type="s0:FilterElementType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExcludeProperties" type="s:string" />
+        </s:sequence>
+        <s:attribute name="maxRecursion" type="s:int" />
+        <s:attribute name="maxSize" type="s:unsignedLong" />
+        <s:attribute name="maxElements" type="s:int" />
+      </s:complexType>
+      <s:complexType name="ModifiedPropertiesType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Property" type="s0:ModifiablePropertyType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ActionType" abstract="true" />
+      <s:simpleType name="ReservationType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Collaborative" />
+          <s:enumeration value="Exclusive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="CreateAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="classId" type="s:string" use="required" />
+            <s:attribute name="autoUniqueContainmentName" type="s:boolean" />
+            <s:attribute name="reservationType" type="s0:ReservationType" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UpdateAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DeleteAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CheckoutAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="reservationId" type="s0:GuidType" />
+            <s:attribute name="reservationType" type="s0:ReservationType" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CheckinAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="autoClassify" type="s:boolean" />
+            <s:attribute name="checkinMinorVersion" type="s:boolean" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FreezeAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ChangeStateAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="lifecycleAction" use="required">
+              <s:simpleType>
+                <s:restriction base="s:string">
+                  <s:enumeration value="Reset" />
+                  <s:enumeration value="Promote" />
+                  <s:enumeration value="Demote" />
+                  <s:enumeration value="SetException" />
+                  <s:enumeration value="ClearException" />
+                </s:restriction>
+              </s:simpleType>
+            </s:attribute>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ChangeClassAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="newClass" type="s:string" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MoveContentAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="targetPolicyId" type="s0:GuidType" use="required" />
+            <s:attribute name="moveAllVersions" type="s:boolean" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="LockAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="timeout" type="s:unsignedInt" use="required" />
+            <s:attribute name="owner" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UnlockAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PromoteVersionAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DemoteVersionAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ApplySecurityTemplateAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="applyStateId" type="s0:GuidType" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RaiseEventAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:sequence>
+              <s:element minOccurs="0" name="EventProperties" type="s0:ModifiedPropertiesType" />
+            </s:sequence>
+            <s:attribute name="classId" type="s:string" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="InstallAddOnAction">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ActionType">
+            <s:attribute name="addOnId" type="s0:GuidType" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="Localization">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="Locale" type="s:string" />
+            <s:element minOccurs="0" name="Timezone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="ErrorNameType">
+        <s:restriction base="s:string">
+          <s:enumeration value="SERVER_ERROR" />
+          <s:enumeration value="HEAP_FAILURE" />
+          <s:enumeration value="DEADLOCK_ERROR" />
+          <s:enumeration value="DATABASE_ERROR" />
+          <s:enumeration value="DATABASE_FULL" />
+          <s:enumeration value="TRANSACTION_TIMEOUT" />
+          <s:enumeration value="AUTHENTICATION_FAILURE" />
+          <s:enumeration value="NOT_SUPPORTED" />
+          <s:enumeration value="BAD_CLASSID" />
+          <s:enumeration value="BAD_PROPERTYID" />
+          <s:enumeration value="BAD_INDEX" />
+          <s:enumeration value="BAD_OBJECT" />
+          <s:enumeration value="INVALID_REQUEST" />
+          <s:enumeration value="REQUIRED_VALUE_ABSENT" />
+          <s:enumeration value="OBJECT_NOT_FOUND" />
+          <s:enumeration value="OBJECT_DELETED" />
+          <s:enumeration value="BAD_VALUE" />
+          <s:enumeration value="DATATYPE_MISMATCH" />
+          <s:enumeration value="ACCESS_DENIED" />
+          <s:enumeration value="CONSTRAINT_VIOLATED" />
+          <s:enumeration value="NOT_UNIQUE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="DiagnosticType">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="diagnosticType" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="ErrorRecordType">
+        <s:sequence>
+          <s:element minOccurs="0" name="Source" type="s:string" />
+          <s:element minOccurs="0" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Diagnostic" type="s0:DiagnosticType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ErrorStackType">
+        <s:sequence>
+          <s:element name="ErrorName" type="s0:ErrorNameType" />
+          <s:element minOccurs="1" maxOccurs="unbounded" name="ErrorRecord" type="s0:ErrorRecordType" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ErrorStack" type="s0:ErrorStackType" />
+      <s:complexType name="SearchScopeType" abstract="true" />
+      <s:complexType name="ObjectStoreScope">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:SearchScopeType">
+            <s:attribute name="objectStore" type="s:string" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MergedScope">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:SearchScopeType">
+            <s:sequence>
+              <s:element minOccurs="2" maxOccurs="unbounded" name="ComponentScope" type="s0:SearchScopeType" />
+            </s:sequence>
+            <s:attribute name="mergeMode">
+              <s:simpleType>
+                <s:restriction base="s:string">
+                  <s:enumeration value="Union" />
+                  <s:enumeration value="Intersection" />
+                </s:restriction>
+              </s:simpleType>
+            </s:attribute>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="RepositorySearchModeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Rows" />
+          <s:enumeration value="Objects" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="SearchRequestType" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" name="SelectionFilter" type="s0:PropertyFilterType" />
+        </s:sequence>
+        <s:attribute name="maxElements" type="s:int" />
+        <s:attribute name="continueFrom" type="s:string" />
+        <s:attribute name="continuable" type="s:boolean" />
+      </s:complexType>
+      <s:complexType name="RepositorySearch">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:SearchRequestType">
+            <s:sequence>
+              <s:element name="SearchScope" type="s0:SearchScopeType" />
+              <s:element name="SearchSQL" type="s:string" />
+            </s:sequence>
+            <s:attribute name="repositorySearchMode" type="s0:RepositorySearchModeType" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PrincipalSearch">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:SearchRequestType">
+            <s:sequence>
+              <s:element name="SearchRealm" type="s:string" />
+              <s:element name="SearchPattern" type="s:string" />
+            </s:sequence>
+            <s:attribute name="includeUsers" type="s:boolean" />
+            <s:attribute name="includeGroups" type="s:boolean" />
+            <s:attribute name="principalSearchType">
+              <s:simpleType>
+                <s:restriction base="s:string">
+                  <s:enumeration value="Custom" />
+                  <s:enumeration value="PrefixMatch" />
+                  <s:enumeration value="SuffixMatch" />
+                  <s:enumeration value="Contains" />
+                  <s:enumeration value="Exact" />
+                </s:restriction>
+              </s:simpleType>
+            </s:attribute>
+            <s:attribute name="principalSearchAttribute">
+              <s:simpleType>
+                <s:restriction base="s:string">
+                  <s:enumeration value="ShortName" />
+                  <s:enumeration value="DisplayName" />
+                </s:restriction>
+              </s:simpleType>
+            </s:attribute>
+            <s:attribute name="principalSort">
+              <s:simpleType>
+                <s:restriction base="s:string">
+                  <s:enumeration value="Ascending" />
+                  <s:enumeration value="Descending" />
+                </s:restriction>
+              </s:simpleType>
+            </s:attribute>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="StoredSearch">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:SearchRequestType">
+            <s:sequence>
+              <s:element name="SearchObject" type="s0:ObjectReference" />
+              <s:element name="ExecuteXML">
+                <s:complexType>
+                  <s:sequence>
+                    <s:any processContents="lax" />
+                  </s:sequence>
+                </s:complexType>
+              </s:element>
+            </s:sequence>
+            <s:attribute name="repositorySearchMode" type="s0:RepositorySearchModeType" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ObjectRequestType">
+        <s:sequence>
+          <s:element name="SourceSpecification" type="s0:ObjectReference" />
+          <s:element minOccurs="0" name="PropertyFilter" type="s0:PropertyFilterType" />
+        </s:sequence>
+        <s:attribute name="id" type="s:ID" />
+        <s:attribute name="cacheAllowed" type="s:boolean" />
+        <s:attribute name="maxElements" type="s:int" />
+        <s:attribute name="continueFrom" type="s:string" />
+      </s:complexType>
+      <s:element name="GetObjectsRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="ObjectRequest" type="s0:ObjectRequestType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ObjectResponseType">
+        <s:sequence>
+          <s:choice>
+            <s:element name="Object" type="s0:ObjectValue" />
+            <s:element name="ObjectSet" type="s0:ObjectSetType" />
+            <s:element ref="s0:ErrorStack" />
+          </s:choice>
+        </s:sequence>
+        <s:attribute name="id" type="s:ID" />
+      </s:complexType>
+      <s:element name="GetObjectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="ObjectResponse" type="s0:ObjectResponseType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ChangeRequestType">
+        <s:sequence>
+          <s:element name="TargetSpecification" type="s0:ObjectReference" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Action" type="s0:ActionType" />
+          <s:element minOccurs="0" name="ActionProperties" type="s0:ModifiedPropertiesType" />
+          <s:element minOccurs="0" name="RefreshFilter" type="s0:PropertyFilterType" />
+        </s:sequence>
+        <s:attribute name="id" type="s:ID" />
+        <s:attribute name="updateSequenceNumber" type="s:int" />
+      </s:complexType>
+      <s:element name="ExecuteChangesRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="ChangeRequest" type="s0:ChangeRequestType" />
+          </s:sequence>
+          <s:attribute name="refresh" type="s:boolean" />
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ChangeResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:ObjectValue">
+            <s:attribute name="id" type="s:ID" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ExecuteChangesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="ChangeResponse" type="s0:ChangeResponseType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteSearchRequest" type="s0:SearchRequestType" />
+      <s:element name="ExecuteSearchResponse" type="s0:ObjectSetType" />
+      <s:element name="GetSearchMetadataRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="SearchScope" type="s0:SearchScopeType" />
+            <s:element minOccurs="0" name="ClassFilter" type="s:string" />
+            <s:element minOccurs="0" name="PropertyFilter" type="s0:PropertyFilterType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSearchMetadataResponse">
+        <s:complexType>
+          <s:complexContent mixed="false">
+            <s:extension base="s0:ObjectSetType">
+              <s:attribute name="metadataEpochId" type="s:string" />
+            </s:extension>
+          </s:complexContent>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </types>
+  <message name="LocalizationHeader">
+    <part name="header" element="s0:Localization" />
+  </message>
+  <message name="GetObjectsRequest">
+    <part name="request" element="s0:GetObjectsRequest" />
+  </message>
+  <message name="GetObjectsResponse">
+    <part name="response" element="s0:GetObjectsResponse" />
+  </message>
+  <message name="ExecuteChangesRequest">
+    <part name="request" element="s0:ExecuteChangesRequest" />
+  </message>
+  <message name="ExecuteChangesResponse">
+    <part name="response" element="s0:ExecuteChangesResponse" />
+  </message>
+  <message name="ExecuteSearchRequest">
+    <part name="request" element="s0:ExecuteSearchRequest" />
+  </message>
+  <message name="ExecuteSearchResponse">
+    <part name="response" element="s0:ExecuteSearchResponse" />
+  </message>
+  <message name="GetSearchMetadataRequest">
+    <part name="request" element="s0:GetSearchMetadataRequest" />
+  </message>
+  <message name="GetSearchMetadataResponse">
+    <part name="response" element="s0:GetSearchMetadataResponse" />
+  </message>
+  <message name="FaultResponse">
+    <part name="error" element="s0:ErrorStack" />
+  </message>
+  <portType name="FNCEWS10PortType">
+    <operation name="GetObjects">
+      <input message="tns:GetObjectsRequest" />
+      <output message="tns:GetObjectsResponse" />
+      <fault name="GeneralError" message="tns:FaultResponse" />
+    </operation>
+    <operation name="ExecuteChanges">
+      <input message="tns:ExecuteChangesRequest" />
+      <output message="tns:ExecuteChangesResponse" />
+      <fault name="GeneralError" message="tns:FaultResponse" />
+    </operation>
+    <operation name="ExecuteSearch">
+      <input message="tns:ExecuteSearchRequest" />
+      <output message="tns:ExecuteSearchResponse" />
+      <fault name="GeneralError" message="tns:FaultResponse" />
+    </operation>
+    <operation name="GetSearchMetadata">
+      <input message="tns:GetSearchMetadataRequest" />
+      <output message="tns:GetSearchMetadataResponse" />
+      <fault name="GeneralError" message="tns:FaultResponse" />
+    </operation>
+  </portType>
+</definitions>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+
+Type Versions; 0.0.1
+ 
+
+Author(s):    Dipen Shah      
+ 
+
+Description  Schema definations for data transfer between Omiga to Direct Gateway for Esurv Request
+
+ 
+
+============================================================================================== -->
+<schema targetNamespace="http://realtimevaluation.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:realtimevaluation="http://realtimevaluation.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" xmlns:questtype="http://questtypes.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="..//CommonTypes.xsd"/>
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="..//GenericMessages.xsd"/>
+	<import namespace="http://questtypes.externalInterface.services.dg.ingdirect.com/0.0.1" schemaLocation="QuestDefinition.xsd"/>
+	<annotation>
+		<documentation>
+                    	Schema definitions for data transfer between Omiga to Direct gateway for eSurv and vice versa.
+                    	This schema defines two message types ,
+			                    	1. RealtimeValuationRequestType and  2. RealtimeValuationResponseType
+       		 	for request and response respectively.
+       		  </documentation>
+		<documentation>
+       		  	Document version = 0.1
+	       	</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+				Removed the reference for Result and using directly as an element.
+       	  </documentation>
+		<documentation>
+       		  	Document version = 0.2
+	       	</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+				1. Added more Values in the enumeration for response element named 'Result'.
+				2. modified the values of applicationType and propertyType.
+				3. Removed the 2 elements namely RealtimeValuationRequestDetails and RealtimeValuationResponseDetails.
+      	 </documentation>
+		<documentation>
+       		  	Document version = 0.3
+	       </documentation>
+	</annotation>
+	<annotation>
+		<documentation>				
+				1.	Added annotations as per Use Case VER02. Note, only elements outlined within UC have been annotated.
+				2.   Change incude to import for DataTypes.xsd and QuestDefinition.xsd due to technical problems on Omiga side.
+				3.  Positive values for NumberofBedroom, AdvanceAmt and PriceofProperty.
+		</documentation>
+		<documentation>
+				Added minoccurs=0 against the sequence number in Response
+       	  </documentation>
+	</annotation>
+	<complexType name="RealtimeValuationRequestType">
+		<annotation>
+			<documentation>
+	                    	Realtime Valuation Request Declaration
+	      		  </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="RealtimeValuationRequestDetails" type="realtimevaluation:RealtimeValuationRequestDetailsType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="RealtimeValuationResponseType">
+		<annotation>
+			<documentation>
+	                    	Realtime Valuation Response Declaration
+	      		  </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence minOccurs="0">
+					<element name="RealtimeValuationResponseDetails" type="realtimevaluation:RealtimeValuationResponseDetailsType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="RealtimeValuationRequestDetailsType">
+		<annotation>
+			<documentation>
+                    	Realtime Valuation Request Elements
+      		  </documentation>
+		</annotation>
+		<sequence>
+			<element name="MessageType">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="40"/>
+						<enumeration value="Survey Instruction"/>
+						<enumeration value="Survey Status"/>
+						<enumeration value="Valuation Report"/>
+						<enumeration value="External Report"/>
+						<enumeration value="Nothing Available"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="MessageTimeStamp" type="common:TimeStampType"/>
+			<element name="MessageOriginatorReference" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="80"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="FeedInData">
+				<complexType>
+					<sequence>
+						<element name="InstructionDetails">
+							<complexType>
+								<sequence>
+									<element name="InstructionSource" fixed="ING Direct NV">
+										<annotation>
+											<documentation>This will always be set to ING Direct NV</documentation>
+										</annotation>
+										<simpleType>
+											<restriction base="string">
+												<maxLength value="20"/>
+												<enumeration value="ING Direct NV"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="InstTelephone" type="common:PhoneDetailsType"/>
+									<element name="InstFax" type="common:PhoneDetailsType"/>
+									<element name="InstructionSourceDX">
+										<simpleType>
+											<restriction base="string">
+												<maxLength value="20"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="TypeOfInstruction" type="questtype:qstInstructionType">
+										<annotation>
+											<documentation>Instructed Valuation Type. Valuation scheme is: 1 = Mortgage Valuation; 2 = Homebuyer's Report and Valuation; 3 = Full Building Survey; 4 = External Appraisal.</documentation>
+										</annotation>
+									</element>
+									<element name="Applicationtype" type="questtype:qstApplicationType">
+										<annotation>
+											<documentation>The mortgage application type: 1 = Home Mover; 2 = First Time Buyer; 3 = Remortgage.</documentation>
+										</annotation>
+									</element>
+									<!-- Instruction Source -->
+									<!-- Instruction Source FAX -->
+								</sequence>
+							</complexType>
+						</element>
+						<element name="LenderDetails">
+							<complexType>
+								<sequence>
+									<element name="LenderIfDifferent">
+										<simpleType>
+											<restriction base="string">
+												<maxLength value="40"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="LenderReference">
+										<annotation>
+											<documentation>The Mortgage Application Number. Unique reference ID.</documentation>
+										</annotation>
+										<simpleType>
+											<restriction base="string">
+												<minLength value="1"/>
+												<maxLength value="10"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="LenderBranch">
+										<simpleType>
+											<restriction base="string">
+												<maxLength value="30"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="LenderBranchTelephone" type="common:PhoneDetailsType"/>
+									<element name="LenderStaff">
+										<simpleType>
+											<restriction base="string">
+												<maxLength value="30"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="LenderStaffTelephone" type="common:PhoneDetailsType"/>
+									<element name="AdvanceAmount">
+										<simpleType>
+											<restriction base="integer">
+												<totalDigits value="8"/>
+												<pattern value="[0-9]*"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="GrossFee" type="string"/>
+									<element name="ReturnAddress" type="common:StructuredAddressDetailsType"/>
+									<!-- LenderBranchTelephoneSource -->
+									<!-- LenderStaffTelephone-->
+								</sequence>
+							</complexType>
+						</element>
+						<element name="PropertyDetails">
+							<complexType>
+								<sequence>
+									<element name="PropertyType" type="questtype:qstPropertyType">
+										<annotation>
+											<documentation>The type of property to be valued. Options are: 1 = House Terrace; 2 = Semi-Detached House; 3 = Detached House; 4 = Flat or Maisonette; 14 = Bungalow; 99 = Other.</documentation>
+										</annotation>
+									</element>
+									<element name="NumberOfBedrooms">
+										<annotation>
+											<documentation>The number of bedrooms for the property to be valued.</documentation>
+										</annotation>
+										<simpleType>
+											<restriction base="integer">
+												<totalDigits value="2"/>
+												<pattern value="[0-9]*"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="Tenure" type="questtype:qstTenure">
+										<annotation>
+											<documentation>Property tenure: Common hold; Free hold; Feuhold; Lease hold</documentation>
+										</annotation>
+									</element>
+									<element name="NewProperty" type="questtype:qstYN">
+										<annotation>
+											<documentation>New property indicator.</documentation>
+										</annotation>
+									</element>
+									<element name="PlotNumber" type="questtype:qstPlotNumber">
+										<annotation>
+											<documentation>Plot number (only for new property). Expected to be blank when passed from OMIGA.</documentation>
+										</annotation>
+									</element>
+									<element name="BuildingIndemnityType" type="questtype:qstIndemnityType">
+										<annotation>
+											<documentation>Only for new property: N = NHBC; Z = Zurich; P = Premier Guarantee.</documentation>
+										</annotation>
+									</element>
+									<element name="PriceOfProperty">
+										<simpleType>
+											<restriction base="integer">
+												<totalDigits value="8"/>
+												<pattern value="[0-9]*"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="PurchasePriceOrEstimatedValue" type="questtype:qstPriceType">
+										<annotation>
+											<documentation>Property purchase price or the applicant's estimated value.</documentation>
+										</annotation>
+									</element>
+									<element name="OccupierName" type="questtype:qstName"/>
+									<element name="PropertyAddress" type="common:StructuredAddressDetailsType">
+										<annotation>
+											<documentation>The address of the property to be valued. The address is typically PAF validated. Individual elements are annotated within CommonTypes xsd. Elements within StructuredAddressDetailsType required by this schema are: FlatNameOrNumber; HouseOrBuildingName; HouseOrBuildingNumber; Street; District; TownOrCity; County; PostCode. </documentation>
+										</annotation>
+									</element>
+									<element name="PropertyTelDay" type="common:PhoneDetailsType"/>
+									<element name="PropertyTelEve" type="common:PhoneDetailsType"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="ApplicantDetails">
+							<complexType>
+								<sequence>
+									<element name="Applicant1" type="questtype:qstName">
+										<annotation>
+											<documentation>Salutation, Initials and LastName of Applicant 1</documentation>
+										</annotation>
+									</element>
+									<element name="Applicant2" type="questtype:qstName">
+										<annotation>
+											<documentation>Salutation, Initials and LastName of Applicant 2</documentation>
+										</annotation>
+									</element>
+									<element name="ApplicantAddress" type="common:StructuredAddressDetailsType">
+										<annotation>
+											<documentation>The address of Applicant 1. Individual elements are annotated within CommonTypes xsd. Elements within StructuredAddressDetailsType required by this schema are: FlatNameOrNumber; HouseOrBuildingName; HouseOrBuildingNumber; Street; District; TownOrCity; County; PostCode.</documentation>
+										</annotation>
+									</element>
+									<element name="ApplicantTelDay" type="common:PhoneDetailsType">
+										<annotation>
+											<documentation>
+											The Work Phone Number of Applicant 1, where PhoneType = WORK (STD code, space, Local Number).</documentation>
+										</annotation>
+									</element>
+									<element name="ApplicantTelEve" type="common:PhoneDetailsType">
+										<annotation>
+											<documentation>
+											The Home Phone Number of Applicant 1, where PhoneType = HOME (STD code, space, Local Number).</documentation>
+										</annotation>
+									</element>
+									<element name="ApplicantMobile" type="common:PhoneDetailsType">
+										<annotation>
+											<documentation>The Mobile Phone Number of Applicant 1, where PhoneType = MOBILE (STD code, space, Local Number).</documentation>
+										</annotation>
+									</element>
+									<element name="ApplicantEmail" type="questtype:qstEmailAddress">
+										<annotation>
+											<documentation>Email address - format must be as per BR10 in Use Case APP14. E.g. local@sub-domain.top-level-domain </documentation>
+										</annotation>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="AgentDetails">
+							<complexType>
+								<sequence>
+									<element name="Agent">
+										<annotation>
+											<documentation>The Selling Agent name.</documentation>
+										</annotation>
+										<simpleType>
+											<restriction base="string">
+												<maxLength value="40"/>
+											</restriction>
+										</simpleType>
+									</element>
+									<element name="AgentTel" type="common:PhoneDetailsType">
+										<annotation>
+											<documentation>Selling Agent telephone number.</documentation>
+										</annotation>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="OtherInformation">
+							<complexType>
+								<sequence>
+									<element name="Access" type="questtype:qstNote"/>
+									<element name="InstructionNote1" type="questtype:qstNote"/>
+									<element name="InstructionNote2" type="questtype:qstNote"/>
+									<element name="InstructionNote3" type="questtype:qstNote"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="RealtimeValuationResponseDetailsType">
+		<annotation>
+			<documentation>
+                    	Realtime Valuation Response Elements
+      		  </documentation>
+		</annotation>
+		<sequence>
+			<element name="Result">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="1"/>
+						<enumeration value="0"/>
+						<enumeration value="1"/>
+						<enumeration value="2"/>
+						<enumeration value="3"/>
+						<enumeration value="4"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="qstReference" type="questtype:qstReference"/>
+		</sequence>
+	</complexType>
+	<annotation>
+		<documentation>
+                    	Realtime Valuation Root Elements
+      		  </documentation>
+	</annotation>
+	<element name="RealtimeValuationRequest" type="realtimevaluation:RealtimeValuationRequestType"/>
+	<element name="RealtimeValuationResponse" type="realtimevaluation:RealtimeValuationResponseType"/>
+</schema>

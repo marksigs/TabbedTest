@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: Ingestion (Stop&Save) for FMA  - Request
+
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/SubmitFMARequest.xsd $
+Workfile                 $Workfile: SubmitFMARequest.xsd $
+Current Version   	$Revision: 2 $
+Last Modified       	$Modtime: 28/11/06 10:07 $
+Modified By          	$Author: Dbarraclough $
+
+History:
+
+Version 		Author   	Date       			Description
+01.01      		RMH	 		29/06/2005 		Created
+01.02			  TLiu        20/07/2005    	Changed mars to IDUK in path, named a complex type.
+01.03			  TLiu		26/07/2005		Changed to use 2 imported files.
+01.04			  TLiu		26/07/2005		Changed format for Element THIRDPARTY.
+01.05			  TLiu		02/08/2005		Renamed file from FMASubmissionRequest.xsd to SubmitFMARequest.xsd.
+01.06			  TLiu		08/08/2005		Changed some attributes.
+01.07			  IK			09/09/2005		modified as per re-structured OmigaData 
+
+Defect		Author		Date					Description
+EP2_1   	IK				20/09/2006		'product' namespace references
+EP2_159  	IK				23/11/2006		add DECISION to APPLICATION (is read only, will be removed by .xslt), add CRUD_OP to REQUEST
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.SubmitFMA.Omiga.vertex.co.uk" xmlns:OmigaData="http://OmigaData.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk"  targetNamespace="http://Request.SubmitFMA.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://OmigaData.Omiga.vertex.co.uk" schemaLocation="OmigaData.xsd"/>
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="APPLICATION">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="OmigaData:APPLICATIONType">
+							<xs:sequence>
+								<xs:element name="DECISION" minOccurs="0">
+									<xs:complexType>
+										<xs:attribute name="PRODUCTSCHEME" type="xs:short"/>
+										<xs:attribute name="RISKASSESSMENTDECISION" type="xs:short"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpReq" use="optional"/>
+	</xs:complexType>
+</xs:schema>

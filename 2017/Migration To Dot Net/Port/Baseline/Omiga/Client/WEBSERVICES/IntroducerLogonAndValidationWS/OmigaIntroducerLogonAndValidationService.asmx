@@ -1,0 +1,1 @@
+<%@ WebService Language="c#" Codebehind="OmigaIntroducerLogonAndValidationService.asmx.cs" Class="Vertex.Fsd.Omiga.Web.Services.IntroducerLogonAndValidationWS.OmigaIntroducerLogonAndValidationService" %>

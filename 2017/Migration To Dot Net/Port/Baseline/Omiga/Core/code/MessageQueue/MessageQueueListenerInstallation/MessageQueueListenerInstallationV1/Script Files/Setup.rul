@@ -1,0 +1,330 @@
+
+////////////////////////////////////////////////////////////////////////////////
+//                                                                            
+//  IIIIIII SSSSSS                                                            
+//    II    SS                          InstallShield (R)                     
+//    II    SSSSSS      (c) 1996-2000, InstallShield Software Corporation     
+//    II        SS      (c) 1990-1996, InstallShield Corporation              
+//  IIIIIII SSSSSS                     All Rights Reserved.                   
+//                                                                            
+//                                                                            
+//  This code is generated as a starting setup template.  You should   
+//  modify it to provide all necessary steps for your setup.
+//                                                                            
+//                                                                            
+//    File Name:  Setup.rul                                                   
+//                                                                            
+//  Description:  InstallShield script                                        
+//                                                                            
+//     Comments:  This template script performs a basic setup. With minor           
+//                modifications, this template can be adapted to create       
+//                new, customized setups.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Include header files
+    
+#include "ifx.h" //DO NOT REMOVE
+#include "ComponentEvents.rul"
+    
+////////////////////// string defines ////////////////////////////
+
+//////////////////// installation declarations ///////////////////
+
+// ----- DLL function prototypes -----
+
+
+    // your DLL function prototypes
+
+
+// ---- script function prototypes -----
+
+
+    // your script function prototypes
+
+    // your global variables
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//                                                                           
+//  FUNCTION:   OnFirstUIBefore                                            
+//                                                                           
+//  EVENT:      FirstUIBefore event is sent when installation is run for the first
+//              time on given machine. In the handler installation usually displays
+//              UI allowing end user to specify installation parameters. After this
+//              function returns, ComponentTransferData is called to perform file
+//              transfer.
+//                                                                           
+///////////////////////////////////////////////////////////////////////////////
+function OnFirstUIBefore()
+    NUMBER  nResult,nSetupType;
+    STRING  szTitle, szMsg;
+    STRING  szTargetPath;
+    STRING  szDir;
+    STRING  szComponents, szTargetdir;
+    NUMBER  nLevel;
+    NUMBER  nvSize;
+begin	
+    // TO DO: if you want to enable background, window title, and caption bar title                                                                     
+    // SetTitle( @TITLE_MAIN, 24, WHITE );                                        
+    // SetTitle( @TITLE_CAPTIONBAR, 0, BACKGROUNDCAPTION ); 	                   
+    // Enable( FULLWINDOWMODE );						   
+    // Enable( BACKGROUND );							  
+    // SetColor(BACKGROUND,RGB (0, 128, 128));					   
+   
+    nSetupType = TYPICAL;	
+    TARGETDIR = PROGRAMFILES ^@COMPANY_NAME + "\\MQL";	
+    szDir = TARGETDIR;
+
+Dlg_Start:
+    // beginning of dialogs label
+
+Dlg_SdWelcome:
+    szTitle = "";
+    szMsg   = "";
+    nResult = SdWelcome( szTitle, szMsg );
+    if (nResult = BACK) goto Dlg_Start;
+
+Dlg_SdAskDestPath:
+    szTitle = "";
+    szMsg   = "";
+    nResult = SdAskDestPath( szTitle, szMsg, szDir, 0 );
+    TARGETDIR = szDir;
+    if (nResult = BACK) goto Dlg_SdWelcome;
+
+Dlg_SetupType:   
+
+// AD 22/12/04 - changed the setup types so that it copes with Windows 2003 server.
+// Also removed the custom and compact setup types that no-one uses.
+
+//    szTitle    = "";
+//    szMsg      = "";
+//    nResult = SetupType ( szTitle , szMsg , "" , nSetupType , 0 );
+//    if (nResult = BACK) then
+//        goto Dlg_SdAskDestPath;
+//    else
+//        nSetupType = nResult;
+//        if (nSetupType != CUSTOM) then
+//	       szTargetPath = TARGETDIR;
+//	       nvSize = 0;
+//	       ComponentCompareSizeRequired(MEDIA,szTargetPath,nvSize);
+//	       if (nvSize != 0) then      
+//            	   LOG_MessageBox( szSdStr_NotEnoughSpace, WARNING );
+//	           goto Dlg_SetupType;
+//            endif;
+//        endif;   
+//    endif;
+
+    // what os are we.....
+    
+    if (SYSINFO.nWinMajor = 5 && SYSINFO.nWinMinor = 2) then
+    	if (ComponentSetupTypeSet (MEDIA, "2003") < 0) then    
+     	  MessageBox ("ComponentSetupTypeSet failed.", SEVERE);    
+	    endif;   
+	else   
+	    if (ComponentSetupTypeSet (MEDIA, "Typical") < 0) then    
+ 	      MessageBox ("ComponentSetupTypeSet failed.", SEVERE);    
+  	  endif;   
+  	endif;  
+
+
+Dlg_SdComponentTree: 
+    if ((nResult = BACK) && (nSetupType != CUSTOM)) goto Dlg_SetupType;
+    szTitle    = "";
+    szMsg      = "";
+    szTargetdir = TARGETDIR;
+    szComponents = "";
+    nLevel = 2;
+    if (nSetupType = CUSTOM) then
+		    nResult = SdComponentTree(szTitle, szMsg, szTargetdir, szComponents, nLevel);
+		    if (nResult = BACK) goto Dlg_SetupType;  
+    endif;
+
+Dlg_ObjDialogs:
+    nResult = ShowObjWizardPages(nResult);
+    if (nResult = BACK) goto Dlg_SdComponentTree;
+    
+    // setup default status
+    SetStatusWindow(0, "");
+    Enable(STATUSEX);
+    StatusUpdate(ON, 100);
+
+	LOG_Clear();
+	if !MAINTENANCE then   	
+		LOG_Log("Installation of MessageQueueListener");
+		LOG_Log("====================================");
+	else
+		LOG_Log("Maintenance of MessageQueueListener");
+		LOG_Log("===================================");
+	endif;    	
+
+    return 0;
+end;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnMaintUIBefore
+//
+//  EVENT:      MaintUIBefore event is sent when end user runs installation that
+//              has already been installed on the machine. Usually this happens 
+//              through Add/Remove Programs applet. In the handler installation 
+//              usually displays UI allowing end user to modify existing installation
+//              or uninstall application. After this function returns, 
+//              ComponentTransferData is called to perform file transfer.
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnMaintUIBefore()
+    STRING svResult,szCaption;
+    NUMBER nResult;
+begin
+	   // TO DO:   if you want to enable background, window title, and caption bar title   								
+	   // SetTitle( @TITLE_MAIN, 24, WHITE );					
+	   // SetTitle( @TITLE_CAPTIONBAR, 0, BACKGROUNDCAPTION );  
+	   // SetColor(BACKGROUND,RGB (0, 128, 128));					
+	   // Enable( FULLWINDOWMODE );						
+	   // Enable( BACKGROUND );							
+	
+    //Maintenance Mode
+    svResult = SdLoadString(IFX_MAINTUI_MSG);
+    szCaption = SdLoadString(IFX_ONMAINTUI_CAPTION);
+	   nResult = SprintfBox(MB_OKCANCEL,szCaption,"%s",svResult);
+	   if (nResult = IDCANCEL) then
+	       exit;
+	   elseif(nResult = IDOK) then
+	       // setup default status
+        SetStatusWindow(0, "");
+        Enable(STATUSEX);
+        StatusUpdate(ON, 100);
+
+	       //-->Remove all components
+	       ComponentRemoveAll();
+    endif;
+    return 0;
+end;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnMoving
+//
+//  EVENT:      Moving event is sent when file transfer is started as a result of
+//              ComponentTransferData call, before any file transfer operations 
+//              are performed.
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnMoving()
+    STRING szAppPath;
+begin
+    // Set LOGO Compliance Application Path 
+    // TO DO : if your application .exe is in a subfolder of TARGETDIR then add subfolder 
+    szAppPath = TARGETDIR;
+    RegDBSetItem(REGDB_APPPATH, szAppPath);
+    RegDBSetItem(REGDB_APPPATH_DEFAULT, szAppPath ^ @PRODUCT_KEY);
+end;
+ 
+//////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnInstallingFile
+//
+//  EVENT:      Installing File event is sent before a file that is being installed
+//
+//  ARGUMENTS:  File - full path of file being installed
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnInstallingFile(File)
+begin
+	LOG_Log("Installing file " + File);
+end;
+ 
+///////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnEnd
+//
+//  EVENT:      End event is the last event. It is not sent if the installation
+//              has been aborted. In this case Abort event is sent
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnEnd()
+begin
+	if !MAINTENANCE then   
+		LOG_Log("Installation finished");
+	endif;
+end;
+ 
+//////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnAbort
+//
+//  EVENT:      Abort event is sent at the end of installation that was aborted
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnAbort()
+begin
+	LOG_Log("Installation aborted");
+end;
+ 
+//////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnBegin
+//
+//  EVENT:      Begin event is always sent as the first event during installation.
+//
+//////////////////////////////////////////////////////////////////////////////
+function OnBegin()
+	BOOL bContinue;
+	STRING szVersionNumber;
+begin
+    // TO DO: you may change default non-UI setting, for example
+    //
+    // Disable(SELFREGISTERBATCH)
+    // SetInstallationInfo with arguments other then default
+    //
+    // You may also perform your custom initialization steps, check requirements, etc.
+    
+	// NO LOGGING FUNCTIONS CAN BE USED AS TARGET DIR HAS NOT BEEN SET 
+    bContinue = TRUE;
+
+	// check for admin rights
+    if SYSINFO.WINNT.bAdmin_Logged_On = FALSE then
+    	bContinue = AskYesNo("You are not logged on with administrator rights.  Do you wish to continue anyway?", YES);
+    endif;
+    
+    // check for OS 
+    if bContinue = TRUE then
+	    if SYSINFO.WINNT.bWinNT4 = TRUE then
+	    	if SYSINFO.WINNT.nServicePack < 6 then
+		    	bContinue = AskYesNo("NT4 Service pack 6 is required.  Do you wish to continue anyway?", YES);	
+	    	endif;
+	  	elseif SYSINFO.WINNT.bWin2000 then
+	    	if SYSINFO.WINNT.nServicePack < 1 then
+		    	bContinue = AskYesNo("Windows 2000 Service pack 1 is required.  Do you wish to continue anyway?", YES);	
+	    	endif;
+	    endif;
+	endif;
+	    
+    // check for MTS on NT4
+    if bContinue = TRUE && SYSINFO.WINNT.bWinNT4 = TRUE && VerGetFileVersion(WINSYSDIR ^ "mts\\mtxas.dll", szVersionNumber) != 0 then
+    	bContinue = AskYesNo("MTS is not detected on your system.  Do you wish to continue anyway?", YES);	
+    endif; 
+    
+    if bContinue = FALSE then
+    	abort;
+    endif;
+end;
+ 
+//////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnUninstallingFile
+//
+//  EVENT:      Uninstalling File event is sent before a file that is being uninstalled
+//
+//  ARGUMENTS:  File - full path of file being uninstalled
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnUninstallingFile(File)
+begin
+	LOG_Log("Uninstalling file " + File);
+	SetFileInfo(File, FILE_ATTRIBUTE, FILE_ATTR_NORMAL, "");
+end;
+

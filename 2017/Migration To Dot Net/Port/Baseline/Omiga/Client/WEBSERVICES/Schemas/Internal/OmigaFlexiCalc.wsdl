@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==============================XML Document Control=============================
+Description: OmigaFlexiCalc WSDL
+
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/OmigaFlexiCalc.wsdl $
+Workfile                 $Workfile: OmigaFlexiCalc.wsdl $
+Current Version   	$Revision: 1 $
+Last Modified       	$Modtime: 16/03/07 13:37 $
+Modified By          	$Author: Mheys $
+
+History:
+
+Version Author      Date       		Description
+01.00   	IK				15/03/2007 	Created.   
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://OmigaFlexiCalc.Omiga.vertex.co.uk" 
+    xmlns="http://OmigaFlexiCalc.Omiga.vertex.co.uk" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:omRequest="http://Request.FlexiCalc.Omiga.vertex.co.uk" 
+    xmlns:omResponse="http://Response.FlexiCalc.Omiga.vertex.co.uk"  >
+
+    <wsdl:types>
+        <xs:schema 
+            xmlns:omRequest="http://Request.FlexiCalc.Omiga.vertex.co.uk" 
+            xmlns:omResponse="http://Response.FlexiCalc.Omiga.vertex.co.uk" >
+            <xs:import 
+                namespace="http://Request.FlexiCalc.Omiga.vertex.co.uk" 
+                schemaLocation="OmigaFlexiCalcRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.FlexiCalc.Omiga.vertex.co.uk" 
+                schemaLocation="OmigaFlexiCalcResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="OmigaFlexiCalcSoapIn">
+        <wsdl:part name="request" element="omRequest:OmigaFlexiCalcRequest" />
+    </wsdl:message>
+    <wsdl:message name="OmigaFlexiCalcSoapOut">
+        <wsdl:part name="response" element="omResponse:OmigaFlexiCalcResponse" />
+    </wsdl:message>
+
+    <wsdl:portType name="OmigaFlexiCalcPort">
+        <wsdl:operation name="omigaFlexiCalc">
+            <wsdl:input message="OmigaFlexiCalcSoapIn" />
+            <wsdl:output message="OmigaFlexiCalcSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="OmigaFlexiCalcPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="omigaFlexiCalc">
+             <soap:operation 
+                soapAction="http://Request.FlexiCalc.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaFlexiCalc">
+        <wsdl:port name="OmigaFlexiCalcPort" binding="OmigaSoapRpcSoap">
+			<soap:address location="http://localhost/OmigaWebServices/OmigaFlexiCalcWS/OmigaFlexiCalcService.asmx"/>
+        </wsdl:port>
+    </wsdl:service>
+    
+</wsdl:definitions>
+

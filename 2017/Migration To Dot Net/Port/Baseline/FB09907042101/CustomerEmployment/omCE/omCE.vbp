@@ -1,0 +1,64 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\SYSTEM32\STDOLE2.TLB#OLE Automation
+Reference=*\G{EF53050B-882E-4776-B643-EDA472E8E3F2}#2.7#0#C:\Program Files\Common Files\System\ADO\msado27.tlb#Microsoft ActiveX Data Objects 2.7 Library
+Reference=*\G{74C08640-CEDB-11CF-8B49-00AA00B8A790}#1.0#0#C:\WINDOWS\SYSTEM32\COMSVCS.DLL#Microsoft Transaction Server Type Library
+Reference=*\G{F5078F18-C551-11D3-89B9-0000F81FE221}#4.0#0#C:\WINDOWS\system32\msxml4.dll#Microsoft XML, v4.0
+Reference=*\G{10E98D81-E223-4674-BD4E-369841AF4C71}#1.2#0#C:\Build Epsom2\2 Int Code\ExternalComponents\COM+\omBase.dll#omBase
+Reference=*\G{0B0E82CF-112F-11D4-8240-0060087A1EBE}#1.0#0#C:\Build Epsom2\2 Int Code Bin\DLL\omTP.dll#
+Module=StdData; StdData.bas
+Class=ErrAssist; errAssist.cls
+Class=CustomerEmploymentTxBO; CustomerEmploymentTxBO.cls
+Class=XMLAssist; ParserAssist.cls
+Class=CustomerEmploymentDO; CustomerEmploymentDO.cls
+Class=CustomerEmploymentBO; CustomerEmploymentBO.cls
+Class=ConvertAssist; ConvertAssist.cls
+Class=omCEClassDef; omCEClassDef.cls
+Class=IomCEClassDef; IomCEClassDef.cls
+Class=ICustomerEmploymentDO; ICustomerEmploymentDO.cls
+Class=ICustomerEmploymentTxBO; ICustomerEmploymentTxBO.cls
+Class=ICustomerEmploymentBO; ICustomerEmploymentBO.cls
+Class=ThirdPartyAssist; ThirdPartyAssist.cls
+Class=IThirdPartyAssist; IThirdPartyAssist.cls
+Class=IThirdPartyClassDef; IThirdPartyClassDef.cls
+Class=ThirdPartyClassDef; ThirdPartyClassDef.cls
+Class=SQLAssist; SQLAssist.cls
+Module=errConstants; errConstants.bas
+Module=guidAssistEx; guidAssist.bas
+Startup="(None)"
+HelpFile=""
+Title="omCE"
+ExeName32="omCE.dll"
+Command32=""
+Name="omCE"
+HelpContextID="0"
+CompatibleMode="0"
+CompatibleEXE32=""
+
+MajorVer=7
+MinorVer=421
+RevisionVer=1
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="Marlborough Stirling"
+CondComp="GENERIC_SQL = 1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo = -1
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+DllBaseAddress=&H3CE0000
+
+[MS Transaction Server]
+AutoRefresh=1
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--==============================XML Document Control=============================
+Description: FindDirectoryList- Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01     		RMH			29/06/2005 		Created
+01.02			TLiu				20/07/2005      Changed mars to IDUK in path, named a complexType.
+01.03			RHart			22/07/2005		Changed the declared Request type to an Imported request type
+01.04			TLiu				08/08/2005		Replaced REQUESTAttribs with 6 attributes.
+01.05			TLiu				11/08/2005		Renamed a complex Type to make names different in Request and Response.
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.FindDirectoryList.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.FindDirectoryList.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="BUILDINGORHOUSENAME" type="xs:string"/>
+	<xs:element name="BUILDINGORHOUSENUMBER" type="xs:int"/>
+	<xs:element name="COMPANYNAME" type="xs:string"/>
+	<xs:element name="FILTER" type="xs:string"/>
+	<xs:element name="FLATNUMBER" type="xs:string"/>
+	<xs:complexType name="NAMEANDADDRESSDIRECTORYRequestType">
+		<xs:sequence>
+			<xs:element ref="PANELID" minOccurs="0"/>
+			<xs:element ref="COMPANYNAME" minOccurs="0"/>
+			<xs:element ref="TOWN" minOccurs="0"/>
+			<xs:element ref="STREET" minOccurs="0"/>
+			<xs:element ref="POSTCODE" minOccurs="0"/>
+			<xs:element ref="BUILDINGORHOUSENAME" minOccurs="0"/>
+			<xs:element ref="BUILDINGORHOUSENUMBER" minOccurs="0"/>
+			<xs:element ref="FLATNUMBER" minOccurs="0"/>
+			<xs:element ref="FILTER" minOccurs="0"/>
+			<xs:element ref="NAMEANDADDRESSTYPE"/>
+			<xs:element ref="SORTCODE" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="NAMEANDADDRESSTYPE" type="xs:string"/>
+	<xs:element name="PANELID" type="xs:string"/>
+	<xs:element name="POSTCODE" type="xs:string"/>
+	<xs:element name="REQUEST" type="REQUESTType"/>
+	<xs:complexType name="REQUESTType">
+		<xs:sequence>
+			<xs:element name="NAMEANDADDRESSDIRECTORY" type="NAMEANDADDRESSDIRECTORYRequestType"/>
+		</xs:sequence>
+		<xs:attribute name="USERID" type="xs:string" use="required"/>
+		<xs:attribute name="UNITID" type="xs:string" use="required"/>
+		<xs:attribute name="MACHINEID" type="xs:string" use="optional"/>
+		<xs:attribute name="CHANNELID" type="xs:string" use="optional"/>
+		<xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional"/>
+		<xs:attribute name="PASSWORD" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:element name="SORTCODE" type="xs:string"/>
+	<xs:element name="STREET" type="xs:string"/>
+	<xs:element name="TOWN" type="xs:string"/>
+</xs:schema>

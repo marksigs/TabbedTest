@@ -1,0 +1,12 @@
+CreditCheckDO = 22, 29, 613, 477, C
+ICreditCheckDO = 0, 0, 0, 0, C
+ICreditCheckBO = 0, 0, 0, 0, C
+CreditCheckBO = 0, 0, 0, 0, C
+ErrAssist = 0, 0, 0, 0, C
+XMLAssist = 0, 0, 0, 0, C
+ICreditCheckClassDef = 0, 0, 0, 0, C
+CreditCheckClassDef = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+SQLAssist = 0, 0, 0, 0, C
+GeneralAssist = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C

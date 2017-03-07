@@ -1,0 +1,23 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+  Persistable = 0  'NotPersistable
+  DataBindingBehavior = 0  'vbNone
+  DataSourceBehavior  = 0  'vbNone
+  MTSTransactionMode  = 0  'NotAnMTSObject
+END
+Attribute VB_Name = "MessageOpGetPrinters"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+Option Explicit
+
+Implements IMessageOp
+
+Private Function IMessageOp_Execute() As Boolean
+    'g_Log.WriteLine "->IMessageOp_Execute"
+    IMessageOp_Execute = GetPrinters(gPrinterData, frmMessage.pbProgress)
+    'g_Log.WriteLine "<-IMessageOp_Execute"
+End Function
+

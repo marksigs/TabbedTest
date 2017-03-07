@@ -1,0 +1,41 @@
+<VisualStudioProject>
+	<CSHARP ProjectType="Local" ProductVersion="7.10.3077" SchemaVersion="2.0" ProjectGuid="{B6AC5928-8B90-4885-943B-66E308D8714E}">
+		<Build>
+			<Settings ApplicationIcon="" AssemblyKeyContainerName="" AssemblyName="omDC" AssemblyOriginatorKeyFile="C:\Build Epsom2\2 Int Code\Keys\Mars.snk" DefaultClientScript="JScript" DefaultHTMLPageLayout="Grid" DefaultTargetSchema="IE50" DelaySign="false" OutputType="Library" PreBuildEvent="" PostBuildEvent="" RootNamespace="Vertex.Fsd.Omiga.omDC" RunPostBuildEvent="OnBuildSuccess" StartupObject="">
+				<Config Name="Debug" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="DEBUG;TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="false" OutputPath="bin\Debug\" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+				<Config Name="Release" AllowUnsafeBlocks="false" BaseAddress="285212672" CheckForOverflowUnderflow="false" ConfigurationOverrideFile="" DefineConstants="TRACE" DocumentationFile="" DebugSymbols="true" FileAlignment="4096" IncrementalBuild="false" NoStdLib="false" NoWarn="" Optimize="true" OutputPath="bin\Release\" RegisterForComInterop="false" RemoveIntegerChecks="false" TreatWarningsAsErrors="false" WarningLevel="4"/>
+			</Settings>
+			<References>
+				<Reference Name="System" AssemblyName="System" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"/>
+				<Reference Name="System.Data" AssemblyName="System.Data" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"/>
+				<Reference Name="System.XML" AssemblyName="System.Xml" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"/>
+				<Reference Name="System.Web.Services" AssemblyName="System.Web.Services" HintPath="C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Web.Services.dll"/>
+				<Reference Name="MSXML2" Guid="{F5078F18-C551-11D3-89B9-0000F81FE221}" VersionMajor="2" VersionMinor="6" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\DelayCompletion\omDC\bin\Debug\Interop.MSXML2.dll"/>
+				<Reference Name="COMSVCSLib" Guid="{2A005C00-A5DE-11CF-9E66-00AA00A3F464}" VersionMajor="1" VersionMinor="0" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\DelayCompletion\omDC\bin\Debug\Interop.COMSVCSLib.dll"/>
+				<Reference Name="ADODB" Guid="{EF53050B-882E-4776-B643-EDA472E8E3F2}" VersionMajor="2" VersionMinor="7" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\DelayCompletion\omDC\bin\Debug\Interop.ADODB.dll"/>
+				<Reference Name="MESSAGEQUEUECOMPONENTVCLib" Guid="{B0C456C2-4DAE-11D4-823C-005004E8D1A7}" VersionMajor="1" VersionMinor="0" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\DelayCompletion\omDC\bin\Debug\Interop.MESSAGEQUEUECOMPONENTVCLib.dll"/>
+				<Reference Name="omCore" AssemblyName="omCore" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omCore.dll"/>
+				<Reference Name="omLogging" AssemblyName="omLogging" HintPath="C:\Build Epsom2\2 Int Code\ExternalComponents\DotNet\omLogging.dll"/>
+				<Reference Name="omROT" Guid="{9F383170-0467-4A58-88B7-222BE69E38D8}" VersionMajor="1" VersionMinor="0" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\DelayCompletion\omDC\bin\Debug\Interop.omROT.dll"/>
+				<Reference Name="omApp" Guid="{D7B2484B-41B8-415B-9111-8C0B70B86C6A}" VersionMajor="1" VersionMinor="2" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\DelayCompletion\omDC\bin\Debug\Interop.omApp.dll"/>
+				<Reference Name="omPayProc" Guid="{6B86A223-80C0-4260-959A-07B1E31259C8}" VersionMajor="1" VersionMinor="0" Lcid="0" WrapperTool="tlbimp" HintPath="C:\Build Epsom2\2 Int Code\DelayCompletion\omDC\bin\Debug\Interop.omPayProc.dll"/>
+				<Reference Name="omDG" AssemblyName="omDG" HintPath="C:\Build Epsom2\2 Int Code Bin\DLLDotNet\omDG.dll"/>
+			</References>
+		</Build>
+		<Files>
+			<Include>
+				<File RelPath="AssemblyInfo.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="DelayCompletionBO.cs" SubType="Code" BuildAction="Compile"/>
+				<File RelPath="RunDelayedCompletionInterface.xml" BuildAction="Content"/>
+				<File RelPath="Web References\DelayCompletion\CommonTypes.xsd" BuildAction="None"/>
+				<File RelPath="Web References\DelayCompletion\DelayCompletion.wsdl" BuildAction="None"/>
+				<File RelPath="Web References\DelayCompletion\DelayCompletion.xsd" BuildAction="None"/>
+				<File RelPath="Web References\DelayCompletion\GenericMessages.xsd" BuildAction="None"/>
+				<File RelPath="Web References\DelayCompletion\Reference.map" BuildAction="None" Generator="MSDiscoCodeGenerator" LastGenOutput="Reference.cs"/>
+				<File RelPath="Web References\DelayCompletion\Reference.cs" DependentUpon="Reference.map" SubType="code" BuildAction="Compile" DesignTime="True" AutoGen="True"/>
+				<Folder RelPath="Web References\DelayCompletion\" WebReferenceUrl="http://localhost/ExternalWebServices/services/DelayCompletion.wsdl" UrlBehavior="Static"/>
+				<Folder RelPath="Web References\" WebReferences="TRUE"/>
+			</Include>
+		</Files>
+	</CSHARP>
+</VisualStudioProject>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/MortgageWhatIfQuoteInputs.xsd $
+Workfile                 $Workfile: MortgageWhatIfQuoteInputs.xsd $
+Current Version   	$Revision: 1 $
+Last Modified       	$Modtime: 16/03/07 13:37 $
+Modified By          	$Author: Mheys $
+
+History:
+
+Version Author      Date       		Description
+01.00   	IK				15/03/2007 	Created.   
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://Alpha.FlexiCalc.Request.vertex.co.uk" xmlns="http://Alpha.FlexiCalc.Request.vertex.co.uk" elementFormDefault="qualified">
+	<xs:element name="Request" type="RequestType"/>
+	<xs:complexType name="RequestType">
+		<xs:sequence>
+			<xs:element name="Inputs" type="InputsType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InputsType">
+		<xs:sequence>
+			<xs:element name="Control" type="ControlType"/>
+		</xs:sequence>
+		<xs:attribute name="Task" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Calculation"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Function" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Mortgage"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Method" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="WhatIfQuote"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Component" type="xs:string" use="optional"/>
+		<xs:attribute name="ParameterData" type="xs:string" use="optional"/>
+		<xs:attribute name="SchemaLocation" type="xs:string" use="optional"/>
+		<xs:attribute name="CallerId" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ControlType">
+		<xs:sequence>
+			<xs:element name="Mortgage" type="MortgageType"/>
+		</xs:sequence>
+		<xs:attribute name="Id" type="xs:ID"/>
+		<xs:attribute name="Comment" type="xs:string"/>
+		<xs:attribute name="IsTraceRequired">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="QuotationDate" type="xs:date" use="required"/>
+		<xs:attribute name="ExchangeRate" type="xs:double"/>
+		<xs:attribute name="OutputPaymentSchedule" default="None">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="None"/>
+					<xs:enumeration value="Annual"/>
+					<xs:enumeration value="Monthly"/>
+					<xs:enumeration value="Changes"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="OutputBalanceSchedule" default="None">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="None"/>
+					<xs:enumeration value="Annual"/>
+					<xs:enumeration value="Monthly"/>
+					<xs:enumeration value="AccountingYear"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="MortgageType">
+		<xs:sequence>
+			<xs:element name="WhatIf" type="WhatIfType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ElementGroup" type="ElementGroupType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ParameterOverride" type="ParameterOverrideType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="CompletionDate" type="xs:date"/>
+		<xs:attribute name="WhatIfIds" type="xs:IDREFS"/>
+		<xs:attribute name="ParameterOverrideIds" type="xs:IDREFS"/>
+		<xs:attribute name="CreditAvailable" type="xs:double"/>
+	</xs:complexType>
+	<xs:complexType name="WhatIfType">
+		<xs:attribute name="Id" type="xs:ID" use="required"/>
+		<xs:attribute name="Type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="PaymentAdjustment"/>
+					<xs:enumeration value="FurtherLoan"/>
+					<xs:enumeration value="LumpSumSavings"/>
+					<xs:enumeration value="RegularSavings"/>
+					<xs:enumeration value="PaymentHoliday"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Amount" type="xs:double" use="optional"/>
+		<xs:attribute name="StartDate" type="xs:date" use="required"/>
+		<xs:attribute name="Term" type="xs:int"/>
+		<xs:attribute name="AdjustOrReplace" default="Adjust">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Adjust"/>
+					<xs:enumeration value="Replace"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ElementGroupType">
+		<xs:sequence>
+			<xs:element name="Element" type="ElementType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Id" type="xs:ID" use="required"/>
+		<xs:attribute name="IsSecured" default="Yes">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Yes"/>
+					<xs:enumeration value="No"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="EndDate" type="xs:date"/>
+		<xs:attribute name="Term" type="xs:int"/>
+		<xs:attribute name="RateAdjustment" type="xs:double" default="0.0"/>
+		<xs:attribute name="WhatIfIds" type="xs:IDREFS"/>
+		<xs:attribute name="ParameterOverrideIds" type="xs:IDREFS"/>
+	</xs:complexType>
+	<xs:complexType name="ParameterOverrideType">
+		<xs:sequence>
+			<xs:element name="ParameterOverrideKey" type="ParameterOverrideKeyType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ParameterOverrideValue" type="ParameterOverrideValueType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Id" type="xs:ID" use="required"/>
+		<xs:attribute name="Parameter" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="MonthsToCompletion"/>
+					<xs:enumeration value="CompletionTiming"/>
+					<xs:enumeration value="CompletionDaysAdjust"/>
+					<xs:enumeration value="CoolingOffPeriod"/>
+					<xs:enumeration value="SpecifiedPaymentDay"/>
+					<xs:enumeration value="FirstMonth"/>
+					<xs:enumeration value="DaysInYear"/>
+					<xs:enumeration value="AccruedBasis"/>
+					<xs:enumeration value="DaysIncludedInAccrued"/>
+					<xs:enumeration value="AddedDaysAccrued"/>
+					<xs:enumeration value="AccruedTiming"/>
+					<xs:enumeration value="InterestChargeBasis"/>
+					<xs:enumeration value="PaymentTiming"/>
+					<xs:enumeration value="InterestChargeMonth"/>
+					<xs:enumeration value="APRMonth"/>
+					<xs:enumeration value="WhenAccIntRounded"/>
+					<xs:enumeration value="AccIntRoundingMultiple"/>
+					<xs:enumeration value="AccIntRoundingDirection"/>
+					<xs:enumeration value="WhenPaymentRounded"/>
+					<xs:enumeration value="PaymentRoundingMultiple"/>
+					<xs:enumeration value="PaymentRoundingDirection"/>
+					<xs:enumeration value="WhenBalanceRounded"/>
+					<xs:enumeration value="BalanceRoundingMultiple"/>
+					<xs:enumeration value="BalanceRoundingDirection"/>
+					<xs:enumeration value="ChargeRoundingMultiple"/>
+					<xs:enumeration value="ChargeRoundingDirection"/>
+					<xs:enumeration value="InterestRate"/>
+					<xs:enumeration value="InterestRateRoundingMultiple"/>
+					<xs:enumeration value="InterestRateRoundingDirection"/>
+					<xs:enumeration value="EarlyRepaymentBasis"/>
+					<xs:enumeration value="EarlyRepaymentCharge"/>
+					<xs:enumeration value="InitialInterestChargeBasis"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Type" default="Substitution">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Substitution"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="OverrideValue" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ParameterOverrideKeyType">
+		<xs:attribute name="Name" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Duration"/>
+					<xs:enumeration value="LTV"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="NumberOfValues" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ParameterOverrideValueType">
+		<xs:attribute name="Duration" type="xs:int"/>
+		<xs:attribute name="LTV" type="xs:double"/>
+		<xs:attribute name="OverrideValue" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ElementType">
+		<xs:sequence>
+			<xs:element name="Loan" type="LoanType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Id" type="xs:ID" use="required"/>
+		<xs:attribute name="Type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="InterestOnly"/>
+					<xs:enumeration value="Repayment"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="WhatIfIds" type="xs:IDREFS"/>
+	</xs:complexType>
+	<xs:complexType name="LoanType">
+		<xs:attribute name="Amount" type="xs:double" use="required"/>
+		<xs:attribute name="Date" type="xs:date"/>
+		<xs:attribute name="Frequency" default="0">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="0"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+					<xs:enumeration value="3"/>
+					<xs:enumeration value="4"/>
+					<xs:enumeration value="12"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

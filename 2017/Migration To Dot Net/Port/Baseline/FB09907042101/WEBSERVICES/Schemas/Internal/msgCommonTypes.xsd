@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: MSG Data Types for import into schemas with msg types  
+
+Archive				$Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/msgCommonTypes.xsd $
+Workfile			$Workfile: msgCommonTypes.xsd $
+Current Version   	$Revision: 9 $
+Last Modified		$Modtime: 26/03/07 13:50 $
+Modified By			$Author: Lesliem $
+
+History:
+
+Version Author		Date		Description
+01.00   RMH			29/06/2005	Created
+01.02   RFairlie    07/07/2005	Changed elementFormDefault to "qualified" and attributeFormDefault to "qualified" 
+01.03   RFairlie    07/07/2005	Changed maxLength of dateTime from 10 to 19
+01.04   RFairlie    07/07/2005	Renamed file to msgDataTypes.xsd
+01.05   TLiu		19/07/2005	Renamed file to msgCommonTypes.xsd. Renamed data types.
+01.06   TLiu        22/07/2005	Added some types from GetApplicationData.xsd. Changed group RESPONSEAttrib to type RESPONSEAttribType.
+01.07   RFairlie	22/07/2005	Added REQUESTAttribs
+								Changed namespace capitalisation to match internal guideline
+01.08	TLiu        27/07/2005	Changed some complex types.
+01.09   RFairlie	27/07/2005	Within ERRORType NUMBER, SOURCE and DESCRIPTION should be elements
+								Within MESSAGEType MESSAGETYPE and MESSAGETEXT should be elements
+01.10   RFairlie	04/08/2005	Removed REQUESTAttribs as they were defined as an attributeGroup.
+01.11	TLiu		24/08/2005	Added two fields to NAMEANDADDRESSDIRECTORYType.
+01.12	TLiu		14/09/2005	Added CONTACTTELEPHONEDETAILSType, etc.
+01.13   RFairlie	10/10/2005	MAR51: InterfaceChangeRegister.xls item 7:
+                                Thirdparty need only ever have one address as a child
+02.01	IK			15/11/2005	additional ERROR nodes (MAR566)
+
+Defect		Author		Date		Description
+EP2_1		IK			22/09/2006	expand SQLCOMMAND
+EP2_1		SR		27/09/2008	Modidufed 'ERRORType'. use xs:all instead of xs:sequence 
+EP2_1		IK			22/09/2006	add msgCrudOp
+EP2_11	SR		19/10/2006	add msgCrudOpReq - this includes IUPDATE. 
+EP2_28	IK			02/11/2006	add ID to ERRORType (returned from omiga4 .net components)
+EP2_57	IK			17/11/2006	attach to defect
+EP2_134	IK			21/11/2006	update only CRUD_OP msgCrudOpU, add CRUD_OP to ADDRESS
+												add CRUD_OP to THIRDPARTYType, ADDRESSType, CONTACTDETAILSType
+EP2_596	IK			17/01/2007	msgCrudOpU should be UPDATE
+EP2_1801 MCh 	21/03/2007	add RELATIONSHIPTOAPPLICANT and CRUD_OP to PERSONType
+================================================================================-->
+<xs:schema xmlns:tns="http://msgtypes.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://msgtypes.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="msgCrudOpU">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="UPDATE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="msgCrudOp">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="CREATE"/>
+			<xs:enumeration value="UPDATE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="msgCrudOpWd">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="CREATE"/>
+			<xs:enumeration value="UPDATE"/>
+			<xs:enumeration value="DELETE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="msgCrudOpReq">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="CREATE"/>
+			<xs:enumeration value="UPDATE"/>
+			<xs:enumeration value="DELETE"/>
+			<xs:enumeration value="IUPDATE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="msgDate">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+			<xs:pattern value="(3[01]|[1-2][0-9]|0[1-9])/(0[1-9]|1[0-2])/\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="msgDateTime">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="19"/>
+			<xs:pattern value="(3[01]|[1-2][0-9]|0[1-9])/(0[1-9]|1[0-2])/\d{4} (0?\d|1[0-9]|2[0-3]):(0?\d|[1-5]\d):(0?\d|[1-5]\d)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="msgGuid">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+			<xs:pattern value="([A-Fa-f0-9])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="MESSAGEType">
+		<xs:sequence>
+			<xs:element name="MESSAGETEXT" type="xs:string"/>
+			<xs:element name="MESSAGETYPE" type="xs:string" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SQLPARAMType">
+		<xs:attribute name="NAME" type="xs:string"/>
+		<xs:attribute name="TYPE" type="xs:string"/>
+		<xs:attribute name="DIRECTION" type="xs:string"/>
+		<xs:attribute name="VALUE" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="SQLCOMMANDType">
+		<xs:sequence>
+			<xs:element name="SQLPARAM" type="msgdt:SQLPARAMType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="xs:string"/>
+		<xs:attribute name="COMMANDTEXT" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ERRORType">
+		<xs:all>
+			<xs:element name="NUMBER" type="xs:long"/>
+			<xs:element name="SOURCE" type="xs:string"/>
+			<xs:element name="VERSION" type="xs:string" minOccurs="0"/>
+			<xs:element name="DESCRIPTION" type="xs:string"/>
+			<xs:element name="ID" type="xs:string" minOccurs="0"/>
+			<xs:element name="REQUEST" type="xs:string" minOccurs="0"/>
+			<xs:element name="REQUESTDOC" type="xs:string" minOccurs="0"/>
+			<xs:element name="REQUESTNODE" type="xs:string" minOccurs="0"/>
+			<xs:element name="SCHEMAMASTERNODE" type="xs:string" minOccurs="0"/>
+			<xs:element name="SCHEMAREFNODE" type="xs:string" minOccurs="0"/>
+			<xs:element name="SQLCOMMAND" type="msgdt:SQLCOMMANDType" minOccurs="0"/>
+			<xs:element name="COMPONENT_ID" type="xs:string" minOccurs="0"/>
+			<xs:element name="COMPONENT_RESPONSE" type="xs:string" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:simpleType name="RESPONSEAttribType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="WARNING"/>
+			<xs:enumeration value="SYSERR"/>
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="APPERR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PERSONType">
+		<xs:attribute name="PERSONGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="DATEOFBIRTH" type="msgdt:msgDate"/>
+		<xs:attribute name="FIRSTFORENAME" type="xs:string"/>
+		<xs:attribute name="GENDER" type="xs:int"/>
+		<xs:attribute name="MARITALSTATUS" type="xs:int"/>
+		<xs:attribute name="NATIONALITY" type="xs:int"/>
+		<xs:attribute name="OTHERFORENAMES" type="xs:string"/>
+		<xs:attribute name="SECONDFORENAME" type="xs:string"/>
+		<xs:attribute name="SURNAME" type="xs:string"/>
+		<xs:attribute name="TITLE" type="xs:int"/>
+		<xs:attribute name="TITLEOTHER" type="xs:string"/>
+		<xs:attribute name="RELATIONSHIPTOAPPLICANT" type="xs:int"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>		
+		<!--Person stores person details for parties only indirectly associated with the application such as other residents and dependents-->
+	</xs:complexType>
+	<xs:complexType name="ACCOUNTType">
+		<xs:sequence>
+			<xs:element name="THIRDPARTY" type="msgdt:THIRDPARTYType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="ACCOUNTGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="ACCOUNTNUMBER" type="xs:string"/>
+		<xs:attribute name="IMPORTEDINDICATOR" type="xs:short"/>
+		<xs:attribute name="DIRECTORYGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="THIRDPARTYGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="UNASSIGNED" type="xs:short"/>
+		<xs:attribute name="CREDITSEARCH" type="xs:short"/>
+		<xs:attribute name="CAISRECORDREF" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="THIRDPARTYType">
+		<xs:sequence>
+			<xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Address is customer data so not joint address ind is held</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CONTACTDETAILS" type="msgdt:CONTACTDETAILSType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="THIRDPARTYGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Unique id for the ThirdParty record</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="THIRDPARTYTYPE" type="xs:int"/>
+		<xs:attribute name="COMPANYNAME" type="xs:string"/>
+		<xs:attribute name="ADDRESSGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Link to adderess table e.g. for employers address</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CONTACTDETAILSGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Link to contact detasils to retrieve telephone contacts for the thirdparty</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ORGANISATIONTYPE" type="xs:int"/>
+		<xs:attribute name="BRANCHNAME" type="xs:string"/>
+		<xs:attribute name="THIRDPARTYBANKSORTCODE" type="xs:string"/>
+		<xs:attribute name="DXID" type="xs:string"/>
+		<xs:attribute name="DXLOCATION" type="xs:string"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="NAMEANDADDRESSDIRECTORYType">
+		<xs:sequence>
+			<xs:element name="ADDRESS" type="msgdt:ADDRESSType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Address is customer data so not joint address ind is held</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CONTACTDETAILS" type="msgdt:CONTACTDETAILSType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="DIRECTORYGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="NAMEANDADDRESSTYPE" type="xs:int"/>
+		<xs:attribute name="COMPANYNAME" type="xs:string"/>
+		<xs:attribute name="HEADOFFICEINDICATOR" type="xs:short"/>
+		<xs:attribute name="NAMEANDADDRESSACTIVEFROM" type="msgdt:msgDateTime"/>
+		<xs:attribute name="NAMEANDADDRESSACTIVETO" type="msgdt:msgDateTime"/>
+		<xs:attribute name="DXID" type="xs:string"/>
+		<xs:attribute name="DXLOCATION" type="xs:string"/>
+		<xs:attribute name="NOTES" type="xs:string"/>
+		<xs:attribute name="CONTACTDETAILSGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="ADDRESSGUID" type="msgdt:msgGuid"/>
+		<xs:attribute name="ORGANISATIONTYPE" type="xs:int"/>
+		<xs:attribute name="NAMEANDADDRESSBANKSORTCODE" type="xs:string"/>
+		<xs:attribute name="BRANCHNAME" type="xs:string"/>
+		<xs:attribute name="OTHERSYSTEMNUMBER" type="xs:string"/>
+		<xs:attribute name="OTHERSYSTEMSUFFIX" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="ADDRESSType">
+		<xs:attribute name="ADDRESSGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Unique Identifier for the record</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BUILDINGORHOUSENAME" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2 House Name</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BUILDINGORHOUSENUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2 House Number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="FLATNUMBER" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2  Flat Number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="STREET" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DISTRICT" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TOWN" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2 Town / City</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="COUNTY" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="COUNTRY" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="POSTCODE" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>ING UC App04b 10.3.2</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DELIVERYPOINTSUFFIX" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Not Curently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="MAILSORTCODE" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>Not Curently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PAFINDICATOR" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Curently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="BFPO" type="xs:short">
+			<xs:annotation>
+				<xs:documentation>Not Curently Used</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="CONTACTDETAILSType">
+		<xs:annotation>
+			<xs:documentation>Telephone and Email contacts for a person linked to a number of tables on ContactdetailsGuid including Name and AddressDirectory and ApplicationLegalRep</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CONTACTTELEPHONEDETAILS" type="msgdt:CONTACTTELEPHONEDETAILSType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="CONTACTDETAILSGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Unique Identifier for the record</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="CONTACTFORENAME" type="xs:string"/>
+		<xs:attribute name="CONTACTSURNAME" type="xs:string"/>
+		<xs:attribute name="CONTACTTITLE" type="xs:string"/>
+		<xs:attribute name="CONTACTTYPE" type="xs:int"/>
+		<xs:attribute name="EMAILADDRESS" type="xs:string"/>
+		<xs:attribute name="FAXNUMBER" type="xs:string"/>
+		<xs:attribute name="TELEPHONEEXTENSIONNUMBER" type="xs:string"/>
+		<xs:attribute name="TELEPHONENUMBER" type="xs:string"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOp" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="CONTACTTELEPHONEDETAILSType">
+		<xs:annotation>
+			<xs:documentation>Contact Telephone Details</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="CONTACTDETAILSGUID" type="msgdt:msgGuid">
+			<xs:annotation>
+				<xs:documentation>Unique Identifier for the record</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TELEPHONESEQNUM" type="xs:int"/>
+		<xs:attribute name="USAGE" type="xs:int"/>
+		<xs:attribute name="COUNTRYCODE" type="xs:string"/>
+		<xs:attribute name="AREACODE" type="xs:string"/>
+		<xs:attribute name="TELENUMBER" type="xs:string"/>
+		<xs:attribute name="EXTENSIONNUMBER" type="xs:string"/>
+		<xs:attribute name="CRUD_OP" type="msgdt:msgCrudOpWd" use="optional"/>
+	</xs:complexType>
+</xs:schema>

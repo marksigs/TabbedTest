@@ -1,0 +1,13 @@
+BuildingsAndContentsDO = 0, 0, 0, 0, C
+IBuildingsAndContentsDO = 0, 0, 0, 0, C
+ConvertAssist = 22, 29, 613, 477, C
+ErrAssist = 0, 0, 0, 0, C
+GeneralAssist = 0, 0, 0, 0, C
+XMLAssist = 0, 0, 0, 0, C
+StdData = 0, 0, 0, 0, C
+IBuildingsAndContentsBO = 0, 0, 0, 0, C
+BuildingsAndCOntentsBO = 0, 0, 0, 0, C
+IomBCClassDef = 0, 0, 0, 0, C
+omBCClassDef = 0, 0, 0, 0, C
+errConstants = 0, 0, 0, 0, C
+SQLAssist = 0, 0, 0, 0, C

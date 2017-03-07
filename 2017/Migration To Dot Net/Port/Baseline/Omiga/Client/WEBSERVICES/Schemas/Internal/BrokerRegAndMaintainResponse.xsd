@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ï»¿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: BrokerRegistrationResponse.xsd
+
+History:
+
+Version 		Author   		Date       			Description
+01.00   		SR			20/09/2006			Created.   
+01.01			SR			16/10/2006		Modified to associate with defect
+01.02			SR			18/10/2006			EP2_11. refer to IndtroducerDetails.xsd rather than IntroducerProfile.xsd.  IntroducerProfile.xs is redundant now.
+===========================================================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.BrokerRegAndMaintain.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" xmlns:IntroProf="http://IntroducerDetail.Omiga.vertex.co.uk" targetNamespace="http://Response.BrokerRegAndMaintain.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:import namespace="http://IntroducerDetail.Omiga.vertex.co.uk" schemaLocation="IntroducerDetail.xsd"/>
+	<xs:element name="RESPONSE" type="RESPONSEType"/>
+	<xs:complexType name="RESPONSEType">
+		<xs:sequence>
+			<xs:element name="INTRODUCER" type="IntroProf:INTRODUCERDETAILSType" minOccurs="0"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required">
+			<xs:annotation>
+				<xs:documentation>Success; AppError; SysError etc..</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

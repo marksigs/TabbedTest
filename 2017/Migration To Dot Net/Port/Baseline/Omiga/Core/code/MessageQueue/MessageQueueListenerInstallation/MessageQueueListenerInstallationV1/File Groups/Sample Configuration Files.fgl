@@ -1,0 +1,11 @@
+[General]
+Type=FILELIST
+Version=1.10.000
+
+[TopDir]
+file0=C:\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles\MessageQueueListener.xml - OMMQ1_SQLOLEDB_Test
+file1=C:\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles\MessageQueueListener.xml - OMMQ1_MSDAORA_Test
+file2=C:\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles\MessageQueueListener.xml - OMMQ1_ORAOLEDB_Test
+file3=C:\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles\MessageQueueListener.xml - MSMQ1_Test
+file4=C:\MessageQueue\MessageQueueListener\MessageQueueListener\SampleConfigurationFiles\MessageQueueListener.xml - MSMQ1_Test (DIRECT OS)
+

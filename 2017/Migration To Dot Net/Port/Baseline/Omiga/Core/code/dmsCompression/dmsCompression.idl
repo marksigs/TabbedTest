@@ -1,0 +1,77 @@
+// dmsCompression.idl : IDL source for dmsCompression.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (dmsCompression.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(95D866F6-4EB8-43DF-BA69-E074468034DF),
+		dual,
+		helpstring("IdmsCompression1 Interface"),
+		pointer_default(unique)
+	]
+	interface IdmsCompression1 : IDispatch
+	{
+		[id(1), helpstring("method BSTRCompressToSafeArray")] HRESULT BSTRCompressToSafeArray([in] BSTR bstrIn, [out,retval] VARIANT* pvarOut);
+		[id(2), helpstring("method SafeArrayDecompressToBSTR")] HRESULT SafeArrayDecompressToBSTR([in] VARIANT varIn, [out,retval] BSTR* pbstrOut);
+		[id(3), helpstring("method XMLNODECompressToSafeArray")] HRESULT XMLNODECompressToSafeArray([in] IUnknown* pUnknownXMLNode, [out,retval] VARIANT* pvarOut);
+		[id(4), helpstring("method SafeArrayDecompressToXMLNODE")] HRESULT SafeArrayDecompressToXMLNODE([in] VARIANT varIn, [in] IUnknown* pUnknownXMLNode);
+		[id(5), helpstring("method XMLNODEBINBASE64CompressToSafeArray")] HRESULT XMLNODEBINBASE64CompressToSafeArray([in] IUnknown* pUnknownXMLNode, [out,retval] VARIANT* pvarOut);
+		[id(6), helpstring("method SafeArrayDecompressToXMLNODEBINBASE64")] HRESULT SafeArrayDecompressToXMLNODEBINBASE64([in] VARIANT varIn, [in] IUnknown* pUnknownXMLNode);
+		[id(7), helpstring("method XMLNODEBINHEXCompressToSafeArray")] HRESULT XMLNODEBINHEXCompressToSafeArray([in] IUnknown* pUnknownXMLNode, [out,retval] VARIANT* pvarOut);
+		[id(8), helpstring("method SafeArrayDecompressToXMLNODEBINHEX")] HRESULT SafeArrayDecompressToXMLNODEBINHEX([in] VARIANT varIn, [in] IUnknown* pUnknownXMLNode);
+		[id(9), helpstring("method SafeArrayCompressToSafeArray")] HRESULT SafeArrayCompressToSafeArray([in] VARIANT varIn, [out,retval] VARIANT* pvarOut);
+		[id(10), helpstring("method SafeArrayDecompressToSafeArray")] HRESULT SafeArrayDecompressToSafeArray([in] VARIANT varIn, [out,retval] VARIANT* pvarOut);
+		[id(11), helpstring("method FileCompressToFile")] HRESULT FileCompressToFile([in] BSTR bstrSrcFile, [in] BSTR bstrTgtFile);
+		[id(12), helpstring("method FileDecompressToFile")] HRESULT FileDecompressToFile([in] BSTR bstrSrcFile, [in] BSTR bstrTgtFile);
+		[propget, id(100), helpstring("property CompressionMethod")] HRESULT CompressionMethod([out, retval] BSTR *pbstrCompressionMethod);
+		[propput, id(100), helpstring("property CompressionMethod")] HRESULT CompressionMethod([in] BSTR bstrCompressionMethod);
+	};
+	[
+		object,
+		uuid(0901D6A8-36F6-4696-8FBE-946D094143DA),
+		dual,
+		helpstring("IPkZip Interface"),
+		pointer_default(unique)
+	]
+	interface IPkZip : IDispatch
+	{
+		[id(1), helpstring("method ZipFile")] HRESULT ZipFile([in] BSTR bstrZipFile, [in] BSTR bstrFile, [in, defaultvalue(FALSE)] BOOL noPaths);
+		[id(2), helpstring("method UnzipFile")] HRESULT UnzipFile([in] BSTR bstrZipFile, [in, defaultvalue("")] BSTR bstrFile, [in, defaultvalue("")] BSTR bstrUnzipDir);
+		[id(3), helpstring("method UnzipFileToSafeArray")] HRESULT UnzipFileToSafeArray(
+			[in] BSTR bstrZipFile, 
+			[in] BSTR bstrFile, 
+			[out] VARIANT* pvarUnzippedFiles, 
+			[out, retval] LONG* pdwUnzippedFilesCount);
+	};
+
+[
+	uuid(85EEB9C0-CB35-46DE-A282-6E112AE5D9D4),
+	version(1.0),
+	helpstring("dmsCompression 1.0 Type Library")
+]
+library DMSCOMPRESSIONLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(87BB92EB-8EA1-44EC-BDE2-B81B5B07874D),
+		helpstring("dmsCompression1 Class")
+	]
+	coclass dmsCompression1
+	{
+		[default] interface IdmsCompression1;
+	};
+	[
+		uuid(1B62FD86-4BFF-4BF7-BB76-2BD17DD9DA8E),
+		helpstring("PkZip Class")
+	]
+	coclass PkZip
+	{
+		[default] interface IPkZip;
+	};
+};

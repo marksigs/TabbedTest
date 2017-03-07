@@ -1,0 +1,26 @@
+HKCR
+{
+	DmsCompression.PkZip.1 = s 'PkZip Class'
+	{
+		CLSID = s '{1B62FD86-4BFF-4BF7-BB76-2BD17DD9DA8E}'
+	}
+	DmsCompression.PkZip = s 'PkZip Class'
+	{
+		CLSID = s '{1B62FD86-4BFF-4BF7-BB76-2BD17DD9DA8E}'
+		CurVer = s 'DmsCompression.PkZip.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {1B62FD86-4BFF-4BF7-BB76-2BD17DD9DA8E} = s 'PkZip Class'
+		{
+			ProgID = s 'DmsCompression.PkZip.1'
+			VersionIndependentProgID = s 'DmsCompression.PkZip'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{85EEB9C0-CB35-46DE-A282-6E112AE5D9D4}'
+		}
+	}
+}

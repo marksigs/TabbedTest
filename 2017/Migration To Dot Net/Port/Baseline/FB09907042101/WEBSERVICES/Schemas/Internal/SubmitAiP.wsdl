@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: SubmitAiP WSDL
+
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/SubmitAiP.wsdl $
+Workfile                 $Workfile: SubmitAiP.wsdl $
+Current Version   	$Revision: 2 $
+Last Modified       	$Modtime: 20/11/06 12:38 $
+Modified By          	$Author: Dbarraclough $
+
+Copyright              Copyright © 2006 Vertex Financial Services
+Description           Ingestion (Stop&Save) at AiP  
+
+History:
+
+Author      Date              Description
+BCan        09/12/2005    Created (based upon MARS ingestion wsdl).
+IK             19/09/2006    remove Epsom identifier from namespace directives.
+IK				16/11/2006	EP2_117 - missed previous defect
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://SubmitAiP.Omiga.vertex.co.uk" 
+    xmlns="http://SubmitAiP.Omiga.vertex.co.uk" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.SubmitAiP.Omiga.vertex.co.uk" 
+    xmlns:msgResponse="http://Response.SubmitAiP.Omiga.vertex.co.uk"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.SubmitAiP.Omiga.vertex.co.uk" 
+            xmlns:msgResponse="http://Response.SubmitAiP.Omiga.vertex.co.uk" >
+            <xs:import 
+                namespace="http://Request.SubmitAiP.Omiga.vertex.co.uk" 
+                schemaLocation="SubmitAiPRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.SubmitAiP.Omiga.vertex.co.uk" 
+                schemaLocation="SubmitAiPResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="SubmitAiPRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="SubmitAiPAddressTargetResolverRequestSoapIn">
+        <wsdl:part name="atr_request" element="msgRequest:ATR_REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="SubmitAiPRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="SubmitAiPPort">
+        <wsdl:operation name="submitAiP">
+            <wsdl:input message="SubmitAiPRequestSoapIn" />
+            <wsdl:output message="SubmitAiPRequestSoapOut" />
+        </wsdl:operation>
+        <wsdl:operation name="submitAiPAddressTargetResolver">
+            <wsdl:input message="SubmitAiPAddressTargetResolverRequestSoapIn" />
+            <wsdl:output message="SubmitAiPRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="SubmitAiPPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="submitAiP">
+             <soap:operation 
+                soapAction="http://Request.SubmitAiP.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="submitAiPAddressTargetResolver">
+             <soap:operation 
+                soapAction="http://Request.submitAiPAddressTargetResolver.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaSubmitAiP">
+        <wsdl:port name="SubmitAiPPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/SubmitAiPWS/OmigaSubmitAiPService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

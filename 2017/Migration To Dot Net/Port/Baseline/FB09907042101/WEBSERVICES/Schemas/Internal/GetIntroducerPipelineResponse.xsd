@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Paul Carter (Vertex Financial Services Ltd) -->
+<!--==============================XML Document Control=============================
+Description: GetIntroducerPipeline - Response
+
+History:
+
+Version 		Author   	Date				Description
+01.01      		PSC			20/11/2006		Created
+01.02			PSC			24/11/2006		Move TRANSFERDATE from CASE node to CURRENTOWNER node
+01.03			PSC			28/11/2006		Amend data type of DRAWDOWN from int to double
+01.04			IK				15/01/2007		EP2_763 add (CUSTOMERVERSION) UKRESIDENTIDICATOR
+01.05			IK				16/01/2007		EP2_816 add CASESTAGE and PACKAGER data
+================================================================================-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Response.GetIntroducerPipeline.Omiga.vertex.co.uk" xmlns:msgdt="http://msgtypes.Omiga.vertex.co.uk" targetNamespace="http://Response.GetIntroducerPipeline.Omiga.vertex.co.uk" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://msgtypes.Omiga.vertex.co.uk" schemaLocation="msgCommonTypes.xsd"/>
+	<xs:element name="RESPONSE" type="GETINTRODUCERPIPELINERESPONSEType"/>
+	<xs:complexType name="GETINTRODUCERPIPELINERESPONSEType">
+		<xs:sequence>
+			<xs:element name="CASE" type="GETINTRODUCERPIPELINECASEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MESSAGE" type="msgdt:MESSAGEType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ERROR" type="msgdt:ERRORType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="TYPE" type="msgdt:RESPONSEAttribType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="GETINTRODUCERPIPELINECASEType">
+		<xs:sequence>
+			<xs:element name="MAINAPPLICANT" type="GETINTRODUCERPIPELINEMAINAPPLICANTType">
+				<xs:annotation>
+					<xs:documentation>Details of the main (first) applicant on the case.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ORIGINALOWNER" type="GETINTRODUCERPIPELINEPERSONType">
+				<xs:annotation>
+					<xs:documentation>Details of the original owner of the case.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CURRENTOWNER" type="GETINTRODUCERPIPELINECURRENTOWNERType">
+				<xs:annotation>
+					<xs:documentation>Details of the current owner of the case.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VALUATION" type="GETINTRODUCERPIPELINEVALUATIONType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Valuation details of the case.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- EP2_816 -->
+			<xs:element name="PACKAGER" type="GETINTRODUCERPIPELINEPACKAGERType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>details of Packager associated with the case.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- EP2_816 ends -->
+		</xs:sequence>
+		<xs:attribute name="APPLICATIONNUMBER" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Unique identifier of the case in Omiga.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REFERENCENUMBER" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The broker’s or packager’s own reference number for the case.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SUBMISSIONDATE" type="msgdt:msgDate" use="optional">
+			<xs:annotation>
+				<xs:documentation>Date upon which the application was submitted into Omiga.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ESTIMATEDCOMPLETIONDATE" type="msgdt:msgDate" use="optional">
+			<xs:annotation>
+				<xs:documentation>Estimated date upon which the application will complete.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="STAGE" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Name of the Omiga stage that the case is currently in.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<!-- EP2_816 -->
+		<xs:attribute name="STAGEID" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Id of the Omiga stage that the case is currently in.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="STAGEDATE" type="msgdt:msgDateTime" use="optional">
+			<xs:annotation>
+				<xs:documentation>Date/Time application entered the Omiga stage that the case is currently in.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<!-- EP2_816 ends -->
+		<xs:attribute name="RULESSTATUS" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Status of the Case Assessment rules.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="UNDERWRITERDECISION" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Underwriting decision for the case.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PURCHASEPRICE" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Declared purchase price or estimated value of the property being mortgaged.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="LOANAMOUNT" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Amount of the loan requested by the applicant(s).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DRAWDOWN" type="xs:double" use="optional">
+			<xs:annotation>
+				<xs:documentation>Drawdown amount held against a flexible mortgage.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TYPEOFAPPLICATION" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Type of mortgage application.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NUMBEROFAPPLICANTS" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Number of applicants present on the case.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="GUARANTOR" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Whether or not a guarantor is present on the case.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OWNINGUNIT" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Name of the firm / unit currently owning the case.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="GETINTRODUCERPIPELINEMAINAPPLICANTType">
+		<xs:complexContent>
+			<xs:extension base="GETINTRODUCERPIPELINEPERSONType">
+				<xs:attribute name="TITLE" type="xs:int" use="optional">
+					<xs:annotation>
+						<xs:documentation>Title of the main (first) applicant on the case.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<!-- EP2_763 -->
+				<xs:attribute name="UKRESIDENTINDICATOR" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation>UKRESIDENTINDICATOR of the main (first) applicant on the case.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="POSTCODE" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:documentation>Postcode of the main (first) applicant’s current address.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GETINTRODUCERPIPELINECURRENTOWNERType">
+		<xs:complexContent>
+			<xs:extension base="GETINTRODUCERPIPELINEPERSONType">
+				<xs:attribute name="TRANSFERDATE" type="msgdt:msgDate" use="optional">
+					<xs:annotation>
+						<xs:documentation>Date upon which the case was transferred to its current owner.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GETINTRODUCERPIPELINEPERSONType">
+		<xs:attribute name="FORENAME" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Forename of the person.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SURNAME" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Surname of the person.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="GETINTRODUCERPIPELINEVALUATIONType">
+		<xs:attribute name="VALUATIONAMOUNT" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Value of the property being mortgaged from the valuation report.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REBUILDCOST" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Potential cost of re-building the property being mortgaged.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="VALUATIONACCEPTABLE" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Whether or not the property valuation was acceptable.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="VALUATIONREFERRED" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Whether or not the property valuation has been referred to an underwriter for consideration.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- EP2_816 -->
+	<xs:complexType name="GETINTRODUCERPIPELINEPACKAGERType">
+		<xs:attribute name="PACKAGERFIRMID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>PRINCIPALFIRMID of associated Packager.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PACKAGERFIRMNAME" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>PRINCIPALFIRMNAME of associated Packager.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PACKAGERFIRMUNITID" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>UNITID of associated Packager.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- EP2_816 ends -->
+</xs:schema>

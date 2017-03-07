@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  webcoreapi:
+    image: webcoreapi
+    build:
+      context: ./WebCoreAPI
+      dockerfile: Dockerfile

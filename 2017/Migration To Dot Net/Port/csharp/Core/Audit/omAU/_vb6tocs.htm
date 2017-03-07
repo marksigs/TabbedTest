@@ -1,0 +1,1355 @@
+<html><head><META HTTP-EQUIV="Content-Type" content="text/html;">
+<link rel="stylesheet" href="vb6tocs\service.css">
+<title>Migrates Information</title>
+<script language="javascript">
+function on_off () {
+oMe = window.event.srcElement
+var child = document.all[event.srcElement.getAttribute("child",false)];
+if (null != child)
+child.className = child.className == "collapsed" ? "expanded" : "collapsed";
+}
+function turn() {
+uMe = window.event.srcElement;
+var check = uMe.src.toLowerCase();
+if (check.lastIndexOf("plus.gif") != -1)
+{
+uMe.src = "vb6tocs/minus.gif"
+}
+else
+{
+	uMe.src = "vb6tocs/plus.gif"
+}
+}
+</script>
+</head>
+<body topmargin=0 leftmargin=0 rightmargin=0 onclick="on_off();">
+<h1>Migration Report of C:\projects\astanleyCoreSM\CORE\DotNetPort\PoC\Vertex2Sapient\Delivery1\vb6\Audit\omAU\omAU.vbp</h1>
+<h2>This report shows you which VB6 files can be converted successfully by VB6TOCS. </h2><br>
+<h2>Time:&nbsp;03/04/2007 13:30:02</h2>
+<h2>Converted Issues:</h2>
+<table width=98% border=1 bordercolor=white class=firsttable>
+<tr>
+<td nowrap class=tabhd  width="30%">VB6 Files</td>
+<td nowrap class=tabhd  width="30%">New C# Files</td>
+<td nowrap class=tabhd width="30%">Issues</td>
+<td nowrap class=tabhd width="5%">Total lines</td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file1">&nbsp;AuditDO.cls</td>
+ <td >AuditDO.cs</td>
+ <td >44</td>
+ <td>1017</td>
+</tr>
+<tr class=collapsed id=file1  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>IAuditDO_GetNumberOfFailedAttempts</td>
+<td>44</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>IAuditDO_GetNumberOfFailedAttempts</td>
+<td>74</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>IAuditDO_GetNumberOfFailedAttempts</td>
+<td>100</td>
+<td>Don't know the object type: 'm_objErrAssist'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>IAuditDO_GetNumberOfFailedAttempts</td>
+<td>106</td>
+<td>Don't know the object type: 'm_objErrAssist'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>5</td>
+<td>IAuditDO_GetNumberOfFailedAttempts</td>
+<td>135</td>
+<td>Don't know the object type: 'm_objErrAssist'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>6</td>
+<td>IAuditDO_GetNumberOfFailedAttempts</td>
+<td>141</td>
+<td>Don't know the object type: 'm_objErrAssist'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>7</td>
+<td>IAuditDO_GetNumberOfFailedAttempts</td>
+<td>211</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>8</td>
+<td>IAuditDO_GetNumberOfFailedAttempts</td>
+<td>213</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>9</td>
+<td>GetHighestSequenceNumberForAttempt</td>
+<td>34</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>10</td>
+<td>GetHighestSequenceNumberForAttempt</td>
+<td>40</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>11</td>
+<td>GetHighestSequenceNumberForAttempt</td>
+<td>45</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>12</td>
+<td>GetHighestSequenceNumberForAttempt</td>
+<td>83</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>13</td>
+<td>GetHighestSequenceNumberForAttempt</td>
+<td>113</td>
+<td>Don't know the object type: 'm_objErrAssist'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>14</td>
+<td>GetHighestSequenceNumberForAttempt</td>
+<td>141</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>15</td>
+<td>GetHighestSequenceNumberForAttempt</td>
+<td>143</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>16</td>
+<td>GetHighestSequenceNumberForAttempt</td>
+<td>146</td>
+<td>Don't know the object type: 'm_objErrAssist'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>17</td>
+<td>IAuditDO_IsPasswordChange</td>
+<td>11</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>18</td>
+<td>IAuditDO_IsPasswordChange</td>
+<td>43</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>19</td>
+<td>IAuditDO_IsPasswordChange</td>
+<td>45</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>20</td>
+<td>IAuditDO_IsApplicationAccess</td>
+<td>11</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>21</td>
+<td>IAuditDO_IsApplicationAccess</td>
+<td>41</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>22</td>
+<td>IAuditDO_IsApplicationAccess</td>
+<td>43</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>23</td>
+<td>IAuditDO_IsApplicationRelease</td>
+<td>10</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>24</td>
+<td>IAuditDO_IsApplicationRelease</td>
+<td>40</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>25</td>
+<td>IAuditDO_IsApplicationRelease</td>
+<td>42</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>26</td>
+<td>IAuditDO_IsLogon</td>
+<td>10</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>27</td>
+<td>IAuditDO_IsLogon</td>
+<td>40</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>28</td>
+<td>IAuditDO_IsLogon</td>
+<td>42</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>29</td>
+<td>IAuditDO_GetApplicationLockValueId</td>
+<td>10</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>30</td>
+<td>IAuditDO_GetApplicationLockValueId</td>
+<td>40</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>31</td>
+<td>IAuditDO_GetApplicationLockValueId</td>
+<td>43</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>32</td>
+<td>IAuditDO_GetApplicationReleaseValueId</td>
+<td>10</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>33</td>
+<td>IAuditDO_GetApplicationReleaseValueId</td>
+<td>42</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>34</td>
+<td>IAuditDO_GetApplicationReleaseValueId</td>
+<td>45</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>35</td>
+<td>IAuditDO_GetChangePasswordValueId</td>
+<td>11</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>36</td>
+<td>IAuditDO_GetChangePasswordValueId</td>
+<td>42</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>37</td>
+<td>IAuditDO_GetChangePasswordValueId</td>
+<td>45</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>38</td>
+<td>IAuditDO_GetLogonValueId</td>
+<td>11</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>39</td>
+<td>IAuditDO_GetLogonValueId</td>
+<td>43</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>40</td>
+<td>IAuditDO_GetLogonValueId</td>
+<td>46</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>41</td>
+<td>IAuditDO_AddDerivedData</td>
+<td>18</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>42</td>
+<td>IAuditDO_CreateAccessAudit</td>
+<td>27</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>43</td>
+<td>IAuditDO_CreateAccessAudit</td>
+<td>147</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>44</td>
+<td>IAuditDO_CreateAccessAudit</td>
+<td>149</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\GeneralAssist.cls</td>
+ <td>GeneralAssist.cs</td>
+ <td>0</td>
+ <td>487 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;AuditNTxBO.cls</td>
+ <td>AuditNTxBO.cs</td>
+ <td>0</td>
+ <td>57 </td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file4">&nbsp;..\..\shared\vb6\LogAssist.cls</td>
+ <td >LogAssist.cs</td>
+ <td >6</td>
+ <td>741</td>
+</tr>
+<tr class=collapsed id=file4  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>StartTimerEx</td>
+<td>58</td>
+<td>Method or data member not found: 'LogEvent'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>StopTimerEx</td>
+<td>53</td>
+<td>Method or data member not found: 'LogEvent'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>LogEventEx</td>
+<td>7</td>
+<td>Method or data member not found: 'LogEvent'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>StartTimer</td>
+<td>11</td>
+<td>Method or data member not found: 'LogEvent'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>5</td>
+<td>StopTimer</td>
+<td>9</td>
+<td>Method or data member not found: 'LogEvent'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>6</td>
+<td>LogEvent</td>
+<td>7</td>
+<td>Method or data member not found: 'LogEvent'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;IAuditNTxBO.cls</td>
+ <td>IAuditNTxBO.cs</td>
+ <td>0</td>
+ <td>18 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;IAuditTxBO.cls</td>
+ <td>IAuditTxBO.cs</td>
+ <td>0</td>
+ <td>17 </td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file7">&nbsp;..\..\shared\vb6\ConvertAssist.cls</td>
+ <td >ConvertAssist.cs</td>
+ <td >1</td>
+ <td>220</td>
+</tr>
+<tr class=collapsed id=file7  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>StringToByteArray</td>
+<td>23</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file8">&nbsp;AuditBO.cls</td>
+ <td >AuditBO.cs</td>
+ <td >24</td>
+ <td>434</td>
+</tr>
+<tr class=collapsed id=file8  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>IAuditBO_Validate</td>
+<td>14</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>IAuditBO_Validate</td>
+<td>42</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>IAuditBO_Validate</td>
+<td>64</td>
+<td>Method or data member not found: 'AddWarning'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>IAuditBO_Validate</td>
+<td>67</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>5</td>
+<td>IAuditBO_Validate</td>
+<td>69</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>6</td>
+<td>CreateAccessAudit</td>
+<td>37</td>
+<td>Method or data member not found: 'CheckResponse'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>7</td>
+<td>CreateAccessAudit</td>
+<td>43</td>
+<td>Method or data member not found: 'CheckResponse'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>8</td>
+<td>CreateAccessAudit</td>
+<td>64</td>
+<td>Method or data member not found: 'AddWarning'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>9</td>
+<td>CreateAccessAudit</td>
+<td>67</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>10</td>
+<td>CreateAccessAudit</td>
+<td>69</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>11</td>
+<td>GetNumberOfFailedAttempts</td>
+<td>14</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>12</td>
+<td>GetNumberOfFailedAttempts</td>
+<td>29</td>
+<td>Method or data member not found: 'CheckResponse'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>13</td>
+<td>GetNumberOfFailedAttempts</td>
+<td>44</td>
+<td>Method or data member not found: 'AddWarning'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>14</td>
+<td>GetNumberOfFailedAttempts</td>
+<td>47</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>15</td>
+<td>GetNumberOfFailedAttempts</td>
+<td>49</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>16</td>
+<td>IAuditBO_CreateAccessAudit</td>
+<td>28</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>17</td>
+<td>IAuditBO_CreateAccessAudit</td>
+<td>69</td>
+<td>Method or data member not found: 'CheckResponse'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>18</td>
+<td>IAuditBO_CreateAccessAudit</td>
+<td>87</td>
+<td>Method or data member not found: 'AddWarning'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>19</td>
+<td>IAuditBO_CreateAccessAudit</td>
+<td>90</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>20</td>
+<td>IAuditBO_CreateAccessAudit</td>
+<td>92</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>21</td>
+<td>IAuditBO_GetNumberOfFailedAttempts</td>
+<td>12</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>22</td>
+<td>IAuditBO_GetNumberOfFailedAttempts</td>
+<td>50</td>
+<td>Method or data member not found: 'AddWarning'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>23</td>
+<td>IAuditBO_GetNumberOfFailedAttempts</td>
+<td>53</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>24</td>
+<td>IAuditBO_GetNumberOfFailedAttempts</td>
+<td>55</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;IAuditDO.cls</td>
+ <td>IAuditDO.cs</td>
+ <td>0</td>
+ <td>52 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;IomAUClassDef.cls</td>
+ <td>IomAUClassDef.cs</td>
+ <td>0</td>
+ <td>21 </td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file11">&nbsp;AuditTxBO.cls</td>
+ <td >AuditTxBO.cs</td>
+ <td >5</td>
+ <td>117</td>
+</tr>
+<tr class=collapsed id=file11  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>IAuditTxBO_CreateAccessAudit</td>
+<td>11</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>IAuditTxBO_CreateAccessAudit</td>
+<td>35</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>IAuditTxBO_CreateAccessAudit</td>
+<td>53</td>
+<td>Method or data member not found: 'AddWarning'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>IAuditTxBO_CreateAccessAudit</td>
+<td>56</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>5</td>
+<td>IAuditTxBO_CreateAccessAudit</td>
+<td>58</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file12">&nbsp;..\..\shared\vb6\errAssist.cls</td>
+ <td >ErrAssist.cs</td>
+ <td >2</td>
+ <td>1258</td>
+</tr>
+<tr class=collapsed id=file12  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>CreateErrorResponse</td>
+<td>22</td>
+<td>Function is not defined: 'GetExceptionType'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>FormatParserError</td>
+<td>11</td>
+<td>Syntax error </td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file13">&nbsp;..\..\shared\vb6\SQLAssist.cls</td>
+ <td >SQLAssist.cs</td>
+ <td >27</td>
+ <td>742</td>
+</tr>
+<tr class=collapsed id=file13  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>FormatGuid</td>
+<td>42</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>FormatGuid</td>
+<td>59</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>FormatGuid</td>
+<td>82</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>FormatWildcardedString</td>
+<td>47</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>5</td>
+<td>FormatWildcardedString</td>
+<td>56</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>6</td>
+<td>GetSystemDate</td>
+<td>22</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>7</td>
+<td>GetSystemDate</td>
+<td>30</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>8</td>
+<td>TruncateDateColumn</td>
+<td>25</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>9</td>
+<td>TruncateDateColumn</td>
+<td>28</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>10</td>
+<td>TruncateDateColumn</td>
+<td>35</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>11</td>
+<td>FormatDate</td>
+<td>29</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>12</td>
+<td>FormatDate</td>
+<td>44</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>13</td>
+<td>FormatDate</td>
+<td>47</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>14</td>
+<td>FormatDate</td>
+<td>54</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>15</td>
+<td>FormatDateString</td>
+<td>18</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>16</td>
+<td>FormatDateString</td>
+<td>23</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>17</td>
+<td>FormatDateString</td>
+<td>29</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>18</td>
+<td>FormatDateString</td>
+<td>31</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>19</td>
+<td>FormatDateString</td>
+<td>37</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>20</td>
+<td>GuidToString</td>
+<td>58</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>21</td>
+<td>GetFormattedValue</td>
+<td>38</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>22</td>
+<td>GetColumnDayOfWeek</td>
+<td>18</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>23</td>
+<td>GetColumnDayOfWeek</td>
+<td>28</td>
+<td>Method or data member not found: 'RaiseError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>24</td>
+<td>GetColumnDayOfWeek</td>
+<td>34</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>25</td>
+<td>GuidStringToByteArray</td>
+<td>27</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>26</td>
+<td>ByteArrayToGuidString</td>
+<td>39</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>27</td>
+<td>ByteArrayToGuidString</td>
+<td>43</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;omAUClassDef.cls</td>
+ <td>omAUClassDef.cs</td>
+ <td>0</td>
+ <td>69 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;IAuditBO.cls</td>
+ <td>IAuditBO.cs</td>
+ <td>0</td>
+ <td>23 </td>
+</tr>
+ <tr>
+<td><IMG class="expandable" height=11 onclick=turn() src="vb6tocs/plus.gif" width=9 child="file16">&nbsp;..\..\shared\vb6\ParserAssist.cls</td>
+ <td >XMLAssist.cs</td>
+ <td >71</td>
+ <td>1780</td>
+</tr>
+<tr class=collapsed id=file16  bgcolor=#ffffff><td colspan=4>
+<table width=97% border=1 bordercolor="#dcdcdc" class=tablestyle>
+<tr nowrap class=attrhdr>
+<td>#</td>
+<td>Location</td>
+<td>Line No.</td>
+<td>Description</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>1</td>
+<td>RaiseParserError</td>
+<td>19</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>2</td>
+<td>RaiseParserError</td>
+<td>22</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>3</td>
+<td>RaiseParserError</td>
+<td>24</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>4</td>
+<td>CopyNode</td>
+<td>51</td>
+<td>Method or data member not found: 'cloneNode'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>5</td>
+<td>CopyNode</td>
+<td>65</td>
+<td>Don't know the object type: 'objXmlNodeList[intNodeCount2]'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>6</td>
+<td>CopyNode</td>
+<td>67</td>
+<td>Don't know the object type: 'objXmlNodeList[intNodeCount2]'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>7</td>
+<td>CopyNode</td>
+<td>86</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>8</td>
+<td>CopyNode</td>
+<td>88</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>9</td>
+<td>AddNode</td>
+<td>48</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>10</td>
+<td>AddNode</td>
+<td>73</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>11</td>
+<td>AddNode</td>
+<td>75</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>12</td>
+<td>GetRequestNodeEx</td>
+<td>35</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>13</td>
+<td>GetRequestNodeEx</td>
+<td>52</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>14</td>
+<td>GetRequestNodeEx</td>
+<td>54</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>15</td>
+<td>GetRequestNode</td>
+<td>21</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>16</td>
+<td>GetRequestNode</td>
+<td>35</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>17</td>
+<td>GetRequestNode</td>
+<td>37</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>18</td>
+<td>AddNodeWithUCaseText</td>
+<td>28</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>19</td>
+<td>AddNodeWithUCaseText</td>
+<td>30</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>20</td>
+<td>ChangeNodeName</td>
+<td>35</td>
+<td>Method or data member not found: 'cloneNode'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>21</td>
+<td>ChangeNodeName</td>
+<td>45</td>
+<td>Method or data member not found: 'cloneNode'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>22</td>
+<td>ChangeNodeName</td>
+<td>61</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>23</td>
+<td>ChangeNodeName</td>
+<td>63</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>24</td>
+<td>GroupNodesIntoList</td>
+<td>36</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>25</td>
+<td>GroupNodesIntoList</td>
+<td>38</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>26</td>
+<td>RemoveDuplicates</td>
+<td>43</td>
+<td>Method or data member not found: 'childNodes'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>27</td>
+<td>RemoveDuplicates</td>
+<td>44</td>
+<td>Method or data member not found: 'cloneNode'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>28</td>
+<td>RemoveDuplicates</td>
+<td>62</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>29</td>
+<td>RemoveDuplicates</td>
+<td>64</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>30</td>
+<td>NodesMatch</td>
+<td>66</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>31</td>
+<td>NodesMatch</td>
+<td>68</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>32</td>
+<td>GroupNodes</td>
+<td>74</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>33</td>
+<td>GroupNodes</td>
+<td>76</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>34</td>
+<td>GroupNodesEx</td>
+<td>71</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>35</td>
+<td>GroupNodesEx</td>
+<td>73</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>36</td>
+<td>BuildComboValueList</td>
+<td>37</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>37</td>
+<td>BuildComboValueList</td>
+<td>39</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>38</td>
+<td>DetermineOperation</td>
+<td>50</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>39</td>
+<td>DetermineOperation</td>
+<td>68</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>40</td>
+<td>DetermineOperation</td>
+<td>79</td>
+<td>Don't know the object type: 'xmlKeyNodeList[intNodeCount]'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>41</td>
+<td>DetermineOperation</td>
+<td>122</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>42</td>
+<td>DetermineOperation</td>
+<td>124</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>43</td>
+<td>DetermineOperationEx</td>
+<td>45</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>44</td>
+<td>DetermineOperationEx</td>
+<td>65</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>45</td>
+<td>DetermineOperationEx</td>
+<td>77</td>
+<td>Don't know the object type: 'xmlKeyNodeList[intNodeCount]'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>46</td>
+<td>DetermineOperationEx</td>
+<td>112</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>47</td>
+<td>DetermineOperationEx</td>
+<td>114</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>48</td>
+<td>AreAllNonKeyValuesNull</td>
+<td>29</td>
+<td>Don't know the object type: 'xmlNonPKNodeList[intNodeCount]'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>49</td>
+<td>AreAllNonKeyValuesNull</td>
+<td>45</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>50</td>
+<td>AreAllNonKeyValuesNull</td>
+<td>47</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>51</td>
+<td>AreAllNonKeyValuesNullEx</td>
+<td>24</td>
+<td>Don't know the object type: 'xmlNonPKNodeList[intNodeCount]'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>52</td>
+<td>AreAllNonKeyValuesNullEx</td>
+<td>38</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>53</td>
+<td>AreAllNonKeyValuesNullEx</td>
+<td>40</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>54</td>
+<td>GetMandatoryAttribute</td>
+<td>12</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>55</td>
+<td>GetMandatoryElementText</td>
+<td>12</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>56</td>
+<td>GetMandatoryNode</td>
+<td>9</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>57</td>
+<td>AttachResponseData</td>
+<td>20</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>58</td>
+<td>AttachResponseData</td>
+<td>24</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>59</td>
+<td>PromoteNode</td>
+<td>86</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>60</td>
+<td>PromoteNode</td>
+<td>88</td>
+<td>Method or data member not found: 'LogError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>61</td>
+<td>GetNodeFromClassDefByNodeValue</td>
+<td>22</td>
+<td>Don't know the object type: 'xmlNodeList[intNodeCounter]'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>62</td>
+<td>GetNodeFromClassDefByNodeValue</td>
+<td>34</td>
+<td>Don't know the object type: 'xmlNodeList[intNodeCounter]'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>63</td>
+<td>CheckNode</td>
+<td>6</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>64</td>
+<td>CheckNode</td>
+<td>10</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>65</td>
+<td>GetNode</td>
+<td>22</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>66</td>
+<td>GetNode</td>
+<td>26</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>67</td>
+<td>GetNode</td>
+<td>33</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>68</td>
+<td>GetNodeValue</td>
+<td>20</td>
+<td>Method or data member not found: 'ThrowError'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>69</td>
+<td>GetNodeValue</td>
+<td>27</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>70</td>
+<td>StartXMLLogging</td>
+<td>7</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+<tr class=inc_con>
+<td  width=10>71</td>
+<td>StopXMLLogging</td>
+<td>8</td>
+<td>Method or data member not found: 'AddToErrSource'</td>
+</tr>
+</table>
+</td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\StdData.bas</td>
+ <td>StdData.cs</td>
+ <td>0</td>
+ <td>94 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\EncryptAssist.bas</td>
+ <td>EncryptAssist.cs</td>
+ <td>0</td>
+ <td>41 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\errConstants.bas</td>
+ <td>errConstants.cs</td>
+ <td>0</td>
+ <td>99 </td>
+</tr>
+ <tr>
+<td><IMG src="vb6tocs/minus.gif" width=9>&nbsp;..\..\shared\vb6\guidAssist.bas</td>
+ <td>guidAssistEx.cs</td>
+ <td>0</td>
+ <td>45 </td>
+</tr>
+<tr>
+<td colspan=2><IMG height=11 src="vb6tocs/minus.gif" width=9><font color=red>&nbsp;omAU_vs2005.csproj</font></td>
+<td colspan=2>the project for VS 2005</td>
+</tr>
+<tr>
+<td colspan=2><IMG height=11 src="vb6tocs/minus.gif" width=9><font color=red>&nbsp;omAU.csproj</font></td>
+<td colspan=2>the project for VS 2003</td>
+</tr>
+<tr valign=top class=foot >
+<td colspan=4>File(s): 20&nbsp;&nbsp;&nbsp;&nbsp; 
+TotalLines: 7332&nbsp;&nbsp;&nbsp;&nbsp;
+</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>
+.NET SDK: 1.1.4322.2032
+</td></tr>
+<tr valign=top class=foot >
+<td colspan=4><br><br><b>ActiveX/COM:</b></td></tr>
+<tr valign=top class=foot >
+<td colspan=4>C:\WINDOWS\System32\stdole2.tlb</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>C:\Program Files\Common Files\System\ado\msado27.tlb</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>C:\WINDOWS\system32\msxml4.dll</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>C:\WINDOWS\System32\COMSVCS.DLL</td></tr>
+<tr valign=top class=foot >
+<td colspan=4>..\..\Base\omBase\omBase.dll</td></tr>
+</table>
+</body>
+</html>

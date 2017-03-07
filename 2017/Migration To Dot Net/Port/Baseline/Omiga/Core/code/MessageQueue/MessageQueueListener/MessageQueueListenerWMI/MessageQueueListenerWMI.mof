@@ -1,0 +1,48 @@
+///////////////////////////////////////////////////////////////////////////////
+//	FILE:			MessageQueueListenerWMI1.mof
+//	DESCRIPTION:	
+//	SYSTEM: 		Omiga
+//	COPYRIGHT:		(c) 2001, Marlborough Stirling Group. All rights reserved 
+//
+//	HISTORY
+//	=======
+//
+//	Prog	Date		Description
+//  LD      12/01/01    Initial version
+///////////////////////////////////////////////////////////////////////////////
+
+#pragma autorecover
+#pragma namespace ("\\\\.\\Root")
+
+instance of __Namespace
+{
+    Name = "CIMV2";
+};
+
+#pragma namespace ("\\\\.\\Root\\CIMV2")
+ 
+instance of __Namespace
+{
+    Name = "Marlborough_Stirling";
+};
+
+#pragma namespace ("\\\\.\\Root\\CIMV2\\Marlborough_Stirling")
+
+
+instance of __Win32Provider as $P
+{
+    Name = "MessageQueueListenerWMI";
+    ClsId = "{9633f535-efe4-437d-a634-959fe5d579d3}";
+};
+
+instance of __MethodProviderRegistration
+{
+    Provider = $P;
+};
+
+[Dynamic: ToInstance, Provider("MessageQueueListenerWMI")]
+class MessageQueueListenerWMI
+{
+	[implemented, static] uint32 Configure ([in] string strXMLIn, [in, out] string strXMLOut);
+};
+

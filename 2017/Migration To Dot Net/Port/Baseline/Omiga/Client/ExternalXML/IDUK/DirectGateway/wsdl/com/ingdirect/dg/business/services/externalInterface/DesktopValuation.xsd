@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by ING Direct NV (ING Direct NV) -->
+<!-- ==============================================================================================
+
+Project;        ING Direct, Direct Gateway (Project MARS)
+
+ 
+Type Versions: 0.0.1
+ 
+
+Author(s):    Vikram Thakur     
+ 
+
+Description:  Schema definitions for data transfer between Omiga to Direct Gateway for Desktop valuation request & response
+                    This schema defines two message types ,
+	             1. DesktopValuationRequestType and  2. DesktopValuationResponseTypefor request and response respectively.
+
+ ============================================================================================== -->
+<schema targetNamespace="http://desktopvaluation.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:common="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" xmlns:desktopvaluation="http://desktopvaluation.externalInterface.services.dg.ingdirect.com/0.0.1" xmlns:generic="http://generic.dg.ingdirect.com/0.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://generic.dg.ingdirect.com/0.0.1" schemaLocation="..//GenericMessages.xsd"/>
+	<import namespace="http://commontypes.messages.services.dg.ingdirect.com/0.0.1" schemaLocation="..//CommonTypes.xsd"/>
+	<annotation>
+		<documentation>document version = 0.1 </documentation>
+		<documentation>Initial Version </documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.2 </documentation>
+		<documentation>
+			1.	Added a new element ValuationReference to DesktopValuationResponseType.This field was missed out 				earlier. 
+			2.	Changed minimum occurances of all KnownvalueDate, EffectiveDate and DateReceived, version  elements to 				zero as they are not mandatory.
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.3 </documentation>
+		<documentation>
+			1.	Changed datatypes of Bedrooms and Reception from positiveInteger to int.
+			2.	Set minOccurs to zero for KnownValue,EstimatedValue and FloorArea
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+			1.	Annotated as per Use Case APP31. Note only fields specified in the UC have been annotated.
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>
+			1.	ChangedminOccurs to zero for response sequence.
+		</documentation>
+	</annotation>
+	<annotation>
+		<documentation>document version = 0.4 </documentation>
+		<documentation>
+			1.	Removed accountid element from request.
+			2.	Changed minimum occurances of error and warning element to zero.
+		</documentation>
+	</annotation>
+	
+	<complexType name="DesktopValuationRequestType">
+		<annotation>
+			<documentation>Desktop Valuation Request type definition</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericRequestType">
+				<sequence>
+					<element name="version" type="string" minOccurs="0"/>
+					<element name="AppReference" type="string">
+						<annotation>
+							<documentation>The Mortgage Application Number. Unique reference ID of the application.</documentation>
+						</annotation>
+					</element>
+					<element name="PropertyAddress" type="common:StructuredAddressDetailsType">
+						<annotation>
+							<documentation>Address details of the property to be valued. Individual elements are annotated within CommonTypes xsd. Elements within StructuredAddressDetailsType required by this schema are: FlatNameOrNumber; HouseOrBuildingName; HouseOrBuildingNumber; Street; TownOrCity; County. This field will be a concatenation of the above fields, separated by comma.</documentation>
+						</annotation>
+					</element>
+					<element name="Bedrooms">
+						<simpleType>
+							<annotation>
+								<documentation>No of bedrooms in property. 2 digits</documentation>
+							</annotation>
+							<restriction base="int">
+								<totalDigits value="1"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="Receptions" minOccurs="0">
+						<simpleType>
+							<restriction base="int">
+								<totalDigits value="1"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="PropertyType">
+						<annotation>
+							<documentation>The type of property to be valued. Options are: 1 = House Terrace; 2 = Semi-Detached House; 3 = Detached House; 4 = Flat or Maisonette; 14 = Bungalow; 99 = Other.</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="positiveInteger">
+								<totalDigits value="2"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="KnownValue" type="int" minOccurs="0"/>
+					<element name="KnownvalueDate" type="common:SimpleDateType" minOccurs="0"/>
+					<element name="EstimatedValue" type="int" minOccurs="0">
+						<annotation>
+							<documentation>Estimated value of the property</documentation>
+						</annotation>
+					</element>
+					<element name="EffectiveDate" type="common:SimpleDateType" minOccurs="0"/>
+					<element name="FloorArea" type="int" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="DesktopValuationResponseType">
+		<annotation>
+			<documentation>Desktop Valuation Response type definition</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="generic:GenericResponseType">
+				<sequence minOccurs="0">
+					<element ref="desktopvaluation:Warnings"/>
+					<element ref="desktopvaluation:Errors"/>
+					<element name="Reference" type="string">
+						<annotation>
+							<documentation>The Mortgage Application Number. Unique reference ID of the application.</documentation>
+						</annotation>
+					</element>
+					<element name="ValuationReference" type="int">
+						<annotation>
+							<documentation>Hometrack reference (integer)</documentation>
+						</annotation>
+					</element>
+					<element name="DateReceived" type="common:SimpleDateType" minOccurs="0">
+						<annotation>
+							<documentation>The date and time of the valuation.</documentation>
+						</annotation>
+					</element>
+					<element name="RealtimeValuation" type="int">
+						<annotation>
+							<documentation>The automated valuation amount. Value of property derived by Hometrack.</documentation>
+						</annotation>
+					</element>
+					<element name="ConfidenceLevel" type="decimal">
+						<annotation>
+							<documentation>Hometrack confidence level (ranging from 0 to 7, lowest to highest).</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ErrorsType">
+		<annotation>
+			<documentation>ErrorsType definition.
+							 Used to Specify errors encountered during request processing.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="Error" minOccurs="0" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="ErrorId" type="int"/>
+						<element name="ErrorMessage" type="string"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="WarningsType">
+		<annotation>
+			<documentation>WarningsType definition. Used for specifying warning messages encountered during request processing.</documentation>
+		</annotation>
+		<sequence>
+			<element name="Warning" minOccurs="0" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="WarningId" type="int"/>
+						<element name="WarningMessage" type="string"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="DesktopValuationRequest" type="desktopvaluation:DesktopValuationRequestType"/>
+	<element name="DesktopValuationResponse" type="desktopvaluation:DesktopValuationResponseType"/>
+	<element name="Warnings" type="desktopvaluation:WarningsType"/>
+	<element name="Errors" type="desktopvaluation:ErrorsType"/>
+</schema>

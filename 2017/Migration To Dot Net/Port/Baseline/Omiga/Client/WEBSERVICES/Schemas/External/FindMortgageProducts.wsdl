@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: FindMortgageProducts WSDL
+
+History:
+
+Version Author      Date       Description
+01.00   Ikemp    	25/07/2005 Created.   
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns="http://FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com" 
+    xmlns:msgResponse="http://Response.FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com"  >
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com" 
+            xmlns:msgResponse="http://Response.FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com" >
+            <xs:import 
+                namespace="http://Request.FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="FindMortgageProductsRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com" 
+                schemaLocation="FindMortgageProductsResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="FindMortgageProductsRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="FindMortgageProductsRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="FindMortgageProductsPort">
+        <wsdl:operation name="findMortgageProducts">
+            <wsdl:input message="FindMortgageProductsRequestSoapIn" />
+            <wsdl:output message="FindMortgageProductsRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OmigaSoapRpcSoap" type="FindMortgageProductsPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="findMortgageProducts">
+             <soap:operation 
+                soapAction="http://Request.FindMortgageProducts.IDUK.Omiga.marlboroughstirling.com" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaFindMortgageProducts">
+        <wsdl:port name="FindMortgageProductsPort" binding="OmigaSoapRpcSoap">
+            <soap:address location="http://localhost/OmigaWebServices/FindMortgageProductsWS/OmigaFindMortgageProductsService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

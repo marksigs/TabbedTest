@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by ﻿ITS (Marlborough Stirling plc) -->
+<!--==============================XML Document Control=============================
+Description: GetAffordability - RunIncomeCalcs Request
+
+History:
+
+Version 		Author   		Date       			Description
+01.01  			RMH	 		29/06/2005 		Created
+01.02			TLiu             20/07/2005      Changed mars to IDUK in path
+01.03			TLiu				26/07/2005		Fixed Name Spaces
+01.04			TLiu				28/07/2005		Renamed File from RunIncomeCalculationsRequestDC160.xsd to RunIncomeCalculationsRequest.xsd.
+01.05			TLiu				27/07/2005		Named complexType REQUESTType.
+01.06			TLiu				08/08/2005		Changed some attributes.
+01.07			TLiu				11/08/2005		Renamed some complex Types to make names different in Request and Response.
+01.08			TLiu				26/08/2005		Fixed bug on CUSTOMERLIST.
+01.09			TLiu				15/09/2005		Made ADMINSYSTEMSTATE optional.
+================================================================================-->
+<!-- as modified by XDSPreReleaseProcessing utility: 21/03/2006 15:00:23 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://Request.RunIncomeCalculations.IDUK.Omiga.marlboroughstirling.com" xmlns:msgdt="http://msgtypes.IDUK.Omiga.marlboroughstirling.com" targetNamespace="http://Request.RunIncomeCalculations.IDUK.Omiga.marlboroughstirling.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:complexType name="APPLICATIONType">
+    <xs:sequence>
+      <xs:element ref="APPLICATIONNUMBER" />
+      <xs:element ref="APPLICATIONFACTFINDNUMBER" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="APPLICATIONFACTFINDNUMBER" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>The factfind number for the application</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="APPLICATIONNUMBER" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>Unique Identifier for the Appn</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="CUSTOMERRequestType">
+    <xs:sequence>
+      <xs:element ref="CUSTOMERNUMBER" />
+      <xs:element ref="CUSTOMERVERSIONNUMBER" />
+      <xs:element ref="CUSTOMERROLETYPE" />
+      <xs:element ref="CUSTOMERORDER" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CUSTOMERLISTRequestType">
+    <xs:sequence>
+      <xs:element name="CUSTOMER" type="CUSTOMERRequestType" maxOccurs="5" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CUSTOMERNUMBER" type="xs:string" />
+  <xs:element name="CUSTOMERORDER" type="xs:string" />
+  <xs:element name="CUSTOMERROLETYPE" type="xs:string" />
+  <xs:element name="CUSTOMERVERSIONNUMBER" type="xs:string" />
+  <xs:complexType name="INCOMECALCULATIONRequestType">
+    <xs:sequence>
+      <xs:element name="APPLICATION" type="APPLICATIONType" />
+      <xs:element name="CUSTOMERLIST" type="CUSTOMERLISTRequestType">
+        <xs:annotation>
+          <xs:documentation>Identifies each customer and the order which they exist on the application</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="CALCULATEMAXBORROWING" type="xs:string" use="required" />
+    <xs:attribute name="QUICKQUOTEMAXBORROWING" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:element name="REQUEST" type="REQUESTType" />
+  <xs:complexType name="REQUESTType">
+    <xs:sequence>
+      <xs:element name="INCOMECALCULATION" type="INCOMECALCULATIONRequestType" />
+    </xs:sequence>
+    <xs:attribute name="USERID" type="xs:string" use="required" />
+    <xs:attribute name="UNITID" type="xs:string" use="required" />
+    <xs:attribute name="MACHINEID" type="xs:string" use="optional" />
+    <xs:attribute name="CHANNELID" type="xs:string" use="optional" />
+    <xs:attribute name="ADMINSYSTEMSTATE" type="xs:string" use="optional" />
+    <xs:attribute name="USERAUTHORITYLEVEL" type="xs:string" use="optional" />
+    <xs:attribute name="PASSWORD" type="xs:string" use="required" />
+  </xs:complexType>
+</xs:schema>

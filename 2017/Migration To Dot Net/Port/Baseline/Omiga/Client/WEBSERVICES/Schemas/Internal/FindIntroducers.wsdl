@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--==============================XML Document Control=============================
+Description: FindIntroducers WSDL
+
+Archive                  $Archive: /Epsom Phase2/2 INT Code/WebServices/Schemas/Internal/FindIntroducers.wsdl $
+Workfile                 $Workfile: FindIntroducers.wsdl $
+Current Version   	$Revision: 1 $
+Last Modified       	$Modtime: 24/11/06 13:55 $
+Modified By          	$Author: Dbarraclough $
+
+Copyright              Copyright © 2006 Vertex Financial Services
+Description           epsom FindIntroducers web service
+
+History:
+
+Author      Date              Description
+IK             18/10/2006    created
+IK				21/11/2006	EP2_146 attach to defect (initial check-in)
+================================================================================-->
+<wsdl:definitions 
+	targetNamespace="http://FindIntroducers.Omiga.vertex.co.uk" 
+    xmlns="http://FindIntroducers.Omiga.vertex.co.uk" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgRequest="http://Request.FindIntroducers.Omiga.vertex.co.uk" 
+    xmlns:msgResponse="http://Response.FindIntroducers.Omiga.vertex.co.uk"  >
+
+    <wsdl:types>
+        <xs:schema 
+            xmlns:msgRequest="http://Request.FindIntroducers.Omiga.vertex.co.uk" 
+            xmlns:msgResponse="http://Response.FindIntroducers.Omiga.vertex.co.uk" >
+            <xs:import 
+                namespace="http://Request.FindIntroducers.Omiga.vertex.co.uk" 
+                schemaLocation="FindIntroducersRequest.xsd" />
+            <xs:import 
+                namespace="http://Response.FindIntroducers.Omiga.vertex.co.uk" 
+                schemaLocation="FindIntroducersResponse.xsd" />
+        </xs:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="FindIntroducersRequestSoapIn">
+        <wsdl:part name="request" element="msgRequest:REQUEST" />
+    </wsdl:message>
+    <wsdl:message name="FindIntroducersRequestSoapOut">
+        <wsdl:part name="response" element="msgResponse:RESPONSE" />
+    </wsdl:message>
+
+    <wsdl:portType name="FindIntroducersPort">
+        <wsdl:operation name="FindIntroducers">
+            <wsdl:input message="FindIntroducersRequestSoapIn" />
+            <wsdl:output message="FindIntroducersRequestSoapOut" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="FindIntroducersSoap" type="FindIntroducersPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="FindIntroducers">
+             <soap:operation 
+                soapAction="http://Request.FindIntroducers.Omiga.vertex.co.uk" 
+                style="document" />
+             <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="OmigaFindIntroducers">
+        <wsdl:port name="FindIntroducersPort" binding="FindIntroducersSoap">
+            <soap:address location="http://localhost/OmigaWebServices/FindIntroducersWS/OmigaFindIntroducersService.asmx" />
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
